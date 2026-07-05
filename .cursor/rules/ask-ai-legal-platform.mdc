@@ -1,0 +1,35 @@
+---
+description: Ask AI Legal platform spec — phased build, Counsel Review gate, compliance
+alwaysApply: true
+---
+
+# Ask AI Legal Platform
+
+Read **`docs/ASK_AI_LEGAL_SPEC.md`** before any architectural or product decision.
+
+Track progress in **`docs/BUILD_PROGRESS.md`**. Phase 1 details live in **`docs/PHASE_1_ARCHITECTURE.md`**.
+
+## Non-negotiables
+
+1. **Counsel Review gate** (spec Section 5, stage 9): No client-facing legal document, strategy memo, or advice-adjacent output is finalized or delivered until a licensed human attorney approves it in the review UI. AI drafts; humans approve.
+
+2. **UPL framing** (spec Section 0): We are a document-preparation / self-help service, not a law firm. Do not build features that replace attorney judgment without the review gate.
+
+3. **Phased build** (spec Section 9): Do **not** skip ahead to voice, email agents, or retrieval agents until Phase 1 works end-to-end:
+   `intake → estimate → payment → draft → counsel review → delivery`
+
+4. **Single source of truth**: All channels (when added) write to the same **Case** record (spec Section 4).
+
+## Phase 1 scope (current)
+
+- **Matter type:** California unlawful detainer / tenant eviction response (document prep)
+- **Jurisdiction:** California only
+- **Backend:** Convex (see `docs/PHASE_1_ARCHITECTURE.md`)
+- **Channel:** Web chat only (no voice, no email agent)
+
+## When implementing
+
+- Prefer extending the existing Next.js marketing site and chat widget over greenfield rewrites.
+- Log agent runs for audit (`AgentRun` table).
+- Use maintained pricing reference data for attorney comparisons — do not invent market rates in prompts.
+- Resolve spec Section 10 compliance questions with real counsel before production launch.

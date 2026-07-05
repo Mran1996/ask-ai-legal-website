@@ -1,0 +1,141 @@
+# Ask AI Legal — Build Progress
+
+Track implementation against [ASK_AI_LEGAL_SPEC.md](./ASK_AI_LEGAL_SPEC.md) Section 9.
+
+**Phase 1 defaults:** CA unlawful detainer · California · Convex · web chat only
+
+**Legend:** Check boxes as each step ships and is verified.
+
+---
+
+## Phase 0 — Foundation (docs & rules)
+
+- [x] Platform spec in repo (`docs/ASK_AI_LEGAL_SPEC.md`)
+- [x] Cursor rule (`.cursor/rules/ask-ai-legal-platform.mdc`)
+- [x] Phase 1 architecture proposal (`docs/PHASE_1_ARCHITECTURE.md`)
+- [x] This progress tracker
+- [ ] Compliance: schedule UPL review with real counsel (spec Section 10)
+- [ ] Choose / confirm licensed attorney for Counsel Review gate
+- [ ] Stripe account (test mode) created
+- [ ] Auth provider chosen (Clerk vs Convex Auth)
+
+---
+
+## Phase 1 — MVP (single matter, one channel)
+
+### 1.1 Backend scaffold
+
+- [x] Initialize Convex in monorepo (`npx convex dev`)
+- [x] Wire `ConvexProvider` in Next.js `app/layout.tsx`
+- [x] Implement `convex/schema.ts` (clients, cases, estimates, documents, payments, agentRuns, counselReviews)
+- [x] Custom auth wrappers (`convex/lib/customFunctions.ts` — authedQuery, counselMutation)
+- [x] Seed pricing reference stub (`lib/pricing/ca-eviction.ts`)
+
+### 1.2 Intake → Case record
+
+- [x] Define CA UD `intakeStructured` TypeScript type + validator
+- [x] Convex mutation: `cases.createFromIntake`
+- [x] Connect chat widget / quote form to create Case (not mailto-only)
+- [x] Auto-provision case storage prefix on create
+- [x] Log Intake `agentRun`
+- [x] Intake auto-email (client + support@) via Resend + `notifications` table
+
+### 1.3 Estimate + value comparison UI
+
+- [x] Convex mutation: `estimates.generateForCase`
+- [x] Attorney comparison from reference table (not LLM-invented rates)
+- [x] Client UI: estimate page/widget (“Attorneys typically $X–$Y · Ask AI Legal $Z”)
+- [x] Case status → `estimate_sent`
+- [x] Log Pricing `agentRun`
+- [x] Minimal ops intake list: `/ops/intakes` + case detail
+
+### 1.4 Stripe payment
+
+- [ ] Stripe Checkout session on estimate accept
+- [ ] Webhook: `checkout.session.completed` → update payment + case status
+- [ ] Case status → `awaiting_payment` → `awaiting_docs` after pay
+- [ ] Store `stripeCheckoutSessionId` on estimate
+
+### 1.5 Document upload
+
+- [ ] Client portal route: `/portal/cases/[id]`
+- [ ] Upload to case folder `uploaded_by_client/` (Convex storage or R2)
+- [ ] `documents` rows with version tracking
+- [ ] Auth: client sees own cases only
+
+### 1.6 Drafting agent (minimal)
+
+- [ ] Convex action: generate CA UD draft from intake + uploads
+- [ ] Save to `drafts/`; case status → `in_counsel_review`
+- [ ] Log Drafting `agentRun`
+- [ ] Reuse existing LLM provider stack; strict no-legal-advice system prompt
+
+### 1.7 Counsel Review gate (mandatory)
+
+- [ ] Ops routes: `/ops`, `/ops/cases/[id]`, `/ops/queue`
+- [ ] Review UI: view draft, notes, approve / reject / needs_edit
+- [ ] `counselReviews` table + enforce: no `delivered` without `approved`
+- [ ] Reject loops case back to `in_drafting`
+- [ ] Role-gate: counsel/ops only
+
+### 1.8 Delivery
+
+- [ ] On approve: copy to `final_delivered/`, case status → `delivered`
+- [ ] Client notification (email with link or portal download)
+- [ ] Log Delivery `agentRun`
+- [ ] Optional: upsell placeholder (Phase 3)
+
+### 1.9 Phase 1 QA
+
+- [ ] End-to-end test case (test Stripe + test draft + counsel approve)
+- [ ] `npm run build` passes
+- [ ] Disclaimers visible on portal + delivered docs
+- [ ] Audit trail: all agentRuns queryable per case
+
+---
+
+## Phase 2 — Multi-channel intake
+
+- [ ] Email agent: inbound webhook → same Case record
+- [ ] Email: FAQ/logistics only; no new legal content without approved docs
+- [ ] Voice agent: business info + intake + account status (authenticated)
+- [ ] Voice: escalate on legal-advice requests
+- [ ] Outbound voice/email: payment reminders, doc requests
+- [ ] Unified case timeline across chat / email / phone
+
+---
+
+## Phase 3 — Retrieval + full agent pipeline
+
+- [ ] Retrieval Agent + retainer payment flow
+- [ ] Document Understanding Agent (OCR/parsing)
+- [ ] Legal Research Agent + citation verification
+- [ ] Strategy Agent + roadmap upsell bundles
+- [ ] Analytics Agent (success rate) with grounded data only
+- [ ] Workflow orchestration upgrade (LangGraph/Temporal if needed)
+
+---
+
+## Phase 4 — Scale
+
+- [ ] Multi-jurisdiction pricing + template libraries
+- [ ] Additional matter types beyond CA UD
+- [ ] Attorney review network (per-state reviewers)
+- [ ] Production hardening: monitoring, retention policy, access logs
+- [ ] Launch checklist: spec Section 10 resolved with counsel
+
+---
+
+## Current focus
+
+**Next step:** Phase 1.4 — Stripe payment.
+
+---
+
+## Session log (optional)
+
+| Date | Step | Notes |
+|------|------|-------|
+| 2026-07-02 | Phase 0 | Spec, rule, architecture docs added |
+| 2026-07-02 | Phase 1.1 | Convex schema, auth wrappers, pricing stub, ConvexProvider |
+| 2026-07-03 | Phase 1.2–1.3 | Cloud Convex, intake emails, ops list, estimates + value comparison UI |
