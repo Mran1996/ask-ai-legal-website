@@ -26,12 +26,12 @@ export function BrandLockup({
   const isHeader = variant === "header"
 
   const title = isHeader ? (
-    <span className="font-sans text-[15px] font-semibold leading-tight tracking-tight text-navy sm:text-base">
+    <span className="font-sans text-[15px] font-semibold leading-tight tracking-tight text-gold sm:text-base">
       {SITE_BRAND_NAME}
     </span>
   ) : (
     <span
-      className="font-sans text-4xl font-bold leading-[1.05] tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl"
+      className="font-sans text-4xl font-bold leading-[1.05] tracking-tight text-gold sm:text-5xl md:text-6xl lg:text-7xl"
       aria-label={SITE_BRAND_NAME}
     >
       <TypewriterText
@@ -48,8 +48,8 @@ export function BrandLockup({
       className={
         taglineClassName ??
         (isHeader
-          ? "mt-0.5 text-[8px] font-medium uppercase leading-snug tracking-[0.2em] text-navy/55 sm:text-[9px]"
-          : "mt-4 max-w-2xl text-sm font-medium uppercase leading-relaxed tracking-[0.22em] text-white/90 sm:mt-5 md:text-lg md:tracking-[0.26em]")
+          ? "mt-0.5 text-[8px] font-medium uppercase leading-snug tracking-[0.2em] text-navy/65 sm:text-[9px]"
+          : "mt-4 max-w-2xl text-sm font-medium uppercase leading-relaxed tracking-[0.22em] text-gold-light sm:mt-5 md:text-lg md:tracking-[0.26em]")
       }
     >
       {SITE_TAGLINE}

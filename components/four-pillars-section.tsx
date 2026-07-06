@@ -1,6 +1,6 @@
 "use client"
 
-import { useMemo, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { BadgeCheck, Check, FileText, Scale } from "lucide-react"
 import type { LucideIcon } from "lucide-react"
 import { PaperShaderBackground } from "@/components/paper-shader-background"
@@ -8,6 +8,7 @@ import { useLanguage } from "@/components/language-provider"
 
 const PILLAR_ICONS: LucideIcon[] = [FileText, Scale, BadgeCheck, Check]
 const FLIP_MS = 650
+const AUTO_FLIP_MS = 4000
 
 function PillarCard({
   title,
@@ -80,7 +81,7 @@ function PillarCard({
 
 export function FourPillarsSection() {
   const { t } = useLanguage()
-  const [flippedIndex, setFlippedIndex] = useState<number | null>(null)
+  const [flippedIndex, setFlippedIndex] = useState(0)
 
   const pillars = useMemo(
     () =>
@@ -91,8 +92,19 @@ export function FourPillarsSection() {
     [t]
   )
 
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)")
+    if (mq.matches) return
+
+    const id = window.setInterval(() => {
+      setFlippedIndex((prev) => (prev + 1) % pillars.length)
+    }, AUTO_FLIP_MS)
+
+    return () => window.clearInterval(id)
+  }, [pillars.length])
+
   const handleToggle = (index: number) => {
-    setFlippedIndex((prev) => (prev === index ? null : index))
+    setFlippedIndex(index)
   }
 
   return (

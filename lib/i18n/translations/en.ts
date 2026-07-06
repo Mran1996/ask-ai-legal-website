@@ -18,15 +18,15 @@ export const en = {
     titleLine1: "You paid the retainer.",
     titleHighlight: "Do you know",
     titleLine2: "what's in your case file?",
-    body: "We prepare court-ready documents and citation-verified research for people handling their own divorce, family, civil, and business matters. Start with a flat $199 case file review — credited in full toward your documents.",
+    body: "We prepare court-ready documents and citation-verified research for people handling their own legal matters — any issue, any jurisdiction. Start with a flat $199 case file review — credited in full toward your documents.",
     ctaPrimary: "Start my case file review — $199",
     ctaSecondary: "See how it works",
     stat1Value: "$199",
     stat1Label: "Case file review",
     stat1Sub: "Credited toward your documents",
     stat2Value: "2 hrs",
-    stat2Label: "Typical scope memo",
-    stat2Sub: "Plain English, not legalese",
+    stat2Label: "Your written case summary",
+    stat2Sub: "Plain English — usually ready within 2 hours",
     stat3Value: "1",
     stat3Label: "Flat quote",
     stat3Sub: "No hourly billing, ever",
@@ -74,7 +74,7 @@ export const en = {
       {
         title: "Document preparation",
         description:
-          "Motions, petitions, responses, and demand letters — fully drafted, formatted, and court-ready. You don't write a thing.",
+          "Motions, petitions, responses, complaints, answers, affidavits, declarations, discovery papers, demand letters, and more — fully drafted, formatted, and court-ready. Upload what you have and we build from your files. You don't write a thing. Call us or leave us a message to see how we can help.",
       },
       {
         title: "Document delivery",
@@ -202,7 +202,7 @@ export const en = {
       },
       {
         q: "What kinds of cases do you handle?",
-        a: "Divorce and custody, family court matters, civil disputes, small business disputes, and the responses, motions, and letters they require — across U.S. jurisdictions.",
+        a: "Any legal matter — there is no limit. Divorce, custody, family court, civil disputes, criminal motions, business issues, and whatever documents your case needs. Across U.S. jurisdictions.",
       },
       {
         q: "How do I know your legal citations are real?",

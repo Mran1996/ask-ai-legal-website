@@ -89,7 +89,7 @@ const en: ChatUiStrings = {
   email: "Email",
   phone: "Phone",
   state: "State / jurisdiction",
-  stateHint: "Select your state. Instant estimates available for many California matter types.",
+  stateHint: "Select your state — we'll show a local average for your case type.",
   caseType: "Case type",
   issue: "Describe your issue",
   deadline: "Deadline or urgency (optional)",
@@ -110,7 +110,7 @@ const en: ChatUiStrings = {
     "We couldn't save your intake. Please try again or email support@askailegal.com with your details.",
   submitAnother: "Submit another request",
   estimateComparison:
-    "Attorneys typically {attorneyLow}–{attorneyHigh} · Ask AI Legal {ourPrice}",
+    "Attorneys in your area typically {attorneyLow}–{attorneyHigh} · Ask AI Legal estimated average {ourPrice}",
   estimateCustomQuote:
     "Attorneys in this area often charge {attorneyLow}–{attorneyHigh}. Our team will email you a custom quote after reviewing your intake.",
   estimateServiceLine: "Service",
@@ -157,7 +157,7 @@ const hi: ChatUiStrings = {
   email: "ईमेल",
   phone: "फ़ोन",
   state: "राज्य / अधिकार क्षेत्र",
-  stateHint: "अपना राज्य चुनें। कई कैलिफ़ोर्निया मामलों के लिए तुरंत अनुमान उपलब्ध।",
+  stateHint: "अपना राज्य चुनें — हम आपके मामले के प्रकार के लिए स्थानीय औसत दिखाएंगे।",
   caseType: "मामले का प्रकार",
   issue: "अपना मुद्दा बताएँ",
   deadline: "अंतिम तिथि या तात्कालिकता (वैकल्पिक)",
