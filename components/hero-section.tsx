@@ -6,7 +6,7 @@ import { PaperShaderBackground } from "@/components/paper-shader-background"
 import { NeonButton } from "@/components/neon-button"
 import { BrandLockup } from "@/components/brand-lockup"
 import { useLanguage } from "@/components/language-provider"
-import { SUPPORT_MAILTO } from "@/lib/site-config"
+import { openChatWidget } from "@/lib/chat/open-chat"
 import { CountUpStat, type HeroStatItem } from "@/components/count-up-stat"
 
 export function HeroSection() {
@@ -21,15 +21,14 @@ export function HeroSection() {
     },
     {
       kind: "count",
-      value: 72,
+      value: 2,
       suffix: " hrs",
       label: t.hero.stat2Label,
       sub: t.hero.stat2Sub,
     },
     {
-      kind: "count",
-      value: 100,
-      suffix: "%",
+      kind: "text",
+      display: t.hero.stat3Value,
       label: t.hero.stat3Label,
       sub: t.hero.stat3Sub,
     },
@@ -60,7 +59,7 @@ export function HeroSection() {
           </p>
 
           <div className="mt-10 flex w-full flex-col items-center justify-center gap-4 sm:flex-row animate-fade-up [animation-delay:340ms]">
-            <NeonButton href={SUPPORT_MAILTO}>
+            <NeonButton onClick={() => openChatWidget("quote")}>
               {t.hero.ctaPrimary}
               <ArrowRight className="h-4 w-4" aria-hidden />
             </NeonButton>

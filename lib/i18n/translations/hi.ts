@@ -66,55 +66,6 @@ export const hi = mergeTranslations({
       { title: "अपने दस्तावेज़ प्राप्त करें", body: "आपके तैयार दस्तावेज़ समीक्षा के लिए फ़ॉर्मैट में पहुँचते हैं।" },
     ],
   },
-  testimonials: {
-    label: "ग्राहक परिणाम",
-    titleWhite: "असली लोग। ",
-    titleGold: "असली परिणाम।",
-    rotateHint: "समीक्षाएँ लगातार बदलती हैं · रोकने के लिए कार्ड पर टैप करें",
-    verified: "सत्यापित ग्राहक",
-    clients: {
-      sandra: {
-        quote:
-          "तलाक में मुझे समझ नहीं आ रहा था कि कहाँ से शुरू करूँ। उन्होंने कागज़ी कार्रवाई का हर कदम समझाया — custody, संपत्ति, सब कुछ। पहली बार लगा कि कोई मेरे साथ है।",
-        name: "Sandra M.",
-        title: "तलाक दाखिला",
-        case: "Ohio",
-        imageAlt: "Sandra M. की तस्वीर, Ohio की ग्राहक",
-      },
-      marcus: {
-        quote:
-          "मुझे जल्दी मोशन चाहिए था और हर वकील ने retainer माँगा जो मैं afford नहीं कर सकता था। एक ईमेल, स्पष्ट कीमत, 48 घंटे में दस्तावेज़।",
-        name: "Marcus J.",
-        title: "सिविल मोशन",
-        case: "Georgia",
-        imageAlt: "Marcus J. की तस्वीर, Georgia के ग्राहक",
-      },
-      priya: {
-        quote:
-          "काम और दो बच्चों के साथ family court की deadline संभालना असंभव था। उन्होंने शोध और दाखिले संभाले — सब कुछ सादी भाषा में समझाया।",
-        name: "Priya S.",
-        title: "फैमिली कोर्ट",
-        case: "New Jersey",
-        imageAlt: "Priya S. की तस्वीर, New Jersey की ग्राहक",
-      },
-      keisha: {
-        quote:
-          "अनुचित बेदखली का सामना कर रही थी। उन्होंने किरायेदार अधिकारों पर शोध किया, मेरा जवाब तैयार किया, और हर पैराग्राफ़ समझाया।",
-        name: "Keisha W.",
-        title: "आवास बचाव",
-        case: "Illinois",
-        imageAlt: "Keisha W. की तस्वीर, Illinois की ग्राहक",
-      },
-      carlos: {
-        quote:
-          "अंग्रेज़ी मेरी पहली भाषा नहीं है और कानूनी फ़ॉर्म बहुत मुश्किल थे। उन्होंने सब कुछ स्पष्ट समझाया और मेरा जवाब तैयार किया।",
-        name: "Carlos R.",
-        title: "छोटे दावे का जवाब",
-        case: "Arizona",
-        imageAlt: "Carlos R. की तस्वीर, Arizona के ग्राहक",
-      },
-    },
-  },
   consultation: {
     label: "आपका निवेश",
     titleLine1: "हर मामला अलग है।",

@@ -31,13 +31,6 @@ export const fr = mergeTranslations({
     stat3Label: "Documents seulement",
     stat3Sub: "Nous générons. Vous décidez.",
   },
-  testimonials: {
-    label: "Résultats clients",
-    titleWhite: "De vraies personnes. ",
-    titleGold: "De vrais résultats.",
-    rotateHint: "Les avis défilent · Appuyez pour pause",
-    verified: "Client vérifié",
-  },
   cta: {
     label: "Commencez aujourd'hui",
     title: "Votre dossier mérite la meilleure préparation — pas la plus grosse facture",

@@ -36,9 +36,9 @@ function detectCaseType(text: string): string | undefined {
   const lower = text.toLowerCase()
   const rules: { type: (typeof CASE_TYPES)[number]; patterns: RegExp[] }[] = [
     { type: "Housing / eviction", patterns: [/evict/, /unlawful detainer/, /landlord/, /3-?day notice/, /notice to quit/] },
-    { type: "Family / divorce", patterns: [/divorce/, /custody/, /dissolution/, /spousal support/, /family court/] },
-    { type: "Post-conviction", patterns: [/post-?conviction/, /habeas/, /expunge/, /record relief/, /appeal/] },
-    { type: "Criminal motion", patterns: [/criminal motion/, /sentencing/, /felony/, /misdemeanor/] },
+    { type: "Custody", patterns: [/custody/, /parenting plan/, /child support/, /visitation/] },
+    { type: "Family / divorce", patterns: [/divorce/, /dissolution/, /spousal support/, /family court/] },
+    { type: "Business dispute", patterns: [/business dispute/, /breach of contract/, /partnership dispute/, /vendor dispute/] },
     { type: "Small claims", patterns: [/small claims/] },
     { type: "Demand letter", patterns: [/demand letter/, /cease and desist/] },
     { type: "Civil complaint", patterns: [/civil complaint/, /file a lawsuit/, /sue\b/] },

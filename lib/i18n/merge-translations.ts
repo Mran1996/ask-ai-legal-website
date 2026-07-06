@@ -8,7 +8,6 @@ type DeepPartial<T> = T extends object
 
 /** Deep-merge partial locale overrides onto English defaults. */
 export function mergeTranslations(overrides: DeepPartial<Translations>): Translations {
-  const testimonials = overrides.testimonials
   return {
     ...en,
     ...overrides,
@@ -46,13 +45,6 @@ export function mergeTranslations(overrides: DeepPartial<Translations>): Transla
         }
       : en.footer,
     cta: { ...en.cta, ...overrides.cta },
-    testimonials: testimonials
-      ? {
-          ...en.testimonials,
-          ...testimonials,
-          clients: { ...en.testimonials.clients, ...testimonials.clients },
-        }
-      : en.testimonials,
     servicesPage: overrides.servicesPage
       ? {
           ...en.servicesPage,

@@ -4,9 +4,10 @@ import { LegalDocumentLayout } from "@/components/legal-document-layout"
 import { SUPPORT_EMAIL } from "@/lib/site-config"
 
 export const metadata: Metadata = {
-  title: "Disclaimer — Ask AI Legal",
+  title: "Disclaimer",
   description:
     "Important disclaimers regarding Ask AI Legal's document preparation services.",
+  alternates: { canonical: "/disclaimer" },
 }
 
 const LAST_UPDATED = "June 29, 2026"

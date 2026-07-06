@@ -1,12 +1,12 @@
 "use client"
 
 import { useMemo, useState } from "react"
-import { Check, FileText, LineChart, Scale } from "lucide-react"
+import { BadgeCheck, Check, FileText, Scale } from "lucide-react"
 import type { LucideIcon } from "lucide-react"
 import { PaperShaderBackground } from "@/components/paper-shader-background"
 import { useLanguage } from "@/components/language-provider"
 
-const PILLAR_ICONS: LucideIcon[] = [FileText, Scale, LineChart, Check]
+const PILLAR_ICONS: LucideIcon[] = [FileText, Scale, BadgeCheck, Check]
 const FLIP_MS = 650
 
 function PillarCard({

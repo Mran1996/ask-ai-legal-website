@@ -2,7 +2,7 @@ import { servicesPageContent } from "./services-page"
 
 export const en = {
   nav: {
-    freeReview: "Free case review",
+    freeReview: "Case file review",
     help: "Help",
     about: "About",
     services: "Services",
@@ -10,26 +10,26 @@ export const en = {
     process: "Process",
     faq: "FAQ",
     contact: "Contact",
-    emailForReview: "Email for review",
+    emailForReview: "Case file review — $199",
     language: "Language",
   },
   hero: {
-    slogan: "Where Law Meets Intelligence.",
-    titleLine1: "Court-ready documents,",
-    titleHighlight: "generated",
-    titleLine2: "for your case.",
-    body: "We research, draft, and deliver — you review and file on your own behalf. No hourly billing.",
-    ctaPrimary: "Email for a free case review",
-    ctaSecondary: "See the difference",
-    stat1Value: "Custom",
-    stat1Label: "Quote for every case",
-    stat1Sub: "Delivered in days",
-    stat2Value: "72 hrs",
-    stat2Label: "Typical turnaround",
-    stat2Sub: "Not weeks of waiting",
-    stat3Value: "100%",
-    stat3Label: "Documents",
-    stat3Sub: "We generate what you need.",
+    slogan: "Know your case. Own your case.",
+    titleLine1: "You paid the retainer.",
+    titleHighlight: "Do you know",
+    titleLine2: "what's in your case file?",
+    body: "We prepare court-ready documents and citation-verified research for people handling their own divorce, family, civil, and business matters. Start with a flat $199 case file review — credited in full toward your documents.",
+    ctaPrimary: "Start my case file review — $199",
+    ctaSecondary: "See how it works",
+    stat1Value: "$199",
+    stat1Label: "Case file review",
+    stat1Sub: "Credited toward your documents",
+    stat2Value: "2 hrs",
+    stat2Label: "Typical scope memo",
+    stat2Sub: "Plain English, not legalese",
+    stat3Value: "1",
+    stat3Label: "Flat quote",
+    stat3Sub: "No hourly billing, ever",
   },
   services: {
     label: "What we handle for you",
@@ -62,9 +62,9 @@ export const en = {
           "Statutes, rules, and case law relevant to your issue — researched and applied to your facts so your documents cite the right authority.",
       },
       {
-        title: "Success rate analysis",
+        title: "Citation verification",
         description:
-          "We review your case, explain your strongest arguments, and run it through our proprietary analysis to estimate how similar matters have resolved — so you know where you stand before you commit.",
+          "Every case we cite is retrieved from the actual source, stored in your case file, and verified in a separate review pass before it appears in your documents — never invented, never guessed.",
       },
       {
         title: "Hearing preparation",
@@ -90,29 +90,29 @@ export const en = {
   servicesPage: servicesPageContent,
   compare: {
     label: "The difference",
-    titleLine1: "The preparation your case deserves —",
-    titleHighlight: "delivered",
-    titleLine2: "differently",
+    titleLine1: "The retainer trap —",
+    titleHighlight: "solved",
+    titleLine2: "with a two-step flat fee",
     subtitle:
-      "Every case quoted personally. Delivered in days. Built on research depth most practices cannot match at this pace.",
-    traditionalHeading: "Traditional preparation",
-    traditionalPrice: "Hourly billing",
-    traditionalDesc: "Retainers, billable hours, costs that grow with every call",
+      "A $199 case file review, then one flat quote for exactly what your case needs. No hourly clock, ever.",
+    traditionalHeading: "The retainer trap",
+    traditionalPrice: "$3,000–$10,000 retainer",
+    traditionalDesc: "Drawn down hourly, whether or not the work moves your case forward",
     traditionalBullets: [
       "Weeks waiting for callbacks",
-      "Fees often unclear until the invoice arrives",
-      "Pay before you know the full scope",
+      "You may never see an analysis of your own case file",
+      "Costs grow with every call and every email",
     ],
     usBadge: "Ask AI Legal",
-    usHeading: "Full-service preparation",
-    usPrice: "Custom quote",
-    usDesc: "Quoted upfront · Delivered in days, not weeks",
+    usHeading: "Two-step flat fee",
+    usPrice: "$199 to start",
+    usDesc: "Credited in full toward your document package",
     usBullets: [
-      "We generate your documents — you handle filing and court",
-      "Delivered in days, not weeks",
-      "No hourly surprises, ever",
+      "$199 case file review — credited toward your documents",
+      "One flat quote after your scope memo, no hourly billing",
+      "Every case citation retrieved, stored, and verified",
     ],
-    cta: "Email to get your quote",
+    cta: "Start my case file review",
     usCompareLabel: "Ask AI Legal",
     traditionalCompareLabel: "Traditional",
     highlightsLabel: "Services we offer",
@@ -132,86 +132,41 @@ export const en = {
           "We search the full body of case law — not from memory, not from a firm's go-to precedent list. Continuously updated as the law changes, so your strategy is never built on outdated rulings.",
       },
       {
-        title: "Success rate analysis",
-        summary: "Know your odds before you commit",
+        title: "Citation verification",
+        summary: "Every citation retrieved and checked twice",
         detail:
-          "We benchmark your case against thousands of similar outcomes for real, data-backed probability — not a gut feeling from someone who 'thinks they've seen a case like this before.'",
+          "Every case we cite is pulled from the actual source, stored in your case file, and verified in a separate review pass before it reaches your draft — never invented, never guessed.",
       },
       {
         title: "Transparent quote",
         summary: "One price, no surprises",
         detail:
-          "Flat pricing, calculated upfront. No clock running while someone drafts an email — you know the full cost before you say yes.",
+          "Flat pricing, calculated upfront from your scope memo. No clock running while someone drafts an email — you know the full cost before you say yes.",
       },
     ],
   },
   process: {
     label: "Our process",
-    title: "We generate your documents — that's it",
-    cta: "Email for a free case review",
+    title: "Two payments. No hourly clock. Ever.",
+    cta: "Start my case file review",
     steps: [
       {
-        title: "Tell us your story",
-        body: "Share your case in plain language. We ask the right questions — you never touch legal jargon.",
+        title: "Tell us your case",
+        body: "Share your situation in plain language and upload what you have. We ask the right questions — you never touch legal jargon.",
       },
       {
-        title: "We prepare your work",
-        body: "Our team drafts, researches, formats, and refines your documents. You relax. We deliver.",
+        title: "$199 case file review",
+        body: "We review your case file and send a plain-English scope memo, usually within 2 hours — credited in full toward your documents.",
       },
       {
-        title: "Receive your documents",
-        body: "Your completed documents arrive formatted and ready for review. You handle any filing or court appearance yourself.",
+        title: "One flat quote",
+        body: "Your memo ends with a single recommendation and one flat price for the documents your case needs. No hourly surprises.",
+      },
+      {
+        title: "Court-ready delivery",
+        body: "We research, draft, and verify every citation, then deliver your complete document package. You review and file on your own behalf.",
       },
     ],
-  },
-  testimonials: {
-    label: "Client outcomes",
-    titleWhite: "Real people. ",
-    titleGold: "Real results.",
-    rotateHint: "Reviews slide automatically · Use dots or arrows to pause and read",
-    verified: "Verified client",
-    clients: {
-      sandra: {
-        quote:
-          "Going through my divorce I had no idea where to start. They walked me through the paperwork step by step — custody, property, all of it. I felt like I had someone in my corner for the first time.",
-        name: "Sandra M.",
-        title: "Divorce filing",
-        case: "Ohio",
-        imageAlt: "Photo of Sandra M., client from Ohio",
-      },
-      marcus: {
-        quote:
-          "I needed a motion filed fast and every lawyer wanted a retainer I couldn't afford. One email, a clear price, and my documents were back in 72 hours. They looked like something a real attorney wrote.",
-        name: "Marcus J.",
-        title: "Civil motion",
-        case: "Georgia",
-        imageAlt: "Photo of Marcus J., client from Georgia",
-      },
-      priya: {
-        quote:
-          "Between work and my two kids, I couldn't keep up with family court deadlines. They handled the research and filings so I could focus on my children — everything was explained in plain language.",
-        name: "Priya S.",
-        title: "Family court",
-        case: "New Jersey",
-        imageAlt: "Photo of Priya S., client from New Jersey",
-      },
-      keisha: {
-        quote:
-          "Facing an unfair eviction with nowhere to turn. They researched tenant rights, drafted my response, and broke down every paragraph so I understood it before I walked into court.",
-        name: "Keisha W.",
-        title: "Housing defense",
-        case: "Illinois",
-        imageAlt: "Photo of Keisha W., client from Illinois",
-      },
-      carlos: {
-        quote:
-          "English isn't my first language and legal forms were overwhelming. They explained everything clearly, prepared my response, and made sure I knew exactly what to file.",
-        name: "Carlos R.",
-        title: "Small claims response",
-        case: "Arizona",
-        imageAlt: "Photo of Carlos R., client from Arizona",
-      },
-    },
   },
   consultation: {
     label: "Your investment",
@@ -231,31 +186,31 @@ export const en = {
   faq: {
     label: "Questions",
     title: "Straight answers",
-    intro: "Transparency is part of the service. Here's what clients ask before they call.",
+    intro: "Transparency is part of the service. Here's what clients ask before they start.",
     items: [
       {
         q: "Are you a law firm?",
         a: "No. Ask AI Legal generates legal documents only. We prepare court-ready documents for your review and use. We do not provide legal advice and do not establish an attorney-client relationship.",
       },
       {
-        q: "Why don't you list prices on the website?",
-        a: "Every case is different — a simple motion and a complex post-conviction petition require different work. We quote after we understand your situation. Email us at support@askailegal.com for a free consultation and a clear, upfront quote.",
+        q: "What do I get for $199?",
+        a: "A case file review: we read what you send us — filings, notices, letters, court documents — and deliver a plain-English scope memo, usually within 2 hours. It tells you where your case stands procedurally, what documents it needs next, and one flat quote to prepare them. The $199 is credited in full toward that quote.",
+      },
+      {
+        q: "Why two payments instead of one price up front?",
+        a: "Because quoting document work before reading your case file is guessing — that's how retainers balloon. The first payment covers actually reviewing your file; the second is a fixed quote for exactly the work your memo describes. No hourly billing at either step.",
+      },
+      {
+        q: "What kinds of cases do you handle?",
+        a: "Divorce and custody, family court matters, civil disputes, small business disputes, and the responses, motions, and letters they require — across U.S. jurisdictions.",
+      },
+      {
+        q: "How do I know your legal citations are real?",
+        a: "Every case we cite is retrieved from the actual source, stored in your case file, and verified in a separate review pass before it appears in your documents. You receive the citation list with your delivery.",
       },
       {
         q: "Will you appear in court for me?",
         a: "No — never. We only generate documents. You are responsible for filing, serving, and appearing in court on your own behalf or through an attorney you hire separately.",
-      },
-      {
-        q: "What does 'done for you' actually mean?",
-        a: "You describe your case. We handle research, drafting, formatting, citations, and revisions. You receive a complete document package to review — without writing legal content yourself. We do not file documents or appear in court.",
-      },
-      {
-        q: "How is this different from hiring an attorney?",
-        a: "Attorneys typically bill by the hour with retainers upfront. We provide attorney-quality document preparation with a custom quote for your specific case — full service, fraction of the cost, no hourly clock.",
-      },
-      {
-        q: "What types of cases do you handle?",
-        a: "Criminal motions, civil complaints, post-conviction petitions, responses, demand letters, and more — across U.S. jurisdictions.",
       },
       {
         q: "Can I request revisions?",
@@ -277,7 +232,7 @@ export const en = {
       caseRoadmap: "Case roadmap",
       caseResearch: "Case research",
       legalResearch: "Legal research",
-      outcomeAnalysis: "Success rate analysis",
+      outcomeAnalysis: "Citation verification",
       hearingPrep: "Hearing preparation",
       documentPrep: "Document prep",
       about: "About us",
@@ -292,11 +247,11 @@ export const en = {
   },
   cta: {
     label: "Begin today",
-    title: "Your case deserves the best preparation — not the biggest bill",
-    body: "Email us for a free case review. We'll tell you exactly what we can prepare for you and quote your investment — no obligation.",
-    emailConsult: "Email for a free consultation",
+    title: "Stop paying for hours. Start with your file.",
+    body: "A $199 case file review tells you exactly where your case stands and what it will cost to prepare — before you commit to anything else. Credited in full toward your documents.",
+    emailConsult: "Start my case file review",
     emailQuote: "Email to get your quote",
-    disclaimer: "Not a law firm · Document generation only",
+    disclaimer: "Not a law firm · No legal advice · Document preparation & research only",
   },
 }
 

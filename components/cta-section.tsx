@@ -1,9 +1,9 @@
 "use client"
 
-import { ArrowRight, Mail } from "lucide-react"
+import { ArrowRight, FileSearch } from "lucide-react"
 import { PaperShaderBackground } from "@/components/paper-shader-background"
 import { useLanguage } from "@/components/language-provider"
-import { SUPPORT_MAILTO } from "@/lib/site-config"
+import { openChatWidget } from "@/lib/chat/open-chat"
 
 export function CtaSection() {
   const { t } = useLanguage()
@@ -21,11 +21,15 @@ export function CtaSection() {
           <p className="relative mx-auto mt-5 max-w-lg text-white/65">
             {t.cta.body}
           </p>
-          <a href={SUPPORT_MAILTO} className="btn-neon relative mt-10 inline-flex flex-row items-center gap-2">
-            <Mail className="h-4 w-4 shrink-0" aria-hidden />
+          <button
+            type="button"
+            onClick={() => openChatWidget("quote")}
+            className="btn-neon relative mt-10 inline-flex flex-row items-center gap-2"
+          >
+            <FileSearch className="h-4 w-4 shrink-0" aria-hidden />
             <span>{t.cta.emailConsult}</span>
             <ArrowRight className="h-4 w-4 shrink-0" aria-hidden />
-          </a>
+          </button>
           <p className="relative mt-6 text-xs text-white/40">
             {t.cta.disclaimer}
           </p>

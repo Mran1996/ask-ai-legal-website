@@ -31,55 +31,6 @@ export const es = mergeTranslations({
     stat3Label: "Solo documentos",
     stat3Sub: "Nosotros generamos. Usted decide.",
   },
-  testimonials: {
-    label: "Resultados de clientes",
-    titleWhite: "Personas reales. ",
-    titleGold: "Resultados reales.",
-    rotateHint: "Las reseñas rotan · Toque una tarjeta para pausar",
-    verified: "Cliente verificado",
-    clients: {
-      sandra: {
-        quote:
-          "En mi divorcio no sabía por dónde empezar. Me guiaron paso a paso con la documentación — custodia, bienes, todo. Por primera vez sentí que alguien estaba de mi lado.",
-        name: "Sandra M.",
-        title: "Divorcio",
-        case: "Ohio",
-        imageAlt: "Foto de Sandra M., clienta de Ohio",
-      },
-      marcus: {
-        quote:
-          "Necesitaba una moción rápido y cada abogado pedía un anticipo que no podía pagar. Un correo, precio claro, documentos en 48 horas.",
-        name: "Marcus J.",
-        title: "Moción civil",
-        case: "Georgia",
-        imageAlt: "Foto de Marcus J., cliente de Georgia",
-      },
-      priya: {
-        quote:
-          "Entre el trabajo y mis dos hijos no podía con los plazos del tribunal familiar. Se encargaron de la investigación y los trámites.",
-        name: "Priya S.",
-        title: "Tribunal familiar",
-        case: "Nueva Jersey",
-        imageAlt: "Foto de Priya S., clienta de Nueva Jersey",
-      },
-      keisha: {
-        quote:
-          "Enfrentaba un desalojo injusto. Investigar mis derechos como inquilina, redactar mi respuesta y explicarme cada párrafo.",
-        name: "Keisha W.",
-        title: "Defensa de vivienda",
-        case: "Illinois",
-        imageAlt: "Foto de Keisha W., clienta de Illinois",
-      },
-      carlos: {
-        quote:
-          "El inglés no es mi primer idioma y los formularios legales eran abrumadores. Lo explicaron todo claramente y prepararon mi respuesta.",
-        name: "Carlos R.",
-        title: "Respuesta de reclamo menor",
-        case: "Arizona",
-        imageAlt: "Foto de Carlos R., cliente de Arizona",
-      },
-    },
-  },
   faq: {
     label: "Preguntas",
     title: "Respuestas directas",

@@ -27,6 +27,7 @@ import { prefillIntakeFromChat } from "@/lib/chat/intake-from-chat"
 import { formatUsdFromCents } from "@/lib/pricing/ca-eviction"
 import { getChatUiStrings, getWelcomeMessage } from "@/lib/chat/ui-strings"
 import { stripMarkdownForChat } from "@/lib/chat/sanitize-response"
+import { OPEN_CHAT_EVENT, type OpenChatEventDetail } from "@/lib/chat/open-chat"
 import { SUPPORT_MAILTO, SITE_BRAND_NAME } from "@/lib/site-config"
 import { api } from "@/convex/_generated/api"
 import type { Id } from "@/convex/_generated/dataModel"
@@ -286,6 +287,19 @@ export function ChatWidget() {
       return { ...prev, ...patch }
     })
   }
+
+  useEffect(() => {
+    const handleOpenEvent = (event: Event) => {
+      const detail = (event as CustomEvent<OpenChatEventDetail>).detail
+      handleOpen()
+      if (detail?.tab === "quote" && languageConfirmed) {
+        switchToQuoteTab()
+      }
+    }
+    window.addEventListener(OPEN_CHAT_EVENT, handleOpenEvent)
+    return () => window.removeEventListener(OPEN_CHAT_EVENT, handleOpenEvent)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [languageConfirmed, chatLocale])
 
   const handleIntakeFiles = (fileList: FileList | null) => {
     if (!fileList?.length) return

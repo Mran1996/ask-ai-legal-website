@@ -2,11 +2,12 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Mail, Menu, X } from "lucide-react"
+import { FileSearch, Menu, X } from "lucide-react"
 import { useEffect, useMemo, useState } from "react"
 import { BrandLockup } from "@/components/brand-lockup"
 import { LanguageSelector } from "@/components/language-selector"
 import { useLanguage } from "@/components/language-provider"
+import { openChatWidget } from "@/lib/chat/open-chat"
 import { SUPPORT_EMAIL, SUPPORT_MAILTO } from "@/lib/site-config"
 
 function isLinkActive(pathname: string, href: string) {
@@ -118,14 +119,14 @@ export function Navigation() {
 
         <div className="z-10 ml-auto flex items-center gap-2 sm:gap-3">
           <LanguageSelector compact />
-          <a
-            href={SUPPORT_MAILTO}
+          <button
+            type="button"
+            onClick={() => openChatWidget("quote")}
             className="header-call-pill hidden sm:inline-flex"
-            aria-label={`Email ${SUPPORT_EMAIL}`}
           >
-            <Mail className="h-3.5 w-3.5 shrink-0" aria-hidden />
+            <FileSearch className="h-3.5 w-3.5 shrink-0" aria-hidden />
             <span>{t.nav.emailForReview}</span>
-          </a>
+          </button>
 
           <button
             type="button"
@@ -154,13 +155,19 @@ export function Navigation() {
               </li>
             ))}
           </ul>
-          <a
-            href={SUPPORT_MAILTO}
+          <button
+            type="button"
+            onClick={() => {
+              setOpen(false)
+              openChatWidget("quote")
+            }}
             className="header-call-pill mt-4 w-full justify-center py-3"
-            onClick={() => setOpen(false)}
           >
-            <Mail className="h-4 w-4" aria-hidden />
-            <span>{SUPPORT_EMAIL}</span>
+            <FileSearch className="h-4 w-4" aria-hidden />
+            <span>{t.nav.emailForReview}</span>
+          </button>
+          <a href={SUPPORT_MAILTO} className="mt-3 block text-center text-xs text-navy/50 hover:text-navy/70">
+            {SUPPORT_EMAIL}
           </a>
         </nav>
       )}

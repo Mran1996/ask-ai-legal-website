@@ -1,12 +1,12 @@
 "use client"
 
-import { ArrowRight, FileCheck, FileText, MessageSquare } from "lucide-react"
+import { ArrowRight, FileSearch, MessageSquare, Receipt, Send } from "lucide-react"
 import type { LucideIcon } from "lucide-react"
 import { NeonButton } from "@/components/neon-button"
 import { useLanguage } from "@/components/language-provider"
-import { SUPPORT_MAILTO } from "@/lib/site-config"
+import { openChatWidget } from "@/lib/chat/open-chat"
 
-const STEP_ICONS: LucideIcon[] = [MessageSquare, FileText, FileCheck]
+const STEP_ICONS: LucideIcon[] = [MessageSquare, FileSearch, Receipt, Send]
 
 export function HowItWorks() {
   const { t } = useLanguage()
@@ -22,13 +22,13 @@ export function HowItWorks() {
 
         <div className="relative mx-auto mt-14 max-w-5xl sm:mt-16">
           <div
-            className="pointer-events-none absolute left-[16.67%] right-[16.67%] top-14 hidden h-px bg-gold/25 sm:block"
+            className="pointer-events-none absolute left-[12.5%] right-[12.5%] top-14 hidden h-px bg-gold/25 lg:block"
             aria-hidden
           />
 
-          <ol className="grid gap-8 sm:grid-cols-3 sm:gap-6 lg:gap-8">
+          <ol className="grid gap-8 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4 lg:gap-8">
             {t.process.steps.map((item, i) => {
-              const Icon = STEP_ICONS[i] ?? FileText
+              const Icon = STEP_ICONS[i] ?? MessageSquare
 
               return (
                 <li
@@ -54,7 +54,7 @@ export function HowItWorks() {
         </div>
 
         <div className="mt-12 flex justify-center sm:mt-14">
-          <NeonButton href={SUPPORT_MAILTO} className="btn-neon-light">
+          <NeonButton onClick={() => openChatWidget("quote")} className="btn-neon-light">
             {t.process.cta}
             <ArrowRight className="h-4 w-4" aria-hidden />
           </NeonButton>

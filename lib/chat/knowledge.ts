@@ -115,7 +115,7 @@ export function buildKnowledgeForLocale(locale: Locale): KnowledgeChunk[] {
   }
 
   chunks.push(
-    chunk(locale, "compare", "vs attorney", t.faq.items[4]?.a ?? t.compare.subtitle, [
+    chunk(locale, "compare", "vs attorney", t.compare.subtitle, [
       "attorney",
       "lawyer",
       "different",

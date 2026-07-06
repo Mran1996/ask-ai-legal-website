@@ -31,13 +31,6 @@ export const ar = mergeTranslations({
     stat3Label: "مستندات فقط",
     stat3Sub: "نحن نُعد. أنت تقرر.",
   },
-  testimonials: {
-    label: "نتائج العملاء",
-    titleWhite: "أشخاص حقيقيون. ",
-    titleGold: "نتائج حقيقية.",
-    rotateHint: "المراجعات تتناوب · اضغط على بطاقة للإيقاف",
-    verified: "عميل موثّق",
-  },
   cta: {
     label: "ابدأ اليوم",
     title: "قضيتك تستحق أفضل إعداد — وليس أكبر فاتورة",

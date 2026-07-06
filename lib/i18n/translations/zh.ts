@@ -31,13 +31,6 @@ export const zh = mergeTranslations({
     stat3Label: "仅文档",
     stat3Sub: "我们生成。您决定下一步。",
   },
-  testimonials: {
-    label: "客户成果",
-    titleWhite: "真实的人。",
-    titleGold: "真实的结果。",
-    rotateHint: "评价自动轮播 · 点击卡片暂停",
-    verified: "已验证客户",
-  },
   cta: {
     label: "今天开始",
     title: "您的案件值得最好的准备——而不是最高的账单",

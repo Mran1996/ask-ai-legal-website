@@ -4,9 +4,10 @@ import { LegalDocumentLayout } from "@/components/legal-document-layout"
 import { SUPPORT_EMAIL } from "@/lib/site-config"
 
 export const metadata: Metadata = {
-  title: "Privacy Policy — Ask AI Legal",
+  title: "Privacy Policy",
   description:
     "How Ask AI Legal collects, uses, and protects your personal information.",
+  alternates: { canonical: "/privacy-policy" },
 }
 
 const LAST_UPDATED = "June 29, 2026"

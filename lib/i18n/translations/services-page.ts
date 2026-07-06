@@ -64,12 +64,12 @@ export const servicesPageContent = {
     },
     {
       detail:
-        "We explain your strongest arguments and run your matter through proprietary analysis against comparable cases — so you have a data-informed picture of how similar situations have resolved before you invest further. This is analytical preparation, not a guarantee of outcome.",
+        "Every case we cite is retrieved from the actual reporter, stored in your case file, and verified in a separate review pass before it ever appears in your document. AI does the heavy lifting; verification makes it court-ready.",
       includes: [
-        "Review of your strongest legal arguments",
-        "Comparison to similar case patterns",
-        "Written analysis of likely considerations",
-        "Context before you commit to next steps",
+        "Every cited case retrieved from source",
+        "Stored in your case file for reference",
+        "Verified in a separate review pass",
+        "Full citation list delivered with your documents",
       ],
     },
     {
@@ -119,8 +119,8 @@ export const servicesPageContent = {
   },
   cta: {
     title: "Ready to see what we can prepare for you?",
-    body: "Email us for a free case review. Every matter receives a custom quote — typical turnaround within 72 hours once work begins.",
-    button: "Email for a free case review",
+    body: "Start with a flat $199 case file review. You'll get a plain-English scope memo and one flat quote for the documents your case needs — credited in full toward your total.",
+    button: "Start my case file review",
   },
   homeLink: "Learn more about our services",
 }

@@ -31,13 +31,6 @@ export const tl = mergeTranslations({
     stat3Label: "Dokumento lamang",
     stat3Sub: "Kami ang gumagawa. Ikaw ang magdesisyon.",
   },
-  testimonials: {
-    label: "Resulta ng kliyente",
-    titleWhite: "Tunay na tao. ",
-    titleGold: "Tunay na resulta.",
-    rotateHint: "Umiikot ang mga review · Tap para huminto",
-    verified: "Verified na kliyente",
-  },
   cta: {
     label: "Magsimula ngayon",
     title: "Karapat-dapat ang iyong kaso sa pinakamahusay na paghahanda",

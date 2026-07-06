@@ -6,11 +6,11 @@ import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
 import {
   ArrowRight,
+  BadgeCheck,
   BookOpen,
   Clock,
   FileSearch,
-  LineChart,
-  Scale,
+  Receipt,
   Shield,
 } from "lucide-react"
 
@@ -19,19 +19,19 @@ const capabilities = [
     icon: FileSearch,
     title: "Thousands of cases, one strategy",
     description:
-      "Your matter is researched against a vast body of filings, motions, and outcomes — the kind of depth that would take a traditional practice weeks to compile. We deliver it as part of your preparation.",
+      "Your matter is researched against a vast body of filings, motions, and case law — the kind of depth that would take a traditional practice weeks to compile. We deliver it as part of your preparation.",
   },
   {
-    icon: Scale,
-    title: "Similar granted-case matching",
+    icon: BadgeCheck,
+    title: "Citation verification",
     description:
-      "We identify cases like yours where relief was actually granted — not just cited, but won. Your documents are shaped by what has worked for people in your position.",
+      "Every case we cite is retrieved from the actual source, stored in your case file, and verified in a separate review pass before it reaches your documents — never invented, never guessed.",
   },
   {
-    icon: LineChart,
-    title: "Success-rate intelligence",
+    icon: Receipt,
+    title: "Two flat fees, no hourly clock",
     description:
-      "You receive clear insight into how cases with your facts tend to resolve. Not guesswork — a data-informed picture of your landscape before you file a single page.",
+      "A $199 case file review, credited toward one flat quote for your documents. You know the full cost before you commit to either step.",
   },
   {
     icon: BookOpen,
@@ -41,7 +41,7 @@ const capabilities = [
   },
   {
     icon: Clock,
-    title: "Delivered in days",
+    title: "Delivered fast",
     description:
       "Preparation moves on your timeline. No waiting weeks for a return call while deadlines approach.",
   },
@@ -63,8 +63,8 @@ const standards = [
     text: "You know the scope, the timeline, and the investment before work begins.",
   },
   {
-    title: "Outcomes over optics",
-    text: "Your preparation reflects what has actually worked in cases like yours.",
+    title: "Verified over invented",
+    text: "Every citation in your documents is retrieved from source and checked twice before delivery.",
   },
   {
     title: "Service without the clock",
@@ -73,9 +73,10 @@ const standards = [
 ]
 
 export const metadata: Metadata = {
-  title: "About Us — Ask AI Legal",
+  title: "About Us",
   description:
-    "What makes Ask AI Legal different: institutional-scale case research, granted-outcome matching, outcome likelihood analysis, and full-service document preparation — delivered in days.",
+    "What makes Ask AI Legal different: institutional-scale case research, citation-verified legal work, and a two-step flat fee — no hourly billing, no retainer trap.",
+  alternates: { canonical: "/about" },
 }
 
 export default function AboutPage() {

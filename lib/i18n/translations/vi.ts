@@ -31,13 +31,6 @@ export const vi = mergeTranslations({
     stat3Label: "Chỉ tài liệu",
     stat3Sub: "Chúng tôi tạo. Bạn quyết định.",
   },
-  testimonials: {
-    label: "Kết quả khách hàng",
-    titleWhite: "Người thật. ",
-    titleGold: "Kết quả thật.",
-    rotateHint: "Đánh giá luân phiên · Chạm để dừng",
-    verified: "Khách hàng đã xác minh",
-  },
   cta: {
     label: "Bắt đầu hôm nay",
     title: "Vụ án của bạn xứng đáng được chuẩn bị tốt nhất",

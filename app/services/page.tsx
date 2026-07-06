@@ -4,9 +4,10 @@ import { Footer } from "@/components/footer"
 import { ServicesPageContent } from "@/components/services-page-content"
 
 export const metadata: Metadata = {
-  title: "Services — Ask AI Legal",
+  title: "Services",
   description:
-    "Full-service legal document preparation: case analysis, roadmap, research, success rate analysis, hearing prep, drafting, delivery, and revisions. Not a law firm — documents for your review.",
+    "Full-service legal document preparation: case analysis, roadmap, citation-verified research, hearing prep, drafting, delivery, and revisions. Not a law firm — documents for your review.",
+  alternates: { canonical: "/services" },
 }
 
 export default function ServicesPage() {
