@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080" width="1080" height="1080">
+  <rect width="1080" height="1080" fill="#0c1929" />
+  <!-- Abstract "AA" monogram: two bold geometric chevrons with crossbars, tightly paired -->
+  <g fill="none" stroke="#C5A059" stroke-width="58" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Letter 1 -->
+    <path d="M 225 760 L 390 320 L 555 760" />
+    <path d="M 300 585 L 480 585" />
+    <!-- Letter 2 -->
+    <path d="M 525 760 L 690 320 L 855 760" />
+    <path d="M 600 585 L 780 585" />
+  </g>
+</svg>
