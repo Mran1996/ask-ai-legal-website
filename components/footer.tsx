@@ -4,12 +4,12 @@ import Link from "next/link"
 import { Scale, Instagram, Facebook, Youtube } from "lucide-react"
 import { useLanguage } from "@/components/language-provider"
 import { serviceSlug } from "@/lib/service-icons"
-import { SITE_DISCLAIMER, SOCIAL_LINKS, SITE_BRAND_NAME } from "@/lib/site-config"
+import { SITE_DISCLAIMER, SITE_BRAND_NAME } from "@/lib/site-config"
 
 const social = [
-  { label: "Instagram", href: SOCIAL_LINKS.instagram, icon: Instagram },
-  { label: "Facebook", href: SOCIAL_LINKS.facebook, icon: Facebook },
-  { label: "YouTube", href: SOCIAL_LINKS.youtube, icon: Youtube },
+  { label: "Instagram", icon: Instagram },
+  { label: "Facebook", icon: Facebook },
+  { label: "YouTube", icon: Youtube },
 ]
 
 export function Footer() {
@@ -63,17 +63,15 @@ export function Footer() {
               {SITE_DISCLAIMER}
             </p>
             <div className="mt-5 flex gap-3">
-              {social.map(({ label, href, icon: Icon }) => (
-                <a
+              {social.map(({ label, icon: Icon }) => (
+                <button
                   key={label}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  type="button"
                   aria-label={label}
-                  className="flex h-10 w-10 items-center justify-center rounded-sm border border-white/10 text-white/70 transition-colors hover:border-gold/40 hover:text-gold"
+                  className="flex h-10 w-10 cursor-default items-center justify-center rounded-sm border border-white/10 text-white/70 transition-colors hover:border-gold/40 hover:text-gold"
                 >
                   <Icon className="h-4 w-4" aria-hidden />
-                </a>
+                </button>
               ))}
             </div>
           </div>
@@ -101,17 +99,15 @@ export function Footer() {
               {columns.social}
             </h3>
             <ul className="mt-4 space-y-2.5">
-              {social.map(({ label, href, icon: Icon }) => (
+              {social.map(({ label, icon: Icon }) => (
                 <li key={label}>
-                  <a
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-sm transition-colors hover:text-gold"
+                  <button
+                    type="button"
+                    className="flex cursor-default items-center gap-2 text-sm transition-colors hover:text-gold"
                   >
                     <Icon className="h-4 w-4 shrink-0" aria-hidden />
                     {label}
-                  </a>
+                  </button>
                 </li>
               ))}
             </ul>

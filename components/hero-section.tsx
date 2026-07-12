@@ -42,7 +42,6 @@ export function HeroSection() {
         <div className="mx-auto flex w-full max-w-4xl flex-col items-center">
           <BrandLockup
             href="/"
-            typewriterClassName="text-glow-accent"
             typewriterSpeed={75}
             typewriterDelay={400}
             className="animate-fade-up justify-center px-4 py-2 sm:py-3"

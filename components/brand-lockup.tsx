@@ -15,7 +15,7 @@ type BrandLockupProps = {
 }
 
 export function BrandLockup({
-  typewriterClassName = "text-glow-accent-sm",
+  typewriterClassName = "",
   taglineClassName,
   className = "",
   typewriterSpeed = 60,
