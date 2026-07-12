@@ -24,8 +24,6 @@ import { US_STATES } from "@/lib/chat/us-states"
 import { isIntakeValid, SUPPORT_EMAIL } from "@/lib/chat/intake"
 import { intakeFormToPayload } from "@/lib/chat/intake-structured"
 import { prefillIntakeFromChat } from "@/lib/chat/intake-from-chat"
-import { formatUsdFromCents } from "@/lib/pricing/ca-eviction"
-import { estimateFractionPercent } from "@/lib/pricing/service-pricing"
 import { getChatUiStrings, getWelcomeMessage } from "@/lib/chat/ui-strings"
 import { stripMarkdownForChat } from "@/lib/chat/sanitize-response"
 import { OPEN_CHAT_EVENT, type OpenChatEventDetail } from "@/lib/chat/open-chat"
@@ -142,61 +140,6 @@ function AssistantMessageBubble({
 
 type Tab = "chat" | "quote"
 
-type IntakeSuccessState = {
-  caseReference: string
-  serviceLine: string
-  attorneyLow: string
-  attorneyHigh: string
-  ourPrice: string
-  ourPriceCents: number
-  attorneyLowCents: number
-  attorneyHighCents: number
-  fractionPercent: number
-  isCustomQuote: boolean
-  submittedIntake: IntakeFormData
-  uploadedFileCount: number
-}
-
-function intakeSummaryRows(
-  intake: IntakeFormData,
-  ui: ReturnType<typeof getChatUiStrings>
-): Array<{ label: string; value: string }> {
-  const stateLabel =
-    US_STATES.find((s) => s.code === intake.state)?.label ?? intake.state
-
-  const rows: Array<{ label: string; value: string }> = [
-    { label: ui.firstName, value: intake.firstName },
-    { label: ui.lastName, value: intake.lastName },
-    { label: ui.email, value: intake.email },
-  ]
-
-  if (intake.phone.trim()) rows.push({ label: ui.phone, value: intake.phone })
-  rows.push({ label: ui.state, value: stateLabel })
-  if (intake.caseType.trim()) rows.push({ label: ui.caseType, value: intake.caseType })
-  rows.push({ label: ui.issue, value: intake.issue })
-  if (intake.deadline.trim()) rows.push({ label: ui.deadline, value: intake.deadline })
-  if (intake.opposingParty.trim()) {
-    rows.push({ label: ui.opposingParty, value: intake.opposingParty })
-  }
-  if (intake.hasDocuments) {
-    rows.push({
-      label: ui.hasDocuments,
-      value: intake.hasDocuments === "yes" ? ui.hasDocumentsYes : ui.hasDocumentsNo,
-    })
-  }
-  if (intake.preferredContact) {
-    const contactLabel =
-      intake.preferredContact === "email"
-        ? ui.contactEmail
-        : intake.preferredContact === "phone"
-          ? ui.contactPhone
-          : ui.contactEither
-    rows.push({ label: ui.preferredContact, value: contactLabel })
-  }
-
-  return rows
-}
-
 export function ChatWidget() {
   const { locale: siteLocale, setLanguage } = useLanguage()
   const [open, setOpen] = useState(false)
@@ -207,7 +150,7 @@ export function ChatWidget() {
   const [intake, setIntake] = useState<IntakeFormData>(EMPTY_INTAKE)
   const [intakeError, setIntakeError] = useState("")
   const [intakeSubmitting, setIntakeSubmitting] = useState(false)
-  const [intakeSuccess, setIntakeSuccess] = useState<IntakeSuccessState | null>(null)
+  const [intakeSubmitBanner, setIntakeSubmitBanner] = useState<string | null>(null)
   const [pendingFiles, setPendingFiles] = useState<File[]>([])
   const fileInputRef = useRef<HTMLInputElement>(null)
   const createFromIntake = useMutation(api.cases.createFromIntake)
@@ -409,32 +352,13 @@ export function ChatWidget() {
       if (pendingFiles.length > 0) {
         await uploadIntakeFiles(result.caseId, pendingFiles)
       }
-      const estimate = await generateForCase({ caseId: result.caseId })
-      const submittedSnapshot = { ...intake }
-      const uploadedFileCount = pendingFiles.length
-      const fractionPercent = estimateFractionPercent(
-        estimate.finalQuoteCents,
-        estimate.attorneyCompareLowCents,
-        estimate.attorneyCompareHighCents
-      )
-      setIntakeSuccess({
-        caseReference: result.caseReference,
-        serviceLine: estimate.serviceLine,
-        attorneyLow: formatUsdFromCents(estimate.attorneyCompareLowCents),
-        attorneyHigh: formatUsdFromCents(estimate.attorneyCompareHighCents),
-        ourPrice: estimate.isCustomQuote
-          ? ""
-          : formatUsdFromCents(estimate.finalQuoteCents),
-        ourPriceCents: estimate.finalQuoteCents,
-        attorneyLowCents: estimate.attorneyCompareLowCents,
-        attorneyHighCents: estimate.attorneyCompareHighCents,
-        fractionPercent,
-        isCustomQuote: estimate.isCustomQuote,
-        submittedIntake: submittedSnapshot,
-        uploadedFileCount,
-      })
+      await generateForCase({ caseId: result.caseId })
       setIntake(EMPTY_INTAKE)
       setPendingFiles([])
+      setIntakeSubmitBanner(result.caseReference)
+      if (fileInputRef.current) {
+        fileInputRef.current.value = ""
+      }
       void requestIntakeNotifications({ caseId: result.caseId }).catch(() => {
         // Email is best-effort; intake + estimate already saved.
       })
@@ -461,11 +385,14 @@ export function ChatWidget() {
     }
   }
 
-  const resetIntakeSuccess = () => {
-    setIntakeSuccess(null)
+  const resetIntakeForm = () => {
+    setIntakeSubmitBanner(null)
     setIntake(EMPTY_INTAKE)
     setIntakeError("")
     setPendingFiles([])
+    if (fileInputRef.current) {
+      fileInputRef.current.value = ""
+    }
   }
 
   const updateIntake = (field: keyof IntakeFormData, value: string) => {
@@ -531,7 +458,10 @@ export function ChatWidget() {
           )}
           <button
             type="button"
-            onClick={() => setOpen(false)}
+            onClick={() => {
+              setOpen(false)
+              setIntakeSubmitBanner(null)
+            }}
             className="rounded-full p-1.5 text-white/70 hover:bg-white/10 hover:text-white"
             aria-label={ui.closeChat}
           >
@@ -564,7 +494,10 @@ export function ChatWidget() {
           <div className="flex shrink-0 border-b border-white/10">
             <button
               type="button"
-              onClick={() => setTab("chat")}
+              onClick={() => {
+                setTab("chat")
+                setIntakeSubmitBanner(null)
+              }}
               className={`flex flex-1 items-center justify-center gap-1.5 py-2.5 text-xs font-semibold uppercase tracking-wider ${
                 tab === "chat" ? "border-b-2 border-gold text-gold" : "text-white/55 hover:text-white/80"
               }`}
@@ -657,156 +590,29 @@ export function ChatWidget() {
                 </div>
               </div>
             </>
-          ) : intakeSuccess ? (
-            <div className="flex flex-1 flex-col overflow-hidden">
-              <div className="flex-1 space-y-4 overflow-y-auto px-4 py-4">
-                <div className="text-center">
-                  <CheckCircle2 className="mx-auto h-10 w-10 text-gold" aria-hidden />
-                  <p className="mt-3 font-display text-xl text-white">{ui.intakeSuccessTitle}</p>
-                  <p className="mt-2 rounded-sm border border-gold/40 bg-gold/10 px-4 py-2.5 font-mono text-base font-semibold tracking-wide text-gold">
-                    {intakeSuccess.caseReference}
-                  </p>
-                  <p className="mt-3 text-sm leading-relaxed text-white/75">
-                    {ui.intakeSuccessBody}
-                  </p>
-                </div>
-
-                {messages.length > 0 && (
-                  <section>
-                    <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] text-gold">
-                      {ui.conversationTitle}
-                    </h3>
-                    <div className="mt-2 space-y-2 rounded-sm border border-white/10 bg-white/5 p-3">
-                      {messages.map((message) => {
-                        const text = getMessageText(message)
-                        if (!text.trim()) return null
-                        if (message.role === "user") {
-                          return (
-                            <UserMessageBubble
-                              key={message.id}
-                              text={text}
-                              animate={false}
-                            />
-                          )
-                        }
-                        return (
-                          <AssistantMessageBubble
-                            key={message.id}
-                            text={text}
-                            animate={false}
-                            isStreaming={false}
-                          />
-                        )
-                      })}
-                    </div>
-                  </section>
-                )}
-
-                <section>
-                  <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] text-gold">
-                    {ui.submittedInfoTitle}
-                  </h3>
-                  <dl className="mt-2 space-y-2 rounded-sm border border-white/10 bg-white/5 px-4 py-3 text-sm">
-                    {intakeSummaryRows(intakeSuccess.submittedIntake, ui).map(({ label, value }) => (
-                      <div key={label}>
-                        <dt className="text-[10px] uppercase tracking-wider text-white/45">{label}</dt>
-                        <dd className="mt-0.5 whitespace-pre-wrap text-white/90">{value}</dd>
-                      </div>
-                    ))}
-                    {intakeSuccess.uploadedFileCount > 0 && (
-                      <div>
-                        <dt className="text-[10px] uppercase tracking-wider text-white/45">
-                          {ui.uploadFiles}
-                        </dt>
-                        <dd className="mt-0.5 text-white/90">
-                          {ui.uploadFilesSelected.replace(
-                            "{count}",
-                            String(intakeSuccess.uploadedFileCount)
-                          )}
-                        </dd>
-                      </div>
-                    )}
-                  </dl>
-                </section>
-
-                <section>
-                  <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] text-gold">
-                    {ui.pricingTitle}
-                  </h3>
-                  <div className="mt-2 rounded-sm border border-white/15 bg-white/5 px-4 py-3 text-left">
-                    <p className="text-[10px] uppercase tracking-wider text-white/50">
-                      {ui.estimateServiceLine}
-                    </p>
-                    <p className="mt-1 text-sm text-white/90">{intakeSuccess.serviceLine}</p>
-
-                    <div className="mt-4 grid gap-3 sm:grid-cols-2">
-                      <div className="rounded-sm border border-white/10 bg-navy/60 px-3 py-3">
-                        <p className="text-[10px] uppercase tracking-wider text-white/45">
-                          {ui.attorneyTypicalLabel}
-                        </p>
-                        <p className="mt-1 font-display text-lg font-semibold text-white/80">
-                          {intakeSuccess.attorneyLow}–{intakeSuccess.attorneyHigh}
-                        </p>
-                      </div>
-                      <div className="rounded-sm border border-gold/35 bg-gold/10 px-3 py-3">
-                        <p className="text-[10px] uppercase tracking-wider text-gold/80">
-                          {ui.ourEstimatedLabel}
-                        </p>
-                        <p className="mt-1 font-display text-lg font-semibold text-gold">
-                          {intakeSuccess.isCustomQuote
-                            ? ui.ourCustomQuoteLabel
-                            : intakeSuccess.ourPrice}
-                        </p>
-                      </div>
-                    </div>
-
-                    <p className="mt-3 text-sm text-white/85">
-                      {intakeSuccess.isCustomQuote
-                        ? ui.estimateCustomQuote
-                            .replace("{attorneyTypicalLabel}", ui.attorneyTypicalLabel)
-                            .replace("{attorneyLow}", intakeSuccess.attorneyLow)
-                            .replace("{attorneyHigh}", intakeSuccess.attorneyHigh)
-                            .replace("{fraction}", String(intakeSuccess.fractionPercent))
-                        : ui.estimateComparison
-                            .replace("{attorneyTypicalLabel}", ui.attorneyTypicalLabel)
-                            .replace("{ourEstimatedLabel}", ui.ourEstimatedLabel)
-                            .replace("{attorneyLow}", intakeSuccess.attorneyLow)
-                            .replace("{attorneyHigh}", intakeSuccess.attorneyHigh)
-                            .replace("{ourPrice}", intakeSuccess.ourPrice)}
-                    </p>
-
-                    {!intakeSuccess.isCustomQuote && (
-                      <p className="mt-2 text-sm font-semibold text-gold">
-                        {ui.ourFractionNote}
-                      </p>
-                    )}
-
-                    {intakeSuccess.isCustomQuote && (
-                      <p className="mt-2 text-sm font-semibold text-gold">
-                        {ui.ourFractionNote}
-                      </p>
-                    )}
-
-                    <p className="mt-3 text-[10px] leading-relaxed text-white/45">
-                      {ui.estimateDisclaimer}
-                    </p>
-                  </div>
-                </section>
-              </div>
-
-              <div className="border-t border-white/10 px-4 py-3">
-                <button
-                  type="button"
-                  onClick={resetIntakeSuccess}
-                  className="w-full rounded-sm border border-white/20 py-2.5 text-sm font-semibold text-white/90 hover:border-gold/40 hover:bg-white/5"
-                >
-                  {ui.submitAnother}
-                </button>
-              </div>
-            </div>
           ) : (
             <form onSubmit={handleIntakeSubmit} className="flex flex-1 flex-col overflow-hidden">
               <div className="flex-1 space-y-3 overflow-y-auto px-4 py-3">
+                {intakeSubmitBanner && (
+                  <div className="rounded-sm border border-gold/40 bg-gold/10 px-4 py-3 text-center">
+                    <CheckCircle2 className="mx-auto h-8 w-8 text-gold" aria-hidden />
+                    <p className="mt-2 font-display text-base text-white">{ui.intakeSuccessTitle}</p>
+                    <p className="mt-2 font-mono text-sm font-semibold tracking-wide text-gold">
+                      {intakeSubmitBanner}
+                    </p>
+                    <p className="mt-2 text-xs leading-relaxed text-white/75">
+                      {ui.intakeSuccessBody}
+                    </p>
+                    <button
+                      type="button"
+                      onClick={resetIntakeForm}
+                      className="mt-3 text-xs font-semibold text-gold underline-offset-2 hover:underline"
+                    >
+                      {ui.submitAnother}
+                    </button>
+                  </div>
+                )}
+
                 <div>
                   <p className="font-display text-lg text-white">{ui.quoteTitle}</p>
                   <p className="mt-1 text-xs text-white/60">{ui.quoteHint}</p>
