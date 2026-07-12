@@ -7,6 +7,55 @@ import { internalAction } from "./_generated/server"
 const SUPPORT_EMAIL = "support@askailegal.com"
 const RESEND_API_URL = "https://api.resend.com/emails"
 
+type IntakeEstimate = {
+  serviceLine: string
+  finalQuoteCents: number
+  attorneyCompareLowCents: number
+  attorneyCompareHighCents: number
+  isCustomQuote: boolean
+}
+
+function formatUsdFromCents(cents: number): string {
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    maximumFractionDigits: 0,
+  }).format(cents / 100)
+}
+
+function formatQuoteLines(estimate: IntakeEstimate | null): string[] {
+  if (!estimate) {
+    return ["Quote shown to customer: (no estimate on file)"]
+  }
+
+  const attorneyRange = `${formatUsdFromCents(estimate.attorneyCompareLowCents)}–${formatUsdFromCents(estimate.attorneyCompareHighCents)}`
+
+  if (estimate.isCustomQuote) {
+    return [
+      "Quote shown to customer:",
+      `Service: ${estimate.serviceLine}`,
+      `Typical attorney: ${attorneyRange}`,
+      "Ask AI Legal: Custom flat quote — support team to follow up",
+    ]
+  }
+
+  const fractionOfMid =
+    estimate.attorneyCompareLowCents > 0 && estimate.attorneyCompareHighCents > 0
+      ? Math.round(
+          (estimate.finalQuoteCents /
+            ((estimate.attorneyCompareLowCents + estimate.attorneyCompareHighCents) / 2)) *
+            100
+        )
+      : 0
+
+  return [
+    "Quote shown to customer:",
+    `Service: ${estimate.serviceLine}`,
+    `Typical attorney: ${attorneyRange}`,
+    `Ask AI Legal estimate: ${formatUsdFromCents(estimate.finalQuoteCents)} (midpoint of typical attorney range, ~${fractionOfMid}% of range midpoint)`,
+  ]
+}
+
 async function sendResendEmail(args: {
   to: string
   subject: string
@@ -65,18 +114,42 @@ export const sendIntakeEmails = internalAction({
       return null
     }
 
-    const clientSubject = `We received your intake — ${args.caseReference}`
-    const clientBody = [
+    const clientSubject = `Thank you for reaching out — ${args.caseReference}`
+    const clientBodyParts = [
       `Hello ${context.clientFirstName},`,
+      "",
+      "Thank you for reaching out to Ask AI Legal!",
       "",
       `We received your intake request. Your case reference is ${args.caseReference}.`,
       "",
-      "Our team will follow up by email with next steps.",
+      "Someone from Ask AI Legal support will be in touch with you soon.",
+    ]
+
+    if (context.estimate) {
+      clientBodyParts.push("")
+      if (context.estimate.isCustomQuote) {
+        clientBodyParts.push(
+          `Service: ${context.estimate.serviceLine}`,
+          `Typical attorney cost: ${formatUsdFromCents(context.estimate.attorneyCompareLowCents)}–${formatUsdFromCents(context.estimate.attorneyCompareHighCents)}`,
+          "We'll email you a custom flat quote for Ask AI Legal document preparation."
+        )
+      } else {
+        clientBodyParts.push(
+          `Service: ${context.estimate.serviceLine}`,
+          `Typical attorney cost: ${formatUsdFromCents(context.estimate.attorneyCompareLowCents)}–${formatUsdFromCents(context.estimate.attorneyCompareHighCents)}`,
+          `Ask AI Legal estimated average: ${formatUsdFromCents(context.estimate.finalQuoteCents)}`
+        )
+      }
+    }
+
+    clientBodyParts.push(
       "",
       "Important: This message is not legal advice. Ask AI Legal generates documents only; we are not a law firm. Nothing has been delivered yet.",
       "",
-      "— Ask AI Legal",
-    ].join("\n")
+      "— Ask AI Legal"
+    )
+
+    const clientBody = clientBodyParts.join("\n")
 
     const clientResult = await sendResendEmail({
       to: context.clientEmail,
@@ -106,6 +179,8 @@ export const sendIntakeEmails = internalAction({
       "",
       "Issue summary:",
       context.issueSummary ?? "(none)",
+      "",
+      ...formatQuoteLines(context.estimate),
       "",
       "View in ops: /ops/intakes/" + args.caseId,
     ].join("\n")

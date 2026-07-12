@@ -113,7 +113,7 @@ const en: ChatUiStrings = {
   submittingRequest: "Submitting…",
   intakeSuccessTitle: "Intake received",
   intakeSuccessBody:
-    "Save your reference below. Our team will follow up by email with next steps. Nothing has been delivered yet — this is document preparation only, not legal advice.",
+    "Thank you for reaching out! Save your reference below. Someone from Ask AI Legal support will be in touch with you soon. Nothing has been delivered yet — this is document preparation only, not legal advice.",
   intakeSubmitError:
     "We couldn't save your intake. Please try again or email support@askailegal.com with your details.",
   submitAnother: "Submit another request",
@@ -123,7 +123,8 @@ const en: ChatUiStrings = {
   attorneyTypicalLabel: "Typical attorney cost",
   ourEstimatedLabel: "Ask AI Legal estimated average",
   ourCustomQuoteLabel: "Custom flat quote by email",
-  ourFractionNote: "About {fraction}% of typical attorney fees — flat fee, no hourly billing",
+  ourFractionNote:
+    "Priced at the midpoint of the typical attorney range above — flat fee, no hourly billing",
   estimateComparison:
     "{attorneyTypicalLabel}: {attorneyLow}–{attorneyHigh} · {ourEstimatedLabel}: {ourPrice}",
   estimateCustomQuote:
@@ -200,7 +201,8 @@ const hi: ChatUiStrings = {
   attorneyTypicalLabel: "वकील की सामान्य लागत",
   ourEstimatedLabel: "Ask AI Legal अनुमानित औसत",
   ourCustomQuoteLabel: "ईमेल द्वारा कस्टम फ्लैट कोट",
-  ourFractionNote: "वकील शुल्क का लगभग {fraction}% — फ्लैट फी, प्रति घंटा नहीं",
+  ourFractionNote:
+    "ऊपर दिखाई गई वकील रेंज का मध्य बिंदु — फ्लैट फी, प्रति घंटा नहीं",
   estimateComparison:
     "{attorneyTypicalLabel}: {attorneyLow}–{attorneyHigh} · {ourEstimatedLabel}: {ourPrice}",
   estimateCustomQuote:

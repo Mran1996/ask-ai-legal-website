@@ -777,19 +777,13 @@ export function ChatWidget() {
 
                     {!intakeSuccess.isCustomQuote && (
                       <p className="mt-2 text-sm font-semibold text-gold">
-                        {ui.ourFractionNote.replace(
-                          "{fraction}",
-                          String(intakeSuccess.fractionPercent)
-                        )}
+                        {ui.ourFractionNote}
                       </p>
                     )}
 
                     {intakeSuccess.isCustomQuote && (
                       <p className="mt-2 text-sm font-semibold text-gold">
-                        {ui.ourFractionNote.replace(
-                          "{fraction}",
-                          String(intakeSuccess.fractionPercent)
-                        )}
+                        {ui.ourFractionNote}
                       </p>
                     )}
 

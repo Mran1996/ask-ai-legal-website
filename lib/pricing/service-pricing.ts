@@ -147,18 +147,17 @@ export type PricingLookupResult = {
 const HIGH_COST_STATES = new Set(["CA", "NY", "MA", "CT", "NJ", "DC", "WA", "HI", "CO", "MD"])
 const LOW_COST_STATES = new Set(["MS", "WV", "AR", "OK", "ID", "MT", "WY", "ND", "SD", "AL", "KY"])
 
-/** Document-prep average as a fraction of typical local attorney fees for the matter. */
-export const OUR_PRICE_FRACTION = 0.2
+/** Reference fraction when no computed price exists (custom-quote path). */
+export const OUR_PRICE_FRACTION = 0.5
 
 export function estimateFractionPercent(
   ourPriceCents: number,
   attorneyLowCents: number,
   attorneyHighCents: number
 ): number {
-  if (ourPriceCents <= 0) return Math.round(OUR_PRICE_FRACTION * 100)
   const mid = (attorneyLowCents + attorneyHighCents) / 2
-  if (mid <= 0) return Math.round(OUR_PRICE_FRACTION * 100)
-  return Math.max(1, Math.min(99, Math.round((ourPriceCents / mid) * 100)))
+  if (ourPriceCents <= 0 || mid <= 0) return Math.round(OUR_PRICE_FRACTION * 100)
+  return Math.max(1, Math.min(100, Math.round((ourPriceCents / mid) * 100)))
 }
 
 function normalizeState(state?: string): string {
@@ -184,12 +183,11 @@ function scaleCents(cents: number, factor: number): number {
 function computeOurAverageCents(
   attorneyLowCents: number,
   attorneyHighCents: number,
-  templateOurPriceCents: number | null
+  _templateOurPriceCents: number | null
 ): number {
-  if (templateOurPriceCents !== null) return templateOurPriceCents
-  const mid = (attorneyLowCents + attorneyHighCents) / 2
-  const raw = Math.round((mid * OUR_PRICE_FRACTION) / 100) * 100
-  return Math.max(29900, Math.min(199900, raw))
+  const midpoint =
+    Math.round((attorneyLowCents + attorneyHighCents) / 2 / 100) * 100
+  return Math.max(29900, Math.min(199900, midpoint))
 }
 
 function issueMatchesKeywords(issue: string, keywords: readonly string[]): boolean {

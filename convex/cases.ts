@@ -141,6 +141,14 @@ export const requestIntakeNotifications = mutation({
   },
 })
 
+const intakeEstimateValidator = v.object({
+  serviceLine: v.string(),
+  finalQuoteCents: v.number(),
+  attorneyCompareLowCents: v.number(),
+  attorneyCompareHighCents: v.number(),
+  isCustomQuote: v.boolean(),
+})
+
 export const getIntakeEmailContext = internalQuery({
   args: { caseId: v.id("cases") },
   returns: v.union(
@@ -150,6 +158,7 @@ export const getIntakeEmailContext = internalQuery({
       clientEmail: v.string(),
       clientPhone: v.optional(v.string()),
       issueSummary: v.optional(v.string()),
+      estimate: v.union(intakeEstimateValidator, v.null()),
     }),
     v.null()
   ),
@@ -160,12 +169,28 @@ export const getIntakeEmailContext = internalQuery({
     const client = await ctx.db.get("clients", caseDoc.clientId)
     if (!client) return null
 
+    const estimateDoc = await ctx.db
+      .query("estimates")
+      .withIndex("by_case", (q) => q.eq("caseId", args.caseId))
+      .first()
+
+    const estimate = estimateDoc
+      ? {
+          serviceLine: estimateDoc.serviceLine,
+          finalQuoteCents: estimateDoc.finalQuoteCents,
+          attorneyCompareLowCents: estimateDoc.attorneyCompareLowCents,
+          attorneyCompareHighCents: estimateDoc.attorneyCompareHighCents,
+          isCustomQuote: estimateDoc.finalQuoteCents === 0,
+        }
+      : null
+
     return {
       clientFirstName: client.firstName,
       clientLastName: client.lastName,
       clientEmail: client.email,
       clientPhone: client.phone,
       issueSummary: caseDoc.intakeStructured.issueSummary,
+      estimate,
     }
   },
 })
