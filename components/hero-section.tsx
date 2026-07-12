@@ -21,7 +21,7 @@ export function HeroSection() {
     },
     {
       kind: "count",
-      value: 2,
+      value: 72,
       suffix: " hrs",
       label: t.hero.stat2Label,
       sub: t.hero.stat2Sub,
