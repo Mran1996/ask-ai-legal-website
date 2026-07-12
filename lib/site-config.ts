@@ -5,7 +5,6 @@ export const SITE_URL = "https://askailegal.com"
 export const SOCIAL_LINKS = {
   instagram: "https://www.instagram.com/askailegal",
   facebook: "https://www.facebook.com/askailegal",
-  youtube: "https://www.youtube.com/watch?v=-W-vXHhkwNg",
 } as const
 
 export const SUPPORT_EMAIL = "support@askailegal.com"

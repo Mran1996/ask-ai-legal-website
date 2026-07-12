@@ -9,7 +9,7 @@ export function BrandMark({ className = "" }: BrandMarkProps) {
   return (
     <div className={`relative shrink-0 ${className}`} aria-hidden>
       <Scale
-        className="h-12 w-12 text-gold sm:h-14 sm:w-14 md:h-[4.25rem] md:w-[4.25rem] lg:h-[4.75rem] lg:w-[4.75rem]"
+        className="brand-title-gold h-12 w-12 sm:h-14 sm:w-14 md:h-[4.25rem] md:w-[4.25rem] lg:h-[4.75rem] lg:w-[4.75rem]"
         strokeWidth={1.5}
       />
     </div>

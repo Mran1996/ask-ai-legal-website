@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { Scale, Instagram, Facebook, Youtube } from "lucide-react"
+import { Scale, Instagram, Facebook } from "lucide-react"
 import { useLanguage } from "@/components/language-provider"
 import { serviceSlug } from "@/lib/service-icons"
 import { SITE_DISCLAIMER, SITE_BRAND_NAME } from "@/lib/site-config"
@@ -9,7 +9,6 @@ import { SITE_DISCLAIMER, SITE_BRAND_NAME } from "@/lib/site-config"
 const social = [
   { label: "Instagram", icon: Instagram },
   { label: "Facebook", icon: Facebook },
-  { label: "YouTube", icon: Youtube },
 ]
 
 export function Footer() {

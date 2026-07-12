@@ -1,45 +1,33 @@
 import Link from "next/link"
 import { BrandMark } from "@/components/brand-mark"
-import { TypewriterText } from "@/components/typewriter-text"
 import { SITE_BRAND_NAME, SITE_TAGLINE } from "@/lib/site-config"
 
 type BrandLockupProps = {
-  typewriterClassName?: string
   taglineClassName?: string
   className?: string
-  typewriterSpeed?: number
-  typewriterDelay?: number
   href?: string
-  /** Hero = centered typewriter + tagline. Header = compact left-aligned nav mark. */
+  /** Hero = centered mark + tagline. Header = compact left-aligned nav mark. */
   variant?: "hero" | "header"
 }
 
 export function BrandLockup({
-  typewriterClassName = "",
   taglineClassName,
   className = "",
-  typewriterSpeed = 60,
-  typewriterDelay = 200,
   href,
   variant = "hero",
 }: BrandLockupProps) {
   const isHeader = variant === "header"
 
   const title = isHeader ? (
-    <span className="font-sans text-[15px] font-semibold leading-tight tracking-tight text-gold sm:text-base">
+    <span className="brand-title-gold font-sans text-[15px] font-semibold leading-tight tracking-tight sm:text-base">
       {SITE_BRAND_NAME}
     </span>
   ) : (
     <span
-      className="font-sans text-4xl font-bold leading-[1.05] tracking-tight text-gold sm:text-5xl md:text-6xl lg:text-7xl"
+      className="brand-title-gold font-sans text-4xl font-semibold leading-[1.05] tracking-tight sm:text-5xl md:text-6xl lg:text-7xl"
       aria-label={SITE_BRAND_NAME}
     >
-      <TypewriterText
-        text={SITE_BRAND_NAME}
-        className={typewriterClassName}
-        speed={typewriterSpeed}
-        startDelay={typewriterDelay}
-      />
+      {SITE_BRAND_NAME}
     </span>
   )
 
@@ -62,7 +50,7 @@ export function BrandLockup({
       {tagline}
     </div>
   ) : (
-    <div className="flex w-full flex-col items-center text-center">
+    <div className="relative z-10 flex w-full flex-col items-center text-center">
       <div className="flex flex-row items-center justify-center gap-3 sm:gap-4 md:gap-5">
         <BrandMark className="-mt-0.5 sm:-mt-1" />
         {title}
