@@ -45,9 +45,17 @@ export type ChatUiStrings = {
   intakeSuccessBody: string
   intakeSubmitError: string
   submitAnother: string
+  conversationTitle: string
+  submittedInfoTitle: string
+  pricingTitle: string
+  attorneyTypicalLabel: string
+  ourEstimatedLabel: string
+  ourCustomQuoteLabel: string
+  ourFractionNote: string
   estimateComparison: string
   estimateCustomQuote: string
   estimateServiceLine: string
+  estimateDisclaimer: string
   fillRequired: string
   uploadNote: string
   uploadFiles: string
@@ -105,15 +113,24 @@ const en: ChatUiStrings = {
   submittingRequest: "Submitting…",
   intakeSuccessTitle: "Intake received",
   intakeSuccessBody:
-    "Save the reference above. Our team will follow up by email with next steps. Nothing has been delivered yet; a licensed attorney will review before any documents are sent.",
+    "Save your reference below. Our team will follow up by email with next steps. Nothing has been delivered yet — this is document preparation only, not legal advice.",
   intakeSubmitError:
     "We couldn't save your intake. Please try again or email support@askailegal.com with your details.",
   submitAnother: "Submit another request",
+  conversationTitle: "Your conversation",
+  submittedInfoTitle: "What you submitted",
+  pricingTitle: "Estimated investment",
+  attorneyTypicalLabel: "Typical attorney cost",
+  ourEstimatedLabel: "Ask AI Legal estimated average",
+  ourCustomQuoteLabel: "Custom flat quote by email",
+  ourFractionNote: "About {fraction}% of typical attorney fees — flat fee, no hourly billing",
   estimateComparison:
-    "Attorneys in your area typically {attorneyLow}–{attorneyHigh} · Ask AI Legal estimated average {ourPrice}",
+    "{attorneyTypicalLabel}: {attorneyLow}–{attorneyHigh} · {ourEstimatedLabel}: {ourPrice}",
   estimateCustomQuote:
-    "Attorneys in this area often charge {attorneyLow}–{attorneyHigh}. Our team will email you a custom quote after reviewing your intake.",
+    "{attorneyTypicalLabel}: {attorneyLow}–{attorneyHigh}. We'll email a custom flat quote — usually about {fraction}% of what attorneys charge for this work.",
   estimateServiceLine: "Service",
+  estimateDisclaimer:
+    "Estimate only — not legal advice. Final flat quote confirmed in your scope memo after case file review.",
   fillRequired: "Please fill in name, email, and a brief issue description.",
   uploadNote:
     "Optional: attach court papers, notices, or leases (PDF, JPG, PNG — up to 10 MB each).",
@@ -173,15 +190,24 @@ const hi: ChatUiStrings = {
   submittingRequest: "भेजा जा रहा है…",
   intakeSuccessTitle: "इंटेक प्राप्त",
   intakeSuccessBody:
-    "ऊपर दिया संदर्भ सहेजें। हमारी टीम अगले कदमों के लिए ईमेल से संपर्क करेगी। अभी कुछ भी वितरित नहीं किया गया है।",
+    "नीचे दिया संदर्भ सहेजें। हमारी टीम अगले कदमों के लिए ईमेल से संपर्क करेगी। अभी कुछ भी वितरित नहीं किया गया है।",
   intakeSubmitError:
     "इंटेक सहेज नहीं सका। कृपया फिर कोशिश करें या support@askailegal.com पर ईमेल करें।",
   submitAnother: "दूसरा अनुरोध भेजें",
+  conversationTitle: "आपकी बातचीत",
+  submittedInfoTitle: "आपने जो भेजा",
+  pricingTitle: "अनुमानित लागत",
+  attorneyTypicalLabel: "वकील की सामान्य लागत",
+  ourEstimatedLabel: "Ask AI Legal अनुमानित औसत",
+  ourCustomQuoteLabel: "ईमेल द्वारा कस्टम फ्लैट कोट",
+  ourFractionNote: "वकील शुल्क का लगभग {fraction}% — फ्लैट फी, प्रति घंटा नहीं",
   estimateComparison:
-    "वकील आमतौर पर {attorneyLow}–{attorneyHigh} · Ask AI Legal {ourPrice}",
+    "{attorneyTypicalLabel}: {attorneyLow}–{attorneyHigh} · {ourEstimatedLabel}: {ourPrice}",
   estimateCustomQuote:
-    "इस क्षेत्र में वकील अक्सर {attorneyLow}–{attorneyHigh} लेते हैं। हमारी टीम आपके इंटेक की समीक्षा के बाद कस्टम कोट ईमेल करेगी।",
+    "{attorneyTypicalLabel}: {attorneyLow}–{attorneyHigh}. हम कस्टम फ्लैट कोट ईमेल करेंगे — आमतौर पर वकील शुल्क का लगभग {fraction}%।",
   estimateServiceLine: "सेवा",
+  estimateDisclaimer:
+    "केवल अनुमान — कानूनी सलाह नहीं। अंतिम कोट केस फ़ाइल समीक्षा के बाद पुष्टि होगी।",
   fillRequired: "कृपया नाम, ईमेल और संक्षिप्त विवरण भरें।",
   uploadNote:
     "वैकल्पिक: अदालती कागज़ात, नोटिस या लीज़ संलग्न करें (PDF, JPG, PNG — प्रति 10 MB)।",

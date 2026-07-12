@@ -148,7 +148,18 @@ const HIGH_COST_STATES = new Set(["CA", "NY", "MA", "CT", "NJ", "DC", "WA", "HI"
 const LOW_COST_STATES = new Set(["MS", "WV", "AR", "OK", "ID", "MT", "WY", "ND", "SD", "AL", "KY"])
 
 /** Document-prep average as a fraction of typical local attorney fees for the matter. */
-const OUR_PRICE_FRACTION = 0.2
+export const OUR_PRICE_FRACTION = 0.2
+
+export function estimateFractionPercent(
+  ourPriceCents: number,
+  attorneyLowCents: number,
+  attorneyHighCents: number
+): number {
+  if (ourPriceCents <= 0) return Math.round(OUR_PRICE_FRACTION * 100)
+  const mid = (attorneyLowCents + attorneyHighCents) / 2
+  if (mid <= 0) return Math.round(OUR_PRICE_FRACTION * 100)
+  return Math.max(1, Math.min(99, Math.round((ourPriceCents / mid) * 100)))
+}
 
 function normalizeState(state?: string): string {
   const s = state?.trim().toUpperCase() ?? ""

@@ -73,7 +73,7 @@ export const sendIntakeEmails = internalAction({
       "",
       "Our team will follow up by email with next steps.",
       "",
-      "Important: This message is not legal advice. Ask AI Legal generates documents only; we are not a law firm. Nothing has been delivered yet — a licensed attorney will review before any documents are sent.",
+      "Important: This message is not legal advice. Ask AI Legal generates documents only; we are not a law firm. Nothing has been delivered yet.",
       "",
       "— Ask AI Legal",
     ].join("\n")
