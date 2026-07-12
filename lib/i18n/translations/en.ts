@@ -1,4 +1,5 @@
 import { servicesPageContent } from "./services-page"
+import { CASE_FILE_REVIEW_PRICE_DISPLAY as REVIEW_PRICE } from "@/lib/site-config"
 
 export const en = {
   nav: {
@@ -10,7 +11,7 @@ export const en = {
     process: "Process",
     faq: "FAQ",
     contact: "Contact",
-    emailForReview: "Case file review — $199",
+    emailForReview: `Case file review — ${REVIEW_PRICE}`,
     language: "Language",
   },
   hero: {
@@ -18,10 +19,10 @@ export const en = {
     titleLine1: "You paid the retainer.",
     titleHighlight: "Do you know",
     titleLine2: "what's in your case file?",
-    body: "We prepare court-ready documents and citation-verified research for people handling their own legal matters — any issue, any jurisdiction. Start with a flat $199 case file review — credited in full toward your documents.",
-    ctaPrimary: "Start my case file review — $199",
+    body: `We prepare court-ready documents and citation-verified research for people handling their own legal matters — any issue, any jurisdiction. Start with a flat ${REVIEW_PRICE} case file review — credited in full toward your documents.`,
+    ctaPrimary: `Start my case file review — ${REVIEW_PRICE}`,
     ctaSecondary: "See how it works",
-    stat1Value: "$199",
+    stat1Value: REVIEW_PRICE,
     stat1Label: "Case file review",
     stat1Sub: "Credited toward your documents",
     stat2Value: "2 hrs",
@@ -93,8 +94,7 @@ export const en = {
     titleLine1: "The retainer trap —",
     titleHighlight: "solved",
     titleLine2: "with a two-step flat fee",
-    subtitle:
-      "A $199 case file review, then one flat quote for exactly what your case needs. No hourly clock, ever.",
+    subtitle: `A ${REVIEW_PRICE} case file review, then one flat quote for exactly what your case needs. No hourly clock, ever.`,
     traditionalHeading: "The retainer trap",
     traditionalPrice: "$3,000–$10,000 retainer",
     traditionalDesc: "Drawn down hourly, whether or not the work moves your case forward",
@@ -105,10 +105,10 @@ export const en = {
     ],
     usBadge: "Ask AI Legal",
     usHeading: "Two-step flat fee",
-    usPrice: "$199 to start",
+    usPrice: `${REVIEW_PRICE} to start`,
     usDesc: "Credited in full toward your document package",
     usBullets: [
-      "$199 case file review — credited toward your documents",
+      `${REVIEW_PRICE} case file review — credited toward your documents`,
       "One flat quote after your scope memo, no hourly billing",
       "Every case citation retrieved, stored, and verified",
     ],
@@ -155,7 +155,7 @@ export const en = {
         body: "Share your situation in plain language and upload what you have. We ask the right questions — you never touch legal jargon.",
       },
       {
-        title: "$199 case file review",
+        title: `${REVIEW_PRICE} case file review`,
         body: "We review your case file and send a plain-English scope memo, usually within 2 hours — credited in full toward your documents.",
       },
       {
@@ -193,8 +193,8 @@ export const en = {
         a: "No. Ask AI Legal generates legal documents only. We prepare court-ready documents for your review and use. We do not provide legal advice and do not establish an attorney-client relationship.",
       },
       {
-        q: "What do I get for $199?",
-        a: "A case file review: we read what you send us — filings, notices, letters, court documents — and deliver a plain-English scope memo, usually within 2 hours. It tells you where your case stands procedurally, what documents it needs next, and one flat quote to prepare them. The $199 is credited in full toward that quote.",
+        q: `What do I get for ${REVIEW_PRICE}?`,
+        a: `A case file review: we read what you send us — filings, notices, letters, court documents — and deliver a plain-English scope memo, usually within 2 hours. It tells you where your case stands procedurally, what documents it needs next, and one flat quote to prepare them. The ${REVIEW_PRICE} is credited in full toward that quote.`,
       },
       {
         q: "Why two payments instead of one price up front?",
@@ -248,7 +248,7 @@ export const en = {
   cta: {
     label: "Begin today",
     title: "Stop paying for hours. Start with your file.",
-    body: "A $199 case file review tells you exactly where your case stands and what it will cost to prepare — before you commit to anything else. Credited in full toward your documents.",
+    body: `A ${REVIEW_PRICE} case file review tells you exactly where your case stands and what it will cost to prepare — before you commit to anything else. Credited in full toward your documents.`,
     emailConsult: "Start my case file review",
     emailQuote: "Email to get your quote",
     disclaimer: "Not a law firm · No legal advice · Document preparation & research only",

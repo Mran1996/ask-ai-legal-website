@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next"
 import { Cormorant_Garamond, Inter, JetBrains_Mono } from "next/font/google"
 import "./globals.css"
 import { Providers } from "@/components/providers"
-import { SITE_URL, SUPPORT_EMAIL } from "@/lib/site-config"
+import { SITE_URL, SUPPORT_EMAIL, CASE_FILE_REVIEW_PRICE_DISPLAY } from "@/lib/site-config"
 
 const display = Cormorant_Garamond({
   subsets: ["latin"],
@@ -31,7 +31,7 @@ export const viewport: Viewport = {
 
 const TITLE_DEFAULT = "Ask AI Legal — Court-Ready Documents & Verified Legal Research"
 const DESCRIPTION =
-  "Flat-fee document preparation for divorce, custody, civil, and business matters. Start with a $199 case file review — credited toward your documents. Every citation retrieved and verified. Not a law firm, no legal advice."
+  `Flat-fee document preparation for divorce, custody, civil, and business matters. Start with a ${CASE_FILE_REVIEW_PRICE_DISPLAY} case file review — credited toward your documents. Every citation retrieved and verified. Not a law firm, no legal advice.`
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -79,7 +79,7 @@ const legalServiceJsonLd = {
   description: DESCRIPTION,
   url: SITE_URL,
   email: SUPPORT_EMAIL,
-  priceRange: "$199+",
+  priceRange: `${CASE_FILE_REVIEW_PRICE_DISPLAY}+`,
   areaServed: {
     "@type": "Country",
     name: "United States",

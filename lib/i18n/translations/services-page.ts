@@ -1,4 +1,6 @@
 /** Services page copy (English). Merged into en.ts as servicesPage. */
+import { CASE_FILE_REVIEW_PRICE_DISPLAY } from "@/lib/site-config"
+
 export const servicesPageContent = {
   label: "Services",
   title: "Everything we prepare for your case",
@@ -119,7 +121,7 @@ export const servicesPageContent = {
   },
   cta: {
     title: "Ready to see what we can prepare for you?",
-    body: "Start with a flat $199 case file review. You'll get a plain-English scope memo and one flat quote for the documents your case needs — credited in full toward your total.",
+    body: `Start with a flat ${CASE_FILE_REVIEW_PRICE_DISPLAY} case file review. You'll get a plain-English scope memo and one flat quote for the documents your case needs — credited in full toward your total.`,
     button: "Start my case file review",
   },
   homeLink: "Learn more about our services",

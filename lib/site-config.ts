@@ -11,6 +11,10 @@ export const SOCIAL_LINKS = {
 export const SUPPORT_EMAIL = "support@askailegal.com"
 export const SUPPORT_MAILTO = `mailto:${SUPPORT_EMAIL}` as const
 
+/** Pay #1 — flat case file review (credited toward document package). */
+export const CASE_FILE_REVIEW_PRICE_USD = 499
+export const CASE_FILE_REVIEW_PRICE_DISPLAY = `$${CASE_FILE_REVIEW_PRICE_USD}`
+
 /** Brand mark copy — header + hero lockup */
 export const SITE_BRAND_NAME = "Ask AI Legal™"
 export const SITE_TAGLINE = "Know your case. Own your case."

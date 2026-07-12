@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import { NeonButton } from "@/components/neon-button"
-import { SUPPORT_MAILTO } from "@/lib/site-config"
+import { SUPPORT_MAILTO, CASE_FILE_REVIEW_PRICE_DISPLAY } from "@/lib/site-config"
 import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
 import {
@@ -31,7 +31,7 @@ const capabilities = [
     icon: Receipt,
     title: "Two flat fees, no hourly clock",
     description:
-      "A $199 case file review, credited toward one flat quote for your documents. You know the full cost before you commit to either step.",
+      `A ${CASE_FILE_REVIEW_PRICE_DISPLAY} case file review, credited toward one flat quote for your documents. You know the full cost before you commit to either step.`,
   },
   {
     icon: BookOpen,
