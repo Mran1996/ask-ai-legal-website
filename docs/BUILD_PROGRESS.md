@@ -123,6 +123,9 @@ Track implementation against [ASK_AI_LEGAL_SPEC.md](./ASK_AI_LEGAL_SPEC.md) Sect
 - [ ] Attorney review network (per-state reviewers)
 - [ ] Production hardening: monitoring, retention policy, access logs
 - [ ] Launch checklist: spec Section 10 resolved with counsel
+- [ ] Vercel deployment configured (`vercel.json`, `docs/VERCEL_DEPLOY.md`)
+- [ ] Convex cloud deployed (`npm run deploy:convex`)
+- [ ] Vercel env vars set (`NEXT_PUBLIC_CONVEX_URL`, chat keys, `NEXT_PUBLIC_SITE_URL`)
 
 ---
 

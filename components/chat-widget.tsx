@@ -376,8 +376,24 @@ export function ChatWidget() {
       void requestIntakeNotifications({ caseId: result.caseId }).catch(() => {
         // Email is best-effort; intake + estimate already saved.
       })
-    } catch {
-      setIntakeError(ui.intakeSubmitError)
+    } catch (error) {
+      console.error("Intake submit failed:", error)
+      const detail =
+        error instanceof Error ? error.message.toLowerCase() : ""
+      if (detail.includes("timed out")) {
+        setIntakeError(
+          "Request timed out. Run npm run dev:convex in a terminal, wait for \"Convex functions ready\", then try again."
+        )
+      } else if (
+        detail.includes("failed to fetch") ||
+        detail.includes("network")
+      ) {
+        setIntakeError(
+          "Cannot reach the server. Start both npm run dev:convex and npm run dev, then try again."
+        )
+      } else {
+        setIntakeError(ui.intakeSubmitError)
+      }
     } finally {
       setIntakeSubmitting(false)
     }

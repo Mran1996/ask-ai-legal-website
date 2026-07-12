@@ -1,6 +1,7 @@
 import { v } from "convex/values"
-import { mutation } from "./_generated/server"
-import { generateForCaseReturnValidator } from "./lib/validators"
+import { internal } from "./_generated/api"
+import { internalMutation, mutation } from "./_generated/server"
+import { generateForCaseReturnValidator, matterTypeValidator } from "./lib/validators"
 import { resolvePricing, matterTypeFromDeliverable } from "./lib/servicePricing"
 
 export const generateForCase = mutation({
@@ -40,13 +41,14 @@ export const generateForCase = mutation({
       issue: structured.issueSummary ?? structured.notes,
     })
 
-    const { deliverable, isCustomQuote } = pricing
+    const { deliverable } = pricing
     const finalQuoteCents = deliverable.ourPriceCents ?? 0
+    const isCustomQuote = finalQuoteCents === 0
     const now = Date.now()
 
     const estimateId = await ctx.db.insert("estimates", {
       caseId: args.caseId,
-      serviceLine: isCustomQuote ? deliverable.serviceLine : deliverable.serviceLine,
+      serviceLine: deliverable.serviceLine,
       baseCostCents: finalQuoteCents,
       attorneyCompareLowCents: deliverable.attorneyLowCents,
       attorneyCompareHighCents: deliverable.attorneyHighCents,
@@ -56,20 +58,12 @@ export const generateForCase = mutation({
       createdAt: now,
     })
 
-    await ctx.db.patch("cases", args.caseId, {
-      matterType: matterTypeFromDeliverable(deliverable.matterType),
-      assignedServices: [deliverable.serviceId],
-      status: "estimate_sent",
-      updatedAt: now,
-    })
-
-    await ctx.db.insert("agentRuns", {
+    await ctx.scheduler.runAfter(0, internal.estimates.finalizeEstimate, {
       caseId: args.caseId,
-      agentType: "pricing",
+      estimateId,
+      matterType: matterTypeFromDeliverable(deliverable.matterType),
+      serviceId: deliverable.serviceId,
       inputRef: `${deliverable.id}:${pricing.matchedBy}`,
-      outputRef: estimateId,
-      status: "completed",
-      createdAt: now,
     })
 
     return {
@@ -80,5 +74,43 @@ export const generateForCase = mutation({
       attorneyCompareHighCents: deliverable.attorneyHighCents,
       isCustomQuote,
     }
+  },
+})
+
+/** Deferred case update + audit — keeps generateForCase under local Convex 1s limit. */
+export const finalizeEstimate = internalMutation({
+  args: {
+    caseId: v.id("cases"),
+    estimateId: v.id("estimates"),
+    matterType: matterTypeValidator,
+    serviceId: v.string(),
+    inputRef: v.string(),
+  },
+  returns: v.null(),
+  handler: async (ctx, args) => {
+    const caseDoc = await ctx.db.get("cases", args.caseId)
+    if (!caseDoc) {
+      return null
+    }
+
+    if (caseDoc.status === "intake") {
+      await ctx.db.patch("cases", args.caseId, {
+        matterType: args.matterType,
+        assignedServices: [args.serviceId],
+        status: "estimate_sent",
+        updatedAt: Date.now(),
+      })
+    }
+
+    await ctx.db.insert("agentRuns", {
+      caseId: args.caseId,
+      agentType: "pricing",
+      inputRef: args.inputRef,
+      outputRef: args.estimateId,
+      status: "completed",
+      createdAt: Date.now(),
+    })
+
+    return null
   },
 })

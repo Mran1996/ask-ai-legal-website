@@ -47,16 +47,12 @@ export function buildIntakeStructured(args: IntakeFormArgs) {
 }
 
 export function buildIntakeRaw(args: IntakeFormArgs): string {
-  return JSON.stringify(
-    {
-      ...args,
-      email: normalizeEmail(args.email),
-      submittedAt: Date.now(),
-      channel: "web_chat_quote_tab",
-    },
-    null,
-    2
-  )
+  return JSON.stringify({
+    ...args,
+    email: normalizeEmail(args.email),
+    submittedAt: Date.now(),
+    channel: "web_chat_quote_tab",
+  })
 }
 
 export function formatCaseReference(caseId: string): string {

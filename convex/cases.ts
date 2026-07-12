@@ -1,6 +1,7 @@
 import { paginationOptsValidator } from "convex/server"
 import { v } from "convex/values"
-import { internalQuery, mutation, query } from "./_generated/server"
+import { internal } from "./_generated/api"
+import { internalMutation, internalQuery, mutation, query } from "./_generated/server"
 import { assertOpsToken } from "./lib/opsAuth"
 import {
   caseDetailValidator,
@@ -13,7 +14,7 @@ import {
   buildIntakeStructured,
   formatCaseReference,
   normalizeEmail,
-  resolveCaseFromIntake,
+  normalizeStateCode,
   validateIntakeForm,
 } from "./lib/intakeMapping"
 import { scheduleIntakeEmailsIfNeeded } from "./lib/scheduleIntakeEmails"
@@ -28,7 +29,9 @@ export const createFromIntake = mutation({
     const email = normalizeEmail(args.email)
     const intakeStructured = buildIntakeStructured(args)
     const intakeRaw = buildIntakeRaw(args)
-    const caseMeta = resolveCaseFromIntake(args)
+    const firstName = args.firstName.trim()
+    const lastName = args.lastName.trim()
+    const phone = args.phone?.trim()
 
     const existingClient = await ctx.db
       .query("clients")
@@ -38,17 +41,23 @@ export const createFromIntake = mutation({
     let clientId = existingClient?._id
 
     if (existingClient) {
-      await ctx.db.patch("clients", existingClient._id, {
-        firstName: args.firstName.trim(),
-        lastName: args.lastName.trim(),
-        phone: args.phone?.trim() || existingClient.phone,
-      })
+      if (
+        existingClient.firstName !== firstName ||
+        existingClient.lastName !== lastName ||
+        existingClient.phone !== (phone || existingClient.phone)
+      ) {
+        await ctx.db.patch("clients", existingClient._id, {
+          firstName,
+          lastName,
+          phone: phone || existingClient.phone,
+        })
+      }
     } else {
       clientId = await ctx.db.insert("clients", {
         email,
-        phone: args.phone?.trim() || undefined,
-        firstName: args.firstName.trim(),
-        lastName: args.lastName.trim(),
+        phone: phone || undefined,
+        firstName,
+        lastName,
         createdAt: now,
       })
     }
@@ -59,39 +68,57 @@ export const createFromIntake = mutation({
 
     const caseId = await ctx.db.insert("cases", {
       clientId,
-      matterType: caseMeta.matterType,
-      jurisdiction: { state: caseMeta.jurisdictionState },
+      matterType: "custom",
+      jurisdiction: { state: normalizeStateCode(args.state) },
       status: "intake",
       intakeRaw,
       intakeStructured,
-      assignedServices: caseMeta.assignedServices,
+      assignedServices: [],
       storagePrefix: "cases/pending/",
       createdAt: now,
       updatedAt: now,
     })
 
-    const storagePrefix = `cases/${caseId}/`
     const caseReference = formatCaseReference(caseId)
-
-    await ctx.db.patch("cases", caseId, {
-      storagePrefix,
-      updatedAt: now,
-    })
-
-    await ctx.db.insert("agentRuns", {
-      caseId,
-      agentType: "intake",
-      inputRef: `intake:web:${clientId}`,
-      outputRef: caseId,
-      status: "completed",
-      createdAt: now,
-    })
 
     return {
       caseId,
       clientId,
       caseReference,
     }
+  },
+})
+
+/** Deferred housekeeping — keeps createFromIntake under local Convex 1s limit. */
+export const finalizeIntakeCase = internalMutation({
+  args: {
+    caseId: v.id("cases"),
+    clientId: v.id("clients"),
+  },
+  returns: v.null(),
+  handler: async (ctx, args) => {
+    const caseDoc = await ctx.db.get("cases", args.caseId)
+    if (!caseDoc) {
+      return null
+    }
+
+    if (caseDoc.storagePrefix === "cases/pending/") {
+      await ctx.db.patch("cases", args.caseId, {
+        storagePrefix: `cases/${args.caseId}/`,
+        updatedAt: Date.now(),
+      })
+    }
+
+    await ctx.db.insert("agentRuns", {
+      caseId: args.caseId,
+      agentType: "intake",
+      inputRef: `intake:web:${args.clientId}`,
+      outputRef: args.caseId,
+      status: "completed",
+      createdAt: Date.now(),
+    })
+
+    return null
   },
 })
 
@@ -104,6 +131,11 @@ export const requestIntakeNotifications = mutation({
     if (!caseDoc) {
       throw new Error("Case not found")
     }
+
+    await ctx.scheduler.runAfter(0, internal.cases.finalizeIntakeCase, {
+      caseId: args.caseId,
+      clientId: caseDoc.clientId,
+    })
     await scheduleIntakeEmailsIfNeeded(ctx, args.caseId)
     return null
   },
