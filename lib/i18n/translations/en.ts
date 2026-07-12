@@ -156,7 +156,7 @@ export const en = {
       },
       {
         title: `${REVIEW_PRICE} case file review`,
-        body: "We review your case file and send a plain-English scope memo, usually within 2 hours — credited in full toward your documents.",
+        body: "We review your case file and send a plain-English scope memo, usually within 72 hours — credited in full toward your documents.",
       },
       {
         title: "One flat quote",
@@ -194,7 +194,7 @@ export const en = {
       },
       {
         q: `What do I get for ${REVIEW_PRICE}?`,
-        a: `A case file review: we read what you send us — filings, notices, letters, court documents — and deliver a plain-English scope memo, usually within 2 hours. It tells you where your case stands procedurally, what documents it needs next, and one flat quote to prepare them. The ${REVIEW_PRICE} is credited in full toward that quote.`,
+        a: `A case file review: we read what you send us — filings, notices, letters, court documents — and deliver a plain-English scope memo, usually within 72 hours. It tells you where your case stands procedurally, what documents it needs next, and one flat quote to prepare them. The ${REVIEW_PRICE} is credited in full toward that quote.`,
       },
       {
         q: "Why two payments instead of one price up front?",
