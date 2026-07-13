@@ -13,6 +13,7 @@ import { SUPPORT_EMAIL, SUPPORT_MAILTO } from "@/lib/site-config"
 function isLinkActive(pathname: string, href: string) {
   if (href === "/about") return pathname === "/about"
   if (href === "/services") return pathname === "/services"
+  if (href === "/pricing") return pathname === "/pricing"
   if (href.startsWith("/#")) return pathname === "/"
   return pathname === href
 }
@@ -61,6 +62,7 @@ export function Navigation() {
     () => [
       { href: "/about", label: t.nav.about },
       { href: "/services", label: t.nav.services },
+      { href: "/pricing", label: t.nav.pricing },
       { href: "/#compare", label: t.nav.whyUs },
       { href: "/#process", label: t.nav.process },
       { href: "/#faq", label: t.nav.faq },

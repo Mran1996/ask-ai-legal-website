@@ -66,11 +66,43 @@ npx convex env set OPS_ACCESS_TOKEN "$(openssl rand -hex 32)"
 5. Add [environment variables](#vercel-environment-variables) **before** first deploy
 6. Deploy
 
-### 4. Custom domain (optional)
+### 4. Custom domain (askailegal.com)
 
-Vercel → Project → **Settings → Domains** → add `askailegal.com` and follow DNS instructions.
+1. Vercel → Project → **Settings → Domains**
+2. Add **both** `askailegal.com` (apex) and `www.askailegal.com`
+3. Set **primary** domain to `askailegal.com` (matches sitemap and canonical URLs in code)
+4. Point DNS per Vercel instructions (A/CNAME records)
+
+**www → apex redirect:** `vercel.json` includes a permanent (301) redirect from `www.askailegal.com` to `https://askailegal.com`. After deploy, verify:
+
+```bash
+curl -sI https://www.askailegal.com | grep -i location
+# Location: https://askailegal.com/
+```
 
 Set `NEXT_PUBLIC_SITE_URL=https://askailegal.com` on Vercel (Production).
+
+### 5. Search engine indexing (manual, once)
+
+Code ships `robots.txt` and `sitemap.xml`, but you must submit them to search engines:
+
+#### Google Search Console
+
+1. [search.google.com/search-console](https://search.google.com/search-console) → add property for `askailegal.com` (Domain or URL prefix)
+2. Verify via **DNS TXT** (recommended) or HTML tag
+3. Submit sitemap: `https://askailegal.com/sitemap.xml`
+4. After major launches, use **URL Inspection** → Request indexing for `/` and `/services` (and `/pricing`)
+
+#### Bing Webmaster Tools (optional)
+
+1. [bing.com/webmasters](https://www.bing.com/webmasters) → add site
+2. Submit the same sitemap URL
+
+#### Live checks
+
+- `https://askailegal.com/robots.txt`
+- `https://askailegal.com/sitemap.xml`
+- `https://askailegal.com/opengraph-image` (social preview image)
 
 ---
 

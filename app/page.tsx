@@ -8,10 +8,12 @@ import { Testimonials } from "@/components/testimonials"
 import { FaqSection } from "@/components/faq-section"
 import { CtaSection } from "@/components/cta-section"
 import { Footer } from "@/components/footer"
+import { FaqJsonLd } from "@/lib/seo/faq-json-ld"
 
 export default function Home() {
   return (
     <div className="min-h-screen flex flex-col">
+      <FaqJsonLd />
       <Navigation />
       <main className="flex-grow">
         <HeroSection />
