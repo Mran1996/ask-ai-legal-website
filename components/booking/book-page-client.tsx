@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import { BookingBanner } from "@/components/brand/booking-banner"
 import {
   BOOKING_DISCLAIMER,
   INTAKE_CALL_DESCRIPTION,
@@ -69,6 +70,8 @@ export function BookPageClient({
           <Link href="/" className="text-sm text-white/50 hover:text-gold">
             ← {SITE_BRAND_NAME}
           </Link>
+
+          <BookingBanner className="mt-8" />
 
           <p className="firm-label mt-8 text-gold">Book a call</p>
           <h1 className="firm-title mt-3 text-white">{callTitle(normalizedType)}</h1>

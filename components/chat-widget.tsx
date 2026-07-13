@@ -29,6 +29,7 @@ import { stripMarkdownForChat } from "@/lib/chat/sanitize-response"
 import { OPEN_CHAT_EVENT, type OpenChatEventDetail } from "@/lib/chat/open-chat"
 import { SUPPORT_MAILTO, SITE_BRAND_NAME } from "@/lib/site-config"
 import { buildBookPageUrl } from "@/lib/booking"
+import { BookingBanner } from "@/components/brand/booking-banner"
 import { formatUsdFromCents } from "@/lib/pricing/ca-eviction"
 import { estimateFractionPercent } from "@/lib/pricing/service-pricing"
 import { api } from "@/convex/_generated/api"
@@ -657,6 +658,7 @@ export function ChatWidget() {
               <div className="flex-1 space-y-3 overflow-y-auto px-4 py-3">
                 {intakeSubmitBanner && (
                   <div className="rounded-sm border border-gold/40 bg-gold/10 px-4 py-3 text-center">
+                    <BookingBanner compact className="mb-3" />
                     <CheckCircle2 className="mx-auto h-8 w-8 text-gold" aria-hidden />
                     <p className="mt-2 font-display text-base text-white">{ui.intakeSuccessTitle}</p>
                     <p className="mt-2 font-mono text-sm font-semibold tracking-wide text-gold">
