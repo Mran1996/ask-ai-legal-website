@@ -37,13 +37,8 @@ export const es = mergeTranslations({
     intro: "La transparencia es parte del servicio. Esto preguntan antes de llamar.",
   },
   testimonials: {
-    label: "Ejemplos ilustrativos",
-    titleWhite: "Situaciones comunes ",
-    titleGold: "en las que ayudamos.",
-    rotateHint: "Los ejemplos rotan automáticamente · Use los puntos o flechas para navegar",
-    cardBadge: "Ejemplo ilustrativo",
-    disclaimer:
-      "Estos son ejemplos compuestos con fines informativos. No representan clientes reales, reseñas verificadas ni resultados garantizados. Los resultados varían.",
+    titleWhite: "Lo que dicen ",
+    titleGold: "nuestros clientes",
     clients: {
       sandra: {
         quote:

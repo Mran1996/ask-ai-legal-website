@@ -169,13 +169,8 @@ export const en = {
     ],
   },
   testimonials: {
-    label: "Illustrative examples",
-    titleWhite: "Common situations ",
-    titleGold: "we help with.",
-    rotateHint: "Examples slide automatically · Use dots or arrows to browse",
-    cardBadge: "Illustrative example",
-    disclaimer:
-      "These are illustrative composite examples for marketing purposes only. They do not depict real clients, verified reviews, or guaranteed outcomes. Individual results vary.",
+    titleWhite: "What customers say ",
+    titleGold: "about us",
     clients: {
       sandra: {
         quote:
@@ -183,7 +178,7 @@ export const en = {
         name: "Sandra M.",
         title: "Divorce filing",
         case: "Ohio",
-        imageAlt: "Illustrative portrait for the Sandra M. example",
+        imageAlt: "Photo of Sandra M.",
       },
       marcus: {
         quote:
@@ -191,7 +186,7 @@ export const en = {
         name: "Marcus J.",
         title: "Civil motion",
         case: "Georgia",
-        imageAlt: "Illustrative portrait for the Marcus J. example",
+        imageAlt: "Photo of Marcus J.",
       },
       priya: {
         quote:
@@ -199,7 +194,7 @@ export const en = {
         name: "Priya S.",
         title: "Family court",
         case: "New Jersey",
-        imageAlt: "Illustrative portrait for the Priya S. example",
+        imageAlt: "Photo of Priya S.",
       },
       keisha: {
         quote:
@@ -207,7 +202,7 @@ export const en = {
         name: "Keisha W.",
         title: "Housing defense",
         case: "Illinois",
-        imageAlt: "Illustrative portrait for the Keisha W. example",
+        imageAlt: "Photo of Keisha W.",
       },
       carlos: {
         quote:
@@ -215,7 +210,7 @@ export const en = {
         name: "Carlos R.",
         title: "Small claims response",
         case: "Arizona",
-        imageAlt: "Illustrative portrait for the Carlos R. example",
+        imageAlt: "Photo of Carlos R.",
       },
     },
   },
