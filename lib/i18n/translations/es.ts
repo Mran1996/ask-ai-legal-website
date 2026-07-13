@@ -58,7 +58,7 @@ export const es = mergeTranslations({
       },
       priya: {
         quote:
-          "Entre el trabajo y mis dos hijos no podía con los plazos del tribunal familiar. Se encargaron de la investigación y los trámites.",
+          "Entre el trabajo y mis dos hijos no podía con los plazos del tribunal familiar. Se encargaron de la investigación y prepararon mis documentos para que pudiera centrarme en mis hijos — todo en lenguaje claro.",
         name: "Priya S.",
         title: "Tribunal familiar",
         case: "Nueva Jersey",

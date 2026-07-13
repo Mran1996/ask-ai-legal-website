@@ -88,7 +88,7 @@ export const hi = mergeTranslations({
       },
       priya: {
         quote:
-          "काम और दो बच्चों के साथ family court की deadline संभालना असंभव था। उन्होंने शोध और दाखिले संभाले — सब कुछ सादी भाषा में समझाया।",
+          "काम और दो बच्चों के साथ family court की deadline संभालना असंभव था। उन्होंने शोध किया और मेरे दस्तावेज़ तैयार किए — सब कुछ सादी भाषा में समझाया।",
         name: "Priya S.",
         title: "फैमिली कोर्ट",
         case: "New Jersey",

@@ -190,7 +190,7 @@ export const en = {
       },
       priya: {
         quote:
-          "Between work and my two kids, I couldn't keep up with family court deadlines. They handled the research and filings so I could focus on my children — everything was explained in plain language.",
+          "Between work and my two kids, I couldn't keep up with family court deadlines. They handled the research and prepared my documents so I could focus on my children — everything was explained in plain language.",
         name: "Priya S.",
         title: "Family court",
         case: "New Jersey",

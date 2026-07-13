@@ -1,7 +1,6 @@
 "use client"
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react"
-import { ChevronLeft, ChevronRight } from "lucide-react"
 import { useLanguage } from "@/components/language-provider"
 
 const CABO_GOLD = "#C5A059"
@@ -64,35 +63,13 @@ function SlideCarousel({
   clients,
   activeIndex,
   reduceMotion,
-  onPrev,
-  onNext,
 }: {
   clients: ClientExample[]
   activeIndex: number
   reduceMotion: boolean
-  onPrev: () => void
-  onNext: () => void
 }) {
   return (
     <div className="relative mx-auto w-full max-w-lg">
-      <button
-        type="button"
-        onClick={onPrev}
-        aria-label="Previous testimonial"
-        className="absolute -left-2 top-1/2 z-10 hidden -translate-y-1/2 rounded-full border border-white/15 bg-navy/80 p-2 text-white/70 transition-colors hover:border-gold/40 hover:text-gold sm:flex"
-      >
-        <ChevronLeft className="h-5 w-5" aria-hidden />
-      </button>
-
-      <button
-        type="button"
-        onClick={onNext}
-        aria-label="Next testimonial"
-        className="absolute -right-2 top-1/2 z-10 hidden -translate-y-1/2 rounded-full border border-white/15 bg-navy/80 p-2 text-white/70 transition-colors hover:border-gold/40 hover:text-gold sm:flex"
-      >
-        <ChevronRight className="h-5 w-5" aria-hidden />
-      </button>
-
       <div className="w-full overflow-hidden">
         <div
           className="flex w-full"
@@ -192,14 +169,6 @@ export function Testimonials() {
     [pauseTemporarily]
   )
 
-  const goPrev = useCallback(() => {
-    goTo((activeIndex - 1 + count) % count)
-  }, [goTo, activeIndex, count])
-
-  const goNext = useCallback(() => {
-    goTo((activeIndex + 1) % count)
-  }, [goTo, activeIndex, count])
-
   return (
     <section id="testimonials" className="section-pad overflow-x-hidden bg-navy text-white">
       <div className="container-main">
@@ -217,8 +186,6 @@ export function Testimonials() {
             clients={clientExamples}
             activeIndex={activeIndex}
             reduceMotion={reduceMotion}
-            onPrev={goPrev}
-            onNext={goNext}
           />
 
           <div className="mt-6 flex justify-center gap-2">
