@@ -175,17 +175,18 @@ export function Testimonials() {
               {t.testimonials.titleGold}
             </span>
           </h2>
-          <p className="firm-label mt-6" style={{ color: CABO_GOLD }}>
-            {t.testimonials.label}
-          </p>
         </div>
 
-        <div className="relative mt-10 flex flex-col items-center sm:mt-12">
+        <div className="relative mt-12 flex flex-col items-center sm:mt-14">
           <SlideCarousel
             clients={clientExamples}
             activeIndex={activeIndex}
             reduceMotion={reduceMotion}
           />
+
+          <p className="firm-label mt-6" style={{ color: CABO_GOLD }}>
+            {t.testimonials.label}
+          </p>
 
           <div className="mt-6 flex justify-center gap-2">
             {clientExamples.map((client, index) => (
