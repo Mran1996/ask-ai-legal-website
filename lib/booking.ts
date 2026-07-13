@@ -29,6 +29,33 @@ export function calcomIntakeSlug(): string | null {
   return slug || null
 }
 
+function calcomEventBaseUrl(): string | null {
+  const slug = calcomIntakeSlug()
+  if (!slug) return null
+  return slug.startsWith("http") ? slug.replace(/\?.*$/, "") : `https://cal.com/${slug.replace(/^\//, "")}`
+}
+
+export function buildCalcomPublicUrl(args: {
+  email: string
+  name: string
+  caseReference: string
+  caseId: string
+}): string | null {
+  const base = calcomEventBaseUrl()
+  if (!base) return null
+
+  const params = new URLSearchParams({
+    email: args.email,
+    name: args.name,
+    "case-reference": args.caseReference,
+    caseReference: args.caseReference,
+    caseId: args.caseId,
+  })
+
+  const separator = base.includes("?") ? "&" : "?"
+  return `${base}${separator}${params.toString()}`
+}
+
 export function buildCalcomEmbedSrc(args: {
   email: string
   name: string
@@ -51,7 +78,8 @@ export function buildCalcomEmbedSrc(args: {
     callType: args.callType ?? "intake",
   })
 
-  const base = slug.startsWith("http") ? slug : `https://cal.com/${slug.replace(/^\//, "")}`
+  const base = calcomEventBaseUrl()
+  if (!base) return null
   const separator = base.includes("?") ? "&" : "?"
   return `${base}${separator}${params.toString()}`
 }

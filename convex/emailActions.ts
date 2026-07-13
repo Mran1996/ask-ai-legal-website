@@ -134,7 +134,7 @@ export const sendIntakeEmails = internalAction({
       "",
       "Someone from Ask AI Legal support will be in touch with you soon.",
       "",
-      "Book your free 15–20 minute intake call (document preparation and pricing only — not legal advice):",
+      "Book a 15–20 minute intake call (document preparation and pricing only — not legal advice):",
       bookUrl,
     ]
 

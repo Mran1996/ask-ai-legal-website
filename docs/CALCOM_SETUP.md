@@ -41,12 +41,19 @@ The webhook matches bookings to Convex cases using **case reference** (`AAL-…`
 
 ## 3. Environment variables
 
+Verify your event is live before setting the slug:
+
+```bash
+curl -sI "https://cal.com/ask-ai-legal/intake-call" | head -1
+# HTTP/2 200 — good. HTTP/2 404 — fix username/slug in Cal.com first.
+```
+
 ### Next.js / Vercel (`.env.local` / Vercel dashboard)
 
 ```bash
 NEXT_PUBLIC_SITE_URL=https://askailegal.com
-# Cal.com event path, e.g. askailegal/intake-call
-NEXT_PUBLIC_CALCOM_INTAKE_EVENT_SLUG=askailegal/intake-call
+# Cal.com event path, e.g. ask-ai-legal/intake-call (must return HTTP 200 at https://cal.com/<slug>)
+NEXT_PUBLIC_CALCOM_INTAKE_EVENT_SLUG=ask-ai-legal/intake-call
 ```
 
 ### Convex (production)

@@ -29,8 +29,18 @@ import { stripMarkdownForChat } from "@/lib/chat/sanitize-response"
 import { OPEN_CHAT_EVENT, type OpenChatEventDetail } from "@/lib/chat/open-chat"
 import { SUPPORT_MAILTO, SITE_BRAND_NAME } from "@/lib/site-config"
 import { buildBookPageUrl } from "@/lib/booking"
+import { formatUsdFromCents } from "@/lib/pricing/ca-eviction"
+import { estimateFractionPercent } from "@/lib/pricing/service-pricing"
 import { api } from "@/convex/_generated/api"
 import type { Id } from "@/convex/_generated/dataModel"
+
+type IntakeEstimateSummary = {
+  serviceLine: string
+  finalQuoteCents: number
+  attorneyCompareLowCents: number
+  attorneyCompareHighCents: number
+  isCustomQuote: boolean
+}
 
 type IntakeSubmitBanner = {
   caseReference: string
@@ -38,6 +48,36 @@ type IntakeSubmitBanner = {
   email: string
   firstName: string
   lastName: string
+  estimate: IntakeEstimateSummary
+}
+
+type ChatUi = ReturnType<typeof getChatUiStrings>
+
+function formatIntakeEstimateLine(estimate: IntakeEstimateSummary, ui: ChatUi): string {
+  const attorneyLow = formatUsdFromCents(estimate.attorneyCompareLowCents)
+  const attorneyHigh = formatUsdFromCents(estimate.attorneyCompareHighCents)
+
+  if (estimate.isCustomQuote) {
+    const fraction = String(
+      estimateFractionPercent(
+        0,
+        estimate.attorneyCompareLowCents,
+        estimate.attorneyCompareHighCents
+      )
+    )
+    return ui.estimateCustomQuote
+      .replace("{attorneyTypicalLabel}", ui.attorneyTypicalLabel)
+      .replace("{attorneyLow}", attorneyLow)
+      .replace("{attorneyHigh}", attorneyHigh)
+      .replace("{fraction}", fraction)
+  }
+
+  return ui.estimateComparison
+    .replace("{attorneyTypicalLabel}", ui.attorneyTypicalLabel)
+    .replace("{attorneyLow}", attorneyLow)
+    .replace("{attorneyHigh}", attorneyHigh)
+    .replace("{ourEstimatedLabel}", ui.ourEstimatedLabel)
+    .replace("{ourPrice}", formatUsdFromCents(estimate.finalQuoteCents))
 }
 
 const CHAT_LOCALE_KEY = "ask-ai-legal-chat-locale"
@@ -361,13 +401,20 @@ export function ChatWidget() {
       if (pendingFiles.length > 0) {
         await uploadIntakeFiles(result.caseId, pendingFiles)
       }
-      await generateForCase({ caseId: result.caseId })
+      const estimate = await generateForCase({ caseId: result.caseId })
       setIntakeSubmitBanner({
         caseReference: result.caseReference,
         caseId: result.caseId,
         email: intake.email,
         firstName: intake.firstName,
         lastName: intake.lastName,
+        estimate: {
+          serviceLine: estimate.serviceLine,
+          finalQuoteCents: estimate.finalQuoteCents,
+          attorneyCompareLowCents: estimate.attorneyCompareLowCents,
+          attorneyCompareHighCents: estimate.attorneyCompareHighCents,
+          isCustomQuote: estimate.isCustomQuote,
+        },
       })
       setIntake(EMPTY_INTAKE)
       setPendingFiles([])
@@ -615,6 +662,20 @@ export function ChatWidget() {
                     <p className="mt-2 font-mono text-sm font-semibold tracking-wide text-gold">
                       {intakeSubmitBanner.caseReference}
                     </p>
+                    <div className="mt-3 rounded-sm border border-white/15 bg-navy/50 px-3 py-2.5 text-left">
+                      <p className="text-[10px] font-bold uppercase tracking-wider text-gold">
+                        {ui.pricingTitle}
+                      </p>
+                      <p className="mt-1 text-xs text-white/85">
+                        {intakeSubmitBanner.estimate.serviceLine}
+                      </p>
+                      <p className="mt-2 text-xs leading-relaxed text-white/70">
+                        {formatIntakeEstimateLine(intakeSubmitBanner.estimate, ui)}
+                      </p>
+                      <p className="mt-2 text-[10px] leading-relaxed text-white/45">
+                        {ui.estimateDisclaimer}
+                      </p>
+                    </div>
                     <p className="mt-2 text-xs leading-relaxed text-white/75">
                       {ui.intakeSuccessBody}
                     </p>
@@ -627,8 +688,6 @@ export function ChatWidget() {
                         firstName: intakeSubmitBanner.firstName,
                         lastName: intakeSubmitBanner.lastName,
                       })}
-                      target="_blank"
-                      rel="noopener noreferrer"
                       className="mt-4 inline-flex w-full items-center justify-center rounded-sm border border-gold/50 bg-gold/15 px-4 py-2.5 text-sm font-semibold text-gold hover:bg-gold/25"
                     >
                       {ui.bookIntakeCall}

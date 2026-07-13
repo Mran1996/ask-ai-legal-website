@@ -117,7 +117,7 @@ Add in **Vercel → Settings → Environment Variables**. Enable for **Productio
 | `NEXT_PUBLIC_CONVEX_URL` | `https://affable-hare-544.convex.cloud` | From Convex dashboard |
 | `NEXT_PUBLIC_CONVEX_SITE_URL` | `https://affable-hare-544.convex.site` | HTTP actions / site URL |
 | `NEXT_PUBLIC_SITE_URL` | `https://askailegal.com` | Or your `*.vercel.app` URL |
-| `NEXT_PUBLIC_CALCOM_INTAKE_EVENT_SLUG` | `askailegal/intake-call` | Intake call embed on `/book` |
+| `NEXT_PUBLIC_CALCOM_INTAKE_EVENT_SLUG` | `ask-ai-legal/intake-call` | Intake call embed on `/book` |
 
 ### Cal.com webhook (Convex — not Vercel)
 

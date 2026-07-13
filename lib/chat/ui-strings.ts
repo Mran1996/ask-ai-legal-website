@@ -117,7 +117,7 @@ const en: ChatUiStrings = {
   intakeSuccessBody:
     "Thank you for reaching out! Save your reference below. Someone from Ask AI Legal support will be in touch with you soon. Nothing has been delivered yet — this is document preparation only, not legal advice.",
   bookIntakeCall: "Book your intake call",
-  bookIntakeCallHint: "15–20 min · free · document preparation and pricing only",
+  bookIntakeCallHint: "15–20 min · document preparation and pricing only",
   intakeSubmitError:
     "We couldn't save your intake. Please try again or email support@askailegal.com with your details.",
   submitAnother: "Submit another request",
@@ -197,7 +197,7 @@ const hi: ChatUiStrings = {
   intakeSuccessBody:
     "नीचे दिया संदर्भ सहेजें। हमारी टीम अगले कदमों के लिए ईमेल से संपर्क करेगी। अभी कुछ भी वितरित नहीं किया गया है।",
   bookIntakeCall: "अपना इंटेक कॉल बुक करें",
-  bookIntakeCallHint: "15–20 मिनट · मुफ़्त · केवल दस्तावेज़ तैयारी और मूल्य",
+  bookIntakeCallHint: "15–20 मिनट · केवल दस्तावेज़ तैयारी और मूल्य",
   intakeSubmitError:
     "इंटेक सहेज नहीं सका। कृपया फिर कोशिश करें या support@askailegal.com पर ईमेल करें।",
   submitAnother: "दूसरा अनुरोध भेजें",

@@ -5,6 +5,7 @@ import {
   BOOKING_DISCLAIMER,
   INTAKE_CALL_DESCRIPTION,
   buildCalcomEmbedSrc,
+  buildCalcomPublicUrl,
   calcomIntakeSlug,
   type BookCallType,
 } from "@/lib/booking"
@@ -54,6 +55,11 @@ export function BookPageClient({
         })
       : null
 
+  const publicCalUrl =
+    caseId && caseReference && email
+      ? buildCalcomPublicUrl({ email, name, caseReference, caseId })
+      : null
+
   const slugConfigured = Boolean(calcomIntakeSlug())
 
   return (
@@ -95,7 +101,21 @@ export function BookPageClient({
                 </p>
               </div>
             ) : embedSrc ? (
-              <CalcomEmbed src={embedSrc} title={callTitle(normalizedType)} />
+              <>
+                <CalcomEmbed src={embedSrc} title={callTitle(normalizedType)} />
+                {publicCalUrl && (
+                  <p className="mt-4 text-center text-sm text-white/55">
+                    Calendar not loading?{" "}
+                    <a
+                      href={publicCalUrl}
+                      className="font-semibold text-gold underline-offset-2 hover:underline"
+                      rel="noopener noreferrer"
+                    >
+                      Open the scheduling page
+                    </a>
+                  </p>
+                )}
+              </>
             ) : null}
           </div>
         </div>
