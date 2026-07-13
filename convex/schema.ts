@@ -3,6 +3,8 @@ import { v } from "convex/values"
 import {
   agentRunStatusValidator,
   agentTypeValidator,
+  appointmentCallTypeValidator,
+  appointmentStatusValidator,
   caseStatusValidator,
   counselDecisionValidator,
   notificationStatusValidator,
@@ -33,16 +35,38 @@ export default defineSchema({
     matterType: matterTypeValidator,
     jurisdiction: jurisdictionValidator,
     status: caseStatusValidator,
+    caseReference: v.optional(v.string()),
     intakeRaw: v.string(),
     intakeStructured: intakeStructuredValidator,
     assignedServices: v.array(v.string()),
     storagePrefix: v.string(),
+    caseFileReviewPaidAt: v.optional(v.number()),
+    includedPlanningCallsUsed: v.optional(v.number()),
     createdAt: v.number(),
     updatedAt: v.number(),
   })
     .index("by_client", ["clientId"])
     .index("by_status", ["status"])
-    .index("by_createdAt", ["createdAt"]),
+    .index("by_createdAt", ["createdAt"])
+    .index("by_caseReference", ["caseReference"]),
+
+  appointments: defineTable({
+    caseId: v.id("cases"),
+    callType: appointmentCallTypeValidator,
+    scheduledAt: v.number(),
+    timezone: v.optional(v.string()),
+    durationMinutes: v.number(),
+    status: appointmentStatusValidator,
+    provider: v.string(),
+    externalEventId: v.string(),
+    meetLink: v.optional(v.string()),
+    attendeeEmail: v.optional(v.string()),
+    attendeeName: v.optional(v.string()),
+    createdAt: v.number(),
+    updatedAt: v.number(),
+  })
+    .index("by_case", ["caseId"])
+    .index("by_externalEventId", ["externalEventId"]),
 
   notifications: defineTable({
     caseId: v.id("cases"),

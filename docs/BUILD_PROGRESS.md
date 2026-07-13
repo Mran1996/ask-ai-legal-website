@@ -39,6 +39,9 @@ Track implementation against [ASK_AI_LEGAL_SPEC.md](./ASK_AI_LEGAL_SPEC.md) Sect
 - [x] Auto-provision case storage prefix on create
 - [x] Log Intake `agentRun`
 - [x] Intake auto-email (client + support@) via Resend + `notifications` table
+- [x] Post-intake **Intake call** booking (Cal.com + `/book` + Convex webhook + ops view) — see `docs/CALCOM_SETUP.md`
+- [ ] v2: Document planning calls gated on $499 case file review (3 included)
+- [ ] v3: Paid follow-up calls ($50 / 30 min) via Cal.com or Stripe
 
 ### 1.3 Estimate + value comparison UI
 

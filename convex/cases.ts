@@ -18,6 +18,9 @@ import {
   validateIntakeForm,
 } from "./lib/intakeMapping"
 import { scheduleIntakeEmailsIfNeeded } from "./lib/scheduleIntakeEmails"
+import { resolveCaseReference } from "./lib/caseLookup"
+
+const INCLUDED_PLANNING_CALLS = 3
 
 export const createFromIntake = mutation({
   args: intakeFormValidator,
@@ -75,11 +78,13 @@ export const createFromIntake = mutation({
       intakeStructured,
       assignedServices: [],
       storagePrefix: "cases/pending/",
+      includedPlanningCallsUsed: 0,
       createdAt: now,
       updatedAt: now,
     })
 
     const caseReference = formatCaseReference(caseId)
+    await ctx.db.patch("cases", caseId, { caseReference })
 
     return {
       caseId,
@@ -279,9 +284,36 @@ export const getCaseForOps = query({
         }
       : null
 
+    const appointmentRows = await ctx.db
+      .query("appointments")
+      .withIndex("by_case", (q) => q.eq("caseId", args.caseId))
+      .order("desc")
+      .collect()
+
+    const appointments = appointmentRows.map((row) => ({
+      appointmentId: row._id,
+      callType: row.callType,
+      scheduledAt: row.scheduledAt,
+      timezone: row.timezone,
+      durationMinutes: row.durationMinutes,
+      status: row.status,
+      meetLink: row.meetLink,
+      attendeeEmail: row.attendeeEmail,
+    }))
+
+    const caseFileReviewPaid = caseDoc.caseFileReviewPaidAt !== undefined
+    const planningUsed = caseDoc.includedPlanningCallsUsed ?? 0
+    const callCredits = {
+      caseFileReviewPaid,
+      includedPlanningCallsRemaining: caseFileReviewPaid
+        ? Math.max(0, INCLUDED_PLANNING_CALLS - planningUsed)
+        : 0,
+      followUpCallsPaid: false,
+    }
+
     return {
       caseId: caseDoc._id,
-      caseReference: formatCaseReference(caseDoc._id),
+      caseReference: resolveCaseReference(caseDoc),
       status: caseDoc.status,
       matterType: caseDoc.matterType,
       intakeRaw: caseDoc.intakeRaw,
@@ -289,6 +321,8 @@ export const getCaseForOps = query({
       storagePrefix: caseDoc.storagePrefix,
       createdAt: caseDoc.createdAt,
       updatedAt: caseDoc.updatedAt,
+      caseFileReviewPaidAt: caseDoc.caseFileReviewPaidAt,
+      includedPlanningCallsUsed: caseDoc.includedPlanningCallsUsed,
       client: {
         firstName: client.firstName,
         lastName: client.lastName,
@@ -296,6 +330,8 @@ export const getCaseForOps = query({
         phone: client.phone,
       },
       estimate,
+      appointments,
+      callCredits,
     }
   },
 })

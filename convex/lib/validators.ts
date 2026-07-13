@@ -136,8 +136,39 @@ export const createFromIntakeReturnValidator = v.object({
 
 export const notificationTypeValidator = v.union(
   v.literal("intake_client"),
-  v.literal("intake_support")
+  v.literal("intake_support"),
+  v.literal("appointment_booked_support")
 )
+
+export const appointmentCallTypeValidator = v.union(
+  v.literal("intake"),
+  v.literal("document_planning"),
+  v.literal("follow_up_paid")
+)
+
+export const appointmentStatusValidator = v.union(
+  v.literal("scheduled"),
+  v.literal("cancelled"),
+  v.literal("completed"),
+  v.literal("rescheduled")
+)
+
+export const appointmentSummaryValidator = v.object({
+  appointmentId: v.id("appointments"),
+  callType: appointmentCallTypeValidator,
+  scheduledAt: v.number(),
+  timezone: v.optional(v.string()),
+  durationMinutes: v.number(),
+  status: appointmentStatusValidator,
+  meetLink: v.optional(v.string()),
+  attendeeEmail: v.optional(v.string()),
+})
+
+export const callCreditsValidator = v.object({
+  caseFileReviewPaid: v.boolean(),
+  includedPlanningCallsRemaining: v.number(),
+  followUpCallsPaid: v.boolean(),
+})
 
 export const notificationStatusValidator = v.union(
   v.literal("pending"),
@@ -178,6 +209,8 @@ export const caseDetailValidator = v.object({
   storagePrefix: v.string(),
   createdAt: v.number(),
   updatedAt: v.number(),
+  caseFileReviewPaidAt: v.optional(v.number()),
+  includedPlanningCallsUsed: v.optional(v.number()),
   client: v.object({
     firstName: v.string(),
     lastName: v.string(),
@@ -185,4 +218,6 @@ export const caseDetailValidator = v.object({
     phone: v.optional(v.string()),
   }),
   estimate: v.union(estimateSummaryValidator, v.null()),
+  appointments: v.array(appointmentSummaryValidator),
+  callCredits: callCreditsValidator,
 })

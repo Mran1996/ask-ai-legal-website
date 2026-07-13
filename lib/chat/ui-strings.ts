@@ -43,6 +43,8 @@ export type ChatUiStrings = {
   submittingRequest: string
   intakeSuccessTitle: string
   intakeSuccessBody: string
+  bookIntakeCall: string
+  bookIntakeCallHint: string
   intakeSubmitError: string
   submitAnother: string
   conversationTitle: string
@@ -114,6 +116,8 @@ const en: ChatUiStrings = {
   intakeSuccessTitle: "Intake received",
   intakeSuccessBody:
     "Thank you for reaching out! Save your reference below. Someone from Ask AI Legal support will be in touch with you soon. Nothing has been delivered yet — this is document preparation only, not legal advice.",
+  bookIntakeCall: "Book your intake call",
+  bookIntakeCallHint: "15–20 min · free · document preparation and pricing only",
   intakeSubmitError:
     "We couldn't save your intake. Please try again or email support@askailegal.com with your details.",
   submitAnother: "Submit another request",
@@ -131,7 +135,7 @@ const en: ChatUiStrings = {
     "{attorneyTypicalLabel}: {attorneyLow}–{attorneyHigh}. We'll email a custom flat quote — usually about {fraction}% of what attorneys charge for this work.",
   estimateServiceLine: "Service",
   estimateDisclaimer:
-    "Estimate only — not legal advice. Final flat quote confirmed in your scope memo after case file review.",
+    "Estimate only — not legal advice. Final flat quote confirmed in your written case summary after case file review.",
   fillRequired: "Please fill in name, email, and a brief issue description.",
   uploadNote:
     "Optional: attach court papers, notices, or leases (PDF, JPG, PNG — up to 10 MB each).",
@@ -192,6 +196,8 @@ const hi: ChatUiStrings = {
   intakeSuccessTitle: "इंटेक प्राप्त",
   intakeSuccessBody:
     "नीचे दिया संदर्भ सहेजें। हमारी टीम अगले कदमों के लिए ईमेल से संपर्क करेगी। अभी कुछ भी वितरित नहीं किया गया है।",
+  bookIntakeCall: "अपना इंटेक कॉल बुक करें",
+  bookIntakeCallHint: "15–20 मिनट · मुफ़्त · केवल दस्तावेज़ तैयारी और मूल्य",
   intakeSubmitError:
     "इंटेक सहेज नहीं सका। कृपया फिर कोशिश करें या support@askailegal.com पर ईमेल करें।",
   submitAnother: "दूसरा अनुरोध भेजें",

@@ -28,8 +28,17 @@ import { getChatUiStrings, getWelcomeMessage } from "@/lib/chat/ui-strings"
 import { stripMarkdownForChat } from "@/lib/chat/sanitize-response"
 import { OPEN_CHAT_EVENT, type OpenChatEventDetail } from "@/lib/chat/open-chat"
 import { SUPPORT_MAILTO, SITE_BRAND_NAME } from "@/lib/site-config"
+import { buildBookPageUrl } from "@/lib/booking"
 import { api } from "@/convex/_generated/api"
 import type { Id } from "@/convex/_generated/dataModel"
+
+type IntakeSubmitBanner = {
+  caseReference: string
+  caseId: Id<"cases">
+  email: string
+  firstName: string
+  lastName: string
+}
 
 const CHAT_LOCALE_KEY = "ask-ai-legal-chat-locale"
 const CHAT_STARTED_KEY = "ask-ai-legal-chat-started"
@@ -150,7 +159,7 @@ export function ChatWidget() {
   const [intake, setIntake] = useState<IntakeFormData>(EMPTY_INTAKE)
   const [intakeError, setIntakeError] = useState("")
   const [intakeSubmitting, setIntakeSubmitting] = useState(false)
-  const [intakeSubmitBanner, setIntakeSubmitBanner] = useState<string | null>(null)
+  const [intakeSubmitBanner, setIntakeSubmitBanner] = useState<IntakeSubmitBanner | null>(null)
   const [pendingFiles, setPendingFiles] = useState<File[]>([])
   const fileInputRef = useRef<HTMLInputElement>(null)
   const createFromIntake = useMutation(api.cases.createFromIntake)
@@ -353,9 +362,15 @@ export function ChatWidget() {
         await uploadIntakeFiles(result.caseId, pendingFiles)
       }
       await generateForCase({ caseId: result.caseId })
+      setIntakeSubmitBanner({
+        caseReference: result.caseReference,
+        caseId: result.caseId,
+        email: intake.email,
+        firstName: intake.firstName,
+        lastName: intake.lastName,
+      })
       setIntake(EMPTY_INTAKE)
       setPendingFiles([])
-      setIntakeSubmitBanner(result.caseReference)
       if (fileInputRef.current) {
         fileInputRef.current.value = ""
       }
@@ -598,11 +613,27 @@ export function ChatWidget() {
                     <CheckCircle2 className="mx-auto h-8 w-8 text-gold" aria-hidden />
                     <p className="mt-2 font-display text-base text-white">{ui.intakeSuccessTitle}</p>
                     <p className="mt-2 font-mono text-sm font-semibold tracking-wide text-gold">
-                      {intakeSubmitBanner}
+                      {intakeSubmitBanner.caseReference}
                     </p>
                     <p className="mt-2 text-xs leading-relaxed text-white/75">
                       {ui.intakeSuccessBody}
                     </p>
+                    <a
+                      href={buildBookPageUrl({
+                        callType: "intake",
+                        caseId: intakeSubmitBanner.caseId,
+                        caseReference: intakeSubmitBanner.caseReference,
+                        email: intakeSubmitBanner.email,
+                        firstName: intakeSubmitBanner.firstName,
+                        lastName: intakeSubmitBanner.lastName,
+                      })}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-4 inline-flex w-full items-center justify-center rounded-sm border border-gold/50 bg-gold/15 px-4 py-2.5 text-sm font-semibold text-gold hover:bg-gold/25"
+                    >
+                      {ui.bookIntakeCall}
+                    </a>
+                    <p className="mt-2 text-[10px] text-white/50">{ui.bookIntakeCallHint}</p>
                     <button
                       type="button"
                       onClick={resetIntakeForm}

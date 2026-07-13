@@ -3,6 +3,7 @@
 import { v } from "convex/values"
 import { internal } from "./_generated/api"
 import { internalAction } from "./_generated/server"
+import { buildBookPageUrl } from "./lib/bookingUrls"
 
 const SUPPORT_EMAIL = "support@askailegal.com"
 const RESEND_API_URL = "https://api.resend.com/emails"
@@ -114,6 +115,15 @@ export const sendIntakeEmails = internalAction({
       return null
     }
 
+    const bookUrl = buildBookPageUrl({
+      callType: "intake",
+      caseId: args.caseId,
+      caseReference: args.caseReference,
+      email: context.clientEmail,
+      firstName: context.clientFirstName,
+      lastName: context.clientLastName,
+    })
+
     const clientSubject = `Thank you for reaching out — ${args.caseReference}`
     const clientBodyParts = [
       `Hello ${context.clientFirstName},`,
@@ -123,6 +133,9 @@ export const sendIntakeEmails = internalAction({
       `We received your intake request. Your case reference is ${args.caseReference}.`,
       "",
       "Someone from Ask AI Legal support will be in touch with you soon.",
+      "",
+      "Book your free 15–20 minute intake call (document preparation and pricing only — not legal advice):",
+      bookUrl,
     ]
 
     if (context.estimate) {
@@ -182,6 +195,9 @@ export const sendIntakeEmails = internalAction({
       "",
       ...formatQuoteLines(context.estimate),
       "",
+      `Intake call booking link (for client): ${bookUrl}`,
+      "Call booking status: pending until client books via Cal.com",
+      "",
       "View in ops: /ops/intakes/" + args.caseId,
     ].join("\n")
 
@@ -194,6 +210,63 @@ export const sendIntakeEmails = internalAction({
     await ctx.runMutation(internal.notifications.recordNotification, {
       caseId: args.caseId,
       type: "intake_support",
+      recipient: SUPPORT_EMAIL,
+      status: supportResult.ok ? "sent" : "failed",
+      provider: "resend",
+      errorMessage: supportResult.ok ? undefined : supportResult.error,
+    })
+
+    return null
+  },
+})
+
+export const sendAppointmentBookedEmail = internalAction({
+  args: {
+    caseId: v.id("cases"),
+    appointmentId: v.id("appointments"),
+  },
+  returns: v.null(),
+  handler: async (ctx, args) => {
+    const context = await ctx.runQuery(internal.appointments.getEmailContext, {
+      caseId: args.caseId,
+      appointmentId: args.appointmentId,
+    })
+
+    if (!context) {
+      return null
+    }
+
+    const when = new Date(context.scheduledAt).toLocaleString("en-US", {
+      dateStyle: "full",
+      timeStyle: "short",
+      timeZone: context.timezone ?? "America/Los_Angeles",
+    })
+
+    const supportBody = [
+      "A client booked a call.",
+      "",
+      `Case reference: ${context.caseReference}`,
+      `Case ID: ${args.caseId}`,
+      `Call type: ${context.callTypeLabel}`,
+      `When: ${when}${context.timezone ? ` (${context.timezone})` : ""}`,
+      `Duration: ${context.durationMinutes} minutes`,
+      `Attendee: ${context.attendeeName ?? "—"} <${context.attendeeEmail ?? "—"}>`,
+      context.meetLink ? `Meeting link: ${context.meetLink}` : "",
+      "",
+      `View in ops: /ops/intakes/${args.caseId}`,
+    ]
+      .filter(Boolean)
+      .join("\n")
+
+    const supportResult = await sendResendEmail({
+      to: SUPPORT_EMAIL,
+      subject: `Call booked — ${context.caseReference}`,
+      text: supportBody,
+    })
+
+    await ctx.runMutation(internal.notifications.recordNotification, {
+      caseId: args.caseId,
+      type: "appointment_booked_support",
       recipient: SUPPORT_EMAIL,
       status: supportResult.ok ? "sent" : "failed",
       provider: "resend",

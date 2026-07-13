@@ -8,13 +8,17 @@
  * @module
  */
 
+import type * as appointments from "../appointments.js";
 import type * as cases from "../cases.js";
 import type * as documents from "../documents.js";
 import type * as emailActions from "../emailActions.js";
 import type * as estimates from "../estimates.js";
 import type * as health from "../health.js";
+import type * as http from "../http.js";
 import type * as lib_auth from "../lib/auth.js";
+import type * as lib_bookingUrls from "../lib/bookingUrls.js";
 import type * as lib_caEvictionPricing from "../lib/caEvictionPricing.js";
+import type * as lib_caseLookup from "../lib/caseLookup.js";
 import type * as lib_customFunctions from "../lib/customFunctions.js";
 import type * as lib_intakeMapping from "../lib/intakeMapping.js";
 import type * as lib_opsAuth from "../lib/opsAuth.js";
@@ -30,13 +34,17 @@ import type {
 } from "convex/server";
 
 declare const fullApi: ApiFromModules<{
+  appointments: typeof appointments;
   cases: typeof cases;
   documents: typeof documents;
   emailActions: typeof emailActions;
   estimates: typeof estimates;
   health: typeof health;
+  http: typeof http;
   "lib/auth": typeof lib_auth;
+  "lib/bookingUrls": typeof lib_bookingUrls;
   "lib/caEvictionPricing": typeof lib_caEvictionPricing;
+  "lib/caseLookup": typeof lib_caseLookup;
   "lib/customFunctions": typeof lib_customFunctions;
   "lib/intakeMapping": typeof lib_intakeMapping;
   "lib/opsAuth": typeof lib_opsAuth;

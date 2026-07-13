@@ -91,6 +91,56 @@ export function CaseDetailView({ opsToken, caseId }: Props) {
       )}
 
       <section className="mt-6 rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
+        <h2 className="font-semibold text-navy">Call credits</h2>
+        <dl className="mt-3 grid gap-2 text-sm sm:grid-cols-2">
+          <div>
+            <dt className="text-gray-500">Case file review paid</dt>
+            <dd>{detail.callCredits.caseFileReviewPaid ? "Yes" : "No"}</dd>
+          </div>
+          <div>
+            <dt className="text-gray-500">Free document planning calls left</dt>
+            <dd>
+              {detail.callCredits.caseFileReviewPaid
+                ? detail.callCredits.includedPlanningCallsRemaining
+                : "— (after $499 review)"}
+            </dd>
+          </div>
+        </dl>
+        <p className="mt-3 text-xs text-gray-500">
+          Follow-up calls ($50 / 30 min) unlock after included planning calls are used.
+        </p>
+      </section>
+
+      <section className="mt-6 rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
+        <h2 className="font-semibold text-navy">Scheduled calls</h2>
+        {detail.appointments.length === 0 ? (
+          <p className="mt-2 text-sm text-gray-500">No calls booked yet.</p>
+        ) : (
+          <ul className="mt-3 space-y-3">
+            {detail.appointments.map((appt) => (
+              <li
+                key={appt.appointmentId}
+                className="rounded border border-gray-100 bg-gray-50 px-4 py-3 text-sm"
+              >
+                <p className="font-medium capitalize text-navy">
+                  {appt.callType.replace(/_/g, " ")} · {appt.status}
+                </p>
+                <p className="mt-1 text-gray-600">
+                  {new Date(appt.scheduledAt).toLocaleString()}
+                  {appt.timezone ? ` (${appt.timezone})` : ""} · {appt.durationMinutes} min
+                </p>
+                {appt.meetLink && (
+                  <a href={appt.meetLink} className="mt-1 inline-block text-navy underline">
+                    Meeting link
+                  </a>
+                )}
+              </li>
+            ))}
+          </ul>
+        )}
+      </section>
+
+      <section className="mt-6 rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
         <h2 className="font-semibold text-navy">Structured intake</h2>
         <pre className="mt-3 overflow-x-auto rounded bg-gray-50 p-4 text-xs text-gray-700">
           {JSON.stringify(detail.intakeStructured, null, 2)}
