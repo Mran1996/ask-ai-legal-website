@@ -45,8 +45,8 @@ The webhook matches bookings to Convex cases using **case reference** (`AAL-…`
 
 ```bash
 NEXT_PUBLIC_SITE_URL=https://askailegal.com
-# Cal.com event path, e.g. your-username/intake-call
-NEXT_PUBLIC_CALCOM_INTAKE_EVENT_SLUG=your-username/intake-call
+# Cal.com event path, e.g. askailegal/intake-call
+NEXT_PUBLIC_CALCOM_INTAKE_EVENT_SLUG=askailegal/intake-call
 ```
 
 ### Convex (production)

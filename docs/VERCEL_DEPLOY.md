@@ -85,6 +85,21 @@ Add in **Vercel → Settings → Environment Variables**. Enable for **Productio
 | `NEXT_PUBLIC_CONVEX_URL` | `https://affable-hare-544.convex.cloud` | From Convex dashboard |
 | `NEXT_PUBLIC_CONVEX_SITE_URL` | `https://affable-hare-544.convex.site` | HTTP actions / site URL |
 | `NEXT_PUBLIC_SITE_URL` | `https://askailegal.com` | Or your `*.vercel.app` URL |
+| `NEXT_PUBLIC_CALCOM_INTAKE_EVENT_SLUG` | `askailegal/intake-call` | Intake call embed on `/book` |
+
+### Cal.com webhook (Convex — not Vercel)
+
+Set in **Convex** prod (`robust-wombat-16`), not Vercel:
+
+| Variable | Notes |
+|----------|-------|
+| `CALCOM_WEBHOOK_SECRET` | `npx convex env set CALCOM_WEBHOOK_SECRET "$(openssl rand -hex 32)"` |
+| `PUBLIC_SITE_URL` | `https://askailegal.com` (for intake email `/book` links) |
+
+Cal.com webhook URL: `https://robust-wombat-16.convex.site/calcom-webhook`  
+Header: `Authorization: Bearer <CALCOM_WEBHOOK_SECRET>`
+
+See `docs/CALCOM_SETUP.md`.
 
 ### Required for AI chat (pick one provider)
 
