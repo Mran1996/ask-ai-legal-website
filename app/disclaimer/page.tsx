@@ -107,9 +107,15 @@ export default function DisclaimerPage() {
 
       <h2>8. Testimonials and examples</h2>
       <p>
-        Client testimonials, case types, and examples on our website reflect individual
-        experiences and are not guarantees that you will have the same experience or outcome.
-        Names may be abbreviated to protect privacy. Results vary.
+        Illustrative scenarios on our homepage — including names, portraits, and quoted text in
+        the carousel — are <strong>composite marketing examples</strong>. They do not depict
+        real clients, verified reviews, or actual outcomes. They are shown to explain common
+        situations we may help with, not to represent specific people or guaranteed results.
+      </p>
+      <p>
+        If we publish genuine client feedback in the future, it will be clearly labeled and
+        shared only with appropriate consent. Nothing on this website is a guarantee that you
+        will have the same experience or outcome. Results vary.
       </p>
 
       <h2>9. Emergency and time-sensitive matters</h2>

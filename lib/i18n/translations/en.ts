@@ -168,6 +168,57 @@ export const en = {
       },
     ],
   },
+  testimonials: {
+    label: "Illustrative examples",
+    titleWhite: "Common situations ",
+    titleGold: "we help with.",
+    rotateHint: "Examples slide automatically · Use dots or arrows to browse",
+    cardBadge: "Illustrative example",
+    disclaimer:
+      "These are illustrative composite examples for marketing purposes only. They do not depict real clients, verified reviews, or guaranteed outcomes. Individual results vary.",
+    clients: {
+      sandra: {
+        quote:
+          "Going through my divorce I had no idea where to start. They walked me through the paperwork step by step — custody, property, all of it. I felt like I had someone in my corner for the first time.",
+        name: "Sandra M.",
+        title: "Divorce filing",
+        case: "Ohio",
+        imageAlt: "Illustrative portrait for the Sandra M. example",
+      },
+      marcus: {
+        quote:
+          "I needed a motion filed fast and every lawyer wanted a retainer I couldn't afford. One email, a clear price, and my documents were back in 72 hours. They looked like something a real attorney wrote.",
+        name: "Marcus J.",
+        title: "Civil motion",
+        case: "Georgia",
+        imageAlt: "Illustrative portrait for the Marcus J. example",
+      },
+      priya: {
+        quote:
+          "Between work and my two kids, I couldn't keep up with family court deadlines. They handled the research and filings so I could focus on my children — everything was explained in plain language.",
+        name: "Priya S.",
+        title: "Family court",
+        case: "New Jersey",
+        imageAlt: "Illustrative portrait for the Priya S. example",
+      },
+      keisha: {
+        quote:
+          "Facing an unfair eviction with nowhere to turn. They researched tenant rights, drafted my response, and broke down every paragraph so I understood it before I walked into court.",
+        name: "Keisha W.",
+        title: "Housing defense",
+        case: "Illinois",
+        imageAlt: "Illustrative portrait for the Keisha W. example",
+      },
+      carlos: {
+        quote:
+          "English isn't my first language and legal forms were overwhelming. They explained everything clearly, prepared my response, and made sure I knew exactly what to file.",
+        name: "Carlos R.",
+        title: "Small claims response",
+        case: "Arizona",
+        imageAlt: "Illustrative portrait for the Carlos R. example",
+      },
+    },
+  },
   consultation: {
     label: "Your investment",
     titleLine1: "Every case is different.",

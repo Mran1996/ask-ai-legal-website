@@ -36,6 +36,57 @@ export const es = mergeTranslations({
     title: "Respuestas directas",
     intro: "La transparencia es parte del servicio. Esto preguntan antes de llamar.",
   },
+  testimonials: {
+    label: "Ejemplos ilustrativos",
+    titleWhite: "Situaciones comunes ",
+    titleGold: "en las que ayudamos.",
+    rotateHint: "Los ejemplos rotan automáticamente · Use los puntos o flechas para navegar",
+    cardBadge: "Ejemplo ilustrativo",
+    disclaimer:
+      "Estos son ejemplos compuestos con fines informativos. No representan clientes reales, reseñas verificadas ni resultados garantizados. Los resultados varían.",
+    clients: {
+      sandra: {
+        quote:
+          "En mi divorcio no sabía por dónde empezar. Me guiaron paso a paso con la documentación — custodia, bienes, todo. Por primera vez sentí que alguien estaba de mi lado.",
+        name: "Sandra M.",
+        title: "Divorcio",
+        case: "Ohio",
+        imageAlt: "Retrato ilustrativo del ejemplo Sandra M.",
+      },
+      marcus: {
+        quote:
+          "Necesitaba una moción rápido y cada abogado pedía un anticipo que no podía pagar. Un correo, precio claro, documentos en 72 horas.",
+        name: "Marcus J.",
+        title: "Moción civil",
+        case: "Georgia",
+        imageAlt: "Retrato ilustrativo del ejemplo Marcus J.",
+      },
+      priya: {
+        quote:
+          "Entre el trabajo y mis dos hijos no podía con los plazos del tribunal familiar. Se encargaron de la investigación y los trámites.",
+        name: "Priya S.",
+        title: "Tribunal familiar",
+        case: "Nueva Jersey",
+        imageAlt: "Retrato ilustrativo del ejemplo Priya S.",
+      },
+      keisha: {
+        quote:
+          "Enfrentaba un desalojo injusto. Investigar mis derechos como inquilina, redactar mi respuesta y explicarme cada párrafo.",
+        name: "Keisha W.",
+        title: "Defensa de vivienda",
+        case: "Illinois",
+        imageAlt: "Retrato ilustrativo del ejemplo Keisha W.",
+      },
+      carlos: {
+        quote:
+          "El inglés no es mi primer idioma y los formularios legales eran abrumadores. Lo explicaron todo claramente y prepararon mi respuesta.",
+        name: "Carlos R.",
+        title: "Respuesta de reclamo menor",
+        case: "Arizona",
+        imageAlt: "Retrato ilustrativo del ejemplo Carlos R.",
+      },
+    },
+  },
   consultation: {
     label: "Su inversión",
     titleLine1: "Cada caso es diferente.",

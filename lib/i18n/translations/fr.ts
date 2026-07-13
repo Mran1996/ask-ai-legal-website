@@ -31,6 +31,15 @@ export const fr = mergeTranslations({
     stat3Label: "Documents seulement",
     stat3Sub: "Nous générons. Vous décidez.",
   },
+  testimonials: {
+    label: "Exemples illustratifs",
+    titleWhite: "Situations courantes ",
+    titleGold: "que nous aidons à traiter.",
+    rotateHint: "Les exemples défilent automatiquement · Utilisez les points ou les flèches",
+    cardBadge: "Exemple illustratif",
+    disclaimer:
+      "Il s'agit d'exemples composites à des fins d'information uniquement. Ils ne représentent pas de vrais clients, d'avis vérifiés ni de résultats garantis. Les résultats varient.",
+  },
   cta: {
     label: "Commencez aujourd'hui",
     title: "Votre dossier mérite la meilleure préparation — pas la plus grosse facture",
