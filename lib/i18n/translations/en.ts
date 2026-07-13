@@ -171,6 +171,7 @@ export const en = {
   testimonials: {
     titleWhite: "What customers say ",
     titleGold: "about us",
+    label: "Illustrative examples",
     clients: {
       sandra: {
         quote:

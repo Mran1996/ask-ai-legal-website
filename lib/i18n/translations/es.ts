@@ -39,6 +39,7 @@ export const es = mergeTranslations({
   testimonials: {
     titleWhite: "Lo que dicen ",
     titleGold: "nuestros clientes",
+    label: "Ejemplos ilustrativos",
     clients: {
       sandra: {
         quote:

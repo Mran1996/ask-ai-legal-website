@@ -27,7 +27,6 @@ type ClientExample = {
   quote: string
   name: string
   title: string
-  case: string
   image: string
   imageAlt: string
 }
@@ -50,9 +49,7 @@ function ReviewCardContent({ client }: { client: ClientExample }) {
         />
         <div className="min-w-0 flex-1">
           <p className="font-semibold text-navy">{client.name}</p>
-          <p className="mt-0.5 text-xs text-gray-500">
-            {client.title} · {client.case}
-          </p>
+          <p className="mt-0.5 text-xs text-gray-500">{client.title}</p>
         </div>
       </footer>
     </>
@@ -111,7 +108,6 @@ export function Testimonials() {
           quote: copy.quote,
           name: copy.name,
           title: copy.title,
-          case: copy.case,
           image: CLIENT_IMAGES[id],
           imageAlt: copy.imageAlt,
         }
@@ -179,9 +175,12 @@ export function Testimonials() {
               {t.testimonials.titleGold}
             </span>
           </h2>
+          <p className="firm-label mt-6" style={{ color: CABO_GOLD }}>
+            {t.testimonials.label}
+          </p>
         </div>
 
-        <div className="relative mt-12 flex flex-col items-center sm:mt-14">
+        <div className="relative mt-10 flex flex-col items-center sm:mt-12">
           <SlideCarousel
             clients={clientExamples}
             activeIndex={activeIndex}
