@@ -45,6 +45,19 @@ export type ChatUiStrings = {
   intakeSuccessBody: string
   bookIntakeCall: string
   bookIntakeCallHint: string
+  caseNumberLabel: string
+  caseNumberHint: string
+  retrievalCheckbox: string
+  retrievalFeeNote: string
+  quoteSummaryTitle: string
+  quotePrepLine: string
+  quoteRetrievalLine: string
+  quoteTotalLine: string
+  payToStart: string
+  paying: string
+  payError: string
+  uploadMoreDocs: string
+  quoteNextSteps: string
   intakeSubmitError: string
   submitAnother: string
   conversationTitle: string
@@ -93,7 +106,7 @@ const en: ChatUiStrings = {
   requestQuote: "Request a free case review",
   quoteTitle: "Tell us about your case",
   quoteHint:
-    "This helps our team respond by email with scope, timeline, and investment. Consultations are free.",
+    "Submit intake to get a start price. Pay before we retrieve or generate documents. Document preparation only — not a law firm.",
   firstName: "First name",
   lastName: "Last name",
   email: "Email",
@@ -115,9 +128,22 @@ const en: ChatUiStrings = {
   submittingRequest: "Submitting…",
   intakeSuccessTitle: "Intake received",
   intakeSuccessBody:
-    "Thank you for reaching out! Save your reference below. Someone from Ask AI Legal support will be in touch with you soon. Nothing has been delivered yet — this is document preparation only, not legal advice.",
+    "Next: confirm case number if you have one, upload documents or request paid retrieval, then pay to start. Document preparation only — not legal advice.",
   bookIntakeCall: "Book your intake call",
   bookIntakeCallHint: "15–20 min · document preparation and pricing only",
+  caseNumberLabel: "Case / docket number (if you have it)",
+  caseNumberHint: "Optional but helps us work faster. Leave blank if you don't have one yet.",
+  retrievalCheckbox: "I need Ask AI Legal to retrieve documents (additional fee).",
+  retrievalFeeNote: "Retrieval is billed as an add-on and must be paid before we pull records.",
+  quoteSummaryTitle: "Amount due before we start",
+  quotePrepLine: "Document preparation",
+  quoteRetrievalLine: "Document retrieval",
+  quoteTotalLine: "Total due now",
+  payToStart: "Pay to start",
+  paying: "Opening secure checkout…",
+  payError: "We couldn't start checkout. Try again or email support@askailegal.com.",
+  uploadMoreDocs: "Upload documents now",
+  quoteNextSteps: "Order: intake → quote → pay → we work → deliver.",
   intakeSubmitError:
     "We couldn't save your intake. Please try again or email support@askailegal.com with your details.",
   submitAnother: "Submit another request",
@@ -126,16 +152,16 @@ const en: ChatUiStrings = {
   pricingTitle: "Estimated investment",
   attorneyTypicalLabel: "Typical attorney cost",
   ourEstimatedLabel: "Ask AI Legal estimated average",
-  ourCustomQuoteLabel: "Custom flat quote by email",
+  ourCustomQuoteLabel: "Case file review to start",
   ourFractionNote:
     "Priced at the midpoint of the typical attorney range above — flat fee, no hourly billing",
   estimateComparison:
     "{attorneyTypicalLabel}: {attorneyLow}–{attorneyHigh} · {ourEstimatedLabel}: {ourPrice}",
   estimateCustomQuote:
-    "{attorneyTypicalLabel}: {attorneyLow}–{attorneyHigh}. We'll email a custom flat quote — usually about {fraction}% of what attorneys charge for this work.",
+    "{attorneyTypicalLabel}: {attorneyLow}–{attorneyHigh}. Start with a case file review; we'll confirm the full package after we read your file.",
   estimateServiceLine: "Service",
   estimateDisclaimer:
-    "Estimate only — not legal advice. Final flat quote confirmed in your written case summary after case file review.",
+    "Estimate for planning. You pay the total below before we retrieve records or prepare documents. Not legal advice.",
   fillRequired: "Please fill in name, email, and a brief issue description.",
   uploadNote:
     "Optional: attach court papers, notices, or leases (PDF, JPG, PNG — up to 10 MB each).",
@@ -173,7 +199,7 @@ const hi: ChatUiStrings = {
   requestQuote: "मुफ़्त केस समीक्षा का अनुरोध",
   quoteTitle: "अपने मामले के बारे में बताएँ",
   quoteHint:
-    "इससे हमारी टीम ईमेल से दायरा, समय और लागत के साथ जवाब दे सकती है। परामर्श मुफ़्त है।",
+    "इंटेक भेजें, स्टार्ट कीमत देखें, फिर भुगतान करें। भुगतान के बाद ही हम दस्तावेज़ तैयार या प्राप्त करते हैं। केवल दस्तावेज़ तैयारी — कानूनी फर्म नहीं।",
   firstName: "पहला नाम",
   lastName: "अंतिम नाम",
   email: "ईमेल",
@@ -195,9 +221,22 @@ const hi: ChatUiStrings = {
   submittingRequest: "भेजा जा रहा है…",
   intakeSuccessTitle: "इंटेक प्राप्त",
   intakeSuccessBody:
-    "नीचे दिया संदर्भ सहेजें। हमारी टीम अगले कदमों के लिए ईमेल से संपर्क करेगी। अभी कुछ भी वितरित नहीं किया गया है।",
+    "अगला: केस नंबर (यदि हो), दस्तावेज़ अपलोड या सशुल्क रिट्रीवल, फिर काम शुरू करने के लिए भुगतान। केवल दस्तावेज़ तैयारी — कानूनी सलाह नहीं।",
   bookIntakeCall: "अपना इंटेक कॉल बुक करें",
   bookIntakeCallHint: "15–20 मिनट · केवल दस्तावेज़ तैयारी और मूल्य",
+  caseNumberLabel: "केस / डॉकेट नंबर (यदि हो)",
+  caseNumberHint: "वैकल्पिक, लेकिन काम तेज़ करता है। न हो तो खाली छोड़ दें।",
+  retrievalCheckbox: "मुझे Ask AI Legal से दस्तावेज़ रिट्रीव करवाने हैं (अतिरिक्त शुल्क)।",
+  retrievalFeeNote: "रिट्रीवल ऐड-ऑन है और भुगतान के बाद ही रिकॉर्ड खींचे जाएंगे।",
+  quoteSummaryTitle: "काम शुरू होने से पहले देय राशि",
+  quotePrepLine: "दस्तावेज़ तैयारी",
+  quoteRetrievalLine: "दस्तावेज़ रिट्रीवल",
+  quoteTotalLine: "अभी कुल देय",
+  payToStart: "शुरू करने के लिए भुगतान करें",
+  paying: "सुरक्षित चेकआउट खुल रहा है…",
+  payError: "चेकआउट शुरू नहीं हो सका। फिर कोशिश करें या support@askailegal.com पर ईमेल करें।",
+  uploadMoreDocs: "अभी दस्तावेज़ अपलोड करें",
+  quoteNextSteps: "क्रम: इंटेक → कोट → भुगतान → हम काम करते हैं → डिलीवरी।",
   intakeSubmitError:
     "इंटेक सहेज नहीं सका। कृपया फिर कोशिश करें या support@askailegal.com पर ईमेल करें।",
   submitAnother: "दूसरा अनुरोध भेजें",
@@ -206,16 +245,16 @@ const hi: ChatUiStrings = {
   pricingTitle: "अनुमानित लागत",
   attorneyTypicalLabel: "वकील की सामान्य लागत",
   ourEstimatedLabel: "Ask AI Legal अनुमानित औसत",
-  ourCustomQuoteLabel: "ईमेल द्वारा कस्टम फ्लैट कोट",
+  ourCustomQuoteLabel: "शुरू करने के लिए केस फ़ाइल समीक्षा",
   ourFractionNote:
     "ऊपर दिखाई गई वकील रेंज का मध्य बिंदु — फ्लैट फी, प्रति घंटा नहीं",
   estimateComparison:
     "{attorneyTypicalLabel}: {attorneyLow}–{attorneyHigh} · {ourEstimatedLabel}: {ourPrice}",
   estimateCustomQuote:
-    "{attorneyTypicalLabel}: {attorneyLow}–{attorneyHigh}. हम कस्टम फ्लैट कोट ईमेल करेंगे — आमतौर पर वकील शुल्क का लगभग {fraction}%।",
+    "{attorneyTypicalLabel}: {attorneyLow}–{attorneyHigh}. केस फ़ाइल समीक्षा से शुरू करें; फ़ाइल पढ़ने के बाद पूरा पैकेज तय होगा।",
   estimateServiceLine: "सेवा",
   estimateDisclaimer:
-    "केवल अनुमान — कानूनी सलाह नहीं। अंतिम कोट केस फ़ाइल समीक्षा के बाद पुष्टि होगी।",
+    "योजना के लिए अनुमान। दस्तावेज़ तैयार/रिट्रीव करने से पहले नीचे दी गई राशि का भुगतान करें। कानूनी सलाह नहीं।",
   fillRequired: "कृपया नाम, ईमेल और संक्षिप्त विवरण भरें।",
   uploadNote:
     "वैकल्पिक: अदालती कागज़ात, नोटिस या लीज़ संलग्न करें (PDF, JPG, PNG — प्रति 10 MB)।",

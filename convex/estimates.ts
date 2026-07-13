@@ -31,6 +31,7 @@ export const generateForCase = mutation({
         attorneyCompareLowCents: existing.attorneyCompareLowCents,
         attorneyCompareHighCents: existing.attorneyCompareHighCents,
         isCustomQuote,
+        retrievalCostCents: existing.retrievalCostCents,
       }
     }
 
@@ -73,6 +74,7 @@ export const generateForCase = mutation({
       attorneyCompareLowCents: deliverable.attorneyLowCents,
       attorneyCompareHighCents: deliverable.attorneyHighCents,
       isCustomQuote,
+      retrievalCostCents: 0,
     }
   },
 })

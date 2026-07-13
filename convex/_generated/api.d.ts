@@ -22,10 +22,13 @@ import type * as lib_caseLookup from "../lib/caseLookup.js";
 import type * as lib_customFunctions from "../lib/customFunctions.js";
 import type * as lib_intakeMapping from "../lib/intakeMapping.js";
 import type * as lib_opsAuth from "../lib/opsAuth.js";
+import type * as lib_quoteTotal from "../lib/quoteTotal.js";
 import type * as lib_scheduleIntakeEmails from "../lib/scheduleIntakeEmails.js";
 import type * as lib_servicePricing from "../lib/servicePricing.js";
 import type * as lib_validators from "../lib/validators.js";
 import type * as notifications from "../notifications.js";
+import type * as payments from "../payments.js";
+import type * as stripeActions from "../stripeActions.js";
 
 import type {
   ApiFromModules,
@@ -48,10 +51,13 @@ declare const fullApi: ApiFromModules<{
   "lib/customFunctions": typeof lib_customFunctions;
   "lib/intakeMapping": typeof lib_intakeMapping;
   "lib/opsAuth": typeof lib_opsAuth;
+  "lib/quoteTotal": typeof lib_quoteTotal;
   "lib/scheduleIntakeEmails": typeof lib_scheduleIntakeEmails;
   "lib/servicePricing": typeof lib_servicePricing;
   "lib/validators": typeof lib_validators;
   notifications: typeof notifications;
+  payments: typeof payments;
+  stripeActions: typeof stripeActions;
 }>;
 
 /**

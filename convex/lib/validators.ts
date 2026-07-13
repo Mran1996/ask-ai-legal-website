@@ -55,7 +55,10 @@ export const documentStatusValidator = v.union(
   v.literal("delivered")
 )
 
-export const paymentTypeValidator = v.literal("per_document")
+export const paymentTypeValidator = v.union(
+  v.literal("per_document"),
+  v.literal("case_start")
+)
 
 export const paymentStatusValidator = v.union(
   v.literal("pending"),
@@ -126,6 +129,10 @@ export const intakeStructuredValidator = v.object({
   preferredContact: v.optional(preferredContactValidator),
   preferredLanguage: v.optional(v.string()),
   issueSummary: v.optional(v.string()),
+  /** Court / docket / case number if the client has one. */
+  caseNumber: v.optional(v.string()),
+  /** Client asked us to retrieve documents for an additional fee. */
+  retrievalRequested: v.optional(v.boolean()),
 })
 
 export const createFromIntakeReturnValidator = v.object({
@@ -137,7 +144,8 @@ export const createFromIntakeReturnValidator = v.object({
 export const notificationTypeValidator = v.union(
   v.literal("intake_client"),
   v.literal("intake_support"),
-  v.literal("appointment_booked_support")
+  v.literal("appointment_booked_support"),
+  v.literal("delivery_client")
 )
 
 export const appointmentCallTypeValidator = v.union(
@@ -183,6 +191,24 @@ export const estimateSummaryValidator = v.object({
   attorneyCompareLowCents: v.number(),
   attorneyCompareHighCents: v.number(),
   isCustomQuote: v.boolean(),
+  retrievalCostCents: v.number(),
+})
+
+export const paymentSummaryValidator = v.object({
+  paymentId: v.id("payments"),
+  type: paymentTypeValidator,
+  amountCents: v.number(),
+  status: paymentStatusValidator,
+  createdAt: v.number(),
+})
+
+export const documentSummaryValidator = v.object({
+  documentId: v.id("documents"),
+  fileName: v.string(),
+  folder: documentFolderValidator,
+  type: documentTypeValidator,
+  status: documentStatusValidator,
+  createdAt: v.number(),
 })
 
 export const generateForCaseReturnValidator = estimateSummaryValidator
@@ -218,6 +244,8 @@ export const caseDetailValidator = v.object({
     phone: v.optional(v.string()),
   }),
   estimate: v.union(estimateSummaryValidator, v.null()),
+  payment: v.union(paymentSummaryValidator, v.null()),
+  documents: v.array(documentSummaryValidator),
   appointments: v.array(appointmentSummaryValidator),
   callCredits: callCreditsValidator,
 })

@@ -54,16 +54,17 @@ Track implementation against [ASK_AI_LEGAL_SPEC.md](./ASK_AI_LEGAL_SPEC.md) Sect
 
 ### 1.4 Stripe payment
 
-- [ ] Stripe Checkout session on estimate accept
-- [ ] Webhook: `checkout.session.completed` → update payment + case status
-- [ ] Case status → `awaiting_payment` → `awaiting_docs` after pay
-- [ ] Store `stripeCheckoutSessionId` on estimate
+- [x] Stripe Checkout session on estimate accept (`convex/stripeActions.ts` — prep + optional retrieval)
+- [x] Webhook: `checkout.session.completed` → update payment + case status (`/stripe-webhook`)
+- [x] Case status → `awaiting_payment` → `awaiting_docs` or `in_drafting` after pay (money before work)
+- [x] Store `stripeCheckoutSessionId` on estimate
+- [x] Flow docs: `docs/PAY_QUOTE_DELIVER_FLOW.md` (Intake → Quote → Pay → Work → Deliver; no counsel gate in product loop)
 
 ### 1.5 Document upload
 
+- [x] Intake + post-intake uploads via chat widget (`documents.attachIntakeDocument`)
 - [ ] Client portal route: `/portal/cases/[id]`
-- [ ] Upload to case folder `uploaded_by_client/` (Convex storage or R2)
-- [ ] `documents` rows with version tracking
+- [x] `documents` rows with version tracking (intake folder)
 - [ ] Auth: client sees own cases only
 
 ### 1.6 Drafting agent (minimal)
@@ -134,7 +135,8 @@ Track implementation against [ASK_AI_LEGAL_SPEC.md](./ASK_AI_LEGAL_SPEC.md) Sect
 
 ## Current focus
 
-**Next step:** Phase 1.4 — Stripe payment.
+**Next step:** Configure Stripe keys + webhook on Convex; run a test Checkout. Ops: mark work / deliver from case detail.
+
 
 ---
 

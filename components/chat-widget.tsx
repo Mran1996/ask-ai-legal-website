@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { useChat } from "@ai-sdk/react"
 import { DefaultChatTransport, type UIMessage } from "ai"
-import { useMutation } from "convex/react"
+import { useMutation, useAction } from "convex/react"
 import {
   CheckCircle2,
   ChevronDown,
@@ -32,6 +32,12 @@ import { buildBookPageUrl } from "@/lib/booking"
 import { BookingBanner } from "@/components/brand/booking-banner"
 import { formatUsdFromCents } from "@/lib/pricing/ca-eviction"
 import { estimateFractionPercent } from "@/lib/pricing/service-pricing"
+import {
+  documentPrepStartCents,
+  retrievalFeeCents,
+  totalDueBeforeWorkCents,
+} from "@/lib/pricing/quote-total"
+import { DOCUMENT_RETRIEVAL_FEE_DISPLAY } from "@/lib/site-config"
 import { api } from "@/convex/_generated/api"
 import type { Id } from "@/convex/_generated/dataModel"
 
@@ -202,12 +208,19 @@ export function ChatWidget() {
   const [intakeSubmitting, setIntakeSubmitting] = useState(false)
   const [intakeSubmitBanner, setIntakeSubmitBanner] = useState<IntakeSubmitBanner | null>(null)
   const [pendingFiles, setPendingFiles] = useState<File[]>([])
+  const [postCaseNumber, setPostCaseNumber] = useState("")
+  const [retrievalRequested, setRetrievalRequested] = useState(false)
+  const [paying, setPaying] = useState(false)
+  const [payError, setPayError] = useState("")
   const fileInputRef = useRef<HTMLInputElement>(null)
+  const postPayFileInputRef = useRef<HTMLInputElement>(null)
   const createFromIntake = useMutation(api.cases.createFromIntake)
   const generateForCase = useMutation(api.estimates.generateForCase)
   const requestIntakeNotifications = useMutation(api.cases.requestIntakeNotifications)
   const generateUploadUrl = useMutation(api.documents.generateUploadUrl)
   const attachIntakeDocument = useMutation(api.documents.attachIntakeDocument)
+  const savePostIntakeQuoteDetails = useMutation(api.payments.savePostIntakeQuoteDetails)
+  const createCheckoutSession = useAction(api.stripeActions.createCheckoutSession)
   const [langMenuOpen, setLangMenuOpen] = useState(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const localeRef = useRef<Locale>(siteLocale)
@@ -453,8 +466,45 @@ export function ChatWidget() {
     setIntake(EMPTY_INTAKE)
     setIntakeError("")
     setPendingFiles([])
+    setPostCaseNumber("")
+    setRetrievalRequested(false)
+    setPaying(false)
+    setPayError("")
     if (fileInputRef.current) {
       fileInputRef.current.value = ""
+    }
+    if (postPayFileInputRef.current) {
+      postPayFileInputRef.current.value = ""
+    }
+  }
+
+  const handlePayToStart = async () => {
+    if (!intakeSubmitBanner) return
+    setPayError("")
+    setPaying(true)
+    try {
+      await savePostIntakeQuoteDetails({
+        caseId: intakeSubmitBanner.caseId,
+        caseNumber: postCaseNumber.trim() || undefined,
+        retrievalRequested,
+      })
+      const session = await createCheckoutSession({ caseId: intakeSubmitBanner.caseId })
+      window.location.href = session.url
+    } catch (error) {
+      console.error("Checkout failed:", error)
+      setPayError(ui.payError)
+      setPaying(false)
+    }
+  }
+
+  const handlePostIntakeFiles = async (files: FileList | null) => {
+    if (!intakeSubmitBanner || !files?.length) return
+    const list = Array.from(files).slice(0, MAX_INTAKE_FILES)
+    try {
+      await uploadIntakeFiles(intakeSubmitBanner.caseId, list)
+    } catch (error) {
+      console.error("Post-intake upload failed:", error)
+      setPayError(ui.intakeSubmitError)
     }
   }
 
@@ -681,6 +731,97 @@ export function ChatWidget() {
                     <p className="mt-2 text-xs leading-relaxed text-white/75">
                       {ui.intakeSuccessBody}
                     </p>
+                    <p className="mt-2 text-[10px] text-white/45">{ui.quoteNextSteps}</p>
+
+                    <label className="mt-3 block text-left">
+                      <span className="mb-1 block text-[10px] uppercase tracking-wider text-white/50">
+                        {ui.caseNumberLabel}
+                      </span>
+                      <input
+                        value={postCaseNumber}
+                        onChange={(e) => setPostCaseNumber(e.target.value)}
+                        placeholder={ui.caseNumberHint}
+                        className="w-full rounded-sm border border-white/15 bg-white/5 px-2.5 py-2 text-sm text-white focus:border-gold/50 focus:outline-none"
+                      />
+                    </label>
+
+                    <label className="mt-3 flex items-start gap-2 text-left text-xs text-white/75">
+                      <input
+                        type="checkbox"
+                        checked={retrievalRequested}
+                        onChange={(e) => setRetrievalRequested(e.target.checked)}
+                        className="mt-0.5"
+                      />
+                      <span>
+                        {ui.retrievalCheckbox}{" "}
+                        <span className="text-gold">({DOCUMENT_RETRIEVAL_FEE_DISPLAY})</span>
+                        <span className="mt-1 block text-[10px] text-white/45">
+                          {ui.retrievalFeeNote}
+                        </span>
+                      </span>
+                    </label>
+
+                    <div className="mt-3">
+                      <input
+                        ref={postPayFileInputRef}
+                        type="file"
+                        accept=".pdf,image/jpeg,image/png,image/webp"
+                        multiple
+                        className="hidden"
+                        onChange={(e) => void handlePostIntakeFiles(e.target.files)}
+                      />
+                      <button
+                        type="button"
+                        onClick={() => postPayFileInputRef.current?.click()}
+                        className="w-full rounded-sm border border-white/20 px-3 py-2 text-xs font-semibold text-white/80 hover:border-gold/40 hover:text-gold"
+                      >
+                        {ui.uploadMoreDocs}
+                      </button>
+                    </div>
+
+                    {(() => {
+                      const prep = documentPrepStartCents(intakeSubmitBanner.estimate)
+                      const retrieval = retrievalFeeCents(retrievalRequested)
+                      const total = totalDueBeforeWorkCents({
+                        ...intakeSubmitBanner.estimate,
+                        retrievalRequested,
+                      })
+                      return (
+                        <div className="mt-3 rounded-sm border border-gold/30 bg-navy/60 px-3 py-2.5 text-left text-xs text-white/80">
+                          <p className="text-[10px] font-bold uppercase tracking-wider text-gold">
+                            {ui.quoteSummaryTitle}
+                          </p>
+                          <p className="mt-2 flex justify-between gap-2">
+                            <span>{ui.quotePrepLine}</span>
+                            <span>{formatUsdFromCents(prep)}</span>
+                          </p>
+                          {retrieval > 0 && (
+                            <p className="mt-1 flex justify-between gap-2">
+                              <span>{ui.quoteRetrievalLine}</span>
+                              <span>{formatUsdFromCents(retrieval)}</span>
+                            </p>
+                          )}
+                          <p className="mt-2 flex justify-between gap-2 border-t border-white/10 pt-2 font-semibold text-gold">
+                            <span>{ui.quoteTotalLine}</span>
+                            <span>{formatUsdFromCents(total)}</span>
+                          </p>
+                        </div>
+                      )
+                    })()}
+
+                    {payError && (
+                      <p className="mt-2 text-xs text-red-300">{payError}</p>
+                    )}
+
+                    <button
+                      type="button"
+                      disabled={paying}
+                      onClick={() => void handlePayToStart()}
+                      className="mt-4 inline-flex w-full items-center justify-center rounded-sm border border-gold bg-gold/25 px-4 py-2.5 text-sm font-semibold text-gold hover:bg-gold/35 disabled:opacity-60"
+                    >
+                      {paying ? ui.paying : ui.payToStart}
+                    </button>
+
                     <a
                       href={buildBookPageUrl({
                         callType: "intake",
@@ -690,7 +831,7 @@ export function ChatWidget() {
                         firstName: intakeSubmitBanner.firstName,
                         lastName: intakeSubmitBanner.lastName,
                       })}
-                      className="mt-4 inline-flex w-full items-center justify-center rounded-sm border border-gold/50 bg-gold/15 px-4 py-2.5 text-sm font-semibold text-gold hover:bg-gold/25"
+                      className="mt-3 inline-flex w-full items-center justify-center rounded-sm border border-gold/50 bg-gold/15 px-4 py-2.5 text-sm font-semibold text-gold hover:bg-gold/25"
                     >
                       {ui.bookIntakeCall}
                     </a>

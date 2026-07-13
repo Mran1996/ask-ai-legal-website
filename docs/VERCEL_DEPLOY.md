@@ -126,12 +126,29 @@ Set in **Convex** prod (`robust-wombat-16`), not Vercel:
 | Variable | Notes |
 |----------|-------|
 | `CALCOM_WEBHOOK_SECRET` | `npx convex env set CALCOM_WEBHOOK_SECRET "$(openssl rand -hex 32)"` |
-| `PUBLIC_SITE_URL` | `https://askailegal.com` (for intake email `/book` links) |
+| `PUBLIC_SITE_URL` | `https://askailegal.com` (for intake email `/book` links + Stripe success URLs) |
 
 Cal.com webhook URL: `https://robust-wombat-16.convex.site/calcom-webhook`  
 Header: `Authorization: Bearer <CALCOM_WEBHOOK_SECRET>`
 
 See `docs/CALCOM_SETUP.md`.
+
+### Stripe Checkout (Convex — required for Pay to start)
+
+Set in **Convex** (actions + HTTP webhook), not only Vercel:
+
+| Variable | Notes |
+|----------|-------|
+| `STRIPE_SECRET_KEY` | `sk_test_…` or `sk_live_…` |
+| `STRIPE_WEBHOOK_SECRET` | From Stripe Dashboard webhook signing secret |
+| `PUBLIC_SITE_URL` | `https://askailegal.com` |
+
+Stripe webhook URL: `https://robust-wombat-16.convex.site/stripe-webhook`  
+Event: `checkout.session.completed`
+
+Optional on Vercel: `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` (hosted Checkout redirect does not require it).
+
+See `docs/PAY_QUOTE_DELIVER_FLOW.md`.
 
 ### Required for AI chat (pick one provider)
 

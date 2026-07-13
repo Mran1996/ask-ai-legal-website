@@ -1,7 +1,8 @@
 "use client"
 
+import { useState } from "react"
 import Link from "next/link"
-import { useQuery } from "convex/react"
+import { useMutation, useQuery } from "convex/react"
 import { api } from "@/convex/_generated/api"
 import type { Id } from "@/convex/_generated/dataModel"
 import { formatUsdFromCents } from "@/lib/pricing/ca-eviction"
@@ -14,6 +15,10 @@ type Props = {
 
 export function CaseDetailView({ opsToken, caseId }: Props) {
   const detail = useQuery(api.cases.getCaseForOps, { opsToken, caseId })
+  const markWorkStarted = useMutation(api.payments.markWorkStarted)
+  const markDelivered = useMutation(api.payments.markDelivered)
+  const [busy, setBusy] = useState(false)
+  const [actionError, setActionError] = useState("")
 
   if (detail === undefined) {
     return <p className="px-4 py-16 text-center text-gray-500">Loading case…</p>
@@ -28,6 +33,21 @@ export function CaseDetailView({ opsToken, caseId }: Props) {
         </Link>
       </div>
     )
+  }
+
+  const retrievalRequested = detail.intakeStructured.retrievalRequested === true
+  const paid = detail.payment?.status === "paid"
+
+  const runAction = async (fn: () => Promise<null>) => {
+    setActionError("")
+    setBusy(true)
+    try {
+      await fn()
+    } catch (error) {
+      setActionError(error instanceof Error ? error.message : "Action failed")
+    } finally {
+      setBusy(false)
+    }
   }
 
   return (
@@ -46,11 +66,43 @@ export function CaseDetailView({ opsToken, caseId }: Props) {
       </div>
 
       <section className="mt-8 rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
+        <h2 className="font-semibold text-navy">Fulfillment (pay → work → deliver)</h2>
+        <p className="mt-2 text-sm text-gray-600">
+          Document generation only — no counsel gate. Do not start work until payment is paid.
+        </p>
+        <div className="mt-4 flex flex-wrap gap-3">
+          <button
+            type="button"
+            disabled={busy || !paid || detail.status === "delivered"}
+            onClick={() =>
+              void runAction(() => markWorkStarted({ opsToken, caseId }))
+            }
+            className="rounded border border-navy bg-navy px-4 py-2 text-sm font-semibold text-white disabled:opacity-40"
+          >
+            Mark work started
+          </button>
+          <button
+            type="button"
+            disabled={busy || !paid || detail.status === "delivered"}
+            onClick={() =>
+              void runAction(() => markDelivered({ opsToken, caseId }))
+            }
+            className="rounded border border-gold bg-gold/20 px-4 py-2 text-sm font-semibold text-navy disabled:opacity-40"
+          >
+            Mark delivered (email client)
+          </button>
+        </div>
+        {actionError && <p className="mt-2 text-sm text-red-600">{actionError}</p>}
+      </section>
+
+      <section className="mt-6 rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
         <h2 className="font-semibold text-navy">Client contact</h2>
         <dl className="mt-3 grid gap-2 text-sm sm:grid-cols-2">
           <div>
             <dt className="text-gray-500">Name</dt>
-            <dd>{detail.client.firstName} {detail.client.lastName}</dd>
+            <dd>
+              {detail.client.firstName} {detail.client.lastName}
+            </dd>
           </div>
           <div>
             <dt className="text-gray-500">Email</dt>
@@ -64,20 +116,61 @@ export function CaseDetailView({ opsToken, caseId }: Props) {
             <dt className="text-gray-500">Phone</dt>
             <dd>{detail.client.phone ?? "—"}</dd>
           </div>
+          <div>
+            <dt className="text-gray-500">Case / docket #</dt>
+            <dd>{detail.intakeStructured.caseNumber ?? "—"}</dd>
+          </div>
+          <div>
+            <dt className="text-gray-500">Retrieval requested</dt>
+            <dd>{retrievalRequested ? "Yes (paid add-on)" : "No"}</dd>
+          </div>
         </dl>
       </section>
 
+      <section className="mt-6 rounded-lg border border-gold/40 bg-gold/5 p-6">
+        <h2 className="font-semibold text-navy">Payment</h2>
+        {detail.payment ? (
+          <dl className="mt-3 grid gap-2 text-sm sm:grid-cols-2">
+            <div>
+              <dt className="text-gray-500">Status</dt>
+              <dd className="capitalize">{detail.payment.status}</dd>
+            </div>
+            <div>
+              <dt className="text-gray-500">Amount</dt>
+              <dd>{formatUsdFromCents(detail.payment.amountCents)}</dd>
+            </div>
+            <div>
+              <dt className="text-gray-500">Type</dt>
+              <dd>{detail.payment.type}</dd>
+            </div>
+          </dl>
+        ) : (
+          <p className="mt-2 text-sm text-gray-600">No payment recorded yet.</p>
+        )}
+        {detail.estimate && (
+          <p className="mt-3 text-sm text-gray-700">
+            Prep quote:{" "}
+            {detail.estimate.isCustomQuote
+              ? "custom / case file review start"
+              : formatUsdFromCents(detail.estimate.finalQuoteCents)}
+            {detail.estimate.retrievalCostCents > 0
+              ? ` · Retrieval: ${formatUsdFromCents(detail.estimate.retrievalCostCents)}`
+              : ""}
+          </p>
+        )}
+      </section>
+
       {detail.estimate && (
-        <section className="mt-6 rounded-lg border border-gold/40 bg-gold/5 p-6">
-          <h2 className="font-semibold text-navy">Estimate sent</h2>
+        <section className="mt-6 rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
+          <h2 className="font-semibold text-navy">Estimate</h2>
           <p className="mt-2 text-sm">{detail.estimate.serviceLine}</p>
           <p className="mt-2 text-sm">
             {detail.estimate.isCustomQuote ? (
               <>
                 Attorneys in this area often charge{" "}
                 {formatUsdFromCents(detail.estimate.attorneyCompareLowCents)}–
-                {formatUsdFromCents(detail.estimate.attorneyCompareHighCents)}. Custom quote
-                pending team review.
+                {formatUsdFromCents(detail.estimate.attorneyCompareHighCents)}. Start price uses
+                case file review until package is confirmed.
               </>
             ) : (
               <>
@@ -91,6 +184,24 @@ export function CaseDetailView({ opsToken, caseId }: Props) {
       )}
 
       <section className="mt-6 rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
+        <h2 className="font-semibold text-navy">Documents attached</h2>
+        {detail.documents.length === 0 ? (
+          <p className="mt-2 text-sm text-gray-500">No uploads yet.</p>
+        ) : (
+          <ul className="mt-3 space-y-2 text-sm">
+            {detail.documents.map((doc) => (
+              <li key={doc.documentId} className="rounded border border-gray-100 bg-gray-50 px-3 py-2">
+                {doc.fileName}{" "}
+                <span className="text-gray-500">
+                  ({doc.folder} · {doc.status})
+                </span>
+              </li>
+            ))}
+          </ul>
+        )}
+      </section>
+
+      <section className="mt-6 rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
         <h2 className="font-semibold text-navy">Call credits</h2>
         <dl className="mt-3 grid gap-2 text-sm sm:grid-cols-2">
           <div>
@@ -98,17 +209,14 @@ export function CaseDetailView({ opsToken, caseId }: Props) {
             <dd>{detail.callCredits.caseFileReviewPaid ? "Yes" : "No"}</dd>
           </div>
           <div>
-            <dt className="text-gray-500">Free document planning calls left</dt>
+            <dt className="text-gray-500">Planning calls left</dt>
             <dd>
               {detail.callCredits.caseFileReviewPaid
                 ? detail.callCredits.includedPlanningCallsRemaining
-                : "— (after $499 review)"}
+                : "— (after paid start)"}
             </dd>
           </div>
         </dl>
-        <p className="mt-3 text-xs text-gray-500">
-          Follow-up calls ($50 / 30 min) unlock after included planning calls are used.
-        </p>
       </section>
 
       <section className="mt-6 rounded-lg border border-gray-200 bg-white p-6 shadow-sm">

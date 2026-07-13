@@ -89,7 +89,8 @@ export default defineSchema({
     status: estimateStatusValidator,
     stripeCheckoutSessionId: v.optional(v.string()),
     createdAt: v.number(),
-  }).index("by_case", ["caseId"]),
+  }).index("by_case", ["caseId"])
+    .index("by_stripeCheckoutSessionId", ["stripeCheckoutSessionId"]),
 
   documents: defineTable({
     caseId: v.id("cases"),

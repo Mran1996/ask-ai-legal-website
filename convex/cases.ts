@@ -158,6 +158,7 @@ export const getIntakeEmailContext = internalQuery({
   args: { caseId: v.id("cases") },
   returns: v.union(
     v.object({
+      caseReference: v.string(),
       clientFirstName: v.string(),
       clientLastName: v.string(),
       clientEmail: v.string(),
@@ -190,6 +191,7 @@ export const getIntakeEmailContext = internalQuery({
       : null
 
     return {
+      caseReference: resolveCaseReference(caseDoc),
       clientFirstName: client.firstName,
       clientLastName: client.lastName,
       clientEmail: client.email,
@@ -222,7 +224,14 @@ export const listRecentIntakes = query({
     const page = (
       await Promise.all(
         result.page.map(async (caseDoc) => {
-          if (caseDoc.status !== "intake" && caseDoc.status !== "estimate_sent") {
+          if (
+            caseDoc.status !== "intake" &&
+            caseDoc.status !== "estimate_sent" &&
+            caseDoc.status !== "awaiting_payment" &&
+            caseDoc.status !== "awaiting_docs" &&
+            caseDoc.status !== "in_drafting" &&
+            caseDoc.status !== "delivered"
+          ) {
             return null
           }
 
@@ -281,8 +290,37 @@ export const getCaseForOps = query({
           attorneyCompareLowCents: estimateRow.attorneyCompareLowCents,
           attorneyCompareHighCents: estimateRow.attorneyCompareHighCents,
           isCustomQuote: estimateRow.finalQuoteCents === 0,
+          retrievalCostCents: estimateRow.retrievalCostCents,
         }
       : null
+
+    const paymentRows = await ctx.db
+      .query("payments")
+      .withIndex("by_case", (q) => q.eq("caseId", args.caseId))
+      .collect()
+    const latestPayment = paymentRows.sort((a, b) => b.createdAt - a.createdAt)[0]
+    const payment = latestPayment
+      ? {
+          paymentId: latestPayment._id,
+          type: latestPayment.type,
+          amountCents: latestPayment.amountCents,
+          status: latestPayment.status,
+          createdAt: latestPayment.createdAt,
+        }
+      : null
+
+    const documentRows = await ctx.db
+      .query("documents")
+      .withIndex("by_case", (q) => q.eq("caseId", args.caseId))
+      .collect()
+    const documents = documentRows.map((row) => ({
+      documentId: row._id,
+      fileName: row.fileName,
+      folder: row.folder,
+      type: row.type,
+      status: row.status,
+      createdAt: row.createdAt,
+    }))
 
     const appointmentRows = await ctx.db
       .query("appointments")
@@ -330,6 +368,8 @@ export const getCaseForOps = query({
         phone: client.phone,
       },
       estimate,
+      payment,
+      documents,
       appointments,
       callCredits,
     }

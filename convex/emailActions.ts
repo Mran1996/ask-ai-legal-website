@@ -276,3 +276,55 @@ export const sendAppointmentBookedEmail = internalAction({
     return null
   },
 })
+
+export const sendDeliveryEmail = internalAction({
+  args: { caseId: v.id("cases") },
+  returns: v.null(),
+  handler: async (ctx, args) => {
+    const context = await ctx.runQuery(internal.cases.getIntakeEmailContext, {
+      caseId: args.caseId,
+    })
+
+    if (!context) {
+      await ctx.runMutation(internal.notifications.recordNotification, {
+        caseId: args.caseId,
+        type: "delivery_client",
+        recipient: SUPPORT_EMAIL,
+        status: "failed",
+        provider: "resend",
+        errorMessage: "Case or client not found for delivery email",
+      })
+      return null
+    }
+
+    const body = [
+      `Hello ${context.clientFirstName},`,
+      "",
+      "Your document package is ready.",
+      "",
+      `Case reference: ${context.caseReference}`,
+      "",
+      "Ask AI Legal generates legal documents only. We are not a law firm and do not provide legal advice.",
+      "Please review the documents carefully before you file or use them. Reply to this email if you need a revision within the scope you paid for.",
+      "",
+      "— Ask AI Legal",
+    ].join("\n")
+
+    const result = await sendResendEmail({
+      to: context.clientEmail,
+      subject: `Documents ready — ${context.caseReference}`,
+      text: body,
+    })
+
+    await ctx.runMutation(internal.notifications.recordNotification, {
+      caseId: args.caseId,
+      type: "delivery_client",
+      recipient: context.clientEmail,
+      status: result.ok ? "sent" : "failed",
+      provider: "resend",
+      errorMessage: result.ok ? undefined : result.error,
+    })
+
+    return null
+  },
+})
