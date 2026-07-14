@@ -17,12 +17,22 @@ export const generateForCase = mutation({
       throw new Error("Estimate cannot be generated for this case status")
     }
 
+    const structured = caseDoc.intakeStructured
+    const pricingInput = {
+      state: structured.clientStateInput ?? caseDoc.jurisdiction.state,
+      caseType: structured.caseTypeLabel,
+      issue: structured.issueSummary ?? structured.notes,
+    }
+    const pricing = resolvePricing(pricingInput)
+    const { deliverable, matterSignature } = pricing
+
     const existing = await ctx.db
       .query("estimates")
       .withIndex("by_case", (q) => q.eq("caseId", args.caseId))
       .first()
 
-    if (existing) {
+    // Only reuse when matter fingerprint matches (avoids sticky wrong $1,999 quotes)
+    if (existing && existing.matterSignature === matterSignature) {
       const isCustomQuote = existing.finalQuoteCents === 0
       return {
         estimateId: existing._id,
@@ -35,46 +45,53 @@ export const generateForCase = mutation({
       }
     }
 
-    const structured = caseDoc.intakeStructured
-    const pricing = resolvePricing({
-      state: structured.clientStateInput ?? caseDoc.jurisdiction.state,
-      caseType: structured.caseTypeLabel,
-      issue: structured.issueSummary ?? structured.notes,
-    })
-
-    const { deliverable } = pricing
     const finalQuoteCents = deliverable.ourPriceCents ?? 0
     const isCustomQuote = finalQuoteCents === 0
     const now = Date.now()
 
-    const estimateId = await ctx.db.insert("estimates", {
-      caseId: args.caseId,
-      serviceLine: deliverable.serviceLine,
-      baseCostCents: finalQuoteCents,
-      attorneyCompareLowCents: deliverable.attorneyLowCents,
-      attorneyCompareHighCents: deliverable.attorneyHighCents,
-      retrievalCostCents: 0,
-      finalQuoteCents,
-      status: isCustomQuote ? "draft" : "sent",
-      createdAt: now,
-    })
+    let estimateId = existing?._id
+    if (existing) {
+      await ctx.db.patch("estimates", existing._id, {
+        serviceLine: deliverable.serviceLine,
+        baseCostCents: finalQuoteCents,
+        attorneyCompareLowCents: deliverable.attorneyLowCents,
+        attorneyCompareHighCents: deliverable.attorneyHighCents,
+        finalQuoteCents,
+        matterSignature,
+        status: isCustomQuote ? "draft" : "sent",
+      })
+      estimateId = existing._id
+    } else {
+      estimateId = await ctx.db.insert("estimates", {
+        caseId: args.caseId,
+        serviceLine: deliverable.serviceLine,
+        baseCostCents: finalQuoteCents,
+        attorneyCompareLowCents: deliverable.attorneyLowCents,
+        attorneyCompareHighCents: deliverable.attorneyHighCents,
+        retrievalCostCents: 0,
+        finalQuoteCents,
+        matterSignature,
+        status: isCustomQuote ? "draft" : "sent",
+        createdAt: now,
+      })
+    }
 
     await ctx.scheduler.runAfter(0, internal.estimates.finalizeEstimate, {
       caseId: args.caseId,
-      estimateId,
+      estimateId: estimateId!,
       matterType: matterTypeFromDeliverable(deliverable.matterType),
       serviceId: deliverable.serviceId,
-      inputRef: `${deliverable.id}:${pricing.matchedBy}`,
+      inputRef: `${deliverable.id}:${pricing.matchedBy}:${matterSignature}`,
     })
 
     return {
-      estimateId,
+      estimateId: estimateId!,
       serviceLine: deliverable.serviceLine,
       finalQuoteCents,
       attorneyCompareLowCents: deliverable.attorneyLowCents,
       attorneyCompareHighCents: deliverable.attorneyHighCents,
       isCustomQuote,
-      retrievalCostCents: 0,
+      retrievalCostCents: existing?.retrievalCostCents ?? 0,
     }
   },
 })

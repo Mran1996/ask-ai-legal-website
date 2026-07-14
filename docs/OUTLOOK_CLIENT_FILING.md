@@ -44,8 +44,9 @@ Example: `Clients/Garcia-AAL-CH8AE8TW/04-Client-Docs`
 
 Resend templates already use:
 
-- `{AAL-…} — Personalized intake form | Ask AI Legal`
-- `{AAL-…} — Quote, contract & invoice | Ask AI Legal`
+- `{AAL-…} — Intake Part 1 questionnaire | Ask AI Legal`
+- `{AAL-…} — We received your Part 1 | Ask AI Legal`
+- `{AAL-…} — Issues we can start with & invoice | Ask AI Legal`
 - `{AAL-…}` on delivery mail
 
 Reply-all threads keep the reference so rules keep working.
@@ -63,6 +64,26 @@ Reply-all threads keep the reference so rules keep working.
    - Create subfolders `01-Intake` … `05-Delivery` (five Create folder steps).
    - **Get attachments** → **Create file** into `04-Client-Docs` or `01-Intake`.
 5. Save and turn **On**. Test by emailing yourself with subject `AAL-TEST — hello`.
+
+## Power Automate — Flow C (Part 1 returned — CRITICAL for ops filing)
+
+When the client emails the completed Word form + docs back to `support@`:
+
+1. **Create** → Automated cloud flow  
+2. Trigger: **When a new email arrives (V3)**  
+   - To: shared mailbox / support@  
+   - Subject includes `AAL-`  
+   - Optional: Has attachment = Yes  
+3. Actions:
+   - Parse case ref from subject (`AAL-XXXXXXXX`)
+   - Get sender display name → last name for folder  
+   - **Create folder** (if not exists): `Clients/{LastName}-{AAL}/`  
+   - Ensure children: `01-Intake`, `02-Forms`, `04-Client-Docs`  
+   - **Save attachments** → `02-Forms` (Word) and `04-Client-Docs` (PDF/images)  
+   - Optional: move message into that folder / categorize “Form returned”  
+4. Convex still sends the **auto receipt email** via `/resend-inbound` when Resend receiving is configured — Outlook Power Automate is the **human filing mirror**, not the ack.
+
+**Graph API:** not wired in this repo yet (no `MICROSOFT_GRAPH_*` env). Use Power Automate above until Graph app registration is added.
 
 ## Power Automate — Flow B (paid)
 

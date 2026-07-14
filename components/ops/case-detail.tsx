@@ -22,6 +22,7 @@ export function CaseDetailView({ opsToken, caseId }: Props) {
   const detail = useQuery(api.cases.getCaseForOps, { opsToken, caseId })
   const markPersonalizedFormSent = useMutation(api.payments.markPersonalizedFormSent)
   const markFormReturned = useMutation(api.payments.markFormReturned)
+  const sendFormReceivedAcknowledgment = useMutation(api.payments.sendFormReceivedAcknowledgment)
   const markContractInvoiceSent = useMutation(api.payments.markContractInvoiceSent)
   const markPaidManual = useMutation(api.payments.markPaidManual)
   const markWorkStarted = useMutation(api.payments.markWorkStarted)
@@ -32,6 +33,7 @@ export function CaseDetailView({ opsToken, caseId }: Props) {
   const [paymentLinkUrl, setPaymentLinkUrl] = useState("")
   const [quotedAmountDollars, setQuotedAmountDollars] = useState("")
   const [scopeSummary, setScopeSummary] = useState("")
+  const [issuesSummary, setIssuesSummary] = useState("")
   const [timeframe, setTimeframe] = useState("")
 
   if (detail === undefined) {
@@ -85,11 +87,12 @@ export function CaseDetailView({ opsToken, caseId }: Props) {
       <section className="mt-8 rounded-lg border border-gold/40 bg-gold/5 p-6">
         <h2 className="font-semibold text-navy">Fulfillment checklist</h2>
         <ol className="mt-4 space-y-2 text-sm text-gray-700">
-          <li>1. Personalized form sent: {stamp(f.personalizedFormSentAt)}</li>
+          <li>1. Part 1 Word sent: {stamp(f.personalizedFormSentAt)}</li>
           <li>2. Form returned: {stamp(f.formReturnedAt)}</li>
-          <li>3. Contract + invoice emailed: {stamp(f.contractInvoiceSentAt)}</li>
-          <li>4. Paid: {stamp(f.paidAt)}</li>
-          <li>5. Work / deliver: status → {detail.status.replace(/_/g, " ")}</li>
+          <li>3. Receipt ack emailed: {stamp(f.formReceivedAckSentAt)}</li>
+          <li>4. Issues + invoice emailed: {stamp(f.contractInvoiceSentAt)}</li>
+          <li>5. Paid: {stamp(f.paidAt)}</li>
+          <li>6. Work / deliver: status → {detail.status.replace(/_/g, " ")}</li>
         </ol>
         <dl className="mt-4 grid gap-2 text-sm sm:grid-cols-2">
           <div>
@@ -106,27 +109,48 @@ export function CaseDetailView({ opsToken, caseId }: Props) {
           </div>
         </dl>
 
-        <div className="mt-6 space-y-3">
+        <div className="mt-6 flex flex-wrap gap-2">
           <button
             type="button"
             disabled={busy}
             onClick={() => void runAction(() => markPersonalizedFormSent({ opsToken, caseId }))}
-            className="mr-2 rounded border border-navy px-3 py-2 text-sm font-semibold text-navy disabled:opacity-40"
+            className="rounded border border-navy px-3 py-2 text-sm font-semibold text-navy disabled:opacity-40"
           >
-            Email / resend Word intake form
+            Email / resend Part 1 Word
           </button>
           <button
             type="button"
             disabled={busy}
-            onClick={() => void runAction(() => markFormReturned({ opsToken, caseId }))}
-            className="mr-2 rounded border border-navy px-3 py-2 text-sm font-semibold text-navy disabled:opacity-40"
+            onClick={() =>
+              void runAction(() =>
+                markFormReturned({ opsToken, caseId, sendAcknowledgment: true })
+              )
+            }
+            className="rounded border border-navy px-3 py-2 text-sm font-semibold text-navy disabled:opacity-40"
           >
-            Mark form returned
+            Mark form returned + send ack
+          </button>
+          <button
+            type="button"
+            disabled={busy}
+            onClick={() =>
+              void runAction(() => sendFormReceivedAcknowledgment({ opsToken, caseId }))
+            }
+            className="rounded border border-navy px-3 py-2 text-sm font-semibold text-navy disabled:opacity-40"
+          >
+            Send receipt acknowledgment
           </button>
         </div>
 
         <div className="mt-6 space-y-2 rounded border border-gray-200 bg-white p-4">
-          <p className="text-sm font-semibold text-navy">Email quote + contract + invoice</p>
+          <p className="text-sm font-semibold text-navy">Email issues we can start with + invoice</p>
+          <textarea
+            value={issuesSummary}
+            onChange={(e) => setIssuesSummary(e.target.value)}
+            placeholder="Issues / work we can start with (from Part 1 review)"
+            rows={3}
+            className="w-full rounded border border-gray-200 px-3 py-2 text-sm"
+          />
           <input
             value={paymentLinkUrl}
             onChange={(e) => setPaymentLinkUrl(e.target.value)}
@@ -136,7 +160,7 @@ export function CaseDetailView({ opsToken, caseId }: Props) {
           <input
             value={quotedAmountDollars}
             onChange={(e) => setQuotedAmountDollars(e.target.value)}
-            placeholder="Quoted amount USD (e.g. 499)"
+            placeholder="Quoted amount USD (e.g. 799)"
             className="w-full rounded border border-gray-200 px-3 py-2 text-sm"
           />
           <textarea
@@ -168,12 +192,13 @@ export function CaseDetailView({ opsToken, caseId }: Props) {
                   quotedAmountCents,
                   scopeSummary: scopeSummary.trim() || undefined,
                   timeframe: timeframe.trim() || undefined,
+                  issuesSummary: issuesSummary.trim() || undefined,
                 })
               )
             }}
             className="rounded border border-gold bg-gold/20 px-3 py-2 text-sm font-semibold text-navy disabled:opacity-40"
           >
-            Email quote, contract & invoice
+            Email issues + invoice package
           </button>
         </div>
 

@@ -148,12 +148,16 @@ export const notificationTypeValidator = v.union(
   v.literal("appointment_booked_support"),
   v.literal("delivery_client"),
   v.literal("personalized_form_client"),
-  v.literal("quote_contract_invoice_client")
+  v.literal("quote_contract_invoice_client"),
+  v.literal("form_received_ack_client"),
+  v.literal("form_received_support"),
+  v.literal("issues_invoice_client")
 )
 
 export const fulfillmentChecklistValidator = v.object({
   personalizedFormSentAt: v.optional(v.number()),
   formReturnedAt: v.optional(v.number()),
+  formReceivedAckSentAt: v.optional(v.number()),
   contractInvoiceSentAt: v.optional(v.number()),
   paidAt: v.optional(v.number()),
   paymentLinkUrl: v.optional(v.string()),

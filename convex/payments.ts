@@ -2,13 +2,14 @@ import { v } from "convex/values"
 import { internal } from "./_generated/api"
 import { internalMutation, internalQuery, mutation, query } from "./_generated/server"
 import type { QueryCtx } from "./_generated/server"
-import type { Id } from "./_generated/dataModel"
+import type { Doc, Id } from "./_generated/dataModel"
 import { assertOpsToken } from "./lib/opsAuth"
 import {
   documentPrepStartCents,
   retrievalFeeCents,
   totalDueBeforeWorkCents,
 } from "./lib/quoteTotal"
+import { resolveCaseReference } from "./lib/caseLookup"
 
 export const savePostIntakeQuoteDetails = mutation({
   args: {
@@ -257,17 +258,131 @@ export const markPersonalizedFormSent = mutation({
 })
 
 export const markFormReturned = mutation({
+  args: {
+    opsToken: v.string(),
+    caseId: v.id("cases"),
+    sendAcknowledgment: v.optional(v.boolean()),
+  },
+  returns: v.null(),
+  handler: async (ctx, args) => {
+    assertOpsToken(args.opsToken)
+    const caseDoc = await ctx.db.get("cases", args.caseId)
+    if (!caseDoc) throw new Error("Case not found")
+    const now = Date.now()
+    await ctx.db.patch("cases", args.caseId, {
+      formReturnedAt: now,
+      updatedAt: now,
+    })
+    if (args.sendAcknowledgment !== false) {
+      await ctx.scheduler.runAfter(0, internal.emailActions.sendFormReceivedAcknowledgmentEmail, {
+        caseId: args.caseId,
+        force: true,
+      })
+    }
+    return null
+  },
+})
+
+export const sendFormReceivedAcknowledgment = mutation({
   args: { opsToken: v.string(), caseId: v.id("cases") },
   returns: v.null(),
   handler: async (ctx, args) => {
     assertOpsToken(args.opsToken)
     const caseDoc = await ctx.db.get("cases", args.caseId)
     if (!caseDoc) throw new Error("Case not found")
-    await ctx.db.patch("cases", args.caseId, {
-      formReturnedAt: Date.now(),
-      updatedAt: Date.now(),
+    if (caseDoc.formReturnedAt === undefined) {
+      await ctx.db.patch("cases", args.caseId, {
+        formReturnedAt: Date.now(),
+        updatedAt: Date.now(),
+      })
+    }
+    await ctx.scheduler.runAfter(0, internal.emailActions.sendFormReceivedAcknowledgmentEmail, {
+      caseId: args.caseId,
+      force: true,
     })
     return null
+  },
+})
+
+/** Used by Resend inbound webhook — marks form returned + schedules client ack. */
+export const markFormReceivedAckSent = internalMutation({
+  args: { caseId: v.id("cases") },
+  returns: v.null(),
+  handler: async (ctx, args) => {
+    const now = Date.now()
+    await ctx.db.patch("cases", args.caseId, {
+      formReceivedAckSentAt: now,
+      updatedAt: now,
+    })
+    return null
+  },
+})
+
+export const processInboundClientEmail = internalMutation({
+  args: {
+    fromEmail: v.string(),
+    subject: v.string(),
+    textPreview: v.optional(v.string()),
+    hasAttachments: v.boolean(),
+  },
+  returns: v.union(
+    v.object({
+      caseId: v.id("cases"),
+      caseReference: v.string(),
+      status: v.literal("processed"),
+    }),
+    v.object({ status: v.literal("ignored"), reason: v.string() })
+  ),
+  handler: async (ctx, args) => {
+    const refMatch = args.subject.match(/AAL-[A-Z0-9]+/i)
+    let caseDoc: Doc<"cases"> | null = null
+
+    if (refMatch) {
+      const caseReference = refMatch[0]!.toUpperCase()
+      caseDoc = await ctx.db
+        .query("cases")
+        .withIndex("by_caseReference", (q) => q.eq("caseReference", caseReference))
+        .first()
+    }
+
+    if (!caseDoc) {
+      const email = args.fromEmail.trim().toLowerCase()
+      const client = await ctx.db
+        .query("clients")
+        .withIndex("by_email", (q) => q.eq("email", email))
+        .first()
+      if (client) {
+        caseDoc = await ctx.db
+          .query("cases")
+          .withIndex("by_client", (q) => q.eq("clientId", client._id))
+          .order("desc")
+          .first()
+      }
+    }
+
+    if (!caseDoc) {
+      return { status: "ignored" as const, reason: "No matching case for subject/from" }
+    }
+
+    const now = Date.now()
+    const alreadyReturned = caseDoc.formReturnedAt !== undefined
+    await ctx.db.patch("cases", caseDoc._id, {
+      formReturnedAt: caseDoc.formReturnedAt ?? now,
+      updatedAt: now,
+    })
+
+    await ctx.scheduler.runAfter(0, internal.emailActions.sendFormReceivedAcknowledgmentEmail, {
+      caseId: caseDoc._id,
+      force: !alreadyReturned || caseDoc.formReceivedAckSentAt === undefined,
+      hasAttachments: args.hasAttachments,
+      inboundPreview: args.textPreview,
+    })
+
+    return {
+      caseId: caseDoc._id,
+      caseReference: resolveCaseReference(caseDoc),
+      status: "processed" as const,
+    }
   },
 })
 
@@ -279,6 +394,7 @@ export const markContractInvoiceSent = mutation({
     quotedAmountCents: v.optional(v.number()),
     scopeSummary: v.optional(v.string()),
     timeframe: v.optional(v.string()),
+    issuesSummary: v.optional(v.string()),
   },
   returns: v.null(),
   handler: async (ctx, args) => {
@@ -299,6 +415,7 @@ export const markContractInvoiceSent = mutation({
       quotedAmountCents: args.quotedAmountCents,
       scopeSummary: args.scopeSummary,
       timeframe: args.timeframe,
+      issuesSummary: args.issuesSummary,
     })
     return null
   },

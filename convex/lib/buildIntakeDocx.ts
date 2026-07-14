@@ -1,5 +1,6 @@
 /**
- * Builds the personalized client intake Word document (letterhead + Parts A/B).
+ * Builds Ask AI Legal Intake Part 1 Word doc matching
+ * docs/templates/Ask_AI_Legal_Case_Intake_Part1_Professional.docx
  * Import only from `"use node"` Convex actions.
  */
 import {
@@ -8,7 +9,6 @@ import {
   Document,
   Footer,
   Header,
-  HeadingLevel,
   ImageRun,
   Packer,
   PageNumber,
@@ -40,99 +40,55 @@ export type IntakeDocxContext = {
   logoBytes?: Uint8Array
 }
 
-function blankLine(label: string, prefill?: string): Paragraph[] {
-  const answer = prefill?.trim() ? prefill.trim() : "_______________________________________________"
-  return [
-    new Paragraph({
-      spacing: { before: 160, after: 40 },
-      children: [
-        new TextRun({ text: label, bold: true, size: 20, font: "Calibri", color: NAVY }),
-      ],
-    }),
-    new Paragraph({
-      spacing: { after: 80 },
-      border: {
-        bottom: { style: BorderStyle.SINGLE, size: 6, color: "CCCCCC", space: 1 },
-      },
-      children: [
-        new TextRun({
-          text: answer,
-          size: 20,
-          font: "Calibri",
-          color: prefill?.trim() ? "333333" : "888888",
-        }),
-      ],
-    }),
-  ]
-}
-
-function blankBlock(label: string, lines = 3, prefill?: string): Paragraph[] {
-  const paras: Paragraph[] = [
-    new Paragraph({
-      spacing: { before: 160, after: 60 },
-      children: [
-        new TextRun({ text: label, bold: true, size: 20, font: "Calibri", color: NAVY }),
-      ],
-    }),
-  ]
-  if (prefill?.trim()) {
-    paras.push(
-      new Paragraph({
-        spacing: { after: 60 },
-        children: [
-          new TextRun({ text: prefill.trim(), size: 20, font: "Calibri", color: "333333" }),
-        ],
-      })
-    )
-    paras.push(
-      new Paragraph({
-        spacing: { after: 40 },
-        children: [
-          new TextRun({
-            text: "(Add or correct above as needed)",
-            italics: true,
-            size: 18,
-            font: "Calibri",
-            color: "666666",
-          }),
-        ],
-      })
-    )
-  }
-  for (let i = 0; i < lines; i++) {
-    paras.push(
-      new Paragraph({
-        spacing: { after: 80 },
-        border: {
-          bottom: { style: BorderStyle.SINGLE, size: 6, color: "CCCCCC", space: 1 },
-        },
-        children: [new TextRun({ text: " ", size: 20, font: "Calibri" })],
-      })
-    )
-  }
-  return paras
-}
-
-function sectionTitle(text: string): Paragraph {
+function blankAnswer(prefill?: string): Paragraph {
+  const text = prefill?.trim()
+    ? prefill.trim()
+    : "_______________________________________________________________________________"
   return new Paragraph({
-    heading: HeadingLevel.HEADING_1,
-    spacing: { before: 320, after: 120 },
+    spacing: { after: 140 },
     border: {
-      bottom: { style: BorderStyle.SINGLE, size: 12, color: GOLD, space: 4 },
+      bottom: { style: BorderStyle.SINGLE, size: 6, color: "CCCCCC", space: 1 },
     },
     children: [
-      new TextRun({ text, bold: true, size: 26, font: "Calibri", color: NAVY }),
+      new TextRun({
+        text,
+        size: 20,
+        font: "Calibri",
+        color: prefill?.trim() ? "333333" : "888888",
+      }),
     ],
   })
 }
 
-function bodyText(text: string, opts?: { italics?: boolean; bold?: boolean }): Paragraph {
+function question(num: number, text: string, prefill?: string, extraLines = 0): Paragraph[] {
+  const paras: Paragraph[] = [
+    new Paragraph({
+      spacing: { before: 180, after: 60 },
+      children: [
+        new TextRun({
+          text: `${num}. ${text}`,
+          bold: true,
+          size: 20,
+          font: "Calibri",
+          color: NAVY,
+        }),
+      ],
+    }),
+    blankAnswer(prefill),
+  ]
+  for (let i = 0; i < extraLines; i++) {
+    paras.push(blankAnswer())
+  }
+  return paras
+}
+
+function body(text: string, opts?: { italics?: boolean; bold?: boolean; size?: number }): Paragraph {
   return new Paragraph({
     spacing: { after: 100 },
     children: [
       new TextRun({
         text,
-        size: 20,
+        size: opts?.size ?? 20,
         font: "Calibri",
         color: "333333",
         italics: opts?.italics,
@@ -150,7 +106,21 @@ export function intakeDocxFileName(args: {
     args.lastName.replace(/[^a-zA-Z0-9_-]+/g, "-").replace(/-+/g, "-").replace(/^-|-$/g, "") ||
     "Client"
   const safeRef = args.caseReference.replace(/[^a-zA-Z0-9_-]+/g, "")
-  return `Ask-AI-Legal-Intake-${safeLast}-${safeRef}.docx`
+  return `Ask-AI-Legal-Intake-Part1-${safeLast}-${safeRef}.docx`
+}
+
+function jurisdictionLabel(ctx: IntakeDocxContext): string {
+  const state = ctx.state?.trim()
+  if (!state) return "Document Preparation Intake"
+  const long =
+    state.toUpperCase() === "WA"
+      ? "Washington State"
+      : state.toUpperCase() === "CA"
+        ? "California"
+        : state.length === 2
+          ? `${state.toUpperCase()} State`
+          : state
+  return `${long} – Document Preparation Intake`
 }
 
 export async function buildPersonalizedIntakeDocx(
@@ -167,22 +137,15 @@ export async function buildPersonalizedIntakeDocx(
     month: "long",
     day: "numeric",
   })
-  const stateCounty = [ctx.state, ctx.county].filter(Boolean).join(" / ") || undefined
-  const retrievalPrefill =
-    ctx.retrievalRequested === true
-      ? "Yes — please quote retrieval before pulling records"
-      : ctx.retrievalRequested === false
-        ? "No"
-        : undefined
 
   const headerChildren: Paragraph[] = [
     new Paragraph({
       alignment: AlignmentType.CENTER,
-      spacing: { after: 80 },
+      spacing: { after: 60 },
       children: [
         new ImageRun({
           data: logoBytes,
-          transformation: { width: 280, height: 90 },
+          transformation: { width: 300, height: 96 },
           type: "png",
         }),
       ],
@@ -192,7 +155,7 @@ export async function buildPersonalizedIntakeDocx(
       spacing: { after: 40 },
       children: [
         new TextRun({
-          text: "https://askailegal.com  ·  support@askailegal.com",
+          text: "support@askailegal.com  ·  https://askailegal.com",
           size: 16,
           font: "Calibri",
           color: "555555",
@@ -203,7 +166,7 @@ export async function buildPersonalizedIntakeDocx(
       border: {
         bottom: { style: BorderStyle.SINGLE, size: 18, color: GOLD, space: 1 },
       },
-      spacing: { after: 200 },
+      spacing: { after: 180 },
       children: [],
     }),
   ]
@@ -245,10 +208,10 @@ export async function buildPersonalizedIntakeDocx(
         children: [
           new Paragraph({
             alignment: AlignmentType.CENTER,
-            spacing: { after: 120 },
+            spacing: { after: 80 },
             children: [
               new TextRun({
-                text: "PERSONALIZED INTAKE FORM",
+                text: "CASE INTAKE QUESTIONNAIRE – PART 1",
                 bold: true,
                 size: 28,
                 font: "Calibri",
@@ -257,119 +220,119 @@ export async function buildPersonalizedIntakeDocx(
               }),
             ],
           }),
-          bodyText(`Case reference: ${ctx.caseReference}`, { bold: true }),
-          bodyText(`Prepared for: ${fullName}`),
-          bodyText(`Date: ${today}`),
-          ...(ctx.caseTypeLabel
-            ? [bodyText(`Matter type (from intake): ${ctx.caseTypeLabel}`)]
-            : []),
-          ...(stateCounty ? [bodyText(`Jurisdiction (from intake): ${stateCounty}`)] : []),
-          bodyText(
-            "Instructions: Complete Part A and Part B. Reply to the email from Ask AI Legal with this completed Word file attached, plus any court papers you have. Ask AI Legal prepares legal documents only — we are not a law firm, we do not provide legal advice, and we do not file or appear in court for you. Prefill below may already include what you told us in chat — please correct anything that is wrong."
+          new Paragraph({
+            alignment: AlignmentType.CENTER,
+            spacing: { after: 160 },
+            children: [
+              new TextRun({
+                text: jurisdictionLabel(ctx),
+                size: 22,
+                font: "Calibri",
+                color: "444444",
+              }),
+            ],
+          }),
+          body(`Case reference: ${ctx.caseReference}`, { bold: true }),
+          blankAnswer(`Client Name: ${fullName}`),
+          blankAnswer(`Date: ${today}`),
+          blankAnswer(
+            ctx.caseNumber
+              ? `Case Number (if any): ${ctx.caseNumber}`
+              : "Case Number (if any): ____________________"
+          ),
+          body(
+            "Please answer each question as completely as possible. Detailed responses help us evaluate your matter and determine how we may be able to assist. This questionnaire is for information gathering only and does not create an attorney-client relationship.",
+            { italics: true, size: 18 }
           ),
 
-          sectionTitle("Part A — Getting started"),
-          bodyText(
-            "These questions help us confirm contact details and a high-level picture of your matter. Keep answers brief.",
-            { italics: true }
-          ),
-          ...blankLine("1. Preferred full legal name + any AKA", fullName),
-          ...blankLine(
-            "2. Best phone / best email / preferred contact time",
-            [
-              ctx.clientPhone ? `Phone: ${ctx.clientPhone}` : null,
-              `Email: ${ctx.clientEmail}`,
-              ctx.preferredContact ? `Preferred: ${ctx.preferredContact}` : null,
-            ]
-              .filter(Boolean)
-              .join("  ·  ") || undefined
-          ),
-          ...blankLine(
-            "3. State / county where the matter is or will be filed",
-            stateCounty
-          ),
-          ...blankLine(
-            "4. Rough matter type (divorce, custody, eviction, civil, other)",
-            ctx.caseTypeLabel
-          ),
-          ...blankBlock(
-            "5. Brief situation in your own words (5–8 sentences)",
-            4,
-            ctx.issueSummary
-          ),
-          ...blankLine(
-            "6. Any hard deadline or court date you know of?",
-            ctx.deadline
-          ),
-          ...blankLine(
-            "7. Opposing party name (if known) — or write “unknown”",
-            ctx.opposingParty
-          ),
-          ...blankLine(
-            "8. Do you already have court papers? (yes / no) — list what you can attach",
-            ctx.hasDocuments === "yes"
-              ? "Yes — (list attachments below)"
-              : ctx.hasDocuments === "no"
-                ? "No"
-                : undefined
-          ),
-          ...blankLine(
-            "9. Do you need paid document retrieval? (yes / no) — fee will be quoted in writing before we pull records; never free unpaid work",
-            retrievalPrefill
-          ),
-          ...blankLine("10. How did you hear about Ask AI Legal?"),
-
-          sectionTitle("Part B — Details we need to prepare documents"),
-          bodyText(
-            "Answer what you can. Skip anything unknown. These facts help us draft documents accurately — they are not a request for legal advice.",
-            { italics: true }
-          ),
-          ...blankLine("11. Case / docket number (if any)", ctx.caseNumber),
-          ...blankLine("12. Court name / department (if known)"),
-          ...blankLine(
-            "13. Filing party status (I filed / other side filed / unsure)"
-          ),
-          ...blankBlock(
-            "14. Key dates — served / filed / hearing / response due (fill what applies)",
-            3,
-            ctx.deadline ? `Known deadline/urgency from intake: ${ctx.deadline}` : undefined
-          ),
-          ...blankLine(
-            "15. Children involved? If needed for the documents you want, list ages only (not full stories)"
-          ),
-          ...blankBlock(
-            "16. What documents do you want prepared? (petition, response, declaration, letters, motions, etc.)",
-            3
-          ),
-          ...blankBlock(
-            "17. Specific facts that must appear in the documents (bullets OK)",
-            4
-          ),
-          ...blankBlock(
-            "18. Documents you will upload / attach with your reply (checklist)",
-            3
-          ),
-          ...blankBlock(
-            "19. Prior agreements, orders, or temporary orders we should mirror in drafting?",
-            3
-          ),
-          ...blankBlock(
-            "20. Anything urgent we must not miss before we send your written quote?",
+          ...question(
+            1,
+            "In your own words, describe your current situation and what prompted you to contact us.",
+            ctx.issueSummary,
             2
           ),
-          ...blankLine("21. Mailing address for captions / letters (street, city, state, ZIP)"),
-          ...blankLine("22. Other party mailing address (if known)"),
-          ...blankLine(
-            "23. Interpreter or accessibility needs we should know about for written materials?"
+          ...question(2, "What outcome are you hoping to achieve?", undefined, 1),
+          ...question(
+            3,
+            "What discussions have taken place between you and your spouse (or other party) regarding the matter?",
+            ctx.opposingParty
+              ? `Opposing party named in chat: ${ctx.opposingParty}`
+              : undefined,
+            1
           ),
+          ...question(
+            4,
+            "Are you currently receiving or seeking child support and/or spousal support?"
+          ),
+          ...question(
+            5,
+            "Are you seeking spousal support, increased child support, or both? Explain.",
+            undefined,
+            1
+          ),
+          ...question(
+            6,
+            "Are there any upcoming deadlines or hearings?",
+            ctx.deadline,
+            1
+          ),
+          ...question(
+            7,
+            "What type of assistance are you requesting from Ask AI Legal?",
+            ctx.caseTypeLabel
+              ? `From intake: ${ctx.caseTypeLabel}`
+              : undefined,
+            1
+          ),
+          ...question(8, "Has a Petition for Dissolution (or other petition) been filed?"),
+          ...question(
+            9,
+            "If yes, who filed it and in which county?",
+            ctx.county ? `County from intake: ${ctx.county}` : undefined
+          ),
+          ...question(10, "If no petition has been filed, who intends to file?"),
+          ...question(11, "Have you been formally served? If yes, date?"),
+          ...question(12, "Are temporary orders currently in place?"),
+          ...question(13, "Is a court hearing scheduled?"),
+          ...question(14, "Are there deadlines within the next 30 days?", ctx.deadline),
+          new Paragraph({
+            spacing: { before: 180, after: 60 },
+            children: [
+              new TextRun({
+                text: "15. Which documents do you have?  ☐ Petition  ☐ Summons  ☐ Parenting Plan  ☐ Court Orders  ☐ Other",
+                bold: true,
+                size: 20,
+                font: "Calibri",
+                color: NAVY,
+              }),
+            ],
+          }),
+          blankAnswer(
+            ctx.hasDocuments === "yes"
+              ? "Client indicated they have documents (list / check above and attach with your reply)."
+              : ctx.hasDocuments === "no"
+                ? "Client indicated they do not yet have documents."
+                : undefined
+          ),
+          ...question(16, "What is your date of marriage? (if applicable)"),
+          ...question(
+            17,
+            "How long have you and/or your spouse lived in this state?",
+            ctx.state ? `State from intake: ${ctx.state}` : undefined
+          ),
+          ...question(18, "Any prior legal filings between you and your spouse / other party?"),
+          ...question(19, "Do you have children together? List names and ages."),
+          ...question(20, "What is the current parenting/custody arrangement?", undefined, 1),
 
-          new Paragraph({ spacing: { before: 400 }, children: [] }),
-          bodyText(
-            "By returning this form you confirm the information is accurate to the best of your knowledge and that you understand Ask AI Legal provides document preparation only — not legal advice or representation.",
-            { italics: true }
+          new Paragraph({ spacing: { before: 280 }, children: [] }),
+          body(
+            "Disclaimer: Ask AI Legal is a document preparation service and is not a law firm. We do not provide legal representation or legal advice. Submission of this questionnaire does not create an attorney-client relationship.",
+            { italics: true, size: 18 }
           ),
-          ...blankLine("Signature / typed name"),
-          ...blankLine("Date"),
+          body(
+            "Return this completed Part 1 Word file by replying to the email from Ask AI Legal (keep your case reference in the subject). Attach any court papers you have. After we review Part 1, we will email the issues we can start with and an invoice to begin document preparation.",
+            { size: 18 }
+          ),
         ],
       },
     ],
@@ -384,13 +347,18 @@ export async function loadLetterheadLogoBytes(): Promise<Uint8Array> {
     /\/$/,
     ""
   )
-  try {
-    const res = await fetch(`${site}/brand/letterhead-logo.png`)
-    if (res.ok) {
-      return new Uint8Array(await res.arrayBuffer())
+  for (const path of [
+    "/brand/letterhead-from-template.png",
+    "/brand/letterhead-logo.png",
+  ]) {
+    try {
+      const res = await fetch(`${site}${path}`)
+      if (res.ok) {
+        return new Uint8Array(await res.arrayBuffer())
+      }
+    } catch {
+      // try next
     }
-  } catch {
-    // fall through
   }
   return Uint8Array.from(Buffer.from(LETTERHEAD_LOGO_BASE64, "base64"))
 }

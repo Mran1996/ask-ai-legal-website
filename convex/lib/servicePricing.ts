@@ -83,23 +83,47 @@ export const PRICING_ROWS: readonly PricingDeliverable[] = [
     caseType: "Criminal motion",
     keywords: ["motion", "criminal", "sentencing", "dismiss"],
     serviceLine: "Criminal motion preparation",
-    ourPriceCents: null,
+    ourPriceCents: 89900,
     attorneyLowCents: 250000,
     attorneyHighCents: 600000,
     matterType: "ca_criminal",
     serviceId: "ca_criminal_motion_prep",
   },
   {
-    id: "family_divorce",
+    id: "family_divorce_petition",
     state: "CA",
     caseType: "Family / divorce",
-    keywords: ["divorce", "custody", "family", "dissolution", "spousal"],
-    serviceLine: "Family / divorce document preparation",
-    ourPriceCents: null,
-    attorneyLowCents: 200000,
-    attorneyHighCents: 800000,
+    keywords: ["divorce", "dissolution", "petition for dissolution", "family"],
+    serviceLine: "Divorce / dissolution document preparation",
+    ourPriceCents: 84900,
+    attorneyLowCents: 250000,
+    attorneyHighCents: 750000,
     matterType: "ca_family",
-    serviceId: "ca_family_prep",
+    serviceId: "ca_family_divorce_prep",
+  },
+  {
+    id: "family_custody",
+    state: "CA",
+    caseType: "Family / custody",
+    keywords: ["custody", "parenting plan", "visitation", "parenting"],
+    serviceLine: "Custody / parenting plan document preparation",
+    ourPriceCents: 74900,
+    attorneyLowCents: 200000,
+    attorneyHighCents: 650000,
+    matterType: "ca_family",
+    serviceId: "ca_family_custody_prep",
+  },
+  {
+    id: "family_support",
+    state: "CA",
+    caseType: "Family / support",
+    keywords: ["child support", "spousal support", "alimony", "support modification"],
+    serviceLine: "Support / modification document preparation",
+    ourPriceCents: 69900,
+    attorneyLowCents: 180000,
+    attorneyHighCents: 550000,
+    matterType: "ca_family",
+    serviceId: "ca_family_support_prep",
   },
   {
     id: "post_conviction",
@@ -107,7 +131,7 @@ export const PRICING_ROWS: readonly PricingDeliverable[] = [
     caseType: "Post-conviction",
     keywords: ["post-conviction", "habeas", "appeal", "expunge", "record relief"],
     serviceLine: "Post-conviction relief document preparation",
-    ourPriceCents: null,
+    ourPriceCents: 99900,
     attorneyLowCents: 300000,
     attorneyHighCents: 900000,
     matterType: "ca_post_conviction",
@@ -119,7 +143,7 @@ export const PRICING_ROWS: readonly PricingDeliverable[] = [
     caseType: "Other",
     keywords: [],
     serviceLine: CUSTOM_QUOTE_SERVICE_LINE,
-    ourPriceCents: null,
+    ourPriceCents: 59900,
     attorneyLowCents: 150000,
     attorneyHighCents: 400000,
     matterType: "custom",
@@ -137,17 +161,19 @@ export type PricingLookupResult = {
   deliverable: PricingDeliverable
   isCustomQuote: boolean
   matchedBy: "caseType" | "keyword" | "fallback"
+  matterSignature: string
 }
 
 const HIGH_COST_STATES = new Set(["CA", "NY", "MA", "CT", "NJ", "DC", "WA", "HI", "CO", "MD"])
 const LOW_COST_STATES = new Set(["MS", "WV", "AR", "OK", "ID", "MT", "WY", "ND", "SD", "AL", "KY"])
 
-const OUR_PRICE_FRACTION = 0.5
+const OUR_PRICE_FRACTION_OF_LOW = 0.38
 
 function normalizeState(state?: string): string {
   const s = state?.trim().toUpperCase() ?? ""
   if (s.length === 2) return s
   if (/california/i.test(s)) return "CA"
+  if (/washington/i.test(s)) return "WA"
   if (/texas/i.test(s)) return "TX"
   if (/new york/i.test(s)) return "NY"
   if (/florida/i.test(s)) return "FL"
@@ -161,17 +187,48 @@ function stateLegalMarketFactor(state: string): number {
 }
 
 function scaleCents(cents: number, factor: number): number {
-  return Math.round(cents * factor / 100) * 100
+  return Math.round((cents * factor) / 100) * 100
 }
 
+/** Stable 0..n-1 hash for issue text (not crypto — pricing variance only). */
+function issueHashBucket(issue: string, buckets: number): number {
+  let h = 2166136261
+  const s = issue.trim().toLowerCase()
+  for (let i = 0; i < s.length; i++) {
+    h ^= s.charCodeAt(i)
+    h = Math.imul(h, 16777619)
+  }
+  return Math.abs(h) % buckets
+}
+
+/**
+ * Doc-prep quote: prefer maintained template price, then ~38% of attorney-low,
+ * then issue-aware step so unrelated matters do not share an identical number.
+ * Never use (low+high)/2 midpoint (that forced many family cases to $1,999).
+ */
 function computeOurAverageCents(
   attorneyLowCents: number,
   attorneyHighCents: number,
-  _templateOurPriceCents: number | null
+  templateOurPriceCents: number | null,
+  issue: string,
+  deliverableId: string
 ): number {
-  const midpoint =
-    Math.round((attorneyLowCents + attorneyHighCents) / 2 / 100) * 100
-  return Math.max(29900, Math.min(199900, midpoint))
+  const baseFromTemplate =
+    templateOurPriceCents !== null && templateOurPriceCents > 0
+      ? templateOurPriceCents
+      : Math.round((attorneyLowCents * OUR_PRICE_FRACTION_OF_LOW) / 100) * 100
+
+  // $25 steps from issue/deliverable so same template + different story ≠ identical quote
+  const step = 2500
+  const bucket = issueHashBucket(`${deliverableId}|${issue}`, 17) // 0..16 → $0–$400
+  const adjusted = baseFromTemplate + bucket * step
+
+  const floor = 29900
+  const ceiling = Math.min(
+    249900,
+    Math.max(floor + 10000, Math.round((attorneyHighCents * 0.55) / 100) * 100)
+  )
+  return Math.max(floor, Math.min(ceiling, adjusted))
 }
 
 function issueMatchesKeywords(issue: string, keywords: readonly string[]): boolean {
@@ -179,14 +236,22 @@ function issueMatchesKeywords(issue: string, keywords: readonly string[]): boole
   return keywords.some((kw) => lower.includes(kw.toLowerCase()))
 }
 
-function localizeDeliverable(template: PricingDeliverable, state: string): PricingDeliverable {
+function localizeDeliverable(
+  template: PricingDeliverable,
+  state: string,
+  issue: string
+): PricingDeliverable {
   const factor = stateLegalMarketFactor(state)
   const attorneyLowCents = scaleCents(template.attorneyLowCents, factor)
   const attorneyHighCents = scaleCents(template.attorneyHighCents, factor)
+  const scaledTemplate =
+    template.ourPriceCents !== null ? scaleCents(template.ourPriceCents, factor) : null
   const ourPriceCents = computeOurAverageCents(
     attorneyLowCents,
     attorneyHighCents,
-    template.ourPriceCents !== null ? scaleCents(template.ourPriceCents, factor) : null
+    scaledTemplate,
+    issue,
+    template.id
   )
 
   const baseLine = template.serviceLine.replace(/\s*\([A-Z]{2}\)\s*$/, "").trim()
@@ -223,6 +288,15 @@ function findTemplate(caseType: string, issue: string): PricingDeliverable {
   return PRICING_ROWS.find((r) => r.caseType === "Other") ?? PRICING_ROWS[PRICING_ROWS.length - 1]!
 }
 
+/** Signature so estimates are reused only for the same matter fingerprint. */
+export function pricingMatterSignature(input: PricingLookupInput): string {
+  const state = normalizeState(input.state)
+  const caseType = (input.caseType ?? "").trim().toLowerCase()
+  const issue = (input.issue ?? "").trim().toLowerCase().slice(0, 280)
+  const template = findTemplate(input.caseType?.trim() ?? "", input.issue?.trim() ?? "")
+  return `${state}|${template.id}|${caseType}|${issueHashBucket(issue, 10007)}`
+}
+
 export function resolvePricing(input: PricingLookupInput): PricingLookupResult {
   const state = normalizeState(input.state)
   const caseType = input.caseType?.trim() ?? ""
@@ -236,12 +310,13 @@ export function resolvePricing(input: PricingLookupInput): PricingLookupResult {
         ? "keyword"
         : "fallback"
 
-  const deliverable = localizeDeliverable(template, state)
+  const deliverable = localizeDeliverable(template, state, issue)
 
   return {
     deliverable,
     isCustomQuote: false,
     matchedBy,
+    matterSignature: pricingMatterSignature(input),
   }
 }
 

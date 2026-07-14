@@ -153,14 +153,14 @@ const en: ChatUiStrings = {
   ourEstimatedLabel: "Ask AI Legal estimated average",
   ourCustomQuoteLabel: "Custom package — confirmed by email",
   ourFractionNote:
-    "Priced at the midpoint of the typical attorney range above — flat fee, no hourly billing",
+    "Document-prep estimate for your state and matter type — flat fee, no hourly billing. Not the mid point of the attorney range.",
   estimateComparison:
     "{attorneyTypicalLabel}: {attorneyLow}–{attorneyHigh} · {ourEstimatedLabel}: {ourPrice}",
   estimateCustomQuote:
     "{attorneyTypicalLabel}: {attorneyLow}–{attorneyHigh}. Final package price comes in your emailed quote after we read your form and documents.",
   estimateServiceLine: "Service",
   estimateDisclaimer:
-    "Planning estimate only — not a bill. Final cost, contract, and invoice are emailed after your personalized form. Not legal advice.",
+    "Planning estimate only — not a bill. Typical attorney range is a market reference for your state/matter. Ask AI Legal quote is document-prep only. Final package price is confirmed after Part 1 review. Not legal advice.",
   fillRequired: "Please fill in name, email, and a brief issue description.",
   uploadNote:
     "Optional: attach court papers, notices, or leases (PDF, JPG, PNG — up to 10 MB each).",

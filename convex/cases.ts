@@ -154,6 +154,25 @@ const intakeEstimateValidator = v.object({
   isCustomQuote: v.boolean(),
 })
 
+export const getFormReturnMeta = internalQuery({
+  args: { caseId: v.id("cases") },
+  returns: v.union(
+    v.object({
+      formReturnedAt: v.optional(v.number()),
+      formReceivedAckSentAt: v.optional(v.number()),
+    }),
+    v.null()
+  ),
+  handler: async (ctx, args) => {
+    const caseDoc = await ctx.db.get("cases", args.caseId)
+    if (!caseDoc) return null
+    return {
+      formReturnedAt: caseDoc.formReturnedAt,
+      formReceivedAckSentAt: caseDoc.formReceivedAckSentAt,
+    }
+  },
+})
+
 export const getIntakeEmailContext = internalQuery({
   args: { caseId: v.id("cases") },
   returns: v.union(
@@ -397,6 +416,7 @@ export const getCaseForOps = query({
       fulfillment: {
         personalizedFormSentAt: caseDoc.personalizedFormSentAt,
         formReturnedAt: caseDoc.formReturnedAt,
+        formReceivedAckSentAt: caseDoc.formReceivedAckSentAt,
         contractInvoiceSentAt: caseDoc.contractInvoiceSentAt,
         paidAt: caseDoc.paidAt,
         paymentLinkUrl: caseDoc.paymentLinkUrl,

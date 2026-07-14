@@ -419,17 +419,16 @@ export const sendPersonalizedFormEmail = internalAction({
         "",
         "Ask AI Legal prepares legal documents only. We are not a law firm and do not provide legal advice. You review and file any documents yourself.",
         "",
-        "Attached is your personalized intake form (Microsoft Word .docx) with our letterhead.",
-        "Please complete Part A and Part B, then reply to this email with:",
+        "Attached is your Case Intake Questionnaire – Part 1 (Microsoft Word .docx) with our letterhead.",
+        "Please complete Part 1, then reply to this email with:",
         "• the completed Word file",
         "• any court notices, filings, letters, or orders you already have",
         "",
         "If you need us to retrieve public filings, say so — retrieval is quoted in writing before we pull anything (never free unpaid work).",
         "",
-        "After we receive your form and documents, we will email:",
-        "1. written cost to research and draft",
-        "2. a written document-preparation service agreement",
-        "3. an invoice / payment link",
+        "After we receive your completed Part 1 and documents, we will email:",
+        "1. the issues we see and the document work we can start with",
+        "2. a written start cost / invoice / payment link",
         "",
         "We do not begin paid work until payment is received.",
       ].join("\n")
@@ -453,12 +452,13 @@ export const sendPersonalizedFormEmail = internalAction({
           <td style="padding:28px 28px 8px;font-family:Georgia,serif;color:#111827;font-size:15px;line-height:1.55;">
             <p style="margin:0 0 16px;">Hello ${escapeHtml(context.clientFirstName)},</p>
             <p style="margin:0 0 16px;"><strong>Case reference:</strong> ${escapeHtml(context.caseReference)}</p>
-            <p style="margin:0 0 16px;">Attached is your <strong>personalized intake form</strong> (Microsoft Word). Please complete <strong>Part A</strong> and <strong>Part B</strong>, then <strong>reply to this email</strong> with the completed Word file and any court papers you have.</p>
+            <p style="margin:0 0 16px;">Attached is your <strong>Case Intake Questionnaire – Part 1</strong> (Microsoft Word). Please complete it, then <strong>reply to this email</strong> with the completed Word file and any court papers you have.</p>
             <p style="margin:0 0 8px;font-weight:700;color:#0A1628;">What happens next</p>
             <ol style="margin:0 0 16px;padding-left:20px;">
-              <li>You return the completed form (+ documents)</li>
-              <li>We email a written quote, document-preparation agreement, and invoice / payment link</li>
-              <li>After payment, we prepare and deliver your documents by email</li>
+              <li>You return completed Part 1 (+ documents)</li>
+              <li>We acknowledge receipt and review your matter</li>
+              <li>We email the issues we can start with + invoice / payment link</li>
+              <li>After payment, we prepare and deliver your documents</li>
             </ol>
             <p style="margin:0 0 16px;">Ask AI Legal generates documents only. We are not a law firm, we do not provide legal advice, and we do not file or appear in court for you.</p>
             <p style="margin:0 0 8px;">Questions? Reply to this email or write <a href="mailto:${SUPPORT_EMAIL}" style="color:#C5A059;">${SUPPORT_EMAIL}</a>.</p>
@@ -473,7 +473,7 @@ export const sendPersonalizedFormEmail = internalAction({
 
     const result = await sendResendEmail({
       to: context.clientEmail,
-      subject: `${context.caseReference} — Personalized intake form | Ask AI Legal`,
+      subject: `${context.caseReference} — Intake Part 1 questionnaire | Ask AI Legal`,
       text: textBody,
       html: htmlBody,
       attachments: [
@@ -515,6 +515,119 @@ function escapeHtml(value: string): string {
     .replace(/"/g, "&quot;")
 }
 
+export const sendFormReceivedAcknowledgmentEmail = internalAction({
+  args: {
+    caseId: v.id("cases"),
+    force: v.optional(v.boolean()),
+    hasAttachments: v.optional(v.boolean()),
+    inboundPreview: v.optional(v.string()),
+  },
+  returns: v.null(),
+  handler: async (ctx, args) => {
+    const context = await ctx.runQuery(internal.cases.getIntakeEmailContext, {
+      caseId: args.caseId,
+    })
+    if (!context) return null
+
+    const caseMeta = await ctx.runQuery(internal.cases.getFormReturnMeta, {
+      caseId: args.caseId,
+    })
+    if (!args.force && caseMeta?.formReceivedAckSentAt !== undefined) {
+      return null
+    }
+
+    const docsNote = args.hasAttachments
+      ? "We also see that you included attachments — thank you."
+      : "If you have court papers not yet attached, please reply with those documents so we can complete our review."
+
+    const textBody = withClientFooter(
+      [
+        `Hello ${context.clientFirstName},`,
+        "",
+        `Re: ${context.caseReference} — we received your Part 1 / documents`,
+        "",
+        "Thank you. We received your completed intake materials.",
+        docsNote,
+        "",
+        "Our team will review what you sent and be in touch soon with:",
+        "• the issues we see and the document work we can start with",
+        "• a written start cost / invoice / payment link",
+        "",
+        "We may request additional documents if something important is missing.",
+        "",
+        "Ask AI Legal prepares legal documents only. We are not a law firm and do not provide legal advice. Nothing has been filed by us.",
+      ].join("\n")
+    )
+
+    const htmlBody = `<!DOCTYPE html>
+<html><body style="margin:0;padding:24px;background:#F3F4F6;font-family:Georgia,serif;color:#111827;">
+  <div style="max-width:600px;margin:0 auto;background:#fff;border:1px solid #E5E7EB;padding:28px;">
+    <div style="background:#0A1628;color:#C5A059;padding:16px;text-align:center;font-family:Arial,sans-serif;font-weight:700;">Ask AI Legal</div>
+    <p>Hello ${escapeHtml(context.clientFirstName)},</p>
+    <p><strong>Case reference:</strong> ${escapeHtml(context.caseReference)}</p>
+    <p>Thank you — we <strong>received your completed Part 1 intake</strong>${args.hasAttachments ? " and attachments" : ""}.</p>
+    <p>${escapeHtml(docsNote)}</p>
+    <p><strong>Next:</strong> we will review and email the issues we can start with plus an invoice / payment link. We may request additional documents if needed.</p>
+    <p style="font-size:13px;color:#4B5563;">Document preparation only — not a law firm — not legal advice.</p>
+    ${clientEmailFooterHtml()}
+  </div>
+</body></html>`
+
+    const result = await sendResendEmail({
+      to: context.clientEmail,
+      subject: `${context.caseReference} — We received your Part 1 | Ask AI Legal`,
+      text: textBody,
+      html: htmlBody,
+    })
+
+    if (result.ok) {
+      await ctx.runMutation(internal.payments.markFormReceivedAckSent, {
+        caseId: args.caseId,
+      })
+    }
+
+    await ctx.runMutation(internal.notifications.recordNotification, {
+      caseId: args.caseId,
+      type: "form_received_ack_client",
+      recipient: context.clientEmail,
+      status: result.ok ? "sent" : "failed",
+      provider: "resend",
+      errorMessage: result.ok ? undefined : result.error,
+    })
+
+    const supportBody = [
+      "Client returned Part 1 / emailed support (auto-ack path).",
+      "",
+      `Case: ${context.caseReference}`,
+      `Client: ${context.clientFirstName} ${context.clientLastName} <${context.clientEmail}>`,
+      `Attachments noted: ${args.hasAttachments ? "yes" : "unknown/no"}`,
+      args.inboundPreview ? `Preview:\n${args.inboundPreview.slice(0, 800)}` : "",
+      "",
+      `Ops: ${opsCaseUrl(args.caseId)}`,
+      "Next: review → email issues + invoice package.",
+    ]
+      .filter(Boolean)
+      .join("\n")
+
+    const supportResult = await sendResendEmail({
+      to: SUPPORT_EMAIL,
+      subject: `${context.caseReference} — Form returned (needs review) | Ask AI Legal`,
+      text: supportBody,
+    })
+
+    await ctx.runMutation(internal.notifications.recordNotification, {
+      caseId: args.caseId,
+      type: "form_received_support",
+      recipient: SUPPORT_EMAIL,
+      status: supportResult.ok ? "sent" : "failed",
+      provider: "resend",
+      errorMessage: supportResult.ok ? undefined : supportResult.error,
+    })
+
+    return null
+  },
+})
+
 export const sendQuoteContractInvoiceEmail = internalAction({
   args: {
     caseId: v.id("cases"),
@@ -522,6 +635,7 @@ export const sendQuoteContractInvoiceEmail = internalAction({
     quotedAmountCents: v.optional(v.number()),
     scopeSummary: v.optional(v.string()),
     timeframe: v.optional(v.string()),
+    issuesSummary: v.optional(v.string()),
   },
   returns: v.null(),
   handler: async (ctx, args) => {
@@ -532,14 +646,18 @@ export const sendQuoteContractInvoiceEmail = internalAction({
 
     const amountLine =
       args.quotedAmountCents !== undefined && args.quotedAmountCents > 0
-        ? `Quoted amount: ${formatUsdFromCents(args.quotedAmountCents)}`
-        : "Quoted amount: see the attached / linked invoice (ops will confirm the final figure)."
+        ? `Quoted amount to start: ${formatUsdFromCents(args.quotedAmountCents)}`
+        : "Quoted amount to start: see the linked invoice (ops will confirm the final figure)."
+
+    const issues =
+      args.issuesSummary?.trim() ||
+      "We reviewed your Part 1 responses and will confirm the document set we can prepare in the scope below."
 
     const scope =
       args.scopeSummary?.trim() ||
       (context.estimate
         ? `Document preparation related to: ${context.estimate.serviceLine}.`
-        : "Document preparation as described in your personalized intake responses.")
+        : "Document preparation based on your Part 1 responses.")
 
     const timeframe =
       args.timeframe?.trim() ||
@@ -553,9 +671,12 @@ export const sendQuoteContractInvoiceEmail = internalAction({
       [
         `Hello ${context.clientFirstName},`,
         "",
-        `Re: ${context.caseReference} — quote, agreement, and invoice`,
+        `Re: ${context.caseReference} — issues we can start with + invoice`,
         "",
         "Ask AI Legal generates legal documents only. We are not a law firm, we do not provide legal advice, and we do not appear in court or file on your behalf.",
+        "",
+        "ISSUES / WORK WE CAN START WITH",
+        issues,
         "",
         "SCOPE (document preparation)",
         scope,
@@ -576,26 +697,26 @@ export const sendQuoteContractInvoiceEmail = internalAction({
         "• Document retrieval until separately quoted and paid",
         "",
         "SERVICE AGREEMENT",
-        "By paying the invoice you agree this is a document-preparation engagement only. A written agreement is included with this package (or will be attached by our team). Keep a copy for your records.",
+        "By paying the invoice you agree this is a document-preparation engagement only.",
         "",
-        "PAYMENT (off-site invoice / Payment Link — not charged on our contact page)",
+        "PAYMENT (off-site invoice / Payment Link)",
         payUrl,
         "",
         "We begin research and drafting only after payment is received.",
         "",
-        `Please keep ${context.caseReference} in all email subject lines so we can file your matter correctly.`,
+        `Please keep ${context.caseReference} in all email subject lines.`,
       ].join("\n")
     )
 
     const result = await sendResendEmail({
       to: context.clientEmail,
-      subject: `${context.caseReference} — Quote, contract & invoice | Ask AI Legal`,
+      subject: `${context.caseReference} — Issues we can start with & invoice | Ask AI Legal`,
       text: body,
     })
 
     await ctx.runMutation(internal.notifications.recordNotification, {
       caseId: args.caseId,
-      type: "quote_contract_invoice_client",
+      type: "issues_invoice_client",
       recipient: context.clientEmail,
       status: result.ok ? "sent" : "failed",
       provider: "resend",

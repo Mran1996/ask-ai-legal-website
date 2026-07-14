@@ -66,4 +66,91 @@ http.route({
   }),
 })
 
+/**
+ * Resend inbound / email receiving webhook.
+ * Configure in Resend: Receiving → webhook URL =
+ *   https://robust-wombat-16.convex.site/resend-inbound
+ * Optional: set RESEND_INBOUND_WEBHOOK_SECRET and send as Bearer or svix headers later.
+ */
+http.route({
+  path: "/resend-inbound",
+  method: "POST",
+  handler: httpAction(async (ctx, request) => {
+    const secret = process.env.RESEND_INBOUND_WEBHOOK_SECRET
+    if (secret) {
+      const auth = request.headers.get("authorization")
+      const headerSecret = request.headers.get("x-resend-inbound-secret")
+      if (auth !== `Bearer ${secret}` && headerSecret !== secret) {
+        return new Response("Unauthorized", { status: 401 })
+      }
+    }
+
+    let body: unknown
+    try {
+      body = await request.json()
+    } catch {
+      return new Response("Invalid JSON", { status: 400 })
+    }
+
+    const payload = body as {
+      type?: string
+      data?: Record<string, unknown>
+      from?: string | { address?: string }
+      subject?: string
+      text?: string
+      html?: string
+      attachments?: unknown[]
+      email?: {
+        from?: string
+        subject?: string
+        text?: string
+        attachments?: unknown[]
+      }
+    }
+
+    const data = payload.data ?? payload.email ?? payload
+    const fromRaw = data.from ?? payload.from
+    const fromEmail =
+      typeof fromRaw === "string"
+        ? fromRaw.replace(/.*<([^>]+)>.*/, "$1").trim().toLowerCase()
+        : typeof fromRaw === "object" && fromRaw && "address" in fromRaw
+          ? String((fromRaw as { address?: string }).address ?? "")
+              .trim()
+              .toLowerCase()
+          : ""
+
+    const subject = String(data.subject ?? payload.subject ?? "")
+    const textPreview = String(data.text ?? payload.text ?? "").slice(0, 2000)
+    const attachments = (data.attachments ?? payload.attachments ?? []) as unknown[]
+    const hasAttachments = Array.isArray(attachments) && attachments.length > 0
+
+    if (!fromEmail && !subject) {
+      return new Response(JSON.stringify({ ok: false, reason: "empty" }), {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      })
+    }
+
+    // Ignore our own outbound noise
+    if (fromEmail.includes("askailegal.com") || fromEmail.includes("resend.dev")) {
+      return new Response(JSON.stringify({ ok: true, ignored: "self" }), {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      })
+    }
+
+    const result = await ctx.runMutation(internal.payments.processInboundClientEmail, {
+      fromEmail: fromEmail || "unknown@inbound.local",
+      subject: subject || "(no subject)",
+      textPreview,
+      hasAttachments,
+    })
+
+    return new Response(JSON.stringify({ ok: true, result }), {
+      status: 200,
+      headers: { "Content-Type": "application/json" },
+    })
+  }),
+})
+
 export default http

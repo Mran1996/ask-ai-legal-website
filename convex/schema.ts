@@ -50,6 +50,8 @@ export default defineSchema({
     paidAt: v.optional(v.number()),
     /** Stripe Payment Link or invoice URL pasted by ops for email package */
     paymentLinkUrl: v.optional(v.string()),
+    /** Client auto-ack after Part 1 returned */
+    formReceivedAckSentAt: v.optional(v.number()),
     createdAt: v.number(),
     updatedAt: v.number(),
   })
@@ -96,6 +98,8 @@ export default defineSchema({
     finalQuoteCents: v.number(),
     status: estimateStatusValidator,
     stripeCheckoutSessionId: v.optional(v.string()),
+    /** state|deliverableId|caseType|issueBucket — reuse estimate only when this matches */
+    matterSignature: v.optional(v.string()),
     createdAt: v.number(),
   }).index("by_case", ["caseId"])
     .index("by_stripeCheckoutSessionId", ["stripeCheckoutSessionId"]),
