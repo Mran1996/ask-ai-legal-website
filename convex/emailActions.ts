@@ -7,9 +7,16 @@ import { buildBookPageUrl } from "./lib/bookingUrls"
 import {
   SUPPORT_EMAIL,
   clientEmailFooter,
+  clientEmailFooterHtml,
   opsCaseUrl,
+  publicSiteUrl,
   resendFromAddress,
 } from "./lib/emailBranding"
+import {
+  buildPersonalizedIntakeDocx,
+  intakeDocxFileName,
+  loadLetterheadLogoBytes,
+} from "./lib/buildIntakeDocx"
 
 const RESEND_API_URL = "https://api.resend.com/emails"
 
@@ -66,6 +73,12 @@ async function sendResendEmail(args: {
   to: string
   subject: string
   text: string
+  html?: string
+  attachments?: Array<{
+    filename: string
+    content: string
+    content_type?: string
+  }>
 }): Promise<{ ok: true } | { ok: false; error: string }> {
   const apiKey = process.env.RESEND_API_KEY
   if (!apiKey) {
@@ -75,19 +88,25 @@ async function sendResendEmail(args: {
   const from = resendFromAddress()
   const replyTo = SUPPORT_EMAIL
 
+  const payload: Record<string, unknown> = {
+    from,
+    to: [args.to],
+    reply_to: replyTo,
+    subject: args.subject,
+    text: args.text,
+  }
+  if (args.html) payload.html = args.html
+  if (args.attachments && args.attachments.length > 0) {
+    payload.attachments = args.attachments
+  }
+
   const response = await fetch(RESEND_API_URL, {
     method: "POST",
     headers: {
       Authorization: `Bearer ${apiKey}`,
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({
-      from,
-      to: [args.to],
-      reply_to: replyTo,
-      subject: args.subject,
-      text: args.text,
-    }),
+    body: JSON.stringify(payload),
   })
 
   if (!response.ok) {
@@ -226,6 +245,12 @@ export const sendIntakeEmails = internalAction({
       errorMessage: supportResult.ok ? undefined : supportResult.error,
     })
 
+    // Auto-send Word intake form shortly after thank-you (idempotent if already sent)
+    await ctx.scheduler.runAfter(2500, internal.emailActions.sendPersonalizedFormEmail, {
+      caseId: args.caseId,
+      force: false,
+    })
+
     return null
   },
 })
@@ -340,7 +365,10 @@ export const sendDeliveryEmail = internalAction({
 })
 
 export const sendPersonalizedFormEmail = internalAction({
-  args: { caseId: v.id("cases") },
+  args: {
+    caseId: v.id("cases"),
+    force: v.optional(v.boolean()),
+  },
   returns: v.null(),
   handler: async (ctx, args) => {
     const context = await ctx.runQuery(internal.cases.getIntakeEmailContext, {
@@ -348,19 +376,55 @@ export const sendPersonalizedFormEmail = internalAction({
     })
     if (!context) return null
 
-    const body = withClientFooter(
+    if (!args.force && context.personalizedFormSentAt !== undefined) {
+      return null
+    }
+
+    const logoBytes = await loadLetterheadLogoBytes()
+    const docBytes = await buildPersonalizedIntakeDocx({
+      caseReference: context.caseReference,
+      clientFirstName: context.clientFirstName,
+      clientLastName: context.clientLastName,
+      clientEmail: context.clientEmail,
+      clientPhone: context.clientPhone,
+      issueSummary: context.issueSummary,
+      state: context.state,
+      county: context.county,
+      caseTypeLabel: context.caseTypeLabel,
+      deadline: context.deadline,
+      opposingParty: context.opposingParty,
+      hasDocuments: context.hasDocuments,
+      preferredContact: context.preferredContact,
+      caseNumber: context.caseNumber,
+      retrievalRequested: context.retrievalRequested,
+      logoBytes,
+    })
+
+    const fileName = intakeDocxFileName({
+      lastName: context.clientLastName,
+      caseReference: context.caseReference,
+    })
+
+    const storageId = await ctx.storage.store(
+      new Blob([Buffer.from(docBytes)], {
+        type: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      })
+    )
+
+    const textBody = withClientFooter(
       [
         `Hello ${context.clientFirstName},`,
         "",
-        `Re: ${context.caseReference} — personalized intake form`,
+        `Re: ${context.caseReference} — personalized intake form (Word attachment)`,
         "",
         "Ask AI Legal prepares legal documents only. We are not a law firm and do not provide legal advice. You review and file any documents yourself.",
         "",
-        "Our team is sending (or attaching) a personalized intake form for your matter. Please complete it and reply with:",
-        "• the filled form",
+        "Attached is your personalized intake form (Microsoft Word .docx) with our letterhead.",
+        "Please complete Part A and Part B, then reply to this email with:",
+        "• the completed Word file",
         "• any court notices, filings, letters, or orders you already have",
         "",
-        "If you need us to retrieve public filings, say so in your reply — retrieval is quoted in writing before we pull anything (never free unpaid work).",
+        "If you need us to retrieve public filings, say so — retrieval is quoted in writing before we pull anything (never free unpaid work).",
         "",
         "After we receive your form and documents, we will email:",
         "1. written cost to research and draft",
@@ -371,11 +435,64 @@ export const sendPersonalizedFormEmail = internalAction({
       ].join("\n")
     )
 
+    const site = publicSiteUrl()
+    const logoUrl = `${site}/brand/letterhead-logo.png`
+    const htmlBody = `<!DOCTYPE html>
+<html>
+<body style="margin:0;padding:0;background:#F3F4F6;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#F3F4F6;padding:24px 12px;">
+    <tr><td align="center">
+      <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px;background:#ffffff;border:1px solid #E5E7EB;">
+        <tr>
+          <td style="background:#0A1628;padding:20px 24px;text-align:center;">
+            <img src="${logoUrl}" alt="Ask AI Legal" width="240" style="max-width:240px;height:auto;border:0;" />
+            <p style="margin:10px 0 0;font-family:Arial,sans-serif;font-size:11px;letter-spacing:0.12em;color:#FFFFFF;">KNOW YOUR CASE. OWN YOUR CASE.</p>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:28px 28px 8px;font-family:Georgia,serif;color:#111827;font-size:15px;line-height:1.55;">
+            <p style="margin:0 0 16px;">Hello ${escapeHtml(context.clientFirstName)},</p>
+            <p style="margin:0 0 16px;"><strong>Case reference:</strong> ${escapeHtml(context.caseReference)}</p>
+            <p style="margin:0 0 16px;">Attached is your <strong>personalized intake form</strong> (Microsoft Word). Please complete <strong>Part A</strong> and <strong>Part B</strong>, then <strong>reply to this email</strong> with the completed Word file and any court papers you have.</p>
+            <p style="margin:0 0 8px;font-weight:700;color:#0A1628;">What happens next</p>
+            <ol style="margin:0 0 16px;padding-left:20px;">
+              <li>You return the completed form (+ documents)</li>
+              <li>We email a written quote, document-preparation agreement, and invoice / payment link</li>
+              <li>After payment, we prepare and deliver your documents by email</li>
+            </ol>
+            <p style="margin:0 0 16px;">Ask AI Legal generates documents only. We are not a law firm, we do not provide legal advice, and we do not file or appear in court for you.</p>
+            <p style="margin:0 0 8px;">Questions? Reply to this email or write <a href="mailto:${SUPPORT_EMAIL}" style="color:#C5A059;">${SUPPORT_EMAIL}</a>.</p>
+            ${clientEmailFooterHtml()}
+          </td>
+        </tr>
+      </table>
+    </td></tr>
+  </table>
+</body>
+</html>`
+
     const result = await sendResendEmail({
       to: context.clientEmail,
       subject: `${context.caseReference} — Personalized intake form | Ask AI Legal`,
-      text: body,
+      text: textBody,
+      html: htmlBody,
+      attachments: [
+        {
+          filename: fileName,
+          content: Buffer.from(docBytes).toString("base64"),
+          content_type:
+            "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        },
+      ],
     })
+
+    if (result.ok) {
+      await ctx.runMutation(internal.documents.recordPersonalizedFormDelivery, {
+        caseId: args.caseId,
+        storageId,
+        fileName,
+      })
+    }
 
     await ctx.runMutation(internal.notifications.recordNotification, {
       caseId: args.caseId,
@@ -389,6 +506,14 @@ export const sendPersonalizedFormEmail = internalAction({
     return null
   },
 })
+
+function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+}
 
 export const sendQuoteContractInvoiceEmail = internalAction({
   args: {

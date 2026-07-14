@@ -149,3 +149,4 @@ Track implementation against [ASK_AI_LEGAL_SPEC.md](./ASK_AI_LEGAL_SPEC.md) Sect
 | 2026-07-03 | Phase 1.2–1.3 | Cloud Convex, intake emails, ops list, estimates + value comparison UI |
 | 2026-07-13 | Email funnel | No site Pay; ops form→invoice→paid; Outlook playbook |
 | 2026-07-14 | Funnel fix | Hardened save details; email From/footer/review CTA; Convex prod deploy |
+| 2026-07-14 | Word intake | Auto letterhead DOCX Parts A/B emailed via Resend after intake |

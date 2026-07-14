@@ -1,5 +1,5 @@
 import { v } from "convex/values"
-import { mutation } from "./_generated/server"
+import { internalMutation, mutation } from "./_generated/server"
 
 const MAX_FILE_NAME_LENGTH = 255
 
@@ -49,5 +49,55 @@ export const attachIntakeDocument = mutation({
       version,
       createdAt: Date.now(),
     })
+  },
+})
+
+/** Persist generated Word intake form + mark form sent (audit). */
+export const recordPersonalizedFormDelivery = internalMutation({
+  args: {
+    caseId: v.id("cases"),
+    storageId: v.id("_storage"),
+    fileName: v.string(),
+  },
+  returns: v.id("documents"),
+  handler: async (ctx, args) => {
+    const caseDoc = await ctx.db.get("cases", args.caseId)
+    if (!caseDoc) throw new Error("Case not found")
+
+    const now = Date.now()
+    const existing = await ctx.db
+      .query("documents")
+      .withIndex("by_case_and_folder", (q) =>
+        q.eq("caseId", args.caseId).eq("folder", "intake")
+      )
+      .collect()
+    const version = existing.length + 1
+
+    const documentId = await ctx.db.insert("documents", {
+      caseId: args.caseId,
+      type: "personalized_intake_form",
+      folder: "intake",
+      fileName: args.fileName.slice(0, MAX_FILE_NAME_LENGTH),
+      storageId: args.storageId,
+      status: "received",
+      version,
+      createdAt: now,
+    })
+
+    await ctx.db.patch("cases", args.caseId, {
+      personalizedFormSentAt: now,
+      updatedAt: now,
+    })
+
+    await ctx.db.insert("agentRuns", {
+      caseId: args.caseId,
+      agentType: "intake",
+      inputRef: `personalized_form:${args.caseId}`,
+      outputRef: args.storageId,
+      status: "completed",
+      createdAt: now,
+    })
+
+    return documentId
   },
 })

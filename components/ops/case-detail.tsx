@@ -113,7 +113,7 @@ export function CaseDetailView({ opsToken, caseId }: Props) {
             onClick={() => void runAction(() => markPersonalizedFormSent({ opsToken, caseId }))}
             className="mr-2 rounded border border-navy px-3 py-2 text-sm font-semibold text-navy disabled:opacity-40"
           >
-            Email personalized intake form
+            Email / resend Word intake form
           </button>
           <button
             type="button"
@@ -273,9 +273,15 @@ export function CaseDetailView({ opsToken, caseId }: Props) {
           <ul className="mt-3 space-y-2 text-sm">
             {detail.documents.map((doc) => (
               <li key={doc.documentId} className="rounded border border-gray-100 bg-gray-50 px-3 py-2">
-                {doc.fileName}{" "}
+                {doc.url ? (
+                  <a href={doc.url} target="_blank" rel="noreferrer" className="font-medium text-navy underline">
+                    {doc.fileName}
+                  </a>
+                ) : (
+                  doc.fileName
+                )}{" "}
                 <span className="text-gray-500">
-                  ({doc.folder} · {doc.status})
+                  ({doc.type.replace(/_/g, " ")} · {doc.folder} · {doc.status})
                 </span>
               </li>
             ))}

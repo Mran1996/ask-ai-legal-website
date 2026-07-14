@@ -164,6 +164,16 @@ export const getIntakeEmailContext = internalQuery({
       clientEmail: v.string(),
       clientPhone: v.optional(v.string()),
       issueSummary: v.optional(v.string()),
+      state: v.optional(v.string()),
+      county: v.optional(v.string()),
+      caseTypeLabel: v.optional(v.string()),
+      deadline: v.optional(v.string()),
+      opposingParty: v.optional(v.string()),
+      hasDocuments: v.optional(v.string()),
+      preferredContact: v.optional(v.string()),
+      caseNumber: v.optional(v.string()),
+      retrievalRequested: v.optional(v.boolean()),
+      personalizedFormSentAt: v.optional(v.number()),
       estimate: v.union(intakeEstimateValidator, v.null()),
     }),
     v.null()
@@ -190,13 +200,25 @@ export const getIntakeEmailContext = internalQuery({
         }
       : null
 
+    const s = caseDoc.intakeStructured
+
     return {
       caseReference: resolveCaseReference(caseDoc),
       clientFirstName: client.firstName,
       clientLastName: client.lastName,
       clientEmail: client.email,
       clientPhone: client.phone,
-      issueSummary: caseDoc.intakeStructured.issueSummary,
+      issueSummary: s.issueSummary,
+      state: caseDoc.jurisdiction.state || s.clientStateInput,
+      county: caseDoc.jurisdiction.county,
+      caseTypeLabel: s.caseTypeLabel,
+      deadline: s.deadline,
+      opposingParty: s.opposingParty,
+      hasDocuments: s.hasDocuments,
+      preferredContact: s.preferredContact,
+      caseNumber: s.caseNumber,
+      retrievalRequested: s.retrievalRequested,
+      personalizedFormSentAt: caseDoc.personalizedFormSentAt,
       estimate,
     }
   },
@@ -318,14 +340,20 @@ export const getCaseForOps = query({
       .query("documents")
       .withIndex("by_case", (q) => q.eq("caseId", args.caseId))
       .collect()
-    const documents = documentRows.map((row) => ({
-      documentId: row._id,
-      fileName: row.fileName,
-      folder: row.folder,
-      type: row.type,
-      status: row.status,
-      createdAt: row.createdAt,
-    }))
+    const documents = await Promise.all(
+      documentRows.map(async (row) => {
+        const url = await ctx.storage.getUrl(row.storageId)
+        return {
+          documentId: row._id,
+          fileName: row.fileName,
+          folder: row.folder,
+          type: row.type,
+          status: row.status,
+          createdAt: row.createdAt,
+          url: url ?? undefined,
+        }
+      })
+    )
 
     const appointmentRows = await ctx.db
       .query("appointments")

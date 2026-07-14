@@ -247,13 +247,10 @@ export const markPersonalizedFormSent = mutation({
     assertOpsToken(args.opsToken)
     const caseDoc = await ctx.db.get("cases", args.caseId)
     if (!caseDoc) throw new Error("Case not found")
-    const now = Date.now()
-    await ctx.db.patch("cases", args.caseId, {
-      personalizedFormSentAt: now,
-      updatedAt: now,
-    })
+    // Resend regenerates Word form + emails client (force=true)
     await ctx.scheduler.runAfter(0, internal.emailActions.sendPersonalizedFormEmail, {
       caseId: args.caseId,
+      force: true,
     })
     return null
   },

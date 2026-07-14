@@ -37,7 +37,8 @@ export const estimateStatusValidator = v.union(
 export const documentTypeValidator = v.union(
   v.literal("uploaded_by_client"),
   v.literal("drafted_by_us"),
-  v.literal("final_delivered")
+  v.literal("final_delivered"),
+  v.literal("personalized_intake_form")
 )
 
 export const documentFolderValidator = v.union(
@@ -221,6 +222,7 @@ export const documentSummaryValidator = v.object({
   type: documentTypeValidator,
   status: documentStatusValidator,
   createdAt: v.number(),
+  url: v.optional(v.string()),
 })
 
 export const generateForCaseReturnValidator = estimateSummaryValidator

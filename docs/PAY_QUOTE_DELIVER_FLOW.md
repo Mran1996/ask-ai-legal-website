@@ -5,12 +5,14 @@ Ask AI Legal fulfills **document generation only** (not a law firm). Payment hap
 ## Order of operations
 
 1. **Intake** — Request Quote / chat: problem + contact (+ optional uploads).
-2. **Details** — Case/docket # + docs upload + optional “need retrieval” (quoted later; never free unpaid work).
-3. **Personalized intake form** — Ops emails letterhead-style form (`Email personalized intake form` in `/ops`).
-4. **Form returned** — Ops marks form returned when client replies.
+2. **Auto Word intake form** — Convex generates a letterhead `.docx` (Parts A & B) and emails it as a Resend attachment (~2.5s after thank-you). Ops can **resend** from case detail.
+3. **Details** — Case/docket # + docs upload + optional “need retrieval” (quoted later; never free unpaid work).
+4. **Form returned** — Ops marks form returned when client replies with the completed Word file.
 5. **Quote package email** — Ops pastes Stripe Payment Link, scope, amount → emails cost + agreement summary + invoice link.
 6. **Paid** — Ops **Mark paid (manual)** after Stripe clears (or webhook if Checkout is used later).
 7. **Work → Deliver** — Only after paid.
+
+Letterhead logo: `public/brand/letterhead-logo.png` (also embedded fallback for Convex). Keep DOCX lean — Resend attachment limits apply (~40MB; our form is small).
 
 ## Case / ops fields
 
