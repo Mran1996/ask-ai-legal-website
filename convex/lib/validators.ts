@@ -145,8 +145,20 @@ export const notificationTypeValidator = v.union(
   v.literal("intake_client"),
   v.literal("intake_support"),
   v.literal("appointment_booked_support"),
-  v.literal("delivery_client")
+  v.literal("delivery_client"),
+  v.literal("personalized_form_client"),
+  v.literal("quote_contract_invoice_client")
 )
+
+export const fulfillmentChecklistValidator = v.object({
+  personalizedFormSentAt: v.optional(v.number()),
+  formReturnedAt: v.optional(v.number()),
+  contractInvoiceSentAt: v.optional(v.number()),
+  paidAt: v.optional(v.number()),
+  paymentLinkUrl: v.optional(v.string()),
+  retrievalRequested: v.boolean(),
+  caseNumber: v.optional(v.string()),
+})
 
 export const appointmentCallTypeValidator = v.union(
   v.literal("intake"),
@@ -223,6 +235,11 @@ export const intakeListItemValidator = v.object({
   clientPhone: v.optional(v.string()),
   issueSummary: v.optional(v.string()),
   createdAt: v.number(),
+  personalizedFormSentAt: v.optional(v.number()),
+  formReturnedAt: v.optional(v.number()),
+  contractInvoiceSentAt: v.optional(v.number()),
+  paidAt: v.optional(v.number()),
+  retrievalRequested: v.boolean(),
 })
 
 export const caseDetailValidator = v.object({
@@ -237,6 +254,7 @@ export const caseDetailValidator = v.object({
   updatedAt: v.number(),
   caseFileReviewPaidAt: v.optional(v.number()),
   includedPlanningCallsUsed: v.optional(v.number()),
+  fulfillment: fulfillmentChecklistValidator,
   client: v.object({
     firstName: v.string(),
     lastName: v.string(),

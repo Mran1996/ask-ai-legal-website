@@ -45,7 +45,8 @@ export const savePostIntakeQuoteDetails = mutation({
         caseNumber,
         retrievalRequested,
       },
-      status: "awaiting_payment",
+      // Email funnel: stay on estimate_sent — payment happens via emailed invoice/Payment Link
+      status: caseDoc.status === "intake" ? "estimate_sent" : caseDoc.status,
       updatedAt: Date.now(),
     })
 
@@ -74,11 +75,13 @@ export const savePostIntakeQuoteDetails = mutation({
       retrievalCostCents: retrievalCents,
     })
 
+    const refreshed = await ctx.db.get("cases", args.caseId)
+
     return {
       documentPrepCents,
       retrievalCents,
       totalDueCents,
-      status: "awaiting_payment",
+      status: refreshed?.status ?? "estimate_sent",
     }
   },
 })
@@ -224,6 +227,147 @@ export const markCheckoutPaid = internalMutation({
   },
 })
 
+export const markPersonalizedFormSent = mutation({
+  args: { opsToken: v.string(), caseId: v.id("cases") },
+  returns: v.null(),
+  handler: async (ctx, args) => {
+    assertOpsToken(args.opsToken)
+    const caseDoc = await ctx.db.get("cases", args.caseId)
+    if (!caseDoc) throw new Error("Case not found")
+    const now = Date.now()
+    await ctx.db.patch("cases", args.caseId, {
+      personalizedFormSentAt: now,
+      updatedAt: now,
+    })
+    await ctx.scheduler.runAfter(0, internal.emailActions.sendPersonalizedFormEmail, {
+      caseId: args.caseId,
+    })
+    return null
+  },
+})
+
+export const markFormReturned = mutation({
+  args: { opsToken: v.string(), caseId: v.id("cases") },
+  returns: v.null(),
+  handler: async (ctx, args) => {
+    assertOpsToken(args.opsToken)
+    const caseDoc = await ctx.db.get("cases", args.caseId)
+    if (!caseDoc) throw new Error("Case not found")
+    await ctx.db.patch("cases", args.caseId, {
+      formReturnedAt: Date.now(),
+      updatedAt: Date.now(),
+    })
+    return null
+  },
+})
+
+export const markContractInvoiceSent = mutation({
+  args: {
+    opsToken: v.string(),
+    caseId: v.id("cases"),
+    paymentLinkUrl: v.optional(v.string()),
+    quotedAmountCents: v.optional(v.number()),
+    scopeSummary: v.optional(v.string()),
+    timeframe: v.optional(v.string()),
+  },
+  returns: v.null(),
+  handler: async (ctx, args) => {
+    assertOpsToken(args.opsToken)
+    const caseDoc = await ctx.db.get("cases", args.caseId)
+    if (!caseDoc) throw new Error("Case not found")
+    const now = Date.now()
+    const paymentLinkUrl = args.paymentLinkUrl?.trim() || caseDoc.paymentLinkUrl
+    await ctx.db.patch("cases", args.caseId, {
+      contractInvoiceSentAt: now,
+      paymentLinkUrl,
+      status: "awaiting_payment",
+      updatedAt: now,
+    })
+    await ctx.scheduler.runAfter(0, internal.emailActions.sendQuoteContractInvoiceEmail, {
+      caseId: args.caseId,
+      paymentLinkUrl: paymentLinkUrl ?? "",
+      quotedAmountCents: args.quotedAmountCents,
+      scopeSummary: args.scopeSummary,
+      timeframe: args.timeframe,
+    })
+    return null
+  },
+})
+
+export const markPaidManual = mutation({
+  args: {
+    opsToken: v.string(),
+    caseId: v.id("cases"),
+    amountCents: v.optional(v.number()),
+  },
+  returns: v.null(),
+  handler: async (ctx, args) => {
+    assertOpsToken(args.opsToken)
+    const caseDoc = await ctx.db.get("cases", args.caseId)
+    if (!caseDoc) throw new Error("Case not found")
+
+    const estimate = await ctx.db
+      .query("estimates")
+      .withIndex("by_case", (q) => q.eq("caseId", args.caseId))
+      .first()
+    if (!estimate) throw new Error("Estimate not found")
+
+    const now = Date.now()
+    const amountCents =
+      args.amountCents ??
+      totalDueBeforeWorkCents({
+        finalQuoteCents: estimate.finalQuoteCents,
+        isCustomQuote: estimate.finalQuoteCents === 0,
+        retrievalRequested: caseDoc.intakeStructured.retrievalRequested === true,
+      })
+
+    await ctx.db.insert("payments", {
+      caseId: args.caseId,
+      estimateId: estimate._id,
+      type: "case_start",
+      amountCents,
+      status: "paid",
+      createdAt: now,
+    })
+
+    const retrievalPaid = (estimate.retrievalCostCents ?? 0) > 0
+    const docs = await ctx.db
+      .query("documents")
+      .withIndex("by_case", (q) => q.eq("caseId", args.caseId))
+      .collect()
+    const hasUploads = docs.some(
+      (d) => d.folder === "intake" || d.folder === "uploaded_by_client"
+    )
+    const nextStatus = retrievalPaid || hasUploads ? "in_drafting" : "awaiting_docs"
+
+    await ctx.db.patch("cases", args.caseId, {
+      paidAt: now,
+      caseFileReviewPaidAt: now,
+      status: nextStatus,
+      updatedAt: now,
+    })
+    await ctx.db.patch("estimates", estimate._id, { status: "accepted" })
+
+    return null
+  },
+})
+
+async function assertCasePaid(
+  ctx: { db: QueryCtx["db"] },
+  caseId: Id<"cases">
+): Promise<void> {
+  const caseDoc = await ctx.db.get("cases", caseId)
+  if (!caseDoc) throw new Error("Case not found")
+  if (caseDoc.paidAt !== undefined) return
+  const paid = await ctx.db
+    .query("payments")
+    .withIndex("by_case", (q) => q.eq("caseId", caseId))
+    .collect()
+  if (!paid.some((p) => p.status === "paid")) {
+    throw new Error("Cannot proceed before payment is noted")
+  }
+}
+
 export const markWorkStarted = mutation({
   args: {
     opsToken: v.string(),
@@ -232,16 +376,7 @@ export const markWorkStarted = mutation({
   returns: v.null(),
   handler: async (ctx, args) => {
     assertOpsToken(args.opsToken)
-    const caseDoc = await ctx.db.get("cases", args.caseId)
-    if (!caseDoc) throw new Error("Case not found")
-
-    const paid = await ctx.db
-      .query("payments")
-      .withIndex("by_case", (q) => q.eq("caseId", args.caseId))
-      .collect()
-    if (!paid.some((p) => p.status === "paid")) {
-      throw new Error("Cannot start work before payment")
-    }
+    await assertCasePaid(ctx, args.caseId)
 
     await ctx.db.patch("cases", args.caseId, {
       status: "in_drafting",
@@ -270,16 +405,7 @@ export const markDelivered = mutation({
   returns: v.null(),
   handler: async (ctx, args) => {
     assertOpsToken(args.opsToken)
-    const caseDoc = await ctx.db.get("cases", args.caseId)
-    if (!caseDoc) throw new Error("Case not found")
-
-    const paid = await ctx.db
-      .query("payments")
-      .withIndex("by_case", (q) => q.eq("caseId", args.caseId))
-      .collect()
-    if (!paid.some((p) => p.status === "paid")) {
-      throw new Error("Cannot deliver before payment")
-    }
+    await assertCasePaid(ctx, args.caseId)
 
     await ctx.db.patch("cases", args.caseId, {
       status: "delivered",

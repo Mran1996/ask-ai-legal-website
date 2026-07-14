@@ -248,6 +248,11 @@ export const listRecentIntakes = query({
             clientPhone: client.phone,
             issueSummary: caseDoc.intakeStructured.issueSummary,
             createdAt: caseDoc.createdAt,
+            personalizedFormSentAt: caseDoc.personalizedFormSentAt,
+            formReturnedAt: caseDoc.formReturnedAt,
+            contractInvoiceSentAt: caseDoc.contractInvoiceSentAt,
+            paidAt: caseDoc.paidAt,
+            retrievalRequested: caseDoc.intakeStructured.retrievalRequested === true,
           }
         })
       )
@@ -361,6 +366,15 @@ export const getCaseForOps = query({
       updatedAt: caseDoc.updatedAt,
       caseFileReviewPaidAt: caseDoc.caseFileReviewPaidAt,
       includedPlanningCallsUsed: caseDoc.includedPlanningCallsUsed,
+      fulfillment: {
+        personalizedFormSentAt: caseDoc.personalizedFormSentAt,
+        formReturnedAt: caseDoc.formReturnedAt,
+        contractInvoiceSentAt: caseDoc.contractInvoiceSentAt,
+        paidAt: caseDoc.paidAt,
+        paymentLinkUrl: caseDoc.paymentLinkUrl,
+        retrievalRequested: caseDoc.intakeStructured.retrievalRequested === true,
+        caseNumber: caseDoc.intakeStructured.caseNumber,
+      },
       client: {
         firstName: client.firstName,
         lastName: client.lastName,

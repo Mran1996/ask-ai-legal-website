@@ -13,12 +13,26 @@ type Props = {
   caseId: Id<"cases">
 }
 
+function stamp(ms: number | undefined): string {
+  if (ms === undefined) return "—"
+  return new Date(ms).toLocaleString()
+}
+
 export function CaseDetailView({ opsToken, caseId }: Props) {
   const detail = useQuery(api.cases.getCaseForOps, { opsToken, caseId })
+  const markPersonalizedFormSent = useMutation(api.payments.markPersonalizedFormSent)
+  const markFormReturned = useMutation(api.payments.markFormReturned)
+  const markContractInvoiceSent = useMutation(api.payments.markContractInvoiceSent)
+  const markPaidManual = useMutation(api.payments.markPaidManual)
   const markWorkStarted = useMutation(api.payments.markWorkStarted)
   const markDelivered = useMutation(api.payments.markDelivered)
+
   const [busy, setBusy] = useState(false)
   const [actionError, setActionError] = useState("")
+  const [paymentLinkUrl, setPaymentLinkUrl] = useState("")
+  const [quotedAmountDollars, setQuotedAmountDollars] = useState("")
+  const [scopeSummary, setScopeSummary] = useState("")
+  const [timeframe, setTimeframe] = useState("")
 
   if (detail === undefined) {
     return <p className="px-4 py-16 text-center text-gray-500">Loading case…</p>
@@ -35,8 +49,8 @@ export function CaseDetailView({ opsToken, caseId }: Props) {
     )
   }
 
-  const retrievalRequested = detail.intakeStructured.retrievalRequested === true
-  const paid = detail.payment?.status === "paid"
+  const f = detail.fulfillment
+  const paid = f.paidAt !== undefined || detail.payment?.status === "paid"
 
   const runAction = async (fn: () => Promise<null>) => {
     setActionError("")
@@ -61,33 +75,130 @@ export function CaseDetailView({ opsToken, caseId }: Props) {
           <p className="mt-1 text-sm capitalize text-gray-600">
             Status: {detail.status.replace(/_/g, " ")}
           </p>
+          <p className="mt-1 text-xs text-gray-500">
+            Email funnel — pay via emailed invoice / Payment Link (not site checkout).
+          </p>
         </div>
         <OpsSignOutButton />
       </div>
 
-      <section className="mt-8 rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
-        <h2 className="font-semibold text-navy">Fulfillment (pay → work → deliver)</h2>
-        <p className="mt-2 text-sm text-gray-600">
-          Document generation only — no counsel gate. Do not start work until payment is paid.
-        </p>
-        <div className="mt-4 flex flex-wrap gap-3">
+      <section className="mt-8 rounded-lg border border-gold/40 bg-gold/5 p-6">
+        <h2 className="font-semibold text-navy">Fulfillment checklist</h2>
+        <ol className="mt-4 space-y-2 text-sm text-gray-700">
+          <li>1. Personalized form sent: {stamp(f.personalizedFormSentAt)}</li>
+          <li>2. Form returned: {stamp(f.formReturnedAt)}</li>
+          <li>3. Contract + invoice emailed: {stamp(f.contractInvoiceSentAt)}</li>
+          <li>4. Paid: {stamp(f.paidAt)}</li>
+          <li>5. Work / deliver: status → {detail.status.replace(/_/g, " ")}</li>
+        </ol>
+        <dl className="mt-4 grid gap-2 text-sm sm:grid-cols-2">
+          <div>
+            <dt className="text-gray-500">Case / docket #</dt>
+            <dd>{f.caseNumber ?? "—"}</dd>
+          </div>
+          <div>
+            <dt className="text-gray-500">Retrieval requested</dt>
+            <dd>{f.retrievalRequested ? "Yes (quote before pulling)" : "No"}</dd>
+          </div>
+          <div className="sm:col-span-2">
+            <dt className="text-gray-500">Payment link on file</dt>
+            <dd className="break-all text-xs">{f.paymentLinkUrl ?? "—"}</dd>
+          </div>
+        </dl>
+
+        <div className="mt-6 space-y-3">
+          <button
+            type="button"
+            disabled={busy}
+            onClick={() => void runAction(() => markPersonalizedFormSent({ opsToken, caseId }))}
+            className="mr-2 rounded border border-navy px-3 py-2 text-sm font-semibold text-navy disabled:opacity-40"
+          >
+            Email personalized intake form
+          </button>
+          <button
+            type="button"
+            disabled={busy}
+            onClick={() => void runAction(() => markFormReturned({ opsToken, caseId }))}
+            className="mr-2 rounded border border-navy px-3 py-2 text-sm font-semibold text-navy disabled:opacity-40"
+          >
+            Mark form returned
+          </button>
+        </div>
+
+        <div className="mt-6 space-y-2 rounded border border-gray-200 bg-white p-4">
+          <p className="text-sm font-semibold text-navy">Email quote + contract + invoice</p>
+          <input
+            value={paymentLinkUrl}
+            onChange={(e) => setPaymentLinkUrl(e.target.value)}
+            placeholder="Stripe Payment Link or invoice URL"
+            className="w-full rounded border border-gray-200 px-3 py-2 text-sm"
+          />
+          <input
+            value={quotedAmountDollars}
+            onChange={(e) => setQuotedAmountDollars(e.target.value)}
+            placeholder="Quoted amount USD (e.g. 499)"
+            className="w-full rounded border border-gray-200 px-3 py-2 text-sm"
+          />
+          <textarea
+            value={scopeSummary}
+            onChange={(e) => setScopeSummary(e.target.value)}
+            placeholder="Scope summary (what documents you'll prepare)"
+            rows={3}
+            className="w-full rounded border border-gray-200 px-3 py-2 text-sm"
+          />
+          <input
+            value={timeframe}
+            onChange={(e) => setTimeframe(e.target.value)}
+            placeholder="Timeframe (optional)"
+            className="w-full rounded border border-gray-200 px-3 py-2 text-sm"
+          />
+          <button
+            type="button"
+            disabled={busy}
+            onClick={() => {
+              const dollars = Number.parseFloat(quotedAmountDollars)
+              const quotedAmountCents = Number.isFinite(dollars)
+                ? Math.round(dollars * 100)
+                : undefined
+              void runAction(() =>
+                markContractInvoiceSent({
+                  opsToken,
+                  caseId,
+                  paymentLinkUrl: paymentLinkUrl.trim() || undefined,
+                  quotedAmountCents,
+                  scopeSummary: scopeSummary.trim() || undefined,
+                  timeframe: timeframe.trim() || undefined,
+                })
+              )
+            }}
+            className="rounded border border-gold bg-gold/20 px-3 py-2 text-sm font-semibold text-navy disabled:opacity-40"
+          >
+            Email quote, contract & invoice
+          </button>
+        </div>
+
+        <div className="mt-4 flex flex-wrap gap-2">
+          <button
+            type="button"
+            disabled={busy || paid}
+            onClick={() => void runAction(() => markPaidManual({ opsToken, caseId }))}
+            className="rounded border border-navy bg-navy px-3 py-2 text-sm font-semibold text-white disabled:opacity-40"
+          >
+            Mark paid (manual)
+          </button>
           <button
             type="button"
             disabled={busy || !paid || detail.status === "delivered"}
-            onClick={() =>
-              void runAction(() => markWorkStarted({ opsToken, caseId }))
-            }
-            className="rounded border border-navy bg-navy px-4 py-2 text-sm font-semibold text-white disabled:opacity-40"
+            onClick={() => void runAction(() => markWorkStarted({ opsToken, caseId }))}
+            className="rounded border border-navy px-3 py-2 text-sm font-semibold text-navy disabled:opacity-40"
           >
             Mark work started
           </button>
           <button
             type="button"
             disabled={busy || !paid || detail.status === "delivered"}
-            onClick={() =>
-              void runAction(() => markDelivered({ opsToken, caseId }))
-            }
-            className="rounded border border-gold bg-gold/20 px-4 py-2 text-sm font-semibold text-navy disabled:opacity-40"
+            onClick={() => void runAction(() => markDelivered({ opsToken, caseId }))}
+            className="rounded border border-gold bg-gold/20 px-3 py-2 text-sm font-semibold text-navy disabled:opacity-40"
           >
             Mark delivered (email client)
           </button>
@@ -116,19 +227,11 @@ export function CaseDetailView({ opsToken, caseId }: Props) {
             <dt className="text-gray-500">Phone</dt>
             <dd>{detail.client.phone ?? "—"}</dd>
           </div>
-          <div>
-            <dt className="text-gray-500">Case / docket #</dt>
-            <dd>{detail.intakeStructured.caseNumber ?? "—"}</dd>
-          </div>
-          <div>
-            <dt className="text-gray-500">Retrieval requested</dt>
-            <dd>{retrievalRequested ? "Yes (paid add-on)" : "No"}</dd>
-          </div>
         </dl>
       </section>
 
-      <section className="mt-6 rounded-lg border border-gold/40 bg-gold/5 p-6">
-        <h2 className="font-semibold text-navy">Payment</h2>
+      <section className="mt-6 rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
+        <h2 className="font-semibold text-navy">Payment record</h2>
         {detail.payment ? (
           <dl className="mt-3 grid gap-2 text-sm sm:grid-cols-2">
             <div>
@@ -139,45 +242,24 @@ export function CaseDetailView({ opsToken, caseId }: Props) {
               <dt className="text-gray-500">Amount</dt>
               <dd>{formatUsdFromCents(detail.payment.amountCents)}</dd>
             </div>
-            <div>
-              <dt className="text-gray-500">Type</dt>
-              <dd>{detail.payment.type}</dd>
-            </div>
           </dl>
         ) : (
-          <p className="mt-2 text-sm text-gray-600">No payment recorded yet.</p>
-        )}
-        {detail.estimate && (
-          <p className="mt-3 text-sm text-gray-700">
-            Prep quote:{" "}
-            {detail.estimate.isCustomQuote
-              ? "custom / case file review start"
-              : formatUsdFromCents(detail.estimate.finalQuoteCents)}
-            {detail.estimate.retrievalCostCents > 0
-              ? ` · Retrieval: ${formatUsdFromCents(detail.estimate.retrievalCostCents)}`
-              : ""}
-          </p>
+          <p className="mt-2 text-sm text-gray-600">No payment row yet (mark paid after invoice clears).</p>
         )}
       </section>
 
       {detail.estimate && (
         <section className="mt-6 rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
-          <h2 className="font-semibold text-navy">Estimate</h2>
+          <h2 className="font-semibold text-navy">Planning estimate</h2>
           <p className="mt-2 text-sm">{detail.estimate.serviceLine}</p>
-          <p className="mt-2 text-sm">
-            {detail.estimate.isCustomQuote ? (
-              <>
-                Attorneys in this area often charge{" "}
-                {formatUsdFromCents(detail.estimate.attorneyCompareLowCents)}–
-                {formatUsdFromCents(detail.estimate.attorneyCompareHighCents)}. Start price uses
-                case file review until package is confirmed.
-              </>
-            ) : (
-              <>
-                Attorneys typically {formatUsdFromCents(detail.estimate.attorneyCompareLowCents)}–
-                {formatUsdFromCents(detail.estimate.attorneyCompareHighCents)} · Ask AI Legal{" "}
-                {formatUsdFromCents(detail.estimate.finalQuoteCents)}
-              </>
+          <p className="mt-2 text-sm text-gray-700">
+            Attorneys typically {formatUsdFromCents(detail.estimate.attorneyCompareLowCents)}–
+            {formatUsdFromCents(detail.estimate.attorneyCompareHighCents)}
+            {!detail.estimate.isCustomQuote && (
+              <> · Ask AI Legal {formatUsdFromCents(detail.estimate.finalQuoteCents)}</>
+            )}
+            {detail.estimate.retrievalCostCents > 0 && (
+              <> · Retrieval line {formatUsdFromCents(detail.estimate.retrievalCostCents)}</>
             )}
           </p>
         </section>
@@ -202,24 +284,6 @@ export function CaseDetailView({ opsToken, caseId }: Props) {
       </section>
 
       <section className="mt-6 rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
-        <h2 className="font-semibold text-navy">Call credits</h2>
-        <dl className="mt-3 grid gap-2 text-sm sm:grid-cols-2">
-          <div>
-            <dt className="text-gray-500">Case file review paid</dt>
-            <dd>{detail.callCredits.caseFileReviewPaid ? "Yes" : "No"}</dd>
-          </div>
-          <div>
-            <dt className="text-gray-500">Planning calls left</dt>
-            <dd>
-              {detail.callCredits.caseFileReviewPaid
-                ? detail.callCredits.includedPlanningCallsRemaining
-                : "— (after paid start)"}
-            </dd>
-          </div>
-        </dl>
-      </section>
-
-      <section className="mt-6 rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
         <h2 className="font-semibold text-navy">Scheduled calls</h2>
         {detail.appointments.length === 0 ? (
           <p className="mt-2 text-sm text-gray-500">No calls booked yet.</p>
@@ -237,11 +301,6 @@ export function CaseDetailView({ opsToken, caseId }: Props) {
                   {new Date(appt.scheduledAt).toLocaleString()}
                   {appt.timezone ? ` (${appt.timezone})` : ""} · {appt.durationMinutes} min
                 </p>
-                {appt.meetLink && (
-                  <a href={appt.meetLink} className="mt-1 inline-block text-navy underline">
-                    Meeting link
-                  </a>
-                )}
               </li>
             ))}
           </ul>

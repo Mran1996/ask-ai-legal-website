@@ -42,6 +42,14 @@ export default defineSchema({
     storagePrefix: v.string(),
     caseFileReviewPaidAt: v.optional(v.number()),
     includedPlanningCallsUsed: v.optional(v.number()),
+    /** Email funnel: personalized intake form sent to client */
+    personalizedFormSentAt: v.optional(v.number()),
+    formReturnedAt: v.optional(v.number()),
+    contractInvoiceSentAt: v.optional(v.number()),
+    /** Manual or Stripe — payment received off-site / noted in ops */
+    paidAt: v.optional(v.number()),
+    /** Stripe Payment Link or invoice URL pasted by ops for email package */
+    paymentLinkUrl: v.optional(v.string()),
     createdAt: v.number(),
     updatedAt: v.number(),
   })

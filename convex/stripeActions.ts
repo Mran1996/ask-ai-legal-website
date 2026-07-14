@@ -31,6 +31,11 @@ function publicSiteUrl(): string {
   return process.env.PUBLIC_SITE_URL?.replace(/\/$/, "") || "https://askailegal.com"
 }
 
+/**
+ * Soft-disabled for the email funnel: chat UI does not call this.
+ * Kept for optional future Checkout / Payment Link API use. Prefer ops-pasted
+ * Stripe Payment Links emailed from markContractInvoiceSent.
+ */
 export const createCheckoutSession = action({
   args: { caseId: v.id("cases") },
   returns: v.object({

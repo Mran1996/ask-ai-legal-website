@@ -132,9 +132,13 @@ export const sendIntakeEmails = internalAction({
       "",
       `We received your intake request. Your case reference is ${args.caseReference}.`,
       "",
-      "Someone from Ask AI Legal support will be in touch with you soon.",
+      "Next steps:",
+      "1. We will email you a personalized intake form for your situation (letterhead).",
+      "2. Please upload any court papers you have — or tell us if you need us to retrieve documents (additional fee, quoted before we pull records).",
+      "3. After we review your form and documents, we will email a written cost estimate, a document-preparation service agreement, and an invoice / payment link.",
+      "4. We start research and drafting only after payment is received.",
       "",
-      "Book a 15–20 minute intake call (document preparation and pricing only — not legal advice):",
+      "Optional — book a 15–20 minute intake call (document preparation and pricing only — not legal advice):",
       bookUrl,
     ]
 
@@ -319,6 +323,152 @@ export const sendDeliveryEmail = internalAction({
     await ctx.runMutation(internal.notifications.recordNotification, {
       caseId: args.caseId,
       type: "delivery_client",
+      recipient: context.clientEmail,
+      status: result.ok ? "sent" : "failed",
+      provider: "resend",
+      errorMessage: result.ok ? undefined : result.error,
+    })
+
+    return null
+  },
+})
+
+export const sendPersonalizedFormEmail = internalAction({
+  args: { caseId: v.id("cases") },
+  returns: v.null(),
+  handler: async (ctx, args) => {
+    const context = await ctx.runQuery(internal.cases.getIntakeEmailContext, {
+      caseId: args.caseId,
+    })
+    if (!context) return null
+
+    const body = [
+      `Hello ${context.clientFirstName},`,
+      "",
+      `Re: ${context.caseReference} — personalized intake form`,
+      "",
+      "Ask AI Legal prepares legal documents only. We are not a law firm and do not provide legal advice. You review and file any documents yourself.",
+      "",
+      "Attached to this email (or linked by our team) is a personalized intake form tailored to your matter. Please complete it and reply to this email with:",
+      "• the filled form",
+      "• any court notices, filings, letters, or orders you already have",
+      "",
+      "If you do not have documents and need us to retrieve public filings, reply and say so — retrieval is an additional fee that we will quote in writing before we pull anything.",
+      "",
+      "After we receive your form (and documents, or your retrieval request), we will email:",
+      "1. written cost to research and draft your documents",
+      "2. a written document-preparation service agreement",
+      "3. an invoice / payment link",
+      "",
+      "We do not begin paid work until payment is received.",
+      "",
+      "File this email in Outlook under Clients using your case reference in the subject.",
+      "",
+      "— Ask AI Legal",
+      SUPPORT_EMAIL,
+    ].join("\n")
+
+    const result = await sendResendEmail({
+      to: context.clientEmail,
+      subject: `${context.caseReference} — Personalized intake form | Ask AI Legal`,
+      text: body,
+    })
+
+    await ctx.runMutation(internal.notifications.recordNotification, {
+      caseId: args.caseId,
+      type: "personalized_form_client",
+      recipient: context.clientEmail,
+      status: result.ok ? "sent" : "failed",
+      provider: "resend",
+      errorMessage: result.ok ? undefined : result.error,
+    })
+
+    return null
+  },
+})
+
+export const sendQuoteContractInvoiceEmail = internalAction({
+  args: {
+    caseId: v.id("cases"),
+    paymentLinkUrl: v.string(),
+    quotedAmountCents: v.optional(v.number()),
+    scopeSummary: v.optional(v.string()),
+    timeframe: v.optional(v.string()),
+  },
+  returns: v.null(),
+  handler: async (ctx, args) => {
+    const context = await ctx.runQuery(internal.cases.getIntakeEmailContext, {
+      caseId: args.caseId,
+    })
+    if (!context) return null
+
+    const amountLine =
+      args.quotedAmountCents !== undefined && args.quotedAmountCents > 0
+        ? `Quoted amount: ${formatUsdFromCents(args.quotedAmountCents)}`
+        : "Quoted amount: see the attached / linked invoice (ops will confirm the final figure)."
+
+    const scope =
+      args.scopeSummary?.trim() ||
+      (context.estimate
+        ? `Document preparation related to: ${context.estimate.serviceLine}.`
+        : "Document preparation as described in your personalized intake responses.")
+
+    const timeframe =
+      args.timeframe?.trim() ||
+      "Typical drafting window: 3–7 business days after payment clears and we have a complete file (or paid retrieval is finished)."
+
+    const payUrl =
+      args.paymentLinkUrl.trim() ||
+      "(Payment link will be added by our team — reply if you do not see an invoice link.)"
+
+    const body = [
+      `Hello ${context.clientFirstName},`,
+      "",
+      `Re: ${context.caseReference} — quote, agreement, and invoice`,
+      "",
+      "Ask AI Legal generates legal documents only. We are not a law firm, we do not provide legal advice, and we do not appear in court or file on your behalf.",
+      "",
+      "SCOPE (document preparation)",
+      scope,
+      "",
+      amountLine,
+      "",
+      "TIMEFRAME",
+      timeframe,
+      "",
+      "WHAT IS COVERED",
+      "• Research and drafting of the documents described in your scope",
+      "• Plain-English packaging of deliverables for your review",
+      "• Reasonable revisions within the paid scope",
+      "",
+      "WHAT IS NOT COVERED",
+      "• Legal advice or attorney-client representation",
+      "• Court appearance, filing, or serving papers for you",
+      "• Document retrieval until separately quoted and paid",
+      "",
+      "SERVICE AGREEMENT",
+      "By paying the invoice you agree this is a document-preparation engagement only. A written agreement is included with this package (or will be attached by our team). Keep a copy for your records.",
+      "",
+      "PAYMENT (off-site invoice / Payment Link — not charged on our contact page)",
+      payUrl,
+      "",
+      "We begin research and drafting only after payment is received.",
+      "",
+      `Please keep ${context.caseReference} in all email subject lines so we can file your matter correctly in Outlook.`,
+      "",
+      "— Ask AI Legal",
+      SUPPORT_EMAIL,
+    ].join("\n")
+
+    const result = await sendResendEmail({
+      to: context.clientEmail,
+      subject: `${context.caseReference} — Quote, contract & invoice | Ask AI Legal`,
+      text: body,
+    })
+
+    await ctx.runMutation(internal.notifications.recordNotification, {
+      caseId: args.caseId,
+      type: "quote_contract_invoice_client",
       recipient: context.clientEmail,
       status: result.ok ? "sent" : "failed",
       provider: "resend",

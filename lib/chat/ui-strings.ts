@@ -49,13 +49,9 @@ export type ChatUiStrings = {
   caseNumberHint: string
   retrievalCheckbox: string
   retrievalFeeNote: string
-  quoteSummaryTitle: string
-  quotePrepLine: string
-  quoteRetrievalLine: string
-  quoteTotalLine: string
-  payToStart: string
-  paying: string
-  payError: string
+  saveDetails: string
+  savingDetails: string
+  detailsSaved: string
   uploadMoreDocs: string
   quoteNextSteps: string
   intakeSubmitError: string
@@ -106,7 +102,7 @@ const en: ChatUiStrings = {
   requestQuote: "Request a free case review",
   quoteTitle: "Tell us about your case",
   quoteHint:
-    "Submit intake to get a start price. Pay before we retrieve or generate documents. Document preparation only — not a law firm.",
+    "Submit intake so we can email a personalized form, then a written quote, contract, and invoice. Document preparation only — not a law firm.",
   firstName: "First name",
   lastName: "Last name",
   email: "Email",
@@ -128,40 +124,37 @@ const en: ChatUiStrings = {
   submittingRequest: "Submitting…",
   intakeSuccessTitle: "Intake received",
   intakeSuccessBody:
-    "Next: confirm case number if you have one, upload documents or request paid retrieval, then pay to start. Document preparation only — not legal advice.",
+    "Next we'll email a personalized intake form. After that you'll receive a written quote, contract, and invoice by email. Document preparation only — not legal advice. Nothing is filed by us.",
   bookIntakeCall: "Book your intake call",
   bookIntakeCallHint: "15–20 min · document preparation and pricing only",
   caseNumberLabel: "Case / docket number (if you have it)",
   caseNumberHint: "Optional but helps us work faster. Leave blank if you don't have one yet.",
-  retrievalCheckbox: "I need Ask AI Legal to retrieve documents (additional fee).",
-  retrievalFeeNote: "Retrieval is billed as an add-on and must be paid before we pull records.",
-  quoteSummaryTitle: "Amount due before we start",
-  quotePrepLine: "Document preparation",
-  quoteRetrievalLine: "Document retrieval",
-  quoteTotalLine: "Total due now",
-  payToStart: "Pay to start",
-  paying: "Opening secure checkout…",
-  payError: "We couldn't start checkout. Try again or email support@askailegal.com.",
+  retrievalCheckbox: "I need Ask AI Legal to retrieve documents (additional fee — quoted before we pull records).",
+  retrievalFeeNote: "Retrieval is never free unpaid work. We'll include it on your emailed quote if needed.",
+  saveDetails: "Save details & finish",
+  savingDetails: "Saving…",
+  detailsSaved: "Saved. Watch your email for your personalized form (case reference in the subject).",
   uploadMoreDocs: "Upload documents now",
-  quoteNextSteps: "Order: intake → quote → pay → we work → deliver.",
+  quoteNextSteps:
+    "Order: intake → personalized email form → written quote + contract + invoice by email → pay → we work → deliver.",
   intakeSubmitError:
     "We couldn't save your intake. Please try again or email support@askailegal.com with your details.",
   submitAnother: "Submit another request",
   conversationTitle: "Your conversation",
   submittedInfoTitle: "What you submitted",
-  pricingTitle: "Estimated investment",
+  pricingTitle: "Planning estimate",
   attorneyTypicalLabel: "Typical attorney cost",
   ourEstimatedLabel: "Ask AI Legal estimated average",
-  ourCustomQuoteLabel: "Case file review to start",
+  ourCustomQuoteLabel: "Custom package — confirmed by email",
   ourFractionNote:
     "Priced at the midpoint of the typical attorney range above — flat fee, no hourly billing",
   estimateComparison:
     "{attorneyTypicalLabel}: {attorneyLow}–{attorneyHigh} · {ourEstimatedLabel}: {ourPrice}",
   estimateCustomQuote:
-    "{attorneyTypicalLabel}: {attorneyLow}–{attorneyHigh}. Start with a case file review; we'll confirm the full package after we read your file.",
+    "{attorneyTypicalLabel}: {attorneyLow}–{attorneyHigh}. Final package price comes in your emailed quote after we read your form and documents.",
   estimateServiceLine: "Service",
   estimateDisclaimer:
-    "Estimate for planning. You pay the total below before we retrieve records or prepare documents. Not legal advice.",
+    "Planning estimate only — not a bill. Final cost, contract, and invoice are emailed after your personalized form. Not legal advice.",
   fillRequired: "Please fill in name, email, and a brief issue description.",
   uploadNote:
     "Optional: attach court papers, notices, or leases (PDF, JPG, PNG — up to 10 MB each).",
@@ -199,7 +192,7 @@ const hi: ChatUiStrings = {
   requestQuote: "मुफ़्त केस समीक्षा का अनुरोध",
   quoteTitle: "अपने मामले के बारे में बताएँ",
   quoteHint:
-    "इंटेक भेजें, स्टार्ट कीमत देखें, फिर भुगतान करें। भुगतान के बाद ही हम दस्तावेज़ तैयार या प्राप्त करते हैं। केवल दस्तावेज़ तैयारी — कानूनी फर्म नहीं।",
+    "इंटेक भेजें — हम व्यक्तिगत फ़ॉर्म, फिर ईमेल से लिखित कोट, अनुबंध और इनवॉइस भेजेंगे। केवल दस्तावेज़ तैयारी।",
   firstName: "पहला नाम",
   lastName: "अंतिम नाम",
   email: "ईमेल",
@@ -221,40 +214,37 @@ const hi: ChatUiStrings = {
   submittingRequest: "भेजा जा रहा है…",
   intakeSuccessTitle: "इंटेक प्राप्त",
   intakeSuccessBody:
-    "अगला: केस नंबर (यदि हो), दस्तावेज़ अपलोड या सशुल्क रिट्रीवल, फिर काम शुरू करने के लिए भुगतान। केवल दस्तावेज़ तैयारी — कानूनी सलाह नहीं।",
+    "अगला: हम ईमेल से व्यक्तिगत इंटेक फ़ॉर्म भेजेंगे। उसके बाद लिखित कोट, अनुबंध और इनवॉइस ईमेल मिलेगा। केवल दस्तावेज़ तैयारी — कानूनी सलाह नहीं। हम दाखिल नहीं करते।",
   bookIntakeCall: "अपना इंटेक कॉल बुक करें",
   bookIntakeCallHint: "15–20 मिनट · केवल दस्तावेज़ तैयारी और मूल्य",
   caseNumberLabel: "केस / डॉकेट नंबर (यदि हो)",
   caseNumberHint: "वैकल्पिक, लेकिन काम तेज़ करता है। न हो तो खाली छोड़ दें।",
-  retrievalCheckbox: "मुझे Ask AI Legal से दस्तावेज़ रिट्रीव करवाने हैं (अतिरिक्त शुल्क)।",
-  retrievalFeeNote: "रिट्रीवल ऐड-ऑन है और भुगतान के बाद ही रिकॉर्ड खींचे जाएंगे।",
-  quoteSummaryTitle: "काम शुरू होने से पहले देय राशि",
-  quotePrepLine: "दस्तावेज़ तैयारी",
-  quoteRetrievalLine: "दस्तावेज़ रिट्रीवल",
-  quoteTotalLine: "अभी कुल देय",
-  payToStart: "शुरू करने के लिए भुगतान करें",
-  paying: "सुरक्षित चेकआउट खुल रहा है…",
-  payError: "चेकआउट शुरू नहीं हो सका। फिर कोशिश करें या support@askailegal.com पर ईमेल करें।",
+  retrievalCheckbox: "मुझे Ask AI Legal से दस्तावेज़ रिट्रीव करवाने हैं (अतिरिक्त शुल्क — पहले कोट)।",
+  retrievalFeeNote: "रिट्रीवल मुफ़्त नहीं। ज़रूरत हो तो ईमेल कोट में शामिल होगा।",
+  saveDetails: "विवरण सहेजें और समाप्त करें",
+  savingDetails: "सहेजा जा रहा है…",
+  detailsSaved: "सहेज लिया। व्यक्तिगत फ़ॉर्म के लिए ईमेल देखें (विषय में केस संदर्भ)।",
   uploadMoreDocs: "अभी दस्तावेज़ अपलोड करें",
-  quoteNextSteps: "क्रम: इंटेक → कोट → भुगतान → हम काम करते हैं → डिलीवरी।",
+  quoteNextSteps:
+    "क्रम: इंटेक → व्यक्तिगत ईमेल फ़ॉर्म → लिखित कोट + अनुबंध + इनवॉइस → भुगतान → काम → डिलीवरी।",
   intakeSubmitError:
     "इंटेक सहेज नहीं सका। कृपया फिर कोशिश करें या support@askailegal.com पर ईमेल करें।",
   submitAnother: "दूसरा अनुरोध भेजें",
   conversationTitle: "आपकी बातचीत",
   submittedInfoTitle: "आपने जो भेजा",
-  pricingTitle: "अनुमानित लागत",
+  pricingTitle: "योजना अनुमान",
   attorneyTypicalLabel: "वकील की सामान्य लागत",
   ourEstimatedLabel: "Ask AI Legal अनुमानित औसत",
-  ourCustomQuoteLabel: "शुरू करने के लिए केस फ़ाइल समीक्षा",
+  ourCustomQuoteLabel: "कस्टम पैकेज — ईमेल से पुष्टि",
   ourFractionNote:
     "ऊपर दिखाई गई वकील रेंज का मध्य बिंदु — फ्लैट फी, प्रति घंटा नहीं",
   estimateComparison:
     "{attorneyTypicalLabel}: {attorneyLow}–{attorneyHigh} · {ourEstimatedLabel}: {ourPrice}",
   estimateCustomQuote:
-    "{attorneyTypicalLabel}: {attorneyLow}–{attorneyHigh}. केस फ़ाइल समीक्षा से शुरू करें; फ़ाइल पढ़ने के बाद पूरा पैकेज तय होगा।",
+    "{attorneyTypicalLabel}: {attorneyLow}–{attorneyHigh}. अंतिम कीमत फ़ॉर्म और दस्तावेज़ के बाद ईमेल कोट में आएगी।",
   estimateServiceLine: "सेवा",
   estimateDisclaimer:
-    "योजना के लिए अनुमान। दस्तावेज़ तैयार/रिट्रीव करने से पहले नीचे दी गई राशि का भुगतान करें। कानूनी सलाह नहीं।",
+    "केवल योजना अनुमान — बिल नहीं। अंतिम कीमत, अनुबंध और इनवॉइस व्यक्तिगत फ़ॉर्म के बाद ईमेल होंगे। कानूनी सलाह नहीं।",
   fillRequired: "कृपया नाम, ईमेल और संक्षिप्त विवरण भरें।",
   uploadNote:
     "वैकल्पिक: अदालती कागज़ात, नोटिस या लीज़ संलग्न करें (PDF, JPG, PNG — प्रति 10 MB)।",

@@ -9,6 +9,22 @@ type Props = {
   opsToken: string
 }
 
+function stageLabel(row: {
+  personalizedFormSentAt?: number
+  formReturnedAt?: number
+  contractInvoiceSentAt?: number
+  paidAt?: number
+  status: string
+}): string {
+  if (row.status === "delivered") return "Delivered"
+  if (row.status === "in_drafting" || row.status === "awaiting_docs") return "Work"
+  if (row.paidAt !== undefined) return "Paid"
+  if (row.contractInvoiceSentAt !== undefined) return "Invoice emailed"
+  if (row.formReturnedAt !== undefined) return "Form returned"
+  if (row.personalizedFormSentAt !== undefined) return "Form sent"
+  return "Intake"
+}
+
 export function IntakesList({ opsToken }: Props) {
   const { results, status, loadMore } = usePaginatedQuery(
     api.cases.listRecentIntakes,
@@ -17,12 +33,12 @@ export function IntakesList({ opsToken }: Props) {
   )
 
   return (
-    <div className="mx-auto max-w-4xl px-4 py-10">
+    <div className="mx-auto max-w-5xl px-4 py-10">
       <div className="flex items-start justify-between gap-4">
         <div>
           <h1 className="font-display text-3xl text-navy">Intake submissions</h1>
           <p className="mt-1 text-sm text-gray-600">
-            Recent quote-tab intakes — respond manually until full ops dashboard ships.
+            Email funnel: intake → personalized form → quote/contract/invoice → paid → work → deliver.
           </p>
         </div>
         <OpsSignOutButton />
@@ -34,6 +50,7 @@ export function IntakesList({ opsToken }: Props) {
             <tr>
               <th className="px-4 py-3 text-left font-semibold text-gray-600">Reference</th>
               <th className="px-4 py-3 text-left font-semibold text-gray-600">Client</th>
+              <th className="px-4 py-3 text-left font-semibold text-gray-600">Funnel stage</th>
               <th className="px-4 py-3 text-left font-semibold text-gray-600">Status</th>
               <th className="px-4 py-3 text-left font-semibold text-gray-600">Submitted</th>
             </tr>
@@ -48,11 +65,17 @@ export function IntakesList({ opsToken }: Props) {
                   >
                     {row.caseReference}
                   </Link>
+                  {row.retrievalRequested && (
+                    <span className="mt-1 block text-xs text-amber-700">Retrieval quoted later</span>
+                  )}
                 </td>
                 <td className="px-4 py-3">
-                  <div>{row.clientFirstName} {row.clientLastName}</div>
+                  <div>
+                    {row.clientFirstName} {row.clientLastName}
+                  </div>
                   <div className="text-xs text-gray-500">{row.clientEmail}</div>
                 </td>
+                <td className="px-4 py-3 text-gray-800">{stageLabel(row)}</td>
                 <td className="px-4 py-3 capitalize">{row.status.replace(/_/g, " ")}</td>
                 <td className="px-4 py-3 text-gray-600">
                   {new Date(row.createdAt).toLocaleString()}

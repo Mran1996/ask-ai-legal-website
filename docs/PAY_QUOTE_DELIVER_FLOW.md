@@ -1,57 +1,45 @@
-# Pay → Quote → Deliver flow
+# Email quote → contract → invoice flow
 
-Ask AI Legal fulfills **document generation only** (not a law firm; no attorney/counsel gate in this product loop).
+Ask AI Legal fulfills **document generation only** (not a law firm). Payment happens **off-site** via emailed Stripe invoice / Payment Link — not a Pay button on the website or contact section.
 
 ## Order of operations
 
-1. **Intake** — Request Quote / chat form creates a Case + Estimate.
-2. **Quote** — Client sees document-prep start price (+ optional **document retrieval** add-on).
-3. **Pay** — Stripe Checkout for prep + retrieval (if selected). No work until paid.
-4. **Work** — Ops retrieves records if paid; prepares documents (manual retrieval for now).
-5. **Deliver** — Ops marks delivered; client gets email.
+1. **Intake** — Request Quote / chat: problem + contact (+ optional uploads).
+2. **Details** — Case/docket # + docs upload + optional “need retrieval” (quoted later; never free unpaid work).
+3. **Personalized intake form** — Ops emails letterhead-style form (`Email personalized intake form` in `/ops`).
+4. **Form returned** — Ops marks form returned when client replies.
+5. **Quote package email** — Ops pastes Stripe Payment Link, scope, amount → emails cost + agreement summary + invoice link.
+6. **Paid** — Ops **Mark paid (manual)** after Stripe clears (or webhook if Checkout is used later).
+7. **Work → Deliver** — Only after paid.
 
-## Pricing lines
+## Case / ops fields
 
-| Line | Source |
-|------|--------|
-| Document preparation | Estimate package price, or **$499** case file review when the estimate is a custom-quote / $0 package |
-| Document retrieval | Flat **$99** placeholder (`DOCUMENT_RETRIEVAL_FEE_USD` in `lib/site-config.ts` + `convex/lib/quoteTotal.ts`) — ops-fulfilled; no court API yet |
+| Field | Meaning |
+|-------|---------|
+| `personalizedFormSentAt` | Form email sent |
+| `formReturnedAt` | Client returned form |
+| `contractInvoiceSentAt` | Quote/contract/invoice email sent |
+| `paidAt` | Payment noted |
+| `paymentLinkUrl` | Stripe Payment Link / invoice URL |
 
-Update both constants together if you change the fee.
+## Stripe (email Payment Links — not chat checkout)
 
-## Case statuses
+- Chat UI does **not** call Stripe Checkout.
+- Create a **Payment Link** or Invoice in Stripe Dashboard → paste URL in ops when sending the quote package.
+- Optional future: reuse `convex/stripeActions.ts` webhook if you switch links to Checkout sessions.
 
-| Status | Meaning |
-|--------|---------|
-| `intake` / `estimate_sent` | Prefill / quote shown |
-| `awaiting_payment` | Quote locked; waiting for Stripe |
-| `awaiting_docs` | Paid, but no uploads and no paid retrieval |
-| `in_drafting` | Paid and materials covered (uploads and/or paid retrieval) — work may proceed |
-| `delivered` | Package handed off; delivery email sent |
-
-## Stripe (Convex)
-
-Set on **Convex production** (not only Vercel):
+Convex env (if using Checkout webhook later):
 
 ```bash
-npx convex env set STRIPE_SECRET_KEY sk_live_...   # or sk_test_...
+npx convex env set STRIPE_SECRET_KEY sk_...
 npx convex env set STRIPE_WEBHOOK_SECRET whsec_...
 npx convex env set PUBLIC_SITE_URL https://askailegal.com
 ```
 
-Stripe Dashboard → Developers → Webhooks → Add endpoint:
+## Outlook
 
-- **URL:** `https://robust-wombat-16.convex.site/stripe-webhook`  
-  (or your deployment’s `*.convex.site` HTTP actions URL)
-- **Events:** `checkout.session.completed`
+See `docs/OUTLOOK_CLIENT_FILING.md`. Every client email subject includes `AAL-…` so rules can file mail.
 
-Optional on Vercel: `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` (not required for hosted Checkout redirect).
+## Source of truth
 
-## Ops
-
-`/ops/intakes/[caseId]`:
-
-- Payment status + amount
-- Retrieval requested Y/N
-- Uploaded document list
-- **Mark work started** / **Mark delivered (email client)** — both require a paid payment row
+**Convex `/ops/intakes/[caseId]`** is primary. Outlook folders mirror filing for humans.

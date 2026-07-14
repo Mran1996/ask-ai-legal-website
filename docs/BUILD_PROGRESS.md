@@ -52,13 +52,14 @@ Track implementation against [ASK_AI_LEGAL_SPEC.md](./ASK_AI_LEGAL_SPEC.md) Sect
 - [x] Log Pricing `agentRun`
 - [x] Minimal ops intake list: `/ops/intakes` + case detail
 
-### 1.4 Stripe payment
+### 1.4 Email quote + payment (off-site)
 
-- [x] Stripe Checkout session on estimate accept (`convex/stripeActions.ts` — prep + optional retrieval)
-- [x] Webhook: `checkout.session.completed` → update payment + case status (`/stripe-webhook`)
-- [x] Case status → `awaiting_payment` → `awaiting_docs` or `in_drafting` after pay (money before work)
-- [x] Store `stripeCheckoutSessionId` on estimate
-- [x] Flow docs: `docs/PAY_QUOTE_DELIVER_FLOW.md` (Intake → Quote → Pay → Work → Deliver; no counsel gate in product loop)
+- [x] Remove on-site Pay / Stripe Checkout CTA from chat quote success (email funnel)
+- [x] Ops checklist: personalized form → form returned → contract/invoice emailed → mark paid → work → deliver
+- [x] Resend templates: personalized form + quote/contract/invoice (`convex/emailActions.ts`); subjects include `AAL-…`
+- [x] Stripe: Payment Link / invoice pasted in ops email (Checkout code kept unused for later)
+- [x] Money before work: `markWorkStarted` / `markDelivered` require paid
+- [x] Flow docs: `docs/PAY_QUOTE_DELIVER_FLOW.md` + Outlook filing `docs/OUTLOOK_CLIENT_FILING.md`
 
 ### 1.5 Document upload
 
@@ -135,8 +136,7 @@ Track implementation against [ASK_AI_LEGAL_SPEC.md](./ASK_AI_LEGAL_SPEC.md) Sect
 
 ## Current focus
 
-**Next step:** Configure Stripe keys + webhook on Convex; run a test Checkout. Ops: mark work / deliver from case detail.
-
+**Next step:** Create Stripe Payment Links as needed; file client mail per `docs/OUTLOOK_CLIENT_FILING.md`. Ops email funnel is live on `/ops/intakes/[caseId]`.
 
 ---
 
@@ -147,3 +147,4 @@ Track implementation against [ASK_AI_LEGAL_SPEC.md](./ASK_AI_LEGAL_SPEC.md) Sect
 | 2026-07-02 | Phase 0 | Spec, rule, architecture docs added |
 | 2026-07-02 | Phase 1.1 | Convex schema, auth wrappers, pricing stub, ConvexProvider |
 | 2026-07-03 | Phase 1.2–1.3 | Cloud Convex, intake emails, ops list, estimates + value comparison UI |
+| 2026-07-13 | Email funnel | No site Pay; ops form→invoice→paid; Outlook playbook |

@@ -133,22 +133,22 @@ Header: `Authorization: Bearer <CALCOM_WEBHOOK_SECRET>`
 
 See `docs/CALCOM_SETUP.md`.
 
-### Stripe Checkout (Convex — required for Pay to start)
+### Stripe (email Payment Links / invoices — not site Checkout)
 
-Set in **Convex** (actions + HTTP webhook), not only Vercel:
+Payment is **off-site**: create a Stripe **Payment Link** or **Invoice** in the Dashboard, paste the URL in `/ops` when emailing the quote package. The chat / contact UI has **no Pay button**.
+
+Optional Convex env (keep for later Checkout/webhook; not required for Payment Links):
 
 | Variable | Notes |
 |----------|-------|
-| `STRIPE_SECRET_KEY` | `sk_test_…` or `sk_live_…` |
-| `STRIPE_WEBHOOK_SECRET` | From Stripe Dashboard webhook signing secret |
+| `STRIPE_SECRET_KEY` | Only if using Checkout sessions / API invoices later |
+| `STRIPE_WEBHOOK_SECRET` | Webhook signing secret if using `/stripe-webhook` |
 | `PUBLIC_SITE_URL` | `https://askailegal.com` |
 
-Stripe webhook URL: `https://robust-wombat-16.convex.site/stripe-webhook`  
+Stripe webhook URL (optional): `https://robust-wombat-16.convex.site/stripe-webhook`  
 Event: `checkout.session.completed`
 
-Optional on Vercel: `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` (hosted Checkout redirect does not require it).
-
-See `docs/PAY_QUOTE_DELIVER_FLOW.md`.
+See `docs/PAY_QUOTE_DELIVER_FLOW.md` and `docs/OUTLOOK_CLIENT_FILING.md`.
 
 ### Required for AI chat (pick one provider)
 

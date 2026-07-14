@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { useChat } from "@ai-sdk/react"
 import { DefaultChatTransport, type UIMessage } from "ai"
-import { useMutation, useAction } from "convex/react"
+import { useMutation } from "convex/react"
 import {
   CheckCircle2,
   ChevronDown,
@@ -32,11 +32,6 @@ import { buildBookPageUrl } from "@/lib/booking"
 import { BookingBanner } from "@/components/brand/booking-banner"
 import { formatUsdFromCents } from "@/lib/pricing/ca-eviction"
 import { estimateFractionPercent } from "@/lib/pricing/service-pricing"
-import {
-  documentPrepStartCents,
-  retrievalFeeCents,
-  totalDueBeforeWorkCents,
-} from "@/lib/pricing/quote-total"
 import { DOCUMENT_RETRIEVAL_FEE_DISPLAY } from "@/lib/site-config"
 import { api } from "@/convex/_generated/api"
 import type { Id } from "@/convex/_generated/dataModel"
@@ -210,8 +205,9 @@ export function ChatWidget() {
   const [pendingFiles, setPendingFiles] = useState<File[]>([])
   const [postCaseNumber, setPostCaseNumber] = useState("")
   const [retrievalRequested, setRetrievalRequested] = useState(false)
-  const [paying, setPaying] = useState(false)
-  const [payError, setPayError] = useState("")
+  const [savingDetails, setSavingDetails] = useState(false)
+  const [detailsSaved, setDetailsSaved] = useState(false)
+  const [detailsError, setDetailsError] = useState("")
   const fileInputRef = useRef<HTMLInputElement>(null)
   const postPayFileInputRef = useRef<HTMLInputElement>(null)
   const createFromIntake = useMutation(api.cases.createFromIntake)
@@ -220,7 +216,6 @@ export function ChatWidget() {
   const generateUploadUrl = useMutation(api.documents.generateUploadUrl)
   const attachIntakeDocument = useMutation(api.documents.attachIntakeDocument)
   const savePostIntakeQuoteDetails = useMutation(api.payments.savePostIntakeQuoteDetails)
-  const createCheckoutSession = useAction(api.stripeActions.createCheckoutSession)
   const [langMenuOpen, setLangMenuOpen] = useState(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const localeRef = useRef<Locale>(siteLocale)
@@ -468,8 +463,9 @@ export function ChatWidget() {
     setPendingFiles([])
     setPostCaseNumber("")
     setRetrievalRequested(false)
-    setPaying(false)
-    setPayError("")
+    setSavingDetails(false)
+    setDetailsSaved(false)
+    setDetailsError("")
     if (fileInputRef.current) {
       fileInputRef.current.value = ""
     }
@@ -478,22 +474,22 @@ export function ChatWidget() {
     }
   }
 
-  const handlePayToStart = async () => {
+  const handleSavePostIntakeDetails = async () => {
     if (!intakeSubmitBanner) return
-    setPayError("")
-    setPaying(true)
+    setDetailsError("")
+    setSavingDetails(true)
     try {
       await savePostIntakeQuoteDetails({
         caseId: intakeSubmitBanner.caseId,
         caseNumber: postCaseNumber.trim() || undefined,
         retrievalRequested,
       })
-      const session = await createCheckoutSession({ caseId: intakeSubmitBanner.caseId })
-      window.location.href = session.url
+      setDetailsSaved(true)
     } catch (error) {
-      console.error("Checkout failed:", error)
-      setPayError(ui.payError)
-      setPaying(false)
+      console.error("Save intake details failed:", error)
+      setDetailsError(ui.intakeSubmitError)
+    } finally {
+      setSavingDetails(false)
     }
   }
 
@@ -504,7 +500,7 @@ export function ChatWidget() {
       await uploadIntakeFiles(intakeSubmitBanner.caseId, list)
     } catch (error) {
       console.error("Post-intake upload failed:", error)
-      setPayError(ui.intakeSubmitError)
+      setDetailsError(ui.intakeSubmitError)
     }
   }
 
@@ -779,48 +775,21 @@ export function ChatWidget() {
                       </button>
                     </div>
 
-                    {(() => {
-                      const prep = documentPrepStartCents(intakeSubmitBanner.estimate)
-                      const retrieval = retrievalFeeCents(retrievalRequested)
-                      const total = totalDueBeforeWorkCents({
-                        ...intakeSubmitBanner.estimate,
-                        retrievalRequested,
-                      })
-                      return (
-                        <div className="mt-3 rounded-sm border border-gold/30 bg-navy/60 px-3 py-2.5 text-left text-xs text-white/80">
-                          <p className="text-[10px] font-bold uppercase tracking-wider text-gold">
-                            {ui.quoteSummaryTitle}
-                          </p>
-                          <p className="mt-2 flex justify-between gap-2">
-                            <span>{ui.quotePrepLine}</span>
-                            <span>{formatUsdFromCents(prep)}</span>
-                          </p>
-                          {retrieval > 0 && (
-                            <p className="mt-1 flex justify-between gap-2">
-                              <span>{ui.quoteRetrievalLine}</span>
-                              <span>{formatUsdFromCents(retrieval)}</span>
-                            </p>
-                          )}
-                          <p className="mt-2 flex justify-between gap-2 border-t border-white/10 pt-2 font-semibold text-gold">
-                            <span>{ui.quoteTotalLine}</span>
-                            <span>{formatUsdFromCents(total)}</span>
-                          </p>
-                        </div>
-                      )
-                    })()}
-
-                    {payError && (
-                      <p className="mt-2 text-xs text-red-300">{payError}</p>
+                    {detailsError && (
+                      <p className="mt-2 text-xs text-red-300">{detailsError}</p>
                     )}
-
-                    <button
-                      type="button"
-                      disabled={paying}
-                      onClick={() => void handlePayToStart()}
-                      className="mt-4 inline-flex w-full items-center justify-center rounded-sm border border-gold bg-gold/25 px-4 py-2.5 text-sm font-semibold text-gold hover:bg-gold/35 disabled:opacity-60"
-                    >
-                      {paying ? ui.paying : ui.payToStart}
-                    </button>
+                    {detailsSaved ? (
+                      <p className="mt-4 text-xs leading-relaxed text-gold">{ui.detailsSaved}</p>
+                    ) : (
+                      <button
+                        type="button"
+                        disabled={savingDetails}
+                        onClick={() => void handleSavePostIntakeDetails()}
+                        className="mt-4 inline-flex w-full items-center justify-center rounded-sm border border-gold bg-gold/25 px-4 py-2.5 text-sm font-semibold text-gold hover:bg-gold/35 disabled:opacity-60"
+                      >
+                        {savingDetails ? ui.savingDetails : ui.saveDetails}
+                      </button>
+                    )}
 
                     <a
                       href={buildBookPageUrl({
