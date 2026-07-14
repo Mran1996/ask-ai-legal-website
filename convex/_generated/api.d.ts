@@ -20,6 +20,7 @@ import type * as lib_bookingUrls from "../lib/bookingUrls.js";
 import type * as lib_caEvictionPricing from "../lib/caEvictionPricing.js";
 import type * as lib_caseLookup from "../lib/caseLookup.js";
 import type * as lib_customFunctions from "../lib/customFunctions.js";
+import type * as lib_emailBranding from "../lib/emailBranding.js";
 import type * as lib_intakeMapping from "../lib/intakeMapping.js";
 import type * as lib_opsAuth from "../lib/opsAuth.js";
 import type * as lib_quoteTotal from "../lib/quoteTotal.js";
@@ -49,6 +50,7 @@ declare const fullApi: ApiFromModules<{
   "lib/caEvictionPricing": typeof lib_caEvictionPricing;
   "lib/caseLookup": typeof lib_caseLookup;
   "lib/customFunctions": typeof lib_customFunctions;
+  "lib/emailBranding": typeof lib_emailBranding;
   "lib/intakeMapping": typeof lib_intakeMapping;
   "lib/opsAuth": typeof lib_opsAuth;
   "lib/quoteTotal": typeof lib_quoteTotal;

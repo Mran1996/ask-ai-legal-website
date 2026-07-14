@@ -55,6 +55,8 @@ export type ChatUiStrings = {
   uploadMoreDocs: string
   quoteNextSteps: string
   intakeSubmitError: string
+  detailsSaveError: string
+  detailsUploadError: string
   submitAnother: string
   conversationTitle: string
   submittedInfoTitle: string
@@ -139,6 +141,10 @@ const en: ChatUiStrings = {
     "Order: intake → personalized email form → written quote + contract + invoice by email → pay → we work → deliver.",
   intakeSubmitError:
     "We couldn't save your intake. Please try again or email support@askailegal.com with your details.",
+  detailsSaveError:
+    "We couldn't save those details. Your intake was already received — try again or email support@askailegal.com with your case reference.",
+  detailsUploadError:
+    "We couldn't upload that file. Try a smaller PDF/JPG/PNG, or email it to support@askailegal.com with your case reference.",
   submitAnother: "Submit another request",
   conversationTitle: "Your conversation",
   submittedInfoTitle: "What you submitted",
@@ -229,6 +235,10 @@ const hi: ChatUiStrings = {
     "क्रम: इंटेक → व्यक्तिगत ईमेल फ़ॉर्म → लिखित कोट + अनुबंध + इनवॉइस → भुगतान → काम → डिलीवरी।",
   intakeSubmitError:
     "इंटेक सहेज नहीं सका। कृपया फिर कोशिश करें या support@askailegal.com पर ईमेल करें।",
+  detailsSaveError:
+    "विवरण सहेज नहीं सके। आपका इंटेक पहले मिल चुका है — फिर कोशिश करें या केस संदर्भ के साथ support@askailegal.com पर ईमेल करें।",
+  detailsUploadError:
+    "फ़ाइल अपलोड नहीं हो सकी। छोटी PDF/JPG/PNG आज़माएँ, या केस संदर्भ के साथ support@askailegal.com पर ईमेल करें।",
   submitAnother: "दूसरा अनुरोध भेजें",
   conversationTitle: "आपकी बातचीत",
   submittedInfoTitle: "आपने जो भेजा",

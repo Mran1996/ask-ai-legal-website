@@ -28,16 +28,19 @@ export const savePostIntakeQuoteDetails = mutation({
       throw new Error("Case not found")
     }
 
+    // Allow updates until paid work has started / delivered
     if (
-      caseDoc.status !== "intake" &&
-      caseDoc.status !== "estimate_sent" &&
-      caseDoc.status !== "awaiting_payment"
+      caseDoc.status === "in_drafting" ||
+      caseDoc.status === "delivered" ||
+      caseDoc.status === "closed" ||
+      caseDoc.status === "in_counsel_review"
     ) {
-      throw new Error("Quote details can only be updated before payment")
+      throw new Error("Quote details can only be updated before work starts")
     }
 
     const caseNumber = args.caseNumber?.trim() || undefined
     const retrievalRequested = args.retrievalRequested
+    const now = Date.now()
 
     await ctx.db.patch("cases", args.caseId, {
       intakeStructured: {
@@ -45,9 +48,12 @@ export const savePostIntakeQuoteDetails = mutation({
         caseNumber,
         retrievalRequested,
       },
-      // Email funnel: stay on estimate_sent — payment happens via emailed invoice/Payment Link
-      status: caseDoc.status === "intake" ? "estimate_sent" : caseDoc.status,
-      updatedAt: Date.now(),
+      // Email funnel: stay estimate_sent until ops sends invoice package
+      status:
+        caseDoc.status === "intake" || caseDoc.status === "estimate_sent"
+          ? "estimate_sent"
+          : caseDoc.status,
+      updatedAt: now,
     })
 
     const estimate = await ctx.db
@@ -55,32 +61,39 @@ export const savePostIntakeQuoteDetails = mutation({
       .withIndex("by_case", (q) => q.eq("caseId", args.caseId))
       .first()
 
-    if (!estimate) {
-      throw new Error("Estimate not found — submit intake again")
+    const retrievalCents = retrievalFeeCents(retrievalRequested)
+
+    if (estimate) {
+      const isCustomQuote = estimate.finalQuoteCents === 0
+      const documentPrepCents = documentPrepStartCents({
+        finalQuoteCents: estimate.finalQuoteCents,
+        isCustomQuote,
+      })
+      const totalDueCents = totalDueBeforeWorkCents({
+        finalQuoteCents: estimate.finalQuoteCents,
+        isCustomQuote,
+        retrievalRequested,
+      })
+
+      await ctx.db.patch("estimates", estimate._id, {
+        retrievalCostCents: retrievalCents,
+      })
+
+      const refreshed = await ctx.db.get("cases", args.caseId)
+      return {
+        documentPrepCents,
+        retrievalCents,
+        totalDueCents,
+        status: refreshed?.status ?? "estimate_sent",
+      }
     }
 
-    const isCustomQuote = estimate.finalQuoteCents === 0
-    const retrievalCents = retrievalFeeCents(retrievalRequested)
-    const documentPrepCents = documentPrepStartCents({
-      finalQuoteCents: estimate.finalQuoteCents,
-      isCustomQuote,
-    })
-    const totalDueCents = totalDueBeforeWorkCents({
-      finalQuoteCents: estimate.finalQuoteCents,
-      isCustomQuote,
-      retrievalRequested,
-    })
-
-    await ctx.db.patch("estimates", estimate._id, {
-      retrievalCostCents: retrievalCents,
-    })
-
+    // Estimate may still be generating — still persist caseNumber / retrieval
     const refreshed = await ctx.db.get("cases", args.caseId)
-
     return {
-      documentPrepCents,
+      documentPrepCents: 0,
       retrievalCents,
-      totalDueCents,
+      totalDueCents: retrievalCents,
       status: refreshed?.status ?? "estimate_sent",
     }
   },

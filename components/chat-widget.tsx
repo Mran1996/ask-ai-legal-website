@@ -487,7 +487,15 @@ export function ChatWidget() {
       setDetailsSaved(true)
     } catch (error) {
       console.error("Save intake details failed:", error)
-      setDetailsError(ui.intakeSubmitError)
+      const serverMsg =
+        error instanceof Error ? error.message.replace(/^\[.*?\]\s*/, "").trim() : ""
+      const safeHint =
+        serverMsg.length > 0 &&
+        serverMsg.length < 160 &&
+        !/stack|at\s+\w+|convex:\/\//i.test(serverMsg)
+          ? ` (${serverMsg})`
+          : ""
+      setDetailsError(`${ui.detailsSaveError}${safeHint}`)
     } finally {
       setSavingDetails(false)
     }
@@ -500,7 +508,15 @@ export function ChatWidget() {
       await uploadIntakeFiles(intakeSubmitBanner.caseId, list)
     } catch (error) {
       console.error("Post-intake upload failed:", error)
-      setDetailsError(ui.intakeSubmitError)
+      const serverMsg =
+        error instanceof Error ? error.message.replace(/^\[.*?\]\s*/, "").trim() : ""
+      const safeHint =
+        serverMsg.length > 0 &&
+        serverMsg.length < 160 &&
+        !/stack|at\s+\w+|convex:\/\//i.test(serverMsg)
+          ? ` (${serverMsg})`
+          : ""
+      setDetailsError(`${ui.detailsUploadError}${safeHint}`)
     }
   }
 

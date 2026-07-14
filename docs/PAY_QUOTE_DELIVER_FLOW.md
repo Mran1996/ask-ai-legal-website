@@ -22,6 +22,17 @@ Ask AI Legal fulfills **document generation only** (not a law firm). Payment hap
 | `paidAt` | Payment noted |
 | `paymentLinkUrl` | Stripe Payment Link / invoice URL |
 
+## Email branding (Resend)
+
+```bash
+npx convex env set RESEND_FROM_EMAIL "Ask AI Legal <support@askailegal.com>"
+# Optional Google Business Profile review link in email footers:
+npx convex env set GOOGLE_REVIEW_URL "https://g.page/r/YOUR_PLACE_ID/review"
+npx convex env set PUBLIC_SITE_URL https://askailegal.com
+```
+
+Client emails include website + contact + review CTA + UPL disclaimer. Ops notify emails use absolute links: `https://askailegal.com/ops/intakes/{caseId}`.
+
 ## Stripe (email Payment Links — not chat checkout)
 
 - Chat UI does **not** call Stripe Checkout.

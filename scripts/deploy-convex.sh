@@ -11,7 +11,9 @@ fi
 
 echo "→ Deploying Convex functions..."
 if [[ "${1:-}" == "--prod" ]]; then
-  npx convex deploy --prod
+  # Target production (robust-wombat-16) without interactive confirm.
+  # Override local CONVEX_DEPLOYMENT=local:... from .env.local.
+  CONVEX_DEPLOYMENT="${CONVEX_PROD_DEPLOYMENT:-prod:robust-wombat-16}" npx convex deploy
 else
   npx convex deploy
 fi
@@ -22,6 +24,7 @@ echo "  NEXT_PUBLIC_CONVEX_URL=https://<your-deployment>.convex.cloud"
 echo "  NEXT_PUBLIC_CONVEX_SITE_URL=https://<your-deployment>.convex.site"
 echo ""
 echo "Set Convex secrets (if not already):"
-echo "  npx convex env set RESEND_API_KEY re_..."
-echo "  npx convex env set RESEND_FROM_EMAIL 'Ask AI Legal <notifications@yourdomain.com>'"
-echo "  npx convex env set OPS_ACCESS_TOKEN <secret>"
+echo "  npx convex env set RESEND_API_KEY re_... --prod"
+echo "  npx convex env set RESEND_FROM_EMAIL 'Ask AI Legal <support@askailegal.com>' --prod"
+echo "  npx convex env set OPS_ACCESS_TOKEN <secret> --prod"
+echo "  # Optional: npx convex env set GOOGLE_REVIEW_URL 'https://g.page/r/…/review' --prod"

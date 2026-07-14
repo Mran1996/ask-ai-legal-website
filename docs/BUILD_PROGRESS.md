@@ -136,7 +136,7 @@ Track implementation against [ASK_AI_LEGAL_SPEC.md](./ASK_AI_LEGAL_SPEC.md) Sect
 
 ## Current focus
 
-**Next step:** Create Stripe Payment Links as needed; file client mail per `docs/OUTLOOK_CLIENT_FILING.md`. Ops email funnel is live on `/ops/intakes/[caseId]`.
+**Next step:** Keep `RESEND_FROM_EMAIL` + optional `GOOGLE_REVIEW_URL` on Convex prod; smoke-test “Save details & finish” after each deploy.
 
 ---
 
@@ -148,3 +148,4 @@ Track implementation against [ASK_AI_LEGAL_SPEC.md](./ASK_AI_LEGAL_SPEC.md) Sect
 | 2026-07-02 | Phase 1.1 | Convex schema, auth wrappers, pricing stub, ConvexProvider |
 | 2026-07-03 | Phase 1.2–1.3 | Cloud Convex, intake emails, ops list, estimates + value comparison UI |
 | 2026-07-13 | Email funnel | No site Pay; ops form→invoice→paid; Outlook playbook |
+| 2026-07-14 | Funnel fix | Hardened save details; email From/footer/review CTA; Convex prod deploy |

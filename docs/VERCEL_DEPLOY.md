@@ -53,9 +53,16 @@ Set Convex-side secrets:
 
 ```bash
 npx convex env set RESEND_API_KEY re_xxxxxxxx
-npx convex env set RESEND_FROM_EMAIL "Ask AI Legal <notifications@askailegal.com>"
+npx convex env set RESEND_FROM_EMAIL "Ask AI Legal <support@askailegal.com>"
+# Optional — Google Business Profile review link in every client email footer:
+# npx convex env set GOOGLE_REVIEW_URL "https://g.page/r/YOUR_REVIEW_LINK/review"
 npx convex env set OPS_ACCESS_TOKEN "$(openssl rand -hex 32)"
+npx convex env set PUBLIC_SITE_URL https://askailegal.com
 ```
+
+**Resend:** Verify `askailegal.com` in Resend and use `Ask AI Legal <support@askailegal.com>` (or `notifications@…`). Replies go to `support@askailegal.com` via `reply_to`.
+
+**Reviews:** Prefer a **Google Business Profile** review URL (`GOOGLE_REVIEW_URL`). Do not invent a URL — until set, emails say “reply and we’ll send our Google review link.”
 
 ### 3. Import project in Vercel
 
