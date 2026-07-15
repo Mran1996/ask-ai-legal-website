@@ -231,6 +231,20 @@ function computeOurAverageCents(
   return Math.max(floor, Math.min(ceiling, adjusted))
 }
 
+/** For UI copy: our quote as % of attorney midpoint (or planned low-fraction if custom). */
+export function estimateFractionPercent(
+  ourCents: number,
+  attorneyLowCents: number,
+  attorneyHighCents: number
+): number {
+  if (ourCents <= 0) {
+    return Math.round(OUR_PRICE_FRACTION_OF_LOW * 100)
+  }
+  const mid = (attorneyLowCents + attorneyHighCents) / 2
+  if (mid <= 0) return 0
+  return Math.round((ourCents / mid) * 100)
+}
+
 function issueMatchesKeywords(issue: string, keywords: readonly string[]): boolean {
   const lower = issue.toLowerCase()
   return keywords.some((kw) => lower.includes(kw.toLowerCase()))

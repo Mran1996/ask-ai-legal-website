@@ -1,8 +1,8 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Link from "next/link"
-import { useMutation, useQuery } from "convex/react"
+import { useAction, useMutation, useQuery } from "convex/react"
 import { api } from "@/convex/_generated/api"
 import type { Id } from "@/convex/_generated/dataModel"
 import { formatUsdFromCents } from "@/lib/pricing/ca-eviction"
@@ -27,14 +27,38 @@ export function CaseDetailView({ opsToken, caseId }: Props) {
   const markPaidManual = useMutation(api.payments.markPaidManual)
   const markWorkStarted = useMutation(api.payments.markWorkStarted)
   const markDelivered = useMutation(api.payments.markDelivered)
+  const saveDraftPackage = useMutation(api.payments.saveDraftPackage)
+  const regenerateDraftPackage = useMutation(api.payments.regenerateDraftPackage)
+  const approveAndSendPackage = useMutation(api.payments.approveAndSendPackage)
+  const retryCreateOutlookFolder = useMutation(api.payments.retryCreateOutlookFolder)
+  const createStartPaymentLink = useAction(api.stripeActions.createStartPaymentLink)
 
   const [busy, setBusy] = useState(false)
   const [actionError, setActionError] = useState("")
   const [paymentLinkUrl, setPaymentLinkUrl] = useState("")
-  const [quotedAmountDollars, setQuotedAmountDollars] = useState("")
+  const [quotedAmountDollars, setQuotedAmountDollars] = useState("499.99")
   const [scopeSummary, setScopeSummary] = useState("")
   const [issuesSummary, setIssuesSummary] = useState("")
   const [timeframe, setTimeframe] = useState("")
+  const [hydrated, setHydrated] = useState(false)
+
+  useEffect(() => {
+    if (!detail || hydrated) return
+    const f = detail.fulfillment
+    if (f.draftIssuesSummary) setIssuesSummary(f.draftIssuesSummary)
+    if (f.paymentLinkUrl) setPaymentLinkUrl(f.paymentLinkUrl)
+    if (f.quotedStartAmountCents !== undefined) {
+      setQuotedAmountDollars((f.quotedStartAmountCents / 100).toFixed(2))
+    }
+    setHydrated(true)
+  }, [detail, hydrated])
+
+  useEffect(() => {
+    if (!detail?.fulfillment.draftIssuesSummary || !hydrated) return
+    if (detail.fulfillment.draftPackageStatus === "awaiting_ops_approval") {
+      setIssuesSummary(detail.fulfillment.draftIssuesSummary)
+    }
+  }, [detail?.fulfillment.draftPackageGeneratedAt, detail?.fulfillment.draftIssuesSummary, detail?.fulfillment.draftPackageStatus, hydrated])
 
   if (detail === undefined) {
     return <p className="px-4 py-16 text-center text-gray-500">Loading case…</p>
@@ -54,7 +78,12 @@ export function CaseDetailView({ opsToken, caseId }: Props) {
   const f = detail.fulfillment
   const paid = f.paidAt !== undefined || detail.payment?.status === "paid"
 
-  const runAction = async (fn: () => Promise<null>) => {
+  const parseQuotedCents = (): number | undefined => {
+    const dollars = Number.parseFloat(quotedAmountDollars)
+    return Number.isFinite(dollars) ? Math.round(dollars * 100) : undefined
+  }
+
+  const runAction = async (fn: () => Promise<unknown>) => {
     setActionError("")
     setBusy(true)
     try {
@@ -78,7 +107,7 @@ export function CaseDetailView({ opsToken, caseId }: Props) {
             Status: {detail.status.replace(/_/g, " ")}
           </p>
           <p className="mt-1 text-xs text-gray-500">
-            Email funnel — pay via emailed invoice / Payment Link (not site checkout).
+            Email funnel — human approve before issues + invoice; Outlook after paid.
           </p>
         </div>
         <OpsSignOutButton />
@@ -90,9 +119,17 @@ export function CaseDetailView({ opsToken, caseId }: Props) {
           <li>1. Part 1 Word sent: {stamp(f.personalizedFormSentAt)}</li>
           <li>2. Form returned: {stamp(f.formReturnedAt)}</li>
           <li>3. Receipt ack emailed: {stamp(f.formReceivedAckSentAt)}</li>
-          <li>4. Issues + invoice emailed: {stamp(f.contractInvoiceSentAt)}</li>
-          <li>5. Paid: {stamp(f.paidAt)}</li>
-          <li>6. Work / deliver: status → {detail.status.replace(/_/g, " ")}</li>
+          <li>
+            4. LLM draft ready: {stamp(f.draftPackageGeneratedAt)}{" "}
+            {f.draftPackageStatus ? `(${f.draftPackageStatus.replace(/_/g, " ")})` : ""}
+          </li>
+          <li>5. Ops approved &amp; sent: {stamp(f.contractInvoiceSentAt)}</li>
+          <li>6. Paid: {stamp(f.paidAt)}</li>
+          <li>
+            7. Outlook folder: {f.outlookFolderPath ?? "—"}{" "}
+            {f.outlookFolderCreatedAt ? `(${stamp(f.outlookFolderCreatedAt)})` : ""}
+          </li>
+          <li>8. Work / deliver: status → {detail.status.replace(/_/g, " ")}</li>
         </ol>
         <dl className="mt-4 grid gap-2 text-sm sm:grid-cols-2">
           <div>
@@ -143,31 +180,37 @@ export function CaseDetailView({ opsToken, caseId }: Props) {
         </div>
 
         <div className="mt-6 space-y-2 rounded border border-gray-200 bg-white p-4">
-          <p className="text-sm font-semibold text-navy">Email issues we can start with + invoice</p>
+          <p className="text-sm font-semibold text-navy">
+            Human approve — issues + contract + $499.99 invoice
+          </p>
+          <p className="text-xs text-gray-500">
+            LLM drafts after form return. Edit below, then Approve &amp; send. Client never gets this
+            until you approve.
+          </p>
           <textarea
             value={issuesSummary}
             onChange={(e) => setIssuesSummary(e.target.value)}
-            placeholder="Issues / work we can start with (from Part 1 review)"
-            rows={3}
-            className="w-full rounded border border-gray-200 px-3 py-2 text-sm"
+            placeholder="Documents Ask AI Legal can prepare (edit LLM draft)"
+            rows={10}
+            className="w-full rounded border border-gray-200 px-3 py-2 font-mono text-xs"
           />
           <input
             value={paymentLinkUrl}
             onChange={(e) => setPaymentLinkUrl(e.target.value)}
-            placeholder="Stripe Payment Link or invoice URL"
+            placeholder="Stripe Checkout / Payment Link URL"
             className="w-full rounded border border-gray-200 px-3 py-2 text-sm"
           />
           <input
             value={quotedAmountDollars}
             onChange={(e) => setQuotedAmountDollars(e.target.value)}
-            placeholder="Quoted amount USD (e.g. 799)"
+            placeholder="Start amount USD (e.g. 499.99)"
             className="w-full rounded border border-gray-200 px-3 py-2 text-sm"
           />
           <textarea
             value={scopeSummary}
             onChange={(e) => setScopeSummary(e.target.value)}
-            placeholder="Scope summary (what documents you'll prepare)"
-            rows={3}
+            placeholder="Scope summary (optional)"
+            rows={2}
             className="w-full rounded border border-gray-200 px-3 py-2 text-sm"
           />
           <input
@@ -176,40 +219,130 @@ export function CaseDetailView({ opsToken, caseId }: Props) {
             placeholder="Timeframe (optional)"
             className="w-full rounded border border-gray-200 px-3 py-2 text-sm"
           />
-          <button
-            type="button"
-            disabled={busy}
-            onClick={() => {
-              const dollars = Number.parseFloat(quotedAmountDollars)
-              const quotedAmountCents = Number.isFinite(dollars)
-                ? Math.round(dollars * 100)
-                : undefined
-              void runAction(() =>
-                markContractInvoiceSent({
-                  opsToken,
-                  caseId,
-                  paymentLinkUrl: paymentLinkUrl.trim() || undefined,
-                  quotedAmountCents,
-                  scopeSummary: scopeSummary.trim() || undefined,
-                  timeframe: timeframe.trim() || undefined,
-                  issuesSummary: issuesSummary.trim() || undefined,
+          <div className="flex flex-wrap gap-2 pt-1">
+            <button
+              type="button"
+              disabled={busy}
+              onClick={() =>
+                void runAction(() =>
+                  saveDraftPackage({
+                    opsToken,
+                    caseId,
+                    draftIssuesSummary: issuesSummary,
+                    quotedStartAmountCents: parseQuotedCents(),
+                    paymentLinkUrl: paymentLinkUrl.trim() || undefined,
+                  })
+                )
+              }
+              className="rounded border border-navy px-3 py-2 text-sm font-semibold text-navy disabled:opacity-40"
+            >
+              Save draft
+            </button>
+            <button
+              type="button"
+              disabled={busy}
+              onClick={() => void runAction(() => regenerateDraftPackage({ opsToken, caseId }))}
+              className="rounded border border-navy px-3 py-2 text-sm font-semibold text-navy disabled:opacity-40"
+            >
+              Regenerate LLM draft
+            </button>
+            <button
+              type="button"
+              disabled={busy}
+              onClick={() =>
+                void runAction(async () => {
+                  const amountCents = parseQuotedCents() ?? 49999
+                  const created = await createStartPaymentLink({
+                    opsToken,
+                    caseId,
+                    amountCents,
+                  })
+                  setPaymentLinkUrl(created.url)
+                  setQuotedAmountDollars((created.amountCents / 100).toFixed(2))
                 })
-              )
-            }}
-            className="rounded border border-gold bg-gold/20 px-3 py-2 text-sm font-semibold text-navy disabled:opacity-40"
-          >
-            Email issues + invoice package
-          </button>
+              }
+              className="rounded border border-navy px-3 py-2 text-sm font-semibold text-navy disabled:opacity-40"
+            >
+              Generate Stripe pay link
+            </button>
+            <button
+              type="button"
+              disabled={busy || !issuesSummary.trim()}
+              onClick={() =>
+                void runAction(() =>
+                  approveAndSendPackage({
+                    opsToken,
+                    caseId,
+                    issuesSummary: issuesSummary.trim(),
+                    paymentLinkUrl: paymentLinkUrl.trim() || undefined,
+                    quotedAmountCents: parseQuotedCents(),
+                    scopeSummary: scopeSummary.trim() || undefined,
+                    timeframe: timeframe.trim() || undefined,
+                  })
+                )
+              }
+              className="rounded border border-gold bg-gold/20 px-3 py-2 text-sm font-semibold text-navy disabled:opacity-40"
+            >
+              Approve &amp; send to client
+            </button>
+            <button
+              type="button"
+              disabled={busy}
+              onClick={() => {
+                void runAction(() =>
+                  markContractInvoiceSent({
+                    opsToken,
+                    caseId,
+                    paymentLinkUrl: paymentLinkUrl.trim() || undefined,
+                    quotedAmountCents: parseQuotedCents(),
+                    scopeSummary: scopeSummary.trim() || undefined,
+                    timeframe: timeframe.trim() || undefined,
+                    issuesSummary: issuesSummary.trim() || undefined,
+                  })
+                )
+              }}
+              className="rounded border border-gray-300 px-3 py-2 text-sm text-gray-700 disabled:opacity-40"
+            >
+              Legacy: email package (no approve flag)
+            </button>
+          </div>
+          <p className="text-xs text-gray-500">
+            Agreement link included: /document-preparation-agreement (pay = accept).
+          </p>
         </div>
 
         <div className="mt-4 flex flex-wrap gap-2">
           <button
             type="button"
             disabled={busy || paid}
-            onClick={() => void runAction(() => markPaidManual({ opsToken, caseId }))}
+            onClick={() =>
+              void runAction(() =>
+                markPaidManual({
+                  opsToken,
+                  caseId,
+                  amountCents: parseQuotedCents(),
+                })
+              )
+            }
             className="rounded border border-navy bg-navy px-3 py-2 text-sm font-semibold text-white disabled:opacity-40"
           >
-            Mark paid (manual)
+            Mark paid (manual) + Outlook folder
+          </button>
+          <button
+            type="button"
+            disabled={busy || !paid}
+            onClick={() =>
+              void runAction(() =>
+                retryCreateOutlookFolder({
+                  opsToken,
+                  caseId,
+                  amountCents: parseQuotedCents(),
+                })
+              )
+            }
+            className="rounded border border-navy px-3 py-2 text-sm font-semibold text-navy disabled:opacity-40"
+          >
+            Retry Outlook folder
           </button>
           <button
             type="button"

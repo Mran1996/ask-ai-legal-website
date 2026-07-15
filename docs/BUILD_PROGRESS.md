@@ -58,8 +58,11 @@ Track implementation against [ASK_AI_LEGAL_SPEC.md](./ASK_AI_LEGAL_SPEC.md) Sect
 - [x] Ops checklist: personalized form → form returned → contract/invoice emailed → mark paid → work → deliver
 - [x] Resend templates: personalized form + quote/contract/invoice (`convex/emailActions.ts`); subjects include `AAL-…`
 - [x] Stripe: Payment Link / invoice pasted in ops email (Checkout code kept unused for later)
+- [x] Stripe: ops Generate Stripe pay link (`createStartPaymentLink`) for $499.99 start fee
 - [x] Money before work: `markWorkStarted` / `markDelivered` require paid
 - [x] Flow docs: `docs/PAY_QUOTE_DELIVER_FLOW.md` + Outlook filing `docs/OUTLOOK_CLIENT_FILING.md`
+- [x] Outlook folder after paid (Graph + stub + Retry button)
+- [x] LLM draft + ops notify; human Approve & send; agreement page
 
 ### 1.5 Document upload
 

@@ -126,6 +126,92 @@ export const createCheckoutSession = action({
   },
 })
 
+/**
+ * Ops: create a one-time Stripe Checkout URL for the start fee (default $499.99).
+ * Paste remains supported if Stripe is not configured.
+ */
+export const createStartPaymentLink = action({
+  args: {
+    opsToken: v.string(),
+    caseId: v.id("cases"),
+    amountCents: v.optional(v.number()),
+  },
+  returns: v.object({
+    url: v.string(),
+    amountCents: v.number(),
+  }),
+  handler: async (
+    ctx,
+    args
+  ): Promise<{ url: string; amountCents: number }> => {
+    const expected = process.env.OPS_ACCESS_TOKEN
+    if (!expected || expected.length < 8 || args.opsToken !== expected) {
+      throw new Error("Unauthorized")
+    }
+
+    const meta = await ctx.runQuery(internal.cases.getOutlookFolderContext, {
+      caseId: args.caseId,
+    })
+    if (!meta) throw new Error("Case not found")
+
+    const checkout = (await ctx.runQuery(internal.payments.getCheckoutContextInternal, {
+      caseId: args.caseId,
+    })) as CheckoutContext | null
+
+    const amountCents = args.amountCents ?? 49999
+    if (amountCents < 50) throw new Error("Invalid amount")
+
+    const stripe = getStripe()
+    const site = publicSiteUrl()
+    const clientEmail = checkout?.clientEmail
+
+    const session = await stripe.checkout.sessions.create({
+      mode: "payment",
+      customer_email: clientEmail,
+      client_reference_id: args.caseId,
+      line_items: [
+        {
+          quantity: 1,
+          price_data: {
+            currency: "usd",
+            unit_amount: amountCents,
+            product_data: {
+              name: `Document preparation start — ${meta.caseReference}`,
+              description:
+                "Ask AI Legal document preparation start fee. Not a law firm — not legal advice. Paying accepts the Document Preparation Service Agreement.",
+            },
+          },
+        },
+      ],
+      success_url: `${site}/?paid=1&ref=${encodeURIComponent(meta.caseReference)}`,
+      cancel_url: `${site}/ops/intakes/${args.caseId}`,
+      metadata: {
+        caseId: args.caseId,
+        caseReference: meta.caseReference,
+      },
+    })
+
+    if (!session.url) throw new Error("Stripe did not return a checkout URL")
+
+    if (checkout?.estimateId) {
+      await ctx.runMutation(internal.payments.recordCheckoutSession, {
+        caseId: args.caseId,
+        estimateId: checkout.estimateId,
+        amountCents,
+        stripeCheckoutSessionId: session.id,
+      })
+    }
+
+    await ctx.runMutation(internal.payments.savePaymentLinkInternal, {
+      caseId: args.caseId,
+      paymentLinkUrl: session.url,
+      quotedStartAmountCents: amountCents,
+    })
+
+    return { url: session.url, amountCents }
+  },
+})
+
 export const handleStripeWebhook = internalAction({
   args: {
     rawBody: v.string(),

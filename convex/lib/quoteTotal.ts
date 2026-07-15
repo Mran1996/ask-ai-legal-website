@@ -1,5 +1,7 @@
 /** Mirrors lib/site-config.ts — keep in sync (Convex cannot import app lib). */
 export const CASE_FILE_REVIEW_PRICE_CENTS = 49900
+/** Default start fee for issues + invoice package ($499.99). */
+export const DOCUMENT_PREP_START_FEE_CENTS = 49999
 export const DOCUMENT_RETRIEVAL_FEE_CENTS = 9900
 
 export function documentPrepStartCents(args: {

@@ -12,6 +12,14 @@ export function opsCaseUrl(caseId: string): string {
   return `${publicSiteUrl()}/ops/intakes/${caseId}`
 }
 
+export function documentPreparationAgreementUrl(): string {
+  return `${publicSiteUrl()}/document-preparation-agreement`
+}
+
+export function opsNotifyEmail(): string {
+  return process.env.OPS_NOTIFY_EMAIL?.trim() || SUPPORT_EMAIL
+}
+
 export function contactPageUrl(): string {
   return `${publicSiteUrl()}/#contact`
 }

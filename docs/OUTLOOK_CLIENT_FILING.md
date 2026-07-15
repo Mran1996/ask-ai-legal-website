@@ -2,104 +2,109 @@
 
 **Convex ops is the source of truth.** Outlook folders are the human mirror for email + attachments.
 
-Microsoft 365 / Outlook is already connected for the business (same stack as Cal.com).
+## Preferred naming (after paid)
 
-## Folder structure (create once)
+When ops clicks **Mark paid** (or Stripe Checkout completes), Convex schedules `outlookActions.createClientOutlookFolder`:
 
-In Outlook (or Outlook on the web):
+```
+Clients/{LastName}-{AAL-REF}-Paid-{amount}/
+  01-Intake
+  02-Forms
+  03-Contract-Invoice
+  04-Client-Docs
+  05-Delivery
+```
+
+Example: `Clients/Puri-AAL-HN8AH8DG-Paid-499.99`
+
+Path is stored on the case as `outlookFolderPath` / `outlookFolderId` / `outlookFolderCreatedAt`.
+
+## Microsoft Graph (Convex automation)
+
+### 1. Azure app registration
+
+1. [Azure Portal](https://portal.azure.com) → **Microsoft Entra ID** → **App registrations** → **New**.
+2. Name: `Ask AI Legal Outlook Folders`.
+3. Accounts: single tenant.
+4. **Certificates & secrets** → new client secret → copy value.
+5. **API permissions** → Microsoft Graph → **Application** permissions:
+   - `Mail.ReadWrite`
+   - `MailboxSettings.Read` (optional)
+6. Click **Grant admin consent** for the tenant.
+7. Note **Directory (tenant) ID** and **Application (client) ID**.
+
+### 2. Convex production env
+
+```bash
+npx convex env set MICROSOFT_GRAPH_TENANT_ID "<tenant-id>" --prod
+npx convex env set MICROSOFT_GRAPH_CLIENT_ID "<client-id>" --prod
+npx convex env set MICROSOFT_GRAPH_CLIENT_SECRET "<secret>" --prod
+npx convex env set MICROSOFT_GRAPH_MAILBOX "support@askailegal.com" --prod
+```
+
+Mailbox must be the user/shared mailbox where folders should appear.
+
+### 3. Behavior
+
+- If all four env vars are set: Graph creates `Clients` → paid folder → five subfolders; best-effort moves messages whose subject contains `AAL-…` into the paid folder.
+- If any var is missing: **stub mode** — still writes `outlookFolderPath` on the case and logs “Graph not configured”; use Power Automate Flow B below.
+- Ops can click **Retry Outlook folder** on the case page.
+
+## Power Automate — Flow B (paid — backup / until Graph is live)
+
+1. [make.powerautomate.com](https://make.powerautomate.com) → **Automated cloud flow**.
+2. Trigger: **When a new email arrives (V3)** (Office 365 Outlook)
+   - Folder: Inbox or `Clients/_Paid-To-File`
+   - Subject filter includes `AAL-` (and optionally `Paid`)
+3. Actions:
+   - **Compose** folder name: `{LastName}-{AAL}-Paid-{amount}` (parse subject / use fixed $499.99 until Convex Graph is on).
+   - **Create folder** under Inbox: `Clients` (if missing), then the client folder, then:
+     - `01-Intake`, `02-Forms`, `03-Contract-Invoice`, `04-Client-Docs`, `05-Delivery`
+   - **Move email** into that client folder (or `03-Contract-Invoice` for Stripe receipts).
+4. Save → **On**. Test with subject `AAL-TEST — Paid 499.99`.
+
+### Alternate Flow B trigger (ops email)
+
+When Convex marks paid without Graph, have ops BCC themselves a one-line mail with subject `{AAL} — Paid` so Flow B still fires.
+
+## Folder structure helpers
 
 ```
 Inbox
 Clients
   _Inbox-To-File
   _Paid-To-File
-  {LastName}-{AAL-REF}/     ← create per client when first email arrives or when paid
-    01-Intake
-    02-Forms
-    03-Contract-Invoice
-    04-Client-Docs
-    05-Delivery
+  {LastName}-{AAL}-Paid-{amount}/
+    01-Intake … 05-Delivery
 ```
-
-Example: `Clients/Garcia-AAL-CH8AE8TW/04-Client-Docs`
 
 ## Outlook rules (one-time)
 
-### Rule 1 — All Ask AI Legal case mail
+### Rule 1 — Case mail → staging
 
-1. Outlook → **Rules** → **New rule**
-2. Condition: **specific words in the subject** → `AAL-`
-3. Action: **move to folder** → `Clients/_Inbox-To-File`  
-   (or assign category `Ask AI Legal Client`)
-4. Optional: also run on body containing `AAL-`
+Subject contains `AAL-` → move to `Clients/_Inbox-To-File`.
 
-### Rule 2 — Stripe payment receipts
+### Rule 2 — Stripe receipts
 
-1. New rule
-2. Condition: from Stripe (`receipt@stripe.com` / `invoice@stripe.com`) **or** subject contains `payment` / `receipt` / `invoice`
-3. Action: move to `Clients/_Paid-To-File`
-4. When you reconcile: create/move into `Clients/{LastName}-{AAL}/03-Contract-Invoice`
+From Stripe receipt/invoice → `Clients/_Paid-To-File` → reconcile into the paid client folder `03-Contract-Invoice`.
 
 ## Always put case ref in the subject
 
-Resend templates already use:
+Resend templates include `AAL-…` on Part 1, ack, issues/invoice, and delivery mail.
 
-- `{AAL-…} — Intake Part 1 questionnaire | Ask AI Legal`
-- `{AAL-…} — We received your Part 1 | Ask AI Legal`
-- `{AAL-…} — Issues we can start with & invoice | Ask AI Legal`
-- `{AAL-…}` on delivery mail
+## Power Automate — Flow A / Flow C
 
-Reply-all threads keep the reference so rules keep working.
+- **Flow A**: new case mail → ensure nested folders for early intake.
+- **Flow C**: Part 1 returned with attachments → file Word into `02-Forms` / docs into `04-Client-Docs`.
 
-## Power Automate — Flow A (new case mail → OneDrive folders)
-
-1. Go to [make.powerautomate.com](https://make.powerautomate.com) (same Microsoft account as Outlook).
-2. **Create** → **Automated cloud flow**
-3. Trigger: **When a new email arrives (V3)** in Office 365 Outlook  
-   - Folder: Inbox (or `Clients/_Inbox-To-File`)  
-   - Filter: Subject includes `AAL-`
-4. Actions (approximate):
-   - **Compose** case ref: extract with expression from subject (or use the full subject as folder hint).
-   - **Create folder** in OneDrive / SharePoint: `Clients/{FromLastName}-{CaseRef}`
-   - Create subfolders `01-Intake` … `05-Delivery` (five Create folder steps).
-   - **Get attachments** → **Create file** into `04-Client-Docs` or `01-Intake`.
-5. Save and turn **On**. Test by emailing yourself with subject `AAL-TEST — hello`.
-
-## Power Automate — Flow C (Part 1 returned — CRITICAL for ops filing)
-
-When the client emails the completed Word form + docs back to `support@`:
-
-1. **Create** → Automated cloud flow  
-2. Trigger: **When a new email arrives (V3)**  
-   - To: shared mailbox / support@  
-   - Subject includes `AAL-`  
-   - Optional: Has attachment = Yes  
-3. Actions:
-   - Parse case ref from subject (`AAL-XXXXXXXX`)
-   - Get sender display name → last name for folder  
-   - **Create folder** (if not exists): `Clients/{LastName}-{AAL}/`  
-   - Ensure children: `01-Intake`, `02-Forms`, `04-Client-Docs`  
-   - **Save attachments** → `02-Forms` (Word) and `04-Client-Docs` (PDF/images)  
-   - Optional: move message into that folder / categorize “Form returned”  
-4. Convex still sends the **auto receipt email** via `/resend-inbound` when Resend receiving is configured — Outlook Power Automate is the **human filing mirror**, not the ack.
-
-**Graph API:** not wired in this repo yet (no `MICROSOFT_GRAPH_*` env). Use Power Automate above until Graph app registration is added.
-
-## Power Automate — Flow B (paid)
-
-1. New automated flow.
-2. Trigger: new email in `Clients/_Paid-To-File` **or** subject contains `Paid` + `AAL-`.
-3. Actions:
-   - Ensure OneDrive folder `Clients/{LastName}-{CaseRef}` exists (create if missing).
-   - Save PDF attachments into `03-Contract-Invoice`.
-   - Optional: post a Teams message “Paid: AAL-…”.
+(Keep these even when Graph is on — Graph currently focuses on **paid** folder creation + optional move.)
 
 ## Daily operator habit
 
-1. Work from **`/ops/intakes/[caseId]`** (checklist + emails).
-2. Sweep `Clients/_Inbox-To-File` → rename into `LastName-AAL-…` once.
-3. When Stripe pays → **Mark paid** in ops, file receipt under `03-Contract-Invoice`.
+1. Work from **`/ops/intakes/[caseId]`**.
+2. Approve & send → client pays → **Mark paid** (creates/stubs Outlook folder).
+3. Confirm folder path on the case checklist; if stub, run Flow B or **Retry Outlook folder** after Graph env is set.
 
 ## Do not rely on inbox alone
 
-Search Convex by case reference if Outlook search fails. Attachments uploaded in the website chat also live in Convex `documents` on the case.
+Search Convex by case reference if Outlook search fails.

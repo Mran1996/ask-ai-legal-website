@@ -11,6 +11,7 @@
 import type * as appointments from "../appointments.js";
 import type * as cases from "../cases.js";
 import type * as documents from "../documents.js";
+import type * as draftPackageActions from "../draftPackageActions.js";
 import type * as emailActions from "../emailActions.js";
 import type * as estimates from "../estimates.js";
 import type * as health from "../health.js";
@@ -25,11 +26,13 @@ import type * as lib_emailBranding from "../lib/emailBranding.js";
 import type * as lib_intakeMapping from "../lib/intakeMapping.js";
 import type * as lib_letterheadLogoBase64 from "../lib/letterheadLogoBase64.js";
 import type * as lib_opsAuth from "../lib/opsAuth.js";
+import type * as lib_outlookFolderName from "../lib/outlookFolderName.js";
 import type * as lib_quoteTotal from "../lib/quoteTotal.js";
 import type * as lib_scheduleIntakeEmails from "../lib/scheduleIntakeEmails.js";
 import type * as lib_servicePricing from "../lib/servicePricing.js";
 import type * as lib_validators from "../lib/validators.js";
 import type * as notifications from "../notifications.js";
+import type * as outlookActions from "../outlookActions.js";
 import type * as payments from "../payments.js";
 import type * as stripeActions from "../stripeActions.js";
 
@@ -43,6 +46,7 @@ declare const fullApi: ApiFromModules<{
   appointments: typeof appointments;
   cases: typeof cases;
   documents: typeof documents;
+  draftPackageActions: typeof draftPackageActions;
   emailActions: typeof emailActions;
   estimates: typeof estimates;
   health: typeof health;
@@ -57,11 +61,13 @@ declare const fullApi: ApiFromModules<{
   "lib/intakeMapping": typeof lib_intakeMapping;
   "lib/letterheadLogoBase64": typeof lib_letterheadLogoBase64;
   "lib/opsAuth": typeof lib_opsAuth;
+  "lib/outlookFolderName": typeof lib_outlookFolderName;
   "lib/quoteTotal": typeof lib_quoteTotal;
   "lib/scheduleIntakeEmails": typeof lib_scheduleIntakeEmails;
   "lib/servicePricing": typeof lib_servicePricing;
   "lib/validators": typeof lib_validators;
   notifications: typeof notifications;
+  outlookActions: typeof outlookActions;
   payments: typeof payments;
   stripeActions: typeof stripeActions;
 }>;

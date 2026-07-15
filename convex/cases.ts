@@ -173,6 +173,86 @@ export const getFormReturnMeta = internalQuery({
   },
 })
 
+export const getOutlookFolderContext = internalQuery({
+  args: { caseId: v.id("cases") },
+  returns: v.union(
+    v.object({
+      caseReference: v.string(),
+      clientLastName: v.string(),
+      clientFirstName: v.string(),
+      outlookFolderPath: v.optional(v.string()),
+    }),
+    v.null()
+  ),
+  handler: async (ctx, args) => {
+    const caseDoc = await ctx.db.get("cases", args.caseId)
+    if (!caseDoc) return null
+    const client = await ctx.db.get("clients", caseDoc.clientId)
+    if (!client) return null
+    return {
+      caseReference: resolveCaseReference(caseDoc),
+      clientLastName: client.lastName,
+      clientFirstName: client.firstName,
+      outlookFolderPath: caseDoc.outlookFolderPath,
+    }
+  },
+})
+
+export const getDraftPackageContext = internalQuery({
+  args: { caseId: v.id("cases") },
+  returns: v.union(
+    v.object({
+      caseReference: v.string(),
+      clientFirstName: v.string(),
+      clientLastName: v.string(),
+      intakeRaw: v.string(),
+      issueSummary: v.optional(v.string()),
+      state: v.optional(v.string()),
+      county: v.optional(v.string()),
+      caseTypeLabel: v.optional(v.string()),
+      deadline: v.optional(v.string()),
+      opposingParty: v.optional(v.string()),
+      caseNumber: v.optional(v.string()),
+      estimateServiceLine: v.optional(v.string()),
+      draftIssuesSummary: v.optional(v.string()),
+      draftPackageStatus: v.optional(
+        v.union(
+          v.literal("awaiting_ops_approval"),
+          v.literal("approved_sent"),
+          v.literal("rejected")
+        )
+      ),
+    }),
+    v.null()
+  ),
+  handler: async (ctx, args) => {
+    const caseDoc = await ctx.db.get("cases", args.caseId)
+    if (!caseDoc) return null
+    const client = await ctx.db.get("clients", caseDoc.clientId)
+    if (!client) return null
+    const estimate = await ctx.db
+      .query("estimates")
+      .withIndex("by_case", (q) => q.eq("caseId", args.caseId))
+      .first()
+    return {
+      caseReference: resolveCaseReference(caseDoc),
+      clientFirstName: client.firstName,
+      clientLastName: client.lastName,
+      intakeRaw: caseDoc.intakeRaw,
+      issueSummary: caseDoc.intakeStructured.issueSummary,
+      state: caseDoc.jurisdiction.state || caseDoc.intakeStructured.clientStateInput,
+      county: caseDoc.jurisdiction.county,
+      caseTypeLabel: caseDoc.intakeStructured.caseTypeLabel,
+      deadline: caseDoc.intakeStructured.deadline,
+      opposingParty: caseDoc.intakeStructured.opposingParty,
+      caseNumber: caseDoc.intakeStructured.caseNumber,
+      estimateServiceLine: estimate?.serviceLine,
+      draftIssuesSummary: caseDoc.draftIssuesSummary,
+      draftPackageStatus: caseDoc.draftPackageStatus,
+    }
+  },
+})
+
 export const getIntakeEmailContext = internalQuery({
   args: { caseId: v.id("cases") },
   returns: v.union(
@@ -422,6 +502,13 @@ export const getCaseForOps = query({
         paymentLinkUrl: caseDoc.paymentLinkUrl,
         retrievalRequested: caseDoc.intakeStructured.retrievalRequested === true,
         caseNumber: caseDoc.intakeStructured.caseNumber,
+        draftIssuesSummary: caseDoc.draftIssuesSummary,
+        draftPackageStatus: caseDoc.draftPackageStatus,
+        draftPackageGeneratedAt: caseDoc.draftPackageGeneratedAt,
+        quotedStartAmountCents: caseDoc.quotedStartAmountCents,
+        outlookFolderPath: caseDoc.outlookFolderPath,
+        outlookFolderId: caseDoc.outlookFolderId,
+        outlookFolderCreatedAt: caseDoc.outlookFolderCreatedAt,
       },
       client: {
         firstName: client.firstName,

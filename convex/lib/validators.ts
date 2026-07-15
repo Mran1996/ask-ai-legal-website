@@ -151,7 +151,15 @@ export const notificationTypeValidator = v.union(
   v.literal("quote_contract_invoice_client"),
   v.literal("form_received_ack_client"),
   v.literal("form_received_support"),
-  v.literal("issues_invoice_client")
+  v.literal("issues_invoice_client"),
+  v.literal("draft_package_ops"),
+  v.literal("package_approved_client")
+)
+
+export const draftPackageStatusValidator = v.union(
+  v.literal("awaiting_ops_approval"),
+  v.literal("approved_sent"),
+  v.literal("rejected")
 )
 
 export const fulfillmentChecklistValidator = v.object({
@@ -163,6 +171,13 @@ export const fulfillmentChecklistValidator = v.object({
   paymentLinkUrl: v.optional(v.string()),
   retrievalRequested: v.boolean(),
   caseNumber: v.optional(v.string()),
+  draftIssuesSummary: v.optional(v.string()),
+  draftPackageStatus: v.optional(draftPackageStatusValidator),
+  draftPackageGeneratedAt: v.optional(v.number()),
+  quotedStartAmountCents: v.optional(v.number()),
+  outlookFolderPath: v.optional(v.string()),
+  outlookFolderId: v.optional(v.string()),
+  outlookFolderCreatedAt: v.optional(v.number()),
 })
 
 export const appointmentCallTypeValidator = v.union(

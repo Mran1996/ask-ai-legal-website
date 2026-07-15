@@ -52,6 +52,22 @@ export default defineSchema({
     paymentLinkUrl: v.optional(v.string()),
     /** Client auto-ack after Part 1 returned */
     formReceivedAckSentAt: v.optional(v.number()),
+    /** LLM draft of issues/docs we can prepare — ops must approve before client send */
+    draftIssuesSummary: v.optional(v.string()),
+    draftPackageStatus: v.optional(
+      v.union(
+        v.literal("awaiting_ops_approval"),
+        v.literal("approved_sent"),
+        v.literal("rejected")
+      )
+    ),
+    draftPackageGeneratedAt: v.optional(v.number()),
+    /** Start fee used in approve/send package (default $499.99) */
+    quotedStartAmountCents: v.optional(v.number()),
+    /** Outlook mail folder path created after paid */
+    outlookFolderPath: v.optional(v.string()),
+    outlookFolderId: v.optional(v.string()),
+    outlookFolderCreatedAt: v.optional(v.number()),
     createdAt: v.number(),
     updatedAt: v.number(),
   })

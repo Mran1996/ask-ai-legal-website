@@ -5,6 +5,7 @@ import type { QueryCtx } from "./_generated/server"
 import type { Doc, Id } from "./_generated/dataModel"
 import { assertOpsToken } from "./lib/opsAuth"
 import {
+  DOCUMENT_PREP_START_FEE_CENTS,
   documentPrepStartCents,
   retrievalFeeCents,
   totalDueBeforeWorkCents,
@@ -225,6 +226,7 @@ export const markCheckoutPaid = internalMutation({
     await ctx.db.patch("cases", estimate.caseId, {
       status: nextStatus,
       caseFileReviewPaidAt: Date.now(),
+      paidAt: Date.now(),
       updatedAt: Date.now(),
     })
 
@@ -235,6 +237,11 @@ export const markCheckoutPaid = internalMutation({
       outputRef: `paid:${nextStatus}`,
       status: "completed",
       createdAt: Date.now(),
+    })
+
+    await ctx.scheduler.runAfter(0, internal.outlookActions.createClientOutlookFolder, {
+      caseId: estimate.caseId,
+      amountCents: args.amountCents,
     })
 
     return { caseId: estimate.caseId, nextStatus }
@@ -279,6 +286,10 @@ export const markFormReturned = mutation({
         force: true,
       })
     }
+    await ctx.scheduler.runAfter(0, internal.draftPackageActions.generateDraftIssuesPackage, {
+      caseId: args.caseId,
+      force: true,
+    })
     return null
   },
 })
@@ -378,6 +389,11 @@ export const processInboundClientEmail = internalMutation({
       inboundPreview: args.textPreview,
     })
 
+    await ctx.scheduler.runAfter(0, internal.draftPackageActions.generateDraftIssuesPackage, {
+      caseId: caseDoc._id,
+      force: !alreadyReturned,
+    })
+
     return {
       caseId: caseDoc._id,
       caseReference: resolveCaseReference(caseDoc),
@@ -475,6 +491,225 @@ export const markPaidManual = mutation({
     })
     await ctx.db.patch("estimates", estimate._id, { status: "accepted" })
 
+    await ctx.scheduler.runAfter(0, internal.outlookActions.createClientOutlookFolder, {
+      caseId: args.caseId,
+      amountCents,
+    })
+
+    return null
+  },
+})
+
+export const savePaymentLinkInternal = internalMutation({
+  args: {
+    caseId: v.id("cases"),
+    paymentLinkUrl: v.string(),
+    quotedStartAmountCents: v.number(),
+  },
+  returns: v.null(),
+  handler: async (ctx, args) => {
+    await ctx.db.patch("cases", args.caseId, {
+      paymentLinkUrl: args.paymentLinkUrl,
+      quotedStartAmountCents: args.quotedStartAmountCents,
+      updatedAt: Date.now(),
+    })
+    return null
+  },
+})
+
+export const recordOutlookFolder = internalMutation({
+  args: {
+    caseId: v.id("cases"),
+    outlookFolderPath: v.string(),
+    outlookFolderId: v.optional(v.string()),
+    mode: v.union(v.literal("graph"), v.literal("stub")),
+  },
+  returns: v.null(),
+  handler: async (ctx, args) => {
+    const now = Date.now()
+    await ctx.db.patch("cases", args.caseId, {
+      outlookFolderPath: args.outlookFolderPath,
+      outlookFolderId: args.outlookFolderId,
+      outlookFolderCreatedAt: now,
+      updatedAt: now,
+    })
+    await ctx.db.insert("agentRuns", {
+      caseId: args.caseId,
+      agentType: "pricing",
+      inputRef: `outlook:${args.mode}`,
+      outputRef: args.outlookFolderPath,
+      status: args.mode === "graph" ? "completed" : "failed",
+      createdAt: now,
+    })
+    return null
+  },
+})
+
+export const saveDraftPackageInternal = internalMutation({
+  args: {
+    caseId: v.id("cases"),
+    draftIssuesSummary: v.string(),
+    quotedStartAmountCents: v.number(),
+    status: v.union(
+      v.literal("awaiting_ops_approval"),
+      v.literal("approved_sent"),
+      v.literal("rejected")
+    ),
+  },
+  returns: v.null(),
+  handler: async (ctx, args) => {
+    const now = Date.now()
+    await ctx.db.patch("cases", args.caseId, {
+      draftIssuesSummary: args.draftIssuesSummary,
+      draftPackageStatus: args.status,
+      draftPackageGeneratedAt: now,
+      quotedStartAmountCents: args.quotedStartAmountCents,
+      updatedAt: now,
+    })
+    return null
+  },
+})
+
+export const logDraftAgentRun = internalMutation({
+  args: {
+    caseId: v.id("cases"),
+    mode: v.string(),
+  },
+  returns: v.null(),
+  handler: async (ctx, args) => {
+    await ctx.db.insert("agentRuns", {
+      caseId: args.caseId,
+      agentType: "intake",
+      inputRef: "draft_package:form_returned",
+      outputRef: args.mode,
+      status: "completed",
+      createdAt: Date.now(),
+    })
+    return null
+  },
+})
+
+export const saveDraftPackage = mutation({
+  args: {
+    opsToken: v.string(),
+    caseId: v.id("cases"),
+    draftIssuesSummary: v.string(),
+    quotedStartAmountCents: v.optional(v.number()),
+    paymentLinkUrl: v.optional(v.string()),
+  },
+  returns: v.null(),
+  handler: async (ctx, args) => {
+    assertOpsToken(args.opsToken)
+    const caseDoc = await ctx.db.get("cases", args.caseId)
+    if (!caseDoc) throw new Error("Case not found")
+    const now = Date.now()
+    await ctx.db.patch("cases", args.caseId, {
+      draftIssuesSummary: args.draftIssuesSummary.trim(),
+      draftPackageStatus: caseDoc.draftPackageStatus ?? "awaiting_ops_approval",
+      quotedStartAmountCents:
+        args.quotedStartAmountCents ??
+        caseDoc.quotedStartAmountCents ??
+        DOCUMENT_PREP_START_FEE_CENTS,
+      paymentLinkUrl: args.paymentLinkUrl?.trim() || caseDoc.paymentLinkUrl,
+      updatedAt: now,
+    })
+    return null
+  },
+})
+
+export const regenerateDraftPackage = mutation({
+  args: { opsToken: v.string(), caseId: v.id("cases") },
+  returns: v.null(),
+  handler: async (ctx, args) => {
+    assertOpsToken(args.opsToken)
+    const caseDoc = await ctx.db.get("cases", args.caseId)
+    if (!caseDoc) throw new Error("Case not found")
+    await ctx.scheduler.runAfter(0, internal.draftPackageActions.generateDraftIssuesPackage, {
+      caseId: args.caseId,
+      force: true,
+    })
+    return null
+  },
+})
+
+export const approveAndSendPackage = mutation({
+  args: {
+    opsToken: v.string(),
+    caseId: v.id("cases"),
+    issuesSummary: v.string(),
+    paymentLinkUrl: v.optional(v.string()),
+    quotedAmountCents: v.optional(v.number()),
+    scopeSummary: v.optional(v.string()),
+    timeframe: v.optional(v.string()),
+  },
+  returns: v.null(),
+  handler: async (ctx, args) => {
+    assertOpsToken(args.opsToken)
+    const caseDoc = await ctx.db.get("cases", args.caseId)
+    if (!caseDoc) throw new Error("Case not found")
+    const issues = args.issuesSummary.trim()
+    if (!issues) throw new Error("Issues summary is required before approve & send")
+
+    const now = Date.now()
+    const quotedAmountCents =
+      args.quotedAmountCents ??
+      caseDoc.quotedStartAmountCents ??
+      DOCUMENT_PREP_START_FEE_CENTS
+    const paymentLinkUrl = args.paymentLinkUrl?.trim() || caseDoc.paymentLinkUrl
+
+    await ctx.db.patch("cases", args.caseId, {
+      draftIssuesSummary: issues,
+      draftPackageStatus: "approved_sent",
+      quotedStartAmountCents: quotedAmountCents,
+      contractInvoiceSentAt: now,
+      paymentLinkUrl,
+      status: "awaiting_payment",
+      updatedAt: now,
+    })
+
+    await ctx.scheduler.runAfter(0, internal.emailActions.sendQuoteContractInvoiceEmail, {
+      caseId: args.caseId,
+      paymentLinkUrl: paymentLinkUrl ?? "",
+      quotedAmountCents,
+      scopeSummary: args.scopeSummary,
+      timeframe: args.timeframe,
+      issuesSummary: issues,
+      includeAgreement: true,
+      askPriorityIssue: true,
+    })
+    return null
+  },
+})
+
+export const retryCreateOutlookFolder = mutation({
+  args: {
+    opsToken: v.string(),
+    caseId: v.id("cases"),
+    amountCents: v.optional(v.number()),
+  },
+  returns: v.null(),
+  handler: async (ctx, args) => {
+    assertOpsToken(args.opsToken)
+    const caseDoc = await ctx.db.get("cases", args.caseId)
+    if (!caseDoc) throw new Error("Case not found")
+    const estimate = await ctx.db
+      .query("estimates")
+      .withIndex("by_case", (q) => q.eq("caseId", args.caseId))
+      .first()
+    const amountCents =
+      args.amountCents ??
+      caseDoc.quotedStartAmountCents ??
+      (estimate
+        ? totalDueBeforeWorkCents({
+            finalQuoteCents: estimate.finalQuoteCents,
+            isCustomQuote: estimate.finalQuoteCents === 0,
+            retrievalRequested: caseDoc.intakeStructured.retrievalRequested === true,
+          })
+        : DOCUMENT_PREP_START_FEE_CENTS)
+    await ctx.scheduler.runAfter(0, internal.outlookActions.createClientOutlookFolder, {
+      caseId: args.caseId,
+      amountCents,
+    })
     return null
   },
 })

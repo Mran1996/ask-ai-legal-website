@@ -8,7 +8,9 @@ import {
   SUPPORT_EMAIL,
   clientEmailFooter,
   clientEmailFooterHtml,
+  documentPreparationAgreementUrl,
   opsCaseUrl,
+  opsNotifyEmail,
   publicSiteUrl,
   resendFromAddress,
 } from "./lib/emailBranding"
@@ -29,10 +31,12 @@ type IntakeEstimate = {
 }
 
 function formatUsdFromCents(cents: number): string {
+  const hasCents = cents % 100 !== 0
   return new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
-    maximumFractionDigits: 0,
+    minimumFractionDigits: hasCents ? 2 : 0,
+    maximumFractionDigits: 2,
   }).format(cents / 100)
 }
 
@@ -628,6 +632,53 @@ export const sendFormReceivedAcknowledgmentEmail = internalAction({
   },
 })
 
+export const sendOpsDraftPackageReadyEmail = internalAction({
+  args: {
+    caseId: v.id("cases"),
+    draftPreview: v.string(),
+  },
+  returns: v.null(),
+  handler: async (ctx, args) => {
+    const context = await ctx.runQuery(internal.cases.getIntakeEmailContext, {
+      caseId: args.caseId,
+    })
+    if (!context) return null
+
+    const to = opsNotifyEmail()
+    const body = [
+      `${context.caseReference} — LLM draft ready for your approval`,
+      "",
+      `Client: ${context.clientFirstName} ${context.clientLastName} <${context.clientEmail}>`,
+      "",
+      "Review, edit, then Approve & send in ops. Do not auto-forward this draft to the client.",
+      "",
+      `Ops: ${opsCaseUrl(args.caseId)}`,
+      "",
+      "— DRAFT PREVIEW —",
+      args.draftPreview,
+      "",
+      "UPL: Document preparation only — not a law firm.",
+    ].join("\n")
+
+    const result = await sendResendEmail({
+      to,
+      subject: `${context.caseReference} — Approve issues + invoice package | Ask AI Legal`,
+      text: body,
+    })
+
+    await ctx.runMutation(internal.notifications.recordNotification, {
+      caseId: args.caseId,
+      type: "draft_package_ops",
+      recipient: to,
+      status: result.ok ? "sent" : "failed",
+      provider: "resend",
+      errorMessage: result.ok ? undefined : result.error,
+    })
+
+    return null
+  },
+})
+
 export const sendQuoteContractInvoiceEmail = internalAction({
   args: {
     caseId: v.id("cases"),
@@ -636,6 +687,8 @@ export const sendQuoteContractInvoiceEmail = internalAction({
     scopeSummary: v.optional(v.string()),
     timeframe: v.optional(v.string()),
     issuesSummary: v.optional(v.string()),
+    includeAgreement: v.optional(v.boolean()),
+    askPriorityIssue: v.optional(v.boolean()),
   },
   returns: v.null(),
   handler: async (ctx, args) => {
@@ -667,6 +720,32 @@ export const sendQuoteContractInvoiceEmail = internalAction({
       args.paymentLinkUrl.trim() ||
       "(Payment link will be added by our team — reply if you do not see an invoice link.)"
 
+    const agreementUrl = documentPreparationAgreementUrl()
+    const agreementBlock =
+      args.includeAgreement !== false
+        ? [
+            "SERVICE AGREEMENT (document preparation only)",
+            `Please read: ${agreementUrl}`,
+            "By paying the invoice / Payment Link you accept this Document Preparation Service Agreement.",
+            "",
+          ]
+        : [
+            "SERVICE AGREEMENT",
+            "By paying the invoice you agree this is a document-preparation engagement only.",
+            "",
+          ]
+
+    const priorityBlock =
+      args.askPriorityIssue !== false
+        ? [
+            "PLEASE REPLY WITH",
+            "1. Are these the issues, or did we miss anything?",
+            "2. Which ONE issue should we prepare documents for first?",
+            "3. Which remaining issues can wait for a later phase?",
+            "",
+          ]
+        : []
+
     const body = withClientFooter(
       [
         `Hello ${context.clientFirstName},`,
@@ -675,9 +754,10 @@ export const sendQuoteContractInvoiceEmail = internalAction({
         "",
         "Ask AI Legal generates legal documents only. We are not a law firm, we do not provide legal advice, and we do not appear in court or file on your behalf.",
         "",
-        "ISSUES / WORK WE CAN START WITH",
+        "DOCUMENTS / ISSUES WE CAN START WITH (document preparation)",
         issues,
         "",
+        ...priorityBlock,
         "SCOPE (document preparation)",
         scope,
         "",
@@ -696,9 +776,7 @@ export const sendQuoteContractInvoiceEmail = internalAction({
         "• Court appearance, filing, or serving papers for you",
         "• Document retrieval until separately quoted and paid",
         "",
-        "SERVICE AGREEMENT",
-        "By paying the invoice you agree this is a document-preparation engagement only.",
-        "",
+        ...agreementBlock,
         "PAYMENT (off-site invoice / Payment Link)",
         payUrl,
         "",
@@ -716,7 +794,7 @@ export const sendQuoteContractInvoiceEmail = internalAction({
 
     await ctx.runMutation(internal.notifications.recordNotification, {
       caseId: args.caseId,
-      type: "issues_invoice_client",
+      type: args.includeAgreement ? "package_approved_client" : "issues_invoice_client",
       recipient: context.clientEmail,
       status: result.ok ? "sent" : "failed",
       provider: "resend",
