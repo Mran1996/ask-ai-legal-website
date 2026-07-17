@@ -167,7 +167,8 @@ export type PricingLookupResult = {
 const HIGH_COST_STATES = new Set(["CA", "NY", "MA", "CT", "NJ", "DC", "WA", "HI", "CO", "MD"])
 const LOW_COST_STATES = new Set(["MS", "WV", "AR", "OK", "ID", "MT", "WY", "ND", "SD", "AL", "KY"])
 
-const OUR_PRICE_FRACTION_OF_LOW = 0.38
+/** Client-facing quote is always half of the displayed attorney-low. */
+const OUR_PRICE_FRACTION_OF_LOW = 0.5
 
 function normalizeState(state?: string): string {
   const s = state?.trim().toUpperCase() ?? ""
@@ -202,47 +203,24 @@ function issueHashBucket(issue: string, buckets: number): number {
 }
 
 /**
- * Doc-prep quote: prefer maintained template price, then ~38% of attorney-low,
- * then issue-aware step so unrelated matters do not share an identical number.
- * Never use (low+high)/2 midpoint (that forced many family cases to $1,999).
+ * Doc-prep quote = half of the displayed Typical attorney low, rounded to nearest $1.
+ * Example: attorney low $2,875 → Ask AI Legal $1,438.
  */
-function computeOurAverageCents(
-  attorneyLowCents: number,
-  attorneyHighCents: number,
-  templateOurPriceCents: number | null,
-  issue: string,
-  deliverableId: string
-): number {
-  const baseFromTemplate =
-    templateOurPriceCents !== null && templateOurPriceCents > 0
-      ? templateOurPriceCents
-      : Math.round((attorneyLowCents * OUR_PRICE_FRACTION_OF_LOW) / 100) * 100
-
-  // $25 steps from issue/deliverable so same template + different story ≠ identical quote
-  const step = 2500
-  const bucket = issueHashBucket(`${deliverableId}|${issue}`, 17) // 0..16 → $0–$400
-  const adjusted = baseFromTemplate + bucket * step
-
-  const floor = 29900
-  const ceiling = Math.min(
-    249900,
-    Math.max(floor + 10000, Math.round((attorneyHighCents * 0.55) / 100) * 100)
-  )
-  return Math.max(floor, Math.min(ceiling, adjusted))
+export function computeOurAverageCents(attorneyLowCents: number): number {
+  if (attorneyLowCents <= 0) return 0
+  return Math.round(attorneyLowCents / 2 / 100) * 100
 }
 
-/** For UI copy: our quote as % of attorney midpoint (or planned low-fraction if custom). */
+/** For UI copy: our quote as % of attorney low (target 50%). */
 export function estimateFractionPercent(
   ourCents: number,
   attorneyLowCents: number,
-  attorneyHighCents: number
+  _attorneyHighCents: number
 ): number {
-  if (ourCents <= 0) {
+  if (ourCents <= 0 || attorneyLowCents <= 0) {
     return Math.round(OUR_PRICE_FRACTION_OF_LOW * 100)
   }
-  const mid = (attorneyLowCents + attorneyHighCents) / 2
-  if (mid <= 0) return 0
-  return Math.round((ourCents / mid) * 100)
+  return Math.round((ourCents / attorneyLowCents) * 100)
 }
 
 function issueMatchesKeywords(issue: string, keywords: readonly string[]): boolean {
@@ -258,15 +236,7 @@ function localizeDeliverable(
   const factor = stateLegalMarketFactor(state)
   const attorneyLowCents = scaleCents(template.attorneyLowCents, factor)
   const attorneyHighCents = scaleCents(template.attorneyHighCents, factor)
-  const scaledTemplate =
-    template.ourPriceCents !== null ? scaleCents(template.ourPriceCents, factor) : null
-  const ourPriceCents = computeOurAverageCents(
-    attorneyLowCents,
-    attorneyHighCents,
-    scaledTemplate,
-    issue,
-    template.id
-  )
+  const ourPriceCents = computeOurAverageCents(attorneyLowCents)
 
   const baseLine = template.serviceLine.replace(/\s*\([A-Z]{2}\)\s*$/, "").trim()
   const serviceLine =
@@ -309,6 +279,17 @@ export function pricingMatterSignature(input: PricingLookupInput): string {
   const issue = (input.issue ?? "").trim().toLowerCase().slice(0, 280)
   const template = findTemplate(input.caseType?.trim() ?? "", input.issue?.trim() ?? "")
   return `${state}|${template.id}|${caseType}|${issueHashBucket(issue, 10007)}`
+}
+
+/**
+ * @deprecated Quote is now exactly half of attorney-low; kept for callers/tests.
+ * Cent-safe: round to nearest $1 (100 cents).
+ */
+export const SERVICE_MARKUP_FACTOR = 1.0
+
+export function applyServiceMarkup(baseCents: number): number {
+  if (baseCents <= 0) return 0
+  return Math.round((baseCents * SERVICE_MARKUP_FACTOR) / 100) * 100
 }
 
 export function resolvePricing(input: PricingLookupInput): PricingLookupResult {
