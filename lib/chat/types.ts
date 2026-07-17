@@ -89,12 +89,15 @@ export const EMPTY_INTAKE: IntakeFormData = {
 
 export const CASE_TYPES = [
   "Family / divorce",
-  "Custody",
+  "Family / custody",
+  "Family / support",
   "Civil complaint",
   "Business dispute",
   "Housing / eviction",
   "Small claims",
   "Demand letter",
   "Response / answer",
+  "Criminal motion",
+  "Post-conviction",
   "Other",
 ] as const
