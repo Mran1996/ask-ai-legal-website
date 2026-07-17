@@ -76,7 +76,14 @@ export function HeroSection() {
                   className="font-display text-4xl font-semibold text-accent-light sm:text-5xl"
                 />
               ) : (
-                <p className="font-display text-4xl font-semibold text-accent-light sm:text-5xl">
+                <p
+                  className={
+                    // Digit "1" in display serif often reads as capital "I" — use sans for single digits
+                    item.display && /^\d+$/.test(item.display)
+                      ? "font-sans text-4xl font-bold tabular-nums tracking-tight text-accent-light sm:text-5xl"
+                      : "font-display text-4xl font-semibold text-accent-light sm:text-5xl"
+                  }
+                >
                   {item.display}
                 </p>
               )}

@@ -4,11 +4,11 @@ import Link from "next/link"
 import { Scale, Instagram, Facebook } from "lucide-react"
 import { useLanguage } from "@/components/language-provider"
 import { serviceSlug } from "@/lib/service-icons"
-import { SITE_DISCLAIMER, SITE_BRAND_NAME } from "@/lib/site-config"
+import { SITE_DISCLAIMER, SITE_BRAND_NAME, SOCIAL_LINKS } from "@/lib/site-config"
 
 const social = [
-  { label: "Instagram", icon: Instagram },
-  { label: "Facebook", icon: Facebook },
+  { label: "Instagram", icon: Instagram, href: SOCIAL_LINKS.instagram },
+  { label: "Facebook", icon: Facebook, href: SOCIAL_LINKS.facebook },
 ]
 
 export function Footer() {
@@ -63,15 +63,17 @@ export function Footer() {
               {SITE_DISCLAIMER}
             </p>
             <div className="mt-5 flex gap-3">
-              {social.map(({ label, icon: Icon }) => (
-                <button
+              {social.map(({ label, icon: Icon, href }) => (
+                <a
                   key={label}
-                  type="button"
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   aria-label={label}
-                  className="flex h-10 w-10 cursor-default items-center justify-center rounded-sm border border-white/10 text-white/70 transition-colors hover:border-gold/40 hover:text-gold"
+                  className="flex h-10 w-10 items-center justify-center rounded-sm border border-white/10 text-white/70 transition-colors hover:border-gold/40 hover:text-gold"
                 >
                   <Icon className="h-4 w-4" aria-hidden />
-                </button>
+                </a>
               ))}
             </div>
           </div>
@@ -99,15 +101,17 @@ export function Footer() {
               {columns.social}
             </h3>
             <ul className="mt-4 space-y-2.5">
-              {social.map(({ label, icon: Icon }) => (
+              {social.map(({ label, icon: Icon, href }) => (
                 <li key={label}>
-                  <button
-                    type="button"
-                    className="flex cursor-default items-center gap-2 text-sm transition-colors hover:text-gold"
+                  <a
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 text-sm transition-colors hover:text-gold"
                   >
                     <Icon className="h-4 w-4 shrink-0" aria-hidden />
                     {label}
-                  </button>
+                  </a>
                 </li>
               ))}
             </ul>

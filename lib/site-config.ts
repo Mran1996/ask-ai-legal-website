@@ -3,8 +3,8 @@ export const SITE_URL = "https://askailegal.com"
 
 /** Site-wide links — from Ask AI Legal cleanmain app */
 export const SOCIAL_LINKS = {
-  instagram: "https://www.instagram.com/askailegal",
-  facebook: "https://www.facebook.com/askailegal",
+  instagram: "https://www.instagram.com/askailegal/",
+  facebook: "https://www.facebook.com/profile.php?id=61585772484354",
 } as const
 
 export const SUPPORT_EMAIL = "support@askailegal.com"

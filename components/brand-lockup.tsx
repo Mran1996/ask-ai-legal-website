@@ -1,12 +1,15 @@
+"use client"
+
 import Link from "next/link"
 import { BrandMark } from "@/components/brand-mark"
+import { TypewriterText } from "@/components/typewriter-text"
 import { SITE_BRAND_NAME, SITE_TAGLINE } from "@/lib/site-config"
 
 type BrandLockupProps = {
   taglineClassName?: string
   className?: string
   href?: string
-  /** Hero = centered mark + tagline. Header = compact left-aligned nav mark. */
+  /** Hero = centered mark + typewriter title. Header = compact left-aligned nav mark. */
   variant?: "hero" | "header"
 }
 
@@ -27,7 +30,7 @@ export function BrandLockup({
       className="brand-title-gold font-sans text-4xl font-semibold leading-[1.05] tracking-tight sm:text-5xl md:text-6xl lg:text-7xl"
       aria-label={SITE_BRAND_NAME}
     >
-      {SITE_BRAND_NAME}
+      <TypewriterText text={SITE_BRAND_NAME} speed={70} startDelay={280} showCursor />
     </span>
   )
 

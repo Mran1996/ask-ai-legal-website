@@ -1,8 +1,8 @@
 /** Shared branding for outbound Resend client emails (UPL-safe). */
 
 export const SUPPORT_EMAIL = "support@askailegal.com"
-export const INSTAGRAM_URL = "https://www.instagram.com/askailegal"
-export const FACEBOOK_URL = "https://www.facebook.com/askailegal"
+export const INSTAGRAM_URL = "https://www.instagram.com/askailegal/"
+export const FACEBOOK_URL = "https://www.facebook.com/profile.php?id=61585772484354"
 
 export function publicSiteUrl(): string {
   return (process.env.PUBLIC_SITE_URL ?? "https://askailegal.com").replace(/\/$/, "")
