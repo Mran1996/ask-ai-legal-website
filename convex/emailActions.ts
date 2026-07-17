@@ -17,6 +17,7 @@ import {
 import {
   buildPersonalizedIntakeDocx,
   intakeDocxFileName,
+  resolveIntakeDocxMatterHint,
   loadLetterheadLogoBytes,
 } from "./lib/buildIntakeDocx"
 
@@ -385,7 +386,7 @@ export const sendPersonalizedFormEmail = internalAction({
     }
 
     const logoBytes = await loadLetterheadLogoBytes()
-    const docBytes = await buildPersonalizedIntakeDocx({
+    const docxContext = {
       caseReference: context.caseReference,
       clientFirstName: context.clientFirstName,
       clientLastName: context.clientLastName,
@@ -394,19 +395,26 @@ export const sendPersonalizedFormEmail = internalAction({
       issueSummary: context.issueSummary,
       state: context.state,
       county: context.county,
+      court: context.court,
+      matterType: context.matterType,
       caseTypeLabel: context.caseTypeLabel,
+      role: context.role,
+      serviceNeeded: context.serviceNeeded,
       deadline: context.deadline,
+      knownDates: context.knownDates,
       opposingParty: context.opposingParty,
       hasDocuments: context.hasDocuments,
       preferredContact: context.preferredContact,
       caseNumber: context.caseNumber,
       retrievalRequested: context.retrievalRequested,
       logoBytes,
-    })
+    }
+    const docBytes = await buildPersonalizedIntakeDocx(docxContext)
 
     const fileName = intakeDocxFileName({
       lastName: context.clientLastName,
       caseReference: context.caseReference,
+      matterHint: resolveIntakeDocxMatterHint(docxContext),
     })
 
     const storageId = await ctx.storage.store(

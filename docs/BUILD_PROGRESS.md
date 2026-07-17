@@ -153,3 +153,5 @@ Track implementation against [ASK_AI_LEGAL_SPEC.md](./ASK_AI_LEGAL_SPEC.md) Sect
 | 2026-07-13 | Email funnel | No site Pay; ops form→invoice→paid; Outlook playbook |
 | 2026-07-14 | Funnel fix | Hardened save details; email From/footer/review CTA; Convex prod deploy |
 | 2026-07-14 | Word intake | Auto letterhead DOCX Parts A/B emailed via Resend after intake |
+| 2026-07-17 | Practice OS Core | +10% markup, $499 deposit, intake expansion, deadlines/referrals tables, counsel-gated delivery, full ops dashboard |
+| 2026-07-17 | Matter-specific Part 1 | Intake Word form selects question set by matterType / caseType / issue keywords (family, UD, civil, criminal, etc.) |

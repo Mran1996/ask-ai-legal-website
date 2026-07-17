@@ -14,10 +14,17 @@ export function intakeFormToPayload(
     email: data.email.trim(),
     phone: data.phone.trim() || undefined,
     state: data.state.trim() || undefined,
+    county: data.county.trim() || undefined,
     caseType: data.caseType.trim() || undefined,
     issue: data.issue.trim(),
+    caseNumber: data.caseNumber.trim() || undefined,
+    role: data.role.trim() || undefined,
+    serviceNeeded: data.serviceNeeded.trim() || undefined,
     deadline: data.deadline.trim() || undefined,
+    knownDates: data.knownDates.trim() || undefined,
     opposingParty: data.opposingParty.trim() || undefined,
+    referralSource: data.referralSource.trim() || undefined,
+    referralCode: data.referralCode.trim() || undefined,
     hasDocuments:
       data.hasDocuments === "yes" || data.hasDocuments === "no"
         ? data.hasDocuments
@@ -43,9 +50,13 @@ export function buildIntakeStructuredPreview(data: IntakeFormData): CaUdIntakeSt
     hearingDate: deadline || undefined,
     notes: data.issue.trim(),
     clientStateInput: data.state.trim() || undefined,
+    county: data.county.trim() || undefined,
     caseTypeLabel: data.caseType.trim() || undefined,
     deadline: deadline || undefined,
+    knownDates: data.knownDates.trim() || undefined,
     opposingParty: opposingParty || undefined,
+    role: data.role.trim() || undefined,
+    serviceNeeded: data.serviceNeeded.trim() || undefined,
     hasDocuments:
       data.hasDocuments === "yes" || data.hasDocuments === "no"
         ? data.hasDocuments
@@ -58,5 +69,8 @@ export function buildIntakeStructuredPreview(data: IntakeFormData): CaUdIntakeSt
         : undefined,
     preferredLanguage: data.preferredLanguage || undefined,
     issueSummary: data.issue.trim(),
+    caseNumber: data.caseNumber.trim() || undefined,
+    referralSource: data.referralSource.trim() || undefined,
+    referralCode: data.referralCode.trim() || undefined,
   }
 }

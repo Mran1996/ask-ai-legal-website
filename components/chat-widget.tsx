@@ -897,6 +897,16 @@ export function ChatWidget() {
                 </label>
 
                 <label className="block">
+                  <span className="mb-1 block text-[10px] uppercase tracking-wider text-white/50">County</span>
+                  <input
+                    value={intake.county}
+                    onChange={(e) => updateIntake("county", e.target.value)}
+                    placeholder="e.g. Los Angeles"
+                    className="w-full rounded-sm border border-white/15 bg-white/5 px-2.5 py-2 text-sm text-white focus:border-gold/50 focus:outline-none"
+                  />
+                </label>
+
+                <label className="block">
                   <span className="mb-1 block text-[10px] uppercase tracking-wider text-white/50">{ui.caseType}</span>
                   <select
                     value={intake.caseType}
@@ -912,6 +922,36 @@ export function ChatWidget() {
                       </option>
                     ))}
                   </select>
+                </label>
+
+                <label className="block">
+                  <span className="mb-1 block text-[10px] uppercase tracking-wider text-white/50">Case / Docket Number</span>
+                  <input
+                    value={intake.caseNumber}
+                    onChange={(e) => updateIntake("caseNumber", e.target.value)}
+                    placeholder="If you have one"
+                    className="w-full rounded-sm border border-white/15 bg-white/5 px-2.5 py-2 text-sm text-white focus:border-gold/50 focus:outline-none"
+                  />
+                </label>
+
+                <label className="block">
+                  <span className="mb-1 block text-[10px] uppercase tracking-wider text-white/50">Your Role</span>
+                  <input
+                    value={intake.role}
+                    onChange={(e) => updateIntake("role", e.target.value)}
+                    placeholder="e.g. Tenant, Defendant, Petitioner"
+                    className="w-full rounded-sm border border-white/15 bg-white/5 px-2.5 py-2 text-sm text-white focus:border-gold/50 focus:outline-none"
+                  />
+                </label>
+
+                <label className="block">
+                  <span className="mb-1 block text-[10px] uppercase tracking-wider text-white/50">Service Needed</span>
+                  <input
+                    value={intake.serviceNeeded}
+                    onChange={(e) => updateIntake("serviceNeeded", e.target.value)}
+                    placeholder="e.g. Answer to unlawful detainer"
+                    className="w-full rounded-sm border border-white/15 bg-white/5 px-2.5 py-2 text-sm text-white focus:border-gold/50 focus:outline-none"
+                  />
                 </label>
 
                 <label className="block">
@@ -935,10 +975,40 @@ export function ChatWidget() {
                 </label>
 
                 <label className="block">
+                  <span className="mb-1 block text-[10px] uppercase tracking-wider text-white/50">Other Filing / Hearing Dates</span>
+                  <input
+                    value={intake.knownDates}
+                    onChange={(e) => updateIntake("knownDates", e.target.value)}
+                    placeholder="e.g. 08/15/2026 hearing, 09/01/2026 filing"
+                    className="w-full rounded-sm border border-white/15 bg-white/5 px-2.5 py-2 text-sm text-white focus:border-gold/50 focus:outline-none"
+                  />
+                </label>
+
+                <label className="block">
                   <span className="mb-1 block text-[10px] uppercase tracking-wider text-white/50">{ui.opposingParty}</span>
                   <input
                     value={intake.opposingParty}
                     onChange={(e) => updateIntake("opposingParty", e.target.value)}
+                    className="w-full rounded-sm border border-white/15 bg-white/5 px-2.5 py-2 text-sm text-white focus:border-gold/50 focus:outline-none"
+                  />
+                </label>
+
+                <label className="block">
+                  <span className="mb-1 block text-[10px] uppercase tracking-wider text-white/50">How did you hear about us?</span>
+                  <input
+                    value={intake.referralSource}
+                    onChange={(e) => updateIntake("referralSource", e.target.value)}
+                    placeholder="e.g. Google, friend, returning client"
+                    className="w-full rounded-sm border border-white/15 bg-white/5 px-2.5 py-2 text-sm text-white focus:border-gold/50 focus:outline-none"
+                  />
+                </label>
+
+                <label className="block">
+                  <span className="mb-1 block text-[10px] uppercase tracking-wider text-white/50">Referral / Promo Code</span>
+                  <input
+                    value={intake.referralCode}
+                    onChange={(e) => updateIntake("referralCode", e.target.value)}
+                    placeholder="Optional"
                     className="w-full rounded-sm border border-white/15 bg-white/5 px-2.5 py-2 text-sm text-white focus:border-gold/50 focus:outline-none"
                   />
                 </label>

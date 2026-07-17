@@ -36,13 +36,20 @@ export function buildIntakeStructured(args: IntakeFormArgs) {
     hearingDate: deadline || undefined,
     notes: args.issue.trim(),
     clientStateInput: args.state?.trim() || undefined,
+    county: args.county?.trim() || undefined,
     caseTypeLabel: args.caseType?.trim() || undefined,
     deadline: deadline || undefined,
+    knownDates: args.knownDates?.trim() || undefined,
     opposingParty: opposingParty || undefined,
+    role: args.role?.trim() || undefined,
+    serviceNeeded: args.serviceNeeded?.trim() || undefined,
     hasDocuments: args.hasDocuments,
     preferredContact: args.preferredContact,
     preferredLanguage: args.preferredLanguage?.trim() || undefined,
     issueSummary: args.issue.trim(),
+    caseNumber: args.caseNumber?.trim() || undefined,
+    referralSource: args.referralSource?.trim() || undefined,
+    referralCode: args.referralCode?.trim() || undefined,
   }
 }
 

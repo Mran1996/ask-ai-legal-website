@@ -5,13 +5,13 @@ Ask AI Legal fulfills **document generation only** (not a law firm). Payment hap
 ## Order of operations
 
 1. **Intake** — Request Quote / chat: problem + contact (+ optional uploads).
-2. **Auto Part 1 Word** — letterhead Case Intake Questionnaire – Part 1 emailed.
+2. **Auto Part 1 Word** — letterhead Case Intake Questionnaire – Part 1 emailed; questions are **matter-specific** (family, eviction, civil, criminal, demand letter, etc.) from case type / issue — not a fixed divorce form.
 3. **Client returns Part 1** — to `support@askailegal.com` with `AAL-…` in subject.
 4. **Auto acknowledgment** — Resend inbound → marks `formReturnedAt`, emails client receipt ack, notifies ops.
 5. **LLM draft (ops only)** — Convex drafts “documents we can prepare” → saves `draftIssuesSummary` → emails **ops** (`OPS_NOTIFY_EMAIL` or support) with deep link to `/ops`. **Never auto-sends this draft to the client.**
-6. **Human approve** — Ops edits draft, optionally generates Stripe pay link ($499.99 default), **Approve & send** → client gets issues + agreement link + invoice/pay URL.
-7. **Paid** — Ops **Mark paid** (or Stripe Checkout webhook) → status advances → **Outlook folder** created (`Clients/{LastName}-{AAL}-Paid-{amount}`).
-8. **Work → Deliver** — Only after paid.
+6. **Human approve** — Ops edits draft, optionally generates Stripe pay link ($499 fixed deposit), **Approve & send** → client gets issues + agreement link + invoice/pay URL.
+7. **Paid** — Client pays $499 deposit (Stripe Checkout or manual mark) → status advances → **Outlook folder** created. Deposit ≠ full payment; balance is tracked on the estimate.
+8. **Work → Deliver** — Only after paid **and** licensed counsel approves the final document (`counselReviews` table). Delivery without counsel approval is blocked server-side.
 
 Part 2 is **not** auto-sent with Part 1.
 

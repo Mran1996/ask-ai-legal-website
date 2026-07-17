@@ -14,6 +14,8 @@ export const matterTypeValidator = v.union(
 export const jurisdictionValidator = v.object({
   state: v.string(),
   county: v.optional(v.string()),
+  /** Court name if known. */
+  court: v.optional(v.string()),
 })
 
 export const caseStatusValidator = v.union(
@@ -103,16 +105,23 @@ export const intakeFormValidator = v.object({
   email: v.string(),
   phone: v.optional(v.string()),
   state: v.optional(v.string()),
+  county: v.optional(v.string()),
   caseType: v.optional(v.string()),
   issue: v.string(),
+  caseNumber: v.optional(v.string()),
+  role: v.optional(v.string()),
+  serviceNeeded: v.optional(v.string()),
   deadline: v.optional(v.string()),
+  knownDates: v.optional(v.string()),
   opposingParty: v.optional(v.string()),
+  referralSource: v.optional(v.string()),
+  referralCode: v.optional(v.string()),
   hasDocuments: v.optional(hasDocumentsValidator),
   preferredContact: v.optional(preferredContactValidator),
   preferredLanguage: v.optional(v.string()),
 })
 
-/** Parsed intake facts for CA unlawful detainer. */
+/** Parsed intake facts (generic + CA-specific fields). */
 export const intakeStructuredValidator = v.object({
   tenantName: v.optional(v.string()),
   landlordName: v.optional(v.string()),
@@ -123,9 +132,17 @@ export const intakeStructuredValidator = v.object({
   hearingDate: v.optional(v.string()),
   notes: v.optional(v.string()),
   clientStateInput: v.optional(v.string()),
+  /** County within the state. */
+  county: v.optional(v.string()),
   caseTypeLabel: v.optional(v.string()),
   deadline: v.optional(v.string()),
+  /** Additional known filing/hearing dates, comma-separated. */
+  knownDates: v.optional(v.string()),
   opposingParty: v.optional(v.string()),
+  /** Client's role in the case (tenant, defendant, petitioner, etc.). */
+  role: v.optional(v.string()),
+  /** Specific service the client asked for. */
+  serviceNeeded: v.optional(v.string()),
   hasDocuments: v.optional(hasDocumentsValidator),
   preferredContact: v.optional(preferredContactValidator),
   preferredLanguage: v.optional(v.string()),
@@ -134,6 +151,10 @@ export const intakeStructuredValidator = v.object({
   caseNumber: v.optional(v.string()),
   /** Client asked us to retrieve documents for an additional fee. */
   retrievalRequested: v.optional(v.boolean()),
+  /** How the client found us. */
+  referralSource: v.optional(v.string()),
+  /** Promo / referral code for discount. */
+  referralCode: v.optional(v.string()),
 })
 
 export const createFromIntakeReturnValidator = v.object({

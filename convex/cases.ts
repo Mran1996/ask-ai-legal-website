@@ -14,7 +14,7 @@ import {
   buildIntakeStructured,
   formatCaseReference,
   normalizeEmail,
-  normalizeStateCode,
+  resolveCaseFromIntake,
   validateIntakeForm,
 } from "./lib/intakeMapping"
 import { scheduleIntakeEmailsIfNeeded } from "./lib/scheduleIntakeEmails"
@@ -69,14 +69,19 @@ export const createFromIntake = mutation({
       throw new Error("Unable to create client record")
     }
 
+    const resolved = resolveCaseFromIntake(args)
+
     const caseId = await ctx.db.insert("cases", {
       clientId,
-      matterType: "custom",
-      jurisdiction: { state: normalizeStateCode(args.state) },
+      matterType: resolved.matterType,
+      jurisdiction: {
+        state: resolved.jurisdictionState,
+        county: args.county?.trim() || undefined,
+      },
       status: "intake",
       intakeRaw,
       intakeStructured,
-      assignedServices: [],
+      assignedServices: resolved.assignedServices,
       storagePrefix: "cases/pending/",
       includedPlanningCallsUsed: 0,
       createdAt: now,
@@ -265,8 +270,13 @@ export const getIntakeEmailContext = internalQuery({
       issueSummary: v.optional(v.string()),
       state: v.optional(v.string()),
       county: v.optional(v.string()),
+      court: v.optional(v.string()),
+      matterType: v.string(),
       caseTypeLabel: v.optional(v.string()),
+      role: v.optional(v.string()),
+      serviceNeeded: v.optional(v.string()),
       deadline: v.optional(v.string()),
+      knownDates: v.optional(v.string()),
       opposingParty: v.optional(v.string()),
       hasDocuments: v.optional(v.string()),
       preferredContact: v.optional(v.string()),
@@ -309,9 +319,14 @@ export const getIntakeEmailContext = internalQuery({
       clientPhone: client.phone,
       issueSummary: s.issueSummary,
       state: caseDoc.jurisdiction.state || s.clientStateInput,
-      county: caseDoc.jurisdiction.county,
+      county: caseDoc.jurisdiction.county ?? s.county,
+      court: caseDoc.jurisdiction.court,
+      matterType: caseDoc.matterType,
       caseTypeLabel: s.caseTypeLabel,
+      role: s.role,
+      serviceNeeded: s.serviceNeeded,
       deadline: s.deadline,
+      knownDates: s.knownDates,
       opposingParty: s.opposingParty,
       hasDocuments: s.hasDocuments,
       preferredContact: s.preferredContact,
