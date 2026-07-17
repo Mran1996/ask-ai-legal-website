@@ -715,122 +715,124 @@ export function ChatWidget() {
                 </div>
               </div>
             </>
+          ) : intakeSubmitBanner ? (
+            <div className="flex flex-1 flex-col overflow-hidden">
+              <div className="flex-1 space-y-3 overflow-y-auto px-4 py-3">
+                <div className="rounded-sm border border-gold/40 bg-gold/10 px-4 py-3 text-center">
+                  <BookingBanner compact className="mb-3" />
+                  <CheckCircle2 className="mx-auto h-8 w-8 text-gold" aria-hidden />
+                  <p className="mt-2 font-display text-base text-white">{ui.intakeSuccessTitle}</p>
+                  <p className="mt-2 font-mono text-sm font-semibold tracking-wide text-gold">
+                    {intakeSubmitBanner.caseReference}
+                  </p>
+                  <div className="mt-3 rounded-sm border border-white/15 bg-navy/50 px-3 py-2.5 text-left">
+                    <p className="text-[10px] font-bold uppercase tracking-wider text-gold">
+                      {ui.pricingTitle}
+                    </p>
+                    <p className="mt-1 text-xs text-white/85">
+                      {intakeSubmitBanner.estimate.serviceLine}
+                    </p>
+                    <p className="mt-2 text-xs leading-relaxed text-white/70">
+                      {formatIntakeEstimateLine(intakeSubmitBanner.estimate, ui)}
+                    </p>
+                    <p className="mt-2 text-[10px] leading-relaxed text-white/45">
+                      {ui.estimateDisclaimer}
+                    </p>
+                  </div>
+                  <p className="mt-2 text-xs leading-relaxed text-white/75">
+                    {ui.intakeSuccessBody}
+                  </p>
+                  <p className="mt-2 text-[10px] text-white/45">{ui.quoteNextSteps}</p>
+
+                  <label className="mt-3 block text-left">
+                    <span className="mb-1 block text-[10px] uppercase tracking-wider text-white/50">
+                      {ui.caseNumberLabel}
+                    </span>
+                    <input
+                      value={postCaseNumber}
+                      onChange={(e) => setPostCaseNumber(e.target.value)}
+                      placeholder={ui.caseNumberHint}
+                      className="w-full rounded-sm border border-white/15 bg-white/5 px-2.5 py-2 text-sm text-white focus:border-gold/50 focus:outline-none"
+                    />
+                  </label>
+
+                  <label className="mt-3 flex items-start gap-2 text-left text-xs text-white/75">
+                    <input
+                      type="checkbox"
+                      checked={retrievalRequested}
+                      onChange={(e) => setRetrievalRequested(e.target.checked)}
+                      className="mt-0.5"
+                    />
+                    <span>
+                      {ui.retrievalCheckbox}{" "}
+                      <span className="text-gold">({DOCUMENT_RETRIEVAL_FEE_DISPLAY})</span>
+                      <span className="mt-1 block text-[10px] text-white/45">
+                        {ui.retrievalFeeNote}
+                      </span>
+                    </span>
+                  </label>
+
+                  <div className="mt-3">
+                    <input
+                      ref={postPayFileInputRef}
+                      type="file"
+                      accept=".pdf,image/jpeg,image/png,image/webp"
+                      multiple
+                      className="hidden"
+                      onChange={(e) => void handlePostIntakeFiles(e.target.files)}
+                    />
+                    <button
+                      type="button"
+                      onClick={() => postPayFileInputRef.current?.click()}
+                      className="w-full rounded-sm border border-white/20 px-3 py-2 text-xs font-semibold text-white/80 hover:border-gold/40 hover:text-gold"
+                    >
+                      {ui.uploadMoreDocs}
+                    </button>
+                  </div>
+
+                  {detailsError && (
+                    <p className="mt-2 text-xs text-red-300">{detailsError}</p>
+                  )}
+                  {detailsSaved ? (
+                    <p className="mt-4 text-xs leading-relaxed text-gold">{ui.detailsSaved}</p>
+                  ) : (
+                    <button
+                      type="button"
+                      disabled={savingDetails}
+                      onClick={() => void handleSavePostIntakeDetails()}
+                      className="mt-4 inline-flex w-full items-center justify-center rounded-sm border border-gold bg-gold/25 px-4 py-2.5 text-sm font-semibold text-gold hover:bg-gold/35 disabled:opacity-60"
+                    >
+                      {savingDetails ? ui.savingDetails : ui.saveDetails}
+                    </button>
+                  )}
+
+                  <a
+                    href={buildBookPageUrl({
+                      callType: "intake",
+                      caseId: intakeSubmitBanner.caseId,
+                      caseReference: intakeSubmitBanner.caseReference,
+                      email: intakeSubmitBanner.email,
+                      firstName: intakeSubmitBanner.firstName,
+                      lastName: intakeSubmitBanner.lastName,
+                    })}
+                    className="mt-3 inline-flex w-full items-center justify-center rounded-sm border border-gold/50 bg-gold/15 px-4 py-2.5 text-sm font-semibold text-gold hover:bg-gold/25"
+                  >
+                    {ui.bookIntakeCall}
+                  </a>
+                  <p className="mt-2 text-[10px] text-white/50">{ui.bookIntakeCallHint}</p>
+                  <button
+                    type="button"
+                    onClick={resetIntakeForm}
+                    className="mt-3 text-xs font-semibold text-gold underline-offset-2 hover:underline"
+                  >
+                    {ui.submitAnother}
+                  </button>
+                </div>
+              </div>
+            </div>
           ) : (
             <form onSubmit={handleIntakeSubmit} className="flex flex-1 flex-col overflow-hidden">
               <div className="flex-1 space-y-3 overflow-y-auto px-4 py-3">
-                {intakeSubmitBanner && (
-                  <div className="rounded-sm border border-gold/40 bg-gold/10 px-4 py-3 text-center">
-                    <BookingBanner compact className="mb-3" />
-                    <CheckCircle2 className="mx-auto h-8 w-8 text-gold" aria-hidden />
-                    <p className="mt-2 font-display text-base text-white">{ui.intakeSuccessTitle}</p>
-                    <p className="mt-2 font-mono text-sm font-semibold tracking-wide text-gold">
-                      {intakeSubmitBanner.caseReference}
-                    </p>
-                    <div className="mt-3 rounded-sm border border-white/15 bg-navy/50 px-3 py-2.5 text-left">
-                      <p className="text-[10px] font-bold uppercase tracking-wider text-gold">
-                        {ui.pricingTitle}
-                      </p>
-                      <p className="mt-1 text-xs text-white/85">
-                        {intakeSubmitBanner.estimate.serviceLine}
-                      </p>
-                      <p className="mt-2 text-xs leading-relaxed text-white/70">
-                        {formatIntakeEstimateLine(intakeSubmitBanner.estimate, ui)}
-                      </p>
-                      <p className="mt-2 text-[10px] leading-relaxed text-white/45">
-                        {ui.estimateDisclaimer}
-                      </p>
-                    </div>
-                    <p className="mt-2 text-xs leading-relaxed text-white/75">
-                      {ui.intakeSuccessBody}
-                    </p>
-                    <p className="mt-2 text-[10px] text-white/45">{ui.quoteNextSteps}</p>
-
-                    <label className="mt-3 block text-left">
-                      <span className="mb-1 block text-[10px] uppercase tracking-wider text-white/50">
-                        {ui.caseNumberLabel}
-                      </span>
-                      <input
-                        value={postCaseNumber}
-                        onChange={(e) => setPostCaseNumber(e.target.value)}
-                        placeholder={ui.caseNumberHint}
-                        className="w-full rounded-sm border border-white/15 bg-white/5 px-2.5 py-2 text-sm text-white focus:border-gold/50 focus:outline-none"
-                      />
-                    </label>
-
-                    <label className="mt-3 flex items-start gap-2 text-left text-xs text-white/75">
-                      <input
-                        type="checkbox"
-                        checked={retrievalRequested}
-                        onChange={(e) => setRetrievalRequested(e.target.checked)}
-                        className="mt-0.5"
-                      />
-                      <span>
-                        {ui.retrievalCheckbox}{" "}
-                        <span className="text-gold">({DOCUMENT_RETRIEVAL_FEE_DISPLAY})</span>
-                        <span className="mt-1 block text-[10px] text-white/45">
-                          {ui.retrievalFeeNote}
-                        </span>
-                      </span>
-                    </label>
-
-                    <div className="mt-3">
-                      <input
-                        ref={postPayFileInputRef}
-                        type="file"
-                        accept=".pdf,image/jpeg,image/png,image/webp"
-                        multiple
-                        className="hidden"
-                        onChange={(e) => void handlePostIntakeFiles(e.target.files)}
-                      />
-                      <button
-                        type="button"
-                        onClick={() => postPayFileInputRef.current?.click()}
-                        className="w-full rounded-sm border border-white/20 px-3 py-2 text-xs font-semibold text-white/80 hover:border-gold/40 hover:text-gold"
-                      >
-                        {ui.uploadMoreDocs}
-                      </button>
-                    </div>
-
-                    {detailsError && (
-                      <p className="mt-2 text-xs text-red-300">{detailsError}</p>
-                    )}
-                    {detailsSaved ? (
-                      <p className="mt-4 text-xs leading-relaxed text-gold">{ui.detailsSaved}</p>
-                    ) : (
-                      <button
-                        type="button"
-                        disabled={savingDetails}
-                        onClick={() => void handleSavePostIntakeDetails()}
-                        className="mt-4 inline-flex w-full items-center justify-center rounded-sm border border-gold bg-gold/25 px-4 py-2.5 text-sm font-semibold text-gold hover:bg-gold/35 disabled:opacity-60"
-                      >
-                        {savingDetails ? ui.savingDetails : ui.saveDetails}
-                      </button>
-                    )}
-
-                    <a
-                      href={buildBookPageUrl({
-                        callType: "intake",
-                        caseId: intakeSubmitBanner.caseId,
-                        caseReference: intakeSubmitBanner.caseReference,
-                        email: intakeSubmitBanner.email,
-                        firstName: intakeSubmitBanner.firstName,
-                        lastName: intakeSubmitBanner.lastName,
-                      })}
-                      className="mt-3 inline-flex w-full items-center justify-center rounded-sm border border-gold/50 bg-gold/15 px-4 py-2.5 text-sm font-semibold text-gold hover:bg-gold/25"
-                    >
-                      {ui.bookIntakeCall}
-                    </a>
-                    <p className="mt-2 text-[10px] text-white/50">{ui.bookIntakeCallHint}</p>
-                    <button
-                      type="button"
-                      onClick={resetIntakeForm}
-                      className="mt-3 text-xs font-semibold text-gold underline-offset-2 hover:underline"
-                    >
-                      {ui.submitAnother}
-                    </button>
-                  </div>
-                )}
-
                 <div>
                   <p className="font-display text-lg text-white">{ui.quoteTitle}</p>
                   <p className="mt-1 text-xs text-white/60">{ui.quoteHint}</p>
