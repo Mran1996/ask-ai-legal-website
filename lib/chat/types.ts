@@ -20,23 +20,10 @@ export type IntakeFormData = {
   email: string
   phone: string
   state: string
-  county: string
   caseType: string
   issue: string
-  /** Court case / docket number if client has one. */
-  caseNumber: string
-  /** Client's role in the case (e.g. tenant, defendant, petitioner). */
-  role: string
-  /** Specific service the client needs (e.g. "Answer to unlawful detainer"). */
-  serviceNeeded: string
   deadline: string
-  /** Additional known filing or hearing dates, comma-separated. */
-  knownDates: string
   opposingParty: string
-  /** Referral source (how did you hear about us). */
-  referralSource: string
-  /** Promo / referral code. */
-  referralCode: string
   hasDocuments: HasDocumentsChoice
   preferredContact: PreferredContactChoice
   preferredLanguage: string
@@ -76,17 +63,10 @@ export type CreateFromIntakePayload = {
   email: string
   phone?: string
   state?: string
-  county?: string
   caseType?: string
   issue: string
-  caseNumber?: string
-  role?: string
-  serviceNeeded?: string
   deadline?: string
-  knownDates?: string
   opposingParty?: string
-  referralSource?: string
-  referralCode?: string
   hasDocuments?: "yes" | "no"
   preferredContact?: "email" | "phone" | "either"
   preferredLanguage?: string
@@ -98,17 +78,10 @@ export const EMPTY_INTAKE: IntakeFormData = {
   email: "",
   phone: "",
   state: DEFAULT_INTAKE_STATE,
-  county: "",
   caseType: "",
   issue: "",
-  caseNumber: "",
-  role: "",
-  serviceNeeded: "",
   deadline: "",
-  knownDates: "",
   opposingParty: "",
-  referralSource: "",
-  referralCode: "",
   hasDocuments: "",
   preferredContact: "either",
   preferredLanguage: "en",
