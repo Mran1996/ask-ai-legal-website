@@ -4,6 +4,7 @@ import Link from "next/link"
 import { BookingBanner } from "@/components/brand/booking-banner"
 import {
   BOOKING_DISCLAIMER,
+  INTAKE_BOOKING_ENABLED,
   INTAKE_CALL_DESCRIPTION,
   buildCalcomEmbedSrc,
   buildCalcomPublicUrl,
@@ -84,7 +85,18 @@ export function BookPageClient({
           <p className="mt-4 text-xs leading-relaxed text-white/45">{BOOKING_DISCLAIMER}</p>
 
           <div className="mt-8">
-            {!slugConfigured ? (
+            {!INTAKE_BOOKING_ENABLED ? (
+              <div className="rounded-md border border-white/15 bg-white/5 px-4 py-6 text-sm text-white/75">
+                <p className="font-semibold text-white">Online scheduling is not available right now.</p>
+                <p className="mt-2">
+                  Email{" "}
+                  <a href="mailto:support@askailegal.com" className="text-gold underline">
+                    support@askailegal.com
+                  </a>{" "}
+                  with your case reference if you need to reach us.
+                </p>
+              </div>
+            ) : !slugConfigured ? (
               <div className="rounded-md border border-amber-400/40 bg-amber-950/30 px-4 py-6 text-sm text-amber-100">
                 <p className="font-semibold">Scheduling is not configured yet.</p>
                 <p className="mt-2 text-amber-100/80">

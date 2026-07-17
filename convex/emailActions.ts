@@ -3,7 +3,7 @@
 import { v } from "convex/values"
 import { internal } from "./_generated/api"
 import { internalAction } from "./_generated/server"
-import { buildBookPageUrl } from "./lib/bookingUrls"
+import { buildBookPageUrl, INTAKE_BOOKING_ENABLED } from "./lib/bookingUrls"
 import {
   SUPPORT_EMAIL,
   clientEmailFooter,
@@ -149,14 +149,16 @@ export const sendIntakeEmails = internalAction({
       return null
     }
 
-    const bookUrl = buildBookPageUrl({
-      callType: "intake",
-      caseId: args.caseId,
-      caseReference: args.caseReference,
-      email: context.clientEmail,
-      firstName: context.clientFirstName,
-      lastName: context.clientLastName,
-    })
+    const bookUrl = INTAKE_BOOKING_ENABLED
+      ? buildBookPageUrl({
+          callType: "intake",
+          caseId: args.caseId,
+          caseReference: args.caseReference,
+          email: context.clientEmail,
+          firstName: context.clientFirstName,
+          lastName: context.clientLastName,
+        })
+      : null
 
     const clientSubject = `${args.caseReference} — We received your intake | Ask AI Legal`
     const clientBodyParts = [
@@ -171,10 +173,15 @@ export const sendIntakeEmails = internalAction({
       "2. You return the form and any court papers you have (or request paid document retrieval — quoted before we pull records).",
       "3. We email a written cost to research & draft, a document-preparation service agreement, and an invoice / payment link.",
       "4. After payment clears, we prepare your documents and deliver them by email.",
-      "",
-      "Optional — book a short intake call (document prep and pricing only — not legal advice):",
-      bookUrl,
     ]
+
+    if (bookUrl) {
+      clientBodyParts.push(
+        "",
+        "Optional — book a short intake call (document prep and pricing only — not legal advice):",
+        bookUrl
+      )
+    }
 
     if (context.estimate) {
       clientBodyParts.push("")
@@ -229,9 +236,13 @@ export const sendIntakeEmails = internalAction({
       "",
       ...formatQuoteLines(context.estimate),
       "",
-      `Intake call booking link (for client): ${bookUrl}`,
-      "Call booking status: pending until client books via Cal.com",
-      "",
+      ...(bookUrl
+        ? [
+            `Intake call booking link (for client): ${bookUrl}`,
+            "Call booking status: pending until client books via Cal.com",
+            "",
+          ]
+        : ["Intake call booking: disabled", ""]),
       `View in ops: ${opsCaseUrl(args.caseId)}`,
     ].join("\n")
 

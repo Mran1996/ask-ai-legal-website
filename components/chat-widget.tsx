@@ -28,7 +28,6 @@ import { getChatUiStrings, getWelcomeMessage } from "@/lib/chat/ui-strings"
 import { stripMarkdownForChat } from "@/lib/chat/sanitize-response"
 import { OPEN_CHAT_EVENT, type OpenChatEventDetail } from "@/lib/chat/open-chat"
 import { SUPPORT_MAILTO, SITE_BRAND_NAME } from "@/lib/site-config"
-import { buildBookPageUrl } from "@/lib/booking"
 import { BookingBanner } from "@/components/brand/booking-banner"
 import { formatUsdFromCents } from "@/lib/pricing/ca-eviction"
 import { estimateFractionPercent } from "@/lib/pricing/service-pricing"
@@ -806,20 +805,6 @@ export function ChatWidget() {
                     </button>
                   )}
 
-                  <a
-                    href={buildBookPageUrl({
-                      callType: "intake",
-                      caseId: intakeSubmitBanner.caseId,
-                      caseReference: intakeSubmitBanner.caseReference,
-                      email: intakeSubmitBanner.email,
-                      firstName: intakeSubmitBanner.firstName,
-                      lastName: intakeSubmitBanner.lastName,
-                    })}
-                    className="mt-3 inline-flex w-full items-center justify-center rounded-sm border border-gold/50 bg-gold/15 px-4 py-2.5 text-sm font-semibold text-gold hover:bg-gold/25"
-                  >
-                    {ui.bookIntakeCall}
-                  </a>
-                  <p className="mt-2 text-[10px] text-white/50">{ui.bookIntakeCallHint}</p>
                   <button
                     type="button"
                     onClick={resetIntakeForm}

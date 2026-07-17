@@ -1,5 +1,8 @@
 /** Build public /book URLs for intake and future call types. */
 
+/** When false, intake emails omit Cal.com /book links. */
+export const INTAKE_BOOKING_ENABLED = false
+
 export type BookCallType = "intake" | "document_planning" | "follow_up_paid"
 
 export function publicSiteUrl(): string {
