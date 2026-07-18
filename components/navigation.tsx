@@ -129,7 +129,7 @@ export function Navigation() {
 
           <Link
             href="/pay"
-            className="hidden items-center gap-1.5 rounded-full border border-gold/60 px-3 py-1.5 text-xs font-semibold text-gold-dark transition-colors hover:bg-gold/10 xl:inline-flex"
+            className="hidden items-center gap-1.5 rounded-full border border-transparent bg-gold-dark px-3 py-1.5 text-xs font-semibold text-white transition-colors hover:bg-gold xl:inline-flex"
           >
             <CreditCard className="h-3.5 w-3.5 shrink-0" aria-hidden />
             <span>Pay deposit</span>
@@ -176,7 +176,7 @@ export function Navigation() {
           <Link
             href="/pay"
             onClick={() => setOpen(false)}
-            className="mt-3 flex w-full items-center justify-center gap-2 rounded-full border border-gold/60 py-3 text-sm font-semibold text-gold-dark transition-colors hover:bg-gold/10"
+            className="mt-3 flex w-full items-center justify-center gap-2 rounded-full border border-transparent bg-gold-dark py-3 text-sm font-semibold text-white transition-colors hover:bg-gold"
           >
             <CreditCard className="h-4 w-4" aria-hidden />
             <span>Pay deposit</span>

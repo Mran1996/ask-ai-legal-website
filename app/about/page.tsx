@@ -94,7 +94,7 @@ export default function AboutPage() {
               Built for people who deserve more than the status quo
             </h1>
             <p className="mt-8 max-w-2xl text-lg leading-relaxed text-white/70">
-              Ask AI Legal is a full-service legal document preparation company.
+              Ask AI Legal is a full-service document preparation company.
               We exist because most people facing court cannot access the depth
               of research, speed, and preparation that serious cases require —
               and they should not have to choose between quality and affordability.
