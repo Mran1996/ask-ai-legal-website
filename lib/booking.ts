@@ -1,7 +1,7 @@
 /** Client-side booking URL helpers (mirrors convex/lib/bookingUrls.ts). */
 
 /** When false, intake-call CTAs and /book scheduling are disabled. */
-export const INTAKE_BOOKING_ENABLED = false
+export const INTAKE_BOOKING_ENABLED = true
 
 export type BookCallType = "intake" | "document_planning" | "follow_up_paid"
 
