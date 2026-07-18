@@ -169,6 +169,19 @@
     padding-bottom: var(--section-padding);
   }
 
+  /* First section on inner pages: clears the fixed header so its background
+     fills the space (no cream gap) and preserves normal section spacing. */
+  .section-pad-under-header {
+    padding-top: calc(7.25rem + var(--section-padding));
+    padding-bottom: var(--section-padding);
+  }
+
+  @media (min-width: 640px) {
+    .section-pad-under-header {
+      padding-top: calc(7.75rem + var(--section-padding));
+    }
+  }
+
   .container-main {
     @apply mx-auto w-full max-w-content px-5 sm:px-8 lg:px-10;
   }

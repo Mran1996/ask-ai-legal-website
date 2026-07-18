@@ -35,8 +35,8 @@ export default function PayPage() {
     <div className="min-h-screen flex flex-col">
       <Navigation />
 
-      <main className="flex-grow pt-[7.25rem] sm:pt-[7.75rem]">
-        <section className="section-navy section-pad">
+      <main className="flex-grow">
+        <section className="section-navy section-pad-under-header">
           <div className="container-main max-w-lg">
             <div className="mx-auto w-full max-w-md">
               <div className="text-center">

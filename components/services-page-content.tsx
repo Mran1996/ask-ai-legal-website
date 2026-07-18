@@ -11,8 +11,8 @@ export function ServicesPageContent() {
   const page = t.servicesPage
 
   return (
-    <main className="flex-grow pt-[7.25rem] sm:pt-[7.75rem]">
-      <section className="section-navy section-pad">
+    <main className="flex-grow">
+      <section className="section-navy section-pad-under-header">
         <div className="container-main max-w-4xl">
           <p className="firm-label">{page.label}</p>
           <div className="gold-rule mb-8" />

@@ -16,8 +16,8 @@ export function LegalDocumentLayout({
     <div className="min-h-screen flex flex-col">
       <Navigation />
 
-      <main className="flex-grow pt-[7.25rem] sm:pt-[7.75rem]">
-        <section className="section-pad bg-cream">
+      <main className="flex-grow">
+        <section className="section-pad-under-header bg-cream">
           <article className="container-main max-w-3xl">
             <p className="firm-label text-gold-dark">Legal</p>
             <div className="gold-rule mb-6" />

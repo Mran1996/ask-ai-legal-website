@@ -84,9 +84,9 @@ export default function AboutPage() {
     <div className="min-h-screen flex flex-col">
       <Navigation />
 
-      <main className="flex-grow pt-[7.25rem] sm:pt-[7.75rem]">
+      <main className="flex-grow">
         {/* Hero */}
-        <section className="section-navy section-pad">
+        <section className="section-navy section-pad-under-header">
           <div className="container-main max-w-4xl">
             <p className="firm-label">About us</p>
             <div className="gold-rule mb-8" />
