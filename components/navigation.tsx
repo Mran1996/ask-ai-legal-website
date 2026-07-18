@@ -66,7 +66,7 @@ export function Navigation() {
       { href: "/#compare", label: t.nav.whyUs },
       { href: "/#process", label: t.nav.process },
       { href: "/#faq", label: t.nav.faq },
-      { href: "/#contact", label: t.nav.contact },
+      { href: "/contact", label: t.nav.contact },
     ],
     [t]
   )

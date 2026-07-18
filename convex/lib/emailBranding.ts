@@ -21,7 +21,7 @@ export function opsNotifyEmail(): string {
 }
 
 export function contactPageUrl(): string {
-  return `${publicSiteUrl()}/#contact`
+  return `${publicSiteUrl()}/contact`
 }
 
 /** Prefer Ask AI Legal <support@…>; override with RESEND_FROM_EMAIL if set. */

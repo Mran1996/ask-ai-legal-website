@@ -10,6 +10,7 @@
 
 import type * as appointments from "../appointments.js";
 import type * as cases from "../cases.js";
+import type * as contactActions from "../contactActions.js";
 import type * as documents from "../documents.js";
 import type * as draftPackageActions from "../draftPackageActions.js";
 import type * as emailActions from "../emailActions.js";
@@ -24,6 +25,7 @@ import type * as lib_caseLookup from "../lib/caseLookup.js";
 import type * as lib_customFunctions from "../lib/customFunctions.js";
 import type * as lib_emailBranding from "../lib/emailBranding.js";
 import type * as lib_intakeMapping from "../lib/intakeMapping.js";
+import type * as lib_intakeMatterCategory from "../lib/intakeMatterCategory.js";
 import type * as lib_letterheadLogoBase64 from "../lib/letterheadLogoBase64.js";
 import type * as lib_opsAuth from "../lib/opsAuth.js";
 import type * as lib_outlookFolderName from "../lib/outlookFolderName.js";
@@ -45,6 +47,7 @@ import type {
 declare const fullApi: ApiFromModules<{
   appointments: typeof appointments;
   cases: typeof cases;
+  contactActions: typeof contactActions;
   documents: typeof documents;
   draftPackageActions: typeof draftPackageActions;
   emailActions: typeof emailActions;
@@ -59,6 +62,7 @@ declare const fullApi: ApiFromModules<{
   "lib/customFunctions": typeof lib_customFunctions;
   "lib/emailBranding": typeof lib_emailBranding;
   "lib/intakeMapping": typeof lib_intakeMapping;
+  "lib/intakeMatterCategory": typeof lib_intakeMatterCategory;
   "lib/letterheadLogoBase64": typeof lib_letterheadLogoBase64;
   "lib/opsAuth": typeof lib_opsAuth;
   "lib/outlookFolderName": typeof lib_outlookFolderName;

@@ -36,7 +36,7 @@ export function Footer() {
         { label: "Pay deposit", href: "/pay" },
         { label: links.process, href: "/#process" },
         { label: links.whyUs, href: "/#compare" },
-        { label: links.contact, href: "/#contact" },
+        { label: links.contact, href: "/contact" },
         { label: links.faq, href: "/#faq" },
       ],
     },
