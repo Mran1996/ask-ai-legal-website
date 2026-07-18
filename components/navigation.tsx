@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { FileSearch, Menu, X } from "lucide-react"
+import { FileSearch, Menu, X, CreditCard } from "lucide-react"
 import { useEffect, useMemo, useState } from "react"
 import { BrandLockup } from "@/components/brand-lockup"
 import { LanguageSelector } from "@/components/language-selector"
@@ -130,6 +130,14 @@ export function Navigation() {
             <span>{t.nav.emailForReview}</span>
           </button>
 
+          <Link
+            href="/pay"
+            className="hidden items-center gap-1.5 rounded-full border border-gold/60 px-3 py-1.5 text-xs font-semibold text-gold-dark transition-colors hover:bg-gold/10 md:inline-flex"
+          >
+            <CreditCard className="h-3.5 w-3.5 shrink-0" aria-hidden />
+            <span>Pay deposit</span>
+          </Link>
+
           <button
             type="button"
             className="flex h-9 w-9 items-center justify-center rounded-md text-navy transition-colors hover:bg-navy/5 lg:hidden"
@@ -168,6 +176,14 @@ export function Navigation() {
             <FileSearch className="h-4 w-4" aria-hidden />
             <span>{t.nav.emailForReview}</span>
           </button>
+          <Link
+            href="/pay"
+            onClick={() => setOpen(false)}
+            className="mt-3 flex w-full items-center justify-center gap-2 rounded-full border border-gold/60 py-3 text-sm font-semibold text-gold-dark transition-colors hover:bg-gold/10"
+          >
+            <CreditCard className="h-4 w-4" aria-hidden />
+            <span>Pay deposit</span>
+          </Link>
           <a href={SUPPORT_MAILTO} className="mt-3 block text-center text-xs text-navy/50 hover:text-navy/70">
             {SUPPORT_EMAIL}
           </a>

@@ -33,6 +33,7 @@ export function Footer() {
       links: [
         { label: links.about, href: "/about" },
         { label: links.pricing, href: "/pricing" },
+        { label: "Pay deposit", href: "/pay" },
         { label: links.process, href: "/#process" },
         { label: links.whyUs, href: "/#compare" },
         { label: links.contact, href: "/#contact" },
