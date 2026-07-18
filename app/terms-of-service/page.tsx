@@ -6,7 +6,7 @@ import { SUPPORT_EMAIL } from "@/lib/site-config"
 export const metadata: Metadata = {
   title: "Terms of Service",
   description:
-    "Terms governing use of Ask AI Legal's legal document preparation services.",
+    "Terms governing use of Ask AI Legal's document preparation services.",
   alternates: { canonical: "/terms-of-service" },
 }
 
@@ -25,7 +25,7 @@ export default function TermsOfServicePage() {
 
       <h2>1. Who we are</h2>
       <p>
-        Ask AI Legal is a <strong>legal document preparation service</strong>. We prepare
+        Ask AI Legal is a <strong>document preparation service</strong>. We prepare
         court-ready documents, research materials, and related written work product based on
         information you provide. We are <strong>not a law firm</strong>, and our personnel are{" "}
         <strong>not your attorneys</strong>.

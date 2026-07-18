@@ -34,4 +34,4 @@ export const SITE_LEGAL_NAME = "Ask AI Legal LLC"
 export const SITE_SLOGAN = SITE_TAGLINE
 
 export const SITE_DISCLAIMER =
-  "Ask AI Legal generates legal documents only. We are not a law firm and do not provide legal advice."
+  "Ask AI Legal generates documents only. We are not a law firm and do not provide legal advice."

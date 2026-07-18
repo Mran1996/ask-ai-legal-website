@@ -41,11 +41,11 @@ export const metadata: Metadata = {
   },
   description: DESCRIPTION,
   keywords: [
-    "legal document preparation",
+    "document preparation",
     "divorce paperwork help",
     "custody documents",
     "civil case document preparation",
-    "flat fee legal documents",
+    "flat fee documents",
     "self represented litigant",
     "court ready documents",
     "legal citation verification",
@@ -91,7 +91,7 @@ const legalServiceJsonLd = {
     "Business dispute document preparation",
   ],
   disclaimer:
-    "Ask AI Legal generates legal documents only. We are not a law firm and do not provide legal advice.",
+    "Ask AI Legal generates documents only. We are not a law firm and do not provide legal advice.",
 }
 
 export default function RootLayout({

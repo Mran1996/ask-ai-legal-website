@@ -23,7 +23,7 @@ export default function DocumentPreparationAgreementPage() {
         <div className="prose prose-sm mt-8 max-w-none space-y-4 text-gray-800">
           <p>
             Ask AI Legal™ (operated by <strong>Ask AI Legal LLC</strong>, &ldquo;we,&rdquo;
-            &ldquo;us&rdquo;) provides <strong>legal document preparation</strong> and related
+            &ldquo;us&rdquo;) provides <strong>document preparation</strong> and related
             clerical support only. We are <strong>not a law firm</strong>, we do not practice law,
             we do not create an attorney-client relationship, and we do not appear in court or file
             documents for you unless a separate written service (if ever offered) expressly says so.

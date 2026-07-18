@@ -1,7 +1,7 @@
 import { Brain, FileStack, Upload, BookOpen, Clock, Shield } from "lucide-react"
 
 const features = [
-  { icon: Brain, title: "Precision-trained AI", description: "Trained on millions of real legal documents. Spots key issues and builds strategic responses instantly.", large: true },
+  { icon: Brain, title: "Precision-trained AI", description: "Trained on millions of real documents. Spots key issues and builds strategic responses instantly.", large: true },
   { icon: FileStack, title: "Court-ready drafts", description: "Motions, letters, complaints — formatted and ready to file.", large: false },
   { icon: Upload, title: "Smart upload", description: "AI reads your filings and tailors your response.", large: false },
   { icon: BookOpen, title: "Real case law", description: "Citations matched to your facts.", large: false },

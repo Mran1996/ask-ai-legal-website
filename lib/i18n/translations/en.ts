@@ -41,7 +41,7 @@ export const en = {
       "This isn't a DIY template library. We research, draft, format, and deliver your documents — the written work only. We generate documents; we do not file on your behalf or represent you.",
     importantLabel: "Important:",
     importantText:
-      "Ask AI Legal generates legal documents only. We are not a law firm and do not provide legal advice.",
+      "Ask AI Legal generates documents only. We are not a law firm and do not provide legal advice.",
     items: [
       {
         title: "Case analysis",
@@ -238,7 +238,7 @@ export const en = {
     items: [
       {
         q: "Are you a law firm?",
-        a: "No. Ask AI Legal generates legal documents only. We prepare court-ready documents for your review and use. We do not provide legal advice and do not establish an attorney-client relationship.",
+        a: "No. Ask AI Legal generates documents only. We prepare court-ready documents for your review and use. We do not provide legal advice and do not establish an attorney-client relationship.",
       },
       {
         q: `What do I get for ${REVIEW_PRICE}?`,
@@ -267,7 +267,7 @@ export const en = {
     ],
   },
   footer: {
-    tagline: "We generate court-ready legal documents for you — researched, drafted, and delivered.",
+    tagline: "We generate court-ready documents for you — researched, drafted, and delivered.",
     documentOnly: "Document generation only",
     columns: {
       services: "Services",

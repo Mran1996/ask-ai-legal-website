@@ -200,7 +200,7 @@ export default function AboutPage() {
                 Important notice
               </p>
               <p className="mt-4 text-sm leading-relaxed text-gray-600">
-                Ask AI Legal generates legal documents only. We are not a law firm
+                Ask AI Legal generates documents only. We are not a law firm
                 and do not provide legal advice. All materials are prepared for your
                 review and use at your own discretion.
               </p>

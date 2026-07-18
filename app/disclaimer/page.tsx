@@ -24,7 +24,7 @@ export default function DisclaimerPage() {
 
       <h2>1. Not a law firm</h2>
       <p>
-        Ask AI Legal is a <strong>legal document generation service</strong>. We are{" "}
+        Ask AI Legal is a <strong>document generation service</strong>. We are{" "}
         <strong>not a law firm</strong>, and our team members are <strong>not attorneys</strong>{" "}
         acting as your legal counsel unless explicitly stated otherwise in a separate written
         agreement signed by a licensed attorney (which we do not offer through this service).

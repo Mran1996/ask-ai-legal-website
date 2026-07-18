@@ -5,7 +5,7 @@ export const servicesPageContent = {
   label: "Services",
   title: "Everything we prepare for your case",
   intro:
-    "Ask AI Legal is full-service legal document preparation — research, strategy, drafting, and delivery. We are not a law firm and do not provide legal advice. You review what we prepare and handle any filing or court appearance on your own behalf.",
+    "Ask AI Legal is full-service document preparation — research, strategy, drafting, and delivery. We are not a law firm and do not provide legal advice. You review what we prepare and handle any filing or court appearance on your own behalf.",
   flow: {
     label: "How it fits together",
     title: "From first review to court-ready documents",
@@ -117,7 +117,7 @@ export const servicesPageContent = {
   ],
   disclaimer: {
     label: "What we do not do",
-    text: "Ask AI Legal generates legal documents only. We are not a law firm and do not provide legal advice. We never appear in court on your behalf and do not file documents for you. All materials are prepared for your review and use at your own discretion.",
+    text: "Ask AI Legal generates documents only. We are not a law firm and do not provide legal advice. We never appear in court on your behalf and do not file documents for you. All materials are prepared for your review and use at your own discretion.",
   },
   cta: {
     title: "Ready to see what we can prepare for you?",
