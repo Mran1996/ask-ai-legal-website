@@ -39,7 +39,7 @@ export default function PricingPage() {
               file on your own behalf — we prepare documents only.
             </p>
             <div className="mt-10">
-              <NeonButton href="/#contact">Start my case file review</NeonButton>
+              <NeonButton href="/pay">Start my case file review</NeonButton>
             </div>
             <p className="mt-6 text-sm text-white/50">{SITE_DISCLAIMER}</p>
           </div>
@@ -95,7 +95,7 @@ export default function PricingPage() {
               document preparation.
             </p>
             <div className="mt-8 flex flex-wrap gap-4">
-              <NeonButton href="/#contact">{en.process.cta}</NeonButton>
+              <NeonButton href="/pay">{en.process.cta}</NeonButton>
               <Link
                 href="/#faq"
                 className="inline-flex items-center text-sm font-semibold text-gold-dark underline-offset-2 hover:underline"
