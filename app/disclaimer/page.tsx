@@ -17,7 +17,7 @@ export default function DisclaimerPage() {
     <LegalDocumentLayout title="Disclaimer" lastUpdated={LAST_UPDATED}>
       <p>
         Please read this Disclaimer carefully before using the website or services of Ask AI
-        Legal (&ldquo;Ask AI Legal,&rdquo; &ldquo;we,&rdquo; &ldquo;us,&rdquo; or
+        Legal LLC (&ldquo;Ask AI Legal,&rdquo; &ldquo;we,&rdquo; &ldquo;us,&rdquo; or
         &ldquo;our&rdquo;). By using our website or services, you acknowledge that you have
         read, understood, and agree to this Disclaimer.
       </p>
@@ -145,7 +145,7 @@ export default function DisclaimerPage() {
       <h2>12. Contact</h2>
       <p>Questions about this Disclaimer may be directed to:</p>
       <p>
-        Ask AI Legal
+        Ask AI Legal LLC
         <br />
         Email: <a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a>
       </p>

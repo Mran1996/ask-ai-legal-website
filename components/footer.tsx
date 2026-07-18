@@ -4,7 +4,7 @@ import Link from "next/link"
 import { Scale, Instagram, Facebook } from "lucide-react"
 import { useLanguage } from "@/components/language-provider"
 import { serviceSlug } from "@/lib/service-icons"
-import { SITE_DISCLAIMER, SITE_BRAND_NAME, SOCIAL_LINKS } from "@/lib/site-config"
+import { SITE_DISCLAIMER, SITE_BRAND_NAME, SITE_LEGAL_NAME, SOCIAL_LINKS } from "@/lib/site-config"
 
 const social = [
   { label: "Instagram", icon: Instagram, href: SOCIAL_LINKS.instagram },
@@ -120,7 +120,7 @@ export function Footer() {
         </div>
 
         <div className="mt-10 flex flex-col items-start justify-between gap-3 border-t border-white/10 pt-6 sm:flex-row sm:items-center">
-          <p className="text-xs">© {new Date().getFullYear()} Ask AI Legal. All rights reserved.</p>
+          <p className="text-xs">© {new Date().getFullYear()} {SITE_LEGAL_NAME}. All rights reserved.</p>
           <p className="text-xs text-white/40">{t.footer.documentOnly}</p>
         </div>
       </div>

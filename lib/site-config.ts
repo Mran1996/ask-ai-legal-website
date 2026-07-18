@@ -27,6 +27,9 @@ export const DOCUMENT_RETRIEVAL_FEE_CENTS = DOCUMENT_RETRIEVAL_FEE_USD * 100
 export const SITE_BRAND_NAME = "Ask AI Legal™"
 export const SITE_TAGLINE = "Know your case. Own your case."
 
+/** Registered legal entity — used in footer copyright and legal pages (not the marketing lockup). */
+export const SITE_LEGAL_NAME = "Ask AI Legal LLC"
+
 /** @deprecated Use SITE_TAGLINE under the brand lockup instead */
 export const SITE_SLOGAN = SITE_TAGLINE
 

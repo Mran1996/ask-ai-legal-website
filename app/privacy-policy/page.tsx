@@ -16,7 +16,7 @@ export default function PrivacyPolicyPage() {
   return (
     <LegalDocumentLayout title="Privacy Policy" lastUpdated={LAST_UPDATED}>
       <p>
-        Ask AI Legal (&ldquo;Ask AI Legal,&rdquo; &ldquo;we,&rdquo; &ldquo;us,&rdquo; or
+        Ask AI Legal LLC (&ldquo;Ask AI Legal,&rdquo; &ldquo;we,&rdquo; &ldquo;us,&rdquo; or
         &ldquo;our&rdquo;) respects your privacy. This Privacy Policy explains how we collect,
         use, disclose, and protect information when you visit our website, request a
         consultation, or use our document preparation services (collectively, the
@@ -183,7 +183,7 @@ export default function PrivacyPolicyPage() {
       <h2>13. Contact</h2>
       <p>Privacy questions or requests may be sent to:</p>
       <p>
-        Ask AI Legal — Privacy
+        Ask AI Legal LLC — Privacy
         <br />
         Email: <a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a>
       </p>

@@ -17,7 +17,7 @@ export default function TermsOfServicePage() {
     <LegalDocumentLayout title="Terms of Service" lastUpdated={LAST_UPDATED}>
       <p>
         These Terms of Service (&ldquo;Terms&rdquo;) govern your access to and use of the
-        website, consultations, and document preparation services offered by Ask AI Legal
+        website, consultations, and document preparation services offered by Ask AI Legal LLC
         (&ldquo;Ask AI Legal,&rdquo; &ldquo;we,&rdquo; &ldquo;us,&rdquo; or &ldquo;our&rdquo;).
         By accessing our website, requesting a consultation, or purchasing services, you agree
         to these Terms. If you do not agree, do not use our services.
@@ -232,7 +232,7 @@ export default function TermsOfServicePage() {
         Questions about these Terms may be directed to:
       </p>
       <p>
-        Ask AI Legal
+        Ask AI Legal LLC
         <br />
         Email: <a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a>
       </p>
