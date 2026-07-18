@@ -52,7 +52,7 @@ export default function PayPage() {
               </div>
 
               <div className="mt-8 flex justify-center">
-                <div className="w-full max-w-sm rounded-2xl shadow-[0_0_55px_rgba(197,160,89,0.55)] [&_stripe-buy-button]:block [&_stripe-buy-button]:w-full">
+                <div className="w-fit rounded-2xl shadow-[0_0_55px_rgba(197,160,89,0.55)] [&_stripe-buy-button]:block">
                   <StripeBuyButton />
                 </div>
               </div>
