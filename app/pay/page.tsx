@@ -51,11 +51,13 @@ export default function PayPage() {
                 </p>
               </div>
 
-              <div className="mt-8 flex justify-center [&_stripe-buy-button]:w-full">
-                <StripeBuyButton />
+              <div className="mt-8 flex justify-center">
+                <div className="w-full max-w-sm rounded-2xl shadow-[0_0_55px_rgba(197,160,89,0.55)] [&_stripe-buy-button]:block [&_stripe-buy-button]:w-full">
+                  <StripeBuyButton />
+                </div>
               </div>
 
-              <div className="mt-4 flex items-center justify-center gap-1.5 text-xs text-white/50">
+              <div className="mt-5 flex items-center justify-center gap-1.5 text-xs text-white/50">
                 <Lock className="h-3.5 w-3.5 shrink-0" aria-hidden />
                 <span>Secure checkout powered by Stripe</span>
               </div>
