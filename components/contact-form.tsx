@@ -73,8 +73,8 @@ export function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} className="rounded-md border-2 border-navy/10 bg-white p-6 sm:p-8">
-      {/* Honeypot — visually hidden, not for real users. */}
-      <div className="absolute left-[-9999px]" aria-hidden>
+      {/* Honeypot — hidden from users, no layout/overflow impact on mobile. */}
+      <div className="hidden" aria-hidden>
         <label>
           Company
           <input type="text" name="company" tabIndex={-1} autoComplete="off" />
