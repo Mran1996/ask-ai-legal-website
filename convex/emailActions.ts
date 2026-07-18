@@ -356,7 +356,7 @@ export const sendDeliveryEmail = internalAction({
         "",
         `Case reference: ${context.caseReference}`,
         "",
-        "Ask AI Legal generates legal documents only. We are not a law firm and do not provide legal advice.",
+        "Ask AI Legal generates documents only. We are not a law firm and do not provide legal advice.",
         "Please review the documents carefully before you file or use them. Reply to this email if you need a revision within the scope you paid for.",
       ].join("\n")
     )
@@ -440,7 +440,7 @@ export const sendPersonalizedFormEmail = internalAction({
         "",
         `Re: ${context.caseReference} — personalized intake form (Word attachment)`,
         "",
-        "Ask AI Legal prepares legal documents only. We are not a law firm and do not provide legal advice. You review and file any documents yourself.",
+        "Ask AI Legal prepares documents only. We are not a law firm and do not provide legal advice. You review and file any documents yourself.",
         "",
         "Attached is your Case Intake Questionnaire – Part 1 (Microsoft Word .docx) with our letterhead.",
         "Please complete Part 1, then reply to this email with:",
@@ -578,7 +578,7 @@ export const sendFormReceivedAcknowledgmentEmail = internalAction({
         "",
         "We may request additional documents if something important is missing.",
         "",
-        "Ask AI Legal prepares legal documents only. We are not a law firm and do not provide legal advice. Nothing has been filed by us.",
+        "Ask AI Legal prepares documents only. We are not a law firm and do not provide legal advice. Nothing has been filed by us.",
       ].join("\n")
     )
 
@@ -771,7 +771,7 @@ export const sendQuoteContractInvoiceEmail = internalAction({
         "",
         `Re: ${context.caseReference} — issues we can start with + invoice`,
         "",
-        "Ask AI Legal generates legal documents only. We are not a law firm, we do not provide legal advice, and we do not appear in court or file on your behalf.",
+        "Ask AI Legal generates documents only. We are not a law firm, we do not provide legal advice, and we do not appear in court or file on your behalf.",
         "",
         "DOCUMENTS / ISSUES WE CAN START WITH (document preparation)",
         issues,
