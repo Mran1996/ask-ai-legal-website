@@ -33,6 +33,13 @@ const included = [
 export default function PayPage() {
   return (
     <div className="min-h-screen flex flex-col">
+      {/* Warm up Stripe connections during initial HTML parse so the buy button paints fast */}
+      <link rel="preconnect" href="https://js.stripe.com" />
+      <link rel="preconnect" href="https://buy.stripe.com" />
+      <link rel="preconnect" href="https://m.stripe.network" />
+      <link rel="dns-prefetch" href="https://js.stripe.com" />
+      <link rel="preload" as="script" href="https://js.stripe.com/v3/buy-button.js" />
+
       <Navigation />
 
       <main className="flex-grow">
