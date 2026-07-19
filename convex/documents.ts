@@ -1,5 +1,7 @@
 import { v } from "convex/values"
 import { internalMutation, mutation } from "./_generated/server"
+import { notifyOps } from "./notify"
+import { resolveCaseReference } from "./lib/caseLookup"
 
 const MAX_FILE_NAME_LENGTH = 255
 
@@ -39,7 +41,7 @@ export const attachIntakeDocument = mutation({
 
     const version = existing.length + 1
 
-    return await ctx.db.insert("documents", {
+    const documentId = await ctx.db.insert("documents", {
       caseId: args.caseId,
       type: "uploaded_by_client",
       folder: "intake",
@@ -49,6 +51,20 @@ export const attachIntakeDocument = mutation({
       version,
       createdAt: Date.now(),
     })
+
+    await ctx.db.patch("cases", args.caseId, {
+      lastActivityAt: Date.now(),
+      updatedAt: Date.now(),
+    })
+
+    await notifyOps(ctx, {
+      caseId: args.caseId,
+      type: "doc_uploaded",
+      title: `Document uploaded — ${resolveCaseReference(caseDoc)}`,
+      body: `Client uploaded "${fileName}".`,
+    })
+
+    return documentId
   },
 })
 

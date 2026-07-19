@@ -9,8 +9,15 @@
  */
 
 import type * as appointments from "../appointments.js";
+import type * as caseChat from "../caseChat.js";
 import type * as cases from "../cases.js";
 import type * as contactActions from "../contactActions.js";
+import type * as councilActions from "../councilActions.js";
+import type * as councilData from "../councilData.js";
+import type * as crons from "../crons.js";
+import type * as deadlines from "../deadlines.js";
+import type * as deliveryActions from "../deliveryActions.js";
+import type * as documentVersions from "../documentVersions.js";
 import type * as documents from "../documents.js";
 import type * as draftPackageActions from "../draftPackageActions.js";
 import type * as emailActions from "../emailActions.js";
@@ -34,6 +41,9 @@ import type * as lib_scheduleIntakeEmails from "../lib/scheduleIntakeEmails.js";
 import type * as lib_servicePricing from "../lib/servicePricing.js";
 import type * as lib_validators from "../lib/validators.js";
 import type * as notifications from "../notifications.js";
+import type * as notify from "../notify.js";
+import type * as notifyActions from "../notifyActions.js";
+import type * as opsBoard from "../opsBoard.js";
 import type * as outlookActions from "../outlookActions.js";
 import type * as payments from "../payments.js";
 import type * as stripeActions from "../stripeActions.js";
@@ -46,8 +56,15 @@ import type {
 
 declare const fullApi: ApiFromModules<{
   appointments: typeof appointments;
+  caseChat: typeof caseChat;
   cases: typeof cases;
   contactActions: typeof contactActions;
+  councilActions: typeof councilActions;
+  councilData: typeof councilData;
+  crons: typeof crons;
+  deadlines: typeof deadlines;
+  deliveryActions: typeof deliveryActions;
+  documentVersions: typeof documentVersions;
   documents: typeof documents;
   draftPackageActions: typeof draftPackageActions;
   emailActions: typeof emailActions;
@@ -71,6 +88,9 @@ declare const fullApi: ApiFromModules<{
   "lib/servicePricing": typeof lib_servicePricing;
   "lib/validators": typeof lib_validators;
   notifications: typeof notifications;
+  notify: typeof notify;
+  notifyActions: typeof notifyActions;
+  opsBoard: typeof opsBoard;
   outlookActions: typeof outlookActions;
   payments: typeof payments;
   stripeActions: typeof stripeActions;

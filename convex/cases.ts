@@ -19,6 +19,7 @@ import {
 } from "./lib/intakeMapping"
 import { scheduleIntakeEmailsIfNeeded } from "./lib/scheduleIntakeEmails"
 import { resolveCaseReference } from "./lib/caseLookup"
+import { notifyOps } from "./notify"
 
 const INCLUDED_PLANNING_CALLS = 3
 
@@ -126,6 +127,18 @@ export const finalizeIntakeCase = internalMutation({
       outputRef: args.caseId,
       status: "completed",
       createdAt: Date.now(),
+    })
+
+    const client = await ctx.db.get("clients", caseDoc.clientId)
+    await notifyOps(ctx, {
+      caseId: args.caseId,
+      type: "new_intake",
+      title: `New intake — ${resolveCaseReference(caseDoc)}`,
+      body: `${client?.firstName ?? "New"} ${client?.lastName ?? "client"} submitted an intake${
+        caseDoc.intakeStructured.issueSummary
+          ? `: ${caseDoc.intakeStructured.issueSummary.slice(0, 200)}`
+          : "."
+      }`,
     })
 
     return null

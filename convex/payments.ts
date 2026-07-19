@@ -11,6 +11,13 @@ import {
   totalDueBeforeWorkCents,
 } from "./lib/quoteTotal"
 import { resolveCaseReference } from "./lib/caseLookup"
+import { notifyOps } from "./notify"
+
+function formatUsd(cents: number): string {
+  return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(
+    cents / 100
+  )
+}
 
 export const savePostIntakeQuoteDetails = mutation({
   args: {
@@ -227,6 +234,7 @@ export const markCheckoutPaid = internalMutation({
       status: nextStatus,
       caseFileReviewPaidAt: Date.now(),
       paidAt: Date.now(),
+      lastActivityAt: Date.now(),
       updatedAt: Date.now(),
     })
 
@@ -239,10 +247,27 @@ export const markCheckoutPaid = internalMutation({
       createdAt: Date.now(),
     })
 
+    const paidClient = await ctx.db.get("clients", caseDoc.clientId)
+    await notifyOps(ctx, {
+      caseId: estimate.caseId,
+      type: "payment_received",
+      title: `Payment received — ${resolveCaseReference(caseDoc)}`,
+      body: `${paidClient?.firstName ?? "Client"} ${paidClient?.lastName ?? ""} paid ${formatUsd(
+        args.amountCents
+      )} via Stripe. Case moved to ${nextStatus.replace(/_/g, " ")}.`,
+    })
+
     await ctx.scheduler.runAfter(0, internal.outlookActions.createClientOutlookFolder, {
       caseId: estimate.caseId,
       amountCents: args.amountCents,
     })
+
+    // Pipeline automation: paid + materials on hand → convene the AI council.
+    if (nextStatus === "in_drafting") {
+      await ctx.scheduler.runAfter(0, internal.councilActions.runCouncil, {
+        caseId: estimate.caseId,
+      })
+    }
 
     return { caseId: estimate.caseId, nextStatus }
   },
@@ -487,14 +512,31 @@ export const markPaidManual = mutation({
       paidAt: now,
       caseFileReviewPaidAt: now,
       status: nextStatus,
+      lastActivityAt: now,
       updatedAt: now,
     })
     await ctx.db.patch("estimates", estimate._id, { status: "accepted" })
+
+    await notifyOps(ctx, {
+      caseId: args.caseId,
+      type: "payment_received",
+      title: `Payment noted (manual) — ${resolveCaseReference(caseDoc)}`,
+      body: `Marked paid ${formatUsd(amountCents)}. Case moved to ${nextStatus.replace(
+        /_/g,
+        " "
+      )}.`,
+    })
 
     await ctx.scheduler.runAfter(0, internal.outlookActions.createClientOutlookFolder, {
       caseId: args.caseId,
       amountCents,
     })
+
+    if (nextStatus === "in_drafting") {
+      await ctx.scheduler.runAfter(0, internal.councilActions.runCouncil, {
+        caseId: args.caseId,
+      })
+    }
 
     return null
   },
@@ -564,8 +606,21 @@ export const saveDraftPackageInternal = internalMutation({
       draftPackageStatus: args.status,
       draftPackageGeneratedAt: now,
       quotedStartAmountCents: args.quotedStartAmountCents,
+      lastActivityAt: now,
       updatedAt: now,
     })
+
+    if (args.status === "awaiting_ops_approval") {
+      const caseDoc = await ctx.db.get("cases", args.caseId)
+      if (caseDoc) {
+        await notifyOps(ctx, {
+          caseId: args.caseId,
+          type: "draft_ready",
+          title: `Draft package ready — ${resolveCaseReference(caseDoc)}`,
+          body: "AI issues/documents draft is ready for your review. Nothing goes to the client until you approve.",
+        })
+      }
+    }
     return null
   },
 })

@@ -73,8 +73,45 @@ export const paymentStatusValidator = v.union(
 export const agentTypeValidator = v.union(
   v.literal("intake"),
   v.literal("pricing"),
+  v.literal("document_understanding"),
+  v.literal("legal_research"),
+  v.literal("strategy"),
   v.literal("drafting"),
+  v.literal("review_critique"),
   v.literal("counsel")
+)
+
+export const casePriorityValidator = v.union(
+  v.literal("low"),
+  v.literal("normal"),
+  v.literal("high"),
+  v.literal("urgent")
+)
+
+export const deadlineKindValidator = v.union(
+  v.literal("court"),
+  v.literal("filing"),
+  v.literal("hearing"),
+  v.literal("internal"),
+  v.literal("other")
+)
+
+export const chatAuthorTypeValidator = v.union(
+  v.literal("staff"),
+  v.literal("ai_agent"),
+  v.literal("client")
+)
+
+export const notificationChannelValidator = v.union(
+  v.literal("email"),
+  v.literal("sms"),
+  v.literal("in_app")
+)
+
+export const citationTypeValidator = v.union(
+  v.literal("statute"),
+  v.literal("case"),
+  v.literal("rule")
 )
 
 export const agentRunStatusValidator = v.union(
@@ -174,7 +211,14 @@ export const notificationTypeValidator = v.union(
   v.literal("form_received_support"),
   v.literal("issues_invoice_client"),
   v.literal("draft_package_ops"),
-  v.literal("package_approved_client")
+  v.literal("package_approved_client"),
+  // Practice OS operator alerts (in-app bell + email/SMS fan-out)
+  v.literal("payment_received"),
+  v.literal("new_intake"),
+  v.literal("deadline_reminder"),
+  v.literal("draft_ready"),
+  v.literal("doc_uploaded"),
+  v.literal("review_needed")
 )
 
 export const draftPackageStatusValidator = v.union(

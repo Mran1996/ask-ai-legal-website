@@ -7,11 +7,23 @@ import { api } from "@/convex/_generated/api"
 import type { Id } from "@/convex/_generated/dataModel"
 import { formatUsdFromCents } from "@/lib/pricing/ca-eviction"
 import { OpsSignOutButton } from "@/components/ops/ops-access-gate"
+import { NotificationBell } from "@/components/ops/notification-bell"
+import { CaseWorkspace } from "@/components/ops/case-workspace"
+import { CaseDeadlines } from "@/components/ops/case-deadlines"
+import { CaseTimeline } from "@/components/ops/case-timeline"
 
 type Props = {
   opsToken: string
   caseId: Id<"cases">
 }
+
+type DetailTab = "fulfillment" | "workspace" | "tracking"
+
+const DETAIL_TABS: Array<{ key: DetailTab; label: string }> = [
+  { key: "fulfillment", label: "Fulfillment" },
+  { key: "workspace", label: "Workspace" },
+  { key: "tracking", label: "Deadlines & timeline" },
+]
 
 function stamp(ms: number | undefined): string {
   if (ms === undefined) return "—"
@@ -33,6 +45,7 @@ export function CaseDetailView({ opsToken, caseId }: Props) {
   const retryCreateOutlookFolder = useMutation(api.payments.retryCreateOutlookFolder)
   const createStartPaymentLink = useAction(api.stripeActions.createStartPaymentLink)
 
+  const [tab, setTab] = useState<DetailTab>("fulfillment")
   const [busy, setBusy] = useState(false)
   const [actionError, setActionError] = useState("")
   const [paymentLinkUrl, setPaymentLinkUrl] = useState("")
@@ -96,12 +109,17 @@ export function CaseDetailView({ opsToken, caseId }: Props) {
   }
 
   return (
-    <div className="mx-auto max-w-3xl px-4 py-10">
+    <div className="mx-auto max-w-4xl px-4 py-10">
       <div className="flex items-start justify-between gap-4">
         <div>
-          <Link href="/ops/intakes" className="text-sm text-gray-500 hover:text-navy">
-            ← All intakes
-          </Link>
+          <div className="flex gap-4">
+            <Link href="/ops" className="text-sm text-gray-500 hover:text-navy">
+              ← Pipeline
+            </Link>
+            <Link href="/ops/intakes" className="text-sm text-gray-500 hover:text-navy">
+              All intakes
+            </Link>
+          </div>
           <h1 className="mt-2 font-display text-3xl text-navy">{detail.caseReference}</h1>
           <p className="mt-1 text-sm capitalize text-gray-600">
             Status: {detail.status.replace(/_/g, " ")}
@@ -110,9 +128,40 @@ export function CaseDetailView({ opsToken, caseId }: Props) {
             Email funnel — human approve before issues + invoice; Outlook after paid.
           </p>
         </div>
-        <OpsSignOutButton />
+        <div className="flex items-center gap-3">
+          <NotificationBell opsToken={opsToken} />
+          <OpsSignOutButton />
+        </div>
       </div>
 
+      <nav aria-label="Case sections" className="mt-6 flex gap-1 border-b border-gray-200">
+        {DETAIL_TABS.map((t) => (
+          <button
+            key={t.key}
+            type="button"
+            onClick={() => setTab(t.key)}
+            aria-current={tab === t.key ? "page" : undefined}
+            className={`-mb-px rounded-t border-b-2 px-4 py-2.5 text-sm font-semibold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-gold ${
+              tab === t.key
+                ? "border-gold text-navy"
+                : "border-transparent text-gray-500 hover:text-navy"
+            }`}
+          >
+            {t.label}
+          </button>
+        ))}
+      </nav>
+
+      {tab === "workspace" && <CaseWorkspace opsToken={opsToken} caseId={caseId} />}
+      {tab === "tracking" && (
+        <>
+          <CaseDeadlines opsToken={opsToken} caseId={caseId} />
+          <CaseTimeline opsToken={opsToken} caseId={caseId} />
+        </>
+      )}
+
+      {tab === "fulfillment" && (
+        <>
       <section className="mt-8 rounded-lg border border-gold/40 bg-gold/5 p-6">
         <h2 className="font-semibold text-navy">Fulfillment checklist</h2>
         <ol className="mt-4 space-y-2 text-sm text-gray-700">
@@ -484,6 +533,8 @@ export function CaseDetailView({ opsToken, caseId }: Props) {
           {detail.intakeRaw}
         </pre>
       </section>
+        </>
+      )}
     </div>
   )
 }

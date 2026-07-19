@@ -5,8 +5,13 @@ import {
   agentTypeValidator,
   appointmentCallTypeValidator,
   appointmentStatusValidator,
+  casePriorityValidator,
   caseStatusValidator,
+  chatAuthorTypeValidator,
+  citationTypeValidator,
   counselDecisionValidator,
+  deadlineKindValidator,
+  notificationChannelValidator,
   notificationStatusValidator,
   notificationTypeValidator,
   documentFolderValidator,
@@ -68,6 +73,12 @@ export default defineSchema({
     outlookFolderPath: v.optional(v.string()),
     outlookFolderId: v.optional(v.string()),
     outlookFolderCreatedAt: v.optional(v.number()),
+    /** Practice OS: staff member responsible for this case */
+    ownerId: v.optional(v.string()),
+    priority: v.optional(casePriorityValidator),
+    /** Denormalized earliest open deadline for board sorting / urgency color */
+    nextDeadlineAt: v.optional(v.number()),
+    lastActivityAt: v.optional(v.number()),
     createdAt: v.number(),
     updatedAt: v.number(),
   })
@@ -101,6 +112,71 @@ export default defineSchema({
     status: notificationStatusValidator,
     provider: v.optional(v.string()),
     errorMessage: v.optional(v.string()),
+    /** Practice OS: delivery channel + in-app read state + display copy */
+    channel: v.optional(notificationChannelValidator),
+    title: v.optional(v.string()),
+    body: v.optional(v.string()),
+    readAt: v.optional(v.number()),
+    createdAt: v.number(),
+  })
+    .index("by_case", ["caseId"])
+    .index("by_channel", ["channel"]),
+
+  deadlines: defineTable({
+    caseId: v.id("cases"),
+    label: v.string(),
+    dueAt: v.number(),
+    kind: deadlineKindValidator,
+    completedAt: v.optional(v.number()),
+    notes: v.optional(v.string()),
+    /** Largest reminder window already sent (7, 3, or 1 days) so the cron never repeats */
+    lastReminderDays: v.optional(v.number()),
+    createdAt: v.number(),
+  })
+    .index("by_case", ["caseId"])
+    .index("by_dueAt", ["dueAt"]),
+
+  caseChatMessages: defineTable({
+    caseId: v.id("cases"),
+    authorType: chatAuthorTypeValidator,
+    authorId: v.string(),
+    body: v.string(),
+    attachments: v.optional(
+      v.array(v.object({ documentId: v.id("documents"), fileName: v.string() }))
+    ),
+    agentType: v.optional(agentTypeValidator),
+    createdAt: v.number(),
+  }).index("by_case", ["caseId"]),
+
+  documentVersions: defineTable({
+    documentId: v.id("documents"),
+    caseId: v.id("cases"),
+    version: v.number(),
+    content: v.string(),
+    editedBy: v.string(),
+    changeNote: v.optional(v.string()),
+    createdAt: v.number(),
+  })
+    .index("by_document", ["documentId"])
+    .index("by_case", ["caseId"]),
+
+  citations: defineTable({
+    caseId: v.id("cases"),
+    agentRunId: v.optional(v.id("agentRuns")),
+    type: citationTypeValidator,
+    reference: v.string(),
+    title: v.optional(v.string()),
+    sourceUrl: v.string(),
+    /** Hard rule: drafting may only use citations with verified === true */
+    verified: v.boolean(),
+    snippet: v.optional(v.string()),
+    retrievedAt: v.number(),
+  }).index("by_case", ["caseId"]),
+
+  accessLogs: defineTable({
+    caseId: v.id("cases"),
+    actorId: v.string(),
+    action: v.string(),
     createdAt: v.number(),
   }).index("by_case", ["caseId"]),
 
@@ -150,6 +226,11 @@ export default defineSchema({
     outputRef: v.string(),
     status: agentRunStatusValidator,
     reviewedBy: v.optional(v.string()),
+    /** Practice OS council: human-readable result + verified citation ids + model confidence */
+    summary: v.optional(v.string()),
+    citationIds: v.optional(v.array(v.id("citations"))),
+    confidence: v.optional(v.number()),
+    errorMessage: v.optional(v.string()),
     createdAt: v.number(),
   }).index("by_case", ["caseId"]),
 
