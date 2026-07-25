@@ -45,6 +45,13 @@ function getReferrer(): string | undefined {
  * Ops pages are excluded so internal work doesn't skew Insights.
  */
 export function AnalyticsTracker() {
+  if (!process.env.NEXT_PUBLIC_CONVEX_URL) {
+    return null
+  }
+  return <AnalyticsTrackerInner />
+}
+
+function AnalyticsTrackerInner() {
   const convex = useConvex()
   const pathname = usePathname()
   const lastPath = useRef<string | null>(null)
