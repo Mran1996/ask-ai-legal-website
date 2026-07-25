@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/terms-of-service" },
 }
 
-const LAST_UPDATED = "June 29, 2026"
+const LAST_UPDATED = "July 25, 2026"
 
 export default function TermsOfServicePage() {
   return (
@@ -101,23 +101,32 @@ export default function TermsOfServicePage() {
         inaccurate, or withheld information you provide.
       </p>
 
-      <h2>7. Payment, refunds, and cancellations</h2>
+      <h2>7. Payment and no-refund policy</h2>
       <p>
         Fees are due as stated in your quote or invoice. Unless otherwise agreed in writing,
         payment is required before we begin substantive work or before release of final
         deliverables.
       </p>
       <p>
-        Because our services involve custom research and drafting tailored to your matter,
-        <strong> all fees are generally non-refundable</strong> once work has begun, except
-        where required by applicable law or as we expressly agree in writing. If you cancel
-        before work begins, we may refund any prepaid amount minus reasonable administrative
-        costs.
+        <strong>All fees and deposits are non-refundable.</strong> Our services consist of
+        custom research, analysis, and drafting tailored to your specific matter, and work
+        commences promptly upon payment. By paying any fee or deposit, you acknowledge and
+        agree that <strong>no refunds, credits, or chargebacks will be issued</strong> for any
+        reason — including cancellation, change of mind, settlement or dismissal of your case,
+        or dissatisfaction with an outcome in your matter — except where a refund is required
+        by applicable law that cannot be waived.
       </p>
       <p>
-        If you dispute a charge, contact us at{" "}
+        In place of refunds, we stand behind our work with revisions: corrections and
+        refinements within the agreed scope are included as described in Section 8. If you
+        believe a charge was made in error (for example, a duplicate charge), contact us at{" "}
         <a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a> within fourteen (14) days of
-        the charge.
+        the charge and we will review it.
+      </p>
+      <p>
+        This no-refund policy is also part of the{" "}
+        <Link href="/document-preparation-agreement">Document Preparation Service Agreement</Link>{" "}
+        you accept when you pay for services.
       </p>
 
       <h2>8. Revisions</h2>

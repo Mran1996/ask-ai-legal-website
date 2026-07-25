@@ -64,6 +64,10 @@ export default defineSchema({
     draftPackageGeneratedAt: v.optional(v.number()),
     /** Start fee used in approve/send package (default $499.99) */
     quotedStartAmountCents: v.optional(v.number()),
+    /** Gap questions emailed to client when intake facts are missing */
+    gapQuestions: v.optional(v.string()),
+    gapQuestionsSentAt: v.optional(v.number()),
+    gapQuestionsAnsweredAt: v.optional(v.number()),
     /** Outlook mail folder path created after paid */
     outlookFolderPath: v.optional(v.string()),
     outlookFolderId: v.optional(v.string()),
@@ -152,6 +156,20 @@ export default defineSchema({
     reviewedBy: v.optional(v.string()),
     createdAt: v.number(),
   }).index("by_case", ["caseId"]),
+
+  /** Site analytics events — counts and topics only, never document text. */
+  events: defineTable({
+    name: v.string(),
+    path: v.optional(v.string()),
+    referrer: v.optional(v.string()),
+    device: v.optional(v.string()),
+    sessionId: v.optional(v.string()),
+    /** Short label for the event (CTA id, topic, language) — no sensitive text. */
+    meta: v.optional(v.string()),
+    createdAt: v.number(),
+  })
+    .index("by_createdAt", ["createdAt"])
+    .index("by_name", ["name", "createdAt"]),
 
   counselReviews: defineTable({
     caseId: v.id("cases"),

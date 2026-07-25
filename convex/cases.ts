@@ -475,6 +475,11 @@ export const getCaseForOps = query({
       .order("desc")
       .collect()
 
+    const notificationRows = await ctx.db
+      .query("notifications")
+      .withIndex("by_case", (q) => q.eq("caseId", args.caseId))
+      .collect()
+
     const appointments = appointmentRows.map((row) => ({
       appointmentId: row._id,
       callType: row.callType,
@@ -521,6 +526,9 @@ export const getCaseForOps = query({
         draftPackageStatus: caseDoc.draftPackageStatus,
         draftPackageGeneratedAt: caseDoc.draftPackageGeneratedAt,
         quotedStartAmountCents: caseDoc.quotedStartAmountCents,
+        gapQuestions: caseDoc.gapQuestions,
+        gapQuestionsSentAt: caseDoc.gapQuestionsSentAt,
+        gapQuestionsAnsweredAt: caseDoc.gapQuestionsAnsweredAt,
         outlookFolderPath: caseDoc.outlookFolderPath,
         outlookFolderId: caseDoc.outlookFolderId,
         outlookFolderCreatedAt: caseDoc.outlookFolderCreatedAt,
@@ -536,6 +544,16 @@ export const getCaseForOps = query({
       documents,
       appointments,
       callCredits,
+      notifications: notificationRows
+        .sort((a, b) => b.createdAt - a.createdAt)
+        .map((row) => ({
+          notificationId: row._id,
+          type: row.type,
+          recipient: row.recipient,
+          status: row.status,
+          errorMessage: row.errorMessage,
+          createdAt: row.createdAt,
+        })),
     }
   },
 })

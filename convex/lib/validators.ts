@@ -174,7 +174,8 @@ export const notificationTypeValidator = v.union(
   v.literal("form_received_support"),
   v.literal("issues_invoice_client"),
   v.literal("draft_package_ops"),
-  v.literal("package_approved_client")
+  v.literal("package_approved_client"),
+  v.literal("gap_questions_client")
 )
 
 export const draftPackageStatusValidator = v.union(
@@ -196,6 +197,9 @@ export const fulfillmentChecklistValidator = v.object({
   draftPackageStatus: v.optional(draftPackageStatusValidator),
   draftPackageGeneratedAt: v.optional(v.number()),
   quotedStartAmountCents: v.optional(v.number()),
+  gapQuestions: v.optional(v.string()),
+  gapQuestionsSentAt: v.optional(v.number()),
+  gapQuestionsAnsweredAt: v.optional(v.number()),
   outlookFolderPath: v.optional(v.string()),
   outlookFolderId: v.optional(v.string()),
   outlookFolderCreatedAt: v.optional(v.number()),
@@ -308,4 +312,14 @@ export const caseDetailValidator = v.object({
   documents: v.array(documentSummaryValidator),
   appointments: v.array(appointmentSummaryValidator),
   callCredits: callCreditsValidator,
+  notifications: v.array(
+    v.object({
+      notificationId: v.id("notifications"),
+      type: notificationTypeValidator,
+      recipient: v.string(),
+      status: notificationStatusValidator,
+      errorMessage: v.optional(v.string()),
+      createdAt: v.number(),
+    })
+  ),
 })

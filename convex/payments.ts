@@ -294,6 +294,55 @@ export const markFormReturned = mutation({
   },
 })
 
+/** Email the client targeted questions when intake facts are missing. */
+export const sendGapQuestions = mutation({
+  args: {
+    opsToken: v.string(),
+    caseId: v.id("cases"),
+    questions: v.string(),
+  },
+  returns: v.null(),
+  handler: async (ctx, args) => {
+    assertOpsToken(args.opsToken)
+    const caseDoc = await ctx.db.get("cases", args.caseId)
+    if (!caseDoc) throw new Error("Case not found")
+    const questions = args.questions.trim()
+    if (questions.length === 0) throw new Error("Add at least one question before sending")
+    const now = Date.now()
+    await ctx.db.patch("cases", args.caseId, {
+      gapQuestions: questions,
+      gapQuestionsSentAt: now,
+      gapQuestionsAnsweredAt: undefined,
+      updatedAt: now,
+    })
+    await ctx.scheduler.runAfter(0, internal.emailActions.sendGapQuestionsEmail, {
+      caseId: args.caseId,
+      questions,
+    })
+    return null
+  },
+})
+
+/** Ops noted the client answered the gap questions (reply or new upload). */
+export const markGapQuestionsAnswered = mutation({
+  args: { opsToken: v.string(), caseId: v.id("cases") },
+  returns: v.null(),
+  handler: async (ctx, args) => {
+    assertOpsToken(args.opsToken)
+    const caseDoc = await ctx.db.get("cases", args.caseId)
+    if (!caseDoc) throw new Error("Case not found")
+    if (caseDoc.gapQuestionsSentAt === undefined) {
+      throw new Error("No gap questions have been sent for this case")
+    }
+    const now = Date.now()
+    await ctx.db.patch("cases", args.caseId, {
+      gapQuestionsAnsweredAt: now,
+      updatedAt: now,
+    })
+    return null
+  },
+})
+
 export const sendFormReceivedAcknowledgment = mutation({
   args: { opsToken: v.string(), caseId: v.id("cases") },
   returns: v.null(),

@@ -1,8 +1,10 @@
 "use client"
 
 import { use } from "react"
+import Link from "next/link"
 import { OpsAccessGate } from "@/components/ops/ops-access-gate"
-import { CaseDetailView } from "@/components/ops/case-detail"
+import { OpsShell } from "@/components/ops/ops-shell"
+import { MatterFile } from "@/components/ops/matter-file"
 import type { Id } from "@/convex/_generated/dataModel"
 
 type PageProps = {
@@ -16,7 +18,15 @@ export default function OpsCaseDetailPage({ params }: PageProps) {
     <main className="min-h-screen bg-cream">
       <OpsAccessGate>
         {(opsToken) => (
-          <CaseDetailView opsToken={opsToken} caseId={caseId as Id<"cases">} />
+          <OpsShell
+            breadcrumb={
+              <Link href="/ops" className="hover:text-gold hover:underline">
+                ← All matters
+              </Link>
+            }
+          >
+            <MatterFile opsToken={opsToken} caseId={caseId as Id<"cases">} />
+          </OpsShell>
         )}
       </OpsAccessGate>
     </main>

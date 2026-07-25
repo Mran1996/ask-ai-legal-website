@@ -40,6 +40,14 @@ export default function DocumentPreparationAgreementPage() {
             Additional documents or retrieval may require a separate quote.
           </p>
           <p>
+            <strong>No refunds.</strong> All fees and deposits are non-refundable. Work on your
+            matter begins promptly after payment, and fees pay for custom research and drafting
+            tailored to your case. By paying, you agree that no refunds, credits, or chargebacks
+            will be issued for any reason — including cancellation, change of mind, or resolution
+            of your case — except where a refund is required by applicable law that cannot be
+            waived. Corrections and refinements within the agreed scope are included instead.
+          </p>
+          <p>
             <strong>No legal advice.</strong> Information we provide is for document preparation and
             process explanation only. Court deadlines, strategy, and whether to file any particular
             paper are decisions for you (and any attorney you hire).

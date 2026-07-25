@@ -1,12 +1,6 @@
-"use client"
+import { redirect } from "next/navigation"
 
-import { OpsAccessGate } from "@/components/ops/ops-access-gate"
-import { IntakesList } from "@/components/ops/intakes-list"
-
+/** The intakes list became the Matters panel on the ops dashboard. */
 export default function OpsIntakesPage() {
-  return (
-    <main className="min-h-screen bg-cream">
-      <OpsAccessGate>{(opsToken) => <IntakesList opsToken={opsToken} />}</OpsAccessGate>
-    </main>
-  )
+  redirect("/ops")
 }

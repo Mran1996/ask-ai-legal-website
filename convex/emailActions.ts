@@ -651,6 +651,71 @@ export const sendFormReceivedAcknowledgmentEmail = internalAction({
   },
 })
 
+export const sendGapQuestionsEmail = internalAction({
+  args: {
+    caseId: v.id("cases"),
+    questions: v.string(),
+  },
+  returns: v.null(),
+  handler: async (ctx, args) => {
+    const context = await ctx.runQuery(internal.cases.getIntakeEmailContext, {
+      caseId: args.caseId,
+    })
+    if (!context) return null
+
+    const textBody = withClientFooter(
+      [
+        `Hello ${context.clientFirstName},`,
+        "",
+        `Re: ${context.caseReference} — a few details we still need`,
+        "",
+        "Thank you for the information you have sent so far. To prepare your documents",
+        "correctly, we need answers to the questions below:",
+        "",
+        args.questions,
+        "",
+        `Please reply to this email with your answers (keep ${context.caseReference} in the subject).`,
+        "You can also attach any court papers or documents that relate to these questions.",
+        "",
+        "Ask AI Legal prepares documents only. We are not a law firm and do not provide legal advice.",
+      ].join("\n")
+    )
+
+    const questionsHtml = escapeHtml(args.questions).replace(/\n/g, "<br />")
+    const htmlBody = `<!DOCTYPE html>
+<html><body style="margin:0;padding:24px;background:#F3F4F6;font-family:Georgia,serif;color:#111827;">
+  <div style="max-width:600px;margin:0 auto;background:#fff;border:1px solid #E5E7EB;padding:28px;">
+    <div style="background:#0A1628;color:#C5A059;padding:16px;text-align:center;font-family:Arial,sans-serif;font-weight:700;">Ask AI Legal</div>
+    <p>Hello ${escapeHtml(context.clientFirstName)},</p>
+    <p><strong>Case reference:</strong> ${escapeHtml(context.caseReference)}</p>
+    <p>To prepare your documents correctly, we need a few more details:</p>
+    <div style="border-left:3px solid #C5A059;background:#FAF9F6;padding:12px 16px;margin:16px 0;">${questionsHtml}</div>
+    <p>Please <strong>reply to this email</strong> with your answers, keeping ${escapeHtml(context.caseReference)} in the subject. Attach any related court papers if you have them.</p>
+    <p style="font-size:13px;color:#4B5563;">Document preparation only — not a law firm — not legal advice.</p>
+    ${clientEmailFooterHtml()}
+  </div>
+</body></html>`
+
+    const result = await sendResendEmail({
+      to: context.clientEmail,
+      subject: `${context.caseReference} — A few details we still need | Ask AI Legal`,
+      text: textBody,
+      html: htmlBody,
+    })
+
+    await ctx.runMutation(internal.notifications.recordNotification, {
+      caseId: args.caseId,
+      type: "gap_questions_client",
+      recipient: context.clientEmail,
+      status: result.ok ? "sent" : "failed",
+      provider: "resend",
+      errorMessage: result.ok ? undefined : result.error,
+    })
+
+    return null
+  },
+})
+
 export const sendOpsDraftPackageReadyEmail = internalAction({
   args: {
     caseId: v.id("cases"),
