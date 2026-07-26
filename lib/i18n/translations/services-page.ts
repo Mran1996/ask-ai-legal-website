@@ -5,12 +5,12 @@ export const servicesPageContent = {
   label: "Services",
   title: "Everything we prepare for your case",
   intro:
-    "Ask AI Legal is full-service document preparation — research, strategy, drafting, and delivery. We are not a law firm and do not provide legal advice. You review what we prepare and handle any filing or court appearance on your own behalf.",
+    "Ask AI Legal is full-service document preparation — research, planning, drafting, and delivery. We are not a law firm and do not provide legal advice. You review what we prepare and handle any filing or appearance on your own behalf.",
   flow: {
     label: "How it fits together",
-    title: "From first review to court-ready documents",
+    title: "From first review to complete document packages",
     narrative:
-      "Every matter moves through a clear sequence: we understand your situation, map the path forward, research the facts and law, draft your documents, deliver a complete package, and refine until it reflects your case.",
+      "Every matter moves through a clear sequence: we understand your situation, map the path forward, research your files and sources, draft your documents, deliver a complete package, and refine until it reflects your case.",
     steps: [
       "Case analysis",
       "Case roadmap",
@@ -26,19 +26,19 @@ export const servicesPageContent = {
   items: [
     {
       detail:
-        "We start by reviewing your situation in plain language — what happened, what you need, and where you want to go. You receive a clear picture of the strongest legal paths available before any drafting begins. Ideal when you feel overwhelmed and need direction first.",
+        "We start by reviewing your situation in plain language — what happened, what you need, and where you want to go. You receive a clear picture of the recommended document plan before any drafting begins. Ideal when you feel overwhelmed and need direction first.",
       includes: [
         "Review of your facts and goals",
-        "Identification of viable legal paths",
-        "Written summary of strategic options",
+        "Identification of next steps for your paperwork",
+        "Written summary of preparation options",
         "Foundation for all downstream work",
       ],
     },
     {
       detail:
-        "Once we understand your matter, we build a step-by-step plan tailored to your case — key issues, recommended filings, deadlines to watch, and what to prepare next. This is your roadmap, not a generic checklist from the internet.",
+        "Once we understand your matter, we build a step-by-step plan tailored to your case — key issues, recommended documents, deadlines to watch, and what to prepare next. This is your roadmap, not a generic checklist from the internet.",
       includes: [
-        "Sequential filing and preparation plan",
+        "Sequential preparation plan",
         "Key issues and priority actions",
         "Recommended document sequence",
         "Timeline guidance for your review",
@@ -48,7 +48,7 @@ export const servicesPageContent = {
       detail:
         "We investigate the factual record of your matter — prior filings, procedural history, orders, and evidence references — so every document we draft reflects what actually happened in your case, not assumptions.",
       includes: [
-        "Review of prior filings and court records",
+        "Review of prior filings and records",
         "Procedural history mapped to your matter",
         "Fact chronology for drafting reference",
         "Issue spotting tied to your record",
@@ -56,27 +56,27 @@ export const servicesPageContent = {
     },
     {
       detail:
-        "We research statutes, court rules, and case law that apply to your issue and jurisdiction, then connect that authority to your facts. Your documents cite the right sources — prepared for your review, not copy-pasted templates.",
+        "We research rules, requirements, and published sources that apply to your issue and jurisdiction, then connect that material to your facts. Your documents reference the right sources — prepared for your review, not copy-pasted templates.",
       includes: [
-        "Statute and rule research for your jurisdiction",
-        "Case law tied to your factual pattern",
-        "Citation-ready authority summaries",
-        "Legal framework applied to your situation",
+        "Rule and requirement research for your jurisdiction",
+        "Published sources tied to your factual pattern",
+        "Reference-ready source summaries",
+        "Framework applied to your situation",
       ],
     },
     {
       detail:
-        "Every case we cite is retrieved from the actual reporter, stored in your case file, and verified in a separate review pass before it ever appears in your document. AI does the heavy lifting; verification makes it court-ready.",
+        "Every source we use is retrieved from the original publication, stored in your case file, and verified in a separate review pass before it ever appears in your document. Advanced research technology does the heavy lifting; verification makes it complete and accurate.",
       includes: [
-        "Every cited case retrieved from source",
+        "Every reference retrieved from source",
         "Stored in your case file for reference",
         "Verified in a separate review pass",
-        "Full citation list delivered with your documents",
+        "Full reference list delivered with your documents",
       ],
     },
     {
       detail:
-        "When you have a hearing or appearance you handle yourself, we prepare the written materials — outlines, talking points, and supporting documents organized so you can walk in prepared. We do not appear on your behalf or speak for you in court.",
+        "When you have a hearing or appearance you handle yourself, we prepare the written materials — outlines, talking points, and supporting documents organized so you can walk in prepared. We do not appear on your behalf or speak for you.",
       includes: [
         "Hearing or appearance outline",
         "Key talking points in plain language",
@@ -86,11 +86,11 @@ export const servicesPageContent = {
     },
     {
       detail:
-        "This is the core of what we do: motions, petitions, responses, demand letters, and more — fully drafted, properly formatted, and structured for court. You describe your case; we write the legal content.",
+        "This is the core of what we do: motions, petitions, responses, demand letters, and more — fully drafted, properly formatted, and structured for your situation. You describe your case; we write the document content.",
       includes: [
         "Full draft of requested documents",
-        "Court-appropriate formatting and structure",
-        "Headings, sections, and citation placeholders",
+        "Professional formatting and structure",
+        "Headings, sections, and reference placeholders",
         "Ready for your review before any filing",
       ],
     },

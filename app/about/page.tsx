@@ -17,15 +17,15 @@ import {
 const capabilities = [
   {
     icon: FileSearch,
-    title: "Thousands of cases, one strategy",
+    title: "Thousands of files, one plan",
     description:
-      "Your matter is researched against a vast body of filings, motions, and case law — the kind of depth that would take a traditional practice weeks to compile. We deliver it as part of your preparation.",
+      "Your matter is researched against a vast body of filings, motions, and published sources — the kind of depth that would take weeks to compile manually. We deliver it as part of your preparation.",
   },
   {
     icon: BadgeCheck,
-    title: "Citation verification",
+    title: "Source verification",
     description:
-      "Every case we cite is retrieved from the actual source, stored in your case file, and verified in a separate review pass before it reaches your documents — never invented, never guessed.",
+      "Every source we use is retrieved from the original publication, stored in your case file, and verified in a separate review pass before it reaches your documents — never invented, never guessed.",
   },
   {
     icon: Receipt,
@@ -37,7 +37,7 @@ const capabilities = [
     icon: BookOpen,
     title: "Precision drafting",
     description:
-      "Every motion, petition, and response is prepared for your facts, your jurisdiction, and your goals — formatted, cited, and ready for court.",
+      "Every motion, petition, and response is prepared for your facts, your jurisdiction, and your goals — formatted, referenced, and ready for your review.",
   },
   {
     icon: Clock,
@@ -56,7 +56,7 @@ const capabilities = [
 const standards = [
   {
     title: "Depth before draft",
-    text: "Strategy built on exhaustive research — not a first impression and a billable hour.",
+    text: "Planning built on exhaustive research — not a first impression and a billable hour.",
   },
   {
     title: "Clarity before commitment",
@@ -64,7 +64,7 @@ const standards = [
   },
   {
     title: "Verified over invented",
-    text: "Every citation in your documents is retrieved from source and checked twice before delivery.",
+    text: "Every reference in your documents is retrieved from source and checked twice before delivery.",
   },
   {
     title: "Service without the clock",
@@ -75,7 +75,7 @@ const standards = [
 export const metadata: Metadata = {
   title: "About Us",
   description:
-    "What makes Ask AI Legal different: institutional-scale case research, citation-verified legal work, and a two-step flat fee — no hourly billing, no retainer trap.",
+    "What makes Ask AI Legal different: institutional-scale file research, verified source work, and a two-step flat fee — no hourly billing, no retainer trap.",
   alternates: { canonical: "/about" },
 }
 
@@ -95,8 +95,8 @@ export default function AboutPage() {
             </h1>
             <p className="mt-8 max-w-2xl text-lg leading-relaxed text-white/70">
               Ask AI Legal is a full-service document preparation company.
-              We exist because most people facing court cannot access the depth
-              of research, speed, and preparation that serious cases require —
+              We exist because most people handling important paperwork on their own cannot access the depth
+              of research, speed, and preparation serious situations require —
               and they should not have to choose between quality and affordability.
             </p>
           </div>
@@ -113,7 +113,7 @@ export default function AboutPage() {
               </h2>
               <p className="mt-5 text-lg leading-relaxed text-gray-600">
                 We built our service around what clients actually need: exhaustive
-                research, outcome-focused strategy, and documents prepared for them
+                research, clear document planning, and documents prepared for them
                 — not templates they fill in alone. Here is what that means in
                 practice.
               </p>

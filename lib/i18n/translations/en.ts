@@ -20,7 +20,7 @@ export const en = {
     titleLine1: "You paid the retainer.",
     titleHighlight: "Do you know",
     titleLine2: "what's in your case file?",
-    body: `Full document preparation service — divorce paperwork, custody documents, civil disputes, and more. Start with a flat ${REVIEW_PRICE} case file review. We email you a written summary with your exact price, usually within 72 hours — credited in full toward your documents.`,
+    body: `Full document preparation service for people handling important paperwork on their own — any issue, any jurisdiction. Start with a flat ${REVIEW_PRICE} case file review. We email you a written summary with your exact price, usually within 72 hours — credited in full toward your documents.`,
     ctaPrimary: `Start my case file review — ${REVIEW_PRICE}`,
     ctaSecondary: "See how it works",
     stat1Value: REVIEW_PRICE,
@@ -46,7 +46,7 @@ export const en = {
       {
         title: "Case analysis",
         description:
-          "We review your situation, identify the strongest legal path, and map your strategy — before a single word is drafted.",
+          "We review your situation, outline the documents you need, and map the order to prepare them — before a single word is drafted.",
       },
       {
         title: "Case roadmap",
@@ -59,14 +59,14 @@ export const en = {
           "We dig into the facts, filings, and procedural history of your matter so every document is built on what actually happened in your case.",
       },
       {
-        title: "Legal research",
+        title: "In-depth research",
         description:
-          "Statutes, rules, and case law relevant to your issue — researched and applied to your facts so your documents cite the right authority.",
+          "Rules, requirements, and published sources relevant to your issue — researched and applied to your facts so your documents reference the right material.",
       },
       {
-        title: "Citation verification",
+        title: "Source verification",
         description:
-          "Every case we cite is retrieved from the actual source, stored in your case file, and verified in a separate review pass before it appears in your documents — never invented, never guessed.",
+          "Every source we use is retrieved from the original publication, stored in your case file, and verified in a separate review pass before it appears in your documents — never invented, never guessed.",
       },
       {
         title: "Hearing preparation",
@@ -76,7 +76,7 @@ export const en = {
       {
         title: "Document preparation",
         description:
-          "Motions, petitions, responses, complaints, answers, affidavits, declarations, discovery papers, demand letters, and more — fully drafted, formatted, and court-ready. Upload what you have and we build from your files. You don't write a thing. Call us or leave us a message to see how we can help.",
+          "Motions, petitions, responses, complaints, answers, affidavits, declarations, discovery papers, demand letters, and more — fully drafted, formatted, and ready for your review. Upload what you have and we build from your files. You don't write a thing. Call us or leave us a message to see how we can help.",
       },
       {
         title: "Document delivery",
@@ -111,7 +111,7 @@ export const en = {
     usBullets: [
       `${REVIEW_PRICE} case file review — credited toward your documents`,
       "One flat quote after your written case summary, no hourly billing",
-      "Every case citation retrieved, stored, and verified",
+      "Every source retrieved, stored, and verified",
     ],
     cta: "Start my case file review",
     usCompareLabel: "Ask AI Legal",
@@ -124,19 +124,19 @@ export const en = {
         title: "Full document preparation",
         summary: "Researched, drafted, formatted, and ready for your review",
         detail:
-          "Every filing is checked against current court formatting rules and citation standards — no missed local rule, no rejected filing, no billing you to fix a margin.",
+          "Every document is checked against the formatting and reference standards that apply to your situation — no missed requirements, no rejected paperwork, no billing you to fix a margin.",
       },
       {
-        title: "Case strategy & legal research",
-        summary: "Built on your facts and the law that applies",
+        title: "Research & document planning",
+        summary: "Built from your files and verified sources",
         detail:
-          "We search the full body of case law — not from memory, not from a firm's go-to precedent list. Continuously updated as the law changes, so your strategy is never built on outdated rulings.",
+          "We research from primary sources — not from memory or generic templates — so your documents are built on current, verified material.",
       },
       {
-        title: "Citation verification",
-        summary: "Every citation retrieved and checked twice",
+        title: "Source verification",
+        summary: "Every reference retrieved and checked twice",
         detail:
-          "Every case we cite is pulled from the actual source, stored in your case file, and verified in a separate review pass before it reaches your draft — never invented, never guessed.",
+          "Every source we use is pulled from the original publication, stored in your case file, and verified in a separate review pass before it reaches your draft — never invented, never guessed.",
       },
       {
         title: "Transparent quote",
@@ -153,7 +153,7 @@ export const en = {
     steps: [
       {
         title: "Tell us your case",
-        body: "Share your situation in plain language and upload what you have. We ask the right questions — you never touch legal jargon.",
+        body: "Share your situation in plain language and upload what you have. We ask the right questions — you never touch confusing paperwork language.",
       },
       {
         title: `${REVIEW_PRICE} case file review`,
@@ -161,11 +161,11 @@ export const en = {
       },
       {
         title: "One flat quote",
-        body: "Your memo ends with a single recommendation and one flat price for the documents your case needs. No hourly surprises.",
+        body: "Your written summary ends with a single recommendation and one flat price for the documents your situation needs. No hourly surprises.",
       },
       {
-        title: "Court-ready delivery",
-        body: "We research, draft, and verify every citation, then deliver your complete document package. You review and file on your own behalf.",
+        title: "Complete document delivery",
+        body: "We research, draft, and verify every reference, then deliver your complete document package. You review and use the documents yourself.",
       },
     ],
   },
@@ -238,7 +238,7 @@ export const en = {
     items: [
       {
         q: "Are you a law firm?",
-        a: "No. Ask AI Legal generates documents only. We prepare court-ready documents for your review and use. We do not provide legal advice and do not establish an attorney-client relationship.",
+        a: "No. Ask AI Legal generates documents only. We prepare complete documents for your review and use. We do not provide legal advice and do not establish an attorney-client relationship.",
       },
       {
         q: `What do I get for ${REVIEW_PRICE}?`,
@@ -250,11 +250,11 @@ export const en = {
       },
       {
         q: "What kinds of cases do you handle?",
-        a: "Any legal matter — there is no limit. Divorce, custody, family court, civil disputes, criminal motions, business issues, and whatever documents your case needs. Across U.S. jurisdictions.",
+        a: "Any issue — there is no limit. Divorce, custody, family matters, civil disputes, business conflicts, tenant issues, and whatever documents your situation needs. Across U.S. jurisdictions.",
       },
       {
-        q: "How do I know your legal citations are real?",
-        a: "Every case we cite is retrieved from the actual source, stored in your case file, and verified in a separate review pass before it appears in your documents. You receive the citation list with your delivery.",
+        q: "How do I know your sources are real?",
+        a: "Every reference we include is retrieved from the original source, stored in your case file, and verified in a separate review pass before it appears in your documents. You receive a reference list with your delivery.",
       },
       {
         q: "Will you appear in court for me?",
@@ -267,7 +267,7 @@ export const en = {
     ],
   },
   footer: {
-    tagline: "We generate court-ready documents for you — researched, drafted, and delivered.",
+    tagline: "We prepare complete document packages for you — researched, drafted, and delivered.",
     documentOnly: "Document generation only",
     columns: {
       services: "Services",
@@ -279,8 +279,8 @@ export const en = {
       allServices: "All services",
       caseRoadmap: "Case roadmap",
       caseResearch: "Case research",
-      legalResearch: "Legal research",
-      outcomeAnalysis: "Citation verification",
+      legalResearch: "In-depth research",
+      outcomeAnalysis: "Source verification",
       hearingPrep: "Hearing preparation",
       documentPrep: "Document prep",
       about: "About us",

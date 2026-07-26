@@ -2,9 +2,9 @@ import { Brain, FileStack, Upload, BookOpen, Clock, Shield } from "lucide-react"
 
 const features = [
   { icon: Brain, title: "Precision-trained AI", description: "Trained on millions of real documents. Spots key issues and builds strategic responses instantly.", large: true },
-  { icon: FileStack, title: "Court-ready drafts", description: "Motions, letters, complaints — formatted and ready to file.", large: false },
+  { icon: FileStack, title: "Complete document drafts", description: "Motions, letters, complaints — formatted and ready for your review.", large: false },
   { icon: Upload, title: "Smart upload", description: "AI reads your filings and tailors your response.", large: false },
-  { icon: BookOpen, title: "Real case law", description: "Citations matched to your facts.", large: false },
+  { icon: BookOpen, title: "Verified sources", description: "References matched to your facts.", large: false },
   { icon: Clock, title: "24/7 access", description: "Help at 2 AM before a deadline.", large: false },
   { icon: Shield, title: "Built for pro se", description: "Plain-language guidance without a law degree.", large: true },
 ]

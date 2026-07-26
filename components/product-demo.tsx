@@ -39,7 +39,7 @@ export function ProductDemo() {
             — Live demo —
           </span>
           <h2 className="section-title-dark mx-auto">
-            Watch your case become a court-ready document
+            Watch your files become a complete document package
           </h2>
           <p className="section-desc-dark mx-auto">
             Intake → upload → generate → export. The full workflow, automated.
@@ -114,7 +114,7 @@ export function ProductDemo() {
                   <p className="mt-2">Defendant was stopped for an alleged taillight violation…</p>
                   <p className="mt-4 flex items-center gap-2 text-brand">
                     <Sparkles className="h-4 w-4 animate-spin" style={{ animationDuration: "2s" }} aria-hidden />
-                    Adding case citations…
+                    Adding verified references…
                   </p>
                 </div>
               )}
@@ -123,7 +123,7 @@ export function ProductDemo() {
                   <div className="mb-5 flex h-20 w-20 items-center justify-center rounded-full bg-brand/20">
                     <Check className="h-10 w-10 text-brand" aria-hidden />
                   </div>
-                  <p className="font-display text-3xl text-white">Ready to file</p>
+                  <p className="font-display text-3xl text-white">Ready for your review</p>
                   <p className="mt-2 text-gray-400">Motion to Dismiss · 4 pages · PDF export</p>
                 </div>
               )}

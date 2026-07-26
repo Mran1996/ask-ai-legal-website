@@ -26,7 +26,7 @@ export default function TermsOfServicePage() {
       <h2>1. Who we are</h2>
       <p>
         Ask AI Legal is a <strong>document preparation service</strong>. We prepare
-        court-ready documents, research materials, and related written work product based on
+        complete documents, research materials, and related written work product based on
         information you provide. We are <strong>not a law firm</strong>, and our personnel are{" "}
         <strong>not your attorneys</strong>.
       </p>
@@ -109,10 +109,12 @@ export default function TermsOfServicePage() {
       </p>
       <p>
         Because our services involve custom research and drafting tailored to your matter,
-        <strong> all fees are generally non-refundable</strong> once work has begun, except
-        where required by applicable law or as we expressly agree in writing. If you cancel
-        before work begins, we may refund any prepaid amount minus reasonable administrative
-        costs.
+        <strong> all fees are non-refundable once paid</strong>, including if you cancel, change
+        your mind, do not use prepared documents, miss a deadline, or are dissatisfied with
+        outcomes that depend on facts, courts, opposing parties, or your own filing choices.
+        Exceptions apply only where required by applicable law or if we expressly agree in a
+        signed writing. Paying your invoice or Payment Link constitutes acceptance of this
+        no-refund policy for that engagement.
       </p>
       <p>
         If you dispute a charge, contact us at{" "}

@@ -81,7 +81,7 @@ export function HeroDocumentPreview() {
         </div>
 
         <div className="flex items-center justify-between border-t border-gray-100 bg-gray-50 px-4 py-3">
-          <span className="text-xs text-gray-500">Court-ready format</span>
+          <span className="text-xs text-gray-500">Professional format</span>
           <span className="rounded-lg bg-accent px-3 py-1 text-xs font-semibold text-white">
             Export PDF
           </span>
