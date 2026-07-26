@@ -40,4 +40,4 @@ export const SITE_DISCLAIMER =
 export const SITE_SEO_TITLE = "Ask AI Legal — Full Document Preparation Service"
 
 /** Primary SEO description — used in layout, JSON-LD, and social previews. */
-export const SITE_SEO_DESCRIPTION = `Full document preparation service for divorce, custody, civil, and business matters. Start with a flat ${CASE_FILE_REVIEW_PRICE_DISPLAY} case file review — credited toward your documents. Not a law firm, no legal advice.`
+export const SITE_SEO_DESCRIPTION = `Full document preparation service for divorce paperwork, custody documents, and civil disputes. ${CASE_FILE_REVIEW_PRICE_DISPLAY} case file review → written summary with your exact price → flat-fee document package. Not a law firm, no legal advice.`

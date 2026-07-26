@@ -20,7 +20,7 @@ export const en = {
     titleLine1: "You paid the retainer.",
     titleHighlight: "Do you know",
     titleLine2: "what's in your case file?",
-    body: `Full document preparation service for people handling their own legal matters — any issue, any jurisdiction. Start with a flat ${REVIEW_PRICE} case file review — credited in full toward your documents.`,
+    body: `Full document preparation service — divorce paperwork, custody documents, civil disputes, and more. Start with a flat ${REVIEW_PRICE} case file review. We email you a written summary with your exact price, usually within 72 hours — credited in full toward your documents.`,
     ctaPrimary: `Start my case file review — ${REVIEW_PRICE}`,
     ctaSecondary: "See how it works",
     stat1Value: REVIEW_PRICE,
@@ -110,7 +110,7 @@ export const en = {
     usDesc: "Credited in full toward your document package",
     usBullets: [
       `${REVIEW_PRICE} case file review — credited toward your documents`,
-      "One flat quote after your scope memo, no hourly billing",
+      "One flat quote after your written case summary, no hourly billing",
       "Every case citation retrieved, stored, and verified",
     ],
     cta: "Start my case file review",
@@ -142,7 +142,7 @@ export const en = {
         title: "Transparent quote",
         summary: "One price, no surprises",
         detail:
-          "Flat pricing, calculated upfront from your scope memo. No clock running while someone drafts an email — you know the full cost before you say yes.",
+          "Flat pricing, calculated upfront after we review your files. No clock running while someone drafts an email — you know the full cost before you say yes.",
       },
     ],
   },
@@ -157,7 +157,7 @@ export const en = {
       },
       {
         title: `${REVIEW_PRICE} case file review`,
-        body: "We review your case file and send a plain-English scope memo, usually within 72 hours — credited in full toward your documents.",
+        body: `We review your case file and email you a plain-English written summary of your situation — what's missing, what documents you need, and your exact price — usually within 72 hours. The ${REVIEW_PRICE} is credited in full toward your documents.`,
       },
       {
         title: "One flat quote",
@@ -242,11 +242,11 @@ export const en = {
       },
       {
         q: `What do I get for ${REVIEW_PRICE}?`,
-        a: `A case file review: we read what you send us — filings, notices, letters, court documents — and deliver a plain-English scope memo, usually within 72 hours. It tells you where your case stands procedurally, what documents it needs next, and one flat quote to prepare them. The ${REVIEW_PRICE} is credited in full toward that quote.`,
+        a: `A case file review: we read what you send us — filings, notices, letters, and any paperwork you have — and email you a plain-English written summary, usually within 72 hours. It explains where things stand, what documents you still need, and one flat price to prepare them. The ${REVIEW_PRICE} is credited in full toward that price.`,
       },
       {
         q: "Why two payments instead of one price up front?",
-        a: "Because quoting document work before reading your case file is guessing — that's how retainers balloon. The first payment covers actually reviewing your file; the second is a fixed quote for exactly the work your memo describes. No hourly billing at either step.",
+        a: "Because quoting document work before reading your files is guessing — that's how retainers balloon. The first payment covers reviewing what you sent; the second is one fixed price for exactly the documents your written summary describes. No hourly billing at either step.",
       },
       {
         q: "What kinds of cases do you handle?",

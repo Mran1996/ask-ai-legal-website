@@ -35,7 +35,7 @@ export default function PricingPage() {
             <h1 className="firm-title text-white">Two payments. No hourly clock.</h1>
             <p className="mt-8 max-w-2xl text-lg leading-relaxed text-white/70">
               We list how pricing works up front: a flat {CASE_FILE_REVIEW_PRICE_DISPLAY} case file
-              review, then one flat quote for the documents your scope memo describes. You review and
+              review, then one flat price for the documents your written summary describes. You review and
               file on your own behalf — we prepare documents only.
             </p>
             <div className="mt-10">
@@ -91,7 +91,7 @@ export default function PricingPage() {
             </div>
             <p className="mt-10 text-sm leading-relaxed text-gray-600">
               Document package quotes depend on scope — matter type, jurisdiction, and what your case
-              file shows is needed. Your scope memo ends with one flat price before you commit to
+              file shows is needed. Your written summary ends with one flat price before you commit to
               document preparation.
             </p>
             <div className="mt-8 flex flex-wrap gap-4">
