@@ -20,7 +20,7 @@ export const en = {
     titleLine1: "You paid the retainer.",
     titleHighlight: "Do you know",
     titleLine2: "what's in your case file?",
-    body: `We prepare court-ready documents and citation-verified research for people handling their own legal matters — any issue, any jurisdiction. Start with a flat ${REVIEW_PRICE} case file review — credited in full toward your documents.`,
+    body: `Full document preparation service for people handling their own legal matters — any issue, any jurisdiction. Start with a flat ${REVIEW_PRICE} case file review — credited in full toward your documents.`,
     ctaPrimary: `Start my case file review — ${REVIEW_PRICE}`,
     ctaSecondary: "See how it works",
     stat1Value: REVIEW_PRICE,
@@ -28,7 +28,7 @@ export const en = {
     stat1Sub: "Credited toward your documents",
     stat2Value: "72 hrs",
     stat2Label: "Your written case summary",
-    stat2Sub: "After all documentation is received — usually within 72 hours",
+    stat2Sub: "After all documents are received — usually within 72 hours",
     stat3Value: "1",
     stat3Label: "Flat quote",
     stat3Sub: "No hourly billing, ever",
@@ -121,8 +121,8 @@ export const en = {
     highlightsIntro: "Tap a card to flip and explore what we deliver with every case.",
     highlights: [
       {
-        title: "Court-ready documentation",
-        summary: "Formatted, cited, and ready for your review",
+        title: "Full document preparation",
+        summary: "Researched, drafted, formatted, and ready for your review",
         detail:
           "Every filing is checked against current court formatting rules and citation standards — no missed local rule, no rejected filing, no billing you to fix a margin.",
       },

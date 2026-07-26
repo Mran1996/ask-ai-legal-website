@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og"
 import { CASE_FILE_REVIEW_PRICE_DISPLAY } from "@/lib/site-config"
 
-export const alt = "Ask AI Legal — Court-ready documents and verified legal research"
+export const alt = "Ask AI Legal — Full document preparation service"
 export const size = { width: 1200, height: 630 }
 export const contentType = "image/png"
 
@@ -53,7 +53,7 @@ export default function OpenGraphImage() {
             maxWidth: 920,
           }}
         >
-          {`Flat-fee document preparation · ${CASE_FILE_REVIEW_PRICE_DISPLAY} case file review credited toward your documents`}
+          {`Full document preparation service · ${CASE_FILE_REVIEW_PRICE_DISPLAY} case file review credited toward your documents`}
         </div>
         <div
           style={{

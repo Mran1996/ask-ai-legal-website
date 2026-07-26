@@ -6,7 +6,7 @@ export function AnnouncementBar() {
       </span>
       <span className="mx-2 text-gray-600">·</span>
       <span className="text-gray-300">
-        Court-ready AI documents — no hourly billing
+        Full document preparation service — no hourly billing
       </span>
     </div>
   )
