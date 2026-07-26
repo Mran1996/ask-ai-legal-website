@@ -15,7 +15,7 @@ export const tl = mergeTranslations({
   },
   hero: {
     slogan: "Malakas na legal na tulong — kapag kailangan mo",
-    titleLine1: "Court-ready na dokumento,",
+    titleLine1: "Kumpletong dokumento,",
     titleHighlight: "ginawa",
     titleLine2: "para sa iyong kaso.",
     body: "Nagsasaliksik, nagsusulat, at naghahatid kami — ikaw ang magre-review at magfa-file. Walang hourly billing.",

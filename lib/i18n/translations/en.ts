@@ -51,7 +51,7 @@ export const en = {
       {
         title: "Case roadmap",
         description:
-          "A step-by-step plan for your matter — key issues, recommended filings, and what to prepare next. Built from your facts, not a generic template.",
+          "A step-by-step plan for your matter — key issues, recommended documents, and what to prepare next. Built from your facts, not a generic template.",
       },
       {
         title: "Case research",
@@ -76,7 +76,7 @@ export const en = {
       {
         title: "Document preparation",
         description:
-          "Motions, petitions, responses, complaints, answers, affidavits, declarations, discovery papers, demand letters, and more — fully drafted, formatted, and ready for your review. Upload what you have and we build from your files. You don't write a thing. Call us or leave us a message to see how we can help.",
+          "Letters, forms, responses, agreements, statements, exhibits, and supporting paperwork — fully drafted, formatted, and ready for your review. Upload what you have and we build from your files. You don't write a thing. Call us or leave us a message to see how we can help.",
       },
       {
         title: "Document delivery",

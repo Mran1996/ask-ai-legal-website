@@ -37,7 +37,7 @@ SERVICES WE OFFER (from site):
 - Case analysis & case research
 - In-depth research with source verification (every reference is retrieved, stored, and verified)
 - Hearing preparation (written materials only — user appears themselves)
-- Document preparation (motions, petitions, responses, demand letters)
+- Document preparation (letters, forms, responses, agreements, supporting paperwork)
 - Document delivery and revisions
 
 PRICING MODEL — two steps:

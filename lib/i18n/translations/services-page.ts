@@ -86,7 +86,7 @@ export const servicesPageContent = {
     },
     {
       detail:
-        "This is the core of what we do: motions, petitions, responses, demand letters, and more — fully drafted, properly formatted, and structured for your situation. You describe your case; we write the document content.",
+        "This is the core of what we do: letters, forms, responses, agreements, and supporting paperwork — fully drafted, properly formatted, and structured for your situation. You describe your case; we write the document content.",
       includes: [
         "Full draft of requested documents",
         "Professional formatting and structure",

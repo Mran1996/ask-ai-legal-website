@@ -191,7 +191,7 @@ export default function AboutPage() {
                 being priced out of it.
               </p>
               <p className="mt-4 leading-relaxed text-gray-600">
-                We prepare your documents and strategy. You remain in control of
+                We prepare your documents and written plans. You remain in control of
                 your case — informed, equipped, and ready.
               </p>
             </div>

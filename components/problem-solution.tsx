@@ -29,7 +29,7 @@ export function ProblemSolution() {
               <ShieldCheck className="mb-4 h-8 w-8 text-brand" aria-hidden />
               <h3 className="font-display text-2xl text-white">Ask AI Legal changes that</h3>
               <p className="mt-3 text-sm leading-relaxed text-gray-400">
-                Attorney-style drafts, case strategy, and 24/7 guidance — flat monthly
+                Professional drafts, document planning, and 24/7 guidance — flat monthly
                 pricing, on your schedule, always on your side.
               </p>
             </article>
