@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/disclaimer" },
 }
 
-const LAST_UPDATED = "June 29, 2026"
+const LAST_UPDATED = "July 26, 2026"
 
 export default function DisclaimerPage() {
   return (
@@ -126,7 +126,22 @@ export default function DisclaimerPage() {
         time-critical decisions.
       </p>
 
-      <h2>10. Limitation of liability</h2>
+      <h2>10. Payment and refunds</h2>
+      <p>
+        Fees are due as stated in your quote or invoice. Because our services involve custom
+        research and drafting tailored to your matter,{" "}
+        <strong>all fees are non-refundable once paid</strong>, including if you cancel, change your
+        mind, do not use prepared documents, miss a deadline, or are dissatisfied with outcomes
+        that depend on facts, courts, opposing parties, or your own filing choices. Exceptions apply
+        only where required by applicable law or if we expressly agree in a signed writing.
+      </p>
+      <p>
+        Full payment terms are in our{" "}
+        <Link href="/terms-of-service">Terms of Service</Link>. Questions about charges may be
+        directed to <a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a>.
+      </p>
+
+      <h2>11. Limitation of liability</h2>
       <p>
         To the fullest extent permitted by law, Ask AI Legal disclaims liability for any
         damages arising from your use of or reliance on our website, consultations, or
@@ -135,14 +150,14 @@ export default function DisclaimerPage() {
         <Link href="/terms-of-service">Terms of Service</Link>.
       </p>
 
-      <h2>11. Changes</h2>
+      <h2>12. Changes</h2>
       <p>
         We may update this Disclaimer at any time. The &ldquo;Last updated&rdquo; date at the
         top indicates the latest version. Continued use of our website or services after
         changes constitutes acceptance.
       </p>
 
-      <h2>12. Contact</h2>
+      <h2>13. Contact</h2>
       <p>Questions about this Disclaimer may be directed to:</p>
       <p>
         Ask AI Legal LLC

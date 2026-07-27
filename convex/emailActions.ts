@@ -9,6 +9,7 @@ import {
   clientEmailFooter,
   clientEmailFooterHtml,
   documentPreparationAgreementUrl,
+  termsOfServiceUrl,
   opsCaseUrl,
   opsNotifyEmail,
   publicSiteUrl,
@@ -698,6 +699,23 @@ export const sendOpsDraftPackageReadyEmail = internalAction({
   },
 })
 
+const INTERNAL_DRAFT_MARKERS = [
+  "review before sending to client",
+  "Suggested first priority",
+] as const
+
+function assertNoInternalDraftContent(body: string): void {
+  const lower = body.toLowerCase()
+  for (const marker of INTERNAL_DRAFT_MARKERS) {
+    if (lower.includes(marker.toLowerCase())) {
+      console.error("Blocked customer quote email: internal ops marker detected", { marker })
+      throw new Error(
+        `Blocked customer email: body contains internal ops content ("${marker}")`
+      )
+    }
+  }
+}
+
 export const sendQuoteContractInvoiceEmail = internalAction({
   args: {
     caseId: v.id("cases"),
@@ -705,9 +723,6 @@ export const sendQuoteContractInvoiceEmail = internalAction({
     quotedAmountCents: v.optional(v.number()),
     scopeSummary: v.optional(v.string()),
     timeframe: v.optional(v.string()),
-    issuesSummary: v.optional(v.string()),
-    includeAgreement: v.optional(v.boolean()),
-    askPriorityIssue: v.optional(v.boolean()),
   },
   returns: v.null(),
   handler: async (ctx, args) => {
@@ -721,62 +736,28 @@ export const sendQuoteContractInvoiceEmail = internalAction({
         ? `Quoted amount to start: ${formatUsdFromCents(args.quotedAmountCents)}`
         : "Quoted amount to start: see the linked invoice (ops will confirm the final figure)."
 
-    const issues =
-      args.issuesSummary?.trim() ||
-      "We reviewed your Part 1 responses and will confirm the document set we can prepare in the scope below."
-
     const scope =
       args.scopeSummary?.trim() ||
       (context.estimate
         ? `Document preparation related to: ${context.estimate.serviceLine}.`
-        : "Document preparation based on your Part 1 responses.")
+        : "Document preparation as described in your personalized intake responses.")
 
     const timeframe =
       args.timeframe?.trim() ||
       "Typical drafting window: 3–7 business days after payment clears and we have a complete file (or paid retrieval is finished)."
 
-    const payUrl =
-      args.paymentLinkUrl.trim() ||
-      "(Payment link will be added by our team — reply if you do not see an invoice link.)"
-
+    const payUrl = args.paymentLinkUrl.trim()
     const agreementUrl = documentPreparationAgreementUrl()
-    const agreementBlock =
-      args.includeAgreement !== false
-        ? [
-            "SERVICE AGREEMENT (document preparation only)",
-            `Please read: ${agreementUrl}`,
-            "By paying the invoice / Payment Link you accept this Document Preparation Service Agreement.",
-            "",
-          ]
-        : [
-            "SERVICE AGREEMENT",
-            "By paying the invoice you agree this is a document-preparation engagement only.",
-            "",
-          ]
-
-    const priorityBlock =
-      args.askPriorityIssue !== false
-        ? [
-            "PLEASE REPLY WITH",
-            "1. Are these the issues, or did we miss anything?",
-            "2. Which ONE issue should we prepare documents for first?",
-            "3. Which remaining issues can wait for a later phase?",
-            "",
-          ]
-        : []
+    const termsUrl = termsOfServiceUrl()
 
     const body = withClientFooter(
       [
         `Hello ${context.clientFirstName},`,
         "",
-        `Re: ${context.caseReference} — issues we can start with + invoice`,
+        `Re: ${context.caseReference} — quote, agreement, and invoice`,
         "",
         "Ask AI Legal generates documents only. We are not a law firm, we do not provide legal advice, and we do not appear in court or file on your behalf.",
         "",
-        "DOCUMENTS / ISSUES WE CAN START WITH (document preparation)",
-        issues,
-        "",
-        ...priorityBlock,
         "SCOPE (document preparation)",
         scope,
         "",
@@ -795,30 +776,101 @@ export const sendQuoteContractInvoiceEmail = internalAction({
         "• Court appearance, filing, or serving papers for you",
         "• Document retrieval until separately quoted and paid",
         "",
-        ...agreementBlock,
-        "PAYMENT (off-site invoice / Payment Link)",
+        "SERVICE AGREEMENT (document preparation only)",
+        `Please read: ${agreementUrl}`,
+        "By paying the invoice / Payment Link you accept this Document Preparation Service Agreement.",
+        `For payment, refunds, and other terms, please see our Terms of Service: ${termsUrl}`,
+        "",
+        "PAYMENT (off-site invoice / Payment Link — not charged on our contact page)",
         payUrl,
         "",
         "We begin research and drafting only after payment is received.",
         "",
-        `Please keep ${context.caseReference} in all email subject lines.`,
+        `Please keep ${context.caseReference} in all email subject lines so we can file your matter correctly.`,
       ].join("\n")
     )
 
+    assertNoInternalDraftContent(body)
+
     const result = await sendResendEmail({
       to: context.clientEmail,
-      subject: `${context.caseReference} — Issues we can start with & invoice | Ask AI Legal`,
+      subject: `${context.caseReference} — Quote, contract & invoice | Ask AI Legal`,
       text: body,
     })
 
     await ctx.runMutation(internal.notifications.recordNotification, {
       caseId: args.caseId,
-      type: args.includeAgreement ? "package_approved_client" : "issues_invoice_client",
+      type: "quote_contract_invoice_client",
       recipient: context.clientEmail,
       status: result.ok ? "sent" : "failed",
       provider: "resend",
       errorMessage: result.ok ? undefined : result.error,
     })
+
+    return null
+  },
+})
+
+export const sendGapQuestionsEmail = internalAction({
+  args: {
+    caseId: v.id("cases"),
+    questionsText: v.string(),
+    force: v.optional(v.boolean()),
+  },
+  returns: v.null(),
+  handler: async (ctx, args) => {
+    const context = await ctx.runQuery(internal.cases.getIntakeEmailContext, {
+      caseId: args.caseId,
+    })
+    if (!context) return null
+
+    const questions = args.questionsText.trim()
+    if (!questions) return null
+
+    const body = withClientFooter(
+      [
+        `Hello ${context.clientFirstName},`,
+        "",
+        `Re: ${context.caseReference} — a few details we still need`,
+        "",
+        "Thank you for returning Part 1. To prepare accurate documents, we need a bit more information (facts and papers only).",
+        "",
+        "Ask AI Legal prepares documents only. We are not a law firm and do not provide legal advice.",
+        "",
+        "PLEASE REPLY TO THIS EMAIL WITH ANSWERS TO:",
+        questions,
+        "",
+        "Tips:",
+        "• Keep your case reference in the subject line.",
+        "• Attach clear photos or PDFs of notices, complaints, leases, or prior filings.",
+        "• If a question does not apply, reply “N/A” and say why.",
+        "",
+        `You can also reach us at ${SUPPORT_EMAIL}.`,
+      ].join("\n")
+    )
+
+    const result = await sendResendEmail({
+      to: context.clientEmail,
+      subject: `${context.caseReference} — Quick questions so we can prepare your documents | Ask AI Legal`,
+      text: body,
+    })
+
+    await ctx.runMutation(internal.notifications.recordNotification, {
+      caseId: args.caseId,
+      type: "gap_questions_client",
+      recipient: context.clientEmail,
+      status: result.ok ? "sent" : "failed",
+      provider: "resend",
+      errorMessage: result.ok ? undefined : result.error,
+    })
+
+    if (result.ok) {
+      await ctx.runMutation(internal.payments.markGapQuestionsSent, {
+        caseId: args.caseId,
+      })
+    } else {
+      console.error("Gap questions email failed", result.error)
+    }
 
     return null
   },

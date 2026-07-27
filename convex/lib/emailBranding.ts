@@ -16,6 +16,10 @@ export function documentPreparationAgreementUrl(): string {
   return `${publicSiteUrl()}/document-preparation-agreement`
 }
 
+export function termsOfServiceUrl(): string {
+  return `${publicSiteUrl()}/terms-of-service`
+}
+
 export function opsNotifyEmail(): string {
   return process.env.OPS_NOTIFY_EMAIL?.trim() || SUPPORT_EMAIL
 }
