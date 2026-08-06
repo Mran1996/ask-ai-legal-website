@@ -176,11 +176,13 @@ export const sendIntakeEmails = internalAction({
       "4. After payment clears, we prepare your documents and deliver them by email.",
     ]
 
+    const bookDisplayUrl = `${publicSiteUrl()}/book`
+
     if (bookUrl) {
       clientBodyParts.push(
         "",
-        "Optional — book a short intake call (document prep and pricing only — not legal advice):",
-        bookUrl
+        "Optional — book a short intake call:",
+        bookDisplayUrl
       )
     }
 
@@ -206,10 +208,57 @@ export const sendIntakeEmails = internalAction({
       "Nothing has been delivered yet. We do not file documents or appear in court for you."
     )
 
+    const estimateHtml = context.estimate
+      ? context.estimate.isCustomQuote
+        ? `<p style="margin:0 0 8px;"><strong>Planning estimate</strong> — ${escapeHtml(context.estimate.serviceLine)}</p>
+            <p style="margin:0 0 8px;">Typical attorney cost: ${escapeHtml(formatUsdFromCents(context.estimate.attorneyCompareLowCents))}–${escapeHtml(formatUsdFromCents(context.estimate.attorneyCompareHighCents))}</p>
+            <p style="margin:0 0 16px;">Ask AI Legal: custom flat quote will be in your emailed package after we review your form.</p>`
+        : `<p style="margin:0 0 8px;"><strong>Planning estimate</strong> — ${escapeHtml(context.estimate.serviceLine)}</p>
+            <p style="margin:0 0 8px;">Typical attorney cost: ${escapeHtml(formatUsdFromCents(context.estimate.attorneyCompareLowCents))}–${escapeHtml(formatUsdFromCents(context.estimate.attorneyCompareHighCents))}</p>
+            <p style="margin:0 0 16px;">Ask AI Legal estimated average: ${escapeHtml(formatUsdFromCents(context.estimate.finalQuoteCents))} (final package price confirmed in your emailed quote)</p>`
+      : ""
+
+    const bookHtml = bookUrl
+      ? `<p style="margin:16px 0 8px;">Optional — book a short intake call:</p>
+            <p style="margin:0 0 16px;"><a href="${escapeHtml(bookUrl)}" style="color:#C5A059;font-weight:700;text-decoration:none;">askailegal.com/book</a></p>`
+      : ""
+
+    const clientHtml = `<!DOCTYPE html>
+<html>
+<body style="margin:0;padding:0;background:#F3F4F6;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#F3F4F6;padding:24px 12px;">
+    <tr><td align="center">
+      <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px;background:#ffffff;border:1px solid #E5E7EB;">
+        <tr>
+          <td style="padding:28px 28px 8px;font-family:Georgia,serif;color:#111827;font-size:15px;line-height:1.55;">
+            <p style="margin:0 0 16px;">Hello ${escapeHtml(context.clientFirstName)},</p>
+            <p style="margin:0 0 16px;">Thank you for reaching out to Ask AI Legal.</p>
+            <p style="margin:0 0 16px;">We received your intake. Your case reference is <strong>${escapeHtml(args.caseReference)}</strong> — please keep it in email subjects.</p>
+            <p style="margin:0 0 8px;font-weight:700;color:#0A1628;">What happens next</p>
+            <p style="margin:0 0 8px;font-size:13px;color:#6B7280;">Document preparation only — not a law firm, not legal advice.</p>
+            <ol style="margin:0 0 16px;padding-left:20px;">
+              <li>We email you a personalized intake form for your situation.</li>
+              <li>You return the form and any court papers you have (or request paid document retrieval — quoted before we pull records).</li>
+              <li>We email a written cost to research &amp; draft, a document-preparation service agreement, and an invoice / payment link.</li>
+              <li>After payment clears, we prepare your documents and deliver them by email.</li>
+            </ol>
+            ${bookHtml}
+            ${estimateHtml}
+            <p style="margin:0 0 8px;">Nothing has been delivered yet. We do not file documents or appear in court for you.</p>
+            ${clientEmailFooterHtml()}
+          </td>
+        </tr>
+      </table>
+    </td></tr>
+  </table>
+</body>
+</html>`
+
     const clientResult = await sendResendEmail({
       to: context.clientEmail,
       subject: clientSubject,
       text: withClientFooter(clientBodyParts.join("\n")),
+      html: clientHtml,
     })
 
     await ctx.runMutation(internal.notifications.recordNotification, {
@@ -689,6 +738,54 @@ export const sendOpsDraftPackageReadyEmail = internalAction({
     await ctx.runMutation(internal.notifications.recordNotification, {
       caseId: args.caseId,
       type: "draft_package_ops",
+      recipient: to,
+      status: result.ok ? "sent" : "failed",
+      provider: "resend",
+      errorMessage: result.ok ? undefined : result.error,
+    })
+
+    return null
+  },
+})
+
+export const sendOpsCounselReviewReadyEmail = internalAction({
+  args: {
+    caseId: v.id("cases"),
+    documentId: v.id("documents"),
+    preview: v.string(),
+  },
+  returns: v.null(),
+  handler: async (ctx, args) => {
+    const context = await ctx.runQuery(internal.cases.getIntakeEmailContext, {
+      caseId: args.caseId,
+    })
+    if (!context) return null
+
+    const to = opsNotifyEmail()
+    const body = [
+      `${context.caseReference} — document draft ready for counsel review`,
+      "",
+      `Client: ${context.clientFirstName} ${context.clientLastName} <${context.clientEmail}>`,
+      "",
+      "A draft document was generated and queued for licensed counsel approval.",
+      "Approve or reject in ops before marking the matter delivered.",
+      "",
+      `Ops: ${opsCaseUrl(args.caseId)}`,
+      `Document id: ${args.documentId}`,
+      "",
+      "— DRAFT PREVIEW —",
+      args.preview,
+    ].join("\n")
+
+    const result = await sendResendEmail({
+      to,
+      subject: `${context.caseReference} — Counsel review needed | Ask AI Legal`,
+      text: body,
+    })
+
+    await ctx.runMutation(internal.notifications.recordNotification, {
+      caseId: args.caseId,
+      type: "counsel_review_ops",
       recipient: to,
       status: result.ok ? "sent" : "failed",
       provider: "resend",
