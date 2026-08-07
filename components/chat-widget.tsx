@@ -938,12 +938,13 @@ export function ChatWidget() {
                 <label className="block">
                   <span className="mb-1 block text-[10px] uppercase tracking-wider text-white/50">{ui.caseType}</span>
                   <select
+                    required
                     value={intake.caseType}
                     onChange={(e) => updateIntake("caseType", e.target.value)}
                     className="w-full rounded-sm border border-white/15 bg-white/5 px-2.5 py-2 text-sm text-white focus:border-gold/50 focus:outline-none"
                   >
-                    <option value="" className="bg-navy">
-                      —
+                    <option value="" disabled className="bg-navy">
+                      Select case type
                     </option>
                     {CASE_TYPES.map((type) => (
                       <option key={type} value={type} className="bg-navy">

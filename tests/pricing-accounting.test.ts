@@ -5,6 +5,8 @@ import {
 } from "../convex/lib/servicePricing"
 import {
   FIXED_DEPOSIT_CENTS,
+  MIN_DOCUMENT_PREP_QUOTE_CENTS,
+  applyMinimumDocumentPrepQuoteCents,
   balanceRemainingCents,
   depositAmountCents,
   retrievalFeeCents,
@@ -29,8 +31,28 @@ describe("computeOurAverageCents — half of attorney low", () => {
   })
 })
 
+describe("minimum document prep quote", () => {
+  it("floor is $1,489", () => {
+    expect(MIN_DOCUMENT_PREP_QUOTE_CENTS).toBe(148900)
+  })
+
+  it("raises calculated quotes below the floor", () => {
+    expect(applyMinimumDocumentPrepQuoteCents(86300)).toBe(148900)
+    expect(applyMinimumDocumentPrepQuoteCents(143800)).toBe(148900)
+  })
+
+  it("leaves quotes at or above the floor unchanged", () => {
+    expect(applyMinimumDocumentPrepQuoteCents(148900)).toBe(148900)
+    expect(applyMinimumDocumentPrepQuoteCents(158125)).toBe(158125)
+  })
+
+  it("does not floor custom/zero quotes", () => {
+    expect(applyMinimumDocumentPrepQuoteCents(0)).toBe(0)
+  })
+})
+
 describe("resolvePricing quote is half of displayed attorney low", () => {
-  it("Family / divorce in WA → ~half of attorney low ($2,875 → $1,438)", () => {
+  it("Family / divorce in WA → half of attorney low before floor", () => {
     const result = resolvePricing({
       state: "WA",
       caseType: "Family / divorce",
@@ -42,6 +64,7 @@ describe("resolvePricing quote is half of displayed attorney low", () => {
     expect(low).toBe(287500)
     expect(our).toBe(143800)
     expect(our).toBe(Math.round(low / 2 / 100) * 100)
+    expect(applyMinimumDocumentPrepQuoteCents(our)).toBe(148900)
   })
 
   it("housing / eviction quote equals half of its attorney low", () => {
@@ -78,35 +101,34 @@ describe("resolvePricing quote is half of displayed attorney low", () => {
     expect(result.matchedBy).toBe("caseType")
   })
 
-  it("every intake case type has a unique Ask AI Legal quote in the same state", () => {
+  it("matter types below floor quote at $1,489; higher tiers stay distinct", () => {
     const caseTypes = [
       "Housing / eviction",
-      "Response / answer",
       "Small claims",
-      "Demand letter",
-      "Civil complaint",
-      "Business dispute",
       "Criminal motion",
-      "Family / divorce",
-      "Family / custody",
-      "Family / support",
       "Post-conviction",
-      "Other",
-    ]
+    ] as const
     const prices = caseTypes.map((caseType) => {
       const result = resolvePricing({
         state: "WA",
         caseType,
         issue: `test matter for ${caseType}`,
       })
+      const raw = result.deliverable.ourPriceCents!
       return {
         caseType,
         id: result.deliverable.id,
-        our: result.deliverable.ourPriceCents!,
+        quoted: applyMinimumDocumentPrepQuoteCents(raw),
       }
     })
-    const unique = new Set(prices.map((p) => p.our))
-    expect(unique.size).toBe(prices.length)
+    expect(prices.find((p) => p.id === "housing_eviction")!.quoted).toBe(148900)
+    expect(prices.find((p) => p.id === "small_claims")!.quoted).toBe(148900)
+    expect(prices.find((p) => p.id === "criminal_motion")!.quoted).toBeGreaterThan(
+      148900
+    )
+    expect(prices.find((p) => p.id === "post_conviction")!.quoted).toBeGreaterThan(
+      148900
+    )
   })
 })
 

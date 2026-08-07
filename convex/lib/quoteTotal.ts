@@ -10,6 +10,9 @@
 /** Fixed upfront deposit charged via Stripe Checkout. */
 export const FIXED_DEPOSIT_CENTS = 49900 // $499.00
 
+/** Minimum document-prep quote shown after intake (excluding the $499 deposit). */
+export const MIN_DOCUMENT_PREP_QUOTE_CENTS = 148900 // $1,489.00
+
 /** Legacy alias — some ops code still references this name. */
 export const CASE_FILE_REVIEW_PRICE_CENTS = FIXED_DEPOSIT_CENTS
 
@@ -26,6 +29,12 @@ export const DOCUMENT_RETRIEVAL_FEE_CENTS = 9900
 /** How much the deposit should be (always the fixed $499 for now). */
 export function depositAmountCents(): number {
   return FIXED_DEPOSIT_CENTS
+}
+
+/** Never quote document prep below $1,489 (custom/zero quotes unchanged). */
+export function applyMinimumDocumentPrepQuoteCents(calculatedCents: number): number {
+  if (calculatedCents <= 0) return 0
+  return Math.max(calculatedCents, MIN_DOCUMENT_PREP_QUOTE_CENTS)
 }
 
 export function retrievalFeeCents(requested: boolean): number {

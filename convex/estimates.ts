@@ -3,7 +3,11 @@ import { internal } from "./_generated/api"
 import { internalMutation, mutation } from "./_generated/server"
 import { generateForCaseReturnValidator, matterTypeValidator } from "./lib/validators"
 import { resolvePricing, matterTypeFromDeliverable } from "./lib/servicePricing"
-import { FIXED_DEPOSIT_CENTS, balanceRemainingCents } from "./lib/quoteTotal"
+import {
+  FIXED_DEPOSIT_CENTS,
+  applyMinimumDocumentPrepQuoteCents,
+  balanceRemainingCents,
+} from "./lib/quoteTotal"
 
 export const generateForCase = mutation({
   args: { caseId: v.id("cases") },
@@ -46,7 +50,8 @@ export const generateForCase = mutation({
       }
     }
 
-    const finalQuoteCents = deliverable.ourPriceCents ?? 0
+    const rawQuoteCents = deliverable.ourPriceCents ?? 0
+    const finalQuoteCents = applyMinimumDocumentPrepQuoteCents(rawQuoteCents)
     const isCustomQuote = finalQuoteCents === 0
     const now = Date.now()
 

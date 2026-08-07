@@ -38,6 +38,7 @@ export function isIntakeValid(data: IntakeFormData): boolean {
     data.firstName.trim().length > 0 &&
     data.lastName.trim().length > 0 &&
     data.email.includes("@") &&
+    data.caseType.trim().length > 0 &&
     data.issue.trim().length > 10
   )
 }

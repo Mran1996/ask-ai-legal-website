@@ -161,7 +161,7 @@ const en: ChatUiStrings = {
   estimateServiceLine: "Service",
   estimateDisclaimer:
     "Planning estimate only — not a bill. Typical attorney range is a market reference for your state/matter. Ask AI Legal quote is document-prep only. Final package price is confirmed after Part 1 review. Not legal advice.",
-  fillRequired: "Please fill in name, email, and a brief issue description.",
+  fillRequired: "Please fill in name, email, case type, and a brief issue description.",
   uploadNote:
     "Optional: attach court papers, notices, or leases (PDF, JPG, PNG — up to 10 MB each).",
   uploadFiles: "Attach documents",
@@ -255,7 +255,7 @@ const hi: ChatUiStrings = {
   estimateServiceLine: "सेवा",
   estimateDisclaimer:
     "केवल योजना अनुमान — बिल नहीं। अंतिम कीमत, अनुबंध और इनवॉइस व्यक्तिगत फ़ॉर्म के बाद ईमेल होंगे। कानूनी सलाह नहीं।",
-  fillRequired: "कृपया नाम, ईमेल और संक्षिप्त विवरण भरें।",
+  fillRequired: "कृपया नाम, ईमेल, मामले का प्रकार और संक्षिप्त विवरण भरें।",
   uploadNote:
     "वैकल्पिक: अदालती कागज़ात, नोटिस या लीज़ संलग्न करें (PDF, JPG, PNG — प्रति 10 MB)।",
   uploadFiles: "दस्तावेज़ संलग्न करें",
