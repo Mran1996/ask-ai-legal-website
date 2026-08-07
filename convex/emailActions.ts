@@ -176,13 +176,11 @@ export const sendIntakeEmails = internalAction({
       "4. After payment clears, we prepare your documents and deliver them by email.",
     ]
 
-    const bookDisplayUrl = `${publicSiteUrl()}/book`
-
     if (bookUrl) {
       clientBodyParts.push(
         "",
-        "Optional — book a short intake call:",
-        bookDisplayUrl
+        "Optional — book a short intake call (askailegal.com/book):",
+        bookUrl
       )
     }
 
@@ -220,7 +218,7 @@ export const sendIntakeEmails = internalAction({
 
     const bookHtml = bookUrl
       ? `<p style="margin:16px 0 8px;">Optional — book a short intake call:</p>
-            <p style="margin:0 0 16px;"><a href="${escapeHtml(bookUrl)}" style="color:#C5A059;font-weight:700;text-decoration:none;">askailegal.com/book</a></p>`
+            <p style="margin:0 0 16px;"><a href="${escapeHtml(bookUrl)}" style="color:#C5A059;font-weight:700;text-decoration:underline;">Book intake call — askailegal.com/book</a></p>`
       : ""
 
     const clientHtml = `<!DOCTYPE html>
