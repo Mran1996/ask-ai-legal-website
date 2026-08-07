@@ -8,11 +8,7 @@ function opsDashboardUrl(path = "/"): string {
   return `${base}${suffix === "/" ? "" : suffix}` || base
 }
 
-type Props = {
-  params: Promise<{ caseId: string }>
-}
-
-export default async function OpsCaseRedirectPage({ params }: Props) {
-  const { caseId } = await params
-  redirect(opsDashboardUrl(`/matters/${caseId}`))
+/** Ops moved to the separate business dashboard app (Option A). */
+export default function OpsIndexPage() {
+  redirect(opsDashboardUrl("/"))
 }

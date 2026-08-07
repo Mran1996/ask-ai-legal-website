@@ -146,9 +146,11 @@ export default function PrivacyPolicyPage() {
       <h2>8. Cookies and analytics</h2>
       <p>
         We and our service providers may use cookies, pixels, and similar technologies to
-        operate the website, remember preferences, and understand usage patterns. You can
-        control cookies through your browser settings. Disabling cookies may affect site
-        functionality.
+        operate the website, remember preferences, and understand usage patterns. When you
+        first visit our site, we ask you to <strong>Accept</strong> or <strong>Deny</strong>{" "}
+        optional analytics collection. If you deny, we do not load analytics tools for that
+        browser. You can also control cookies through your browser settings. Disabling cookies
+        may affect site functionality.
       </p>
 
       <h2>9. Third-party links</h2>

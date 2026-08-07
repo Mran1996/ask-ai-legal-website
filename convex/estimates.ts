@@ -3,6 +3,7 @@ import { internal } from "./_generated/api"
 import { internalMutation, mutation } from "./_generated/server"
 import { generateForCaseReturnValidator, matterTypeValidator } from "./lib/validators"
 import { resolvePricing, matterTypeFromDeliverable } from "./lib/servicePricing"
+import { FIXED_DEPOSIT_CENTS, balanceRemainingCents } from "./lib/quoteTotal"
 
 export const generateForCase = mutation({
   args: { caseId: v.id("cases") },
@@ -49,6 +50,14 @@ export const generateForCase = mutation({
     const isCustomQuote = finalQuoteCents === 0
     const now = Date.now()
 
+    const deposit = FIXED_DEPOSIT_CENTS
+    const balance = balanceRemainingCents({
+      quotedTotalCents: finalQuoteCents,
+      depositPaidCents: 0,
+      referralDiscountCents: 0,
+      additionalPaidCents: 0,
+    })
+
     let estimateId = existing?._id
     if (existing) {
       await ctx.db.patch("estimates", existing._id, {
@@ -57,6 +66,10 @@ export const generateForCase = mutation({
         attorneyCompareLowCents: deliverable.attorneyLowCents,
         attorneyCompareHighCents: deliverable.attorneyHighCents,
         finalQuoteCents,
+        depositAmountCents: deposit,
+        referralDiscountCents: existing.referralDiscountCents ?? 0,
+        totalPaidCents: existing.totalPaidCents ?? 0,
+        balanceRemainingCents: balance,
         matterSignature,
         status: isCustomQuote ? "draft" : "sent",
       })
@@ -70,6 +83,10 @@ export const generateForCase = mutation({
         attorneyCompareHighCents: deliverable.attorneyHighCents,
         retrievalCostCents: 0,
         finalQuoteCents,
+        depositAmountCents: deposit,
+        referralDiscountCents: 0,
+        totalPaidCents: 0,
+        balanceRemainingCents: balance,
         matterSignature,
         status: isCustomQuote ? "draft" : "sent",
         createdAt: now,

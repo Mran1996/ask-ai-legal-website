@@ -6,6 +6,8 @@ import { action, internalAction } from "./_generated/server"
 import { internal } from "./_generated/api"
 import type { Id } from "./_generated/dataModel"
 
+import { FIXED_DEPOSIT_CENTS } from "./lib/quoteTotal"
+
 type CheckoutContext = {
   caseReference: string
   clientEmail: string
@@ -55,7 +57,8 @@ export const createCheckoutSession = action({
       throw new Error("This case is not awaiting payment")
     }
 
-    if (checkout.totalDueCents < 50) {
+    const depositCents = FIXED_DEPOSIT_CENTS
+    if (depositCents < 50) {
       throw new Error("Invalid checkout amount")
     }
 
@@ -67,29 +70,14 @@ export const createCheckoutSession = action({
         quantity: 1,
         price_data: {
           currency: "usd",
-          unit_amount: checkout.documentPrepCents,
+          unit_amount: depositCents,
           product_data: {
-            name: `Document preparation — ${checkout.serviceLine}`,
-            description: `Case ${checkout.caseReference}. Document generation only — not a law firm, not legal advice.`,
+            name: `Document preparation deposit — ${checkout.serviceLine}`,
+            description: `Case ${checkout.caseReference}. $${(depositCents / 100).toFixed(2)} deposit toward your quoted total. Document generation only — not a law firm, not legal advice.`,
           },
         },
       },
     ]
-
-    if (checkout.retrievalCents > 0) {
-      lineItems.push({
-        quantity: 1,
-        price_data: {
-          currency: "usd",
-          unit_amount: checkout.retrievalCents,
-          product_data: {
-            name: "Document retrieval (add-on)",
-            description:
-              "Retrieve public case documents / filings for your matter. Fulfilled by our team after payment.",
-          },
-        },
-      })
-    }
 
     const session: Stripe.Checkout.Session = await stripe.checkout.sessions.create({
       mode: "payment",
@@ -102,6 +90,7 @@ export const createCheckoutSession = action({
         caseId: args.caseId,
         caseReference: checkout.caseReference,
         estimateId: checkout.estimateId,
+        paymentType: "deposit",
       },
     })
 
@@ -112,7 +101,7 @@ export const createCheckoutSession = action({
     await ctx.runMutation(internal.payments.recordCheckoutSession, {
       caseId: args.caseId,
       estimateId: checkout.estimateId,
-      amountCents: checkout.totalDueCents,
+      amountCents: depositCents,
       stripeCheckoutSessionId: session.id,
     })
 
@@ -158,7 +147,7 @@ export const createStartPaymentLink = action({
       caseId: args.caseId,
     })) as CheckoutContext | null
 
-    const amountCents = args.amountCents ?? 49999
+    const amountCents = args.amountCents ?? FIXED_DEPOSIT_CENTS
     if (amountCents < 50) throw new Error("Invalid amount")
 
     const stripe = getStripe()

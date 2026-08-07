@@ -41,3 +41,12 @@ export const SITE_SEO_TITLE = "Ask AI Legal — Full Document Preparation Servic
 
 /** Primary SEO description — used in layout, JSON-LD, and social previews. */
 export const SITE_SEO_DESCRIPTION = `Full document preparation service for any issue, any jurisdiction. ${CASE_FILE_REVIEW_PRICE_DISPLAY} case file review → written summary with your exact price → flat-fee document package. Not a law firm, no legal advice.`
+
+/** Brand mark (circular scales) — header, hero, app icons. */
+export const SITE_LOGO_MARK = "/brand/stripe-logo-512.png"
+
+/** Full wordmark lockup — footer, emails, letterhead. */
+export const SITE_LOGO_LOCKUP = "/brand/letterhead-logo.png"
+
+/** @deprecated Use SITE_LOGO_MARK */
+export const SITE_LOGO_PATH = SITE_LOGO_MARK

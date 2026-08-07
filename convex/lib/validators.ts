@@ -174,13 +174,21 @@ export const notificationTypeValidator = v.union(
   v.literal("form_received_support"),
   v.literal("issues_invoice_client"),
   v.literal("draft_package_ops"),
-  v.literal("package_approved_client")
+  v.literal("package_approved_client"),
+  v.literal("gap_questions_client"),
+  v.literal("counsel_review_ops")
 )
 
 export const draftPackageStatusValidator = v.union(
   v.literal("awaiting_ops_approval"),
   v.literal("approved_sent"),
   v.literal("rejected")
+)
+
+export const gapQuestionsStatusValidator = v.union(
+  v.literal("none_needed"),
+  v.literal("sent"),
+  v.literal("answered")
 )
 
 export const fulfillmentChecklistValidator = v.object({
@@ -199,6 +207,9 @@ export const fulfillmentChecklistValidator = v.object({
   outlookFolderPath: v.optional(v.string()),
   outlookFolderId: v.optional(v.string()),
   outlookFolderCreatedAt: v.optional(v.number()),
+  gapQuestionsSummary: v.optional(v.string()),
+  gapQuestionsStatus: v.optional(gapQuestionsStatusValidator),
+  gapQuestionsSentAt: v.optional(v.number()),
 })
 
 export const appointmentCallTypeValidator = v.union(
@@ -282,6 +293,55 @@ export const intakeListItemValidator = v.object({
   contractInvoiceSentAt: v.optional(v.number()),
   paidAt: v.optional(v.number()),
   retrievalRequested: v.boolean(),
+  quotedStartAmountCents: v.optional(v.number()),
+  gapQuestionsStatus: v.optional(gapQuestionsStatusValidator),
+  gapQuestionsSentAt: v.optional(v.number()),
+  draftPackageStatus: v.optional(draftPackageStatusValidator),
+  lastEmailLabel: v.string(),
+})
+
+export const deadlineSummaryValidator = v.object({
+  deadlineId: v.id("deadlines"),
+  label: v.string(),
+  dueAt: v.number(),
+  kind: v.union(v.literal("filing"), v.literal("hearing"), v.literal("statute"), v.literal("other")),
+  completedAt: v.optional(v.number()),
+  notes: v.optional(v.string()),
+})
+
+export const referralSummaryValidator = v.object({
+  referralId: v.id("referrals"),
+  code: v.string(),
+  source: v.optional(v.string()),
+  discountCents: v.number(),
+  applied: v.boolean(),
+})
+
+export const counselReviewSummaryValidator = v.object({
+  reviewId: v.id("counselReviews"),
+  documentId: v.id("documents"),
+  reviewerId: v.string(),
+  decision: counselDecisionValidator,
+  notes: v.optional(v.string()),
+  reviewedAt: v.optional(v.number()),
+})
+
+export const agentRunSummaryValidator = v.object({
+  agentRunId: v.id("agentRuns"),
+  agentType: agentTypeValidator,
+  inputRef: v.string(),
+  outputRef: v.string(),
+  status: agentRunStatusValidator,
+  createdAt: v.number(),
+})
+
+export const moneyLedgerValidator = v.object({
+  quotedTotalCents: v.number(),
+  depositAmountCents: v.number(),
+  referralDiscountCents: v.number(),
+  totalPaidCents: v.number(),
+  balanceRemainingCents: v.number(),
+  stripeCheckoutSessionId: v.optional(v.string()),
 })
 
 export const caseDetailValidator = v.object({
@@ -304,8 +364,13 @@ export const caseDetailValidator = v.object({
     phone: v.optional(v.string()),
   }),
   estimate: v.union(estimateSummaryValidator, v.null()),
+  money: moneyLedgerValidator,
   payment: v.union(paymentSummaryValidator, v.null()),
   documents: v.array(documentSummaryValidator),
   appointments: v.array(appointmentSummaryValidator),
   callCredits: callCreditsValidator,
+  deadlines: v.array(deadlineSummaryValidator),
+  referrals: v.array(referralSummaryValidator),
+  counselReviews: v.array(counselReviewSummaryValidator),
+  agentRuns: v.array(agentRunSummaryValidator),
 })

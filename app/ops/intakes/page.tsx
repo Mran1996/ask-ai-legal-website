@@ -1,12 +1,13 @@
-"use client"
+import { redirect } from "next/navigation"
 
-import { OpsAccessGate } from "@/components/ops/ops-access-gate"
-import { IntakesList } from "@/components/ops/intakes-list"
+function opsDashboardUrl(path = "/"): string {
+  const base = (
+    process.env.NEXT_PUBLIC_OPS_DASHBOARD_URL || "http://localhost:3001"
+  ).replace(/\/$/, "")
+  const suffix = path.startsWith("/") ? path : `/${path}`
+  return `${base}${suffix === "/" ? "" : suffix}` || base
+}
 
-export default function OpsIntakesPage() {
-  return (
-    <main className="min-h-screen bg-cream">
-      <OpsAccessGate>{(opsToken) => <IntakesList opsToken={opsToken} />}</OpsAccessGate>
-    </main>
-  )
+export default function OpsIntakesRedirectPage() {
+  redirect(opsDashboardUrl("/matters"))
 }

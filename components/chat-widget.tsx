@@ -28,6 +28,7 @@ import { getChatUiStrings, getWelcomeMessage } from "@/lib/chat/ui-strings"
 import { stripMarkdownForChat } from "@/lib/chat/sanitize-response"
 import { OPEN_CHAT_EVENT, type OpenChatEventDetail } from "@/lib/chat/open-chat"
 import { SUPPORT_MAILTO, SITE_BRAND_NAME } from "@/lib/site-config"
+import { trackChatTopic, trackEvent } from "@/lib/analytics"
 import { buildBookPageUrl, INTAKE_BOOKING_ENABLED } from "@/lib/booking"
 import { BookingBanner } from "@/components/brand/booking-banner"
 import { formatUsdFromCents } from "@/lib/pricing/ca-eviction"
@@ -50,6 +51,8 @@ type IntakeSubmitBanner = {
   email: string
   firstName: string
   lastName: string
+  documentsUploaded: number
+  emailQueued: boolean
   estimate: IntakeEstimateSummary
 }
 
@@ -311,6 +314,7 @@ export function ChatWidget() {
 
   const handleOpen = () => {
     setOpen(true)
+    trackEvent("chat_opened")
     if (languageConfirmed && messages.length === 0 && chatLocale) {
       seedWelcome(chatLocale)
     }
@@ -322,6 +326,7 @@ export function ChatWidget() {
     if (!text || isLoading || !languageConfirmed) return
     setInput("")
     clearError()
+    trackChatTopic(text)
     try {
       await sendMessage({ text })
     } catch {
@@ -331,6 +336,7 @@ export function ChatWidget() {
 
   const switchToQuoteTab = () => {
     setTab("quote")
+    trackEvent("cta_clicked", { cta: "chat_quote_tab" })
     setIntake((prev) => {
       const patch = prefillIntakeFromChat(messages, prev)
       if (Object.keys(patch).length === 0) return prev
@@ -407,16 +413,39 @@ export function ChatWidget() {
       const result = await createFromIntake(
         intakeFormToPayload(intake, activeLocale)
       )
+      trackEvent("quote_submitted", {
+        case_reference: result.caseReference,
+        state: intake.state || "unknown",
+        case_type: intake.caseType || "unknown",
+      })
+      let documentsUploaded = 0
       if (pendingFiles.length > 0) {
-        await uploadIntakeFiles(result.caseId, pendingFiles)
+        try {
+          await uploadIntakeFiles(result.caseId, pendingFiles)
+          documentsUploaded = pendingFiles.length
+        } catch (uploadError) {
+          console.error("Intake document upload failed:", uploadError)
+          setIntakeError(
+            "Your quote was saved, but one or more documents failed to upload. Use “Upload more docs” below or email support with your case reference."
+          )
+        }
       }
       const estimate = await generateForCase({ caseId: result.caseId })
+      let emailQueued = false
+      try {
+        await requestIntakeNotifications({ caseId: result.caseId })
+        emailQueued = true
+      } catch (notifyError) {
+        console.error("Intake notification schedule failed:", notifyError)
+      }
       setIntakeSubmitBanner({
         caseReference: result.caseReference,
         caseId: result.caseId,
         email: intake.email,
         firstName: intake.firstName,
         lastName: intake.lastName,
+        documentsUploaded,
+        emailQueued,
         estimate: {
           serviceLine: estimate.serviceLine,
           finalQuoteCents: estimate.finalQuoteCents,
@@ -430,9 +459,6 @@ export function ChatWidget() {
       if (fileInputRef.current) {
         fileInputRef.current.value = ""
       }
-      void requestIntakeNotifications({ caseId: result.caseId }).catch(() => {
-        // Email is best-effort; intake + estimate already saved.
-      })
     } catch (error) {
       console.error("Intake submit failed:", error)
       const detail =
@@ -741,6 +767,15 @@ export function ChatWidget() {
                   </div>
                   <p className="mt-2 text-xs leading-relaxed text-white/75">
                     {ui.intakeSuccessBody}
+                  </p>
+                  <p className="mt-2 text-[10px] text-white/55">
+                    {intakeSubmitBanner.documentsUploaded > 0
+                      ? `${intakeSubmitBanner.documentsUploaded} document(s) saved to your matter file.`
+                      : "No documents attached yet — upload below so ops can see them."}
+                    {" · "}
+                    {intakeSubmitBanner.emailQueued
+                      ? "Follow-up email queued."
+                      : "Email follow-up could not be queued — we still have your case."}
                   </p>
                   <p className="mt-2 text-[10px] text-white/45">{ui.quoteNextSteps}</p>
 

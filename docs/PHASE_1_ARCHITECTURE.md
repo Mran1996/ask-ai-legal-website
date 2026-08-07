@@ -1,6 +1,6 @@
 # Phase 1 Architecture — Ask AI Legal
 
-> **Status:** Proposal only (not implemented).  
+> **Status:** Phase 1 partially implemented. Practice OS Core Spine shipped 2026-07-17.  
 > **Spec:** [ASK_AI_LEGAL_SPEC.md](./ASK_AI_LEGAL_SPEC.md) Section 9, Phase 1  
 > **Progress:** [BUILD_PROGRESS.md](./BUILD_PROGRESS.md)
 

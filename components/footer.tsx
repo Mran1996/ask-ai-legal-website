@@ -1,10 +1,11 @@
 "use client"
 
 import Link from "next/link"
-import { Scale, Instagram, Facebook } from "lucide-react"
+import { Instagram, Facebook } from "lucide-react"
+import { BrandLogoLockup } from "@/components/brand-logo"
 import { useLanguage } from "@/components/language-provider"
 import { serviceSlug } from "@/lib/service-icons"
-import { SITE_DISCLAIMER, SITE_BRAND_NAME, SITE_LEGAL_NAME, SOCIAL_LINKS } from "@/lib/site-config"
+import { SITE_DISCLAIMER, SITE_LEGAL_NAME, SOCIAL_LINKS } from "@/lib/site-config"
 
 const social = [
   { label: "Instagram", icon: Instagram, href: SOCIAL_LINKS.instagram },
@@ -55,11 +56,9 @@ export function Footer() {
       <div className="container-main">
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(240px,280px)_1fr] lg:items-start lg:gap-x-10 xl:gap-x-12">
           <div>
-            <Link href="/" className="flex items-center gap-3 transition-opacity hover:opacity-90">
-              <Scale className="h-6 w-6 shrink-0 text-gold" aria-hidden />
-              <span className="font-display text-xl font-semibold text-white">{SITE_BRAND_NAME}</span>
+            <Link href="/" className="inline-block transition-opacity hover:opacity-90">
+              <BrandLogoLockup width={220} />
             </Link>
-            <p className="mt-4 text-sm leading-relaxed">{t.footer.tagline}</p>
             <p className="mt-5 rounded-sm border border-white/10 bg-white/5 p-4 text-xs leading-relaxed text-white/50">
               {SITE_DISCLAIMER}
             </p>

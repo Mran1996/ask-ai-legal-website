@@ -2,12 +2,15 @@ import { paginationOptsValidator } from "convex/server"
 import { v } from "convex/values"
 import { internal } from "./_generated/api"
 import { internalMutation, internalQuery, mutation, query } from "./_generated/server"
-import { assertOpsToken } from "./lib/opsAuth"
+import { assertOpsToken, checkOpsToken } from "./lib/opsAuth"
 import {
   caseDetailValidator,
+  caseStatusValidator,
   createFromIntakeReturnValidator,
   intakeFormValidator,
   intakeListItemValidator,
+  intakeStructuredValidator,
+  matterTypeValidator,
 } from "./lib/validators"
 import {
   buildIntakeRaw,
@@ -21,6 +24,35 @@ import { scheduleIntakeEmailsIfNeeded } from "./lib/scheduleIntakeEmails"
 import { resolveCaseReference } from "./lib/caseLookup"
 
 const INCLUDED_PLANNING_CALLS = 3
+
+function lastEmailLabelForCase(caseDoc: {
+  contractInvoiceSentAt?: number
+  gapQuestionsStatus?: "none_needed" | "sent" | "answered"
+  gapQuestionsSentAt?: number
+  formReceivedAckSentAt?: number
+  personalizedFormSentAt?: number
+}): string {
+  if (caseDoc.contractInvoiceSentAt !== undefined) return "Contract / invoice sent"
+  if (caseDoc.gapQuestionsStatus === "sent") return "Gap questions awaiting reply"
+  if (caseDoc.gapQuestionsStatus === "answered") return "Gap questions answered"
+  if (caseDoc.formReceivedAckSentAt !== undefined) return "Form receipt ack sent"
+  if (caseDoc.personalizedFormSentAt !== undefined) return "Part 1 form sent"
+  return "Intake received (no outbound yet)"
+}
+
+/** Soft auth for ops login gate — returns why a token fails instead of throwing. */
+export const verifyOpsAccess = query({
+  args: { opsToken: v.string() },
+  returns: v.object({
+    ok: v.boolean(),
+    reason: v.optional(v.string()),
+  }),
+  handler: async (_ctx, args) => {
+    const result = checkOpsToken(args.opsToken)
+    if (result.ok) return { ok: true as const }
+    return { ok: false as const, reason: result.reason }
+  },
+})
 
 export const createFromIntake = mutation({
   args: intakeFormValidator,
@@ -258,6 +290,120 @@ export const getDraftPackageContext = internalQuery({
   },
 })
 
+export const getDraftingContext = internalQuery({
+  args: { caseId: v.id("cases") },
+  returns: v.union(
+    v.object({
+      caseReference: v.string(),
+      matterType: matterTypeValidator,
+      clientFirstName: v.string(),
+      clientLastName: v.string(),
+      intakeRaw: v.string(),
+      intakeStructured: intakeStructuredValidator,
+      issueSummary: v.optional(v.string()),
+      state: v.optional(v.string()),
+      county: v.optional(v.string()),
+      caseTypeLabel: v.optional(v.string()),
+      deadline: v.optional(v.string()),
+      opposingParty: v.optional(v.string()),
+      caseNumber: v.optional(v.string()),
+      estimateServiceLine: v.optional(v.string()),
+      draftIssuesSummary: v.optional(v.string()),
+      status: caseStatusValidator,
+    }),
+    v.null()
+  ),
+  handler: async (ctx, args) => {
+    const caseDoc = await ctx.db.get("cases", args.caseId)
+    if (!caseDoc) return null
+    const client = await ctx.db.get("clients", caseDoc.clientId)
+    if (!client) return null
+    const estimate = await ctx.db
+      .query("estimates")
+      .withIndex("by_case", (q) => q.eq("caseId", args.caseId))
+      .first()
+    return {
+      caseReference: resolveCaseReference(caseDoc),
+      matterType: caseDoc.matterType,
+      clientFirstName: client.firstName,
+      clientLastName: client.lastName,
+      intakeRaw: caseDoc.intakeRaw,
+      intakeStructured: caseDoc.intakeStructured,
+      issueSummary: caseDoc.intakeStructured.issueSummary,
+      state: caseDoc.jurisdiction.state || caseDoc.intakeStructured.clientStateInput,
+      county: caseDoc.jurisdiction.county,
+      caseTypeLabel: caseDoc.intakeStructured.caseTypeLabel,
+      deadline: caseDoc.intakeStructured.deadline,
+      opposingParty: caseDoc.intakeStructured.opposingParty,
+      caseNumber: caseDoc.intakeStructured.caseNumber,
+      estimateServiceLine: estimate?.serviceLine,
+      draftIssuesSummary: caseDoc.draftIssuesSummary,
+      status: caseDoc.status,
+    }
+  },
+})
+
+export const getGapAssessmentContext = internalQuery({
+  args: { caseId: v.id("cases") },
+  returns: v.union(
+    v.object({
+      caseReference: v.string(),
+      intakeRaw: v.string(),
+      issueSummary: v.optional(v.string()),
+      state: v.optional(v.string()),
+      county: v.optional(v.string()),
+      role: v.optional(v.string()),
+      opposingParty: v.optional(v.string()),
+      landlordName: v.optional(v.string()),
+      tenantName: v.optional(v.string()),
+      caseTypeLabel: v.optional(v.string()),
+      deadline: v.optional(v.string()),
+      knownDates: v.optional(v.string()),
+      caseNumber: v.optional(v.string()),
+      propertyAddress: v.optional(v.string()),
+      hasDocuments: v.optional(v.union(v.literal("yes"), v.literal("no"))),
+      documentCount: v.number(),
+      serviceNeeded: v.optional(v.string()),
+      gapQuestionsStatus: v.optional(
+        v.union(
+          v.literal("none_needed"),
+          v.literal("sent"),
+          v.literal("answered")
+        )
+      ),
+    }),
+    v.null()
+  ),
+  handler: async (ctx, args) => {
+    const caseDoc = await ctx.db.get("cases", args.caseId)
+    if (!caseDoc) return null
+    const documents = await ctx.db
+      .query("documents")
+      .withIndex("by_case", (q) => q.eq("caseId", args.caseId))
+      .collect()
+    return {
+      caseReference: resolveCaseReference(caseDoc),
+      intakeRaw: caseDoc.intakeRaw,
+      issueSummary: caseDoc.intakeStructured.issueSummary,
+      state: caseDoc.jurisdiction.state || caseDoc.intakeStructured.clientStateInput,
+      county: caseDoc.jurisdiction.county ?? caseDoc.intakeStructured.county,
+      role: caseDoc.intakeStructured.role,
+      opposingParty: caseDoc.intakeStructured.opposingParty,
+      landlordName: caseDoc.intakeStructured.landlordName,
+      tenantName: caseDoc.intakeStructured.tenantName,
+      caseTypeLabel: caseDoc.intakeStructured.caseTypeLabel,
+      deadline: caseDoc.intakeStructured.deadline,
+      knownDates: caseDoc.intakeStructured.knownDates,
+      caseNumber: caseDoc.intakeStructured.caseNumber,
+      propertyAddress: caseDoc.intakeStructured.propertyAddress,
+      hasDocuments: caseDoc.intakeStructured.hasDocuments,
+      documentCount: documents.length,
+      serviceNeeded: caseDoc.intakeStructured.serviceNeeded,
+      gapQuestionsStatus: caseDoc.gapQuestionsStatus,
+    }
+  },
+})
+
 export const getIntakeEmailContext = internalQuery({
   args: { caseId: v.id("cases") },
   returns: v.union(
@@ -376,7 +522,7 @@ export const listRecentIntakes = query({
 
           return {
             caseId: caseDoc._id,
-            caseReference: formatCaseReference(caseDoc._id),
+            caseReference: resolveCaseReference(caseDoc),
             status: caseDoc.status,
             clientFirstName: client.firstName,
             clientLastName: client.lastName,
@@ -389,6 +535,11 @@ export const listRecentIntakes = query({
             contractInvoiceSentAt: caseDoc.contractInvoiceSentAt,
             paidAt: caseDoc.paidAt,
             retrievalRequested: caseDoc.intakeStructured.retrievalRequested === true,
+            quotedStartAmountCents: caseDoc.quotedStartAmountCents,
+            gapQuestionsStatus: caseDoc.gapQuestionsStatus,
+            gapQuestionsSentAt: caseDoc.gapQuestionsSentAt,
+            draftPackageStatus: caseDoc.draftPackageStatus,
+            lastEmailLabel: lastEmailLabelForCase(caseDoc),
           }
         })
       )
@@ -524,6 +675,9 @@ export const getCaseForOps = query({
         outlookFolderPath: caseDoc.outlookFolderPath,
         outlookFolderId: caseDoc.outlookFolderId,
         outlookFolderCreatedAt: caseDoc.outlookFolderCreatedAt,
+        gapQuestionsSummary: caseDoc.gapQuestionsSummary,
+        gapQuestionsStatus: caseDoc.gapQuestionsStatus,
+        gapQuestionsSentAt: caseDoc.gapQuestionsSentAt,
       },
       client: {
         firstName: client.firstName,
@@ -532,10 +686,242 @@ export const getCaseForOps = query({
         phone: client.phone,
       },
       estimate,
+      money: {
+        quotedTotalCents: estimateRow?.finalQuoteCents ?? 0,
+        depositAmountCents: estimateRow?.depositAmountCents ?? 49900,
+        referralDiscountCents: estimateRow?.referralDiscountCents ?? 0,
+        totalPaidCents: estimateRow?.totalPaidCents ?? 0,
+        balanceRemainingCents: estimateRow?.balanceRemainingCents ?? 0,
+        stripeCheckoutSessionId: estimateRow?.stripeCheckoutSessionId,
+      },
       payment,
       documents,
       appointments,
       callCredits,
+      deadlines: (await ctx.db.query("deadlines").withIndex("by_case", (q) => q.eq("caseId", args.caseId)).collect()).map((d) => ({
+        deadlineId: d._id,
+        label: d.label,
+        dueAt: d.dueAt,
+        kind: d.kind,
+        completedAt: d.completedAt,
+        notes: d.notes,
+      })),
+      referrals: (await ctx.db.query("referrals").withIndex("by_case", (q) => q.eq("caseId", args.caseId)).collect()).map((r) => ({
+        referralId: r._id,
+        code: r.code,
+        source: r.source,
+        discountCents: r.discountCents,
+        applied: r.applied,
+      })),
+      counselReviews: (await ctx.db.query("counselReviews").withIndex("by_case", (q) => q.eq("caseId", args.caseId)).collect()).map((cr) => ({
+        reviewId: cr._id,
+        documentId: cr.documentId,
+        reviewerId: cr.reviewerId,
+        decision: cr.decision,
+        notes: cr.notes,
+        reviewedAt: cr.reviewedAt,
+      })),
+      agentRuns: (await ctx.db.query("agentRuns").withIndex("by_case", (q) => q.eq("caseId", args.caseId)).collect()).map((ar) => ({
+        agentRunId: ar._id,
+        agentType: ar.agentType,
+        inputRef: ar.inputRef,
+        outputRef: ar.outputRef,
+        status: ar.status,
+        createdAt: ar.createdAt,
+      })),
+    }
+  },
+})
+
+/** Business command-center KPIs for the separate ops dashboard. */
+export const getOpsDashboardSummary = query({
+  args: { opsToken: v.string() },
+  returns: v.object({
+    totalMatters: v.number(),
+    awaitingPayment: v.number(),
+    formReturned: v.number(),
+    draftsAwaitingApproval: v.number(),
+    paid: v.number(),
+    inDrafting: v.number(),
+    delivered: v.number(),
+    gapQuestionsOpen: v.number(),
+    quotedPipelineCents: v.number(),
+    paidTotalCents: v.number(),
+    recentMatters: v.array(
+      v.object({
+        caseId: v.id("cases"),
+        caseReference: v.string(),
+        clientName: v.string(),
+        clientEmail: v.string(),
+        issueSummary: v.optional(v.string()),
+        status: v.string(),
+        createdAt: v.number(),
+        paidAt: v.optional(v.number()),
+        formReturnedAt: v.optional(v.number()),
+        draftPackageStatus: v.optional(v.string()),
+        quotedStartAmountCents: v.optional(v.number()),
+        lastEmailLabel: v.string(),
+      })
+    ),
+    needsAttention: v.array(
+      v.object({
+        caseId: v.id("cases"),
+        caseReference: v.string(),
+        clientName: v.string(),
+        reason: v.string(),
+        quotedStartAmountCents: v.optional(v.number()),
+        issueSummary: v.optional(v.string()),
+      })
+    ),
+  }),
+  handler: async (ctx, args) => {
+    assertOpsToken(args.opsToken)
+
+    // Local Convex has a 1s query limit — keep this scan tight.
+    const cases = await ctx.db.query("cases").withIndex("by_createdAt").order("desc").take(100)
+
+    let awaitingPayment = 0
+    let formReturned = 0
+    let draftsAwaitingApproval = 0
+    let paid = 0
+    let inDrafting = 0
+    let delivered = 0
+    let gapQuestionsOpen = 0
+    let quotedPipelineCents = 0
+    let paidTotalCents = 0
+
+    type AttentionSeed = {
+      caseId: (typeof cases)[number]["_id"]
+      clientId: (typeof cases)[number]["clientId"]
+      caseReference: string
+      reason: string
+      quotedStartAmountCents?: number
+      issueSummary?: string
+      sortKey: number
+    }
+    const attentionSeeds: AttentionSeed[] = []
+
+    for (const c of cases) {
+      if (c.status === "awaiting_payment") awaitingPayment += 1
+      if (c.status === "in_drafting" || c.status === "awaiting_docs") inDrafting += 1
+      if (c.status === "delivered") delivered += 1
+      if (c.formReturnedAt !== undefined) formReturned += 1
+      if (c.draftPackageStatus === "awaiting_ops_approval") draftsAwaitingApproval += 1
+      if (c.paidAt !== undefined) {
+        paid += 1
+        paidTotalCents += c.quotedStartAmountCents ?? 0
+      } else if (c.quotedStartAmountCents !== undefined) {
+        quotedPipelineCents += c.quotedStartAmountCents
+      }
+      if (c.gapQuestionsStatus === "sent") gapQuestionsOpen += 1
+
+      const ref = resolveCaseReference(c)
+      if (c.draftPackageStatus === "awaiting_ops_approval") {
+        attentionSeeds.push({
+          caseId: c._id,
+          clientId: c.clientId,
+          caseReference: ref,
+          reason: "Draft issues package awaiting your approval",
+          quotedStartAmountCents: c.quotedStartAmountCents,
+          issueSummary: c.intakeStructured.issueSummary,
+          sortKey: c.draftPackageGeneratedAt ?? c.updatedAt,
+        })
+      }
+      if (c.status === "awaiting_payment" || (c.contractInvoiceSentAt && !c.paidAt)) {
+        attentionSeeds.push({
+          caseId: c._id,
+          clientId: c.clientId,
+          caseReference: ref,
+          reason: "Awaiting client payment",
+          quotedStartAmountCents: c.quotedStartAmountCents,
+          issueSummary: c.intakeStructured.issueSummary,
+          sortKey: c.contractInvoiceSentAt ?? c.updatedAt,
+        })
+      }
+      if (c.gapQuestionsStatus === "sent") {
+        attentionSeeds.push({
+          caseId: c._id,
+          clientId: c.clientId,
+          caseReference: ref,
+          reason: "Gap questions — waiting on client email",
+          quotedStartAmountCents: c.quotedStartAmountCents,
+          issueSummary: c.intakeStructured.issueSummary,
+          sortKey: c.gapQuestionsSentAt ?? c.updatedAt,
+        })
+      }
+    }
+
+    attentionSeeds.sort((a, b) => b.sortKey - a.sortKey)
+    const recentSlice = cases.slice(0, 8)
+    const clientIds = new Set([
+      ...recentSlice.map((c) => c.clientId),
+      ...attentionSeeds.slice(0, 20).map((a) => a.clientId),
+    ])
+    const clients = new Map<string, { firstName: string; lastName: string; email: string }>()
+    for (const id of clientIds) {
+      const client = await ctx.db.get("clients", id)
+      if (client) {
+        clients.set(id, {
+          firstName: client.firstName,
+          lastName: client.lastName,
+          email: client.email,
+        })
+      }
+    }
+
+    const recentMatters = recentSlice.map((c) => {
+      const client = clients.get(c.clientId)
+      return {
+        caseId: c._id,
+        caseReference: resolveCaseReference(c),
+        clientName: client
+          ? `${client.firstName} ${client.lastName}`.trim()
+          : "Unknown client",
+        clientEmail: client?.email ?? "",
+        issueSummary: c.intakeStructured.issueSummary,
+        status: c.status,
+        createdAt: c.createdAt,
+        paidAt: c.paidAt,
+        formReturnedAt: c.formReturnedAt,
+        draftPackageStatus: c.draftPackageStatus,
+        quotedStartAmountCents: c.quotedStartAmountCents,
+        lastEmailLabel: lastEmailLabelForCase(c),
+      }
+    })
+
+    const seen = new Set<string>()
+    const needsAttention = []
+    for (const row of attentionSeeds) {
+      const key = `${row.caseId}:${row.reason}`
+      if (seen.has(key)) continue
+      seen.add(key)
+      const client = clients.get(row.clientId)
+      needsAttention.push({
+        caseId: row.caseId,
+        caseReference: row.caseReference,
+        clientName: client
+          ? `${client.firstName} ${client.lastName}`.trim()
+          : "Unknown client",
+        reason: row.reason,
+        quotedStartAmountCents: row.quotedStartAmountCents,
+        issueSummary: row.issueSummary,
+      })
+      if (needsAttention.length >= 12) break
+    }
+
+    return {
+      totalMatters: cases.length,
+      awaitingPayment,
+      formReturned,
+      draftsAwaitingApproval,
+      paid,
+      inDrafting,
+      delivered,
+      gapQuestionsOpen,
+      quotedPipelineCents,
+      paidTotalCents,
+      recentMatters,
+      needsAttention,
     }
   },
 })

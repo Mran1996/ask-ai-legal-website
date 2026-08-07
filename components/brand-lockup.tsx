@@ -1,15 +1,14 @@
 "use client"
 
 import Link from "next/link"
-import { BrandMark } from "@/components/brand-mark"
-import { TypewriterText } from "@/components/typewriter-text"
-import { SITE_BRAND_NAME, SITE_TAGLINE } from "@/lib/site-config"
+import { BrandLogo } from "@/components/brand-logo"
+import { SITE_TAGLINE } from "@/lib/site-config"
 
 type BrandLockupProps = {
   taglineClassName?: string
   className?: string
   href?: string
-  /** Hero = centered mark + typewriter title. Header = compact left-aligned nav mark. */
+  /** Hero = centered mark + slogan. Header = compact left-aligned nav mark. */
   variant?: "hero" | "header"
 }
 
@@ -20,19 +19,6 @@ export function BrandLockup({
   variant = "hero",
 }: BrandLockupProps) {
   const isHeader = variant === "header"
-
-  const title = isHeader ? (
-    <span className="brand-title-gold font-sans text-[15px] font-semibold leading-tight tracking-tight sm:text-base">
-      {SITE_BRAND_NAME}
-    </span>
-  ) : (
-    <span
-      className="brand-title-gold font-sans text-4xl font-semibold leading-[1.05] tracking-tight sm:text-5xl md:text-6xl lg:text-7xl"
-      aria-label={SITE_BRAND_NAME}
-    >
-      <TypewriterText text={SITE_BRAND_NAME} speed={70} startDelay={280} showCursor />
-    </span>
-  )
 
   const tagline = (
     <p
@@ -48,16 +34,13 @@ export function BrandLockup({
   )
 
   const content = isHeader ? (
-    <div className="min-w-0 text-left">
-      {title}
-      {tagline}
+    <div className="flex min-w-0 items-center gap-2.5 sm:gap-3">
+      <BrandLogo size={44} className="rounded-xl" />
+      <div className="min-w-0 text-left">{tagline}</div>
     </div>
   ) : (
     <div className="relative z-10 flex w-full flex-col items-center text-center">
-      <div className="flex flex-row items-center justify-center gap-3 sm:gap-4 md:gap-5">
-        <BrandMark className="-mt-0.5 sm:-mt-1" />
-        {title}
-      </div>
+      <BrandLogo size={160} className="rounded-3xl" priority />
       {tagline}
     </div>
   )

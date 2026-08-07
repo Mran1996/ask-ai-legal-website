@@ -5,12 +5,49 @@ import type { QueryCtx } from "./_generated/server"
 import type { Doc, Id } from "./_generated/dataModel"
 import { assertOpsToken } from "./lib/opsAuth"
 import {
-  DOCUMENT_PREP_START_FEE_CENTS,
+  FIXED_DEPOSIT_CENTS,
   documentPrepStartCents,
   retrievalFeeCents,
   totalDueBeforeWorkCents,
+  balanceRemainingCents,
 } from "./lib/quoteTotal"
 import { resolveCaseReference } from "./lib/caseLookup"
+
+function assertValidStripePaymentLink(url: string): void {
+  const trimmed = url.trim()
+  if (!trimmed) {
+    throw new Error("Stripe payment link is required")
+  }
+  if (/placeholder/i.test(trimmed)) {
+    throw new Error(
+      "Payment link looks like a placeholder — generate a real Stripe Checkout URL"
+    )
+  }
+  let parsed: URL
+  try {
+    parsed = new URL(trimmed)
+  } catch {
+    throw new Error("Payment link must be a valid Stripe Checkout URL")
+  }
+  if (
+    parsed.protocol !== "https:" ||
+    (parsed.hostname !== "checkout.stripe.com" && parsed.hostname !== "buy.stripe.com")
+  ) {
+    throw new Error(
+      "Payment link must be a Stripe Checkout URL (checkout.stripe.com or buy.stripe.com)"
+    )
+  }
+}
+
+function assertQuoteEmailReady(caseDoc: Doc<"cases">, paymentLinkUrl: string): void {
+  if (caseDoc.personalizedFormSentAt === undefined) {
+    throw new Error("Send Part 1 intake form to the client before emailing quote/invoice")
+  }
+  if (caseDoc.formReturnedAt === undefined) {
+    throw new Error("Mark Part 1 returned before emailing quote/invoice")
+  }
+  assertValidStripePaymentLink(paymentLinkUrl)
+}
 
 export const savePostIntakeQuoteDetails = mutation({
   args: {
@@ -186,6 +223,19 @@ export const markCheckoutPaid = internalMutation({
       .withIndex("by_case", (q) => q.eq("caseId", estimate.caseId))
       .collect()
 
+    // Idempotency: if a payment with this PI already exists and is paid, skip.
+    if (args.stripePaymentIntentId) {
+      const alreadyPaid = payments.find(
+        (p) =>
+          p.stripePaymentIntentId === args.stripePaymentIntentId &&
+          p.status === "paid"
+      )
+      if (alreadyPaid) {
+        // Duplicate webhook — no-op
+        return { caseId: estimate.caseId, nextStatus: caseDoc.status }
+      }
+    }
+
     let payment =
       payments.find((p) => p.status === "pending") ??
       payments.find((p) => p.estimateId === estimate._id)
@@ -208,7 +258,21 @@ export const markCheckoutPaid = internalMutation({
       })
     }
 
-    await ctx.db.patch("estimates", estimate._id, { status: "accepted" })
+    // Recompute deposit/balance accounting on the estimate
+    const totalPaid = (estimate.totalPaidCents ?? 0) + args.amountCents
+    const discount = estimate.referralDiscountCents ?? 0
+    const remaining = balanceRemainingCents({
+      quotedTotalCents: estimate.finalQuoteCents,
+      depositPaidCents: args.amountCents,
+      referralDiscountCents: discount,
+      additionalPaidCents: estimate.totalPaidCents ?? 0,
+    })
+
+    await ctx.db.patch("estimates", estimate._id, {
+      status: "accepted",
+      totalPaidCents: totalPaid,
+      balanceRemainingCents: remaining,
+    })
 
     const retrievalPaid = (estimate.retrievalCostCents ?? 0) > 0
     const docs = await ctx.db
@@ -289,6 +353,10 @@ export const markFormReturned = mutation({
     await ctx.scheduler.runAfter(0, internal.draftPackageActions.generateDraftIssuesPackage, {
       caseId: args.caseId,
       force: true,
+    })
+    await ctx.scheduler.runAfter(0, internal.gapQuestionsActions.assessAndSendGapQuestions, {
+      caseId: args.caseId,
+      force: false,
     })
     return null
   },
@@ -394,6 +462,18 @@ export const processInboundClientEmail = internalMutation({
       force: !alreadyReturned,
     })
 
+    if (caseDoc.gapQuestionsStatus === "sent") {
+      await ctx.db.patch("cases", caseDoc._id, {
+        gapQuestionsStatus: "answered",
+        updatedAt: now,
+      })
+    } else if (!alreadyReturned || caseDoc.gapQuestionsStatus === undefined) {
+      await ctx.scheduler.runAfter(0, internal.gapQuestionsActions.assessAndSendGapQuestions, {
+        caseId: caseDoc._id,
+        force: false,
+      })
+    }
+
     return {
       caseId: caseDoc._id,
       caseReference: resolveCaseReference(caseDoc),
@@ -419,6 +499,10 @@ export const markContractInvoiceSent = mutation({
     if (!caseDoc) throw new Error("Case not found")
     const now = Date.now()
     const paymentLinkUrl = args.paymentLinkUrl?.trim() || caseDoc.paymentLinkUrl
+    if (!paymentLinkUrl) {
+      throw new Error("Stripe payment link is required before sending contract/invoice")
+    }
+    assertQuoteEmailReady(caseDoc, paymentLinkUrl)
     await ctx.db.patch("cases", args.caseId, {
       contractInvoiceSentAt: now,
       paymentLinkUrl,
@@ -427,11 +511,10 @@ export const markContractInvoiceSent = mutation({
     })
     await ctx.scheduler.runAfter(0, internal.emailActions.sendQuoteContractInvoiceEmail, {
       caseId: args.caseId,
-      paymentLinkUrl: paymentLinkUrl ?? "",
+      paymentLinkUrl,
       quotedAmountCents: args.quotedAmountCents,
       scopeSummary: args.scopeSummary,
       timeframe: args.timeframe,
-      issuesSummary: args.issuesSummary,
     })
     return null
   },
@@ -589,6 +672,107 @@ export const logDraftAgentRun = internalMutation({
   },
 })
 
+export const saveGapAssessmentInternal = internalMutation({
+  args: {
+    caseId: v.id("cases"),
+    summary: v.string(),
+    status: v.optional(
+      v.union(
+        v.literal("none_needed"),
+        v.literal("sent"),
+        v.literal("answered")
+      )
+    ),
+  },
+  returns: v.null(),
+  handler: async (ctx, args) => {
+    const now = Date.now()
+    const patch: {
+      gapQuestionsSummary?: string
+      gapQuestionsStatus?: "none_needed" | "sent" | "answered"
+      gapQuestionsSentAt?: number
+      updatedAt: number
+    } = { updatedAt: now }
+    if (args.summary.trim()) {
+      patch.gapQuestionsSummary = args.summary.trim()
+    } else if (args.status === "none_needed") {
+      patch.gapQuestionsSummary = undefined
+    }
+    if (args.status !== undefined) {
+      patch.gapQuestionsStatus = args.status
+      if (args.status === "sent") {
+        patch.gapQuestionsSentAt = now
+      }
+    }
+    await ctx.db.patch("cases", args.caseId, patch)
+    return null
+  },
+})
+
+export const logGapAgentRun = internalMutation({
+  args: {
+    caseId: v.id("cases"),
+    mode: v.string(),
+  },
+  returns: v.null(),
+  handler: async (ctx, args) => {
+    await ctx.db.insert("agentRuns", {
+      caseId: args.caseId,
+      agentType: "intake",
+      inputRef: "gap_questions:assess",
+      outputRef: args.mode,
+      status: "completed",
+      createdAt: Date.now(),
+    })
+    return null
+  },
+})
+
+export const markGapQuestionsSent = internalMutation({
+  args: { caseId: v.id("cases") },
+  returns: v.null(),
+  handler: async (ctx, args) => {
+    const now = Date.now()
+    await ctx.db.patch("cases", args.caseId, {
+      gapQuestionsStatus: "sent",
+      gapQuestionsSentAt: now,
+      updatedAt: now,
+    })
+    return null
+  },
+})
+
+/** Ops: re-run gap detection and email client (force). */
+export const sendGapQuestions = mutation({
+  args: { opsToken: v.string(), caseId: v.id("cases") },
+  returns: v.null(),
+  handler: async (ctx, args) => {
+    assertOpsToken(args.opsToken)
+    const caseDoc = await ctx.db.get("cases", args.caseId)
+    if (!caseDoc) throw new Error("Case not found")
+    await ctx.scheduler.runAfter(0, internal.gapQuestionsActions.assessAndSendGapQuestions, {
+      caseId: args.caseId,
+      force: true,
+    })
+    return null
+  },
+})
+
+export const markGapQuestionsAnswered = mutation({
+  args: { opsToken: v.string(), caseId: v.id("cases") },
+  returns: v.null(),
+  handler: async (ctx, args) => {
+    assertOpsToken(args.opsToken)
+    const caseDoc = await ctx.db.get("cases", args.caseId)
+    if (!caseDoc) throw new Error("Case not found")
+    await ctx.db.patch("cases", args.caseId, {
+      gapQuestionsStatus: "answered",
+      updatedAt: Date.now(),
+    })
+    return null
+  },
+})
+
 export const saveDraftPackage = mutation({
   args: {
     opsToken: v.string(),
@@ -609,7 +793,7 @@ export const saveDraftPackage = mutation({
       quotedStartAmountCents:
         args.quotedStartAmountCents ??
         caseDoc.quotedStartAmountCents ??
-        DOCUMENT_PREP_START_FEE_CENTS,
+        FIXED_DEPOSIT_CENTS,
       paymentLinkUrl: args.paymentLinkUrl?.trim() || caseDoc.paymentLinkUrl,
       updatedAt: now,
     })
@@ -636,7 +820,7 @@ export const approveAndSendPackage = mutation({
   args: {
     opsToken: v.string(),
     caseId: v.id("cases"),
-    issuesSummary: v.string(),
+    issuesSummary: v.optional(v.string()),
     paymentLinkUrl: v.optional(v.string()),
     quotedAmountCents: v.optional(v.number()),
     scopeSummary: v.optional(v.string()),
@@ -647,18 +831,22 @@ export const approveAndSendPackage = mutation({
     assertOpsToken(args.opsToken)
     const caseDoc = await ctx.db.get("cases", args.caseId)
     if (!caseDoc) throw new Error("Case not found")
-    const issues = args.issuesSummary.trim()
-    if (!issues) throw new Error("Issues summary is required before approve & send")
+    const issues =
+      args.issuesSummary?.trim() || caseDoc.draftIssuesSummary?.trim() || undefined
 
     const now = Date.now()
     const quotedAmountCents =
       args.quotedAmountCents ??
       caseDoc.quotedStartAmountCents ??
-      DOCUMENT_PREP_START_FEE_CENTS
+      FIXED_DEPOSIT_CENTS
     const paymentLinkUrl = args.paymentLinkUrl?.trim() || caseDoc.paymentLinkUrl
+    if (!paymentLinkUrl) {
+      throw new Error("Generate or paste a Stripe payment link before approve & send")
+    }
+    assertQuoteEmailReady(caseDoc, paymentLinkUrl)
 
     await ctx.db.patch("cases", args.caseId, {
-      draftIssuesSummary: issues,
+      ...(issues !== undefined ? { draftIssuesSummary: issues } : {}),
       draftPackageStatus: "approved_sent",
       quotedStartAmountCents: quotedAmountCents,
       contractInvoiceSentAt: now,
@@ -669,13 +857,10 @@ export const approveAndSendPackage = mutation({
 
     await ctx.scheduler.runAfter(0, internal.emailActions.sendQuoteContractInvoiceEmail, {
       caseId: args.caseId,
-      paymentLinkUrl: paymentLinkUrl ?? "",
+      paymentLinkUrl,
       quotedAmountCents,
       scopeSummary: args.scopeSummary,
       timeframe: args.timeframe,
-      issuesSummary: issues,
-      includeAgreement: true,
-      askPriorityIssue: true,
     })
     return null
   },
@@ -705,7 +890,7 @@ export const retryCreateOutlookFolder = mutation({
             isCustomQuote: estimate.finalQuoteCents === 0,
             retrievalRequested: caseDoc.intakeStructured.retrievalRequested === true,
           })
-        : DOCUMENT_PREP_START_FEE_CENTS)
+        : FIXED_DEPOSIT_CENTS)
     await ctx.scheduler.runAfter(0, internal.outlookActions.createClientOutlookFolder, {
       caseId: args.caseId,
       amountCents,
@@ -740,18 +925,24 @@ export const markWorkStarted = mutation({
     assertOpsToken(args.opsToken)
     await assertCasePaid(ctx, args.caseId)
 
-    await ctx.db.patch("cases", args.caseId, {
-      status: "in_drafting",
-      updatedAt: Date.now(),
-    })
-
-    await ctx.db.insert("agentRuns", {
+    const now = Date.now()
+    const agentRunId = await ctx.db.insert("agentRuns", {
       caseId: args.caseId,
       agentType: "drafting",
       inputRef: "ops:mark_work_started",
-      outputRef: args.caseId,
+      outputRef: "running",
       status: "running",
-      createdAt: Date.now(),
+      createdAt: now,
+    })
+
+    await ctx.db.patch("cases", args.caseId, {
+      status: "in_drafting",
+      updatedAt: now,
+    })
+
+    await ctx.scheduler.runAfter(0, internal.draftingActions.generateCaseDraft, {
+      caseId: args.caseId,
+      agentRunId,
     })
 
     return null
@@ -768,6 +959,18 @@ export const markDelivered = mutation({
   handler: async (ctx, args) => {
     assertOpsToken(args.opsToken)
     await assertCasePaid(ctx, args.caseId)
+
+    // Hard rule: no delivery without approved counsel review
+    const reviews = await ctx.db
+      .query("counselReviews")
+      .withIndex("by_case", (q) => q.eq("caseId", args.caseId))
+      .collect()
+    const hasApproval = reviews.some((r) => r.decision === "approved")
+    if (!hasApproval) {
+      throw new Error(
+        "Cannot deliver: a licensed human counsel must approve at least one document before delivery."
+      )
+    }
 
     await ctx.db.patch("cases", args.caseId, {
       status: "delivered",

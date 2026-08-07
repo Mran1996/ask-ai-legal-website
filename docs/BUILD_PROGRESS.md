@@ -51,6 +51,11 @@ Track implementation against [ASK_AI_LEGAL_SPEC.md](./ASK_AI_LEGAL_SPEC.md) Sect
 - [x] Case status → `estimate_sent`
 - [x] Log Pricing `agentRun`
 - [x] Minimal ops intake list: `/ops/intakes` + case detail
+- [x] Phase 1 ops shell: Matters | Insights tabs (`/ops`, `/ops/insights`) — law-firm chrome
+- [x] Phase 2 matter file: timeline, one-click toolbar, tabs (Overview | Documents | Money | Communications | Drafts)
+- [x] Phase 3 ops funnel: auto gap-question email after Part 1 return; Approve & send requires Stripe pay link; no-refunds in TOS + agreement + invoice email
+- [x] Option A: separate ops dashboard app at `/Users/sylasp/ask-ai-legal-ops` (localhost:3001); marketing `/ops` redirects there
+- [x] Firm matter board + Needs attention; PostHog on marketing for clicks/chat/quotes; ops offline UX when Convex down
 
 ### 1.4 Email quote + payment (off-site)
 
@@ -139,7 +144,7 @@ Track implementation against [ASK_AI_LEGAL_SPEC.md](./ASK_AI_LEGAL_SPEC.md) Sect
 
 ## Current focus
 
-**Next step:** Keep `RESEND_FROM_EMAIL` + optional `GOOGLE_REVIEW_URL` on Convex prod; smoke-test “Save details & finish” after each deploy.
+**Next step:** Open a matter at http://localhost:3001/matters — Working Matter OS (docs, money, fulfillment rail, LLM + counsel). Set Stripe + Graph env for live pay links / Outlook folders.
 
 ---
 
@@ -154,4 +159,5 @@ Track implementation against [ASK_AI_LEGAL_SPEC.md](./ASK_AI_LEGAL_SPEC.md) Sect
 | 2026-07-14 | Funnel fix | Hardened save details; email From/footer/review CTA; Convex prod deploy |
 | 2026-07-14 | Word intake | Auto letterhead DOCX Parts A/B emailed via Resend after intake |
 | 2026-07-17 | Practice OS Core | +10% markup, $499 deposit, intake expansion, deadlines/referrals tables, counsel-gated delivery, full ops dashboard |
-| 2026-07-17 | Matter-specific Part 1 | Intake Word form selects question set by matterType / caseType / issue keywords (family, UD, civil, criminal, etc.) |
+| 2026-07-25 | Ops Phase 3 | Gap-question auto email; pay-link required on approve; no-refunds hardening |
+| 2026-07-25 | Option A ops app | Separate `ask-ai-legal-ops` on :3001; shared Convex; marketing `/ops` redirects |

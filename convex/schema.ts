@@ -15,6 +15,7 @@ import {
   estimateStatusValidator,
   intakeStructuredValidator,
   jurisdictionValidator,
+  gapQuestionsStatusValidator,
   matterTypeValidator,
   paymentStatusValidator,
   paymentTypeValidator,
@@ -64,6 +65,10 @@ export default defineSchema({
     draftPackageGeneratedAt: v.optional(v.number()),
     /** Start fee used in approve/send package (default $499.99) */
     quotedStartAmountCents: v.optional(v.number()),
+    /** Missing-info questions emailed to client after Part 1 return */
+    gapQuestionsSummary: v.optional(v.string()),
+    gapQuestionsStatus: v.optional(gapQuestionsStatusValidator),
+    gapQuestionsSentAt: v.optional(v.number()),
     /** Outlook mail folder path created after paid */
     outlookFolderPath: v.optional(v.string()),
     outlookFolderId: v.optional(v.string()),
@@ -107,11 +112,21 @@ export default defineSchema({
   estimates: defineTable({
     caseId: v.id("cases"),
     serviceLine: v.string(),
+    /** Pre-markup base cost (internal only). */
     baseCostCents: v.number(),
     attorneyCompareLowCents: v.number(),
     attorneyCompareHighCents: v.number(),
     retrievalCostCents: v.number(),
+    /** Client-facing total (already includes silent 10% markup). */
     finalQuoteCents: v.number(),
+    /** Fixed $499 deposit amount. */
+    depositAmountCents: v.optional(v.number()),
+    /** Referral/promo discount in cents. */
+    referralDiscountCents: v.optional(v.number()),
+    /** Total paid so far (deposit + any additional). */
+    totalPaidCents: v.optional(v.number()),
+    /** Remaining balance owed after deposit & discounts. */
+    balanceRemainingCents: v.optional(v.number()),
     status: estimateStatusValidator,
     stripeCheckoutSessionId: v.optional(v.string()),
     /** state|deliverableId|caseType|issueBucket — reuse estimate only when this matches */
@@ -152,6 +167,41 @@ export default defineSchema({
     reviewedBy: v.optional(v.string()),
     createdAt: v.number(),
   }).index("by_case", ["caseId"]),
+
+  deadlines: defineTable({
+    caseId: v.id("cases"),
+    label: v.string(),
+    /** Unix ms of the deadline / hearing / filing date. */
+    dueAt: v.number(),
+    /** "filing" | "hearing" | "statute" | "other" */
+    kind: v.union(
+      v.literal("filing"),
+      v.literal("hearing"),
+      v.literal("statute"),
+      v.literal("other")
+    ),
+    completedAt: v.optional(v.number()),
+    notes: v.optional(v.string()),
+    createdAt: v.number(),
+  })
+    .index("by_case", ["caseId"])
+    .index("by_dueAt", ["dueAt"]),
+
+  referrals: defineTable({
+    caseId: v.id("cases"),
+    clientId: v.id("clients"),
+    /** Referral / promo code used. */
+    code: v.string(),
+    /** Source description (e.g. "Google", "friend", "returning client"). */
+    source: v.optional(v.string()),
+    /** Discount in cents awarded for this referral. */
+    discountCents: v.number(),
+    /** Whether the discount has been applied to an estimate. */
+    applied: v.boolean(),
+    createdAt: v.number(),
+  })
+    .index("by_case", ["caseId"])
+    .index("by_code", ["code"]),
 
   counselReviews: defineTable({
     caseId: v.id("cases"),
