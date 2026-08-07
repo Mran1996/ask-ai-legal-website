@@ -1,56 +1,50 @@
-# Ask AI Legal Web — Claude Code Project Guide
+# Ask AI Legal Web — Claude / Cowork project guide
 
-## Design reference (source of truth for brand)
+## GitHub (canonical — use this repo only)
 
-Read the existing Ask AI Legal app for colors, copy tone, and layout patterns:
+| | |
+|---|---|
+| **Owner** | `Mran1996` |
+| **Repository** | `ask-ai-legal-website` |
+| **URL** | https://github.com/Mran1996/ask-ai-legal-website |
+| **Local path** | `/Users/sylasp/ask ai legal web` |
+| **Default branch** | `main` |
 
+**Do not use:** `cleanmain`, `ask-ai-legal-work`, or `/Users/sylasp/Ask AI legal Auto` for code changes (that folder is handoff docs only, not git).
+
+Deployment repo (separate): `Mran1996/ask-ai-legal-deployment`
+
+### Verify before any edit or push
+
+```bash
+cd "/Users/sylasp/ask ai legal web"
+git remote -v
+git branch --show-current
+git status -sb
 ```
-/Users/sylasp/ask-ai-legal-main/ask-ai-legal
-```
 
-Key files:
-- `tailwind.config.ts` — brand colors (primary `#00A95C`, sky `#0EA5E9`)
-- `app/globals.css` — CSS variables and spacing
-- `components/hero-section.tsx`, `components/navigation.tsx` — UI patterns
-- `app/page.tsx` — homepage structure
+Expected `origin`: `https://github.com/Mran1996/ask-ai-legal-website.git`
 
-Also see `design-reference/DESIGN_SYSTEM.md` in this repo.
+GitHub MCP / connector must be able to read **`Mran1996/ask-ai-legal-website`** (private). If 404, fix at https://github.com/settings/installations → Claude app → grant access to this repo.
 
-GitHub: https://github.com/Mran1996/cleanmain
+## Product
 
-## Required skills (use before building UI)
+Ask AI Legal LLC — document preparation (not a law firm). Website: **askailegal.com**. Backend: **Convex**. Phase 1: CA unlawful detainer / web chat intake.
 
-When designing or implementing pages, **invoke these slash commands first**:
-
-1. **`/frontend-design`** — [Anthropic frontend-design skill](https://github.com/anthropics/skills/tree/main/skills/frontend-design)
-   - Distinctive, intentional visual design; avoid generic AI templates.
-
-2. **`/ui-ux-pro-max`** — [UI/UX Pro Max skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill)
-   - Color systems, typography, accessibility, responsive layout, UX guidelines.
-
-## Brand constraints (non-negotiable)
-
-| Token | Value | Usage |
-|-------|-------|--------|
-| Primary | `#00A95C` | CTAs, hero, links, brand accent |
-| Primary hover | `#059669` | Button hover |
-| Secondary | `#0EA5E9` | Support accents, badges |
-| Background | `#F9FAFB` | Page background |
-| Text | `#374151` / `#111827` | Body / headings |
-| Radius | `0.5rem` | Buttons, cards |
-
-Tagline: *We don't bill by the hour. We help you take back control of your legal case — fast.*
-
-Product: AI-powered legal documents, outcome strategy, court-ready filings for self-represented litigants.
+Read `docs/ASK_AI_LEGAL_SPEC.md` before architectural decisions.
 
 ## Stack
 
-- Next.js (App Router), TypeScript, Tailwind CSS
-- Run dev: `npm run dev`
-- Build: `npm run build`
+- Next.js (App Router), TypeScript, Tailwind, Convex
+- Dev: `npm run dev` + `npx convex dev`
+- Deploy: Vercel (frontend), `npx convex deploy` (backend)
 
-## Working in this repo
+## Brand
 
-- New marketing site lives in `app/` and `components/`.
-- Match Ask AI Legal emerald/sky palette; do not swap to unrelated color schemes.
-- Mobile-first, accessible focus states, `prefers-reduced-motion` respected.
+See `design-reference/DESIGN_SYSTEM.md`. Marketing site uses navy/gold palette in current `app/` (not legacy cleanmain emerald).
+
+## Non-negotiables
+
+1. Counsel review gate — no client-facing legal output without attorney approval
+2. UPL framing — document prep / self-help, not a law firm
+3. Phase 1 flow: intake → estimate → payment → draft → counsel review → delivery
