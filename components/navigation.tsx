@@ -47,6 +47,7 @@ export function Navigation() {
   const pathname = usePathname()
   const { t } = useLanguage()
   const [open, setOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
 
   const utilityLinks = useMemo(
     () => [
@@ -78,8 +79,17 @@ export function Navigation() {
     }
   }, [open])
 
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8)
+    onScroll()
+    window.addEventListener("scroll", onScroll, { passive: true })
+    return () => window.removeEventListener("scroll", onScroll)
+  }, [])
+
   return (
-    <header className="fixed left-0 right-0 top-0 z-50 border-b border-navy/8 bg-cream shadow-[0_1px_0_rgba(27,42,65,0.06)]">
+    <header
+      className={`site-header ${scrolled ? "site-header--scrolled" : ""}`}
+    >
       <div className="hidden border-b border-navy/6 bg-cream-dark/80 sm:block">
         <div className="container-main flex h-8 items-center justify-end gap-3">
           {utilityLinks.map((link, index) => (
@@ -127,17 +137,14 @@ export function Navigation() {
             <span>{t.nav.emailForReview}</span>
           </button>
 
-          <Link
-            href="/pay"
-            className="hidden items-center gap-1.5 rounded-full border border-transparent bg-gold-dark px-3 py-1.5 text-xs font-semibold text-white transition-colors hover:bg-gold xl:inline-flex"
-          >
+          <Link href="/pay" className="btn-pay-pill hidden xl:inline-flex">
             <CreditCard className="h-3.5 w-3.5 shrink-0" aria-hidden />
             <span>Pay deposit</span>
           </Link>
 
           <button
             type="button"
-            className="flex h-9 w-9 items-center justify-center rounded-md text-navy transition-colors hover:bg-navy/5 lg:hidden"
+            className="flex h-9 w-9 items-center justify-center rounded-md text-navy transition-all duration-200 hover:bg-navy/5 active:scale-95 lg:hidden"
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
             onClick={() => setOpen(!open)}
@@ -147,8 +154,12 @@ export function Navigation() {
         </div>
       </div>
 
-      {open && (
-        <nav className="border-t border-navy/8 bg-cream px-5 py-5 lg:hidden" aria-label="Mobile">
+      <nav
+        className={`mobile-nav-drawer ${open ? "mobile-nav-drawer--open" : ""}`}
+        aria-label="Mobile"
+        aria-hidden={!open}
+      >
+        <div className="mobile-nav-drawer__inner">
           <ul className="flex flex-col">
             {mainLinks.map((link) => (
               <li key={link.href} className="border-b border-navy/6 last:border-0">
@@ -176,7 +187,7 @@ export function Navigation() {
           <Link
             href="/pay"
             onClick={() => setOpen(false)}
-            className="mt-3 flex w-full items-center justify-center gap-2 rounded-full border border-transparent bg-gold-dark py-3 text-sm font-semibold text-white transition-colors hover:bg-gold"
+            className="btn-pay-pill mt-3 w-full justify-center py-3 text-sm"
           >
             <CreditCard className="h-4 w-4" aria-hidden />
             <span>Pay deposit</span>
@@ -184,8 +195,8 @@ export function Navigation() {
           <a href={SUPPORT_MAILTO} className="mt-3 block text-center text-xs text-navy/50 hover:text-navy/70">
             {SUPPORT_EMAIL}
           </a>
-        </nav>
-      )}
+        </div>
+      </nav>
     </header>
   )
 }

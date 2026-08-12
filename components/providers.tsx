@@ -5,6 +5,10 @@ import { ChatWidgetLoader } from "@/components/chat-widget-loader"
 import { LanguageProvider } from "@/components/language-provider"
 import { ConvexClientProvider } from "@/components/convex-client-provider"
 import {
+  MetaPixelPageView,
+  MetaPixelProvider,
+} from "@/components/analytics/meta-pixel-provider"
+import {
   PostHogPageView,
   PostHogProvider,
 } from "@/components/analytics/posthog-provider"
@@ -16,14 +20,17 @@ export function Providers({ children }: { children: React.ReactNode }) {
     <ConsentProvider>
       <ConvexClientProvider>
         <PostHogProvider>
-          <LanguageProvider>
-            <Suspense fallback={null}>
-              <PostHogPageView />
-            </Suspense>
-            {children}
-            <ChatWidgetLoader />
-            <CookieConsentBanner />
-          </LanguageProvider>
+          <MetaPixelProvider>
+            <LanguageProvider>
+              <Suspense fallback={null}>
+                <PostHogPageView />
+                <MetaPixelPageView />
+              </Suspense>
+              {children}
+              <ChatWidgetLoader />
+              <CookieConsentBanner />
+            </LanguageProvider>
+          </MetaPixelProvider>
         </PostHogProvider>
       </ConvexClientProvider>
     </ConsentProvider>

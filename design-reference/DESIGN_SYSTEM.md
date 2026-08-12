@@ -52,5 +52,5 @@
 
 ## Reference paths
 
-Local: `/Users/sylasp/ask-ai-legal-main/ask-ai-legal`
-GitHub: https://github.com/Mran1996/cleanmain
+Local: `/Users/sylasp/ask ai legal web`
+GitHub: https://github.com/Mran1996/ask-ai-legal-website

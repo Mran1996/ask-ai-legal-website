@@ -1,7 +1,7 @@
 /** Canonical production URL — used for metadataBase, canonical links, sitemap, and JSON-LD. */
 export const SITE_URL = "https://askailegal.com"
 
-/** Site-wide links — from Ask AI Legal cleanmain app */
+/** Site-wide links — canonical ask-ai-legal-website app */
 export const SOCIAL_LINKS = {
   instagram: "https://www.instagram.com/askailegal/",
   facebook: "https://www.facebook.com/profile.php?id=61585772484354",
@@ -9,6 +9,12 @@ export const SOCIAL_LINKS = {
 
 export const SUPPORT_EMAIL = "support@askailegal.com"
 export const SUPPORT_MAILTO = `mailto:${SUPPORT_EMAIL}` as const
+
+/** Google Business Profile NAP — phone line hidden in UI while empty. */
+export const BUSINESS_PHONE: string = ""
+export const BUSINESS_HOURS = "Monday–Friday, 9:00 AM – 5:00 PM Pacific"
+export const BUSINESS_SERVICE_AREAS =
+  "California and all U.S. states (document preparation service)"
 
 /** Pay #1 — flat case file review / start price when package is custom-quote (credited toward documents). */
 export const CASE_FILE_REVIEW_PRICE_USD = 499

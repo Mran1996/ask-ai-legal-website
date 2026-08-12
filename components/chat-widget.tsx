@@ -197,6 +197,7 @@ type Tab = "chat" | "quote"
 export function ChatWidget() {
   const { locale: siteLocale, setLanguage } = useLanguage()
   const [open, setOpen] = useState(false)
+  const [panelVisible, setPanelVisible] = useState(false)
   const [tab, setTab] = useState<Tab>("chat")
   const [chatLocale, setChatLocale] = useState<Locale | null>(null)
   const [languageConfirmed, setLanguageConfirmed] = useState(false)
@@ -319,6 +320,29 @@ export function ChatWidget() {
       seedWelcome(chatLocale)
     }
   }
+
+  const handleClose = useCallback(() => {
+    setPanelVisible(false)
+    window.setTimeout(() => {
+      setOpen(false)
+      setIntakeSubmitBanner(null)
+    }, 280)
+  }, [])
+
+  useEffect(() => {
+    if (!open) {
+      setPanelVisible(false)
+      return
+    }
+
+    const frame = window.requestAnimationFrame(() => {
+      setPanelVisible(true)
+    })
+
+    return () => {
+      window.cancelAnimationFrame(frame)
+    }
+  }, [open])
 
   const handleSend = async (e?: React.FormEvent) => {
     e?.preventDefault?.()
@@ -555,7 +579,7 @@ export function ChatWidget() {
       <button
         type="button"
         onClick={handleOpen}
-        className="fixed bottom-5 right-5 z-[70] flex items-center gap-2 rounded-full border border-gold/50 bg-navy px-5 py-3 text-sm font-semibold text-white shadow-neon transition-transform hover:-translate-y-0.5 hover:border-gold"
+        className="chat-fab"
         aria-label={ui.openChat}
       >
         <MessageCircle className="h-5 w-5 text-gold" aria-hidden />
@@ -566,7 +590,7 @@ export function ChatWidget() {
 
   return (
     <div
-      className="fixed bottom-4 right-4 z-[70] flex h-[min(500px,85vh)] w-[min(360px,calc(100vw-2rem))] flex-col overflow-hidden rounded-lg border border-gold/30 bg-navy shadow-firm max-sm:inset-x-3 max-sm:right-auto max-sm:w-auto"
+      className={`chat-panel ${panelVisible ? "chat-panel--visible" : ""}`}
       role="dialog"
       aria-label={ui.title}
     >
@@ -609,11 +633,8 @@ export function ChatWidget() {
           )}
           <button
             type="button"
-            onClick={() => {
-              setOpen(false)
-              setIntakeSubmitBanner(null)
-            }}
-            className="rounded-full p-1.5 text-white/70 hover:bg-white/10 hover:text-white"
+            onClick={handleClose}
+            className="rounded-full p-1.5 text-white/70 transition-colors hover:bg-white/10 hover:text-white active:scale-95"
             aria-label={ui.closeChat}
           >
             <X className="h-5 w-5" />
