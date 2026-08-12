@@ -4,6 +4,7 @@ import { useState, type FormEvent } from "react"
 import { useAction } from "convex/react"
 import { Check, Loader2, Send } from "lucide-react"
 import { api } from "@/convex/_generated/api"
+import { pixelTrack } from "@/lib/meta-pixel"
 import { SUPPORT_EMAIL } from "@/lib/site-config"
 
 type Status = "idle" | "sending" | "success" | "error"
@@ -37,6 +38,7 @@ export function ContactForm() {
       })
 
       if (result.ok) {
+        pixelTrack("Lead", { content_category: "contact_form" })
         setStatus("success")
         form.reset()
       } else {

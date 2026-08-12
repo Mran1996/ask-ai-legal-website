@@ -1,11 +1,19 @@
 "use client"
 
 import Link from "next/link"
-import { Instagram, Facebook } from "lucide-react"
-import { BrandLogoLockup } from "@/components/brand-logo"
+import { Scale, Instagram, Facebook } from "lucide-react"
 import { useLanguage } from "@/components/language-provider"
 import { serviceSlug } from "@/lib/service-icons"
-import { SITE_DISCLAIMER, SITE_LEGAL_NAME, SOCIAL_LINKS } from "@/lib/site-config"
+import {
+  BUSINESS_HOURS,
+  BUSINESS_PHONE,
+  BUSINESS_SERVICE_AREAS,
+  SITE_DISCLAIMER,
+  SITE_BRAND_NAME,
+  SITE_LEGAL_NAME,
+  SOCIAL_LINKS,
+  SUPPORT_EMAIL,
+} from "@/lib/site-config"
 
 const social = [
   { label: "Instagram", icon: Instagram, href: SOCIAL_LINKS.instagram },
@@ -56,9 +64,28 @@ export function Footer() {
       <div className="container-main">
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(240px,280px)_1fr] lg:items-start lg:gap-x-10 xl:gap-x-12">
           <div>
-            <Link href="/" className="inline-block transition-opacity hover:opacity-90">
-              <BrandLogoLockup width={220} />
+            <Link href="/" className="flex items-center gap-3 transition-opacity hover:opacity-90">
+              <Scale className="h-6 w-6 shrink-0 text-gold" aria-hidden />
+              <span className="font-display text-xl font-semibold text-white">{SITE_BRAND_NAME}</span>
             </Link>
+            <p className="mt-4 text-sm leading-relaxed">{t.footer.tagline}</p>
+            <address className="mt-5 not-italic text-sm leading-relaxed text-white/60">
+              <p className="font-semibold text-white/80">{SITE_LEGAL_NAME}</p>
+              <p className="mt-2">{BUSINESS_SERVICE_AREAS}</p>
+              <p className="mt-1">{BUSINESS_HOURS}</p>
+              <p className="mt-1">
+                <a href={`mailto:${SUPPORT_EMAIL}`} className="transition-colors hover:text-gold">
+                  {SUPPORT_EMAIL}
+                </a>
+              </p>
+              {BUSINESS_PHONE ? (
+                <p className="mt-1">
+                  <a href={`tel:${BUSINESS_PHONE}`} className="transition-colors hover:text-gold">
+                    {BUSINESS_PHONE}
+                  </a>
+                </p>
+              ) : null}
+            </address>
             <p className="mt-5 rounded-sm border border-white/10 bg-white/5 p-4 text-xs leading-relaxed text-white/50">
               {SITE_DISCLAIMER}
             </p>

@@ -25,7 +25,15 @@ git status -sb
 
 Expected `origin`: `https://github.com/Mran1996/ask-ai-legal-website.git`
 
-GitHub MCP / connector must be able to read **`Mran1996/ask-ai-legal-website`** (private). If 404, fix at https://github.com/settings/installations → Claude app → grant access to this repo.
+GitHub MCP must read **`Mran1996/ask-ai-legal-website`** (private). Run the fix script (uses your `gh` token — full private repo access):
+
+```bash
+./scripts/setup-claude-github.sh
+```
+
+Then **Cmd+Q** Claude, reopen, and start a **new** Cowork session. If the broken remote connector returns, remove **Github** under Settings → Connectors.
+
+See `docs/CLAUDE_GITHUB_SETUP.md`.
 
 ## Product
 
