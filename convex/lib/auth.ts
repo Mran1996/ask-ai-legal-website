@@ -36,13 +36,13 @@ export async function requireCounselUser(ctx: QueryCtx | MutationCtx): Promise<A
 
   if (allowlist.size === 0) {
     throw new Error(
-      "Counsel access is not configured (set COUNSEL_EMAILS in Convex env)"
+      "Review access is not configured (set COUNSEL_EMAILS in Convex env)"
     )
   }
 
   const email = user.email?.trim().toLowerCase()
   if (!email || !allowlist.has(email)) {
-    throw new Error("Unauthorized: counsel access required")
+    throw new Error("Unauthorized: document review access required")
   }
 
   return user

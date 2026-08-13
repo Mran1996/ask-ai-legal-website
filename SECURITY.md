@@ -31,11 +31,11 @@ Before production traffic, configure these Convex environment variables:
 ```bash
 npx convex env set CALCOM_WEBHOOK_SECRET "<long-random-secret>"
 npx convex env set RESEND_INBOUND_WEBHOOK_SECRET "<long-random-secret>"
-npx convex env set COUNSEL_EMAILS "counsel@askailegal.com,partner@example.com"
+npx convex env set COUNSEL_EMAILS "support@askailegal.com"
 npx convex env set OPS_ACCESS_TOKEN "$(openssl rand -hex 32)"
 ```
 
-Webhooks **reject** requests when their secrets are unset. Counsel review routes require an authenticated user whose email appears in `COUNSEL_EMAILS`.
+Webhooks **reject** requests when their secrets are unset. `COUNSEL_EMAILS` limits who can access the internal document review UI (comma-separated staff emails). Ask AI Legal is document preparation only — not a law firm.
 
 ## Supported versions
 

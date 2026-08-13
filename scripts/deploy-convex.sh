@@ -29,5 +29,5 @@ echo "  npx convex env set RESEND_FROM_EMAIL 'Ask AI Legal <support@askailegal.c
 echo "  npx convex env set OPS_ACCESS_TOKEN <secret> --prod"
 echo "  npx convex env set CALCOM_WEBHOOK_SECRET \"\$(openssl rand -hex 32)\" --prod"
 echo "  npx convex env set RESEND_INBOUND_WEBHOOK_SECRET \"\$(openssl rand -hex 32)\" --prod"
-echo "  npx convex env set COUNSEL_EMAILS 'counsel@askailegal.com' --prod"
+echo "  npx convex env set COUNSEL_EMAILS 'support@askailegal.com' --prod"
 echo "  # Optional: npx convex env set GOOGLE_REVIEW_URL 'https://g.page/r/…/review' --prod"
