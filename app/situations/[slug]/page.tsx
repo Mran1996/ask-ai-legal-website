@@ -45,15 +45,19 @@ export default async function SituationGuidePage({ params }: Props) {
       <main className="flex-grow">
         <section className="section-navy section-pad-under-header">
           <div className="container-main max-w-3xl">
-            <Link
-              href="/"
-              className="mb-6 inline-flex min-h-[44px] items-center gap-2.5 rounded-full border-2 border-gold/55 bg-gold/10 px-4 py-3 text-sm font-semibold text-gold transition-colors hover:border-gold hover:bg-gold/15 hover:text-white"
-            >
-              <ArrowLeft className="h-5 w-5 shrink-0" aria-hidden />
-              Back to home
-            </Link>
-            <p className="firm-label text-gold">Situation guide</p>
-            <div className="gold-rule mb-6 mt-2" />
+            <div className="flex flex-col items-start gap-5">
+              <Link
+                href="/"
+                className="flex w-fit min-h-[44px] items-center gap-2.5 rounded-full border-2 border-gold/55 bg-gold/10 px-4 py-3 text-sm font-semibold text-gold transition-colors hover:border-gold hover:bg-gold/15 hover:text-white"
+              >
+                <ArrowLeft className="h-5 w-5 shrink-0" aria-hidden />
+                Back to home
+              </Link>
+              <div className="w-full">
+                <p className="firm-label block text-gold">Situation guide</p>
+                <div className="gold-rule mb-6 mt-2" />
+              </div>
+            </div>
             <h1 className="firm-title text-white">{guide.title}</h1>
             <p className="mt-6 text-lg leading-relaxed text-white/70">{guide.intro}</p>
             <div className="flex justify-center">
