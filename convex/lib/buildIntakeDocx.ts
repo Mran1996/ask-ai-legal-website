@@ -178,7 +178,7 @@ function statePrefill(ctx: IntakeDocxContext): string | undefined {
 
 function assistancePrefill(ctx: IntakeDocxContext): string | undefined {
   const parts = [
-    ctx.caseTypeLabel?.trim() ? `Case type: ${ctx.caseTypeLabel.trim()}` : undefined,
+    ctx.caseTypeLabel?.trim() ? `Matter type: ${ctx.caseTypeLabel.trim()}` : undefined,
     ctx.serviceNeeded?.trim() ? `Service requested: ${ctx.serviceNeeded.trim()}` : undefined,
     ctx.role?.trim() ? `Your role: ${ctx.role.trim()}` : undefined,
   ].filter(Boolean)
@@ -844,7 +844,7 @@ export async function buildPersonalizedIntakeDocx(
               }),
             ],
           }),
-          body(`Case reference: ${ctx.caseReference}`, { bold: true }),
+          body(`File reference: ${ctx.caseReference}`, { bold: true }),
           blankAnswer(`Client Name: ${fullName}`),
           blankAnswer(
             ctx.clientEmail.trim()
@@ -854,8 +854,8 @@ export async function buildPersonalizedIntakeDocx(
           blankAnswer(`Date: ${today}`),
           blankAnswer(
             ctx.caseNumber
-              ? `Case Number (if any): ${ctx.caseNumber}`
-              : "Case Number (if any): ____________________"
+              ? `Court / docket number (if any): ${ctx.caseNumber}`
+              : "Court / docket number (if any): ____________________"
           ),
           blankAnswer(
             ctx.caseTypeLabel?.trim()
@@ -888,7 +888,7 @@ export async function buildPersonalizedIntakeDocx(
             { italics: true, size: 18 }
           ),
           body(
-            "Return this completed Part 1 Word file by replying to the email from Ask AI Legal (keep your case reference in the subject). Attach any court papers you have. After we review Part 1, we will email the issues we can start with and an invoice to begin document preparation.",
+            "Return this completed Part 1 Word file by replying to the email from Ask AI Legal (keep your file reference in the subject). Attach any court papers you have. After we review Part 1, we will email the issues we can start with and an invoice to begin document preparation.",
             { size: 18 }
           ),
         ],

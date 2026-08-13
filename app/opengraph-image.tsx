@@ -1,5 +1,5 @@
 import { ImageResponse } from "next/og"
-import { CASE_FILE_REVIEW_PRICE_DISPLAY } from "@/lib/site-config"
+import { CASE_FILE_REVIEW_PRICE_DISPLAY, FILE_REVIEW_DEPOSIT_LABEL, SITE_TAGLINE } from "@/lib/site-config"
 
 export const alt = "Ask AI Legal — Full document preparation service"
 export const size = { width: 1200, height: 630 }
@@ -40,7 +40,7 @@ export default function OpenGraphImage() {
             fontStyle: "italic",
           }}
         >
-          Know your case. Own your case.
+          {SITE_TAGLINE}
         </div>
         <div
           style={{
@@ -53,7 +53,7 @@ export default function OpenGraphImage() {
             maxWidth: 920,
           }}
         >
-          {`Full document preparation service · ${CASE_FILE_REVIEW_PRICE_DISPLAY} case file review credited toward your documents`}
+          {`Full document preparation service · ${CASE_FILE_REVIEW_PRICE_DISPLAY} ${FILE_REVIEW_DEPOSIT_LABEL.toLowerCase()} credited toward your documents`}
         </div>
         <div
           style={{

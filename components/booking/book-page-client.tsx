@@ -12,7 +12,7 @@ import {
   type BookCallType,
 } from "@/lib/booking"
 import { CalcomEmbed } from "@/components/booking/calcom-embed"
-import { SITE_BRAND_NAME } from "@/lib/site-config"
+import { SITE_BRAND_NAME, FILE_REVIEW_DEPOSIT_LABEL } from "@/lib/site-config"
 
 type Props = {
   callType: string
@@ -30,7 +30,7 @@ function callTitle(callType: string): string {
 
 function callDescription(callType: string): string {
   if (callType === "document_planning") {
-    return "Included with your paid case file review — discuss next documents and timeline."
+    return `Included with your paid ${FILE_REVIEW_DEPOSIT_LABEL.toLowerCase()} — discuss next documents and timeline.`
   }
   if (callType === "follow_up_paid") {
     return "30-minute follow-up call ($50) — available after included planning calls are used."
@@ -93,7 +93,7 @@ export function BookPageClient({
                   <a href="mailto:support@askailegal.com" className="text-gold underline">
                     support@askailegal.com
                   </a>{" "}
-                  with your case reference if you need to reach us.
+                  with your file reference if you need to reach us.
                 </p>
               </div>
             ) : !slugConfigured ? (
@@ -106,13 +106,13 @@ export function BookPageClient({
               </div>
             ) : !caseId || !caseReference || !email ? (
               <div className="rounded-md border border-white/15 bg-white/5 px-4 py-6 text-sm text-white/75">
-                <p>Please complete the Request Quote form first so we can link this call to your case.</p>
+                <p>Please complete the Request Quote form first so we can link this call to your file.</p>
                 <p className="mt-2">
                   Or email{" "}
                   <a href="mailto:support@askailegal.com" className="text-gold underline">
                     support@askailegal.com
                   </a>{" "}
-                  with your case reference.
+                  with your file reference.
                 </p>
               </div>
             ) : embedSrc ? (

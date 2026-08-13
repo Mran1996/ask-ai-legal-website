@@ -1,7 +1,9 @@
 import Image from "next/image"
 
 export const BOOKING_BANNER_PATH = "/brand/ask-ai-legal-booking-banner.png"
-export const BOOKING_BANNER_ALT = "Ask AI Legal — Know your case. Own your case."
+import { SITE_TAGLINE } from "@/lib/site-config"
+
+export const BOOKING_BANNER_ALT = `Ask AI Legal — ${SITE_TAGLINE}`
 
 type Props = {
   /** Smaller banner for chat widget success state */

@@ -7,6 +7,7 @@ import { NeonButton } from "@/components/neon-button"
 import { BrandLockup } from "@/components/brand-lockup"
 import { useLanguage } from "@/components/language-provider"
 import { openChatWidget } from "@/lib/chat/open-chat"
+import { CASE_FILE_REVIEW_PRICE_USD } from "@/lib/site-config"
 import { CountUpStat, type HeroStatItem } from "@/components/count-up-stat"
 
 export function HeroSection() {
@@ -14,8 +15,9 @@ export function HeroSection() {
 
   const stats: HeroStatItem[] = [
     {
-      kind: "text",
-      display: t.hero.stat1Value,
+      kind: "count",
+      value: CASE_FILE_REVIEW_PRICE_USD,
+      prefix: "$",
       label: t.hero.stat1Label,
       sub: t.hero.stat1Sub,
     },
@@ -83,6 +85,7 @@ export function HeroSection() {
               {item.kind === "count" && item.value !== undefined ? (
                 <CountUpStat
                   value={item.value}
+                  prefix={item.prefix}
                   suffix={item.suffix ?? ""}
                   className="font-display text-4xl font-semibold text-accent-light sm:text-5xl"
                 />

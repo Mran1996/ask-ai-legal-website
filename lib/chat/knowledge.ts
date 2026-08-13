@@ -46,7 +46,7 @@ export function buildKnowledgeForLocale(locale: Locale): KnowledgeChunk[] {
       locale,
       "contact",
       "Contact support",
-      `Email ${SUPPORT_EMAIL} for a free case review, custom quote, questions, or to upload documents. Consultations are free. Most inquiries receive a reply within one business day.`,
+      `Email ${SUPPORT_EMAIL} for a free document review, custom quote, questions, or to upload documents. Consultations are free. Most inquiries receive a reply within one business day.`,
       ["support", "email", "quote", "price", "cost", "upload", "documents"]
     ),
     chunk(locale, "pricing", "Pricing", t.compare.usPrice + ". " + t.compare.usDesc + ". " + t.faq.items[1]?.a, [

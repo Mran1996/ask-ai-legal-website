@@ -450,7 +450,7 @@ export function ChatWidget() {
         } catch (uploadError) {
           console.error("Intake document upload failed:", uploadError)
           setIntakeError(
-            "Your quote was saved, but one or more documents failed to upload. Use “Upload more docs” below or email support with your case reference."
+            "Your quote was saved, but one or more documents failed to upload. Use “Upload more docs” below or email support with your file reference."
           )
         }
       }
@@ -796,7 +796,7 @@ export function ChatWidget() {
                     {" · "}
                     {intakeSubmitBanner.emailQueued
                       ? "Follow-up email queued."
-                      : "Email follow-up could not be queued — we still have your case."}
+                      : "Email follow-up could not be queued — we still have your information."}
                   </p>
                   <p className="mt-2 text-[10px] text-white/45">{ui.quoteNextSteps}</p>
 
@@ -965,7 +965,7 @@ export function ChatWidget() {
                     className="w-full rounded-sm border border-white/15 bg-white/5 px-2.5 py-2 text-sm text-white focus:border-gold/50 focus:outline-none"
                   >
                     <option value="" disabled className="bg-navy">
-                      Select case type
+                      Select matter type
                     </option>
                     {CASE_TYPES.map((type) => (
                       <option key={type} value={type} className="bg-navy">

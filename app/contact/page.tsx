@@ -39,7 +39,7 @@ export default function ContactPage() {
             <div className="gold-rule mb-8" />
             <h1 className="firm-title text-white">We&rsquo;re here to help</h1>
             <p className="mt-8 max-w-2xl text-lg leading-relaxed text-white/70">
-              Have a question about your case, a document package, billing, or anything else? Send
+              Have a question about your situation, a document package, billing, or anything else? Send
               us a message below and our support team will get back to you by email. You can also
               reach us directly at{" "}
               <a className="text-gold underline underline-offset-2" href={SUPPORT_MAILTO}>

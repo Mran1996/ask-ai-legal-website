@@ -19,10 +19,14 @@ export const BUSINESS_HOURS = "Monday–Friday, 9:00 AM – 5:00 PM Pacific"
 export const BUSINESS_SERVICE_AREAS =
   "California and all U.S. states (document preparation service)"
 
-/** Pay #1 — flat case file review / start price when package is custom-quote (credited toward documents). */
+/** Pay #1 — flat file review deposit (credited toward documents). Internal constant name kept for Stripe/code compat. */
 export const CASE_FILE_REVIEW_PRICE_USD = 499
 export const CASE_FILE_REVIEW_PRICE_DISPLAY = `$${CASE_FILE_REVIEW_PRICE_USD}`
 export const CASE_FILE_REVIEW_PRICE_CENTS = CASE_FILE_REVIEW_PRICE_USD * 100
+
+/** Client-facing product labels — avoid "case" in marketing copy. */
+export const FILE_REVIEW_DEPOSIT_LABEL = "File review deposit"
+export const FILE_REVIEW_LABEL = "File review"
 
 /**
  * Optional document retrieval add-on (ops fulfills manually for now — no court API yet).
@@ -34,7 +38,7 @@ export const DOCUMENT_RETRIEVAL_FEE_CENTS = DOCUMENT_RETRIEVAL_FEE_USD * 100
 
 /** Brand mark copy — header + hero lockup */
 export const SITE_BRAND_NAME = "Ask AI Legal™"
-export const SITE_TAGLINE = "Know your situation. Own your situation."
+export const SITE_TAGLINE = "Get the help that you deserve"
 
 /** Registered legal entity — used in footer copyright and legal pages (not the marketing lockup). */
 export const SITE_LEGAL_NAME = "Ask AI Legal LLC"
@@ -49,7 +53,7 @@ export const SITE_DISCLAIMER =
 export const SITE_SEO_TITLE = "Ask AI Legal — Full Document Preparation Service"
 
 /** Primary SEO description — used in layout, JSON-LD, and social previews. */
-export const SITE_SEO_DESCRIPTION = `Full document preparation service for any issue, any jurisdiction. ${CASE_FILE_REVIEW_PRICE_DISPLAY} case file review → written summary with your exact price → flat-fee document package. Not a law firm, no legal advice.`
+export const SITE_SEO_DESCRIPTION = `Full document preparation service for any issue, any jurisdiction. ${CASE_FILE_REVIEW_PRICE_DISPLAY} ${FILE_REVIEW_DEPOSIT_LABEL.toLowerCase()} → written summary with your exact price → flat-fee document package. Not a law firm, no legal advice.`
 
 /** Brand mark (circular scales) — header, hero, app icons. */
 export const SITE_LOGO_MARK = "/brand/stripe-logo-512.png"

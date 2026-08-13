@@ -3,11 +3,16 @@ import Link from "next/link"
 import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
 import { NeonButton } from "@/components/neon-button"
-import { CASE_FILE_REVIEW_PRICE_DISPLAY, SITE_DISCLAIMER, SITE_URL } from "@/lib/site-config"
+import {
+  CASE_FILE_REVIEW_PRICE_DISPLAY,
+  FILE_REVIEW_DEPOSIT_LABEL,
+  SITE_DISCLAIMER,
+  SITE_URL,
+} from "@/lib/site-config"
 import { en } from "@/lib/i18n/translations/en"
 
 const TITLE = "Pricing — Flat Fee Document Preparation"
-const DESCRIPTION = `Two-step flat fee: ${CASE_FILE_REVIEW_PRICE_DISPLAY} case file review (credited toward documents), then one flat quote for your document package. No hourly billing. Not a law firm.`
+const DESCRIPTION = `Two-step flat fee: ${CASE_FILE_REVIEW_PRICE_DISPLAY} ${FILE_REVIEW_DEPOSIT_LABEL.toLowerCase()} (credited toward documents), then one flat quote for your document package. No hourly billing. Not a law firm.`
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -34,12 +39,13 @@ export default function PricingPage() {
             <div className="gold-rule mb-8" />
             <h1 className="firm-title text-white">Two payments. No hourly clock.</h1>
             <p className="mt-8 max-w-2xl text-lg leading-relaxed text-white/70">
-              We list how pricing works up front: a flat {CASE_FILE_REVIEW_PRICE_DISPLAY} case file
-              review, then one flat price for the documents your written summary describes. You review and
-              file on your own behalf — we prepare documents only.
+              We list how pricing works up front: a flat {CASE_FILE_REVIEW_PRICE_DISPLAY}{" "}
+              {FILE_REVIEW_DEPOSIT_LABEL.toLowerCase()}, then one flat price for the documents your
+              written summary describes. You review and file on your own behalf — we prepare
+              documents only.
             </p>
             <div className="mt-10">
-              <NeonButton href="/pay">Start my case file review</NeonButton>
+              <NeonButton href="/pay">Start my file review</NeonButton>
             </div>
             <p className="mt-6 text-sm text-white/50">{SITE_DISCLAIMER}</p>
           </div>
@@ -90,9 +96,9 @@ export default function PricingPage() {
               </div>
             </div>
             <p className="mt-10 text-sm leading-relaxed text-gray-600">
-              Document package quotes depend on scope — matter type, jurisdiction, and what your case
-              file shows is needed. Your written summary ends with one flat price before you commit to
-              document preparation.
+              Document package quotes depend on scope — matter type, jurisdiction, and what your
+              documents show is needed. Your written summary ends with one flat price before you
+              commit to document preparation.
             </p>
             <div className="mt-8 flex flex-wrap gap-4">
               <NeonButton href="/pay">{en.process.cta}</NeonButton>

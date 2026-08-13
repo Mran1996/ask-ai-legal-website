@@ -35,8 +35,8 @@ function PillarCard({
         className={[
           "relative aspect-square w-full overflow-hidden rounded-sm text-left",
           isFlipped
-            ? "border-2 border-gold shadow-[0_0_28px_rgba(197,160,89,0.3)]"
-            : "border border-white/10 bg-white/[0.04] hover:border-white/25 hover:bg-white/[0.06]",
+            ? "border-2 border-gold bg-white/[0.06] shadow-[0_0_36px_rgba(197,160,89,0.45)] ring-2 ring-gold/35"
+            : "border-2 border-gold/30 bg-white/[0.04] shadow-[0_0_14px_rgba(197,160,89,0.12)] hover:border-gold/55 hover:bg-white/[0.06] hover:shadow-[0_0_24px_rgba(197,160,89,0.25)]",
         ].join(" ")}
         style={{ transition: "border-color 350ms ease, box-shadow 350ms ease" }}
       >
@@ -52,7 +52,10 @@ function PillarCard({
             className="absolute inset-0 flex flex-col items-center justify-center bg-white/[0.03] p-4 sm:p-5 [backface-visibility:hidden]"
             style={{ transform: "rotateY(0deg)" }}
           >
-            <Icon className="mb-3 h-8 w-8 text-white/40 sm:h-9 sm:w-9" aria-hidden />
+            <Icon
+              className={`mb-3 h-8 w-8 sm:h-9 sm:w-9 ${isFlipped ? "text-gold" : "text-gold/45"}`}
+              aria-hidden
+            />
             <span className="font-display text-center text-sm font-semibold leading-snug text-white sm:text-base">
               {title}
             </span>

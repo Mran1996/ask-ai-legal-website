@@ -3,7 +3,7 @@ import { CASE_FILE_REVIEW_PRICE_DISPLAY as REVIEW_PRICE } from "@/lib/site-confi
 
 export const en = {
   nav: {
-    freeReview: "Situation file review",
+    freeReview: "File review",
     help: "Help",
     about: "About",
     services: "Services",
@@ -12,11 +12,11 @@ export const en = {
     process: "Process",
     faq: "FAQ",
     contact: "Contact",
-    emailForReview: `Situation file review — ${REVIEW_PRICE}`,
+    emailForReview: `File review — ${REVIEW_PRICE}`,
     language: "Language",
   },
   hero: {
-    slogan: "Know your situation. Own your situation.",
+    slogan: "Get the help that you deserve",
     titleLine1: "Help — without the",
     titleHighlight: "$10,000 retainer.",
     titleLine2: "",
@@ -32,10 +32,10 @@ export const en = {
     ctaPrimary: "Get help today",
     ctaSecondary: "See how it works",
     stat1Value: REVIEW_PRICE,
-    stat1Label: "Situation file review",
+    stat1Label: "File review deposit",
     stat1Sub: "Credited toward your documents",
     stat2Value: "72 hrs",
-    stat2Label: "Your written situation summary",
+    stat2Label: "Your written document summary",
     stat2Sub: "After all documents are received — usually within 72 hours",
     stat3Value: "1",
     stat3Label: "Flat quote",
@@ -62,7 +62,7 @@ export const en = {
           "A step-by-step plan for your matter — key issues, recommended documents, and what to prepare next. Built from your facts, not a generic template.",
       },
       {
-        title: "Situation research",
+        title: "Document research",
         description:
           "We dig into the facts, filings, and procedural history of your matter so every document is built on what actually happened in your situation.",
       },
@@ -74,7 +74,7 @@ export const en = {
       {
         title: "Source verification",
         description:
-          "Every source we use is retrieved from the original publication, stored in your situation file, and verified in a separate review pass before it appears in your documents — never invented, never guessed.",
+          "Every source we use is retrieved from the original publication, stored in your document file, and verified in a separate review pass before it appears in your documents — never invented, never guessed.",
       },
       {
         title: "Hearing preparation",
@@ -103,13 +103,13 @@ export const en = {
     titleLine1: "Why pay $10,000 up front",
     titleHighlight: "to be kept in the dark?",
     titleLine2: "",
-    subtitle: `A ${REVIEW_PRICE} situation file review, then one flat quote for exactly what your situation needs. No hourly clock, ever.`,
+    subtitle: `A ${REVIEW_PRICE} file review deposit, then one flat quote for exactly what your situation needs. No hourly clock, ever.`,
     traditionalHeading: "The retainer trap",
     traditionalPrice: "$3,000–$10,000 retainer",
     traditionalDesc: "Drawn down hourly, whether or not the work moves your situation forward",
     traditionalBullets: [
       "Weeks waiting for callbacks",
-      "You may never see an analysis of your own situation file",
+      "You may never see an analysis of your own documents",
       "Costs grow with every call and every email",
     ],
     usBadge: "Ask AI Legal",
@@ -117,11 +117,11 @@ export const en = {
     usPrice: `${REVIEW_PRICE} to start`,
     usDesc: "Credited in full toward your document package",
     usBullets: [
-      `${REVIEW_PRICE} situation file review — credited toward your documents`,
-      "One flat quote after your written situation summary, no hourly billing",
+      `${REVIEW_PRICE} file review deposit — credited toward your documents`,
+      "One flat quote after your written document summary, no hourly billing",
       "Every source retrieved, stored, and verified",
     ],
-    cta: "Start my situation file review",
+    cta: "Start my file review",
     usCompareLabel: "Ask AI Legal",
     traditionalCompareLabel: "Traditional",
     highlightsLabel: "Services we offer",
@@ -146,7 +146,7 @@ export const en = {
         title: "Source verification",
         summary: "Every reference retrieved and checked twice",
         detail:
-          "Every source we use is pulled from the original publication, stored in your situation file, and verified in a separate review pass before it reaches your draft — never invented, never guessed.",
+          "Every source we use is pulled from the original publication, stored in your document file, and verified in a separate review pass before it reaches your draft — never invented, never guessed.",
       },
       {
         title: "Transparent quote",
@@ -226,18 +226,18 @@ export const en = {
   },
   consultation: {
     label: "Your investment",
-    titleLine1: "Every case is different.",
+    titleLine1: "Every situation is different.",
     titleLine2: "So is every solution.",
     body1:
       "We learn about your situation first — then tell you exactly what we can prepare for you and what it will cost. No surprises.",
     body2:
-      "Email us your details. We'll reply with what we can do for your case and whether we're the right fit.",
+      "Email us your details. We'll reply with what we can do for your situation and whether we're the right fit.",
     cardLabel: "Schedule a consultation",
     cardTitle: "Let's discuss what we can do for you",
     emailLabel: "Email us",
     timing:
       "Consultations are free. Most inquiries receive a reply within one business day. You'll get a clear picture of scope, timeline, and investment.",
-    cta: "Email for a free case review",
+    cta: "Email for a free document review",
   },
   faq: {
     label: "Questions",
@@ -250,19 +250,19 @@ export const en = {
       },
       {
         q: `What do I get for ${REVIEW_PRICE}?`,
-        a: `A case file review: we read what you send us — filings, notices, letters, and any paperwork you have — and email you a plain-English written summary, usually within 72 hours. It explains where things stand, what documents you still need, and one flat price to prepare them. The ${REVIEW_PRICE} is credited in full toward that price.`,
+        a: `A ${REVIEW_PRICE} file review: we read what you send us — filings, notices, letters, and any paperwork you have — and email you a plain-English written summary, usually within 72 hours. It explains where things stand, what documents you still need, and one flat price to prepare them. The ${REVIEW_PRICE} is credited in full toward that price.`,
       },
       {
         q: "Why two payments instead of one price up front?",
         a: "Because quoting document work before reading your files is guessing — that's how retainers balloon. The first payment covers reviewing what you sent; the second is one fixed price for exactly the documents your written summary describes. No hourly billing at either step.",
       },
       {
-        q: "What kinds of cases do you handle?",
+        q: "What kinds of matters do you handle?",
         a: "Any issue — there is no limit. Divorce, custody, family matters, civil disputes, business conflicts, tenant issues, and whatever documents your situation needs. Across U.S. jurisdictions.",
       },
       {
         q: "How do I know your sources are real?",
-        a: "Every reference we include is retrieved from the original source, stored in your case file, and verified in a separate review pass before it appears in your documents. You receive a reference list with your delivery.",
+        a: "Every reference we include is retrieved from the original source, stored in your document file, and verified in a separate review pass before it appears in your documents. You receive a reference list with your delivery.",
       },
       {
         q: "Will you appear in court for me?",
@@ -270,7 +270,7 @@ export const en = {
       },
       {
         q: "Can I request revisions?",
-        a: "Yes. Revisions are included in your quoted scope until your documents reflect your case accurately. We refine until you're confident filing.",
+        a: "Yes. Revisions are included in your quoted scope until your documents reflect your situation accurately. We refine until you're confident filing.",
       },
     ],
   },
@@ -285,8 +285,8 @@ export const en = {
     },
     links: {
       allServices: "All services",
-      caseRoadmap: "Case roadmap",
-      caseResearch: "Case research",
+      caseRoadmap: "Road map",
+      caseResearch: "Document research",
       legalResearch: "In-depth research",
       outcomeAnalysis: "Source verification",
       hearingPrep: "Hearing preparation",

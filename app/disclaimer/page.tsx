@@ -54,10 +54,10 @@ export default function DisclaimerPage() {
         judges, opposing parties, procedural compliance, and timing. We do{" "}
         <strong>not guarantee</strong> that any document we prepare will be accepted by a
         court, that any motion will be granted, or that you will achieve any particular result
-        in your case.
+        in your matter.
       </p>
       <p>
-        Any references on our website to research depth, case matching, outcome likelihood
+        Any references on our website to research depth, matter matching, outcome likelihood
         analysis, or similar analyses describe preparation methods and informational insights —
         not promises or predictions about your outcome.
       </p>

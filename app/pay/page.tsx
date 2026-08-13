@@ -5,13 +5,14 @@ import { Footer } from "@/components/footer"
 import { StripeBuyButton } from "@/components/payments/stripe-buy-button"
 import {
   CASE_FILE_REVIEW_PRICE_DISPLAY,
+  FILE_REVIEW_DEPOSIT_LABEL,
   SITE_DISCLAIMER,
   SITE_URL,
   SUPPORT_EMAIL,
 } from "@/lib/site-config"
 
-const TITLE = "Pay your case file review deposit"
-const DESCRIPTION = `Securely pay your ${CASE_FILE_REVIEW_PRICE_DISPLAY} case file review deposit to open your case. Credited toward your document preparation. Not a law firm.`
+const TITLE = `Pay your ${FILE_REVIEW_DEPOSIT_LABEL.toLowerCase()}`
+const DESCRIPTION = `Securely pay your ${CASE_FILE_REVIEW_PRICE_DISPLAY} ${FILE_REVIEW_DEPOSIT_LABEL.toLowerCase()} to begin document review. Credited toward your document preparation. Not a law firm.`
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -50,11 +51,11 @@ export default function PayPage() {
                 <p className="firm-label text-gold">Secure payment</p>
                 <div className="gold-rule mx-auto mb-6 mt-2" />
                 <h1 className="font-display text-3xl leading-tight text-white sm:text-4xl">
-                  Case file review deposit
+                  {FILE_REVIEW_DEPOSIT_LABEL}
                 </h1>
                 <p className="mx-auto mt-4 max-w-sm text-base leading-relaxed text-white/70">
-                  A one-time {CASE_FILE_REVIEW_PRICE_DISPLAY} deposit to open your case — fully
-                  credited toward your document preparation.
+                  A one-time {CASE_FILE_REVIEW_PRICE_DISPLAY} deposit to begin your document review
+                  — fully credited toward your document preparation.
                 </p>
               </div>
 

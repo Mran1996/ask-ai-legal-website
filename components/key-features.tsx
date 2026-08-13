@@ -16,7 +16,7 @@ export function KeyFeatures() {
         <div className="max-w-2xl">
           <span className="section-label">Features</span>
           <h2 className="section-title">Professional legal tools. Not professional prices.</h2>
-          <p className="section-desc">Everything you need to move your case forward — in one platform.</p>
+          <p className="section-desc">Everything you need to move your matter forward — in one platform.</p>
         </div>
 
         <ul className="mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">

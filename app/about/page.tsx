@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import { NeonButton } from "@/components/neon-button"
-import { SUPPORT_MAILTO, CASE_FILE_REVIEW_PRICE_DISPLAY } from "@/lib/site-config"
+import { SUPPORT_MAILTO, CASE_FILE_REVIEW_PRICE_DISPLAY, FILE_REVIEW_DEPOSIT_LABEL } from "@/lib/site-config"
 import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
 import {
@@ -25,13 +25,13 @@ const capabilities = [
     icon: BadgeCheck,
     title: "Source verification",
     description:
-      "Every source we use is retrieved from the original publication, stored in your case file, and verified in a separate review pass before it reaches your documents — never invented, never guessed.",
+      "Every source we use is retrieved from the original publication, stored in your document file, and verified in a separate review pass before it reaches your documents — never invented, never guessed.",
   },
   {
     icon: Receipt,
     title: "Two flat fees, no hourly clock",
     description:
-      `A ${CASE_FILE_REVIEW_PRICE_DISPLAY} case file review, credited toward one flat quote for your documents. You know the full cost before you commit to either step.`,
+      `A ${CASE_FILE_REVIEW_PRICE_DISPLAY} ${FILE_REVIEW_DEPOSIT_LABEL.toLowerCase()}, credited toward one flat quote for your documents. You know the full cost before you commit to either step.`,
   },
   {
     icon: BookOpen,
@@ -142,12 +142,12 @@ export default function AboutPage() {
               <p className="firm-label text-gold-dark">Our standard</p>
               <div className="gold-rule mx-auto mb-6" />
               <h2 className="firm-title text-navy">
-                The preparation your case deserves
+                The preparation your situation deserves
               </h2>
               <p className="mt-5 text-gray-600 leading-relaxed">
                 Every client should walk into court with research behind them,
                 documents they trust, and a clear picture of what lies ahead.
-                That is the bar we hold ourselves to — every case, every time.
+                That is the bar we hold ourselves to — every matter, every time.
               </p>
             </div>
 
@@ -171,7 +171,7 @@ export default function AboutPage() {
               <p className="font-display text-2xl italic leading-relaxed text-navy">
                 &ldquo;We don&apos;t ask you to accept less. We built a service
                 that delivers more — more research, more speed, more clarity —
-                because your case is too important for anything else.&rdquo;
+                because your situation is too important for anything else.&rdquo;
               </p>
             </blockquote>
           </div>
@@ -192,7 +192,7 @@ export default function AboutPage() {
               </p>
               <p className="mt-4 leading-relaxed text-gray-600">
                 We prepare your documents and written plans. You remain in control of
-                your case — informed, equipped, and ready.
+                your matter — informed, equipped, and ready.
               </p>
             </div>
             <div className="rounded-sm border border-gold/30 bg-white p-8">
@@ -205,7 +205,7 @@ export default function AboutPage() {
                 review and use at your own discretion.
               </p>
               <NeonButton href={SUPPORT_MAILTO} className="btn-neon-light mt-8 inline-flex">
-                Email for a free case review
+                Email for a free document review
                 <ArrowRight className="h-4 w-4" aria-hidden />
               </NeonButton>
             </div>

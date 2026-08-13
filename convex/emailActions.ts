@@ -167,7 +167,7 @@ export const sendIntakeEmails = internalAction({
       "",
       "Thank you for reaching out to Ask AI Legal.",
       "",
-      `We received your intake. Your case reference is ${args.caseReference} — please keep it in email subjects.`,
+      `We received your intake. Your file reference is ${args.caseReference} — please keep it in email subjects.`,
       "",
       "What happens next (document preparation only — not a law firm, not legal advice):",
       "1. We email you a personalized intake form for your situation.",
@@ -231,7 +231,7 @@ export const sendIntakeEmails = internalAction({
           <td style="padding:28px 28px 8px;font-family:Georgia,serif;color:#111827;font-size:15px;line-height:1.55;">
             <p style="margin:0 0 16px;">Hello ${escapeHtml(context.clientFirstName)},</p>
             <p style="margin:0 0 16px;">Thank you for reaching out to Ask AI Legal.</p>
-            <p style="margin:0 0 16px;">We received your intake. Your case reference is <strong>${escapeHtml(args.caseReference)}</strong> — please keep it in email subjects.</p>
+            <p style="margin:0 0 16px;">We received your intake. Your file reference is <strong>${escapeHtml(args.caseReference)}</strong> — please keep it in email subjects.</p>
             <p style="margin:0 0 8px;font-weight:700;color:#0A1628;">What happens next</p>
             <p style="margin:0 0 8px;font-size:13px;color:#6B7280;">Document preparation only — not a law firm, not legal advice.</p>
             <ol style="margin:0 0 16px;padding-left:20px;">
@@ -490,7 +490,7 @@ export const sendPersonalizedFormEmail = internalAction({
         "",
         "Ask AI Legal prepares documents only. We are not a law firm and do not provide legal advice. You review and file any documents yourself.",
         "",
-        "Attached is your Case Intake Questionnaire – Part 1 (Microsoft Word .docx) with our letterhead.",
+        "Attached is your Intake Questionnaire – Part 1 (Microsoft Word .docx) with our letterhead.",
         "Please complete Part 1, then reply to this email with:",
         "• the completed Word file",
         "• any court notices, filings, letters, or orders you already have",
@@ -516,14 +516,14 @@ export const sendPersonalizedFormEmail = internalAction({
         <tr>
           <td style="background:#0A1628;padding:20px 24px;text-align:center;">
             <img src="${logoUrl}" alt="Ask AI Legal" width="240" style="max-width:240px;height:auto;border:0;" />
-            <p style="margin:10px 0 0;font-family:Arial,sans-serif;font-size:11px;letter-spacing:0.12em;color:#FFFFFF;">KNOW YOUR CASE. OWN YOUR CASE.</p>
+            <p style="margin:10px 0 0;font-family:Arial,sans-serif;font-size:11px;letter-spacing:0.12em;color:#FFFFFF;">GET THE HELP THAT YOU DESERVE</p>
           </td>
         </tr>
         <tr>
           <td style="padding:28px 28px 8px;font-family:Georgia,serif;color:#111827;font-size:15px;line-height:1.55;">
             <p style="margin:0 0 16px;">Hello ${escapeHtml(context.clientFirstName)},</p>
-            <p style="margin:0 0 16px;"><strong>Case reference:</strong> ${escapeHtml(context.caseReference)}</p>
-            <p style="margin:0 0 16px;">Attached is your <strong>Case Intake Questionnaire – Part 1</strong> (Microsoft Word). Please complete it, then <strong>reply to this email</strong> with the completed Word file and any court papers you have.</p>
+            <p style="margin:0 0 16px;"><strong>File reference:</strong> ${escapeHtml(context.caseReference)}</p>
+            <p style="margin:0 0 16px;">Attached is your <strong>Intake Questionnaire – Part 1</strong> (Microsoft Word). Please complete it, then <strong>reply to this email</strong> with the completed Word file and any court papers you have.</p>
             <p style="margin:0 0 8px;font-weight:700;color:#0A1628;">What happens next</p>
             <ol style="margin:0 0 16px;padding-left:20px;">
               <li>You return completed Part 1 (+ documents)</li>
@@ -635,7 +635,7 @@ export const sendFormReceivedAcknowledgmentEmail = internalAction({
   <div style="max-width:600px;margin:0 auto;background:#fff;border:1px solid #E5E7EB;padding:28px;">
     <div style="background:#0A1628;color:#C5A059;padding:16px;text-align:center;font-family:Arial,sans-serif;font-weight:700;">Ask AI Legal</div>
     <p>Hello ${escapeHtml(context.clientFirstName)},</p>
-    <p><strong>Case reference:</strong> ${escapeHtml(context.caseReference)}</p>
+    <p><strong>File reference:</strong> ${escapeHtml(context.caseReference)}</p>
     <p>Thank you — we <strong>received your completed Part 1 intake</strong>${args.hasAttachments ? " and attachments" : ""}.</p>
     <p>${escapeHtml(docsNote)}</p>
     <p><strong>Next:</strong> we will review and email the issues we can start with plus an invoice / payment link. We may request additional documents if needed.</p>
@@ -936,7 +936,7 @@ export const sendGapQuestionsEmail = internalAction({
         questions,
         "",
         "Tips:",
-        "• Keep your case reference in the subject line.",
+        "• Keep your file reference in the subject line.",
         "• Attach clear photos or PDFs of notices, complaints, leases, or prior filings.",
         "• If a question does not apply, reply “N/A” and say why.",
         "",
