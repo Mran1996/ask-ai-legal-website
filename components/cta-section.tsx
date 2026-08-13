@@ -4,7 +4,6 @@ import { ArrowRight } from "lucide-react"
 import { PaperShaderBackground } from "@/components/paper-shader-background"
 import { NeonButton } from "@/components/neon-button"
 import { useLanguage } from "@/components/language-provider"
-import { openChatWidget } from "@/lib/chat/open-chat"
 
 export function CtaSection() {
   const { t } = useLanguage()
@@ -19,10 +18,7 @@ export function CtaSection() {
           <p className="relative mx-auto mt-5 max-w-xl text-lg leading-relaxed text-white/65">
             {t.cta.body}
           </p>
-          <NeonButton
-            onClick={() => openChatWidget("quote")}
-            className="btn-neon relative mt-10 inline-flex flex-row items-center gap-2"
-          >
+          <NeonButton href="/pay" className="btn-neon relative mt-10 inline-flex flex-row items-center gap-2">
             <span>{t.cta.emailConsult}</span>
             <ArrowRight className="h-4 w-4 shrink-0" aria-hidden />
           </NeonButton>

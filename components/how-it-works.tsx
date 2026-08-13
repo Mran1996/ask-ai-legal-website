@@ -3,7 +3,6 @@
 import { ArrowRight } from "lucide-react"
 import { NeonButton } from "@/components/neon-button"
 import { useLanguage } from "@/components/language-provider"
-import { openChatWidget } from "@/lib/chat/open-chat"
 
 export function HowItWorks() {
   const { t } = useLanguage()
@@ -38,7 +37,7 @@ export function HowItWorks() {
         </ol>
 
         <div className="mt-12 flex justify-center sm:mt-14">
-          <NeonButton onClick={() => openChatWidget("quote")} className="btn-neon-light">
+          <NeonButton href="/pay" className="btn-neon-light">
             {t.process.cta}
             <ArrowRight className="h-4 w-4" aria-hidden />
           </NeonButton>

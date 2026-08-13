@@ -6,7 +6,6 @@ import { PaperShaderBackground } from "@/components/paper-shader-background"
 import { NeonButton } from "@/components/neon-button"
 import { BrandLockup } from "@/components/brand-lockup"
 import { useLanguage } from "@/components/language-provider"
-import { openChatWidget } from "@/lib/chat/open-chat"
 import { CASE_FILE_REVIEW_PRICE_USD } from "@/lib/site-config"
 import { CountUpStat, type HeroStatItem } from "@/components/count-up-stat"
 import { HeroCategoryPills } from "@/components/hero-category-pills"
@@ -62,7 +61,7 @@ export function HeroSection() {
           <HeroCategoryPills />
 
           <div className="mt-10 flex w-full flex-col items-center justify-center gap-4 sm:flex-row animate-fade-up [animation-delay:340ms]">
-            <NeonButton onClick={() => openChatWidget("quote")}>
+            <NeonButton href="/pay">
               {t.hero.ctaPrimary}
               <ArrowRight className="h-4 w-4" aria-hidden />
             </NeonButton>
