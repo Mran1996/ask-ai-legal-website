@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# Generate Convex security env vars and print set commands (run locally after `npx convex login`).
+# Print Convex security env set commands (dry-run).
+# To apply automatically, use: ./scripts/apply-security-env.sh --prod
 # Usage: ./scripts/setup-security-env.sh [--prod]
 set -euo pipefail
 
