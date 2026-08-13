@@ -47,16 +47,16 @@ export default async function SituationGuidePage({ params }: Props) {
           <div className="container-main max-w-3xl">
             <Link
               href="/"
-              className="inline-flex items-center gap-2 text-sm text-white/60 transition-colors hover:text-gold"
+              className="mb-6 inline-flex min-h-[44px] items-center gap-2.5 rounded-full border-2 border-gold/55 bg-gold/10 px-4 py-3 text-sm font-semibold text-gold transition-colors hover:border-gold hover:bg-gold/15 hover:text-white"
             >
-              <ArrowLeft className="h-4 w-4" aria-hidden />
+              <ArrowLeft className="h-5 w-5 shrink-0" aria-hidden />
               Back to home
             </Link>
-            <p className="firm-label mt-8 text-gold">Situation guide</p>
+            <p className="firm-label text-gold">Situation guide</p>
             <div className="gold-rule mb-6 mt-2" />
             <h1 className="firm-title text-white">{guide.title}</h1>
             <p className="mt-6 text-lg leading-relaxed text-white/70">{guide.intro}</p>
-            <div className="mt-8 flex justify-center">
+            <div className="flex justify-center">
               <HeroCategoryPills />
             </div>
           </div>

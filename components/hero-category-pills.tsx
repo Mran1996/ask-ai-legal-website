@@ -8,7 +8,7 @@ const pillBase =
   "inline-block rounded-full border-2 px-3 py-1.5 text-xs font-medium transition-all duration-300 sm:text-sm"
 
 const pillDefault =
-  "border-gold/35 text-white/85 shadow-[0_0_12px_rgba(197,160,89,0.1)] hover:border-gold/70 hover:text-white hover:shadow-[0_0_22px_rgba(197,160,89,0.28)]"
+  "border-gold/55 bg-white/[0.06] text-white shadow-[0_0_14px_rgba(197,160,89,0.18)] hover:border-gold/80 hover:bg-white/[0.08] hover:shadow-[0_0_22px_rgba(197,160,89,0.28)]"
 
 const pillActive =
   "border-gold bg-gold/10 text-white shadow-[0_0_26px_rgba(197,160,89,0.4)] ring-1 ring-gold/30"
