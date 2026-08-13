@@ -21,9 +21,16 @@ jobs:
           CONVEX_DEPLOY_KEY: ${{ secrets.CONVEX_DEPLOY_KEY }}
         run: ./scripts/apply-security-env.sh --prod
 
-      - name: Print webhook URLs (secrets stay in Convex only)
+      - name: Upload webhook checklist (Cal.com + Resend values)
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: webhook-setup
+          path: security-env.local.txt
+          retention-days: 1
+
+      - name: Print next steps
+        if: success()
         run: |
-          echo "Cal.com webhook URL: https://robust-wombat-16.convex.site/calcom-webhook"
-          echo "Resend inbound URL: https://robust-wombat-16.convex.site/resend-inbound"
-          echo "Retrieve CALCOM_WEBHOOK_SECRET and RESEND_INBOUND_WEBHOOK_SECRET from Convex dashboard → Environment Variables"
-          echo "Then configure Cal.com and Resend dashboards (see docs/CONVEX_SECURITY_SETUP.md)"
+          echo "Download artifact 'webhook-setup' from this workflow run."
+          echo "Paste values into Cal.com and Resend dashboards (see docs/CONVEX_SECURITY_SETUP.md)."
