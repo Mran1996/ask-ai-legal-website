@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react"
 
 type CountUpStatProps = {
   value: number
+  prefix?: string
   suffix?: string
   durationMs?: number
   tickMs?: number
@@ -12,6 +13,7 @@ type CountUpStatProps = {
 
 export function CountUpStat({
   value,
+  prefix = "",
   suffix = "",
   durationMs = 1500,
   tickMs = 40,
@@ -75,6 +77,7 @@ export function CountUpStat({
 
   return (
     <p ref={ref} className={className}>
+      {prefix}
       {display}
       {suffix}
     </p>
@@ -84,6 +87,7 @@ export function CountUpStat({
 export type HeroStatItem = {
   kind: "text" | "count"
   value?: number
+  prefix?: string
   suffix?: string
   display?: string
   label: string

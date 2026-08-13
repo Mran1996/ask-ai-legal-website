@@ -575,7 +575,7 @@ export function CaseDetailView({ opsToken, caseId }: Props) {
 
           <Panel title="Call credits">
             <dl className="grid gap-3 sm:grid-cols-2">
-              <Field label="Case file review paid">
+              <Field label="File review deposit paid">
                 {detail.callCredits.caseFileReviewPaid ? "Yes" : "No"}
               </Field>
               <Field label="Planning calls left">

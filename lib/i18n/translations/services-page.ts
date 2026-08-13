@@ -1,19 +1,19 @@
 /** Services page copy (English). Merged into en.ts as servicesPage. */
-import { CASE_FILE_REVIEW_PRICE_DISPLAY } from "@/lib/site-config"
+import { CASE_FILE_REVIEW_PRICE_DISPLAY, FILE_REVIEW_DEPOSIT_LABEL } from "@/lib/site-config"
 
 export const servicesPageContent = {
   label: "Services",
-  title: "Everything we prepare for your case",
+  title: "Everything we prepare for your situation",
   intro:
     "Ask AI Legal is full-service document preparation — research, planning, drafting, and delivery. We are not a law firm and do not provide legal advice. You review what we prepare and handle any filing or appearance on your own behalf.",
   flow: {
     label: "How it fits together",
     title: "From first review to complete document packages",
     narrative:
-      "Every matter moves through a clear sequence: we understand your situation, map the path forward, research your files and sources, draft your documents, deliver a complete package, and refine until it reflects your case.",
+      "Every matter moves through a clear sequence: we understand your situation, map the path forward, research your files and sources, draft your documents, deliver a complete package, and refine until it reflects your situation accurately.",
     steps: [
-      "Case analysis",
-      "Case roadmap",
+      "Analysis",
+      "Road map",
       "Research",
       "Documents",
       "Delivery",
@@ -36,7 +36,7 @@ export const servicesPageContent = {
     },
     {
       detail:
-        "Once we understand your matter, we build a step-by-step plan tailored to your case — key issues, recommended documents, deadlines to watch, and what to prepare next. This is your roadmap, not a generic checklist from the internet.",
+        "Once we understand your matter, we build a step-by-step plan tailored to your situation — key issues, recommended documents, deadlines to watch, and what to prepare next. This is your roadmap, not a generic checklist from the internet.",
       includes: [
         "Sequential preparation plan",
         "Key issues and priority actions",
@@ -46,7 +46,7 @@ export const servicesPageContent = {
     },
     {
       detail:
-        "We investigate the factual record of your matter — prior filings, procedural history, orders, and evidence references — so every document we draft reflects what actually happened in your case, not assumptions.",
+        "We investigate the factual record of your matter — prior filings, procedural history, orders, and evidence references — so every document we draft reflects what actually happened in your situation, not assumptions.",
       includes: [
         "Review of prior filings and records",
         "Procedural history mapped to your matter",
@@ -66,10 +66,10 @@ export const servicesPageContent = {
     },
     {
       detail:
-        "Every source we use is retrieved from the original publication, stored in your case file, and verified in a separate review pass before it ever appears in your document. Advanced research technology does the heavy lifting; verification makes it complete and accurate.",
+        "Every source we use is retrieved from the original publication, stored in your document file, and verified in a separate review pass before it ever appears in your document. Advanced research technology does the heavy lifting; verification makes it complete and accurate.",
       includes: [
         "Every reference retrieved from source",
-        "Stored in your case file for reference",
+        "Stored in your document file for reference",
         "Verified in a separate review pass",
         "Full reference list delivered with your documents",
       ],
@@ -86,7 +86,7 @@ export const servicesPageContent = {
     },
     {
       detail:
-        "This is the core of what we do: letters, forms, responses, agreements, and supporting paperwork — fully drafted, properly formatted, and structured for your situation. You describe your case; we write the document content.",
+        "This is the core of what we do: letters, forms, responses, agreements, and supporting paperwork — fully drafted, properly formatted, and structured for your situation. You describe your situation; we write the document content.",
       includes: [
         "Full draft of requested documents",
         "Professional formatting and structure",
@@ -106,12 +106,12 @@ export const servicesPageContent = {
     },
     {
       detail:
-        "Need changes after review? Revisions are part of full-service preparation — we refine wording, facts, and structure until the documents accurately reflect your case. No hourly meter running in the background.",
+        "Need changes after review? Revisions are part of full-service preparation — we refine wording, facts, and structure until the documents accurately reflect your situation. No hourly meter running in the background.",
       includes: [
         "Revisions within your quoted scope",
         "Fact and argument refinements",
         "Formatting adjustments",
-        "Follow-up until documents match your case",
+        "Follow-up until documents match your situation",
       ],
     },
   ],
@@ -121,8 +121,8 @@ export const servicesPageContent = {
   },
   cta: {
     title: "Ready to see what we can prepare for you?",
-    body: `Start with a flat ${CASE_FILE_REVIEW_PRICE_DISPLAY} case file review. You'll get a plain-English written summary and one flat price for the documents your situation needs — credited in full toward your total.`,
-    button: "Start my case file review",
+    body: `Start with a flat ${CASE_FILE_REVIEW_PRICE_DISPLAY} ${FILE_REVIEW_DEPOSIT_LABEL.toLowerCase()}. You'll get a plain-English written summary and one flat price for the documents your situation needs — credited in full toward your total.`,
+    button: "Start my file review",
   },
   homeLink: "Learn more about our services",
 }

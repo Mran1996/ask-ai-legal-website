@@ -31,7 +31,7 @@ const KPI_PLACEHOLDERS = [
   {
     label: "Paid $499",
     value: "—",
-    hint: "Case file review",
+    hint: "File review deposit",
     icon: TrendingUp,
   },
 ] as const

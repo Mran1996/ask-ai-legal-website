@@ -33,7 +33,7 @@ export default function PrivacyPolicyPage() {
       <ul>
         <li>Name, email address, phone number, and mailing address;</li>
         <li>
-          Details about your legal matter, including case type, jurisdiction, parties,
+          Details about your legal matter, including matter type, jurisdiction, parties,
           deadlines, and narrative descriptions;
         </li>
         <li>Documents, filings, correspondence, and other materials you upload or send us;</li>
@@ -68,7 +68,7 @@ export default function PrivacyPolicyPage() {
 
       <h2>3. Sensitive information</h2>
       <p>
-        Information about legal matters may be sensitive. We handle case-related information
+        Information about legal matters may be sensitive. We handle matter-related information
         with care and restrict internal access to personnel who need it to perform the
         Services. Because we are a document preparation service — not a law firm — information
         you share with us is <strong>not protected by attorney-client privilege</strong>.

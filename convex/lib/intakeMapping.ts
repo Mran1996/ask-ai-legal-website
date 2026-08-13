@@ -21,7 +21,7 @@ export function validateIntakeForm(args: IntakeFormArgs): void {
     throw new Error("A valid email address is required")
   }
   if (!args.caseType?.trim()) {
-    throw new Error("Please select a case type so we can show the right price for your matter")
+    throw new Error("Please select a matter type so we can show the right price for your situation")
   }
   if (args.issue.trim().length < 10) {
     throw new Error("Please describe your issue in at least 10 characters")

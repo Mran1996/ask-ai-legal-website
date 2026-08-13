@@ -3,19 +3,19 @@ import type { IntakeFormData } from "./types"
 
 export function buildIntakeMailto(data: IntakeFormData): string {
   const subject = encodeURIComponent(
-    `Case review request — ${data.firstName} ${data.lastName}`.trim() || "Case review request"
+    `Document review request — ${data.firstName} ${data.lastName}`.trim() || "Document review request"
   )
 
   const bodyLines = [
     "Hello Ask AI Legal,",
     "",
-    "I would like a free case review and custom quote.",
+    "I would like a free document review and custom quote.",
     "",
     `Name: ${data.firstName} ${data.lastName}`.trim(),
     `Email: ${data.email}`,
     `Phone: ${data.phone || "Not provided"}`,
     `State / jurisdiction: ${data.state || "Not provided"}`,
-    `Case type: ${data.caseType || "Not specified"}`,
+    `Matter type: ${data.caseType || "Not specified"}`,
     `Preferred language: ${data.preferredLanguage || "Not specified"}`,
     `Preferred contact: ${data.preferredContact || "Either"}`,
     `Deadline / urgency: ${data.deadline || "Not specified"}`,

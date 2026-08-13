@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     "document preparation service",
     "divorce paperwork help",
     "custody documents",
-    "civil case document preparation",
+    "civil matter document preparation",
     "flat fee documents",
     "self represented litigant",
   ],

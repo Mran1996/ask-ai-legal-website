@@ -46,7 +46,7 @@ export default function DocumentPreparationAgreementPage() {
           </p>
           <p>
             <strong>Your responsibilities.</strong> Provide complete and truthful information;
-            return intake forms promptly; keep your case reference (AAL-…) in email subjects; and
+            return intake forms promptly; keep your file reference (AAL-…) in email subjects; and
             tell us immediately if facts change.
           </p>
           <p>

@@ -136,7 +136,7 @@ export function detectIntakeGaps(input: GapAssessmentInput): GapQuestion[] {
     gaps.push({
       id: "attachments",
       question:
-        "Please reply to this email with copies of your key papers attached (notices, complaint/summons, lease, prior filings). Keep your case reference in the subject line.",
+        "Please reply to this email with copies of your key papers attached (notices, complaint/summons, lease, prior filings). Keep your file reference in the subject line.",
     })
   }
 

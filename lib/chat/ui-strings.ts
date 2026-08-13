@@ -101,8 +101,8 @@ const en: ChatUiStrings = {
   notLegalAdvice: "Not legal advice · Document generation only · Not a law firm",
   emailSupport: "Email support@askailegal.com",
   emailSupportHint: "Attach documents so we can review your situation and send a custom quote.",
-  requestQuote: "Request a free case review",
-  quoteTitle: "Tell us about your case",
+  requestQuote: "Request a free document review",
+  quoteTitle: "Tell us about your situation",
   quoteHint:
     "Submit intake so we can email a personalized form, then a written quote, contract, and invoice. Document preparation only — not a law firm.",
   firstName: "First name",
@@ -110,8 +110,8 @@ const en: ChatUiStrings = {
   email: "Email",
   phone: "Phone",
   state: "State / jurisdiction",
-  stateHint: "Select your state — we'll show a local average for your case type.",
-  caseType: "Case type",
+  stateHint: "Select your state — we'll show a local average for your matter type.",
+  caseType: "Matter type",
   issue: "Describe your issue",
   deadline: "Deadline or urgency (optional)",
   opposingParty: "Opposing party (optional)",
@@ -129,22 +129,22 @@ const en: ChatUiStrings = {
     "Next we'll email a personalized intake form. After that you'll receive a written quote, contract, and invoice by email. Document preparation only — not legal advice. Nothing is filed by us.",
   bookIntakeCall: "Book your intake call",
   bookIntakeCallHint: "15–20 min · document preparation and pricing only",
-  caseNumberLabel: "Case / docket number (if you have it)",
+  caseNumberLabel: "Court / docket number (if you have it)",
   caseNumberHint: "Optional but helps us work faster. Leave blank if you don't have one yet.",
   retrievalCheckbox: "I need Ask AI Legal to retrieve documents (additional fee — quoted before we pull records).",
   retrievalFeeNote: "Retrieval is never free unpaid work. We'll include it on your emailed quote if needed.",
   saveDetails: "Save details & finish",
   savingDetails: "Saving…",
-  detailsSaved: "Saved. Watch your email for your personalized form (case reference in the subject).",
+  detailsSaved: "Saved. Watch your email for your personalized form (file reference in the subject).",
   uploadMoreDocs: "Upload documents now",
   quoteNextSteps:
     "Order: intake → personalized email form → written quote + contract + invoice by email → pay → we work → deliver.",
   intakeSubmitError:
     "We couldn't save your intake. Please try again or email support@askailegal.com with your details.",
   detailsSaveError:
-    "We couldn't save those details. Your intake was already received — try again or email support@askailegal.com with your case reference.",
+    "We couldn't save those details. Your intake was already received — try again or email support@askailegal.com with your file reference.",
   detailsUploadError:
-    "We couldn't upload that file. Try a smaller PDF/JPG/PNG, or email it to support@askailegal.com with your case reference.",
+    "We couldn't upload that file. Try a smaller PDF/JPG/PNG, or email it to support@askailegal.com with your file reference.",
   submitAnother: "Submit another request",
   conversationTitle: "Your conversation",
   submittedInfoTitle: "What you submitted",
@@ -161,7 +161,7 @@ const en: ChatUiStrings = {
   estimateServiceLine: "Service",
   estimateDisclaimer:
     "Planning estimate only — not a bill. Typical attorney range is a market reference for your state/matter. Ask AI Legal quote is document-prep only. Final package price is confirmed after Part 1 review. Not legal advice.",
-  fillRequired: "Please fill in name, email, case type, and a brief issue description.",
+  fillRequired: "Please fill in name, email, matter type, and a brief issue description.",
   uploadNote:
     "Optional: attach court papers, notices, or leases (PDF, JPG, PNG — up to 10 MB each).",
   uploadFiles: "Attach documents",

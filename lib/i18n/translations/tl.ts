@@ -2,7 +2,7 @@ import { mergeTranslations } from "../merge-translations"
 
 export const tl = mergeTranslations({
   nav: {
-    freeReview: "Libreng case review",
+    freeReview: "Libreng document review",
     help: "Tulong",
     about: "Tungkol sa amin",
     services: "Serbisyo",
@@ -19,7 +19,7 @@ export const tl = mergeTranslations({
     titleHighlight: "ginawa",
     titleLine2: "para sa iyong kaso.",
     body: "Nagsasaliksik, nagsusulat, at naghahatid kami — ikaw ang magre-review at magfa-file. Walang hourly billing.",
-    ctaPrimary: "Email para sa libreng case review",
+    ctaPrimary: "Email para sa libreng document review",
     ctaSecondary: "Tingnan ang pagkakaiba",
     stat1Value: "Custom",
     stat1Label: "Quote bawat kaso",
@@ -34,7 +34,7 @@ export const tl = mergeTranslations({
   cta: {
     label: "Magsimula ngayon",
     title: "Karapat-dapat ang iyong kaso sa pinakamahusay na paghahanda",
-    body: "Mag-email para sa libreng case review — walang obligasyon.",
+    body: "Mag-email para sa libreng document review — walang obligasyon.",
     emailConsult: "Email para sa libreng konsultasyon",
     emailQuote: "Email para sa quote",
     disclaimer: "Hindi law firm · Pagbuo ng dokumento lamang",

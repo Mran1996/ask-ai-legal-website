@@ -7,7 +7,7 @@ type DemoStep = "chat" | "upload" | "generate" | "done"
 
 const chatMessages = [
   { role: "user" as const, text: "I need a motion to dismiss for lack of probable cause." },
-  { role: "ai" as const, text: "What jurisdiction is your case in, and what was the basis for the stop?" },
+  { role: "ai" as const, text: "What jurisdiction is your matter in, and what was the basis for the stop?" },
   { role: "user" as const, text: "California. Traffic stop — taillight was out." },
 ]
 

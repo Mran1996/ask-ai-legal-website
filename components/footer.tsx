@@ -29,8 +29,8 @@ export function Footer() {
       title: columns.services,
       links: [
         { label: links.allServices, href: "/services" },
-        { label: links.caseRoadmap, href: `/services#${serviceSlug("Case roadmap")}` },
-        { label: links.caseResearch, href: `/services#${serviceSlug("Case research")}` },
+        { label: links.caseRoadmap, href: `/services#${serviceSlug("Road map")}` },
+        { label: links.caseResearch, href: `/services#${serviceSlug("Document research")}` },
         { label: links.legalResearch, href: `/services#${serviceSlug("In-depth research")}` },
         { label: links.outcomeAnalysis, href: `/services#${serviceSlug("Source verification")}` },
         { label: links.hearingPrep, href: `/services#${serviceSlug("Hearing preparation")}` },

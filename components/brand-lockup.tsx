@@ -39,8 +39,8 @@ export function BrandLockup({
       className={
         taglineClassName ??
         (isHeader
-          ? "mt-0.5 text-[8px] font-medium uppercase leading-snug tracking-[0.2em] text-navy/65 sm:text-[9px]"
-          : "mt-4 max-w-2xl text-sm font-medium uppercase leading-relaxed tracking-[0.22em] text-gold-light sm:mt-5 md:text-lg md:tracking-[0.26em]")
+          ? "mt-0.5 text-[8px] font-medium leading-snug tracking-[0.12em] text-navy/65 sm:text-[9px]"
+          : "mt-4 max-w-2xl text-sm font-medium italic leading-relaxed tracking-[0.06em] text-gold-light sm:mt-5 md:text-lg md:tracking-[0.08em]")
       }
     >
       {SITE_TAGLINE}

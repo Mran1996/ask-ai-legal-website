@@ -70,7 +70,7 @@ export default function TermsOfServicePage() {
 
       <h2>5. Services and deliverables</h2>
       <p>
-        Depending on your matter, our services may include case research, document drafting,
+        Depending on your matter, our services may include document research, document drafting,
         formatting, citation support, and revision rounds within the agreed scope. The specific
         deliverables for your matter will be listed in your accepted quote or written service
         agreement. We generate documents only.
@@ -80,7 +80,7 @@ export default function TermsOfServicePage() {
         <li>Appear in court or at hearings on your behalf;</li>
         <li>File documents with any court or agency as your representative;</li>
         <li>Negotiate with opposing parties or counsel;</li>
-        <li>Provide ongoing representation or monitoring of your case; or</li>
+        <li>Provide ongoing representation or monitoring of your matter; or</li>
         <li>Guarantee any particular outcome in your matter.</li>
       </ul>
 
@@ -89,7 +89,7 @@ export default function TermsOfServicePage() {
       <ul>
         <li>Provide truthful, complete, and timely information and documents;</li>
         <li>Review all deliverables carefully before filing or using them;</li>
-        <li>Meet any court deadlines and procedural rules applicable to your case;</li>
+        <li>Meet any court deadlines and procedural rules applicable to your matter;</li>
         <li>Notify us promptly if facts change in a way that could affect prepared materials;</li>
         <li>
           Obtain independent legal advice when your matter requires it, including for questions

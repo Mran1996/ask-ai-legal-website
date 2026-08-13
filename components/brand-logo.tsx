@@ -1,5 +1,5 @@
 import Image from "next/image"
-import { SITE_BRAND_NAME, SITE_LOGO_LOCKUP, SITE_LOGO_MARK } from "@/lib/site-config"
+import { SITE_BRAND_NAME, SITE_LOGO_LOCKUP, SITE_LOGO_MARK, SITE_TAGLINE } from "@/lib/site-config"
 
 type BrandLogoProps = {
   /** Square mark size in px (circular logo). */
@@ -34,7 +34,7 @@ export function BrandLogoLockup({ className = "", width = 240 }: BrandLogoLockup
   return (
     <Image
       src={SITE_LOGO_LOCKUP}
-      alt={`${SITE_BRAND_NAME} — Know your case. Own your case.`}
+      alt={`${SITE_BRAND_NAME} — ${SITE_TAGLINE}`}
       width={width}
       height={height}
       className={`h-auto w-auto max-w-full ${className}`}

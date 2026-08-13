@@ -6,13 +6,13 @@ import { Footer } from "@/components/footer"
 import { PaySuccessPurchase } from "@/components/analytics/pay-success-purchase"
 import {
   CASE_FILE_REVIEW_PRICE_DISPLAY,
+  FILE_REVIEW_DEPOSIT_LABEL,
   SITE_URL,
   SUPPORT_EMAIL,
 } from "@/lib/site-config"
 
 const TITLE = "Payment received"
-const DESCRIPTION =
-  "Your case file review deposit was received. We will email your document plan and flat-fee quote."
+const DESCRIPTION = `Your ${FILE_REVIEW_DEPOSIT_LABEL.toLowerCase()} was received. We will email your document plan and flat-fee quote.`
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -47,14 +47,14 @@ export default function PaySuccessPage() {
                 Thank you for your deposit
               </h1>
               <p className="mx-auto mt-4 max-w-sm text-base leading-relaxed text-white/70">
-                Your {CASE_FILE_REVIEW_PRICE_DISPLAY} case file review deposit was received. It
-                is fully credited toward your document preparation package.
+                Your {CASE_FILE_REVIEW_PRICE_DISPLAY} {FILE_REVIEW_DEPOSIT_LABEL.toLowerCase()} was
+                received. It is fully credited toward your document preparation package.
               </p>
 
               <div className="mt-8 rounded-sm border border-white/10 bg-white/5 px-5 py-5 text-left">
                 <p className="text-sm font-semibold text-white">What happens next</p>
                 <ul className="mt-3 space-y-2.5 text-sm leading-relaxed text-white/70">
-                  <li>We review your case file and intake details.</li>
+                  <li>We review your documents and intake details.</li>
                   <li>You receive a written document plan and flat-fee quote by email.</li>
                   <li>No hourly billing — you approve the quote before we prepare documents.</li>
                 </ul>
