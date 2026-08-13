@@ -1,10 +1,13 @@
 /** Canonical production URL — used for metadataBase, canonical links, sitemap, and JSON-LD. */
 export const SITE_URL = "https://askailegal.com"
 
+/** Meta / Facebook Page ID — canonical ad-eligible page ("Ask AI Legal"). */
+export const META_FACEBOOK_PAGE_ID = "971753329348819"
+
 /** Site-wide links — canonical ask-ai-legal-website app */
 export const SOCIAL_LINKS = {
   instagram: "https://www.instagram.com/askailegal/",
-  facebook: "https://www.facebook.com/profile.php?id=61585772484354",
+  facebook: `https://www.facebook.com/profile.php?id=${META_FACEBOOK_PAGE_ID}`,
 } as const
 
 export const SUPPORT_EMAIL = "support@askailegal.com"

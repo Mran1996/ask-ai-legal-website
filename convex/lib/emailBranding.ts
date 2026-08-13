@@ -1,8 +1,11 @@
 /** Shared branding for outbound Resend client emails (UPL-safe). */
 
+/** Must match META_FACEBOOK_PAGE_ID in lib/site-config.ts */
+const META_FACEBOOK_PAGE_ID = "971753329348819"
+
 export const SUPPORT_EMAIL = "support@askailegal.com"
 export const INSTAGRAM_URL = "https://www.instagram.com/askailegal/"
-export const FACEBOOK_URL = "https://www.facebook.com/profile.php?id=61585772484354"
+export const FACEBOOK_URL = `https://www.facebook.com/profile.php?id=${META_FACEBOOK_PAGE_ID}`
 
 export function publicSiteUrl(): string {
   return (process.env.PUBLIC_SITE_URL ?? "https://askailegal.com").replace(/\/$/, "")
