@@ -9,6 +9,7 @@ import { useLanguage } from "@/components/language-provider"
 import { openChatWidget } from "@/lib/chat/open-chat"
 import { CASE_FILE_REVIEW_PRICE_USD } from "@/lib/site-config"
 import { CountUpStat, type HeroStatItem } from "@/components/count-up-stat"
+import { HeroCategoryPills } from "@/components/hero-category-pills"
 
 export function HeroSection() {
   const { t } = useLanguage()
@@ -47,7 +48,7 @@ export function HeroSection() {
             className="animate-fade-up justify-center px-4 py-2 sm:py-3"
           />
 
-          <h1 className="firm-title mt-10 text-white animate-fade-up [animation-delay:180ms] sm:mt-12">
+          <h1 className="firm-title mt-2 text-white animate-fade-up [animation-delay:180ms] sm:mt-3">
             {t.hero.titleLine1}
             <br />
             <span className="text-gradient-gold italic">{t.hero.titleHighlight}</span>
@@ -58,15 +59,7 @@ export function HeroSection() {
             {t.hero.body}
           </p>
 
-          <ul className="mt-8 flex flex-wrap items-center justify-center gap-2 animate-fade-up [animation-delay:300ms]">
-            {t.hero.categories.map((category) => (
-              <li key={category}>
-                <span className="inline-block rounded-full border border-white/25 px-3 py-1.5 text-xs font-medium text-white/80 sm:text-sm">
-                  {category}
-                </span>
-              </li>
-            ))}
-          </ul>
+          <HeroCategoryPills />
 
           <div className="mt-10 flex w-full flex-col items-center justify-center gap-4 sm:flex-row animate-fade-up [animation-delay:340ms]">
             <NeonButton onClick={() => openChatWidget("quote")}>
