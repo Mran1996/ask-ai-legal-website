@@ -7,8 +7,8 @@ const http = httpRouter()
 function webhookAuthorized(request: Request): boolean {
   const secret = process.env.CALCOM_WEBHOOK_SECRET
   if (!secret) {
-    console.warn("CALCOM_WEBHOOK_SECRET not set — accepting webhook (configure for production)")
-    return true
+    console.error("CALCOM_WEBHOOK_SECRET not set — rejecting webhook")
+    return false
   }
 
   const auth = request.headers.get("authorization")
@@ -77,12 +77,15 @@ http.route({
   method: "POST",
   handler: httpAction(async (ctx, request) => {
     const secret = process.env.RESEND_INBOUND_WEBHOOK_SECRET
-    if (secret) {
-      const auth = request.headers.get("authorization")
-      const headerSecret = request.headers.get("x-resend-inbound-secret")
-      if (auth !== `Bearer ${secret}` && headerSecret !== secret) {
-        return new Response("Unauthorized", { status: 401 })
-      }
+    if (!secret) {
+      console.error("RESEND_INBOUND_WEBHOOK_SECRET not set — rejecting inbound email")
+      return new Response("Unauthorized", { status: 401 })
+    }
+
+    const auth = request.headers.get("authorization")
+    const headerSecret = request.headers.get("x-resend-inbound-secret")
+    if (auth !== `Bearer ${secret}` && headerSecret !== secret) {
+      return new Response("Unauthorized", { status: 401 })
     }
 
     let body: unknown

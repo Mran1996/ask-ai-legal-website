@@ -19,9 +19,31 @@ export async function getCurrentUser(ctx: QueryCtx | MutationCtx): Promise<AuthU
   }
 }
 
+function counselEmailAllowlist(): Set<string> {
+  const raw = process.env.COUNSEL_EMAILS ?? ""
+  return new Set(
+    raw
+      .split(",")
+      .map((entry) => entry.trim().toLowerCase())
+      .filter(Boolean)
+  )
+}
+
 /** Phase 1.7: replace allowlist with staffMembers table lookup. */
 export async function requireCounselUser(ctx: QueryCtx | MutationCtx): Promise<AuthUser> {
   const user = await getCurrentUser(ctx)
-  // Stub: authenticated users pass until Clerk + staff roles ship in Phase 1.7.
+  const allowlist = counselEmailAllowlist()
+
+  if (allowlist.size === 0) {
+    throw new Error(
+      "Counsel access is not configured (set COUNSEL_EMAILS in Convex env)"
+    )
+  }
+
+  const email = user.email?.trim().toLowerCase()
+  if (!email || !allowlist.has(email)) {
+    throw new Error("Unauthorized: counsel access required")
+  }
+
   return user
 }

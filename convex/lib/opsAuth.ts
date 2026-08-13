@@ -1,3 +1,5 @@
+import { secureCompare } from "./secureCompare"
+
 /** Normalize pasted/env tokens (quotes, BOM, zero-width, env-key prefix). */
 export function normalizeOpsToken(raw: string): string {
   let s = raw.replace(/^\uFEFF/, "").trim()
@@ -22,7 +24,7 @@ export function assertOpsToken(provided: string): void {
   if (!expected || expected.length < 8) {
     throw new Error("Ops access is not configured (set OPS_ACCESS_TOKEN in Convex env)")
   }
-  if (got !== expected) {
+  if (!secureCompare(got, expected)) {
     throw new Error("Unauthorized")
   }
 }
@@ -40,10 +42,11 @@ export function checkOpsToken(
         "OPS_ACCESS_TOKEN is not set on this Convex deployment. From the marketing repo run: npx convex env set OPS_ACCESS_TOKEN \"…\"",
     }
   }
-  if (got !== expected) {
+  if (!secureCompare(got, expected)) {
     return {
       ok: false,
-      reason: `Token does not match (you pasted ${got.length} chars; Convex expects ${expected.length}). Paste the exact value from: npx convex env get OPS_ACCESS_TOKEN — no quotes, no OPS_ACCESS_TOKEN= prefix.`,
+      reason:
+        "Token does not match. Paste the exact value from: npx convex env get OPS_ACCESS_TOKEN — no quotes, no OPS_ACCESS_TOKEN= prefix.",
     }
   }
   return { ok: true }
