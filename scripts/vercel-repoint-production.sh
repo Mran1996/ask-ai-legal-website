@@ -10,7 +10,7 @@ cd "$ROOT"
 TEAM_SCOPE="${VERCEL_TEAM_SCOPE:-sylaspuri-gmailcoms-projects}"
 PROJECT="${VERCEL_PROJECT:-ask-ai-legal-deployment-4}"
 REPO_URL="https://github.com/Mran1996/ask-ai-legal-website"
-PIXEL_ID="752947684580174"
+PIXEL_ID="776368482218917"
 
 SCOPE_ARGS=(-S "$TEAM_SCOPE")
 
