@@ -4,7 +4,6 @@ import { ArrowRight, FileSearch } from "lucide-react"
 import { PaperShaderBackground } from "@/components/paper-shader-background"
 import { NeonButton } from "@/components/neon-button"
 import { useLanguage } from "@/components/language-provider"
-import { openChatWidget } from "@/lib/chat/open-chat"
 
 export function ValueComparison() {
   const { t } = useLanguage()
@@ -52,7 +51,7 @@ export function ValueComparison() {
                 <li key={item}>· {item}</li>
               ))}
             </ul>
-            <NeonButton onClick={() => openChatWidget("quote")} className="btn-neon mt-8 inline-flex w-full sm:w-auto">
+            <NeonButton href="/pay" className="btn-neon mt-8 inline-flex w-full sm:w-auto">
               <FileSearch className="h-4 w-4 shrink-0" aria-hidden />
               <span>{t.compare.cta}</span>
               <ArrowRight className="h-4 w-4 shrink-0" aria-hidden />

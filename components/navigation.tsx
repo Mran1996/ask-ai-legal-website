@@ -7,7 +7,6 @@ import { useEffect, useMemo, useState } from "react"
 import { BrandLockup } from "@/components/brand-lockup"
 import { LanguageSelector } from "@/components/language-selector"
 import { useLanguage } from "@/components/language-provider"
-import { openChatWidget } from "@/lib/chat/open-chat"
 import { SUPPORT_EMAIL, SUPPORT_MAILTO } from "@/lib/site-config"
 
 function isLinkActive(pathname: string, href: string) {
@@ -128,14 +127,10 @@ export function Navigation() {
 
         <div className="ml-auto flex shrink-0 items-center gap-2 sm:gap-3 lg:ml-0">
           <LanguageSelector compact />
-          <button
-            type="button"
-            onClick={() => openChatWidget("quote")}
-            className="header-call-pill hidden sm:inline-flex"
-          >
+          <Link href="/pay" className="header-call-pill hidden sm:inline-flex">
             <FileSearch className="h-3.5 w-3.5 shrink-0" aria-hidden />
             <span>{t.nav.emailForReview}</span>
-          </button>
+          </Link>
 
           <Link href="/pay" className="btn-pay-pill hidden xl:inline-flex">
             <CreditCard className="h-3.5 w-3.5 shrink-0" aria-hidden />
@@ -173,17 +168,14 @@ export function Navigation() {
               </li>
             ))}
           </ul>
-          <button
-            type="button"
-            onClick={() => {
-              setOpen(false)
-              openChatWidget("quote")
-            }}
+          <Link
+            href="/pay"
+            onClick={() => setOpen(false)}
             className="header-call-pill mt-4 w-full justify-center py-3"
           >
             <FileSearch className="h-4 w-4" aria-hidden />
             <span>{t.nav.emailForReview}</span>
-          </button>
+          </Link>
           <Link
             href="/pay"
             onClick={() => setOpen(false)}

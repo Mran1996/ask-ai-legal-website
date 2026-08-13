@@ -4,7 +4,6 @@ import { ArrowRight, Check, Shield } from "lucide-react"
 import { NeonButton } from "@/components/neon-button"
 import { useLanguage } from "@/components/language-provider"
 import { SERVICE_ICONS, serviceSlug } from "@/lib/service-icons"
-import { openChatWidget } from "@/lib/chat/open-chat"
 
 export function ServicesPageContent() {
   const { t } = useLanguage()
@@ -123,7 +122,7 @@ export function ServicesPageContent() {
         <div className="container-main mx-auto max-w-2xl text-center">
           <h2 className="firm-title text-white">{page.cta.title}</h2>
           <p className="mt-5 text-lg leading-relaxed text-white/70">{page.cta.body}</p>
-          <NeonButton onClick={() => openChatWidget("quote")} className="mt-8 inline-flex">
+          <NeonButton href="/pay" className="mt-8 inline-flex">
             {page.cta.button}
             <ArrowRight className="h-4 w-4" aria-hidden />
           </NeonButton>
