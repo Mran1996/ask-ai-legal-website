@@ -18,10 +18,12 @@ export function ValueComparison() {
           <div className="mx-auto mb-8 h-px w-12 bg-accent/60" />
           <h2 className="firm-title mx-auto max-w-3xl">
             {t.compare.titleLine1}{" "}
-            <span className="text-gradient-accent italic">{t.compare.titleHighlight}</span>{" "}
-            {t.compare.titleLine2}
+            <span className="text-gradient-accent italic">{t.compare.titleHighlight}</span>
+            {t.compare.titleLine2 ? <> {t.compare.titleLine2}</> : null}
           </h2>
-          <p className="mx-auto mt-5 max-w-xl text-white/60">{t.compare.subtitle}</p>
+          {t.compare.subtitle ? (
+            <p className="mx-auto mt-5 max-w-xl text-white/60">{t.compare.subtitle}</p>
+          ) : null}
         </div>
 
         <div className="mx-auto mt-16 grid max-w-4xl gap-6 sm:grid-cols-2">

@@ -3,7 +3,7 @@ import { CASE_FILE_REVIEW_PRICE_DISPLAY as REVIEW_PRICE } from "@/lib/site-confi
 
 export const en = {
   nav: {
-    freeReview: "Case file review",
+    freeReview: "Situation file review",
     help: "Help",
     about: "About",
     services: "Services",
@@ -12,22 +12,30 @@ export const en = {
     process: "Process",
     faq: "FAQ",
     contact: "Contact",
-    emailForReview: `Case file review — ${REVIEW_PRICE}`,
+    emailForReview: `Situation file review — ${REVIEW_PRICE}`,
     language: "Language",
   },
   hero: {
-    slogan: "Know your case. Own your case.",
-    titleLine1: "You paid the retainer.",
-    titleHighlight: "Do you know",
-    titleLine2: "what's in your case file?",
-    body: `Full document preparation service for people handling important paperwork on their own — any issue, any jurisdiction. Start with a flat ${REVIEW_PRICE} case file review. We email you a written summary with your exact price, usually within 72 hours — credited in full toward your documents.`,
-    ctaPrimary: `Start my case file review — ${REVIEW_PRICE}`,
+    slogan: "Know your situation. Own your situation.",
+    titleLine1: "Help — without the",
+    titleHighlight: "$10,000 retainer.",
+    titleLine2: "",
+    body: "Whatever you're facing — divorce, custody, a dispute, an unfair notice — we prepare the documents your situation needs, for a fraction of what a lawyer's retainer costs. Plain language. Private. On your side.",
+    categories: [
+      "Divorce & separation",
+      "Custody & family",
+      "Housing",
+      "Civil disputes",
+      "Small claims",
+      "& more",
+    ],
+    ctaPrimary: "Get help today",
     ctaSecondary: "See how it works",
     stat1Value: REVIEW_PRICE,
-    stat1Label: "Case file review",
+    stat1Label: "Situation file review",
     stat1Sub: "Credited toward your documents",
     stat2Value: "72 hrs",
-    stat2Label: "Your written case summary",
+    stat2Label: "Your written situation summary",
     stat2Sub: "After all documents are received — usually within 72 hours",
     stat3Value: "1",
     stat3Label: "Flat quote",
@@ -35,7 +43,7 @@ export const en = {
   },
   services: {
     label: "What we handle for you",
-    titleLine1: "You describe your case.",
+    titleLine1: "You describe your situation.",
     titleLine2: "We do everything else.",
     intro:
       "This isn't a DIY template library. We research, draft, format, and deliver your documents — the written work only. We generate documents; we do not file on your behalf or represent you.",
@@ -44,19 +52,19 @@ export const en = {
       "Ask AI Legal generates documents only. We are not a law firm and do not provide legal advice.",
     items: [
       {
-        title: "Case analysis",
+        title: "Analysis",
         description:
           "We review your situation, outline the documents you need, and map the order to prepare them — before a single word is drafted.",
       },
       {
-        title: "Case roadmap",
+        title: "Road map",
         description:
           "A step-by-step plan for your matter — key issues, recommended documents, and what to prepare next. Built from your facts, not a generic template.",
       },
       {
-        title: "Case research",
+        title: "Situation research",
         description:
-          "We dig into the facts, filings, and procedural history of your matter so every document is built on what actually happened in your case.",
+          "We dig into the facts, filings, and procedural history of your matter so every document is built on what actually happened in your situation.",
       },
       {
         title: "In-depth research",
@@ -66,7 +74,7 @@ export const en = {
       {
         title: "Source verification",
         description:
-          "Every source we use is retrieved from the original publication, stored in your case file, and verified in a separate review pass before it appears in your documents — never invented, never guessed.",
+          "Every source we use is retrieved from the original publication, stored in your situation file, and verified in a separate review pass before it appears in your documents — never invented, never guessed.",
       },
       {
         title: "Hearing preparation",
@@ -85,23 +93,23 @@ export const en = {
       },
       {
         title: "Revision & refinement",
-        description: "Need changes? We revise until your documents reflect your case exactly. No hourly clock running.",
+        description: "Need changes? We revise until your documents reflect your situation exactly. No hourly clock running.",
       },
     ],
   },
   servicesPage: servicesPageContent,
   compare: {
     label: "The difference",
-    titleLine1: "The retainer trap —",
-    titleHighlight: "solved",
-    titleLine2: "with a two-step flat fee",
-    subtitle: `A ${REVIEW_PRICE} case file review, then one flat quote for exactly what your case needs. No hourly clock, ever.`,
+    titleLine1: "Why pay $10,000 up front",
+    titleHighlight: "to be kept in the dark?",
+    titleLine2: "",
+    subtitle: `A ${REVIEW_PRICE} situation file review, then one flat quote for exactly what your situation needs. No hourly clock, ever.`,
     traditionalHeading: "The retainer trap",
     traditionalPrice: "$3,000–$10,000 retainer",
-    traditionalDesc: "Drawn down hourly, whether or not the work moves your case forward",
+    traditionalDesc: "Drawn down hourly, whether or not the work moves your situation forward",
     traditionalBullets: [
       "Weeks waiting for callbacks",
-      "You may never see an analysis of your own case file",
+      "You may never see an analysis of your own situation file",
       "Costs grow with every call and every email",
     ],
     usBadge: "Ask AI Legal",
@@ -109,16 +117,18 @@ export const en = {
     usPrice: `${REVIEW_PRICE} to start`,
     usDesc: "Credited in full toward your document package",
     usBullets: [
-      `${REVIEW_PRICE} case file review — credited toward your documents`,
-      "One flat quote after your written case summary, no hourly billing",
+      `${REVIEW_PRICE} situation file review — credited toward your documents`,
+      "One flat quote after your written situation summary, no hourly billing",
       "Every source retrieved, stored, and verified",
     ],
-    cta: "Start my case file review",
+    cta: "Start my situation file review",
     usCompareLabel: "Ask AI Legal",
     traditionalCompareLabel: "Traditional",
     highlightsLabel: "Services we offer",
-    highlightsTitle: "Four pillars of every case",
-    highlightsIntro: "Tap a card to flip and explore what we deliver with every case.",
+    highlightsTitleLine1: "",
+    highlightsTitleGold: "",
+    highlightsTitle: "Four pillars of every situation",
+    highlightsIntro: "Tap a card to flip and explore what we deliver with every situation.",
     highlights: [
       {
         title: "Full document preparation",
@@ -136,7 +146,7 @@ export const en = {
         title: "Source verification",
         summary: "Every reference retrieved and checked twice",
         detail:
-          "Every source we use is pulled from the original publication, stored in your case file, and verified in a separate review pass before it reaches your draft — never invented, never guessed.",
+          "Every source we use is pulled from the original publication, stored in your situation file, and verified in a separate review pass before it reaches your draft — never invented, never guessed.",
       },
       {
         title: "Transparent quote",
@@ -147,38 +157,36 @@ export const en = {
     ],
   },
   process: {
-    label: "Our process",
-    title: "Two payments. No hourly clock. Ever.",
-    cta: "Start my case file review",
+    label: "How it works",
+    title: "Three simple steps. No hourly clock.",
+    titleLine1: "Three simple steps.",
+    titleHighlight: "No hourly clock.",
+    cta: "Get help today",
     steps: [
       {
-        title: "Tell us your case",
-        body: "Share your situation in plain language and upload what you have. We ask the right questions — you never touch confusing paperwork language.",
+        title: "Tell us what's going on",
+        body: "Share your situation in plain language and upload what you have. We ask the right questions — you never touch confusing paperwork.",
       },
       {
-        title: `${REVIEW_PRICE} case file review`,
-        body: `We review your case file and email you a plain-English written summary of your situation — what's missing, what documents you need, and your exact price — usually within 72 hours. The ${REVIEW_PRICE} is credited in full toward your documents.`,
+        title: "Get answers you understand",
+        body: "We email you a written summary: where you stand, the documents you need, and one flat price — usually within 72 hours.",
       },
       {
-        title: "One flat quote",
-        body: "Your written summary ends with a single recommendation and one flat price for the documents your situation needs. No hourly surprises.",
-      },
-      {
-        title: "Complete document delivery",
-        body: "We research, draft, and verify every reference, then deliver your complete document package. You review and use the documents yourself.",
+        title: "We prepare your documents",
+        body: "We research, draft, and format everything your situation needs, ready for your review. You stay in control of every next step.",
       },
     ],
   },
   testimonials: {
-    titleWhite: "What customers say ",
-    titleGold: "about us",
+    titleWhite: "You'd be surprised ",
+    titleGold: "how much lighter this feels.",
     label: "Illustrative examples",
     clients: {
       sandra: {
         quote:
-          "Going through my divorce I had no idea where to start. They walked me through the paperwork step by step — custody, property, all of it. I felt like I had someone in my corner for the first time.",
+          "Going through my divorce I had no idea where to start. They walked me through the paperwork step by step. I felt like I had someone in my corner for the first time.",
         name: "Sandra M.",
-        title: "Divorce filing",
+        title: "Divorce",
         case: "Ohio",
         imageAlt: "Photo of Sandra M.",
       },
@@ -192,7 +200,7 @@ export const en = {
       },
       priya: {
         quote:
-          "Between work and my two kids, I couldn't keep up with family court deadlines. They handled the research and prepared my documents so I could focus on my children — everything was explained in plain language.",
+          "Between work and my two kids, I couldn't keep up with the deadlines. They handled it and explained everything in plain language so I could focus on my children.",
         name: "Priya S.",
         title: "Family court",
         case: "New Jersey",
@@ -200,9 +208,9 @@ export const en = {
       },
       keisha: {
         quote:
-          "Facing an unfair eviction with nowhere to turn. They researched tenant rights, drafted my response, and broke down every paragraph so I understood it before I walked into court.",
+          "Facing an unfair eviction with nowhere to turn. They drafted my response and broke down every paragraph so I understood it before I walked in.",
         name: "Keisha W.",
-        title: "Housing defense",
+        title: "Housing",
         case: "Illinois",
         imageAlt: "Photo of Keisha W.",
       },
@@ -296,11 +304,12 @@ export const en = {
   },
   cta: {
     label: "Begin today",
-    title: "Stop paying for hours. Start with your file.",
-    body: `A ${REVIEW_PRICE} case file review tells you exactly where your case stands and what it will cost to prepare — before you commit to anything else. Credited in full toward your documents.`,
-    emailConsult: "Start my case file review",
+    title: "You deserve help you can actually afford.",
+    body: "Tell us what you're facing and get real answers — plain language, one flat price, and someone finally on your side.",
+    emailConsult: "Get help today",
     emailQuote: "Email to get your quote",
-    disclaimer: "Not a law firm · No legal advice · Document preparation & research only",
+    disclaimer:
+      "Ask AI Legal provides legal information and document automation for educational and informational purposes only. It does not constitute formal legal advice or an attorney-client relationship.",
   },
 }
 

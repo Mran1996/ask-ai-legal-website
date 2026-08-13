@@ -1,57 +1,41 @@
 "use client"
 
-import { ArrowRight, FileSearch, MessageSquare, Receipt, Send } from "lucide-react"
-import type { LucideIcon } from "lucide-react"
+import { ArrowRight } from "lucide-react"
 import { NeonButton } from "@/components/neon-button"
 import { useLanguage } from "@/components/language-provider"
 import { openChatWidget } from "@/lib/chat/open-chat"
-
-const STEP_ICONS: LucideIcon[] = [MessageSquare, FileSearch, Receipt, Send]
 
 export function HowItWorks() {
   const { t } = useLanguage()
 
   return (
-    <section id="process" className="section-pad bg-white">
+    <section id="process" className="section-pad bg-cream">
       <div className="container-main">
         <div className="mx-auto max-w-3xl text-center">
           <p className="firm-label text-gold-dark">{t.process.label}</p>
           <div className="gold-rule mx-auto mb-6" />
-          <h2 className="firm-title text-navy">{t.process.title}</h2>
+          <h2 className="firm-title text-navy">
+            {t.process.titleLine1 ?? t.process.title}{" "}
+            <span className="italic text-gold-dark">{t.process.titleHighlight}</span>
+          </h2>
         </div>
 
-        <div className="relative mx-auto mt-14 max-w-5xl sm:mt-16">
-          <div
-            className="pointer-events-none absolute left-[12.5%] right-[12.5%] top-14 hidden h-px bg-gold/25 lg:block"
-            aria-hidden
-          />
-
-          <ol className="grid gap-8 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4 lg:gap-8">
-            {t.process.steps.map((item, i) => {
-              const Icon = STEP_ICONS[i] ?? MessageSquare
-
-              return (
-                <li
-                  key={item.title}
-                  className="firm-card relative flex flex-col items-center border-2 border-gold/35 bg-cream px-6 py-8 text-center shadow-[0_0_24px_rgba(197,160,89,0.1),inset_0_1px_0_rgba(232,220,200,0.65)] sm:px-5 sm:py-9"
-                >
-                  <span className="absolute -top-3.5 left-1/2 flex h-7 min-w-7 -translate-x-1/2 items-center justify-center rounded-full bg-gold px-2 text-[11px] font-bold tracking-wide text-navy">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-
-                  <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-full border border-gold/40 bg-white shadow-sm">
-                    <Icon className="h-5 w-5 text-gold-dark" aria-hidden />
-                  </div>
-
-                  <h3 className="font-display text-xl font-semibold leading-snug text-navy sm:text-2xl">
-                    {item.title}
-                  </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-gray-600">{item.body}</p>
-                </li>
-              )
-            })}
-          </ol>
-        </div>
+        <ol className="mx-auto mt-12 grid max-w-5xl gap-6 sm:grid-cols-3 sm:mt-14">
+          {t.process.steps.map((item, i) => (
+            <li
+              key={item.title}
+              className="firm-card flex flex-col border border-gold/20 bg-white p-6 shadow-sm sm:p-8"
+            >
+              <span className="font-display text-5xl font-light leading-none text-gold/80">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <h3 className="mt-4 font-display text-xl font-semibold leading-snug text-navy sm:text-2xl">
+                {item.title}
+              </h3>
+              <p className="mt-3 text-sm leading-relaxed text-gray-600 sm:text-base">{item.body}</p>
+            </li>
+          ))}
+        </ol>
 
         <div className="mt-12 flex justify-center sm:mt-14">
           <NeonButton onClick={() => openChatWidget("quote")} className="btn-neon-light">
