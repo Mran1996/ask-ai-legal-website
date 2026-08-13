@@ -1,0 +1,29 @@
+name: Convex Security Setup
+
+on:
+  workflow_dispatch:
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - run: npm ci
+
+      - name: Apply security env vars and deploy Convex prod
+        env:
+          CONVEX_DEPLOY_KEY: ${{ secrets.CONVEX_DEPLOY_KEY }}
+        run: ./scripts/apply-security-env.sh --prod
+
+      - name: Print webhook URLs (secrets stay in Convex only)
+        run: |
+          echo "Cal.com webhook URL: https://robust-wombat-16.convex.site/calcom-webhook"
+          echo "Resend inbound URL: https://robust-wombat-16.convex.site/resend-inbound"
+          echo "Retrieve CALCOM_WEBHOOK_SECRET and RESEND_INBOUND_WEBHOOK_SECRET from Convex dashboard → Environment Variables"
+          echo "Then configure Cal.com and Resend dashboards (see docs/CONVEX_SECURITY_SETUP.md)"
