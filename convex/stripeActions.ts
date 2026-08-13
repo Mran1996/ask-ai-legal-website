@@ -7,6 +7,7 @@ import { internal } from "./_generated/api"
 import type { Id } from "./_generated/dataModel"
 
 import { FIXED_DEPOSIT_CENTS } from "./lib/quoteTotal"
+import { assertOpsToken } from "./lib/opsAuth"
 
 type CheckoutContext = {
   caseReference: string
@@ -133,10 +134,7 @@ export const createStartPaymentLink = action({
     ctx,
     args
   ): Promise<{ url: string; amountCents: number }> => {
-    const expected = process.env.OPS_ACCESS_TOKEN
-    if (!expected || expected.length < 8 || args.opsToken !== expected) {
-      throw new Error("Unauthorized")
-    }
+    assertOpsToken(args.opsToken)
 
     const meta = await ctx.runQuery(internal.cases.getOutlookFolderContext, {
       caseId: args.caseId,

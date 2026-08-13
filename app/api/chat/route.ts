@@ -1,5 +1,6 @@
 import type { Locale } from "@/lib/i18n/languages"
 import { searchKnowledge } from "@/lib/chat/search"
+import { chatBodyTooLarge, isAllowedChatOrigin } from "@/lib/chat/api-guard"
 import { getPreferredLlmProvider, type ChatProviderId } from "@/lib/chat/providers"
 import {
   buildFaqResponse,
@@ -17,6 +18,14 @@ function isLlmProvider(provider: ChatProviderId): provider is LlmProviderId {
 }
 
 export async function POST(req: Request) {
+  if (!isAllowedChatOrigin(req)) {
+    return new Response("Forbidden", { status: 403 })
+  }
+
+  if (chatBodyTooLarge(req)) {
+    return new Response("Payload too large", { status: 413 })
+  }
+
   let locale: Locale = "en"
   let messages: UIMessage[] = []
 
