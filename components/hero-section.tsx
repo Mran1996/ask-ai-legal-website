@@ -48,19 +48,30 @@ export function HeroSection() {
           <h1 className="firm-title mt-10 text-white animate-fade-up [animation-delay:180ms] sm:mt-12">
             {t.hero.titleLine1}
             <br />
-            <span className="text-gradient-gold italic">{t.hero.titleHighlight}</span> {t.hero.titleLine2}
+            <span className="text-gradient-gold italic">{t.hero.titleHighlight}</span>
+            {t.hero.titleLine2 ? <> {t.hero.titleLine2}</> : null}
           </h1>
 
-          <p className="mx-auto mt-8 max-w-xl text-lg leading-relaxed text-white/70 animate-fade-up [animation-delay:260ms] sm:text-xl">
+          <p className="mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-white/70 animate-fade-up [animation-delay:260ms] sm:text-xl">
             {t.hero.body}
           </p>
+
+          <ul className="mt-8 flex flex-wrap items-center justify-center gap-2 animate-fade-up [animation-delay:300ms]">
+            {t.hero.categories.map((category) => (
+              <li key={category}>
+                <span className="inline-block rounded-full border border-white/25 px-3 py-1.5 text-xs font-medium text-white/80 sm:text-sm">
+                  {category}
+                </span>
+              </li>
+            ))}
+          </ul>
 
           <div className="mt-10 flex w-full flex-col items-center justify-center gap-4 sm:flex-row animate-fade-up [animation-delay:340ms]">
             <NeonButton onClick={() => openChatWidget("quote")}>
               {t.hero.ctaPrimary}
               <ArrowRight className="h-4 w-4" aria-hidden />
             </NeonButton>
-            <Link href="#compare" className="btn-ghost-light">
+            <Link href="#process" className="btn-ghost-light">
               {t.hero.ctaSecondary}
             </Link>
           </div>
@@ -78,7 +89,6 @@ export function HeroSection() {
               ) : (
                 <p
                   className={
-                    // Digit "1" in display serif often reads as capital "I" — use sans for single digits
                     item.display && /^\d+$/.test(item.display)
                       ? "font-sans text-4xl font-bold tabular-nums tracking-tight text-accent-light sm:text-5xl"
                       : "font-display text-4xl font-semibold text-accent-light sm:text-5xl"

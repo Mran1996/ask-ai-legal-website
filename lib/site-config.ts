@@ -34,7 +34,7 @@ export const DOCUMENT_RETRIEVAL_FEE_CENTS = DOCUMENT_RETRIEVAL_FEE_USD * 100
 
 /** Brand mark copy — header + hero lockup */
 export const SITE_BRAND_NAME = "Ask AI Legal™"
-export const SITE_TAGLINE = "Know your case. Own your case."
+export const SITE_TAGLINE = "Know your situation. Own your situation."
 
 /** Registered legal entity — used in footer copyright and legal pages (not the marketing lockup). */
 export const SITE_LEGAL_NAME = "Ask AI Legal LLC"
