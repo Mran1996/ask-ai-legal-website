@@ -25,5 +25,5 @@ npx convex env set COUNSEL_EMAILS "${COUNSEL}"${PROD_FLAG}
 #   or header x-resend-inbound-secret
 
 # After setting, redeploy Convex:
-#   npm run deploy:convex${PROD_FLAG// /}
+#   npm run deploy:convex:prod
 EOF
