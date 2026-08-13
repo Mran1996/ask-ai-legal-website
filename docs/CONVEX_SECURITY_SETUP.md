@@ -23,7 +23,7 @@ This sets `CALCOM_WEBHOOK_SECRET`, `RESEND_INBOUND_WEBHOOK_SECRET`, and `COUNSEL
 1. Convex dashboard → **robust-wombat-16** → Settings → **Deploy Key** → copy production key
 2. GitHub → repo **Settings → Secrets → Actions** → add `CONVEX_DEPLOY_KEY`
 3. GitHub → **Actions** → **Convex Security Setup** → **Run workflow**
-4. Fetch secrets from Convex dashboard → Environment Variables for Cal.com / Resend below
+4. Download the **webhook-setup** artifact from the run — it contains Cal.com and Resend header values
 
 ## Alternative: Cursor local Agent + Convex MCP
 
