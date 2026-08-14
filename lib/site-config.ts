@@ -1,5 +1,3 @@
-import { US_STATES } from "@/lib/chat/us-states"
-
 /** Canonical production URL — used for metadataBase, canonical links, sitemap, and JSON-LD. */
 export const SITE_URL = "https://askailegal.com"
 
@@ -18,14 +16,7 @@ export const SUPPORT_MAILTO = `mailto:${SUPPORT_EMAIL}` as const
 /** Google Business Profile NAP — phone line hidden in UI while empty. */
 export const BUSINESS_PHONE: string = ""
 export const BUSINESS_HOURS = "Open 24/7"
-
-/** All 50 U.S. state names for service-area display (excludes DC). */
-export const BUSINESS_US_STATES: readonly string[] = US_STATES.filter(
-  (state) => state.code !== "DC"
-).map((state) => state.label)
-
-export const BUSINESS_SERVICE_AREAS =
-  "Document preparation service — all 50 U.S. states"
+export const BUSINESS_SERVICE_AREAS = "All 50 states"
 
 /** Pay #1 — flat file review deposit (credited toward documents). Internal constant name kept for Stripe/code compat. */
 export const CASE_FILE_REVIEW_PRICE_USD = 499
