@@ -8,6 +8,7 @@ import {
   BUSINESS_HOURS,
   BUSINESS_PHONE,
   BUSINESS_SERVICE_AREAS,
+  BUSINESS_US_STATES,
   SITE_DISCLAIMER,
   SITE_BRAND_NAME,
   SITE_LEGAL_NAME,
@@ -72,7 +73,10 @@ export function Footer() {
             <address className="mt-5 not-italic text-sm leading-relaxed text-white/60">
               <p className="font-semibold text-white/80">{SITE_LEGAL_NAME}</p>
               <p className="mt-2">{BUSINESS_SERVICE_AREAS}</p>
-              <p className="mt-1">{BUSINESS_HOURS}</p>
+              <p className="mt-2 text-xs leading-relaxed text-white/50">
+                {BUSINESS_US_STATES.join(", ")}
+              </p>
+              <p className="mt-2 font-medium text-white/80">{BUSINESS_HOURS}</p>
               <p className="mt-1">
                 <a href={`mailto:${SUPPORT_EMAIL}`} className="transition-colors hover:text-gold">
                   {SUPPORT_EMAIL}
