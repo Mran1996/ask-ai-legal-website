@@ -13,6 +13,7 @@ export const en = {
     faq: "FAQ",
     contact: "Contact",
     emailForReview: `Case review — ${CASE_REVIEW_PRICE_DISPLAY}`,
+    payCta: "Start your case review",
     language: "Language",
   },
   hero: {

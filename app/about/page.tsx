@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import { NeonButton } from "@/components/neon-button"
-import { SUPPORT_MAILTO, CASE_FILE_REVIEW_PRICE_DISPLAY, FILE_REVIEW_DEPOSIT_LABEL } from "@/lib/site-config"
+import { SUPPORT_MAILTO, CASE_REVIEW_PRICE_DISPLAY, TOTAL_PRICE_DISPLAY } from "@/lib/site-config"
 import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
 import {
@@ -17,39 +17,39 @@ import {
 const capabilities = [
   {
     icon: FileSearch,
-    title: "Thousands of files, one plan",
+    title: "We actually listen",
     description:
-      "Your matter is researched against a vast body of filings, motions, and published sources — the kind of depth that would take weeks to compile manually. We deliver it as part of your preparation.",
+      "You share your situation. We read what you send — not filling in a template, but understanding what you're dealing with. That's what the case review is for.",
   },
   {
     icon: BadgeCheck,
-    title: "Source verification",
+    title: "Honest fit decision",
     description:
-      "Every source we use is retrieved from the original publication, stored in your document file, and verified in a separate review pass before it reaches your documents — never invented, never guessed.",
+      "If we can help, we tell you how. If not, we refund your case review and explain why. No sales pitch, no pressure.",
   },
   {
     icon: Receipt,
     title: "Two flat fees, no hourly clock",
     description:
-      `A ${CASE_FILE_REVIEW_PRICE_DISPLAY} ${FILE_REVIEW_DEPOSIT_LABEL.toLowerCase()}, credited toward one flat quote for your documents. You know the full cost before you commit to either step.`,
+      `${CASE_REVIEW_PRICE_DISPLAY} case review, then ${TOTAL_PRICE_DISPLAY} total for complete hands-on support — walkthrough and 30 days of guidance included.`,
   },
   {
     icon: BookOpen,
-    title: "Precision drafting",
+    title: "Hands-on walkthrough",
     description:
-      "Every motion, petition, and response is prepared for your facts, your jurisdiction, and your goals — formatted, referenced, and ready for your review.",
+      "Screen share. Video call. We show you exactly how to use your setup until you're confident — not a link and goodbye.",
   },
   {
     icon: Clock,
-    title: "Delivered fast",
+    title: "30 days of support",
     description:
-      "Preparation moves on your timeline. No waiting weeks for a return call while deadlines approach.",
+      "Email, call — you hit a snag, we help you fix it. You're not abandoned after payment.",
   },
   {
     icon: Shield,
-    title: "Full-service, start to finish",
+    title: "Someone in your corner",
     description:
-      "You describe your situation. We generate your documents — researched, drafted, and revised until ready.",
+      "Tell us what you're facing. We understand. We guide you step by step. You stay in control of every filing and every decision.",
   },
 ]
 
@@ -75,7 +75,7 @@ const standards = [
 export const metadata: Metadata = {
   title: "About Us",
   description:
-    "What makes Ask AI Legal different: institutional-scale file research, verified source work, and a two-step flat fee — no hourly billing, no retainer trap.",
+    "Ask AI Legal provides case review and hands-on support — someone in your corner when you're facing divorce, custody, housing, or civil disputes. Not a law firm.",
   alternates: { canonical: "/about" },
 }
 
@@ -94,10 +94,10 @@ export default function AboutPage() {
               Built for people who deserve more than the status quo
             </h1>
             <p className="mt-8 max-w-2xl text-lg leading-relaxed text-white/70">
-              Ask AI Legal is a full-service document preparation company.
-              We exist because most people handling important paperwork on their own cannot access the depth
-              of research, speed, and preparation serious situations require —
-              and they should not have to choose between quality and affordability.
+              Ask AI Legal exists for people who shouldn&apos;t have to figure it out alone.
+              We listen to your situation, tell you honestly if we can help, walk you through
+              your complete setup hands-on, and stay with you for 30 days — because your
+              situation is too important to be kept in the dark or priced out of help.
             </p>
           </div>
         </section>
@@ -109,13 +109,12 @@ export default function AboutPage() {
               <p className="firm-label text-gold-dark">What makes us different</p>
               <div className="gold-rule mb-6" />
               <h2 className="firm-title text-navy">
-                Capabilities that change what preparation looks like
+                Support that actually shows up
               </h2>
               <p className="mt-5 text-lg leading-relaxed text-gray-600">
-                We built our service around what clients actually need: exhaustive
-                research, clear document planning, and documents prepared for them
-                — not templates they fill in alone. Here is what that means in
-                practice.
+                We built our service around what clients actually need: someone who listens,
+                honest guidance, a hands-on walkthrough, and real support while they move
+                forward — not templates they fill in alone.
               </p>
             </div>
 
@@ -142,12 +141,12 @@ export default function AboutPage() {
               <p className="firm-label text-gold-dark">Our standard</p>
               <div className="gold-rule mx-auto mb-6" />
               <h2 className="firm-title text-navy">
-                The preparation your situation deserves
+                The support your situation deserves
               </h2>
               <p className="mt-5 text-gray-600 leading-relaxed">
-                Every client should walk into court with research behind them,
-                documents they trust, and a clear picture of what lies ahead.
-                That is the bar we hold ourselves to — every matter, every time.
+                Every client should feel understood, guided, and confident —
+                with someone in their corner, not left staring at blank forms alone.
+                That is the bar we hold ourselves to.
               </p>
             </div>
 
@@ -191,8 +190,8 @@ export default function AboutPage() {
                 being priced out of it.
               </p>
               <p className="mt-4 leading-relaxed text-gray-600">
-                We prepare your documents and written plans. You remain in control of
-                your matter — informed, equipped, and ready.
+                We guide and support you. You remain in control of every filing
+                and every decision — informed, equipped, and not alone.
               </p>
             </div>
             <div className="rounded-sm border border-gold/30 bg-white p-8">
@@ -200,12 +199,11 @@ export default function AboutPage() {
                 Important notice
               </p>
               <p className="mt-4 text-sm leading-relaxed text-gray-600">
-                Ask AI Legal generates documents only. We are not a law firm
-                and do not provide legal advice. All materials are prepared for your
-                review and use at your own discretion.
+                Ask AI Legal is not a law firm and does not provide legal advice.
+                You review everything and take every next step on your own.
               </p>
-              <NeonButton href={SUPPORT_MAILTO} className="btn-neon-light mt-8 inline-flex">
-                Email for a free document review
+              <NeonButton href="/pay" className="btn-neon-light mt-8 inline-flex">
+                Tell us what you&apos;re facing
                 <ArrowRight className="h-4 w-4" aria-hidden />
               </NeonButton>
             </div>

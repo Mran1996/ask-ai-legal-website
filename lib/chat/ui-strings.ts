@@ -98,13 +98,13 @@ const en: ChatUiStrings = {
   placeholder: "Ask about our services…",
   send: "Send",
   thinking: "Thinking…",
-  notLegalAdvice: "Not legal advice · Document generation only · Not a law firm",
+  notLegalAdvice: "Not legal advice · Guidance and support only · Not a law firm",
   emailSupport: "Email support@askailegal.com",
-  emailSupportHint: "Attach documents so we can review your situation and send a custom quote.",
-  requestQuote: "Request a free document review",
-  quoteTitle: "Tell us about your situation",
+  emailSupportHint: "Tell us what you're facing — attach anything you have so we can understand your situation.",
+  requestQuote: "Start your case review",
+  quoteTitle: "Tell us what you're facing",
   quoteHint:
-    "Submit intake so we can email a personalized form, then a written quote, contract, and invoice. Document preparation only — not a law firm.",
+    "Share your situation so we can begin your case review. Guidance and support only — not a law firm.",
   firstName: "First name",
   lastName: "Last name",
   email: "Email",
@@ -126,9 +126,9 @@ const en: ChatUiStrings = {
   submittingRequest: "Submitting…",
   intakeSuccessTitle: "Intake received",
   intakeSuccessBody:
-    "Next we'll email a personalized intake form. After that you'll receive a written quote, contract, and invoice by email. Document preparation only — not legal advice. Nothing is filed by us.",
+    "We received your intake. We'll read what you send and reply within one business day. If we're a fit, we'll schedule your walkthrough. Guidance and support only — not legal advice.",
   bookIntakeCall: "Book your intake call",
-  bookIntakeCallHint: "15–20 min · document preparation and pricing only",
+  bookIntakeCallHint: "15–20 min · case review and support overview only",
   caseNumberLabel: "Court / docket number (if you have it)",
   caseNumberHint: "Optional but helps us work faster. Leave blank if you don't have one yet.",
   retrievalCheckbox: "I need Ask AI Legal to retrieve documents (additional fee — quoted before we pull records).",
@@ -153,14 +153,14 @@ const en: ChatUiStrings = {
   ourEstimatedLabel: "Ask AI Legal estimated average",
   ourCustomQuoteLabel: "Custom package — confirmed by email",
   ourFractionNote:
-    "Document-prep estimate for your state and matter type — flat fee, no hourly billing. Not the mid point of the attorney range.",
+    "Support estimate for your state and matter type — flat fee, no hourly billing. Not the mid point of the attorney range.",
   estimateComparison:
     "{attorneyTypicalLabel}: {attorneyLow}–{attorneyHigh} · {ourEstimatedLabel}: {ourPrice}",
   estimateCustomQuote:
     "{attorneyTypicalLabel}: {attorneyLow}–{attorneyHigh}. Final package price comes in your emailed quote after we read your form and documents.",
   estimateServiceLine: "Service",
   estimateDisclaimer:
-    "Planning estimate only — not a bill. Typical attorney range is a market reference for your state/matter. Ask AI Legal quote is document-prep only. Final package price is confirmed after Part 1 review. Not legal advice.",
+    "Planning estimate only — not a bill. Typical attorney range is a market reference. Ask AI Legal is case review + hands-on support ($499 review + $1,000 support = $1,500 total). Not legal advice.",
   fillRequired: "Please fill in name, email, matter type, and a brief issue description.",
   uploadNote:
     "Optional: attach court papers, notices, or leases (PDF, JPG, PNG — up to 10 MB each).",

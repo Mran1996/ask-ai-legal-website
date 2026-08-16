@@ -134,7 +134,7 @@ export function Navigation() {
 
           <Link href="/pay" className="btn-pay-pill hidden xl:inline-flex">
             <CreditCard className="h-3.5 w-3.5 shrink-0" aria-hidden />
-            <span>Pay deposit</span>
+            <span>{t.nav.payCta}</span>
           </Link>
 
           <button
@@ -182,7 +182,7 @@ export function Navigation() {
             className="btn-pay-pill mt-3 w-full justify-center py-3 text-sm"
           >
             <CreditCard className="h-4 w-4" aria-hidden />
-            <span>Pay deposit</span>
+            <span>{t.nav.payCta}</span>
           </Link>
           <a href={SUPPORT_MAILTO} className="mt-3 block text-center text-xs text-navy/50 hover:text-navy/70">
             {SUPPORT_EMAIL}
