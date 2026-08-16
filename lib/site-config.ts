@@ -18,14 +18,30 @@ export const BUSINESS_PHONE: string = ""
 export const BUSINESS_HOURS = "Open 24/7"
 export const BUSINESS_SERVICE_AREAS = "All 50 states"
 
-/** Pay #1 — flat file review deposit (credited toward documents). Internal constant name kept for Stripe/code compat. */
-export const CASE_FILE_REVIEW_PRICE_USD = 499
-export const CASE_FILE_REVIEW_PRICE_DISPLAY = `$${CASE_FILE_REVIEW_PRICE_USD}`
-export const CASE_FILE_REVIEW_PRICE_CENTS = CASE_FILE_REVIEW_PRICE_USD * 100
+/** Pay #1 — flat case review assessment ($499). Understand situation before anything else. */
+export const CASE_REVIEW_PRICE_USD = 499
+export const CASE_REVIEW_PRICE_DISPLAY = `$${CASE_REVIEW_PRICE_USD}`
+export const CASE_REVIEW_PRICE_CENTS = CASE_REVIEW_PRICE_USD * 100
 
-/** Client-facing product labels — avoid "case" in marketing copy. */
-export const FILE_REVIEW_DEPOSIT_LABEL = "File review deposit"
-export const FILE_REVIEW_LABEL = "File review"
+/** Pay #2 — complete hands-on support + setup + 30-day support ($1,000 balance = $1,500 total). */
+export const COMPLETE_SUPPORT_PRICE_USD = 1000
+export const COMPLETE_SUPPORT_PRICE_DISPLAY = `$${COMPLETE_SUPPORT_PRICE_USD}`
+export const COMPLETE_SUPPORT_PRICE_CENTS = COMPLETE_SUPPORT_PRICE_USD * 100
+
+export const TOTAL_PRICE_USD = CASE_REVIEW_PRICE_USD + COMPLETE_SUPPORT_PRICE_USD
+export const TOTAL_PRICE_DISPLAY = `$${TOTAL_PRICE_USD}`
+export const TOTAL_PRICE_CENTS = TOTAL_PRICE_USD * 100
+
+/** Client-facing product labels */
+export const CASE_REVIEW_LABEL = "Case review"
+export const COMPLETE_SUPPORT_LABEL = "Complete hands-on support"
+
+/** Backward compatibility */
+export const CASE_FILE_REVIEW_PRICE_USD = CASE_REVIEW_PRICE_USD
+export const CASE_FILE_REVIEW_PRICE_DISPLAY = CASE_REVIEW_PRICE_DISPLAY
+export const CASE_FILE_REVIEW_PRICE_CENTS = CASE_REVIEW_PRICE_CENTS
+export const FILE_REVIEW_DEPOSIT_LABEL = CASE_REVIEW_LABEL
+export const FILE_REVIEW_LABEL = "Case review"
 
 /**
  * Optional document retrieval add-on (ops fulfills manually for now — no court API yet).
@@ -46,13 +62,13 @@ export const SITE_LEGAL_NAME = "Ask AI Legal LLC"
 export const SITE_SLOGAN = SITE_TAGLINE
 
 export const SITE_DISCLAIMER =
-  "Ask AI Legal generates documents only. We are not a law firm and do not provide legal advice."
+  "Ask AI Legal is not a law firm and does not provide legal advice. You review everything and take every next step on your own."
 
 /** Primary SEO title — used in layout, Open Graph, and Twitter cards. */
-export const SITE_SEO_TITLE = "Ask AI Legal — Full Document Preparation Service"
+export const SITE_SEO_TITLE = "Ask AI Legal — Case Review & Hands-On Legal Support"
 
 /** Primary SEO description — used in layout, JSON-LD, and social previews. */
-export const SITE_SEO_DESCRIPTION = `Full document preparation service for any issue, any jurisdiction. ${CASE_FILE_REVIEW_PRICE_DISPLAY} ${FILE_REVIEW_DEPOSIT_LABEL.toLowerCase()} → written summary with your exact price → flat-fee document package. Not a law firm, no legal advice.`
+export const SITE_SEO_DESCRIPTION = `Get someone in your corner. ${CASE_REVIEW_PRICE_DISPLAY} case review → ${TOTAL_PRICE_DISPLAY} complete hands-on support with walkthrough and 30-day guidance. Not a law firm, no legal advice.`
 
 /** Brand mark (circular scales) — header, hero, app icons. */
 export const SITE_LOGO_MARK = "/brand/stripe-logo-512.png"
