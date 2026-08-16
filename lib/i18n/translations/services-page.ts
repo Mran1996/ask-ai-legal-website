@@ -1,128 +1,127 @@
 /** Services page copy (English). Merged into en.ts as servicesPage. */
-import { CASE_FILE_REVIEW_PRICE_DISPLAY, FILE_REVIEW_DEPOSIT_LABEL } from "@/lib/site-config"
+import { CASE_REVIEW_PRICE_DISPLAY, TOTAL_PRICE_DISPLAY } from "@/lib/site-config"
 
 export const servicesPageContent = {
   label: "Services",
-  title: "Everything we prepare for your situation",
+  title: "Someone in your corner — from case review to complete support",
   intro:
-    "Ask AI Legal is full-service document preparation — research, planning, drafting, and delivery. We are not a law firm and do not provide legal advice. You review what we prepare and handle any filing or appearance on your own behalf.",
+    "Ask AI Legal is hands-on guidance and support — not a template library and not a retainer trap. We listen to your situation, tell you honestly if we can help, walk you through your complete setup, and stay with you for 30 days. We are not a law firm and do not provide legal advice.",
   flow: {
     label: "How it fits together",
-    title: "From first review to complete document packages",
+    title: "From case review to confidence on your own",
     narrative:
-      "Every matter moves through a clear sequence: we understand your situation, map the path forward, research your files and sources, draft your documents, deliver a complete package, and refine until it reflects your situation accurately.",
+      "Every client moves through a clear sequence: you share your situation, we understand it, we decide together if we're the right fit, we walk you through your setup hands-on, and we support you while you move forward.",
     steps: [
-      "Analysis",
-      "Road map",
-      "Research",
-      "Documents",
-      "Delivery",
-      "Revisions",
+      "Case review",
+      "Understand",
+      "Right fit",
+      "Walkthrough",
+      "30-day support",
     ],
   },
-  deepDivesLabel: "What each service includes",
-  deepDivesTitle: "Prepared for you — in detail",
-  includesLabel: "What you receive",
+  deepDivesLabel: "What you get",
+  deepDivesTitle: "Support at every step",
+  includesLabel: "What's included",
   items: [
     {
       detail:
-        "We start by reviewing your situation in plain language — what happened, what you need, and where you want to go. You receive a clear picture of the recommended document plan before any drafting begins. Ideal when you feel overwhelmed and need direction first.",
+        "You share your situation in plain language. We actually read what you send — not filling in a template, but understanding what you're dealing with.",
       includes: [
-        "Review of your facts and goals",
-        "Identification of next steps for your paperwork",
-        "Written summary of preparation options",
-        "Foundation for all downstream work",
+        "We listen to your facts and goals",
+        "Clarifying questions when something isn't clear",
+        "Honest read on whether we can help",
+        "Foundation for everything that follows",
       ],
     },
     {
       detail:
-        "Once we understand your matter, we build a step-by-step plan tailored to your situation — key issues, recommended documents, deadlines to watch, and what to prepare next. This is your roadmap, not a generic checklist from the internet.",
+        "We take time to understand your matter — what's at stake, what you've already received, and what you're trying to achieve. This is about your situation, not a generic checklist.",
       includes: [
-        "Sequential preparation plan",
+        "Plain-language summary of what we heard",
         "Key issues and priority actions",
-        "Recommended document sequence",
-        "Timeline guidance for your review",
+        "What we'd build for you if you're a fit",
+        "Timeline for next steps",
       ],
     },
     {
       detail:
-        "We investigate the factual record of your matter — prior filings, procedural history, orders, and evidence references — so every document we draft reflects what actually happened in your situation, not assumptions.",
+        "If we think we can genuinely help, we tell you how. If not, we refund your case review and explain why — no sales pitch, no pressure.",
       includes: [
-        "Review of prior filings and records",
-        "Procedural history mapped to your matter",
-        "Fact chronology for drafting reference",
-        "Issue spotting tied to your record",
+        "Honest fit decision",
+        "Refund if we're not the right match",
+        "Clear explanation either way",
+        "No hourly meter at any step",
       ],
     },
     {
       detail:
-        "We research rules, requirements, and published sources that apply to your issue and jurisdiction, then connect that material to your facts. Your documents reference the right sources — prepared for your review, not copy-pasted templates.",
+        "Screen share. Video call. We show you exactly how to use your setup. You ask questions. We answer. We don't move on until you're confident.",
       includes: [
-        "Rule and requirement research for your jurisdiction",
-        "Published sources tied to your factual pattern",
-        "Reference-ready source summaries",
-        "Framework applied to your situation",
+        "Live walkthrough on your schedule",
+        "Step-by-step guidance",
+        "Q&A until you're ready",
+        "Complete setup installed with you",
       ],
     },
     {
       detail:
-        "Every source we use is retrieved from the original publication, stored in your document file, and verified in a separate review pass before it ever appears in your document. Advanced research technology does the heavy lifting; verification makes it complete and accurate.",
+        "30 days of email and call support. You hit a snag? You reach out. We help you fix it. No extra charge — that's what we're here for.",
       includes: [
-        "Every reference retrieved from source",
-        "Stored in your document file for reference",
-        "Verified in a separate review pass",
-        "Full reference list delivered with your documents",
+        "30 days of email and call support",
+        "Help when you get stuck",
+        "No surprise fees",
+        "Someone still in your corner",
       ],
     },
     {
       detail:
-        "When you have a hearing or appearance you handle yourself, we prepare the written materials — outlines, talking points, and supporting documents organized so you can walk in prepared. We do not appear on your behalf or speak for you.",
+        "You learn how to use your setup to generate what you need for your situation. We show you step by step — you stay in control of every filing and every decision.",
       includes: [
-        "Hearing or appearance outline",
-        "Key talking points in plain language",
-        "Supporting document index",
-        "Organized packet for your review",
+        "Hands-on training on your setup",
+        "Generate what your situation needs",
+        "You file. You decide. Your pace.",
+        "Confidence to move forward alone",
       ],
     },
     {
       detail:
-        "This is the core of what we do: letters, forms, responses, agreements, and supporting paperwork — fully drafted, properly formatted, and structured for your situation. You describe your situation; we write the document content.",
+        "After 30 days, you have everything you need. You generate documents. You file. You own this — with the peace of mind that someone understood your situation first.",
       includes: [
-        "Full draft of requested documents",
-        "Professional formatting and structure",
-        "Headings, sections, and reference placeholders",
-        "Ready for your review before any filing",
+        "Complete setup tailored to you",
+        "Skills to use it on your own",
+        "No abandonment after payment",
+        "Real guidance, not a link and goodbye",
       ],
     },
     {
       detail:
-        "You receive a complete, formatted document package — organized, labeled, and ready for your review. What you do next, including any filing or service, is entirely your decision.",
+        "Flat pricing from the start: case review, then complete hands-on support if you're a fit. No hidden costs. No hourly clock.",
       includes: [
-        "Complete document package delivery",
-        "Formatted files ready for review",
-        "Clear organization by document type",
-        "Instructions summary where applicable",
+        `${CASE_REVIEW_PRICE_DISPLAY} case review`,
+        `${TOTAL_PRICE_DISPLAY} total for complete support`,
+        "Walkthrough included",
+        "30-day support included",
       ],
     },
     {
       detail:
-        "Need changes after review? Revisions are part of full-service preparation — we refine wording, facts, and structure until the documents accurately reflect your situation. No hourly meter running in the background.",
+        "Someone who understands your situation. Someone who won't leave you hanging. Someone in your corner — that's what this service is built around.",
       includes: [
-        "Revisions within your quoted scope",
-        "Fact and argument refinements",
-        "Formatting adjustments",
-        "Follow-up until documents match your situation",
+        "Empathy-first intake",
+        "Real human walkthrough",
+        "Ongoing support while you need it",
+        "Confidence, not confusion",
       ],
     },
   ],
   disclaimer: {
     label: "What we do not do",
-    text: "Ask AI Legal generates documents only. We are not a law firm and do not provide legal advice. We never appear in court on your behalf and do not file documents for you. All materials are prepared for your review and use at your own discretion.",
+    text: "Ask AI Legal is not a law firm and does not provide legal advice. We never appear in court on your behalf and do not file documents for you. You take every legal step on your own — we guide and support you.",
   },
   cta: {
-    title: "Ready to see what we can prepare for you?",
-    body: `Start with a flat ${CASE_FILE_REVIEW_PRICE_DISPLAY} ${FILE_REVIEW_DEPOSIT_LABEL.toLowerCase()}. You'll get a plain-English written summary and one flat price for the documents your situation needs — credited in full toward your total.`,
-    button: "Start my file review",
+    title: "Tell us what you're facing",
+    body: `Start with a ${CASE_REVIEW_PRICE_DISPLAY} case review. We'll read everything you send, understand your situation, and tell you honestly if we can help — credited in full toward ${TOTAL_PRICE_DISPLAY} complete support if you're a fit.`,
+    button: "Tell us what you're facing",
   },
   homeLink: "Learn more about our services",
 }

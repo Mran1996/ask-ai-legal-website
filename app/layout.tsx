@@ -5,9 +5,11 @@ import { Providers } from "@/components/providers"
 import {
   SITE_URL,
   SUPPORT_EMAIL,
-  CASE_FILE_REVIEW_PRICE_DISPLAY,
+  CASE_REVIEW_PRICE_DISPLAY,
+  TOTAL_PRICE_DISPLAY,
   SITE_SEO_TITLE,
   SITE_SEO_DESCRIPTION,
+  SITE_DISCLAIMER,
 } from "@/lib/site-config"
 
 const display = Cormorant_Garamond({
@@ -46,12 +48,13 @@ export const metadata: Metadata = {
   },
   description: DESCRIPTION,
   keywords: [
-    "full document preparation service",
-    "document preparation service",
-    "divorce paperwork help",
-    "custody documents",
-    "civil matter document preparation",
-    "flat fee documents",
+    "case review legal support",
+    "hands-on legal guidance",
+    "self-help legal support",
+    "divorce guidance",
+    "custody support",
+    "housing dispute help",
+    "flat fee legal support",
     "self represented litigant",
   ],
   authors: [{ name: "Ask AI Legal" }],
@@ -79,24 +82,23 @@ export const metadata: Metadata = {
 const legalServiceJsonLd = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
-  serviceType: "Full document preparation service",
+  serviceType: "Case review and hands-on legal support",
   name: "Ask AI Legal",
   description: DESCRIPTION,
   url: SITE_URL,
   email: SUPPORT_EMAIL,
-  priceRange: `${CASE_FILE_REVIEW_PRICE_DISPLAY}+`,
+  priceRange: `${CASE_REVIEW_PRICE_DISPLAY}–${TOTAL_PRICE_DISPLAY}`,
   areaServed: {
     "@type": "Country",
     name: "United States",
   },
   knowsAbout: [
-    "Divorce document preparation",
-    "Custody document preparation",
-    "Civil dispute document preparation",
-    "Business dispute document preparation",
+    "Divorce case review and support",
+    "Custody guidance and walkthrough",
+    "Housing dispute support",
+    "Civil dispute self-help guidance",
   ],
-  disclaimer:
-    "Ask AI Legal generates documents only. We are not a law firm and do not provide legal advice.",
+  disclaimer: SITE_DISCLAIMER,
 }
 
 export default function RootLayout({

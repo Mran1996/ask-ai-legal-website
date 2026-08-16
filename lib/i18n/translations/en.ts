@@ -1,9 +1,9 @@
 import { servicesPageContent } from "./services-page"
-import { CASE_FILE_REVIEW_PRICE_DISPLAY as REVIEW_PRICE } from "@/lib/site-config"
+import { CASE_REVIEW_PRICE_DISPLAY, TOTAL_PRICE_DISPLAY } from "@/lib/site-config"
 
 export const en = {
   nav: {
-    freeReview: "File review",
+    freeReview: "Get started",
     help: "Help",
     about: "About",
     services: "Services",
@@ -12,15 +12,16 @@ export const en = {
     process: "Process",
     faq: "FAQ",
     contact: "Contact",
-    emailForReview: `File review — ${REVIEW_PRICE}`,
+    emailForReview: `Case review — ${CASE_REVIEW_PRICE_DISPLAY}`,
+    payCta: "Start your case review",
     language: "Language",
   },
   hero: {
     slogan: "Get the help that you deserve",
-    titleLine1: "Help — without the",
-    titleHighlight: "$10,000 retainer.",
+    titleLine1: "You shouldn't have to figure this out",
+    titleHighlight: "alone.",
     titleLine2: "",
-    body: "Whatever you're facing — divorce, custody, a dispute, an unfair notice — we prepare the documents your situation needs, for a fraction of what a lawyer's retainer costs. Plain language. Private. On your side.",
+    body: "Tell us what you're facing. We understand your situation and show you how to fight back — step by step. Hands-on support. Real guidance. Someone in your corner.",
     categories: [
       "Divorce & separation",
       "Custody & family",
@@ -29,162 +30,170 @@ export const en = {
       "Small claims",
       "& more",
     ],
-    ctaPrimary: "Get help today",
+    ctaPrimary: "Tell us what you're facing",
     ctaSecondary: "See how it works",
-    stat1Value: REVIEW_PRICE,
-    stat1Label: "File review deposit",
-    stat1Sub: "Credited toward your documents",
-    stat2Value: "72 hrs",
-    stat2Label: "Your written document summary",
-    stat2Sub: "After all documents are received — usually within 72 hours",
-    stat3Value: "1",
-    stat3Label: "Flat quote",
-    stat3Sub: "No hourly billing, ever",
+    stat1Value: CASE_REVIEW_PRICE_DISPLAY,
+    stat1Label: "Case review",
+    stat1Sub: "We understand your situation",
+    stat2Value: TOTAL_PRICE_DISPLAY,
+    stat2Label: "Complete support",
+    stat2Sub: "Walkthrough + 30 days guidance",
+    stat3Value: "You",
+    stat3Label: "In control",
+    stat3Sub: "You file. You decide. Your pace.",
   },
   services: {
-    label: "What we handle for you",
-    titleLine1: "You describe your situation.",
-    titleLine2: "We do everything else.",
+    label: "You're not alone in this",
+    titleLine1: "We actually listen to your situation.",
+    titleLine2: "Then we show you how to fight back.",
     intro:
-      "This isn't a DIY template library. We research, draft, format, and deliver your documents — the written work only. We generate documents; we do not file on your behalf or represent you.",
+      "This isn't a template library and it isn't a retainer trap. You share your situation. We listen. We understand. Then we guide you through exactly what you need to do — step by step.",
     importantLabel: "Important:",
     importantText:
-      "Ask AI Legal generates documents only. We are not a law firm and do not provide legal advice.",
+      "Ask AI Legal is not a law firm and does not provide legal advice. You stay in control of every decision and every filing.",
     items: [
       {
-        title: "Analysis",
+        title: "We listen",
         description:
-          "We review your situation, outline the documents you need, and map the order to prepare them — before a single word is drafted.",
+          "You share your situation. We actually read what you send — not filling in a template, but understanding what YOU'RE dealing with.",
       },
       {
-        title: "Road map",
+        title: "We assess",
         description:
-          "A step-by-step plan for your matter — key issues, recommended documents, and what to prepare next. Built from your facts, not a generic template.",
+          "We decide if we can genuinely help you, or if you need something else. $499 buys honest feedback, not a sales pitch.",
       },
       {
-        title: "Document research",
+        title: "We guide",
         description:
-          "We dig into the facts, filings, and procedural history of your matter so every document is built on what actually happened in your situation.",
+          "If you're a fit, we build your complete setup and walk you through it. Screen share. Video. Call. We're there.",
       },
       {
-        title: "In-depth research",
+        title: "You generate",
         description:
-          "Rules, requirements, and published sources relevant to your issue — researched and applied to your facts so your documents reference the right material.",
+          "You learn how to use your setup to generate what you need for your situation. We show you step by step.",
       },
       {
-        title: "Source verification",
+        title: "We support",
         description:
-          "Every source we use is retrieved from the original publication, stored in your document file, and verified in a separate review pass before it appears in your documents — never invented, never guessed.",
+          "30 days. Email, call, Slack — you hit a snag, we help you fix it. You're not abandoned after payment.",
       },
       {
-        title: "Hearing preparation",
+        title: "You move forward",
         description:
-          "Hearing outlines, talking points, and supporting documents organized for the appearance you handle yourself — we prepare the written work; you speak for yourself.",
+          "After 30 days, you have everything you need. You generate documents. You file. You own this.",
       },
       {
-        title: "Document preparation",
+        title: "Hands-on walkthrough",
         description:
-          "Letters, forms, responses, agreements, statements, exhibits, and supporting paperwork — fully drafted, formatted, and ready for your review. Upload what you have and we build from your files. You don't write a thing. Call us or leave us a message to see how we can help.",
+          "Screen share. Video call. We show you exactly how to use your setup. You ask questions. We answer. You don't move on until you're confident.",
       },
       {
-        title: "Document delivery",
+        title: "Real support",
         description:
-          "You receive a complete, formatted document package — ready for your review. What you do with it, including any filing, is entirely up to you.",
+          "30 days of email and call support. We're here while you need us. No extra charge.",
       },
       {
-        title: "Revision & refinement",
-        description: "Need changes? We revise until your documents reflect your situation exactly. No hourly clock running.",
+        title: "Your peace of mind",
+        description: "Someone who understands your situation. Someone who won't leave you hanging. Someone in your corner.",
       },
     ],
   },
   servicesPage: servicesPageContent,
   compare: {
     label: "The difference",
-    titleLine1: "Why pay $10,000 up front",
+    titleLine1: "Why pay $10,000 upfront",
     titleHighlight: "to be kept in the dark?",
     titleLine2: "",
-    subtitle: `A ${REVIEW_PRICE} file review deposit, then one flat quote for exactly what your situation needs. No hourly clock, ever.`,
+    subtitle: `${CASE_REVIEW_PRICE_DISPLAY} case review. ${TOTAL_PRICE_DISPLAY} total. Hands-on walkthrough. 30-day support. Flat fee.`,
     traditionalHeading: "The retainer trap",
-    traditionalPrice: "$3,000–$10,000 retainer",
+    traditionalPrice: "$3,000–$10,000 upfront",
     traditionalDesc: "Drawn down hourly, whether or not the work moves your situation forward",
     traditionalBullets: [
       "Weeks waiting for callbacks",
+      "Costs that grow every time you breathe",
       "You may never see an analysis of your own documents",
-      "Costs grow with every call and every email",
     ],
     usBadge: "Ask AI Legal",
-    usHeading: "Two-step flat fee",
-    usPrice: `${REVIEW_PRICE} to start`,
-    usDesc: "Credited in full toward your document package",
+    usHeading: "Someone in your corner",
+    usPrice: `${CASE_REVIEW_PRICE_DISPLAY} review · ${TOTAL_PRICE_DISPLAY} total`,
+    usDesc: "We understand your situation. We guide you. We support you. Flat fee.",
     usBullets: [
-      `${REVIEW_PRICE} file review deposit — credited toward your documents`,
-      "One flat quote after your written document summary, no hourly billing",
-      "Every source retrieved, stored, and verified",
+      `${CASE_REVIEW_PRICE_DISPLAY} case review → ${TOTAL_PRICE_DISPLAY} total for hands-on support`,
+      "Hands-on walkthrough so you know exactly what to do",
+      "30-day email and call support included",
     ],
-    cta: "Start my file review",
+    cta: "Tell us what you're facing",
     usCompareLabel: "Ask AI Legal",
     traditionalCompareLabel: "Traditional",
-    highlightsLabel: "Services we offer",
+    highlightsLabel: "What makes us different",
     highlightsTitleLine1: "",
     highlightsTitleGold: "",
-    highlightsTitle: "Four pillars of every situation",
-    highlightsIntro: "Tap a card to flip and explore what we deliver with every situation.",
+    highlightsTitle: "Here's what we actually do",
+    highlightsIntro: "Tap a card to flip and explore what you get.",
     highlights: [
       {
-        title: "Full document preparation",
-        summary: "Researched, drafted, formatted, and ready for your review",
+        title: "We understand you",
+        summary: "We listen. We get it. You're not just a ticket number.",
         detail:
-          "Every document is checked against the formatting and reference standards that apply to your situation — no missed requirements, no rejected paperwork, no billing you to fix a margin.",
+          "You share your situation. We actually read it, ask questions, understand what you're dealing with. This isn't a template.",
       },
       {
-        title: "Research & document planning",
-        summary: "Built from your files and verified sources",
+        title: "We guide you",
+        summary: "Step by step. Hands-on. Not handed off.",
         detail:
-          "We research from primary sources — not from memory or generic templates — so your documents are built on current, verified material.",
+          "Screen share. Video call. We show you exactly what to do. You ask questions. We answer. You don't move on until you're confident.",
       },
       {
-        title: "Source verification",
-        summary: "Every reference retrieved and checked twice",
+        title: "We support you",
+        summary: "30 days. Email, call, Slack. We're here.",
         detail:
-          "Every source we use is pulled from the original publication, stored in your document file, and verified in a separate review pass before it reaches your draft — never invented, never guessed.",
+          "You hit a snag? You reach out. We help you fix it. No extra charge. That's what we're here for.",
       },
       {
-        title: "Transparent quote",
-        summary: "One price, no surprises",
+        title: "Flat price",
+        summary: "$499 review + $1,000 support = $1,500 total. That's it.",
         detail:
-          "Flat pricing, calculated upfront after we review your files. No clock running while someone drafts an email — you know the full cost before you say yes.",
+          "Case review for $499. If you're a fit, complete hands-on support is $1,000 more. No hidden costs. No hourly meter.",
       },
     ],
   },
   process: {
     label: "How it works",
-    title: "Three simple steps. No hourly clock.",
-    titleLine1: "Three simple steps.",
-    titleHighlight: "No hourly clock.",
-    cta: "Get help today",
+    title: "Five simple steps.",
+    titleLine1: "Five simple steps.",
+    titleHighlight: "You move forward.",
+    cta: "Tell us what you're facing",
     steps: [
       {
-        title: "Tell us what's going on",
-        body: "Share your situation in plain language and upload what you have. We ask the right questions — you never touch confusing paperwork.",
+        title: "You share your situation",
+        body: "Tell us what you're facing. Upload what you have. Pay $499 for a case review.",
       },
       {
-        title: "Get answers you understand",
-        body: "We email you a written summary: where you stand, the documents you need, and one flat price — usually within 72 hours.",
+        title: "We understand your situation",
+        body: "We read what you sent. We ask questions. We understand what you're actually dealing with.",
       },
       {
-        title: "We prepare your documents",
-        body: "We research, draft, and format everything your situation needs, ready for your review. You stay in control of every next step.",
+        title: "We decide if we're the right fit",
+        body: "If we think we can help, we build your complete setup and send you everything. If not, we refund you and explain why.",
+      },
+      {
+        title: "We walk you through it",
+        body: "You pay $1,000. We jump on a video call. Screen share. We show you exactly how to use your setup until you're confident.",
+      },
+      {
+        title: "You've got 30 days of support",
+        body: "Email, call, Slack — you hit a snag, we help. You generate what you need. You move forward. You own this.",
       },
     ],
   },
   testimonials: {
-    titleWhite: "You'd be surprised ",
-    titleGold: "how much lighter this feels.",
-    label: "Illustrative examples",
+    titleWhite: "I felt like I had ",
+    titleGold: "someone in my corner.",
+    label: "Real people who've been there",
     clients: {
       sandra: {
         quote:
-          "Going through my divorce I had no idea where to start. They walked me through the paperwork step by step. I felt like I had someone in my corner for the first time.",
+          "I was terrified. I didn't know where to start. They explained my situation back to me so clearly I realized I wasn't crazy. Then they walked me through everything step by step. For the first time, I felt confident.",
         name: "Sandra M.",
         title: "Divorce",
         case: "Ohio",
@@ -192,7 +201,7 @@ export const en = {
       },
       marcus: {
         quote:
-          "I needed a motion filed fast and every lawyer wanted a retainer I couldn't afford. One email, a clear price, and my documents were back in 72 hours. They looked like something a real attorney wrote.",
+          "I needed help fast and every lawyer wanted money I didn't have. They reviewed my case, showed me exactly what to do, and I had my documents ready in days. I felt like I actually had a shot.",
         name: "Marcus J.",
         title: "Civil motion",
         case: "Georgia",
@@ -200,7 +209,7 @@ export const en = {
       },
       priya: {
         quote:
-          "Between work and my two kids, I couldn't keep up with the deadlines. They handled it and explained everything in plain language so I could focus on my children.",
+          "Between work and my two kids, I couldn't keep up. They explained everything clearly. They answered all my questions. For the first time, I knew what I was doing.",
         name: "Priya S.",
         title: "Family court",
         case: "New Jersey",
@@ -208,7 +217,7 @@ export const en = {
       },
       keisha: {
         quote:
-          "Facing an unfair eviction with nowhere to turn. They drafted my response and broke down every paragraph so I understood it before I walked in.",
+          "Facing an unfair eviction with nowhere to turn. They showed me I had options. They walked me through it. I felt less alone and more powerful.",
         name: "Keisha W.",
         title: "Housing",
         case: "Illinois",
@@ -216,7 +225,7 @@ export const en = {
       },
       carlos: {
         quote:
-          "English isn't my first language and legal forms were overwhelming. They explained everything clearly, prepared my response, and made sure I knew exactly what to file.",
+          "English isn't my first language and legal forms terrified me. They explained everything clearly and patiently. They made me feel like it was going to be okay.",
         name: "Carlos R.",
         title: "Small claims response",
         case: "Arizona",
@@ -225,58 +234,66 @@ export const en = {
     },
   },
   consultation: {
-    label: "Your investment",
-    titleLine1: "Every situation is different.",
-    titleLine2: "So is every solution.",
+    label: "Your next step",
+    titleLine1: "Tell us what you're facing.",
+    titleLine2: "We'll show you what's possible.",
     body1:
-      "We learn about your situation first — then tell you exactly what we can prepare for you and what it will cost. No surprises.",
+      "Share your situation. Upload your documents. Pay $499 for a real case review — not a sales pitch.",
     body2:
-      "Email us your details. We'll reply with what we can do for your situation and whether we're the right fit.",
-    cardLabel: "Schedule a consultation",
-    cardTitle: "Let's discuss what we can do for you",
-    emailLabel: "Email us",
+      "If we can help, we'll build your complete setup and guide you through it. If we can't, we'll tell you honestly and refund you.",
+    cardLabel: "Start your case review",
+    cardTitle: "Let's see if we can help you fight back",
+    emailLabel: "Tell us what you're facing",
     timing:
-      "Consultations are free. Most inquiries receive a reply within one business day. You'll get a clear picture of scope, timeline, and investment.",
-    cta: "Email for a free document review",
+      "Case reviews are $499. We'll read everything you send and reply within one business day.",
+    cta: "Tell us what you're facing",
   },
   faq: {
     label: "Questions",
     title: "Straight answers",
-    intro: "Transparency is part of the service. Here's what clients ask before they start.",
+    intro: "Here's what clients ask before they start.",
     items: [
       {
         q: "Are you a law firm?",
-        a: "No. Ask AI Legal generates documents only. We prepare complete documents for your review and use. We do not provide legal advice and do not establish an attorney-client relationship.",
+        a: "No. We provide guidance and support. Not legal advice. Not representation.",
       },
       {
-        q: `What do I get for ${REVIEW_PRICE}?`,
-        a: `A ${REVIEW_PRICE} file review: we read what you send us — filings, notices, letters, and any paperwork you have — and email you a plain-English written summary, usually within 72 hours. It explains where things stand, what documents you still need, and one flat price to prepare them. The ${REVIEW_PRICE} is credited in full toward that price.`,
+        q: `What do I get for ${CASE_REVIEW_PRICE_DISPLAY}?`,
+        a: `A real case review: we read what you send, we ask clarifying questions, we understand your situation. We tell you honestly if we can help. The ${CASE_REVIEW_PRICE_DISPLAY} is credited in full if you move forward with complete support.`,
       },
       {
-        q: "Why two payments instead of one price up front?",
-        a: "Because quoting document work before reading your files is guessing — that's how retainers balloon. The first payment covers reviewing what you sent; the second is one fixed price for exactly the documents your written summary describes. No hourly billing at either step.",
+        q: `What's the ${TOTAL_PRICE_DISPLAY} total?`,
+        a: `${CASE_REVIEW_PRICE_DISPLAY} case review + $1,000 complete support. One flat price. Hands-on walkthrough and 30 days of email and call support included.`,
       },
       {
-        q: "What kinds of matters do you handle?",
-        a: "Any issue — there is no limit. Divorce, custody, family matters, civil disputes, business conflicts, tenant issues, and whatever documents your situation needs. Across U.S. jurisdictions.",
+        q: "How do I know you understand my situation?",
+        a: "Because we take time to read what you send. We ask clarifying questions. We don't use templates. We get YOUR situation. That's what the case review is for.",
       },
       {
-        q: "How do I know your sources are real?",
-        a: "Every reference we include is retrieved from the original source, stored in your document file, and verified in a separate review pass before it appears in your documents. You receive a reference list with your delivery.",
+        q: "What if I'm not a fit?",
+        a: "We'll tell you honestly. We'll also explain why and what you could try instead. Your $499 gets refunded. No argument.",
       },
       {
-        q: "Will you appear in court for me?",
-        a: "No — never. We only generate documents. You are responsible for filing, serving, and appearing in court on your own behalf or through an attorney you hire separately.",
+        q: "What happens during the walkthrough?",
+        a: "Screen share. Video call. We show you exactly how to use your setup. You ask questions. We answer. We don't move on until you're confident.",
       },
       {
-        q: "Can I request revisions?",
-        a: "Yes. Revisions are included in your quoted scope until your documents reflect your situation accurately. We refine until you're confident filing.",
+        q: "What if I get stuck during the 30 days?",
+        a: "Email or call us. We help you unstick it. No extra charge. That's what the 30 days is for.",
+      },
+      {
+        q: "Do you file for me or go to court?",
+        a: "No. You take every legal step on your own. We guide you. We support you. You own it.",
+      },
+      {
+        q: "What kinds of situations do you handle?",
+        a: "Any — divorce, custody, housing, disputes, business issues, and more. Across all 50 states.",
       },
     ],
   },
   footer: {
-    tagline: "We prepare complete document packages for you — researched, drafted, and delivered.",
-    documentOnly: "Document generation only",
+    tagline: "When you need someone in your corner.",
+    documentOnly: "Guidance and support only",
     columns: {
       services: "Services",
       company: "Company",
@@ -285,12 +302,12 @@ export const en = {
     },
     links: {
       allServices: "All services",
-      caseRoadmap: "Road map",
-      caseResearch: "Document research",
-      legalResearch: "In-depth research",
-      outcomeAnalysis: "Source verification",
-      hearingPrep: "Hearing preparation",
-      documentPrep: "Document prep",
+      caseRoadmap: "Case review",
+      caseResearch: "Hands-on walkthrough",
+      legalResearch: "30-day support",
+      outcomeAnalysis: "Real guidance",
+      hearingPrep: "Peace of mind",
+      documentPrep: "You own this",
       about: "About us",
       pricing: "Pricing",
       process: "How it works",
@@ -303,13 +320,13 @@ export const en = {
     },
   },
   cta: {
-    label: "Begin today",
-    title: "You deserve help you can actually afford.",
-    body: "Tell us what you're facing and get real answers — plain language, one flat price, and someone finally on your side.",
-    emailConsult: "Get help today",
-    emailQuote: "Email to get your quote",
+    label: "Get started",
+    title: "You deserve someone in your corner.",
+    body: "Tell us what you're facing. We understand. We'll show you how to fight back.",
+    emailConsult: "Tell us what you're facing",
+    emailQuote: "Start your case review",
     disclaimer:
-      "Ask AI Legal provides legal information and document automation for educational and informational purposes only. It does not constitute formal legal advice or an attorney-client relationship.",
+      "Ask AI Legal is not a law firm and does not provide legal advice. You review everything and take every next step on your own.",
   },
 }
 

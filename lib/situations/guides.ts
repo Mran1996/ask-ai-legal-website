@@ -1,3 +1,5 @@
+import { CASE_REVIEW_PRICE_DISPLAY, TOTAL_PRICE_DISPLAY } from "@/lib/site-config"
+
 export type SituationGuide = {
   slug: string
   title: string
@@ -157,7 +159,7 @@ export const SITUATION_GUIDES: Record<string, SituationGuide> = {
       },
       {
         q: "How is pricing worked out?",
-        a: "Start with a flat file review deposit; we read your papers and email a written summary plus one flat price for the exact documents your situation needs — no hourly billing.",
+        a: `Start with a ${CASE_REVIEW_PRICE_DISPLAY} case review. If we're a fit, complete hands-on support is ${TOTAL_PRICE_DISPLAY} total — walkthrough and 30-day support included. No hourly billing.`,
       },
     ],
     documentsExamples: [

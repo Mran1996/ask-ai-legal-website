@@ -6,7 +6,7 @@ export function AnnouncementBar() {
       </span>
       <span className="mx-2 text-gray-600">·</span>
       <span className="text-gray-300">
-        Full document preparation service — no hourly billing
+        Case review & hands-on support — no hourly billing
       </span>
     </div>
   )

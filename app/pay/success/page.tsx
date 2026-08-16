@@ -5,14 +5,14 @@ import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
 import { PaySuccessPurchase } from "@/components/analytics/pay-success-purchase"
 import {
-  CASE_FILE_REVIEW_PRICE_DISPLAY,
-  FILE_REVIEW_DEPOSIT_LABEL,
+  CASE_REVIEW_PRICE_DISPLAY,
+  CASE_REVIEW_LABEL,
   SITE_URL,
   SUPPORT_EMAIL,
 } from "@/lib/site-config"
 
 const TITLE = "Payment received"
-const DESCRIPTION = `Your ${FILE_REVIEW_DEPOSIT_LABEL.toLowerCase()} was received. We will email your document plan and flat-fee quote.`
+const DESCRIPTION = `Your ${CASE_REVIEW_LABEL.toLowerCase()} payment was received. We will read what you send and reply within one business day.`
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -44,19 +44,19 @@ export default function PaySuccessPage() {
               </div>
 
               <h1 className="mt-6 font-display text-3xl leading-tight text-white sm:text-4xl">
-                Thank you for your deposit
+                Thank you — your case review is started
               </h1>
               <p className="mx-auto mt-4 max-w-sm text-base leading-relaxed text-white/70">
-                Your {CASE_FILE_REVIEW_PRICE_DISPLAY} {FILE_REVIEW_DEPOSIT_LABEL.toLowerCase()} was
-                received. It is fully credited toward your document preparation package.
+                Your {CASE_REVIEW_PRICE_DISPLAY} {CASE_REVIEW_LABEL.toLowerCase()} was received. It is
+                credited in full toward complete hands-on support if we&apos;re the right fit.
               </p>
 
               <div className="mt-8 rounded-sm border border-white/10 bg-white/5 px-5 py-5 text-left">
                 <p className="text-sm font-semibold text-white">What happens next</p>
                 <ul className="mt-3 space-y-2.5 text-sm leading-relaxed text-white/70">
-                  <li>We review your documents and intake details.</li>
-                  <li>You receive a written document plan and flat-fee quote by email.</li>
-                  <li>No hourly billing — you approve the quote before we prepare documents.</li>
+                  <li>Share your situation and upload what you have.</li>
+                  <li>We read everything and reply within one business day.</li>
+                  <li>If we can help, we&apos;ll schedule your walkthrough. If not, we refund you.</li>
                 </ul>
               </div>
 
