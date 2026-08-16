@@ -208,6 +208,46 @@ export const SITUATION_GUIDES: Record<string, SituationGuide> = {
     ],
     ctaLabel: "Get help with small claims paperwork",
   },
+  immigration: {
+    slug: "immigration",
+    title: "Green cards & immigration",
+    intro:
+      "Visa applications, green card paperwork, responses to USCIS notices, and family-based petitions — the forms are long and the stakes are high. We read what you have, explain it in plain language, and prepare the written documents your situation needs for your review. Not legal advice; document preparation only.",
+    weHelpWith: [
+      "Responses to USCIS requests for evidence (RFE)",
+      "Family-based petition supporting documents and cover letters",
+      "Affidavits and declaration drafts for immigration filings",
+      "Document organization for adjustment-of-status packages",
+      "Written summaries of what each form is asking for",
+      "Renewal and extension paperwork preparation",
+    ],
+    commonQuestions: [
+      {
+        q: "Can you help with my green card application?",
+        a: "We prepare written documents and supporting paperwork based on your facts — petitions, affidavits, responses, and organized filing packages. You submit to USCIS yourself; we do not represent you before immigration authorities.",
+      },
+      {
+        q: "I received an RFE — can you help me respond?",
+        a: "Send the notice and any documents USCIS asked for. We explain what the RFE means in plain language and prepare written response materials for your review before you file.",
+      },
+      {
+        q: "Is this the same as hiring an immigration lawyer?",
+        a: "No. We are not a law firm and do not provide legal advice or representation. Many clients use our flat-fee document preparation and file on their own or bring materials to a licensed attorney.",
+      },
+      {
+        q: "Do you handle asylum or removal proceedings?",
+        a: "We prepare written documents for many immigration matters. Share your notice and paperwork in your case review — we'll tell you honestly if your situation is one we can help document.",
+      },
+    ],
+    documentsExamples: [
+      "RFE response cover letter and exhibit index",
+      "Affidavit of support supporting documents",
+      "I-130 supporting declaration drafts",
+      "Written timeline of your immigration history",
+      "Plain-English summary of USCIS notices",
+    ],
+    ctaLabel: "Get help with immigration paperwork",
+  },
 }
 
 export const HERO_CATEGORY_LINKS = [
@@ -216,6 +256,7 @@ export const HERO_CATEGORY_LINKS = [
   { slug: "housing", label: "Housing" },
   { slug: "civil", label: "Civil disputes" },
   { slug: "small-claims", label: "Small claims" },
+  { slug: "immigration", label: "Green cards & immigration" },
   { slug: "more", label: "& more", href: "/services" },
 ] as const
 

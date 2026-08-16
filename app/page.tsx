@@ -4,6 +4,7 @@ import { DoneForYou } from "@/components/done-for-you"
 import { ValueComparison } from "@/components/value-comparison"
 import { FourPillarsSection } from "@/components/four-pillars-section"
 import { HowItWorks } from "@/components/how-it-works"
+import { SourceTrustSection } from "@/components/source-trust-section"
 import { Testimonials } from "@/components/testimonials"
 import { FaqSection } from "@/components/faq-section"
 import { CtaSection } from "@/components/cta-section"
@@ -21,6 +22,7 @@ export default function Home() {
         <ValueComparison />
         <FourPillarsSection />
         <HowItWorks />
+        <SourceTrustSection />
         <Testimonials />
         <FaqSection />
         <CtaSection />

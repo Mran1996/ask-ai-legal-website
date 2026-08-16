@@ -6,13 +6,14 @@ import { NeonButton } from "@/components/neon-button"
 import {
   CASE_FILE_REVIEW_PRICE_DISPLAY,
   FILE_REVIEW_DEPOSIT_LABEL,
+  PRIMARY_CTA_LABEL,
   SITE_DISCLAIMER,
   SITE_URL,
 } from "@/lib/site-config"
 import { en } from "@/lib/i18n/translations/en"
 
-const TITLE = "Pricing — Flat Fee Document Preparation"
-const DESCRIPTION = `Two-step flat fee: ${CASE_FILE_REVIEW_PRICE_DISPLAY} ${FILE_REVIEW_DEPOSIT_LABEL.toLowerCase()} (credited toward documents), then one flat quote for your document package. No hourly billing. Not a law firm.`
+const TITLE = "Pricing — Support That Shows Up"
+const DESCRIPTION = `Two-step flat fee: ${CASE_FILE_REVIEW_PRICE_DISPLAY} case review assessment, then one flat quote for support and documents. We stand with you — not a law firm.`
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -39,13 +40,13 @@ export default function PricingPage() {
             <div className="gold-rule mb-8" />
             <h1 className="firm-title text-white">Two payments. No hourly clock.</h1>
             <p className="mt-8 max-w-2xl text-lg leading-relaxed text-white/70">
-              We list how pricing works up front: a flat {CASE_FILE_REVIEW_PRICE_DISPLAY}{" "}
-              {FILE_REVIEW_DEPOSIT_LABEL.toLowerCase()}, then one flat price for the documents your
-              written summary describes. You review and file on your own behalf — we prepare
-              documents only.
+              You shouldn&apos;t have to fight this alone. A flat {CASE_FILE_REVIEW_PRICE_DISPLAY}{" "}
+              {FILE_REVIEW_DEPOSIT_LABEL.toLowerCase()} — we listen first, then one flat price for
+              the support and documents your written summary describes. We stand with you — not
+              a retainer trap.
             </p>
             <div className="mt-10">
-              <NeonButton href="/pay">Start my file review</NeonButton>
+              <NeonButton href="/pay">{PRIMARY_CTA_LABEL}</NeonButton>
             </div>
             <p className="mt-6 text-sm text-white/50">{SITE_DISCLAIMER}</p>
           </div>
@@ -96,12 +97,12 @@ export default function PricingPage() {
               </div>
             </div>
             <p className="mt-10 text-sm leading-relaxed text-gray-600">
-              Document package quotes depend on scope — matter type, jurisdiction, and what your
-              documents show is needed. Your written summary ends with one flat price before you
-              commit to document preparation.
+              Payment 1 ({CASE_FILE_REVIEW_PRICE_DISPLAY}) covers your case review assessment.
+              Payment 2 is one flat price for the support and documents your written summary
+              describes — no hourly billing at either step.
             </p>
             <div className="mt-8 flex flex-wrap gap-4">
-              <NeonButton href="/pay">{en.process.cta}</NeonButton>
+              <NeonButton href="/pay">{en.compare.cta}</NeonButton>
               <Link
                 href="/#faq"
                 className="inline-flex items-center text-sm font-semibold text-gold-dark underline-offset-2 hover:underline"
