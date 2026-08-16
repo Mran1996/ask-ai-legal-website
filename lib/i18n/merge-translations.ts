@@ -30,6 +30,13 @@ export function mergeTranslations(overrides: DeepPartial<Translations>): Transla
           highlights: overrides.compare.highlights ?? en.compare.highlights,
         }
       : en.compare,
+    sourceTrust: overrides.sourceTrust
+      ? {
+          ...en.sourceTrust,
+          ...overrides.sourceTrust,
+          tiles: overrides.sourceTrust.tiles ?? en.sourceTrust.tiles,
+        }
+      : en.sourceTrust,
     process: overrides.process
       ? { ...en.process, ...overrides.process, steps: overrides.process.steps ?? en.process.steps }
       : en.process,

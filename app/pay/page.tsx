@@ -11,8 +11,8 @@ import {
   SUPPORT_EMAIL,
 } from "@/lib/site-config"
 
-const TITLE = `Pay your ${FILE_REVIEW_DEPOSIT_LABEL.toLowerCase()}`
-const DESCRIPTION = `Securely pay your ${CASE_FILE_REVIEW_PRICE_DISPLAY} ${FILE_REVIEW_DEPOSIT_LABEL.toLowerCase()} to begin document review. Credited toward your document preparation. Not a law firm.`
+const TITLE = `${FILE_REVIEW_DEPOSIT_LABEL} — ${CASE_FILE_REVIEW_PRICE_DISPLAY}`
+const DESCRIPTION = `Start your ${FILE_REVIEW_DEPOSIT_LABEL.toLowerCase()} for ${CASE_FILE_REVIEW_PRICE_DISPLAY}. We listen, understand your situation, and guide you on next steps. Not a law firm.`
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -27,14 +27,15 @@ export const metadata: Metadata = {
 }
 
 const included = [
-  "Fully credited toward your document package",
-  "We review your information and email your document plan + flat-fee quote",
+  "We listen first — your story and documents matter",
+  "Judgment about which tools fit your situation — and which don't",
+  "Written summary with your path forward and one flat quote",
+  `${CASE_FILE_REVIEW_PRICE_DISPLAY} credited in full toward your support package`,
 ]
 
 export default function PayPage() {
   return (
     <div className="min-h-screen flex flex-col">
-      {/* Warm up Stripe connections during initial HTML parse so the buy button paints fast */}
       <link rel="preconnect" href="https://js.stripe.com" />
       <link rel="preconnect" href="https://buy.stripe.com" />
       <link rel="preconnect" href="https://m.stripe.network" />
@@ -54,8 +55,8 @@ export default function PayPage() {
                   {FILE_REVIEW_DEPOSIT_LABEL}
                 </h1>
                 <p className="mx-auto mt-4 max-w-sm text-base leading-relaxed text-white/70">
-                  A one-time {CASE_FILE_REVIEW_PRICE_DISPLAY} deposit to begin your document review
-                  — fully credited toward your document preparation.
+                  Tell us what you&apos;re facing. A one-time {CASE_FILE_REVIEW_PRICE_DISPLAY}{" "}
+                  assessment — we understand your situation and guide you on how to fight back.
                 </p>
               </div>
 
