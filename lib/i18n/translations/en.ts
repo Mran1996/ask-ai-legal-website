@@ -38,8 +38,8 @@ export const en = {
     stat2Value: "72 hrs",
     stat2Label: "Install first",
     stat2Sub: "Your tools configured for your situation — usually within 72 hours",
-    stat3Value: "1",
-    stat3Label: "From home",
+    stat3Value: "I quote",
+    stat3Label: "Flat fee",
     stat3Sub: "One flat quote — no hourly billing, ever",
   },
   services: {
@@ -326,7 +326,7 @@ export const en = {
   },
   cta: {
     label: "Begin today",
-    title: "Ready to work from home?",
+    title: "Let's get you set up —"
     body: "We do the install so you can do everything you need from the comfort of your home with Ask AI Legal. Plain language, one flat price, peace of mind.",
     emailConsult: PRIMARY_CTA_LABEL,
     emailQuote: PRIMARY_CTA_LABEL,
