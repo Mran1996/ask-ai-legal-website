@@ -326,7 +326,7 @@ export const en = {
   },
   cta: {
     label: "Begin today",
-    title: "Let's get you set up —"
+    title: "Let's get you set up —",
     body: "We do the install so you can do everything you need from the comfort of your home with Ask AI Legal. Plain language, one flat price, peace of mind.",
     emailConsult: PRIMARY_CTA_LABEL,
     emailQuote: PRIMARY_CTA_LABEL,
