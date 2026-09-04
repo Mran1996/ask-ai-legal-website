@@ -1,5 +1,6 @@
 import { mergeTranslations } from "../merge-translations"
 
+/** Nav labels only — homepage marketing copy falls back to English (install / work-from-home model). */
 export const ar = mergeTranslations({
   nav: {
     freeReview: "مراجعة مجانية",
@@ -12,31 +13,5 @@ export const ar = mergeTranslations({
     contact: "اتصل",
     emailForReview: "بريد للمراجعة",
     language: "اللغة",
-  },
-  hero: {
-    slogan: "مساعدة قانونية قوية — عندما تحتاجها أكثر",
-    titleLine1: "مستندات جاهزة للمحكمة،",
-    titleHighlight: "مُعدّة",
-    titleLine2: "لقضيتك.",
-    body: "نبحث ونصوغ ونسلّم — أنت تراجع وتقدّم بنفسك. لا فواتير بالساعة.",
-    ctaPrimary: "راسلنا لمراجعة مجانية",
-    ctaSecondary: "اكتشف الفرق",
-    stat1Value: "مخصص",
-    stat1Label: "عرض لكل قضية",
-    stat1Sub: "التسليم خلال أيام",
-    stat2Value: "48 س",
-    stat2Label: "المدة المعتادة",
-    stat2Sub: "لا أسابيع انتظار",
-    stat3Value: "100%",
-    stat3Label: "مستندات فقط",
-    stat3Sub: "نحن نُعد. أنت تقرر.",
-  },
-  cta: {
-    label: "ابدأ اليوم",
-    title: "قضيتك تستحق أفضل إعداد — وليس أكبر فاتورة",
-    body: "راسلنا لمراجعة مجانية. سنخبرك ما يمكننا إعداده — دون التزام.",
-    emailConsult: "راسلنا لاستشارة مجانية",
-    emailQuote: "راسلنا للعرض",
-    disclaimer: "ليس مكتب محاماة · إعداد مستندات فقط",
   },
 })

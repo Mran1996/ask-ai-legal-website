@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import { NeonButton } from "@/components/neon-button"
-import { SUPPORT_MAILTO, CASE_FILE_REVIEW_PRICE_DISPLAY, FILE_REVIEW_DEPOSIT_LABEL } from "@/lib/site-config"
+import { SUPPORT_MAILTO, FILE_REVIEW_DEPOSIT_LABEL } from "@/lib/site-config"
 import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
 import {
@@ -29,9 +29,9 @@ const capabilities = [
   },
   {
     icon: Receipt,
-    title: "Two flat fees, no hourly clock",
+    title: "Custom quote, no hourly clock",
     description:
-      `A ${CASE_FILE_REVIEW_PRICE_DISPLAY} ${FILE_REVIEW_DEPOSIT_LABEL.toLowerCase()}, credited toward one flat quote for your documents. You know the full cost before you commit to either step.`,
+      `A custom-quote ${FILE_REVIEW_DEPOSIT_LABEL.toLowerCase()}, credited toward one flat quote for your installed setup. You know the full cost before you commit to either step.`,
   },
   {
     icon: BookOpen,

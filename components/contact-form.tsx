@@ -53,7 +53,7 @@ export function ContactForm() {
 
   if (status === "success") {
     return (
-      <div className="rounded-md border-2 border-gold/40 bg-white p-8 text-center shadow-[0_0_24px_rgba(197,160,89,0.12)]">
+      <div className="rounded-md border-2 border-gold/40 bg-white p-8 text-center shadow-[0_0_24px_rgba(251,176,52,0.12)]">
         <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-gold/15">
           <Check className="h-6 w-6 text-gold-dark" aria-hidden />
         </div>

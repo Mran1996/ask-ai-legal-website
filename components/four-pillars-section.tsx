@@ -35,8 +35,8 @@ function PillarCard({
         className={[
           "relative aspect-square w-full overflow-hidden rounded-sm text-left",
           isFlipped
-            ? "border-2 border-gold bg-white/[0.06] shadow-[0_0_36px_rgba(197,160,89,0.45)] ring-2 ring-gold/35"
-            : "border-2 border-gold/30 bg-white/[0.04] shadow-[0_0_14px_rgba(197,160,89,0.12)] hover:border-gold/55 hover:bg-white/[0.06] hover:shadow-[0_0_24px_rgba(197,160,89,0.25)]",
+            ? "border-2 border-gold bg-white/[0.06] shadow-[0_0_36px_rgba(251,176,52,0.45)] ring-2 ring-gold/35"
+            : "border-2 border-gold/30 bg-white/[0.04] shadow-[0_0_14px_rgba(251,176,52,0.12)] hover:border-gold/55 hover:bg-white/[0.06] hover:shadow-[0_0_24px_rgba(251,176,52,0.25)]",
         ].join(" ")}
         style={{ transition: "border-color 350ms ease, box-shadow 350ms ease" }}
       >

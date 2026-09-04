@@ -6,7 +6,6 @@ import { PaperShaderBackground } from "@/components/paper-shader-background"
 import { NeonButton } from "@/components/neon-button"
 import { BrandLockup } from "@/components/brand-lockup"
 import { useLanguage } from "@/components/language-provider"
-import { CASE_FILE_REVIEW_PRICE_USD } from "@/lib/site-config"
 import { CountUpStat, type HeroStatItem } from "@/components/count-up-stat"
 import { HeroCategoryPills } from "@/components/hero-category-pills"
 
@@ -15,9 +14,8 @@ export function HeroSection() {
 
   const stats: HeroStatItem[] = [
     {
-      kind: "count",
-      value: CASE_FILE_REVIEW_PRICE_USD,
-      prefix: "$",
+      kind: "text",
+      display: t.hero.stat1Value,
       label: t.hero.stat1Label,
       sub: t.hero.stat1Sub,
     },

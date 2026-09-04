@@ -5,7 +5,6 @@ import { Providers } from "@/components/providers"
 import {
   SITE_URL,
   SUPPORT_EMAIL,
-  CASE_FILE_REVIEW_PRICE_DISPLAY,
   SITE_SEO_TITLE,
   SITE_SEO_DESCRIPTION,
 } from "@/lib/site-config"
@@ -84,7 +83,7 @@ const legalServiceJsonLd = {
   description: DESCRIPTION,
   url: SITE_URL,
   email: SUPPORT_EMAIL,
-  priceRange: `${CASE_FILE_REVIEW_PRICE_DISPLAY}+`,
+  priceRange: "Custom quote",
   areaServed: {
     "@type": "Country",
     name: "United States",

@@ -4,15 +4,14 @@ import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
 import { StripeBuyButton } from "@/components/payments/stripe-buy-button"
 import {
-  CASE_FILE_REVIEW_PRICE_DISPLAY,
   FILE_REVIEW_DEPOSIT_LABEL,
   SITE_DISCLAIMER,
   SITE_URL,
   SUPPORT_EMAIL,
 } from "@/lib/site-config"
 
-const TITLE = `${FILE_REVIEW_DEPOSIT_LABEL} — ${CASE_FILE_REVIEW_PRICE_DISPLAY}`
-const DESCRIPTION = `Start your ${FILE_REVIEW_DEPOSIT_LABEL.toLowerCase()} for ${CASE_FILE_REVIEW_PRICE_DISPLAY}. We listen, understand your situation, and guide you on next steps. Not a law firm.`
+const TITLE = `${FILE_REVIEW_DEPOSIT_LABEL} — Custom quote`
+const DESCRIPTION = `Start your ${FILE_REVIEW_DEPOSIT_LABEL.toLowerCase()} with a custom quote. We install Ask AI Legal so you can work from home. Not a law firm.`
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -27,10 +26,10 @@ export const metadata: Metadata = {
 }
 
 const included = [
-  "We listen first — your story and documents matter",
-  "Judgment about which tools fit your situation — and which don't",
-  "Written summary with your path forward and one flat quote",
-  `${CASE_FILE_REVIEW_PRICE_DISPLAY} credited in full toward your support package`,
+  "We configure Ask AI Legal for your situation",
+  "Judgment about which tools fit — and which don't",
+  "You run everything from the comfort of your home",
+  "Start payment credited in full toward your setup package",
 ]
 
 export default function PayPage() {
@@ -55,13 +54,13 @@ export default function PayPage() {
                   {FILE_REVIEW_DEPOSIT_LABEL}
                 </h1>
                 <p className="mx-auto mt-4 max-w-sm text-base leading-relaxed text-white/70">
-                  Tell us what you&apos;re facing. A one-time {CASE_FILE_REVIEW_PRICE_DISPLAY}{" "}
-                  assessment — we understand your situation and guide you on how to fight back.
+                  Tell us what you&apos;re facing. We install Ask AI Legal so you can do everything
+                  you need from the comfort of your home — custom quote to start.
                 </p>
               </div>
 
               <div className="mt-8 flex justify-center">
-                <div className="w-fit rounded-2xl shadow-[0_0_55px_rgba(197,160,89,0.55)] [&_stripe-buy-button]:block">
+                <div className="w-fit rounded-2xl shadow-[0_0_55px_rgba(251,176,52,0.55)] [&_stripe-buy-button]:block">
                   <StripeBuyButton />
                 </div>
               </div>

@@ -24,6 +24,11 @@ export function storeConsent(choice: CookieConsentChoice): void {
   localStorage.setItem(CONSENT_STORAGE_KEY, choice)
 }
 
+export function clearConsent(): void {
+  if (typeof window === "undefined") return
+  localStorage.removeItem(CONSENT_STORAGE_KEY)
+}
+
 export function analyticsAllowed(choice: CookieConsentChoice | null): boolean {
   return choice === "accepted"
 }

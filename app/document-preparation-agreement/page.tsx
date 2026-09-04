@@ -35,8 +35,8 @@ export default function DocumentPreparationAgreementPage() {
             papers yourself or through your own counsel.
           </p>
           <p>
-            <strong>Fees.</strong> The start fee in your invoice / Payment Link (often $499.99 unless
-            otherwise stated) covers the initial document-preparation work described in that package.
+            <strong>Fees.</strong> The start fee in your invoice / Payment Link (custom quote;
+            amount stated on that invoice) covers the initial setup install described in that package.
             Additional documents or retrieval may require a separate quote.
           </p>
           <p>

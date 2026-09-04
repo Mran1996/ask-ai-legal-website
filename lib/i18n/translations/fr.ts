@@ -1,5 +1,6 @@
 import { mergeTranslations } from "../merge-translations"
 
+/** Nav labels only — homepage marketing copy falls back to English (install / work-from-home model). */
 export const fr = mergeTranslations({
   nav: {
     freeReview: "Examen gratuit",
@@ -12,36 +13,5 @@ export const fr = mergeTranslations({
     contact: "Contact",
     emailForReview: "E-mail pour examen",
     language: "Langue",
-  },
-  hero: {
-    slogan: "Aide juridique puissante — quand vous en avez le plus besoin",
-    titleLine1: "Documents prêts pour le tribunal,",
-    titleHighlight: "générés",
-    titleLine2: "pour votre dossier.",
-    body: "Nous recherchons, rédigeons et livrons — vous révisez et déposez. Pas de facturation horaire.",
-    ctaPrimary: "E-mail pour examen gratuit",
-    ctaSecondary: "Voir la différence",
-    stat1Value: "Sur mesure",
-    stat1Label: "Devis par dossier",
-    stat1Sub: "Livré en jours",
-    stat2Value: "48 h",
-    stat2Label: "Délai typique",
-    stat2Sub: "Pas des semaines d'attente",
-    stat3Value: "100%",
-    stat3Label: "Documents seulement",
-    stat3Sub: "Nous générons. Vous décidez.",
-  },
-  testimonials: {
-    titleWhite: "Ce que disent ",
-    titleGold: "nos clients",
-    label: "Exemples illustratifs",
-  },
-  cta: {
-    label: "Commencez aujourd'hui",
-    title: "Votre dossier mérite la meilleure préparation — pas la plus grosse facture",
-    body: "Écrivez-nous pour un examen gratuit. Nous vous dirons ce que nous pouvons préparer — sans obligation.",
-    emailConsult: "E-mail consultation gratuite",
-    emailQuote: "E-mail pour devis",
-    disclaimer: "Pas un cabinet · Génération de documents uniquement",
   },
 })

@@ -1,13 +1,9 @@
 import { servicesPageContent } from "./services-page"
-import {
-  CASE_FILE_REVIEW_PRICE_DISPLAY as REVIEW_PRICE,
-  PRIMARY_CTA_LABEL,
-  CASE_REVIEW_CTA_LABEL,
-} from "@/lib/site-config"
+import { PRIMARY_CTA_LABEL } from "@/lib/site-config"
 
 export const en = {
   nav: {
-    freeReview: "Case review",
+    freeReview: "Get started",
     help: "Help",
     about: "About",
     services: "Services",
@@ -16,15 +12,15 @@ export const en = {
     process: "Process",
     faq: "FAQ",
     contact: "Contact",
-    emailForReview: `Case review — ${REVIEW_PRICE}`,
+    emailForReview: PRIMARY_CTA_LABEL,
     language: "Language",
   },
   hero: {
-    slogan: "Get the help that you deserve",
-    titleLine1: "You shouldn't have to fight this alone.",
-    titleHighlight: "We stand with you.",
+    slogan: "From the comfort of your home",
+    titleLine1: "We do the install.",
+    titleHighlight: "You do everything from home.",
     titleLine2: "",
-    body: "Whatever you're facing — divorce, custody, a dispute, an unfair notice — we understand your situation and guide you on how to fight back. Plain language. Private. Peace of mind.",
+    body: "We set up Ask AI Legal so you can do everything you need from the comfort of your home — research, documents, and next steps — without waiting on someone else to do it for you. Plain language. Private. Yours to run.",
     categories: [
       "Divorce & separation",
       "Custody & family",
@@ -36,69 +32,70 @@ export const en = {
     ],
     ctaPrimary: PRIMARY_CTA_LABEL,
     ctaSecondary: "See how it works",
-    stat1Value: REVIEW_PRICE,
-    stat1Label: "Case review",
-    stat1Sub: "We understand your situation — credited toward your support",
+    stat1Value: "Custom",
+    stat1Label: "To start",
+    stat1Sub: "Get your setup installed and ready to use from home",
     stat2Value: "72 hrs",
-    stat2Label: "We listen first",
-    stat2Sub: "Your written summary — where you stand and what you need, usually within 72 hours",
+    stat2Label: "Install first",
+    stat2Sub: "Your tools configured for your situation — usually within 72 hours",
     stat3Value: "1",
-    stat3Label: "Peace of mind",
+    stat3Label: "From home",
     stat3Sub: "One flat quote — no hourly billing, ever",
   },
   services: {
     label: "How we support you",
-    titleLine1: "Describe your situation,",
-    titleLine2: "generate the documents.",
+    titleLine1: "We do the install.",
+    titleLine2: "You work from home.",
     intro:
-      "You could learn everything yourself — many people try. This is for when you want someone who listens, reads your documents, and guides you — not just a tool, but support with hands-on walkthrough so you're not figuring it out alone. Not a law firm; nothing is filed on your behalf.",
+      "We've changed how we help: instead of doing the work for you, we install and configure Ask AI Legal so you can do everything you need yourself — from the comfort of your home. Not a law firm; nothing is filed on your behalf.",
     importantLabel: "Important:",
     importantText:
-      "Ask AI Legal generates documents only. We are not a law firm and do not provide legal advice.",
+      "Ask AI Legal installs and configures the tools you use from home. We are not a law firm and do not provide legal advice.",
     items: [
       {
         title: "Analysis",
         description:
-          "Review your situation, outline the documents you need, and map the order to prepare them — before a single word is drafted.",
+          "We review your situation and configure what your home setup needs — before you start using the tools yourself.",
       },
       {
         title: "Road map",
         description:
-          "A step-by-step plan for your matter — key issues, recommended documents, and what to prepare next. Built from your facts, not a generic template.",
+          "A step-by-step plan installed into your workspace — key issues, recommended documents, and what to do next from home.",
       },
       {
         title: "Document research",
         description:
-          "Dig into the facts, filings, and procedural history of your matter so every document is built on what actually happened in your situation.",
+          "Your setup is wired to dig into facts, filings, and history so you can research your own matter from home.",
       },
       {
         title: "In-depth research",
         description:
-          "Rules, requirements, and published sources relevant to your issue — researched and applied to your facts so your documents reference the right material.",
+          "Rules, requirements, and published sources — connected in your install so you can pull what applies to your facts yourself.",
       },
       {
         title: "Source verification",
         description:
-          "Every source we use is retrieved from the original publication, stored in your document file, and verified in a separate review pass before it appears in your documents — never invented, never guessed.",
+          "Every source stays traceable to the original publication — so from home you can open it, read it, and verify it yourself.",
       },
       {
         title: "Hearing preparation",
         description:
-          "Hearing outlines, talking points, and supporting documents organized for the appearance you handle yourself — written work prepared; you speak for yourself.",
+          "Outlines, talking points, and supporting materials organized in your setup — you prepare and speak for yourself.",
       },
       {
-        title: "Document preparation",
+        title: "Document tools",
         description:
-          "Letters, forms, responses, agreements, statements, exhibits, and supporting paperwork — fully drafted, formatted, and ready for your review. Upload what you have; documents are built from your files. You don't write a thing. Call or leave a message to learn more.",
+          "Letters, forms, responses, agreements, and supporting paperwork — available in your installed workspace so you draft and refine from home.",
       },
       {
-        title: "Document delivery",
+        title: "Home delivery of your setup",
         description:
-          "You receive a complete, formatted document package — ready for your review. What you do with it, including any filing, is entirely up to you.",
+          "Once install is complete, you run Ask AI Legal from home. What you create and whether you file is entirely up to you.",
       },
       {
         title: "Revision & refinement",
-        description: "Need changes? Revisions until your documents reflect your situation exactly. No hourly clock running.",
+        description:
+          "Need the setup adjusted? We refine the install until it fits your situation. No hourly clock running.",
       },
     ],
   },
@@ -108,54 +105,55 @@ export const en = {
     titleLine1: "Why pay $10,000 up front",
     titleHighlight: "to be kept in the dark?",
     titleLine2: "",
-    subtitle: `A ${REVIEW_PRICE} case review assessment, then one flat quote for the support and documents your situation needs. No hourly clock, ever.`,
+    subtitle:
+      "A custom first step to get Ask AI Legal installed for your situation, then one flat quote. No hourly clock, ever.",
     traditionalHeading: "The retainer trap",
     traditionalPrice: "$3,000–$10,000 retainer",
     traditionalDesc: "Drawn down hourly, whether or not the work moves your situation forward",
     traditionalBullets: [
       "Weeks waiting for callbacks",
-      "You may never see an analysis of your own documents",
+      "Someone else holds the tools — and the timeline",
       "Costs grow with every call and every email",
     ],
     usBadge: "Ask AI Legal",
-    usHeading: "Two-step flat fee",
-    usPrice: `${REVIEW_PRICE} to start`,
-    usDesc: "Credited in full toward your support package",
+    usHeading: "Install, then work from home",
+    usPrice: "Custom quote to start",
+    usDesc: "Credited in full toward your installed setup",
     usBullets: [
-      "Because quoting before reading your files is guessing — that's how payments balloon. The first payment covers your case review; the second is one fixed price for exactly the support and documents your written summary describes. No hourly billing at either step.",
+      "We install and configure Ask AI Legal for your matter. You do everything you need from the comfort of your home — no hourly billing, and no waiting on someone else to do it for you.",
     ],
-    cta: CASE_REVIEW_CTA_LABEL,
+    cta: PRIMARY_CTA_LABEL,
     usCompareLabel: "Ask AI Legal",
     traditionalCompareLabel: "Traditional",
     highlightsLabel: "Services we offer",
     highlightsTitleLine1: "",
     highlightsTitleGold: "",
-    highlightsTitle: "Four pillars of support",
-    highlightsIntro: "Tap a card to explore how we stand with you — not just what we deliver.",
+    highlightsTitle: "Four pillars of your home setup",
+    highlightsIntro: "Tap a card to see how install works — so you can run everything from home.",
     highlights: [
       {
-        title: "We understand first",
-        summary: "Your story and documents — heard and read",
+        title: "We install first",
+        summary: "Your tools, set up for your situation",
         detail:
-          "Your case review starts with listening: your filings, your deadlines, your situation in your own words — before anything else moves forward.",
+          "We configure Ask AI Legal around your filings, deadlines, and goals — so the setup fits you before you start working from home.",
       },
       {
-        title: "Guidance you can trust",
-        summary: "Plain language, verified sources",
+        title: "You run it from home",
+        summary: "Everything you need, in one place",
         detail:
-          "Research from primary sources — not templates — so you understand your path with confidence, not confusion.",
+          "Research, drafting, and next steps live in your installed workspace — so you handle the work yourself, from the comfort of your home.",
       },
       {
-        title: "You're not alone",
-        summary: "Hands-on walkthrough and support",
+        title: "Guidance when you need it",
+        summary: "Support for the setup — not a takeover",
         detail:
-          "We guide you through your materials step by step — so you're not abandoned when it's time to file or respond.",
+          "We help you use what we installed. You stay in control; we don't take the matter over and do it for you.",
       },
       {
         title: "Peace of mind pricing",
         summary: "One price, no surprises",
         detail:
-          "Flat pricing after your case review — no retainer clock running while someone drafts an email. You know the full cost before you say yes.",
+          "Flat pricing after we understand what to install — no retainer clock while someone else owns the tools.",
       },
     ],
   },
@@ -164,26 +162,26 @@ export const en = {
     title: "Three simple steps. No hourly clock.",
     titleLine1: "Three simple steps.",
     titleHighlight: "No hourly clock.",
-    cta: CASE_REVIEW_CTA_LABEL,
+    cta: PRIMARY_CTA_LABEL,
     steps: [
       {
-        title: "Tell us what's going on",
-        body: "Share your situation in plain language and upload what you have. Your story matters — you never have to decode confusing paperwork alone.",
+        title: "Tell us what you need",
+        body: "Share your situation in plain language and upload what you have. We learn what to install — so your home setup matches your matter.",
       },
       {
-        title: "We listen — then explain",
-        body: "A written summary by email: where you stand, what you need, and one flat price — usually within 72 hours. Your facts, reflected back clearly.",
+        title: "We do the install",
+        body: "We configure Ask AI Legal for your situation — usually within 72 hours — so the tools are ready for you to use from home.",
       },
       {
-        title: "Fight back — with support",
-        body: "Hands-on guidance through your materials — including how to open and verify every source yourself — so you know exactly what to do next. You stay in control; you're not abandoned when it counts.",
+        title: "You do everything from home",
+        body: "With the install complete, you research, draft, and manage next steps yourself from the comfort of your home with Ask AI Legal. You stay in control.",
       },
     ],
   },
   sourceTrust: {
     label: "Built on tools that don't guess",
     title: "Real sources. Verified. Every time.",
-    body: "The biggest risk with cheap legal help is paperwork built on cases that don't exist. That's not what happens here. Your setup pulls from real published sources — full opinions, statutes, actual documents — and every reference comes with the source behind it so you can open it and read it yourself. Nothing invented. Nothing you can't check.",
+    body: "Your home install pulls from real published sources — full opinions, statutes, actual documents — and every reference comes with the source behind it so you can open it and read it yourself. Nothing invented. Nothing you can't check.",
     tiles: [
       {
         title: "Real sources, not summaries",
@@ -191,7 +189,7 @@ export const en = {
       },
       {
         title: "Every quote traceable",
-        description: "You can open the source behind any reference and read it in context.",
+        description: "You can open the source behind any reference and read it in context — from home.",
       },
       {
         title: "Current, not remembered",
@@ -199,16 +197,16 @@ export const en = {
       },
     ],
     closing:
-      "We keep the setup current as better tools come out. You get what works now — not what worked two years ago.",
+      "We keep your install current as better tools come out. You get what works now — not what worked two years ago.",
   },
   testimonials: {
-    titleWhite: "You'd be surprised ",
-    titleGold: "how much lighter this feels.",
+    titleWhite: "People who got set up ",
+    titleGold: "and worked from home.",
     label: "Illustrative examples",
     clients: {
       sandra: {
         quote:
-          "Going through my divorce I had no idea where to start. They walked me through the paperwork step by step. I felt like they stood with me for the first time.",
+          "Going through my divorce I had no idea where to start. They installed Ask AI Legal for my situation — then I handled the paperwork myself from home, step by step.",
         name: "Sandra M.",
         title: "Divorce",
         case: "Ohio",
@@ -216,7 +214,7 @@ export const en = {
       },
       marcus: {
         quote:
-          "Every lawyer wanted a retainer I couldn't afford. One email, a clear price, and I felt like someone finally had my back — not just documents, but someone who explained what to do next.",
+          "Every lawyer wanted a retainer I couldn't afford. They did the install, explained how to use it, and I ran everything from my kitchen table — clear price, no hourly clock.",
         name: "Marcus J.",
         title: "Civil motion",
         case: "Georgia",
@@ -224,7 +222,7 @@ export const en = {
       },
       priya: {
         quote:
-          "Between work and my two kids, I couldn't keep up with the deadlines. I felt like someone had my back — they explained everything in plain language so I could focus on my children.",
+          "Between work and my two kids, I couldn't keep up with the deadlines. Once they set me up, I could do what I needed at night from home without waiting on someone else.",
         name: "Priya S.",
         title: "Family court",
         case: "New Jersey",
@@ -232,7 +230,7 @@ export const en = {
       },
       keisha: {
         quote:
-          "Facing an unfair eviction with nowhere to turn. I felt like someone had my back — they broke down every paragraph so I understood it before I walked in.",
+          "Facing an unfair eviction with nowhere to turn. They installed the tools for my housing matter — I opened every source myself and worked through it from home.",
         name: "Keisha W.",
         title: "Housing",
         case: "Illinois",
@@ -240,7 +238,7 @@ export const en = {
       },
       carlos: {
         quote:
-          "English isn't my first language and legal forms were overwhelming. I felt like someone had my back — they explained everything clearly and made sure I knew exactly what to file.",
+          "English isn't my first language and legal forms were overwhelming. After the install, I could go at my own pace from home and still know exactly what I was filing.",
         name: "Carlos R.",
         title: "Small claims response",
         case: "Arizona",
@@ -251,56 +249,56 @@ export const en = {
   consultation: {
     label: "Your investment",
     titleLine1: "Every situation is different.",
-    titleLine2: "So is every solution.",
+    titleLine2: "So is every install.",
     body1:
-      "Review your situation first — someone who reads your documents and tells you honestly what you're facing and what it will cost. No surprises, no guessing.",
+      "We start by understanding what you need installed — so Ask AI Legal fits your matter before you work from home.",
     body2:
-      "You could figure this out alone. Many try. We're here when you want certainty, confidence — we stand with you.",
+      "We do the install. You do everything you need from the comfort of your home with Ask AI Legal.",
     cardLabel: "Schedule a consultation",
-    cardTitle: "Let's discuss what we can do for you",
+    cardTitle: "Let's discuss your home install",
     emailLabel: "Email us",
     timing:
       "Consultations are free. Most inquiries receive a reply within one business day. You'll get a clear picture of scope, timeline, and investment.",
-    cta: CASE_REVIEW_CTA_LABEL,
+    cta: PRIMARY_CTA_LABEL,
   },
   faq: {
     label: "Questions",
     title: "Straight answers",
-    intro: "Transparency is part of the service. Here's what clients ask before they start.",
+    intro: "Transparency is part of the service. Here's what people ask before they start.",
     items: [
       {
-        q: "How do I know you understand my situation?",
-        a: "We read what you send — your filings, notices, and your story in your own words. Your case review includes a written summary that reflects your facts back to you, not generic templates. You could research everything yourself; many people do. We're here when you want someone who has actually listened, explained your path in plain language, and stays with you — with hands-on support so you're not alone at each step.",
+        q: "What changed about how you help?",
+        a: "We used to do more of the work for you. Now we do the install — we set up and configure Ask AI Legal — so you can do everything you need from the comfort of your home. You stay in control of the work.",
       },
       {
         q: "Are you a law firm?",
-        a: "No. Ask AI Legal is not a law firm and does not provide legal advice. We understand your situation and guide you — with documents prepared for your review. No attorney-client relationship.",
+        a: "No. Ask AI Legal is not a law firm and does not provide legal advice. We install and configure tools you use yourself. No attorney-client relationship.",
       },
       {
-        q: `What do I get for ${REVIEW_PRICE}?`,
-        a: `A ${REVIEW_PRICE} case review assessment: we listen, read what you send — filings, notices, letters, and any paperwork — then email a plain-English written summary, usually within 72 hours. It explains where things stand, what you still need, and one flat price for support and documents. The ${REVIEW_PRICE} is credited in full toward that price. Part of what you're paying for is judgment about which tools fit your situation — and which don't.`,
+        q: "What do I get when I start?",
+        a: "We learn your situation and install/configure Ask AI Legal for your matter — usually within 72 hours — so you can work from home. Your start payment (custom quote) is credited in full toward your setup package.",
       },
       {
         q: "Why two payments instead of one price up front?",
-        a: "Because quoting before reading your files is guessing — that's how payments balloon. The first payment covers your case review; the second is one fixed price for exactly the support and documents your written summary describes. No hourly billing at either step.",
+        a: "Because quoting before we know what to install is guessing. The first payment covers understanding your situation and starting the install; the second is one fixed price for the configured setup you use from home. No hourly billing at either step.",
       },
       {
-        q: "What kinds of matters do you handle?",
-        a: "Any issue — there is no limit. Divorce, custody, family matters, civil disputes, business conflicts, tenant issues, and whatever documents your situation needs. Across U.S. jurisdictions.",
+        q: "What kinds of matters work with this?",
+        a: "Divorce, custody, family matters, civil disputes, housing, small claims, immigration paperwork, and more — across U.S. jurisdictions. The install is configured around your situation.",
       },
       {
-        q: "How do I know your sources are real?",
-        a: "Every reference is retrieved from the original published source — stored in your file and verified before it appears in your materials. You receive a reference list with your delivery, and we walk you through how to open each source and confirm it yourself.",
+        q: "How do I know the sources are real?",
+        a: "Your install pulls from original published sources. You can open each reference yourself from home and confirm it — nothing invented, nothing you can't check.",
       },
       {
         q: "Do you use AI?",
-        a: "We use the best research and drafting tools available, and we keep that current as they improve. What matters more is how they're set up — configured for your specific situation, with every source traceable back to a real published document you can open and read. The tools change. The standard doesn't.",
+        a: "Yes — as part of the tools we install and keep current. What matters is the setup: configured for your situation, with every source traceable to a real published document you can open and read yourself.",
       },
     ],
   },
   footer: {
-    tagline: "We stand with you.",
-    documentOnly: "Document generation only",
+    tagline: "We do the install. You work from home.",
+    documentOnly: "Install and tools for home use only",
     columns: {
       services: "Services",
       company: "Company",
@@ -314,7 +312,7 @@ export const en = {
       legalResearch: "In-depth research",
       outcomeAnalysis: "Source verification",
       hearingPrep: "Hearing preparation",
-      documentPrep: "Document prep",
+      documentPrep: "Document tools",
       about: "About us",
       pricing: "Pricing",
       process: "How it works",
@@ -328,12 +326,12 @@ export const en = {
   },
   cta: {
     label: "Begin today",
-    title: "You don't have to fight this alone.",
-    body: "Tell us what you're facing — someone who listens, understands your situation, and guides you on how to fight back. Plain language, one flat price, peace of mind.",
+    title: "Ready to work from home?",
+    body: "We do the install so you can do everything you need from the comfort of your home with Ask AI Legal. Plain language, one flat price, peace of mind.",
     emailConsult: PRIMARY_CTA_LABEL,
-    emailQuote: CASE_REVIEW_CTA_LABEL,
+    emailQuote: PRIMARY_CTA_LABEL,
     disclaimer:
-      "Ask AI Legal provides legal information and document automation for educational and informational purposes only. It does not constitute formal legal advice or an attorney-client relationship.",
+      "Ask AI Legal installs and configures tools for educational and informational use from home. It does not constitute formal legal advice or an attorney-client relationship.",
   },
 }
 
