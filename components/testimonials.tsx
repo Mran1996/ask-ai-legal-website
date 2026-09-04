@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { useLanguage } from "@/components/language-provider"
 
-const CABO_GOLD = "#C5A059"
+const CABO_GOLD = "#FBB034"
 const CABO_CREAM = "#FAF9F6"
 const SLIDE_MS = 500
 const HOLD_MS = 5000

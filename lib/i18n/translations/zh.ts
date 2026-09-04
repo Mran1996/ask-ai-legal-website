@@ -1,5 +1,6 @@
 import { mergeTranslations } from "../merge-translations"
 
+/** Nav labels only — homepage marketing copy falls back to English (install / work-from-home model). */
 export const zh = mergeTranslations({
   nav: {
     freeReview: "免费案件评估",
@@ -12,31 +13,5 @@ export const zh = mergeTranslations({
     contact: "联系",
     emailForReview: "邮件咨询",
     language: "语言",
-  },
-  hero: {
-    slogan: "强大的法律帮助——在您最需要时",
-    titleLine1: "法庭就绪文件，",
-    titleHighlight: "为您生成",
-    titleLine2: "针对您的案件。",
-    body: "我们研究、起草并交付——您自行审阅和提交。无按小时计费。",
-    ctaPrimary: "邮件免费案件评估",
-    ctaSecondary: "了解差异",
-    stat1Value: "定制",
-    stat1Label: "每案报价",
-    stat1Sub: "数日内交付",
-    stat2Value: "48小时",
-    stat2Label: "典型周期",
-    stat2Sub: "无需等待数周",
-    stat3Value: "100%",
-    stat3Label: "仅文档",
-    stat3Sub: "我们生成。您决定下一步。",
-  },
-  cta: {
-    label: "今天开始",
-    title: "您的案件值得最好的准备——而不是最高的账单",
-    body: "发邮件获取免费案件评估。我们会说明能为您准备什么——无任何义务。",
-    emailConsult: "邮件免费咨询",
-    emailQuote: "邮件获取报价",
-    disclaimer: "非律师事务所 · 仅文档生成",
   },
 })

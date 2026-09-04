@@ -1,7 +1,8 @@
 import { ImageResponse } from "next/og"
-import { CASE_FILE_REVIEW_PRICE_DISPLAY, SITE_TAGLINE } from "@/lib/site-config"
+import { SITE_TAGLINE } from "@/lib/site-config"
 
-export const alt = "Ask AI Legal — We stand with you"
+export const alt = "Ask AI Legal — We install. You work from home."
+
 export const size = { width: 1200, height: 630 }
 export const contentType = "image/png"
 
@@ -35,7 +36,7 @@ export default function OpenGraphImage() {
           style={{
             display: "flex",
             fontSize: 36,
-            color: "#C5A059",
+            color: "#FBB034",
             marginTop: 20,
             fontStyle: "italic",
           }}
@@ -53,7 +54,7 @@ export default function OpenGraphImage() {
             maxWidth: 920,
           }}
         >
-          {`We stand with you · ${CASE_FILE_REVIEW_PRICE_DISPLAY} case review assessment · hands-on support`}
+          {`We do the install · custom quote · work from home`}
         </div>
         <div
           style={{
@@ -63,7 +64,7 @@ export default function OpenGraphImage() {
             marginTop: 32,
           }}
         >
-          Not a law firm · Document preparation only
+          Not a law firm · Tools you use from home
         </div>
       </div>
     ),

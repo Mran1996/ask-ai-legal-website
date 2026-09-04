@@ -5,7 +5,6 @@ import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
 import { PaySuccessPurchase } from "@/components/analytics/pay-success-purchase"
 import {
-  CASE_FILE_REVIEW_PRICE_DISPLAY,
   FILE_REVIEW_DEPOSIT_LABEL,
   SITE_URL,
   SUPPORT_EMAIL,
@@ -44,19 +43,19 @@ export default function PaySuccessPage() {
               </div>
 
               <h1 className="mt-6 font-display text-3xl leading-tight text-white sm:text-4xl">
-                Thank you — we&apos;re with you
+                Thank you — your install is next
               </h1>
               <p className="mx-auto mt-4 max-w-sm text-base leading-relaxed text-white/70">
-                Your {CASE_FILE_REVIEW_PRICE_DISPLAY} {FILE_REVIEW_DEPOSIT_LABEL.toLowerCase()} was
-                received. Credited in full toward your support package — we stand with you.
+                Your {FILE_REVIEW_DEPOSIT_LABEL.toLowerCase()} payment was received. Credited in
+                full toward your setup — we&apos;ll install Ask AI Legal so you can work from home.
               </p>
 
               <div className="mt-8 rounded-sm border border-white/10 bg-white/5 px-5 py-5 text-left">
                 <p className="text-sm font-semibold text-white">What happens next</p>
                 <ul className="mt-3 space-y-2.5 text-sm leading-relaxed text-white/70">
                   <li>Share your situation and any documents you have.</li>
-                  <li>We listen and email a written summary with your path forward.</li>
-                  <li>One flat quote for support and documents — no hourly billing.</li>
+                  <li>We install and configure Ask AI Legal for your matter.</li>
+                  <li>You do everything you need from the comfort of your home.</li>
                 </ul>
               </div>
 

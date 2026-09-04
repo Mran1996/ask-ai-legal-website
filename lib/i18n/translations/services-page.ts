@@ -1,5 +1,5 @@
 /** Services page copy (English). Merged into en.ts as servicesPage. */
-import { CASE_FILE_REVIEW_PRICE_DISPLAY, FILE_REVIEW_DEPOSIT_LABEL } from "@/lib/site-config"
+import { FILE_REVIEW_DEPOSIT_LABEL } from "@/lib/site-config"
 
 export const servicesPageContent = {
   label: "Services",
@@ -121,7 +121,7 @@ export const servicesPageContent = {
   },
   cta: {
     title: "Ready to see what we can prepare for you?",
-    body: `Start with a flat ${CASE_FILE_REVIEW_PRICE_DISPLAY} ${FILE_REVIEW_DEPOSIT_LABEL.toLowerCase()}. You'll get a plain-English written summary and one flat price for the documents your situation needs — credited in full toward your total.`,
+    body: `Start with a custom-quote ${FILE_REVIEW_DEPOSIT_LABEL.toLowerCase()}. We install Ask AI Legal so you can do everything you need from home — then one flat price for your configured setup.`,
     button: "Start my file review",
   },
   homeLink: "Learn more about our services",

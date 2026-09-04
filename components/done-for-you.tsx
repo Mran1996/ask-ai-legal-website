@@ -37,7 +37,7 @@ export function DoneForYou() {
             return (
               <li
                 key={service.title}
-                className="firm-card group flex flex-col border-2 border-gold/35 bg-white shadow-[0_0_24px_rgba(197,160,89,0.08),inset_0_1px_0_rgba(232,220,200,0.65)] transition-all duration-300 hover:border-gold/50 hover:shadow-[0_0_28px_rgba(197,160,89,0.14)]"
+                className="firm-card group flex flex-col border-2 border-gold/35 bg-white shadow-[0_0_24px_rgba(251,176,52,0.08),inset_0_1px_0_rgba(232,220,200,0.65)] transition-all duration-300 hover:border-gold/50 hover:shadow-[0_0_28px_rgba(251,176,52,0.14)]"
               >
                 <div className="mb-4 flex items-start justify-between gap-3">
                   <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-gold/40 bg-cream transition-colors group-hover:border-gold/55">

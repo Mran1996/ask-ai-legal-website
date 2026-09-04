@@ -10,7 +10,7 @@ function LanguageGlobe({ size = "sm" }: { size?: "sm" | "md" }) {
 
   return (
     <span
-      className={`relative flex ${ball} shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-gold via-gold-light to-gold-dark text-navy shadow-[0_0_10px_rgba(197,160,89,0.45)] ring-2 ring-gold/30`}
+      className={`relative flex ${ball} shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-gold via-gold-light to-gold-dark text-navy shadow-[0_0_10px_rgba(251,176,52,0.45)] ring-2 ring-gold/30`}
       aria-hidden
     >
       <Globe className={`${icon} stroke-[2.25px]`} />

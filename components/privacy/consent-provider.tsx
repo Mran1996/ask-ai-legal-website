@@ -11,6 +11,7 @@ import {
 } from "react"
 import {
   analyticsAllowed,
+  clearConsent,
   readStoredConsent,
   storeConsent,
   type CookieConsentChoice,
@@ -23,6 +24,8 @@ type ConsentContextValue = {
   analyticsAllowed: boolean
   accept: () => void
   deny: () => void
+  /** Clears the stored choice so the Accept / Deny banner shows again. */
+  resetPreferences: () => void
 }
 
 const ConsentContext = createContext<ConsentContextValue | undefined>(undefined)
@@ -46,6 +49,11 @@ export function ConsentProvider({ children }: { children: ReactNode }) {
     setChoice("denied")
   }, [])
 
+  const resetPreferences = useCallback(() => {
+    clearConsent()
+    setChoice(null)
+  }, [])
+
   const value = useMemo(
     () => ({
       choice: ready ? choice : null,
@@ -53,8 +61,9 @@ export function ConsentProvider({ children }: { children: ReactNode }) {
       analyticsAllowed: analyticsAllowed(choice),
       accept,
       deny,
+      resetPreferences,
     }),
-    [choice, ready, accept, deny]
+    [choice, ready, accept, deny, resetPreferences]
   )
 
   return <ConsentContext.Provider value={value}>{children}</ConsentContext.Provider>

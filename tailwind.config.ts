@@ -18,9 +18,9 @@ const config: Config = {
           dark: "#f0ebe3",
         },
         gold: {
-          DEFAULT: "#C5A059",
-          light: "#E8DCC8",
-          dark: "#B8934A",
+          DEFAULT: "#FBB034",
+          light: "#FFD27A",
+          dark: "#E09416",
         },
         brand: {
           DEFAULT: "#00A95C",
@@ -29,10 +29,10 @@ const config: Config = {
           dark: "#047857",
         },
         accent: {
-          DEFAULT: "#C5A059",
-          light: "#E8DCC8",
-          dark: "#B8934A",
-          glow: "rgba(197, 160, 89, 0.55)",
+          DEFAULT: "#FBB034",
+          light: "#FFD27A",
+          dark: "#E09416",
+          glow: "rgba(251, 176, 52, 0.55)",
         },
       },
       fontFamily: {
@@ -46,9 +46,9 @@ const config: Config = {
       boxShadow: {
         firm: "0 25px 50px -12px rgba(12, 25, 41, 0.35)",
         elevated: "0 4px 24px rgba(12, 25, 41, 0.12)",
-        demo: "0 32px 64px -16px rgba(197, 160, 89, 0.3), 0 0 0 1px rgba(197, 160, 89, 0.15)",
-        neon: "0 0 24px rgba(197, 160, 89, 0.4), 0 0 48px rgba(197, 160, 89, 0.18)",
-        "neon-lg": "0 0 32px rgba(197, 160, 89, 0.55), 0 0 64px rgba(197, 160, 89, 0.25)",
+        demo: "0 32px 64px -16px rgba(251, 176, 52, 0.3), 0 0 0 1px rgba(251, 176, 52, 0.15)",
+        neon: "0 0 24px rgba(251, 176, 52, 0.4), 0 0 48px rgba(251, 176, 52, 0.18)",
+        "neon-lg": "0 0 32px rgba(251, 176, 52, 0.55), 0 0 64px rgba(251, 176, 52, 0.25)",
       },
       keyframes: {
         "fade-up": {

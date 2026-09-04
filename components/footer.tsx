@@ -3,6 +3,7 @@
 import Link from "next/link"
 import { Scale, Instagram, Facebook } from "lucide-react"
 import { useLanguage } from "@/components/language-provider"
+import { useConsent } from "@/components/privacy/consent-provider"
 import { serviceSlug } from "@/lib/service-icons"
 import {
   BUSINESS_HOURS,
@@ -22,6 +23,7 @@ const social = [
 
 export function Footer() {
   const { t } = useLanguage()
+  const { resetPreferences } = useConsent()
   const { links, columns } = t.footer
 
   const linkGroups = [
@@ -34,7 +36,7 @@ export function Footer() {
         { label: links.legalResearch, href: `/services#${serviceSlug("In-depth research")}` },
         { label: links.outcomeAnalysis, href: `/services#${serviceSlug("Source verification")}` },
         { label: links.hearingPrep, href: `/services#${serviceSlug("Hearing preparation")}` },
-        { label: links.documentPrep, href: `/services#${serviceSlug("Document preparation")}` },
+        { label: links.documentPrep, href: `/services#${serviceSlug("Document tools")}` },
       ],
     },
     {
@@ -148,7 +150,22 @@ export function Footer() {
 
         <div className="mt-10 flex flex-col items-start justify-between gap-3 border-t border-white/10 pt-6 sm:flex-row sm:items-center">
           <p className="text-xs">© {new Date().getFullYear()} {SITE_LEGAL_NAME}. All rights reserved.</p>
-          <p className="text-xs text-white/40">{t.footer.documentOnly}</p>
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-white/40">
+            <button
+              type="button"
+              onClick={resetPreferences}
+              className="text-white/55 underline-offset-2 transition-colors hover:text-gold hover:underline"
+            >
+              Cookie preferences (Accept / Deny)
+            </button>
+            <Link
+              href="/privacy-policy"
+              className="text-white/55 underline-offset-2 transition-colors hover:text-gold hover:underline"
+            >
+              Privacy
+            </Link>
+            <p>{t.footer.documentOnly}</p>
+          </div>
         </div>
       </div>
     </footer>

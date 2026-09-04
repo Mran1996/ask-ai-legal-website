@@ -1,5 +1,6 @@
 import { mergeTranslations } from "../merge-translations"
 
+/** Nav labels only — homepage marketing copy falls back to English (install / work-from-home model). */
 export const tl = mergeTranslations({
   nav: {
     freeReview: "Libreng document review",
@@ -12,31 +13,5 @@ export const tl = mergeTranslations({
     contact: "Makipag-ugnayan",
     emailForReview: "Email para sa review",
     language: "Wika",
-  },
-  hero: {
-    slogan: "Malakas na legal na tulong — kapag kailangan mo",
-    titleLine1: "Kumpletong dokumento,",
-    titleHighlight: "ginawa",
-    titleLine2: "para sa iyong kaso.",
-    body: "Nagsasaliksik, nagsusulat, at naghahatid kami — ikaw ang magre-review at magfa-file. Walang hourly billing.",
-    ctaPrimary: "Email para sa libreng document review",
-    ctaSecondary: "Tingnan ang pagkakaiba",
-    stat1Value: "Custom",
-    stat1Label: "Quote bawat kaso",
-    stat1Sub: "Hatid sa ilang araw",
-    stat2Value: "48 oras",
-    stat2Label: "Karaniwang turnaround",
-    stat2Sub: "Hindi linggo ng paghihintay",
-    stat3Value: "100%",
-    stat3Label: "Dokumento lamang",
-    stat3Sub: "Kami ang gumagawa. Ikaw ang magdesisyon.",
-  },
-  cta: {
-    label: "Magsimula ngayon",
-    title: "Karapat-dapat ang iyong kaso sa pinakamahusay na paghahanda",
-    body: "Mag-email para sa libreng document review — walang obligasyon.",
-    emailConsult: "Email para sa libreng konsultasyon",
-    emailQuote: "Email para sa quote",
-    disclaimer: "Hindi law firm · Pagbuo ng dokumento lamang",
   },
 })

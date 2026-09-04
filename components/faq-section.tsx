@@ -28,7 +28,7 @@ export function FaqSection() {
                 className={[
                   "overflow-hidden rounded-sm border-2 bg-white transition-all duration-300",
                   isOpen
-                    ? "border-gold/45 shadow-[0_0_24px_rgba(197,160,89,0.12)]"
+                    ? "border-gold/45 shadow-[0_0_24px_rgba(251,176,52,0.12)]"
                     : "border-gold/20 hover:border-gold/35",
                 ].join(" ")}
               >
