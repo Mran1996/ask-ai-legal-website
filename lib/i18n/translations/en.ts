@@ -38,8 +38,8 @@ export const en = {
     stat2Value: "72 hrs",
     stat2Label: "Install first",
     stat2Sub: "Your tools configured for your situation — usually within 72 hours",
-    stat3Value: "I quote",
-    stat3Label: "Flat fee",
+    stat3Value: "1",
+    stat3Label: "Quote",
     stat3Sub: "One flat quote — no hourly billing, ever",
   },
   services: {
