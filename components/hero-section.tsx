@@ -27,9 +27,9 @@ export function HeroSection() {
       sub: t.hero.stat2Sub,
     },
     {
-      kind: "text",
-      display: t.hero.stat3Value,
-      label: t.hero.stat3Label,
+      kind: "count",
+      value: 1,
+      label: "Quote",
       sub: t.hero.stat3Sub,
     },
   ]
