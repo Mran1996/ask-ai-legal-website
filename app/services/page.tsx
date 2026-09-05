@@ -6,7 +6,7 @@ import { ServicesPageContent } from "@/components/services-page-content"
 export const metadata: Metadata = {
   title: "Services",
   description:
-    "Full document preparation service: case analysis, roadmap, verified source research, hearing prep, drafting, delivery, and revisions. Not a law firm — documents for your review.",
+    "We install Ask AI Legal so you can work from home — analysis, roadmap, verified research, hearing prep materials, document tools, and setup refinements. Not a law firm.",
   alternates: { canonical: "/services" },
 }
 

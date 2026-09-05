@@ -45,12 +45,12 @@ export const metadata: Metadata = {
   },
   description: DESCRIPTION,
   keywords: [
-    "full document preparation service",
-    "document preparation service",
+    "work from home legal tools",
+    "Ask AI Legal install",
     "divorce paperwork help",
     "custody documents",
-    "civil matter document preparation",
-    "flat fee documents",
+    "civil matter tools from home",
+    "flat fee setup",
     "self represented litigant",
   ],
   authors: [{ name: "Ask AI Legal" }],
@@ -78,7 +78,7 @@ export const metadata: Metadata = {
 const legalServiceJsonLd = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
-  serviceType: "Full document preparation service",
+  serviceType: "Legal tool install and configuration for home use",
   name: "Ask AI Legal",
   description: DESCRIPTION,
   url: SITE_URL,
@@ -89,13 +89,13 @@ const legalServiceJsonLd = {
     name: "United States",
   },
   knowsAbout: [
-    "Divorce document preparation",
-    "Custody document preparation",
-    "Civil dispute document preparation",
-    "Business dispute document preparation",
+    "Divorce paperwork tools",
+    "Custody paperwork tools",
+    "Civil dispute tools",
+    "Business dispute tools",
   ],
   disclaimer:
-    "Ask AI Legal generates documents only. We are not a law firm and do not provide legal advice.",
+    "Ask AI Legal installs and configures tools you use from home. We are not a law firm and do not provide legal advice.",
 }
 
 export default function RootLayout({

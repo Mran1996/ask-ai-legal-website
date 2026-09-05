@@ -1,62 +1,62 @@
 /** Services page copy (English). Merged into en.ts as servicesPage. */
-import { FILE_REVIEW_DEPOSIT_LABEL } from "@/lib/site-config"
+import { FILE_REVIEW_DEPOSIT_LABEL, CASE_REVIEW_CTA_LABEL } from "@/lib/site-config"
 
 export const servicesPageContent = {
   label: "Services",
-  title: "Everything we prepare for your situation",
+  title: "We install. You work from home.",
   intro:
-    "Ask AI Legal is full-service document preparation — research, planning, drafting, and delivery. We are not a law firm and do not provide legal advice. You review what we prepare and handle any filing or appearance on your own behalf.",
+    "Ask AI Legal installs and configures the tools you use from home — research, planning, drafting, and next steps in your workspace. We are not a law firm and do not provide legal advice. You run the work yourself; we do the install.",
   flow: {
     label: "How it fits together",
-    title: "From first review to complete document packages",
+    title: "From install to working from home",
     narrative:
-      "Every matter moves through a clear sequence: we understand your situation, map the path forward, research your files and sources, draft your documents, deliver a complete package, and refine until it reflects your situation accurately.",
+      "Every matter moves through a clear sequence: we learn your situation, install a roadmap into your workspace, wire research and source tools, set up document tools, hand the setup to you at home, and refine the install until it fits.",
     steps: [
       "Analysis",
       "Road map",
       "Research",
       "Documents",
-      "Delivery",
-      "Revisions",
+      "Home setup",
+      "Refinement",
     ],
   },
-  deepDivesLabel: "What each service includes",
-  deepDivesTitle: "Prepared for you — in detail",
-  includesLabel: "What you receive",
+  deepDivesLabel: "What each part of the install includes",
+  deepDivesTitle: "Configured for you — ready to run from home",
+  includesLabel: "What you get in your setup",
   items: [
     {
       detail:
-        "We start by reviewing your situation in plain language — what happened, what you need, and where you want to go. You receive a clear picture of the recommended document plan before any drafting begins. Ideal when you feel overwhelmed and need direction first.",
+        "We start by reviewing your situation in plain language — what happened, what you need, and where you want to go. That tells us what to install before you start using the tools yourself. Ideal when you feel overwhelmed and need a clear setup first.",
       includes: [
         "Review of your facts and goals",
-        "Identification of next steps for your paperwork",
-        "Written summary of preparation options",
-        "Foundation for all downstream work",
+        "Identification of what your home setup needs",
+        "Written summary of install options",
+        "Foundation for every tool we configure",
       ],
     },
     {
       detail:
-        "Once we understand your matter, we build a step-by-step plan tailored to your situation — key issues, recommended documents, deadlines to watch, and what to prepare next. This is your roadmap, not a generic checklist from the internet.",
+        "Once we understand your matter, we install a step-by-step plan into your workspace — key issues, recommended documents, deadlines to watch, and what to do next from home. This is your roadmap, not a generic checklist from the internet.",
       includes: [
-        "Sequential preparation plan",
+        "Sequential plan in your workspace",
         "Key issues and priority actions",
         "Recommended document sequence",
-        "Timeline guidance for your review",
+        "Timeline guidance you can follow from home",
       ],
     },
     {
       detail:
-        "We investigate the factual record of your matter — prior filings, procedural history, orders, and evidence references — so every document we draft reflects what actually happened in your situation, not assumptions.",
+        "Your setup is wired to dig into the factual record of your matter — prior filings, procedural history, orders, and evidence references — so you can research what actually happened yourself from home, not guess from assumptions.",
       includes: [
-        "Review of prior filings and records",
+        "Tools to review prior filings and records",
         "Procedural history mapped to your matter",
-        "Fact chronology for drafting reference",
+        "Fact chronology you can build from home",
         "Issue spotting tied to your record",
       ],
     },
     {
       detail:
-        "We research rules, requirements, and published sources that apply to your issue and jurisdiction, then connect that material to your facts. Your documents reference the right sources — prepared for your review, not copy-pasted templates.",
+        "We configure research tools for rules, requirements, and published sources that apply to your issue and jurisdiction — connected to your facts so you can pull what applies yourself from home.",
       includes: [
         "Rule and requirement research for your jurisdiction",
         "Published sources tied to your factual pattern",
@@ -66,63 +66,63 @@ export const servicesPageContent = {
     },
     {
       detail:
-        "Every source we use is retrieved from the original publication, stored in your document file, and verified in a separate review pass before it ever appears in your document. Advanced research technology does the heavy lifting; verification makes it complete and accurate.",
+        "Every source stays traceable to the original publication, stored in your file, and verified — so from home you can open it, read it, and check it yourself. Nothing invented. Nothing you cannot verify.",
       includes: [
         "Every reference retrieved from source",
-        "Stored in your document file for reference",
+        "Stored in your file for reference",
         "Verified in a separate review pass",
-        "Full reference list delivered with your documents",
+        "Full reference list in your home workspace",
       ],
     },
     {
       detail:
-        "When you have a hearing or appearance you handle yourself, we prepare the written materials — outlines, talking points, and supporting documents organized so you can walk in prepared. We do not appear on your behalf or speak for you.",
+        "When you have a hearing or appearance you handle yourself, your install includes written materials — outlines, talking points, and supporting documents organized so you can prepare from home. We do not appear on your behalf or speak for you.",
       includes: [
         "Hearing or appearance outline",
         "Key talking points in plain language",
         "Supporting document index",
-        "Organized packet for your review",
+        "Organized materials in your workspace",
       ],
     },
     {
       detail:
-        "This is the core of what we do: letters, forms, responses, agreements, and supporting paperwork — fully drafted, properly formatted, and structured for your situation. You describe your situation; we write the document content.",
+        "Letters, forms, responses, agreements, and supporting paperwork live in your installed workspace — so you draft and refine from the comfort of your home. We set up the tools; you write and decide what to file.",
       includes: [
-        "Full draft of requested documents",
+        "Document tools configured for your matter",
         "Professional formatting and structure",
         "Headings, sections, and reference placeholders",
-        "Ready for your review before any filing",
+        "Ready for you to review before any filing",
       ],
     },
     {
       detail:
-        "You receive a complete, formatted document package — organized, labeled, and ready for your review. What you do next, including any filing or service, is entirely your decision.",
+        "Once install is complete, you run Ask AI Legal from home. What you create and whether you file is entirely your decision.",
       includes: [
-        "Complete document package delivery",
-        "Formatted files ready for review",
-        "Clear organization by document type",
-        "Instructions summary where applicable",
+        "Configured home workspace delivery",
+        "Tools ready to use from home",
+        "Clear organization by tool and task",
+        "Guidance summary where applicable",
       ],
     },
     {
       detail:
-        "Need changes after review? Revisions are part of full-service preparation — we refine wording, facts, and structure until the documents accurately reflect your situation. No hourly meter running in the background.",
+        "Need the setup adjusted? Revisions refine the install until it fits your situation — wording, structure, and configuration. No hourly meter running in the background.",
       includes: [
-        "Revisions within your quoted scope",
-        "Fact and argument refinements",
-        "Formatting adjustments",
-        "Follow-up until documents match your situation",
+        "Install refinements within your quoted scope",
+        "Fact and structure adjustments",
+        "Formatting and workspace tweaks",
+        "Follow-up until the setup matches your situation",
       ],
     },
   ],
   disclaimer: {
     label: "What we do not do",
-    text: "Ask AI Legal generates documents only. We are not a law firm and do not provide legal advice. We never appear in court on your behalf and do not file documents for you. All materials are prepared for your review and use at your own discretion.",
+    text: "Ask AI Legal installs and configures tools you use from home. We are not a law firm and do not provide legal advice. We never appear in court on your behalf and do not file documents for you. You stay in control of the work.",
   },
   cta: {
-    title: "Ready to see what we can prepare for you?",
+    title: "Let's get you set up —",
     body: `Start with a custom-quote ${FILE_REVIEW_DEPOSIT_LABEL.toLowerCase()}. We install Ask AI Legal so you can do everything you need from home — then one flat price for your configured setup.`,
-    button: "Start my file review",
+    button: CASE_REVIEW_CTA_LABEL,
   },
-  homeLink: "Learn more about our services",
+  homeLink: "See how the install works",
 }
