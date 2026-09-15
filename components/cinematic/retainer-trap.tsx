@@ -21,8 +21,8 @@ export function RetainerTrap() {
         <div className="mt-16 grid gap-6 lg:grid-cols-2">
           {/* the trap */}
           <Reveal className="cine-card relative overflow-hidden border-brick/20">
-            <div className="pointer-events-none absolute -right-10 -top-10 h-72 w-72 opacity-80 sm:h-96 sm:w-96">
-              <Slot src="retainer-trap.png" className="h-full w-full rounded-2xl" imgClassName="object-cover opacity-80" quiet />
+            <div className="pointer-events-none absolute -right-6 -top-6 h-72 w-72 opacity-90 sm:h-96 sm:w-96 [mask-image:radial-gradient(closest-side,black_55%,transparent)]">
+              <Slot src="retainer-trap.png" className="h-full w-full rounded-2xl" imgClassName="object-cover" quiet />
             </div>
             <div className="relative p-8 sm:p-12">
               <p data-reveal className="cine-label !text-brick">The retainer trap</p>
@@ -42,7 +42,7 @@ export function RetainerTrap() {
 
           {/* the install */}
           <Reveal className="cine-card relative overflow-hidden border-accent/30" stagger={0.1}>
-            <div className="pointer-events-none absolute -right-10 -top-10 h-72 w-72 opacity-90 sm:h-96 sm:w-96">
+            <div className="pointer-events-none absolute -right-6 -top-6 h-72 w-72 opacity-90 sm:h-96 sm:w-96 [mask-image:radial-gradient(closest-side,black_55%,transparent)]">
               <Slot src="flat-price.png" className="h-full w-full rounded-2xl" imgClassName="object-contain" quiet />
             </div>
             <div className="relative p-8 sm:p-12">

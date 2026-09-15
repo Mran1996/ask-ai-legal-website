@@ -4,6 +4,7 @@ import Link from "next/link"
 import dynamic from "next/dynamic"
 import { useEffect, useRef } from "react"
 import { ArrowRight } from "lucide-react"
+import { BrandLockup } from "@/components/brand-lockup"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { prefersReducedMotion } from "./smooth-scroll"
@@ -15,10 +16,12 @@ const FallingPapers = dynamic(() => import("./falling-papers"), { ssr: false })
 const SCENES = [
   {
     img: "hero-desk.png",
-    label: "01 · Tonight",
-    title: ["It starts at your", "kitchen table."],
-    sub: "Court papers. Deadlines. No idea where to begin.",
+    label: "Not a law firm · We install, you run it",
+    title: ["We do the install.", "You do everything from home."],
+    sub: "We set up a legal research-and-drafting workspace for your situation — usually within 72 hours — then you run it yourself. Divorce, custody, housing, small claims, civil disputes, immigration paperwork. Any U.S. state.",
     pos: "70% center",
+    brand: true,
+    cta: true,
   },
   {
     img: "story-02-install.png",
@@ -121,13 +124,18 @@ export function StoryHero() {
         <div className="relative min-h-[22rem] sm:min-h-[26rem]">
           {SCENES.map((s, i) => (
             <div key={s.img} data-copy className={`${i === 0 ? "relative" : "absolute inset-0 opacity-0"} max-w-3xl`}>
+              {"brand" in s && s.brand && (
+                <div className="mb-6">
+                  <BrandLockup href="/" className="justify-start" />
+                </div>
+              )}
               <p className="cine-label mb-6">{s.label}</p>
-              <h1 className="cine-h1 text-cream">
+              <h1 className={`cine-h1 text-cream ${"brand" in s && s.brand ? "!text-[clamp(2.4rem,7vw,6rem)]" : ""}`}>
                 <span className="block">{s.title[0]}</span>
                 <span className="cine-serif block text-accent-light">{s.title[1]}</span>
               </h1>
               <p className="cine-body mt-8 max-w-xl">{s.sub}</p>
-              {s.cta && (
+              {"cta" in s && s.cta && (
                 <div className="mt-10 flex flex-col gap-4 sm:flex-row">
                   <Link href="/pay" className="cine-btn-gold">
                     Tell us what you&apos;re facing <ArrowRight className="h-4 w-4" aria-hidden />

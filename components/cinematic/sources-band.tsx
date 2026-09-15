@@ -7,8 +7,7 @@ export function SourcesBand() {
   return (
     <section className="relative overflow-hidden bg-ground">
       <div className="absolute inset-0">
-        <Render src="install-sources.png" className="h-full w-full" imgClassName="object-cover object-[80%_center]" hideIfMissing />
-        <Render src="hero-desk-alt.png" className="absolute inset-0 h-full w-full -z-10" imgClassName="object-cover object-[80%_bottom]" />
+        <Render src="install-04-questions.png" className="h-full w-full" imgClassName="object-cover object-[70%_center]" />
         <div className="absolute inset-0 bg-gradient-to-r from-ground via-ground/70 to-ground/30" />
       </div>
       <div className="cine-container relative py-32 sm:py-44">

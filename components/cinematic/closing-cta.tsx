@@ -34,7 +34,7 @@ export function ClosingCta() {
         </Reveal>
         <Reveal className="mx-auto w-full max-w-[420px]">
           <div data-reveal>
-            <Slot src="hero-desk-alt.png" className="aspect-square w-full rounded-3xl" imgClassName="object-cover object-[65%_center]" />
+            <Slot src="tell-us.png" className="aspect-square w-full rounded-3xl" imgClassName="object-cover object-[35%_center]" />
           </div>
         </Reveal>
       </div>
