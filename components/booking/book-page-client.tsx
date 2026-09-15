@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import { CineNav } from "@/components/cinematic/nav"
 import { BookingBanner } from "@/components/brand/booking-banner"
 import {
   BOOKING_DISCLAIMER,
@@ -65,8 +66,9 @@ export function BookPageClient({
   const slugConfigured = Boolean(calcomIntakeSlug())
 
   return (
-    <main className="min-h-screen bg-navy text-white">
-      <div className="container-main section-pad">
+    <main className="min-h-screen bg-ground text-white">
+      <CineNav />
+      <div className="container-main section-pad-under-header">
         <div className="mx-auto max-w-3xl">
           <Link href="/" className="text-sm text-white/50 hover:text-gold">
             ← {SITE_BRAND_NAME}

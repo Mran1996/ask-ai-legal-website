@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import { Check, Mail } from "lucide-react"
-import { Navigation } from "@/components/navigation"
+import { CineNav } from "@/components/cinematic/nav"
 import { Footer } from "@/components/footer"
 import { PaySuccessPurchase } from "@/components/analytics/pay-success-purchase"
 import {
@@ -29,7 +29,7 @@ export default function PaySuccessPage() {
   return (
     <div className="min-h-screen flex flex-col">
       <PaySuccessPurchase />
-      <Navigation />
+      <CineNav />
 
       <main className="flex-grow">
         <section className="section-navy section-pad-under-header">

@@ -16,7 +16,7 @@ const FallingPapers = dynamic(() => import("./falling-papers"), { ssr: false })
 const SCENES = [
   {
     img: "hero-desk.png",
-    label: "Not a law firm · We install, you run it",
+    label: "Let us help you get your issues in order",
     title: ["We do the install.", "You do everything from home."],
     sub: "We set up a legal research-and-drafting workspace for your situation — usually within 72 hours — then you run it yourself. Divorce, custody, housing, small claims, civil disputes, immigration paperwork. Any U.S. state.",
     pos: "70% center",
@@ -48,7 +48,7 @@ const SCENES = [
     img: "story-05-courthouse.png",
     label: "05 · Your matter",
     title: ["Your matter.", "Your voice."],
-    sub: "Not a law firm. Nothing is filed for you — you stay in control the whole way.",
+    sub: "You file. You speak. You decide. We set up the tools — you stay in control the whole way.",
     pos: "40% center",
   },
   {
@@ -69,8 +69,8 @@ export function StoryHero() {
     const ctx = gsap.context(() => {
       const scenes = gsap.utils.toArray<HTMLElement>("[data-scene]")
       const copies = gsap.utils.toArray<HTMLElement>("[data-copy]")
-      gsap.set(scenes.slice(1), { opacity: 0 })
-      gsap.set(copies.slice(1), { opacity: 0, y: 40 })
+      gsap.set(scenes.slice(1), { autoAlpha: 0 })
+      gsap.set(copies.slice(1), { autoAlpha: 0, y: 40, pointerEvents: "none" })
       gsap.set(scenes, { scale: 1.08 })
       gsap.set(scenes[0], { scale: 1 })
 
@@ -86,10 +86,10 @@ export function StoryHero() {
       SCENES.forEach((_, i) => {
         if (i === 0) return
         const at = `s${i}`
-        tl.to(scenes[i - 1], { opacity: 0, scale: 1.12, duration: 1 }, at)
-          .to(scenes[i], { opacity: 1, scale: 1, duration: 1 }, at)
-          .to(copies[i - 1], { opacity: 0, y: -40, duration: 0.5 }, at)
-          .to(copies[i], { opacity: 1, y: 0, duration: 0.6 }, `${at}+=0.4`)
+        tl.to(scenes[i - 1], { autoAlpha: 0, scale: 1.12, duration: 1 }, at)
+          .to(scenes[i], { autoAlpha: 1, scale: 1, duration: 1 }, at)
+          .to(copies[i - 1], { autoAlpha: 0, y: -40, pointerEvents: "none", duration: 0.5 }, at)
+          .to(copies[i], { autoAlpha: 1, y: 0, pointerEvents: "auto", duration: 0.6 }, `${at}+=0.4`)
           .to("[data-dot]", { backgroundColor: "rgba(250,249,246,0.25)", duration: 0.1 }, at)
           .to(`[data-dot="${i}"]`, { backgroundColor: "#FBB034", duration: 0.1 }, at)
       })
@@ -102,7 +102,7 @@ export function StoryHero() {
     <section ref={root} className="cine-grain relative h-[100svh] overflow-hidden bg-ground">
       {/* scene plates */}
       {SCENES.map((s, i) => (
-        <div key={s.img} data-scene className={`absolute inset-0 will-change-transform ${i > 0 ? "opacity-0" : ""}`}>
+        <div key={s.img} data-scene className={`pointer-events-none absolute inset-0 will-change-transform ${i > 0 ? "invisible opacity-0" : ""}`}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={`/renders/${s.img}`}
@@ -115,26 +115,27 @@ export function StoryHero() {
         </div>
       ))}
       <div className="cine-vignette absolute inset-0" />
-      <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-ground to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 h-[72%] bg-gradient-to-t from-ground via-ground/85 to-transparent md:h-[55%] md:via-ground/60" />
+      <div className="absolute inset-y-0 left-0 hidden w-[60%] bg-gradient-to-r from-ground/80 to-transparent md:block" />
 
       <FallingPapers />
 
       {/* copy */}
-      <div className="cine-container relative flex h-full flex-col justify-end pb-24 pt-28 sm:pb-28 md:justify-center">
+      <div className="cine-container relative z-10 flex h-full flex-col justify-end pb-24 pt-28 sm:pb-28 md:justify-center">
         <div className="relative min-h-[22rem] sm:min-h-[26rem]">
           {SCENES.map((s, i) => (
-            <div key={s.img} data-copy className={`${i === 0 ? "relative" : "absolute inset-0 opacity-0"} max-w-3xl`}>
+            <div key={s.img} data-copy className={`${i === 0 ? "relative" : "absolute inset-0 invisible opacity-0 pointer-events-none"} max-w-3xl`}>
               {"brand" in s && s.brand && (
                 <div className="mb-6">
                   <BrandLockup href="/" className="justify-start" />
                 </div>
               )}
-              <p className="cine-label mb-6">{s.label}</p>
-              <h1 className={`cine-h1 text-cream ${"brand" in s && s.brand ? "!text-[clamp(2.4rem,7vw,6rem)]" : ""}`}>
+              <p className="cine-label cine-shadow mb-6">{s.label}</p>
+              <h1 className={`cine-h1 cine-shadow text-cream ${"brand" in s && s.brand ? "!text-[clamp(2.4rem,7vw,6rem)]" : ""}`}>
                 <span className="block">{s.title[0]}</span>
                 <span className="cine-serif block text-accent-light">{s.title[1]}</span>
               </h1>
-              <p className="cine-body mt-8 max-w-xl">{s.sub}</p>
+              <p className="cine-body cine-shadow mt-8 max-w-xl !text-cream/85">{s.sub}</p>
               {"cta" in s && s.cta && (
                 <div className="mt-10 flex flex-col gap-4 sm:flex-row">
                   <Link href="/pay" className="cine-btn-gold">

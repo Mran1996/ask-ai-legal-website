@@ -1,4 +1,4 @@
-import { Navigation } from "@/components/navigation"
+import { CineNav } from "@/components/cinematic/nav"
 import { Footer } from "@/components/footer"
 
 type LegalDocumentLayoutProps = {
@@ -14,7 +14,7 @@ export function LegalDocumentLayout({
 }: LegalDocumentLayoutProps) {
   return (
     <div className="min-h-screen flex flex-col">
-      <Navigation />
+      <CineNav />
 
       <main className="flex-grow">
         <section className="section-pad-under-header bg-cream">

@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import { ArrowLeft, Check } from "lucide-react"
-import { Navigation } from "@/components/navigation"
+import { CineNav } from "@/components/cinematic/nav"
 import { Footer } from "@/components/footer"
 import { SituationCta } from "@/components/situation-cta"
 import { HeroCategoryPills } from "@/components/hero-category-pills"
@@ -40,7 +40,7 @@ export default async function SituationGuidePage({ params }: Props) {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Navigation />
+      <CineNav />
 
       <main className="flex-grow">
         <section className="section-navy section-pad-under-header">

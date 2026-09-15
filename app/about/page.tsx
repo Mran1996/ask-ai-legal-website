@@ -7,7 +7,7 @@ import {
   CASE_REVIEW_CTA_LABEL,
   SITE_DISCLAIMER,
 } from "@/lib/site-config"
-import { Navigation } from "@/components/navigation"
+import { CineNav } from "@/components/cinematic/nav"
 import { Footer } from "@/components/footer"
 import {
   ArrowRight,
@@ -79,14 +79,14 @@ const standards = [
 export const metadata: Metadata = {
   title: "About Us",
   description:
-    "Ask AI Legal installs and configures tools you use from home. Custom quote to start, one flat price for your setup — no hourly billing. Not a law firm.",
+    "Ask AI Legal installs and configures tools you use from home. Custom quote to start, one flat price for your setup — no hourly billing.",
   alternates: { canonical: "/about" },
 }
 
 export default function AboutPage() {
   return (
     <div className="min-h-screen flex flex-col">
-      <Navigation />
+      <CineNav />
 
       <main className="flex-grow">
         <section className="section-navy section-pad-under-header">

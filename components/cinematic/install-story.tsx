@@ -49,8 +49,8 @@ export function InstallStory() {
     const ctx = gsap.context(() => {
       const steps = gsap.utils.toArray<HTMLElement>("[data-step]")
       const images = gsap.utils.toArray<HTMLElement>("[data-step-img]")
-      gsap.set(steps.slice(1), { opacity: 0, y: 40 })
-      gsap.set(images.slice(1), { opacity: 0, scale: 0.85, rotate: 6 })
+      gsap.set(steps.slice(1), { autoAlpha: 0, y: 40 })
+      gsap.set(images.slice(1), { autoAlpha: 0, scale: 0.85, rotate: 6 })
 
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -63,10 +63,10 @@ export function InstallStory() {
       })
       steps.forEach((_, i) => {
         if (i === 0) return
-        tl.to(steps[i - 1], { opacity: 0, y: -40, duration: 0.5 }, `s${i}`)
-          .to(images[i - 1], { opacity: 0, scale: 1.1, rotate: -6, duration: 0.5 }, `s${i}`)
-          .to(steps[i], { opacity: 1, y: 0, duration: 0.5 }, `s${i}+=0.3`)
-          .to(images[i], { opacity: 1, scale: 1, rotate: 0, duration: 0.5 }, `s${i}+=0.3`)
+        tl.to(steps[i - 1], { autoAlpha: 0, y: -40, duration: 0.5 }, `s${i}`)
+          .to(images[i - 1], { autoAlpha: 0, scale: 1.1, rotate: -6, duration: 0.5 }, `s${i}`)
+          .to(steps[i], { autoAlpha: 1, y: 0, duration: 0.5 }, `s${i}+=0.3`)
+          .to(images[i], { autoAlpha: 1, scale: 1, rotate: 0, duration: 0.5 }, `s${i}+=0.3`)
       })
       // progress bar
       gsap.to("[data-progress]", {
@@ -98,7 +98,7 @@ export function InstallStory() {
               <div
                 key={s.n}
                 data-step
-                className={staticLayout ? "relative" : i === 0 ? "relative" : "absolute inset-0 opacity-0"}
+                className={staticLayout ? "relative" : i === 0 ? "relative" : "absolute inset-0 invisible opacity-0 pointer-events-none"}
               >
                 <p className="cine-label !text-cream/40">{s.n} / 04</p>
                 <h3 className="cine-h3 mt-3 text-cream">{s.title}</h3>
@@ -121,7 +121,7 @@ export function InstallStory() {
             <div
               key={s.img}
               data-step-img
-              className={`${i === 0 ? "relative" : "absolute inset-0 opacity-0"} h-full w-full ${staticLayout && i > 0 ? "hidden" : ""}`}
+              className={`${i === 0 ? "relative" : "absolute inset-0 invisible opacity-0 pointer-events-none"} h-full w-full ${staticLayout && i > 0 ? "hidden" : ""}`}
             >
               <Slot src={s.img} className="h-full w-full rounded-3xl" imgClassName="object-cover" />
             </div>

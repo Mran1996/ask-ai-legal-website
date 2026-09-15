@@ -33,8 +33,8 @@ export function CineNav() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
-        scrolled ? "bg-ground/70 backdrop-blur-md border-b border-cream/[0.06]" : "bg-transparent"
+      className={`fixed inset-x-0 top-0 z-[70] transition-all duration-500 ${
+        open ? "bg-ground border-b border-cream/[0.06]" : scrolled ? "bg-ground/70 backdrop-blur-md border-b border-cream/[0.06]" : "bg-transparent"
       }`}
     >
       <div className="cine-container flex h-[4.5rem] items-center justify-between">
@@ -68,7 +68,7 @@ export function CineNav() {
       </div>
 
       {open && (
-        <div className="fixed inset-0 top-[4.5rem] z-40 bg-ground/95 backdrop-blur-lg lg:hidden">
+        <div className="fixed inset-0 top-[4.5rem] z-[65] overflow-y-auto bg-ground lg:hidden" style={{ backgroundColor: "#070f18" }}>
           <nav className="cine-container flex flex-col gap-2 py-8" aria-label="Mobile">
             {LINKS.map((l) => (
               <Link

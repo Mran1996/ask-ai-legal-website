@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { Navigation } from "@/components/navigation"
+import { CineNav } from "@/components/cinematic/nav"
 import { Footer } from "@/components/footer"
 import { NeonButton } from "@/components/neon-button"
 import {
@@ -12,7 +12,7 @@ import { en } from "@/lib/i18n/translations/en"
 
 const TITLE = "Pricing — Install, then work from home"
 const DESCRIPTION =
-  "Custom quote to get Ask AI Legal installed for your situation, then one flat quote. Work from home. Not a law firm."
+  "Custom quote to get Ask AI Legal installed for your situation, then one flat quote. Work from home."
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -30,7 +30,7 @@ const steps = en.process.steps
 export default function PricingPage() {
   return (
     <div className="min-h-screen flex flex-col">
-      <Navigation />
+      <CineNav />
 
       <main className="flex-grow">
         <section className="section-navy section-pad-under-header">

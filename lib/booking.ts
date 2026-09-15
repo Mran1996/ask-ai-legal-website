@@ -88,7 +88,7 @@ export function buildCalcomEmbedSrc(args: {
 }
 
 export const BOOKING_DISCLAIMER =
-  "Ask AI Legal is not a law firm. This call is for setup install and pricing only — not legal advice."
+  "This call is for setup install and pricing only — not legal advice."
 
 export const INTAKE_CALL_DESCRIPTION =
   "Discuss your situation and what we should install so you can work from home — plus flat-fee pricing."

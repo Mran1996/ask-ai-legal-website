@@ -47,7 +47,7 @@ export const en = {
     titleLine1: "We do the install.",
     titleLine2: "You work from home.",
     intro:
-      "We've changed how we help: instead of doing the work for you, we install and configure Ask AI Legal so you can do everything you need yourself — from the comfort of your home. Not a law firm; nothing is filed on your behalf.",
+      "We've changed how we help: instead of doing the work for you, we install and configure Ask AI Legal so you can do everything you need yourself — from the comfort of your home. Nothing is filed on your behalf — you stay in control.",
     importantLabel: "Important:",
     importantText:
       "Ask AI Legal installs and configures the tools you use from home. We are not a law firm and do not provide legal advice.",

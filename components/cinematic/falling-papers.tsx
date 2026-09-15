@@ -76,6 +76,8 @@ function Sheets({ wind }: { wind: React.MutableRefObject<number> }) {
         emissiveIntensity={0.12}
         roughness={0.9}
         side={THREE.DoubleSide}
+        transparent
+        opacity={0.85}
       />
     </instancedMesh>
   )
