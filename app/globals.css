@@ -46,7 +46,7 @@
   }
 
   body {
-    @apply bg-cream text-gray-700 antialiased;
+    @apply bg-ground text-cream antialiased;
   }
 
   :focus-visible {
@@ -318,14 +318,8 @@
   /* First section on inner pages: clears the fixed header so its background
      fills the space (no cream gap) and preserves normal section spacing. */
   .section-pad-under-header {
-    padding-top: calc(7.25rem + var(--section-padding));
+    padding-top: calc(4.5rem + var(--section-padding));
     padding-bottom: var(--section-padding);
-  }
-
-  @media (min-width: 640px) {
-    .section-pad-under-header {
-      padding-top: calc(7.75rem + var(--section-padding));
-    }
   }
 
   .container-main {
@@ -539,6 +533,9 @@
   .cine-body {
     @apply text-base leading-relaxed text-cream/70 sm:text-lg;
   }
+  .cine-shadow {
+    text-shadow: 0 2px 6px rgba(7, 15, 24, 0.9), 0 8px 32px rgba(7, 15, 24, 0.7);
+  }
   .cine-btn {
     @apply inline-flex items-center justify-center gap-2 rounded-full px-7 py-4 font-sans text-sm font-semibold tracking-wide transition-all duration-300;
   }
@@ -572,3 +569,16 @@
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
 }
+
+/* ---------- Site-wide dark theme: remap legacy cream utilities on inner pages ---------- */
+.cine .bg-cream, .cine .bg-cream-dark, .cine .bg-gray-50, .cine .bg-brand-light { background-color: #0c1929 !important; }
+.cine .bg-white { background-color: #152238 !important; }
+.cine .section-cream { background: #0c1929 !important; }
+.cine .text-gray-900, .cine .text-gray-800, .cine .text-navy, .cine .text-navy-dark { color: #faf9f6 !important; }
+.cine .text-gray-700, .cine .text-gray-600 { color: rgba(250, 249, 246, 0.72) !important; }
+.cine .text-gray-500, .cine .text-gray-400 { color: rgba(250, 249, 246, 0.5) !important; }
+.cine .border-gray-200, .cine .border-gray-100, .cine .border-navy\/10, .cine .border-navy\/6, .cine .border-navy\/15 { border-color: rgba(250, 249, 246, 0.1) !important; }
+.cine .shadow-elevated, .cine .shadow-firm { box-shadow: 0 24px 60px -24px rgba(0, 0, 0, 0.7) !important; }
+.cine .bg-navy, .cine .bg-navy-light, .cine .bg-navy-dark { color: #faf9f6; }
+.cine input, .cine textarea, .cine select { color-scheme: dark; }
+.cine .bg-white input, .cine .bg-cream input, .cine .bg-white textarea, .cine .bg-cream textarea { background-color: #0c1929; color: #faf9f6; border-color: rgba(250,249,246,0.15); }

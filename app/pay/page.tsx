@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import { Check, Lock, ShieldCheck } from "lucide-react"
-import { Navigation } from "@/components/navigation"
+import { CineNav } from "@/components/cinematic/nav"
 import { Footer } from "@/components/footer"
 import { StripeBuyButton } from "@/components/payments/stripe-buy-button"
 import {
@@ -11,7 +11,7 @@ import {
 } from "@/lib/site-config"
 
 const TITLE = `${FILE_REVIEW_DEPOSIT_LABEL} — Custom quote`
-const DESCRIPTION = `Start your ${FILE_REVIEW_DEPOSIT_LABEL.toLowerCase()} with a custom quote. We install Ask AI Legal so you can work from home. Not a law firm.`
+const DESCRIPTION = `Start your ${FILE_REVIEW_DEPOSIT_LABEL.toLowerCase()} with a custom quote. We install Ask AI Legal so you can work from home.`
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -41,7 +41,7 @@ export default function PayPage() {
       <link rel="dns-prefetch" href="https://js.stripe.com" />
       <link rel="preload" as="script" href="https://js.stripe.com/v3/buy-button.js" />
 
-      <Navigation />
+      <CineNav />
 
       <main className="flex-grow">
         <section className="section-navy section-pad-under-header">

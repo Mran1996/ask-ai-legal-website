@@ -5,7 +5,7 @@ export const servicesPageContent = {
   label: "Services",
   title: "We install. You work from home.",
   intro:
-    "Ask AI Legal installs and configures the tools you use from home — research, planning, drafting, and next steps in your workspace. We are not a law firm and do not provide legal advice. You run the work yourself; we do the install.",
+    "Ask AI Legal installs and configures the tools you use from home — research, planning, drafting, and next steps in your workspace..",
   flow: {
     label: "How it fits together",
     title: "From install to working from home",
@@ -117,7 +117,7 @@ export const servicesPageContent = {
   ],
   disclaimer: {
     label: "What we do not do",
-    text: "Ask AI Legal installs and configures tools you use from home. We are not a law firm and do not provide legal advice. We never appear in court on your behalf and do not file documents for you. You stay in control of the work.",
+    text: "Ask AI Legal installs and configures tools you use from home. We never appear in court on your behalf and do not file documents for you. You stay in control of the work.",
   },
   cta: {
     title: "Let's get you set up —",

@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import { Clock, Facebook, Instagram, Mail, ShieldCheck } from "lucide-react"
-import { Navigation } from "@/components/navigation"
+import { CineNav } from "@/components/cinematic/nav"
 import { Footer } from "@/components/footer"
 import { ContactForm } from "@/components/contact-form"
 import {
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <div className="min-h-screen flex flex-col">
-      <Navigation />
+      <CineNav />
 
       <main className="flex-grow">
         <section className="section-navy section-pad-under-header">

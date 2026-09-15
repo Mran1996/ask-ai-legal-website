@@ -60,7 +60,7 @@ export const SITE_SEO_TITLE = "Ask AI Legal — We Install. You Work From Home."
 
 /** Primary SEO description — used in layout, JSON-LD, and social previews. */
 export const SITE_SEO_DESCRIPTION =
-  "We do the install so you can do everything you need from the comfort of your home with Ask AI Legal. Custom quote to get started. Not a law firm, no legal advice."
+  "We do the install so you can do everything you need from the comfort of your home with Ask AI Legal. Custom quote to get started."
 
 /** Brand mark (circular scales) — header, hero, app icons. */
 export const SITE_LOGO_MARK = "/brand/stripe-logo-512.png"

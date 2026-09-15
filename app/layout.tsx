@@ -25,7 +25,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#faf8f5" },
+    { media: "(prefers-color-scheme: light)", color: "#070f18" },
     { media: "(prefers-color-scheme: dark)", color: "#0c1929" },
   ],
 }
@@ -109,8 +109,8 @@ export default function RootLayout({
         />
       </head>
       <body
-        className="min-w-0 overflow-x-hidden font-sans bg-cream text-gray-700 antialiased"
-        style={{ backgroundColor: "#faf8f5", color: "#374151" }}
+        className="cine min-w-0 overflow-x-hidden font-sans antialiased"
+        style={{ backgroundColor: "#070f18", color: "#faf9f6" }}
       >
         <script
           type="application/ld+json"

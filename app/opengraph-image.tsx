@@ -64,7 +64,7 @@ export default function OpenGraphImage() {
             marginTop: 32,
           }}
         >
-          Not a law firm · Tools you use from home
+          We do the install · You work from home
         </div>
       </div>
     ),
