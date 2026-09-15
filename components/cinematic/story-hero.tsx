@@ -13,16 +13,26 @@ gsap.registerPlugin(ScrollTrigger)
 
 const FallingPapers = dynamic(() => import("./falling-papers"), { ssr: false })
 
+const MATTERS = [
+  { label: "Divorce & separation", href: "/situations/divorce" },
+  { label: "Custody & family", href: "/situations/custody" },
+  { label: "Housing", href: "/situations/housing" },
+  { label: "Civil disputes", href: "/situations/civil" },
+  { label: "Small claims", href: "/situations/small-claims" },
+  { label: "Green cards & immigration", href: "/situations/immigration" },
+  { label: "& more", href: "/services" },
+]
+
 const SCENES = [
   {
     img: "hero-desk.png",
     alt: "Laptop glowing on a kitchen table at night with legal documents rising from the screen — Ask AI Legal workspace installed at home",
     label: "Let us help you get your issues in order",
     title: ["We do the install.", "You do everything from home."],
-    sub: "We set up a legal research-and-drafting workspace for your situation — usually within 72 hours — then you run it yourself. You don't have to share your story up front; we walk you through everything. Divorce, custody, housing, small claims, civil disputes, immigration paperwork. Any U.S. state.",
+    sub: "We set up Ask AI Legal so you can do everything you need from the comfort of your home — research, documents, and next steps — without waiting on someone else to do it for you. You don't have to share your story up front; we walk you through everything. Plain language. Private. Yours to run.",
     pos: "70% center",
     brand: true,
-    cta: true,
+    intro: true,
   },
   {
     img: "story-02-install.png",
@@ -89,6 +99,7 @@ export function StoryHero() {
           scrub: 0.8,
         },
       })
+      tl.to("[data-papers]", { opacity: 1, duration: 1 }, "s1")
       SCENES.forEach((_, i) => {
         if (i === 0) return
         const at = `s${i}`
@@ -109,6 +120,7 @@ export function StoryHero() {
       {/* scene plates */}
       {SCENES.map((s, i) => (
         <div key={s.img} data-scene className={`pointer-events-none absolute inset-0 will-change-transform ${i > 0 ? "invisible opacity-0" : ""}`}>
+          {"intro" in s && s.intro && <div className="absolute inset-0 z-[1] bg-ground/70 backdrop-blur-[2px]" />}
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={`/renders/${s.img}`}
@@ -124,23 +136,29 @@ export function StoryHero() {
       <div className="absolute inset-x-0 bottom-0 h-[72%] bg-gradient-to-t from-ground via-ground/85 to-transparent md:h-[55%] md:via-ground/60" />
       <div className="absolute inset-y-0 left-0 hidden w-[60%] bg-gradient-to-r from-ground/80 to-transparent md:block" />
 
-      <FallingPapers />
+      <div data-papers className="absolute inset-0 opacity-0">
+        <FallingPapers />
+      </div>
 
       {/* copy */}
-      <div className="cine-container relative z-10 flex h-full flex-col justify-end pb-24 pt-28 sm:pb-28 md:justify-center">
+      <div className="cine-container relative z-10 flex h-full flex-col justify-center pb-16 pt-20 sm:pb-24 sm:pt-24">
         <div className="relative min-h-[22rem] sm:min-h-[26rem]">
           {SCENES.map((s, i) => (
-            <div key={s.img} data-copy className={`${i === 0 ? "relative" : "absolute inset-0 invisible opacity-0 pointer-events-none"} max-w-3xl`}>
+            <div
+              key={s.img}
+              data-copy
+              className={`${i === 0 ? "relative mx-auto flex flex-col items-center text-center" : "absolute inset-0 invisible opacity-0 pointer-events-none"} max-w-3xl`}
+            >
               {"brand" in s && s.brand && (
-                <div className="mb-6">
-                  <BrandLockup href="/" className="justify-start" />
+                <div className="mb-4">
+                  <BrandLockup href="/" className="justify-center" />
                 </div>
               )}
-              <p className="cine-label cine-shadow mb-6">{s.label}</p>
+              <p className={`cine-label cine-shadow ${i === 0 ? "mb-4 !tracking-[0.12em]" : "mb-6"}`}>{s.label}</p>
               {i === 0 ? (
-                <h1 className="cine-h1 cine-shadow text-cream !text-[clamp(2.4rem,7vw,6rem)]">
-                  <span className="block">{s.title[0]}</span>
-                  <span className="cine-serif block text-accent-light">{s.title[1]}</span>
+                <h1 className="cine-shadow font-display text-cream">
+                  <span className="block text-[clamp(2.1rem,6vw,4.5rem)] font-semibold leading-[1.05] tracking-[-0.02em]">{s.title[0]}</span>
+                  <span className="cine-serif block text-[clamp(2rem,5.6vw,4.25rem)] leading-[1.05] text-accent-light">{s.title[1]}</span>
                 </h1>
               ) : (
                 <h2 className="cine-h1 cine-shadow text-cream">
@@ -148,7 +166,31 @@ export function StoryHero() {
                   <span className="cine-serif block text-accent-light">{s.title[1]}</span>
                 </h2>
               )}
-              <p className="cine-body cine-shadow mt-8 max-w-xl !text-cream/85">{s.sub}</p>
+              <p className={`cine-body cine-shadow max-w-xl !text-cream/85 ${i === 0 ? "mx-auto mt-5 !text-[15px] sm:!text-lg" : "mt-8"}`}>{s.sub}</p>
+              {"intro" in s && s.intro && (
+                <>
+                  <ul className="mt-6 flex flex-wrap justify-center gap-2" aria-label="Matters we install for">
+                    {MATTERS.map((m) => (
+                      <li key={m.href}>
+                        <Link
+                          href={m.href}
+                          className="inline-flex rounded-full border border-accent/50 bg-ground/60 px-3.5 py-1.5 text-[13px] text-cream sm:px-4 sm:py-2 sm:text-sm transition-colors hover:border-accent hover:bg-accent/10 active:bg-accent active:text-ground"
+                        >
+                          {m.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="mt-7 flex w-full flex-col items-center gap-3 sm:flex-row sm:justify-center">
+                    <Link href="/pay" className="cine-btn-gold w-full sm:w-auto">
+                      Start from home <ArrowRight className="h-4 w-4" aria-hidden />
+                    </Link>
+                    <Link href="#install" className="cine-btn-ghost w-full sm:w-auto">
+                      See how it works
+                    </Link>
+                  </div>
+                </>
+              )}
               {"cta" in s && s.cta && (
                 <div className="mt-10 flex flex-col gap-4 sm:flex-row">
                   <Link href="/pay" className="cine-btn-gold">
