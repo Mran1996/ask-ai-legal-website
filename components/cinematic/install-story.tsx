@@ -12,7 +12,7 @@ const STEPS = [
   {
     n: "01",
     title: "We understand your situation",
-    body: "You tell us what you're facing, in plain language, and share what you have. We review it and decide what your setup needs.",
+    body: "Share as much or as little as you're comfortable with — you never have to tell your whole story to a stranger. We ask the questions that matter and work out what your setup needs.",
     img: "install-01-understand.png",
   },
   {

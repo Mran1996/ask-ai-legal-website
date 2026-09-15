@@ -16,15 +16,17 @@ const FallingPapers = dynamic(() => import("./falling-papers"), { ssr: false })
 const SCENES = [
   {
     img: "hero-desk.png",
+    alt: "Laptop glowing on a kitchen table at night with legal documents rising from the screen — Ask AI Legal workspace installed at home",
     label: "Let us help you get your issues in order",
     title: ["We do the install.", "You do everything from home."],
-    sub: "We set up a legal research-and-drafting workspace for your situation — usually within 72 hours — then you run it yourself. Divorce, custody, housing, small claims, civil disputes, immigration paperwork. Any U.S. state.",
+    sub: "We set up a legal research-and-drafting workspace for your situation — usually within 72 hours — then you run it yourself. You don't have to share your story up front; we walk you through everything. Divorce, custody, housing, small claims, civil disputes, immigration paperwork. Any U.S. state.",
     pos: "70% center",
     brand: true,
     cta: true,
   },
   {
     img: "story-02-install.png",
+    alt: "Woman at her home desk watching her legal workspace being installed on her laptop",
     label: "02 · Within 72 hours",
     title: ["We do the", "install."],
     sub: "You accept our link and we set up your workspace live on your screen — you see every step.",
@@ -32,6 +34,7 @@ const SCENES = [
   },
   {
     img: "story-03-drafting.png",
+    alt: "Self-represented woman drafting court documents from home on her laptop",
     label: "03 · Your pace",
     title: ["You do the", "work."],
     sub: "Research, drafting, next steps — from home, with the recorded walkthrough whenever you need it.",
@@ -39,23 +42,26 @@ const SCENES = [
   },
   {
     img: "story-04-ready.png",
+    alt: "Woman leaving home with her organized legal binder, prepared for court",
     label: "04 · The morning",
     title: ["You walk in", "prepared."],
-    sub: "Your documents. Your binder. Your plan.",
+    sub: "Your issue, organized. Your papers, drafted. A fighting chance — built from your own home.",
     pos: "55% center",
   },
   {
     img: "story-05-courthouse.png",
+    alt: "Woman walking up courthouse steps carrying her own case binder",
     label: "05 · Your matter",
     title: ["Your matter.", "Your voice."],
-    sub: "You file. You speak. You decide. We set up the tools — you stay in control the whole way.",
+    sub: "You file. You speak. You stand up for what matters — with the tools ready behind you.",
     pos: "40% center",
   },
   {
     img: "story-06-home.png",
+    alt: "Woman relaxed at her kitchen table after handling her legal matter from home",
     label: "06 · After",
     title: ["From home.", "On your terms."],
-    sub: "No retainer. No hourly clock. Two payments, and the setup is yours.",
+    sub: "No retainer. No hourly clock. Two payments, and the setup — and the fight — is yours.",
     pos: "60% center",
     cta: true,
   },
@@ -106,7 +112,7 @@ export function StoryHero() {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={`/renders/${s.img}`}
-            alt=""
+            alt={s.alt}
             className="h-full w-full object-cover"
             style={{ objectPosition: s.pos }}
             loading={i === 0 ? "eager" : "lazy"}
@@ -131,15 +137,22 @@ export function StoryHero() {
                 </div>
               )}
               <p className="cine-label cine-shadow mb-6">{s.label}</p>
-              <h1 className={`cine-h1 cine-shadow text-cream ${"brand" in s && s.brand ? "!text-[clamp(2.4rem,7vw,6rem)]" : ""}`}>
-                <span className="block">{s.title[0]}</span>
-                <span className="cine-serif block text-accent-light">{s.title[1]}</span>
-              </h1>
+              {i === 0 ? (
+                <h1 className="cine-h1 cine-shadow text-cream !text-[clamp(2.4rem,7vw,6rem)]">
+                  <span className="block">{s.title[0]}</span>
+                  <span className="cine-serif block text-accent-light">{s.title[1]}</span>
+                </h1>
+              ) : (
+                <h2 className="cine-h1 cine-shadow text-cream">
+                  <span className="block">{s.title[0]}</span>
+                  <span className="cine-serif block text-accent-light">{s.title[1]}</span>
+                </h2>
+              )}
               <p className="cine-body cine-shadow mt-8 max-w-xl !text-cream/85">{s.sub}</p>
               {"cta" in s && s.cta && (
                 <div className="mt-10 flex flex-col gap-4 sm:flex-row">
                   <Link href="/pay" className="cine-btn-gold">
-                    Tell us what you&apos;re facing <ArrowRight className="h-4 w-4" aria-hidden />
+                    Start from home <ArrowRight className="h-4 w-4" aria-hidden />
                   </Link>
                   <Link href="#install" className="cine-btn-ghost">
                     See what gets installed

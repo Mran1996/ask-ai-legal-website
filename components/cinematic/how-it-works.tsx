@@ -6,8 +6,8 @@ import { Reveal } from "./reveal"
 const STEPS = [
   {
     n: "01",
-    title: "Tell us what you're facing",
-    body: "Plain language. Upload what you have. We work out what your setup needs.",
+    title: "Start from home",
+    body: "No long forms about your story. Share what you want; we walk you through the rest.",
     img: "step-01-tell-us.png",
   },
   {
@@ -19,7 +19,7 @@ const STEPS = [
   {
     n: "03",
     title: "You work from home",
-    body: "Research, draft, and manage next steps yourself — with the recording to fall back on any time.",
+    body: "Research, draft, and fight for what matters yourself — with the recording to fall back on any time.",
     img: "step-03-home.png",
   },
 ]

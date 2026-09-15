@@ -56,11 +56,11 @@ export const SITE_DISCLAIMER =
   "Ask AI Legal installs and configures the tools you use from home. We are not a law firm and do not provide legal advice."
 
 /** Primary SEO title — used in layout, Open Graph, and Twitter cards. */
-export const SITE_SEO_TITLE = "Ask AI Legal — We Install. You Work From Home."
+export const SITE_SEO_TITLE = "Ask AI Legal — Fight Your Legal Matter From Home | Self-Represented Setup"
 
 /** Primary SEO description — used in layout, JSON-LD, and social previews. */
 export const SITE_SEO_DESCRIPTION =
-  "We do the install so you can do everything you need from the comfort of your home with Ask AI Legal. Custom quote to get started."
+  "Representing yourself? We install a legal research-and-drafting workspace on your computer — divorce, custody, eviction, small claims, civil disputes, immigration paperwork — in any U.S. state. No retainer, no hourly billing. You don't have to share your story up front."
 
 /** Brand mark (circular scales) — header, hero, app icons. */
 export const SITE_LOGO_MARK = "/brand/stripe-logo-512.png"
