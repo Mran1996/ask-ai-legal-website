@@ -8,6 +8,12 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        ground: {
+          DEFAULT: "#070f18",
+          surface: "#0c1929",
+          raised: "#152238",
+        },
+        brick: "#B5533C",
         navy: {
           DEFAULT: "#0c1929",
           light: "#152238",
@@ -36,7 +42,8 @@ const config: Config = {
         },
       },
       fontFamily: {
-        display: ["var(--font-display)", "Georgia", "serif"],
+        display: ["var(--font-display)", "system-ui", "sans-serif"],
+        serif: ["var(--font-serif)", "Georgia", "serif"],
         sans: ["var(--font-sans)", "system-ui", "sans-serif"],
         mono: ["var(--font-mono)", "ui-monospace", "monospace"],
       },

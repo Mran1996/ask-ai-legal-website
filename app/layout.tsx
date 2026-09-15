@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next"
-import { Cormorant_Garamond, Inter, JetBrains_Mono } from "next/font/google"
+import { Instrument_Serif, JetBrains_Mono } from "next/font/google"
 import "./globals.css"
 import { Providers } from "@/components/providers"
 import {
@@ -9,15 +9,11 @@ import {
   SITE_SEO_DESCRIPTION,
 } from "@/lib/site-config"
 
-const display = Cormorant_Garamond({
+const serif = Instrument_Serif({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-display",
-})
-
-const sans = Inter({
-  subsets: ["latin"],
-  variable: "--font-sans",
+  weight: ["400"],
+  style: ["normal", "italic"],
+  variable: "--font-serif",
 })
 
 const mono = JetBrains_Mono({
@@ -104,7 +100,14 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${display.variable} ${sans.variable} ${mono.variable} overflow-x-hidden`}>
+    <html lang="en" className={`${serif.variable} ${mono.variable} overflow-x-hidden`}>
+      <head>
+        <link rel="preconnect" href="https://api.fontshare.com" />
+        <link
+          rel="stylesheet"
+          href="https://api.fontshare.com/v2/css?f[]=clash-grotesk@400,500,600,700&f[]=general-sans@400,500,600&display=swap"
+        />
+      </head>
       <body
         className="min-w-0 overflow-x-hidden font-sans bg-cream text-gray-700 antialiased"
         style={{ backgroundColor: "#faf8f5", color: "#374151" }}

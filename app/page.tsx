@@ -1,31 +1,29 @@
-import { Navigation } from "@/components/navigation"
-import { HeroSection } from "@/components/hero-section"
-import { DoneForYou } from "@/components/done-for-you"
-import { ValueComparison } from "@/components/value-comparison"
-import { FourPillarsSection } from "@/components/four-pillars-section"
-import { HowItWorks } from "@/components/how-it-works"
-import { SourceTrustSection } from "@/components/source-trust-section"
-import { Testimonials } from "@/components/testimonials"
-import { FaqSection } from "@/components/faq-section"
-import { CtaSection } from "@/components/cta-section"
 import { Footer } from "@/components/footer"
 import { FaqJsonLd } from "@/lib/seo/faq-json-ld"
+import { CineNav } from "@/components/cinematic/nav"
+import { StoryHero } from "@/components/cinematic/story-hero"
+import { InstallStory } from "@/components/cinematic/install-story"
+import { RetainerTrap } from "@/components/cinematic/retainer-trap"
+import { HowItWorks } from "@/components/cinematic/how-it-works"
+import { Situations } from "@/components/cinematic/situations"
+import { SourcesBand } from "@/components/cinematic/sources-band"
+import { ClosingCta } from "@/components/cinematic/closing-cta"
+import { SmoothScroll } from "@/components/cinematic/smooth-scroll"
 
 export default function Home() {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="cine min-h-screen">
       <FaqJsonLd />
-      <Navigation />
-      <main className="flex-grow">
-        <HeroSection />
-        <DoneForYou />
-        <ValueComparison />
-        <FourPillarsSection />
+      <SmoothScroll />
+      <CineNav />
+      <main>
+        <StoryHero />
+        <InstallStory />
+        <RetainerTrap />
         <HowItWorks />
-        <SourceTrustSection />
-        <Testimonials />
-        <FaqSection />
-        <CtaSection />
+        <Situations />
+        <SourcesBand />
+        <ClosingCta />
       </main>
       <Footer />
     </div>

@@ -56,3 +56,9 @@ See `design-reference/DESIGN_SYSTEM.md`. Marketing site uses navy/gold palette i
 1. Counsel review gate — no client-facing legal output without attorney approval
 2. UPL framing — document prep / self-help, not a law firm
 3. Phase 1 flow: intake → estimate → payment → draft → counsel review → delivery
+
+## Design System
+Always read DESIGN.md before making any visual or UI decisions.
+All font choices, colors, spacing, and aesthetic direction are defined there.
+Do not deviate without explicit user approval.
+In QA mode, flag any code that doesn't match DESIGN.md.
