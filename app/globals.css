@@ -582,3 +582,12 @@
 .cine .bg-navy, .cine .bg-navy-light, .cine .bg-navy-dark { color: #faf9f6; }
 .cine input, .cine textarea, .cine select { color-scheme: dark; }
 .cine .bg-white input, .cine .bg-cream input, .cine .bg-white textarea, .cine .bg-cream textarea { background-color: #0c1929; color: #faf9f6; border-color: rgba(250,249,246,0.15); }
+
+/* ---------- Button states: pressed / selected / keyboard focus ---------- */
+.cine-btn-gold:active { transform: translateY(1px) scale(0.98); background-color: #E09416 !important; box-shadow: 0 0 0 1px rgba(251,176,52,.8), 0 0 16px rgba(251,176,52,.35) !important; }
+.cine-btn-ghost:hover { background-color: rgba(250,249,246,0.06); }
+.cine-btn-ghost:active, .cine-btn-ghost[aria-current="true"] { background-color: #FBB034; border-color: #FBB034; color: #070f18 !important; transform: translateY(1px) scale(0.98); }
+.cine-btn:focus-visible { outline: 2px solid #FFD27A; outline-offset: 3px; }
+.cine-card a:active, a.cine-card:active { border-color: rgba(251,176,52,.6) !important; transform: scale(0.99); }
+header a[aria-current="page"] { color: #FBB034 !important; }
+header a[aria-current="page"]::after { content: ""; display: block; height: 2px; margin-top: 4px; background: #FBB034; border-radius: 2px; }

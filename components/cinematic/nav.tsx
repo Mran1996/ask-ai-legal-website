@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 import { useEffect, useState } from "react"
 import { Menu, X } from "lucide-react"
 import { BrandLockup } from "@/components/brand-lockup"
@@ -14,8 +15,10 @@ const LINKS = [
 ]
 
 export function CineNav() {
+  const pathname = usePathname()
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
+  const isActive = (href: string) => !href.startsWith("/#") && pathname === href
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24)
@@ -45,7 +48,8 @@ export function CineNav() {
             <Link
               key={l.href}
               href={l.href}
-              className="font-sans text-sm text-cream/70 transition-colors hover:text-cream"
+              aria-current={isActive(l.href) ? "page" : undefined}
+              className="font-sans text-sm text-cream/70 transition-colors hover:text-cream active:text-accent"
             >
               {l.label}
             </Link>
@@ -54,7 +58,7 @@ export function CineNav() {
 
         <div className="flex items-center gap-3">
           <Link href="/pay" className="cine-btn-gold hidden !px-5 !py-2.5 !text-xs sm:inline-flex">
-            Tell us what you&apos;re facing
+            Start from home
           </Link>
           <button
             type="button"
@@ -75,13 +79,14 @@ export function CineNav() {
                 key={l.href}
                 href={l.href}
                 onClick={() => setOpen(false)}
-                className="cine-h3 border-b border-cream/[0.08] py-4 text-cream"
+                aria-current={isActive(l.href) ? "page" : undefined}
+                className="cine-h3 border-b border-cream/[0.08] py-4 text-cream active:text-accent"
               >
                 {l.label}
               </Link>
             ))}
             <Link href="/pay" onClick={() => setOpen(false)} className="cine-btn-gold mt-6 w-full">
-              Tell us what you&apos;re facing
+              Start from home
             </Link>
           </nav>
         </div>

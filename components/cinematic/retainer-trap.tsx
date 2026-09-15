@@ -65,7 +65,7 @@ export function RetainerTrap() {
               </ol>
               <div data-reveal className="mt-10">
                 <Link href="/pay" className="cine-btn-gold">
-                  Tell us what you&apos;re facing <ArrowRight className="h-4 w-4" aria-hidden />
+                  Start from home <ArrowRight className="h-4 w-4" aria-hidden />
                 </Link>
               </div>
             </div>
