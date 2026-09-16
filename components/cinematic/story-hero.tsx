@@ -29,7 +29,8 @@ const SCENES = [
     alt: "Laptop glowing on a kitchen table at night with legal documents rising from the screen — Ask AI Legal workspace installed at home",
     label: "Let us help you get your issues in order",
     title: ["We do the install.", "You do everything from home."],
-    sub: "We set up Ask AI Legal so you can do everything you need from the comfort of your home — research, documents, and next steps — without waiting on someone else to do it for you. You don't have to share your story up front; we walk you through everything. Plain language. Private. Yours to run.",
+    sub: "We set up Ask AI Legal so you can do everything you need from the comfort of your home — research, documents, and next steps — without waiting on someone else to do it for you. You don't have to share your story up front; we walk you through everything.",
+    subExtra: "Plain language. Private. Yours to run.",
     pos: "70% center",
     brand: true,
     intro: true,
@@ -104,8 +105,10 @@ export function StoryHero() {
         const at = `s${i}`
         tl.to(scenes[i - 1], { autoAlpha: 0, scale: 1.12, duration: 1 }, at)
           .to(scenes[i], { autoAlpha: 1, scale: 1, duration: 1 }, at)
-          .to(copies[i - 1], { autoAlpha: 0, y: -40, pointerEvents: "none", duration: 0.5 }, at)
-          .to(copies[i], { autoAlpha: 1, y: 0, pointerEvents: "auto", duration: 0.6 }, `${at}+=0.4`)
+          .to(copies[i - 1], { autoAlpha: 0, y: -40, duration: 0.5 }, at)
+          .set(copies[i - 1], { pointerEvents: "none" }, `${at}+=0.45`)
+          .to(copies[i], { autoAlpha: 1, y: 0, duration: 0.6 }, `${at}+=0.4`)
+          .set(copies[i], { pointerEvents: "auto" }, `${at}+=0.45`)
           .to("[data-dot]", { backgroundColor: "rgba(250,249,246,0.25)", duration: 0.1 }, at)
           .to(`[data-dot="${i}"]`, { backgroundColor: "#FBB034", duration: 0.1 }, at)
       })
@@ -137,7 +140,7 @@ export function StoryHero() {
       <FallingPapers />
 
       {/* copy */}
-      <div className="cine-container relative z-10 flex h-full flex-col justify-center pb-16 pt-20 sm:pb-24 sm:pt-24">
+      <div className="cine-container relative z-10 flex h-full flex-col justify-center pb-28 pt-20 sm:pb-24 sm:pt-24">
         <div className="relative min-h-[22rem] sm:min-h-[26rem]">
           {SCENES.map((s, i) => (
             <div
@@ -162,7 +165,10 @@ export function StoryHero() {
                   <span className="cine-serif block text-accent-light">{s.title[1]}</span>
                 </h2>
               )}
-              <p className={`cine-body cine-shadow max-w-xl !text-cream/85 ${i === 0 ? "mx-auto mt-5 !text-[15px] sm:!text-lg" : "mt-8"}`}>{s.sub}</p>
+              <p className={`cine-body cine-shadow max-w-xl !text-cream/85 ${i === 0 ? "mx-auto mt-5 !text-[15px] sm:!text-lg" : "mt-8"}`}>
+                {s.sub}
+                {"subExtra" in s && s.subExtra && <span className="hidden sm:inline"> {s.subExtra}</span>}
+              </p>
               {"intro" in s && s.intro && (
                 <>
                   <ul className="mt-6 flex flex-wrap justify-center gap-2" aria-label="Matters we install for">
@@ -170,7 +176,7 @@ export function StoryHero() {
                       <li key={m.href}>
                         <Link
                           href={m.href}
-                          className="inline-flex rounded-full border border-accent/50 bg-ground/60 px-3.5 py-1.5 text-[13px] text-cream sm:px-4 sm:py-2 sm:text-sm transition-colors hover:border-accent hover:bg-accent/10 active:bg-accent active:text-ground"
+                          className="cine-pill inline-flex rounded-full border border-accent/50 bg-ground/60 px-3.5 py-1.5 text-[13px] text-cream sm:px-4 sm:py-2 sm:text-sm transition-colors hover:border-accent hover:bg-accent/10 active:bg-accent active:text-ground"
                         >
                           {m.label}
                         </Link>
