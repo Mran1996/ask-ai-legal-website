@@ -4,7 +4,7 @@ import { CineNav } from "@/components/cinematic/nav"
 import { StoryHero } from "@/components/cinematic/story-hero"
 import { InstallStory } from "@/components/cinematic/install-story"
 import { RetainerTrap } from "@/components/cinematic/retainer-trap"
-import { Tools } from "@/components/cinematic/tools"
+import { ToolsCompact } from "@/components/cinematic/tools"
 import { HowItWorks } from "@/components/cinematic/how-it-works"
 import { Situations } from "@/components/cinematic/situations"
 import { SourcesBand } from "@/components/cinematic/sources-band"
@@ -20,7 +20,7 @@ export default function Home() {
       <main>
         <StoryHero />
         <InstallStory />
-        <Tools />
+        <ToolsCompact />
         <RetainerTrap />
         <HowItWorks />
         <Situations />

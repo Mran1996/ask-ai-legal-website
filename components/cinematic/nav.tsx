@@ -8,7 +8,7 @@ import { BrandLockup } from "@/components/brand-lockup"
 
 const LINKS = [
   { href: "/#install", label: "The install" },
-  { href: "/#tools", label: "The tools" },
+  { href: "/services", label: "The tools" },
   { href: "/#compare", label: "Why us" },
   { href: "/#process", label: "How it works" },
   { href: "/pricing", label: "Pricing" },

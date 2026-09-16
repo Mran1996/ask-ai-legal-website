@@ -63,7 +63,10 @@ export function RetainerTrap() {
                   setup, quoted once we know what to install.
                 </li>
               </ol>
-              <div data-reveal className="mt-10">
+              <p data-reveal className="mt-6 font-mono text-xs uppercase tracking-widest text-accent/90">
+                Tested and back-tested on real filings
+              </p>
+              <div data-reveal className="mt-8">
                 <Link href="/pay" className="cine-btn-gold">
                   Start from home <ArrowRight className="h-4 w-4" aria-hidden />
                 </Link>
