@@ -2,6 +2,7 @@
 
 import { Render } from "./render"
 import { Reveal } from "./reveal"
+import { SOURCES } from "./tools"
 
 export function SourcesBand() {
   return (
@@ -25,6 +26,16 @@ export function SourcesBand() {
           <p data-reveal className="font-mono mt-10 text-xs uppercase tracking-widest text-cream/40">
             Opinions · Statutes · Court rules · Forms · Your own documents
           </p>
+          <div data-reveal className="mt-8">
+            <p className="cine-label mb-3 !text-cream/50">Connected sources</p>
+            <ul className="flex flex-wrap gap-2">
+              {SOURCES.map((s) => (
+                <li key={s} className="rounded-full border border-cream/15 px-3 py-1 font-mono text-[11px] uppercase tracking-[0.12em] text-cream/75">
+                  {s}
+                </li>
+              ))}
+            </ul>
+          </div>
         </Reveal>
       </div>
     </section>

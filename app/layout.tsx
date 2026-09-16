@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     "represent yourself in court",
     "self represented litigant help",
     "pro se legal help",
-    "legal document preparation from home",
+    "legal workspace installed at home",
     "divorce paperwork help",
     "custody paperwork help",
     "eviction response help",

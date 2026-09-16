@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const description = guide.intro.slice(0, 155)
   return {
-    title: `${guide.title} — Document preparation help`,
+    title: `${guide.title} — Install for self-represented people`,
     description,
     alternates: { canonical: `/situations/${slug}` },
     openGraph: {
