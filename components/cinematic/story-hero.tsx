@@ -48,7 +48,7 @@ const SCENES = [
     alt: "Self-represented woman drafting court documents from home on her laptop",
     label: "03 · Your pace",
     title: ["You do the", "work."],
-    sub: "Research, drafting, next steps — from home, with the recorded walkthrough whenever you need it.",
+    sub: "Research, drafting, next steps — from home, with tools that remember your matter and a recorded walkthrough whenever you need it.",
     pos: "60% center",
   },
   {
