@@ -591,3 +591,18 @@
 .cine-card a:active, a.cine-card:active { border-color: rgba(251,176,52,.6) !important; transform: scale(0.99); }
 header a[aria-current="page"] { color: #FBB034 !important; }
 header a[aria-current="page"]::after { content: ""; display: block; height: 2px; margin-top: 4px; background: #FBB034; border-radius: 2px; }
+
+/* ---------- Matter pills: gentle staggered pulse so they read as tappable ---------- */
+@keyframes pill-pulse {
+  0%, 100% { border-color: rgba(251,176,52,.45); box-shadow: 0 0 0 0 rgba(251,176,52,0); }
+  50% { border-color: rgba(251,176,52,1); box-shadow: 0 0 18px 0 rgba(251,176,52,.35); }
+}
+.cine-pill { animation: pill-pulse 3.6s ease-in-out infinite; }
+li:nth-child(2) .cine-pill { animation-delay: .5s; }
+li:nth-child(3) .cine-pill { animation-delay: 1s; }
+li:nth-child(4) .cine-pill { animation-delay: 1.5s; }
+li:nth-child(5) .cine-pill { animation-delay: 2s; }
+li:nth-child(6) .cine-pill { animation-delay: 2.5s; }
+li:nth-child(7) .cine-pill { animation-delay: 3s; }
+.cine-pill:hover, .cine-pill:active { animation: none; }
+@media (prefers-reduced-motion: reduce) { .cine-pill { animation: none; } }
