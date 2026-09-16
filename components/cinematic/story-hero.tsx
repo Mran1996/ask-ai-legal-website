@@ -133,8 +133,17 @@ export function StoryHero() {
           />
         </div>
       ))}
-      <div className="cine-vignette absolute inset-0" />
-      <div className="absolute inset-x-0 bottom-0 h-[80%] bg-gradient-to-t from-ground via-ground/80 to-transparent md:h-[65%] md:via-ground/55" />
+      {/* Phone: shade only behind the copy at the top, let the photo breathe below. */}
+      <div
+        className="absolute inset-0 md:hidden"
+        style={{
+          background:
+            "linear-gradient(to bottom, rgba(7,15,24,0.90) 0%, rgba(7,15,24,0.62) 34%, rgba(7,15,24,0.18) 52%, rgba(7,15,24,0) 68%, rgba(7,15,24,0.55) 92%, rgba(7,15,24,0.85) 100%)",
+        }}
+      />
+      {/* Desktop: side + bottom vignette behind left-aligned copy. */}
+      <div className="cine-vignette absolute inset-0 hidden md:block" />
+      <div className="absolute inset-x-0 bottom-0 hidden h-[65%] bg-gradient-to-t from-ground via-ground/55 to-transparent md:block" />
       <div className="absolute inset-y-0 left-0 hidden w-[60%] bg-gradient-to-r from-ground/80 to-transparent md:block" />
 
       <FallingPapers />
@@ -146,7 +155,7 @@ export function StoryHero() {
             <div
               key={s.img}
               data-copy
-              className={`${i === 0 ? "relative mx-auto flex flex-col items-center text-center" : "absolute inset-0 invisible opacity-0 pointer-events-none"} max-w-3xl`}
+              className={`${i === 0 ? "relative mx-auto flex flex-col items-center text-center" : "absolute inset-0 invisible opacity-0 pointer-events-none md:top-auto"} max-w-3xl`}
             >
               {"brand" in s && s.brand && (
                 <div className="mb-4">
