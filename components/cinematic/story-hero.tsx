@@ -99,7 +99,6 @@ export function StoryHero() {
           scrub: 0.8,
         },
       })
-      tl.to("[data-papers]", { opacity: 1, duration: 1 }, "s1")
       SCENES.forEach((_, i) => {
         if (i === 0) return
         const at = `s${i}`
@@ -120,7 +119,6 @@ export function StoryHero() {
       {/* scene plates */}
       {SCENES.map((s, i) => (
         <div key={s.img} data-scene className={`pointer-events-none absolute inset-0 will-change-transform ${i > 0 ? "invisible opacity-0" : ""}`}>
-          {"intro" in s && s.intro && <div className="absolute inset-0 z-[1] bg-ground/70 backdrop-blur-[2px]" />}
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={`/renders/${s.img}`}
@@ -133,12 +131,10 @@ export function StoryHero() {
         </div>
       ))}
       <div className="cine-vignette absolute inset-0" />
-      <div className="absolute inset-x-0 bottom-0 h-[72%] bg-gradient-to-t from-ground via-ground/85 to-transparent md:h-[55%] md:via-ground/60" />
+      <div className="absolute inset-x-0 bottom-0 h-[80%] bg-gradient-to-t from-ground via-ground/80 to-transparent md:h-[65%] md:via-ground/55" />
       <div className="absolute inset-y-0 left-0 hidden w-[60%] bg-gradient-to-r from-ground/80 to-transparent md:block" />
 
-      <div data-papers className="absolute inset-0 opacity-0">
-        <FallingPapers />
-      </div>
+      <FallingPapers />
 
       {/* copy */}
       <div className="cine-container relative z-10 flex h-full flex-col justify-center pb-16 pt-20 sm:pb-24 sm:pt-24">
