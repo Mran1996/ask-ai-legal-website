@@ -6,7 +6,8 @@ import { Canvas, useFrame } from "@react-three/fiber"
 import { makeDocumentTexture } from "./document-texture"
 import * as THREE from "three"
 
-const COUNT = 22
+const COUNT_DESKTOP = 22
+const COUNT_MOBILE = 11
 const TOP = 5
 const BOTTOM = -5.5
 
@@ -22,6 +23,7 @@ function reset(s: Sheet, initial = false, halfW = 6) {
 }
 
 function Sheets({ wind }: { wind: React.MutableRefObject<number> }) {
+  const COUNT = useMemo(() => (typeof window !== "undefined" && window.innerWidth < 768 ? COUNT_MOBILE : COUNT_DESKTOP), [])
   const mesh = useRef<THREE.InstancedMesh>(null)
   const dummy = useMemo(() => new THREE.Object3D(), [])
   const tex = useMemo(() => makeDocumentTexture(7), [])
