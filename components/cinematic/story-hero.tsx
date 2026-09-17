@@ -37,6 +37,7 @@ const SCENES = [
   },
   {
     img: "story-02-install.png",
+    imgMobile: "story-02-install-m.png",
     alt: "Woman at her home desk watching her legal workspace being installed on her laptop",
     label: "02 · Within 72 hours",
     title: ["We do the", "install."],
@@ -45,6 +46,7 @@ const SCENES = [
   },
   {
     img: "story-03-drafting.png",
+    imgMobile: "story-03-drafting-m.png",
     alt: "Self-represented woman drafting court documents from home on her laptop",
     label: "03 · Your pace",
     title: ["You do the", "work."],
@@ -69,6 +71,7 @@ const SCENES = [
   },
   {
     img: "story-06-home.png",
+    imgMobile: "story-06-home-m.png",
     alt: "Woman relaxed at her kitchen table after handling her legal matter from home",
     label: "06 · After",
     title: ["From home.", "On your terms."],
@@ -122,15 +125,18 @@ export function StoryHero() {
       {/* scene plates */}
       {SCENES.map((s, i) => (
         <div key={s.img} data-scene className={`pointer-events-none absolute inset-0 will-change-transform ${i > 0 ? "invisible opacity-0" : ""}`}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={`/renders/${s.img}`}
-            alt={s.alt}
-            className="h-full w-full object-cover"
-            style={{ objectPosition: s.pos }}
-            loading={i === 0 ? "eager" : "lazy"}
-            draggable={false}
-          />
+          <picture>
+            {"imgMobile" in s && s.imgMobile && <source media="(max-width: 767px)" srcSet={`/renders/${s.imgMobile}`} />}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={`/renders/${s.img}`}
+              alt={s.alt}
+              className={`h-full w-full object-cover ${"imgMobile" in s && s.imgMobile ? "max-md:!object-center" : ""}`}
+              style={{ objectPosition: s.pos }}
+              loading={i === 0 ? "eager" : "lazy"}
+              draggable={false}
+            />
+          </picture>
         </div>
       ))}
       {/* Phone: shade only behind the copy at the top, let the photo breathe below. */}
