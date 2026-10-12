@@ -4,9 +4,7 @@ import { Check } from "lucide-react"
 import { CineNav } from "@/components/cinematic/nav"
 import { Footer } from "@/components/footer"
 import { NeonButton } from "@/components/neon-button"
-import { CompareTable } from "@/components/compare-table"
-import { CostVisual } from "@/components/cost-visual"
-import { COMPARISON } from "@/lib/comparison"
+import { KnowWhatYouBuy } from "@/components/cinematic/know-what-you-buy"
 import {
   CONSULT_CTA_LABEL,
   CONSULT_HREF,
@@ -168,23 +166,7 @@ export default function PricingPage() {
           </div>
         </section>
 
-        <section id="compare" className="section-pad scroll-mt-20 bg-white" aria-labelledby="compare-title">
-          <div className="container-main max-w-5xl">
-            <p className="firm-label text-gold-dark">{COMPARISON.tagline}</p>
-            <div className="gold-rule mb-6 mt-2" />
-            <h2 id="compare-title" className="firm-title text-navy">
-              {COMPARISON.title}
-            </h2>
-            <p className="mt-5 max-w-3xl text-base leading-relaxed text-gray-700">{COMPARISON.intro}</p>
-            <div className="mt-10">
-              <CostVisual />
-            </div>
-            <div className="mt-8">
-              <CompareTable tone="light" />
-            </div>
-            <p className="mt-6 max-w-3xl text-sm font-medium leading-relaxed text-navy">{COMPARISON.note}</p>
-          </div>
-        </section>
+        <KnowWhatYouBuy />
 
         <section className="section-pad bg-cream">
           <div className="container-main max-w-4xl space-y-10">
