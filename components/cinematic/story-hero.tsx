@@ -8,6 +8,7 @@ import { BrandLockup } from "@/components/brand-lockup"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { prefersReducedMotion } from "./smooth-scroll"
+import { CONSULT_CTA_LABEL, CONSULT_HREF, THIRD_PARTY_COSTS_NOTE } from "@/lib/site-config"
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -28,9 +29,8 @@ const SCENES = [
     img: "hero-desk.png",
     alt: "Laptop glowing on a kitchen table at night with legal documents rising from the screen — Ask AI Legal workspace installed at home",
     label: "Let us help you get your issues in order",
-    title: ["We do the install.", "You do everything from home."],
-    sub: "We set up Ask AI Legal so you can do everything you need from the comfort of your home — research, documents, and next steps — without waiting on someone else to do it for you. You don't have to share your story up front; we walk you through everything.",
-    subExtra: "Plain language. Private. Yours to run.",
+    title: ["Your legal workspace.", "Installed on your computer."],
+    sub: "Purchase your own installed copy of Ask AI Legal for $3,997. We install and configure your workspace, help you set up your first case, and personally show you how to organize documents, research legal sources, and prepare drafts for review. Your purchase includes a written getting-started guide and 30 days of installation support. Optional maintenance is available for $125 per month.",
     pos: "70% center",
     brand: true,
     intro: true,
@@ -39,9 +39,9 @@ const SCENES = [
     img: "story-02-install.png",
     imgMobile: "story-02-install-m.png",
     alt: "Woman at her home desk watching her legal workspace being installed on her laptop",
-    label: "02 · Within 72 hours",
+    label: "02 · Installation",
     title: ["We do the", "install."],
-    sub: "You accept our link and we set up your workspace live on your screen — you see every step.",
+    sub: "We check your computer, then install and configure your workspace with you — and explain each step as we go.",
     pos: "60% center",
   },
   {
@@ -50,15 +50,15 @@ const SCENES = [
     alt: "Self-represented woman drafting court documents from home on her laptop",
     label: "03 · Your pace",
     title: ["You do the", "work."],
-    sub: "Research, drafting, next steps — from home, with tools that remember your matter and a recorded walkthrough whenever you need it.",
+    sub: "Organize documents, research legal sources, and prepare drafts for your review — from home, at your own pace.",
     pos: "60% center",
   },
   {
     img: "story-04-ready.png",
     alt: "Woman leaving home with her organized legal binder, prepared for court",
-    label: "04 · The morning",
-    title: ["You walk in", "prepared."],
-    sub: "Your issue, organized. Your papers, drafted. A fighting chance — built from your own home.",
+    label: "04 · Organized",
+    title: ["Your papers,", "in order."],
+    sub: "Your documents organized. Your drafts ready for you to review, check, and finish.",
     pos: "55% center",
   },
   {
@@ -66,7 +66,7 @@ const SCENES = [
     alt: "Woman walking up courthouse steps carrying her own case binder",
     label: "05 · Your matter",
     title: ["Your matter.", "Your voice."],
-    sub: "You file. You speak. You stand up for what matters — with the tools ready behind you.",
+    sub: "You decide what to file and what to say. Ask AI Legal helps you organize and prepare — it does not represent you.",
     pos: "40% center",
   },
   {
@@ -75,7 +75,7 @@ const SCENES = [
     alt: "Woman relaxed at her kitchen table after handling her legal matter from home",
     label: "06 · After",
     title: ["From home.", "On your terms."],
-    sub: "No retainer. No hourly clock. Two payments, and the setup — and the fight — is yours.",
+    sub: "A $3,997 one-time purchase, with optional maintenance at $125 per month. We explain additional costs before installation.",
     pos: "60% center",
     cta: true,
   },
@@ -164,15 +164,15 @@ export function StoryHero() {
               className={`${i === 0 ? "relative mx-auto flex flex-col items-center text-center" : "absolute inset-0 invisible opacity-0 pointer-events-none md:top-auto"} max-w-3xl`}
             >
               {"brand" in s && s.brand && (
-                <div className="mb-4">
+                <div className="mb-3 hidden sm:block">
                   <BrandLockup href="/" className="justify-center" />
                 </div>
               )}
-              <p className={`cine-label cine-shadow ${i === 0 ? "mb-4 !tracking-[0.12em]" : "mb-6"}`}>{s.label}</p>
+              <p className={`cine-label cine-shadow ${i === 0 ? "mb-3 !tracking-[0.12em]" : "mb-6"}`}>{s.label}</p>
               {i === 0 ? (
                 <h1 className="cine-shadow font-display text-cream">
-                  <span className="block text-[clamp(2.1rem,6vw,4.5rem)] font-semibold leading-[1.05] tracking-[-0.02em]">{s.title[0]}</span>
-                  <span className="cine-serif block text-[clamp(2rem,5.6vw,4.25rem)] leading-[1.05] text-accent-light">{s.title[1]}</span>
+                  <span className="block text-[clamp(1.9rem,5.4vw,4.25rem)] font-semibold leading-[1.05] tracking-[-0.02em]">{s.title[0]}</span>{" "}
+                  <span className="cine-serif block text-[clamp(1.8rem,5vw,4rem)] leading-[1.05] text-accent-light">{s.title[1]}</span>
                 </h1>
               ) : (
                 <h2 className="cine-h1 cine-shadow text-cream">
@@ -180,13 +180,20 @@ export function StoryHero() {
                   <span className="cine-serif block text-accent-light">{s.title[1]}</span>
                 </h2>
               )}
-              <p className={`cine-body cine-shadow max-w-xl !text-cream/85 ${i === 0 ? "mx-auto mt-5 !text-[15px] sm:!text-lg" : "mt-8"}`}>
+              <p className={`cine-body cine-shadow max-w-2xl !text-cream/85 ${i === 0 ? "mx-auto mt-4 !text-[14px] !leading-relaxed sm:!text-base" : "mt-8"}`}>
                 {s.sub}
-                {"subExtra" in s && s.subExtra && <span className="hidden sm:inline"> {s.subExtra}</span>}
               </p>
               {"intro" in s && s.intro && (
                 <>
-                  <ul className="mt-6 flex flex-wrap justify-center gap-2" aria-label="Matters we install for">
+                  <div className="mt-4 flex flex-col items-center gap-1 sm:flex-row sm:gap-4">
+                    <p className="cine-shadow font-display text-lg font-semibold text-accent-light sm:text-xl">$3,997 one-time purchase</p>
+                    <span className="hidden text-cream/40 sm:inline" aria-hidden>
+                      ·
+                    </span>
+                    <p className="cine-shadow font-display text-base text-cream sm:text-xl">Optional maintenance: $125/month.</p>
+                  </div>
+                  <p className="cine-shadow mx-auto mt-2 max-w-xl text-xs leading-relaxed text-cream/65 sm:text-sm">{THIRD_PARTY_COSTS_NOTE}</p>
+                  <ul className="mt-5 hidden flex-wrap justify-center gap-2 sm:flex" aria-label="Matters people use Ask AI Legal for">
                     {MATTERS.map((m) => (
                       <li key={m.href}>
                         <Link
@@ -198,23 +205,23 @@ export function StoryHero() {
                       </li>
                     ))}
                   </ul>
-                  <div className="mt-7 flex w-full flex-col items-center gap-3 sm:flex-row sm:justify-center">
-                    <Link href="/pay" className="cine-btn-gold w-full sm:w-auto">
-                      Start from home <ArrowRight className="h-4 w-4" aria-hidden />
+                  <div className="mt-6 flex w-full flex-col items-center gap-3 sm:flex-row sm:justify-center">
+                    <Link href={CONSULT_HREF} className="cine-btn-gold w-full sm:w-auto">
+                      {CONSULT_CTA_LABEL} <ArrowRight className="h-4 w-4" aria-hidden />
                     </Link>
-                    <Link href="#install" className="cine-btn-ghost w-full sm:w-auto">
-                      See how it works
+                    <Link href="/pricing" className="cine-btn-ghost w-full sm:w-auto">
+                      See pricing
                     </Link>
                   </div>
                 </>
               )}
               {"cta" in s && s.cta && (
                 <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-                  <Link href="/pay" className="cine-btn-gold">
-                    Start from home <ArrowRight className="h-4 w-4" aria-hidden />
+                  <Link href={CONSULT_HREF} className="cine-btn-gold">
+                    {CONSULT_CTA_LABEL} <ArrowRight className="h-4 w-4" aria-hidden />
                   </Link>
-                  <Link href="#install" className="cine-btn-ghost">
-                    See what gets installed
+                  <Link href="/pricing" className="cine-btn-ghost">
+                    See pricing
                   </Link>
                 </div>
               )}

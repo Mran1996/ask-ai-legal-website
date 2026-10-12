@@ -46,17 +46,16 @@ export function buildKnowledgeForLocale(locale: Locale): KnowledgeChunk[] {
       locale,
       "contact",
       "Contact support",
-      `Email ${SUPPORT_EMAIL} for a free document review, custom quote, questions, or to upload documents. Consultations are free. Most inquiries receive a reply within one business day.`,
-      ["support", "email", "quote", "price", "cost", "upload", "documents"]
+      `Use the contact page or email ${SUPPORT_EMAIL} to book an installation consultation or ask about installation, maintenance, support, or billing.`,
+      ["support", "email", "consultation", "price", "cost", "contact"]
     ),
-    chunk(locale, "pricing", "Pricing", t.compare.usPrice + ". " + t.compare.usDesc + ". " + t.faq.items[1]?.a, [
+    chunk(locale, "pricing", "Pricing", t.faq.items[0]?.a + " " + t.compare.subtitle, [
       "price",
       "cost",
       "afford",
-      "attorney",
-      "fraction",
-      "hourly",
-      "retainer",
+      "maintenance",
+      "monthly",
+      "purchase",
       "quote",
     ]),
     chunk(locale, "services", "Services overview", t.services.intro + " " + t.services.importantText, [
@@ -105,8 +104,8 @@ export function buildKnowledgeForLocale(locale: Locale): KnowledgeChunk[] {
   chunks.push(
     chunk(locale, "consultation", t.consultation.cardTitle, `${t.consultation.body1} ${t.consultation.body2} ${t.consultation.timing}`, [
       "consultation",
-      "review",
-      "investment",
+      "installation",
+      "computer",
     ])
   )
 

@@ -8,11 +8,12 @@ import { HowItWorks } from "@/components/cinematic/how-it-works"
 import { ClosingCta } from "@/components/cinematic/closing-cta"
 import { SmoothScroll } from "@/components/cinematic/smooth-scroll"
 import { Render } from "@/components/cinematic/render"
+import { CONSULT_CTA_LABEL, CONSULT_HREF } from "@/lib/site-config"
 
 export const metadata: Metadata = {
-  title: "What gets installed — the same class of tools the other side has",
+  title: "Features — research, drafting & case organization",
   description:
-    "Verified research connections, court-ready drafting, a workspace that remembers your matter, inbox and calendar watch, drafting on your own model — installed on your computer so you can fight your legal matter from home.",
+    "Research with source links, document drafting for your review, case organization, email and calendar connections, and clear data handling — installed on your computer by Ask AI Legal.",
   alternates: { canonical: "/services" },
 }
 
@@ -31,20 +32,20 @@ export default function ServicesPage() {
           <div className="cine-container relative">
             <p className="cine-label mb-6">What gets installed</p>
             <h1 className="cine-h1 max-w-[14ch] text-cream !text-[clamp(2.4rem,7vw,6rem)]">
-              Everything your workspace
+              Everything your workspace{" "}
               <br />
               <span className="cine-serif text-accent-light">comes with.</span>
             </h1>
             <p className="cine-body mt-8 max-w-2xl">
-              Installed on your own computer, configured for your matter, walked through live on your screen and recorded
-              for you. Then you run it — from home.
+              Installed on your computer and configured with you during installation. Here is what your workspace can
+              do — and what depends on your installation and outside providers.
             </p>
             <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-              <Link href="/pay" className="cine-btn-gold">
-                Start from home <ArrowRight className="h-4 w-4" aria-hidden />
+              <Link href={CONSULT_HREF} className="cine-btn-gold">
+                {CONSULT_CTA_LABEL} <ArrowRight className="h-4 w-4" aria-hidden />
               </Link>
-              <Link href="#tools" className="cine-btn-ghost">
-                See the tools
+              <Link href="/pricing" className="cine-btn-ghost">
+                See pricing
               </Link>
             </div>
           </div>

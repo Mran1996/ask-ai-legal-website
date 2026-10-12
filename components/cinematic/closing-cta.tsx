@@ -4,6 +4,7 @@ import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import { Slot } from "./slot"
 import { Reveal } from "./reveal"
+import { CONSULT_CTA_LABEL, CONSULT_HREF, SITE_DISCLAIMER } from "@/lib/site-config"
 
 export function ClosingCta() {
   return (
@@ -12,24 +13,24 @@ export function ClosingCta() {
       <div className="cine-container relative grid items-center gap-12 md:grid-cols-[1.2fr_1fr]">
         <Reveal>
           <h2 data-reveal className="cine-h2 text-cream">
-            Ready to fight
+            Ready to set up{" "}
             <br />
-            <span className="cine-serif text-accent-light">from home?</span>
+            <span className="cine-serif text-accent-light">your legal workspace?</span>
           </h2>
           <p data-reveal className="cine-body mt-8 max-w-lg">
-            You don&apos;t have to explain everything. Start with as much or as little as you want — we walk you through the rest, step by step, and reply with a custom start quote.
+            Book a consultation to confirm your computer requirements, review the included features, and discuss
+            installation. The one-time purchase is $3,997, with optional maintenance at $125 per month.
           </p>
           <div data-reveal className="mt-10 flex flex-col gap-4 sm:flex-row">
-            <Link href="/pay" className="cine-btn-gold">
-              Start from home <ArrowRight className="h-4 w-4" aria-hidden />
+            <Link href={CONSULT_HREF} className="cine-btn-gold">
+              {CONSULT_CTA_LABEL} <ArrowRight className="h-4 w-4" aria-hidden />
             </Link>
-            <Link href="/book" className="cine-btn-ghost">
-              Book a call
+            <Link href="/pricing" className="cine-btn-ghost">
+              See pricing
             </Link>
           </div>
           <p data-reveal className="mt-12 max-w-lg font-sans text-xs leading-relaxed text-cream/40">
-            Ask AI Legal installs and configures tools for educational and informational use. It is not a law firm and
-            does not provide legal advice or create an attorney-client relationship.
+            {SITE_DISCLAIMER}
           </p>
         </Reveal>
         <Reveal className="mx-auto w-full max-w-[420px]">

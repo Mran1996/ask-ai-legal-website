@@ -2,9 +2,8 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import { NeonButton } from "@/components/neon-button"
 import {
-  SUPPORT_MAILTO,
-  FILE_REVIEW_DEPOSIT_LABEL,
-  CASE_REVIEW_CTA_LABEL,
+  CONSULT_CTA_LABEL,
+  CONSULT_HREF,
   SITE_DISCLAIMER,
 } from "@/lib/site-config"
 import { CineNav } from "@/components/cinematic/nav"
@@ -22,64 +21,65 @@ import {
 const capabilities = [
   {
     icon: FileSearch,
-    title: "Thousands of files, one home setup",
+    title: "Research you can check",
     description:
-      "Your install is wired to research filings, motions, and published sources — the kind of depth that would take weeks to compile manually — so you can dig in from home.",
-  },
-  {
-    icon: BadgeCheck,
-    title: "Source verification",
-    description:
-      "Every source stays traceable to the original publication, stored in your file, and verified — so from home you can open it, read it, and check it yourself.",
-  },
-  {
-    icon: Receipt,
-    title: "Custom quote, no hourly clock",
-    description: `A custom-quote ${FILE_REVIEW_DEPOSIT_LABEL.toLowerCase()}, credited toward one flat quote for your installed setup. You know the full cost before you commit to either step.`,
+      "Source links let you open the opinions, statutes, court rules, and documents behind your research. AI can make mistakes, so check each source before relying on it.",
   },
   {
     icon: BookOpen,
-    title: "Tools you run yourself",
+    title: "Document drafting for your review",
     description:
-      "Document tools, research, and next steps live in your workspace — configured for your facts and jurisdiction so you draft and refine from home.",
+      "Prepare editable drafts using the templates supported by your installation. Review the facts, citations, formatting, and applicable court requirements before filing.",
+  },
+  {
+    icon: Receipt,
+    title: "One price, stated up front",
+    description:
+      "A one-time purchase of $3,997 for your installed copy, setup, personal training, a written getting-started guide, and 30 days of installation support. Optional maintenance is $125 per month.",
   },
   {
     icon: Clock,
-    title: "Installed fast",
+    title: "Personal setup and training",
     description:
-      "We configure Ask AI Legal for your situation — usually within 72 hours — so you are not waiting weeks while deadlines approach.",
+      "We install and configure your workspace, guide you through setting up your first case, and show you how to use it.",
+  },
+  {
+    icon: BadgeCheck,
+    title: "Clear about data handling",
+    description:
+      "We explain which features operate locally, which send information to outside providers, and the settings available to you.",
   },
   {
     icon: Shield,
-    title: "We install. You stay in control.",
+    title: "You stay in control",
     description:
-      "You describe your situation. We install and configure. You do everything you need from the comfort of your home.",
+      "You decide what to research, draft, and file. Ask AI Legal is not a law firm and does not represent you.",
   },
 ]
 
 const standards = [
   {
     title: "Install before you run it",
-    text: "We configure the workspace around your matter — not a template dump and a billable hour.",
+    text: "We configure the workspace with you, then show you how it works.",
   },
   {
     title: "Clarity before commitment",
-    text: "You know the scope, the timeline, and the investment before the install begins.",
+    text: "You know the price, the included services, and any additional costs before you purchase.",
   },
   {
-    title: "Verified over invented",
-    text: "Every reference in your setup is retrieved from source and checked so you can verify it yourself.",
+    title: "Sources you can open",
+    text: "Research comes with source links so you can read the original and confirm it supports your point.",
   },
   {
-    title: "Service without the clock",
-    text: "Install refinements and follow-through included — not metered minute by minute.",
+    title: "Support after setup",
+    text: "30 days of installation support, with optional maintenance afterward.",
   },
 ]
 
 export const metadata: Metadata = {
   title: "About Us",
   description:
-    "Ask AI Legal installs and configures tools you use from home. Custom quote to start, one flat price for your setup — no hourly billing.",
+    "Ask AI Legal installs a legal workspace on your computer: a $3,997 one-time purchase with setup and personal training, plus optional $125/month maintenance.",
   alternates: { canonical: "/about" },
 }
 
@@ -94,13 +94,12 @@ export default function AboutPage() {
             <p className="firm-label">About us</p>
             <div className="gold-rule mb-8" />
             <h1 className="firm-title text-white">
-              We do the install. You work from home.
+              Your legal workspace, installed and explained.
             </h1>
             <p className="mt-8 max-w-2xl text-lg leading-relaxed text-white/70">
-              Ask AI Legal installs and configures the tools you use from the comfort of
-              your home. We exist because people handling important paperwork should not
-              wait on someone else to do the work for them — and they should not have to
-              choose between quality tools and affordability.
+              Ask AI Legal installs legal workspace software on your computer and shows you how to use it. We exist
+              because people handling important paperwork should have organized, capable tools of their own — at a
+              price that is stated up front.
             </p>
           </div>
         </section>
@@ -111,13 +110,11 @@ export default function AboutPage() {
               <p className="firm-label text-gold-dark">What makes us different</p>
               <div className="gold-rule mb-6" />
               <h2 className="firm-title text-navy">
-                Capabilities that change how you work from home
+                What you get when you work from home
               </h2>
               <p className="mt-5 text-lg leading-relaxed text-gray-600">
-                We built our service around what clients actually need: a configured setup,
-                verified sources you can check yourself, and tools you run from home —
-                not waiting for someone else to do it for you. Here is what that means in
-                practice.
+                We built our service around what people actually need: a configured workspace, sources they can check
+                themselves, and clear pricing. Here is what that means in practice.
               </p>
             </div>
 
@@ -146,9 +143,8 @@ export default function AboutPage() {
                 The home setup your situation deserves
               </h2>
               <p className="mt-5 text-gray-600 leading-relaxed">
-                Every client should work from home with research tools behind them,
-                sources they can verify, and a clear picture of what to do next. That is
-                the bar we hold ourselves to — every matter, every install.
+                Everyone working from home should have research tools behind them, sources they can verify, and a
+                clear picture of what they are paying for. That is the bar we hold ourselves to on every install.
               </p>
             </div>
 
@@ -167,14 +163,6 @@ export default function AboutPage() {
                 </li>
               ))}
             </ul>
-
-            <blockquote className="mx-auto mt-16 max-w-2xl border-t border-b border-navy/10 py-10 text-center">
-              <p className="font-display text-2xl italic leading-relaxed text-navy">
-                &ldquo;We don&apos;t ask you to wait for someone else to do the work. We
-                install Ask AI Legal so you can handle everything from home — with more
-                research, more speed, and more clarity.&rdquo;
-              </p>
-            </blockquote>
           </div>
         </section>
 
@@ -185,13 +173,12 @@ export default function AboutPage() {
                 Who we serve
               </h2>
               <p className="mt-4 leading-relaxed text-gray-600">
-                Families fighting for a loved one. Self-represented people who refuse to
-                be outgunned. Advocates pushing for reform. Anyone who needs serious tools
-                and will no longer accept being priced out of them.
+                Families fighting for a loved one. Self-represented people who want to stay organized. Advocates
+                pushing for reform. Anyone who wants capable tools of their own.
               </p>
               <p className="mt-4 leading-relaxed text-gray-600">
-                We install and configure Ask AI Legal for your matter. You remain in
-                control — working from home, informed, and equipped.
+                We install and configure Ask AI Legal and show you how to use it. You remain in control — working from
+                home, informed, and organized.
               </p>
             </div>
             <div className="rounded-sm border border-gold/30 bg-white p-8">
@@ -201,14 +188,14 @@ export default function AboutPage() {
               <p className="mt-4 text-sm leading-relaxed text-gray-600">
                 {SITE_DISCLAIMER}
               </p>
-              <NeonButton href={SUPPORT_MAILTO} className="btn-neon-light mt-8 inline-flex">
-                {CASE_REVIEW_CTA_LABEL}
+              <NeonButton href={CONSULT_HREF} className="btn-neon-light mt-8 inline-flex">
+                {CONSULT_CTA_LABEL}
                 <ArrowRight className="h-4 w-4" aria-hidden />
               </NeonButton>
               <p className="mt-4 text-xs text-gray-500">
                 Or{" "}
-                <Link href="/pay" className="text-gold-dark underline underline-offset-2">
-                  start your setup
+                <Link href="/pricing" className="text-gold-dark underline underline-offset-2">
+                  see pricing
                 </Link>
                 .
               </p>

@@ -6,20 +6,20 @@ import { Reveal } from "./reveal"
 const STEPS = [
   {
     n: "01",
-    title: "Start from home",
-    body: "No long forms about your story. Share what you want; we walk you through the rest.",
+    title: "Book an installation consultation",
+    body: "We confirm your computer requirements, review the included features, and explain any additional costs before you purchase.",
     img: "step-01-tell-us.png",
   },
   {
     n: "02",
     title: "Accept the link. We install — you watch.",
-    body: "Recording starts when you accept. We set everything up live on your screen and answer every question before we close.",
+    body: "We install and configure your workspace and supported connections on your screen, then help you set up your first case.",
     img: "step-02-install.png",
   },
   {
     n: "03",
     title: "You work from home",
-    body: "Research, draft, and fight for what matters yourself — with the recording to fall back on any time.",
+    body: "Organize documents, research legal sources, and prepare drafts for your review — with 30 days of installation support.",
     img: "step-03-home.png",
   },
 ]
@@ -32,7 +32,7 @@ export function HowItWorks() {
           <p data-reveal className="cine-label mb-6">How it works</p>
           <h2 data-reveal className="cine-h2 text-cream">
             Three steps.
-            <span className="cine-serif text-accent-light"> No hourly clock.</span>
+            <span className="cine-serif text-accent-light"> From consultation to your own workspace.</span>
           </h2>
         </Reveal>
 

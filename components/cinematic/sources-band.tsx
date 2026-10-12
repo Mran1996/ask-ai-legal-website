@@ -3,6 +3,7 @@
 import { Render } from "./render"
 import { Reveal } from "./reveal"
 import { SOURCES } from "./tools"
+import { RESEARCH_ACCESS_NOTE } from "@/lib/site-config"
 
 export function SourcesBand() {
   return (
@@ -13,21 +14,19 @@ export function SourcesBand() {
       </div>
       <div className="cine-container relative py-32 sm:py-44">
         <Reveal className="max-w-2xl">
-          <p data-reveal className="cine-label mb-6">Built on tools that don&apos;t guess</p>
+          <p data-reveal className="cine-label mb-6">Research you can check</p>
           <h2 data-reveal className="cine-h2 text-cream">
-            Nothing
+            Open the source.{" "}
             <br />
-            <span className="cine-serif text-accent-light">invented.</span>
+            <span className="cine-serif text-accent-light">Check the citation.</span>
           </h2>
           <p data-reveal className="cine-body mt-8">
-            Every citation in your workspace links to the real published opinion, statute, or document. If it
-            can&apos;t be traced, it doesn&apos;t go in.
+            Use source links to read the opinions, statutes, court rules, and documents behind your research. AI can
+            make mistakes, including incorrect citations. Check each source and confirm that it supports your point
+            before relying on it.
           </p>
-          <p data-reveal className="font-mono mt-10 text-xs uppercase tracking-widest text-cream/40">
-            Opinions · Statutes · Court rules · Forms · Your own documents
-          </p>
-          <div data-reveal className="mt-8">
-            <p className="cine-label mb-3 !text-cream/50">Connected sources</p>
+          <div data-reveal className="mt-10">
+            <p className="cine-label mb-3 !text-cream/50">Confirmed connections</p>
             <ul className="flex flex-wrap gap-2">
               {SOURCES.map((s) => (
                 <li key={s} className="rounded-full border border-cream/15 px-3 py-1 font-mono text-[11px] uppercase tracking-[0.12em] text-cream/75">
@@ -35,6 +34,7 @@ export function SourcesBand() {
                 </li>
               ))}
             </ul>
+            <p className="mt-4 text-sm leading-relaxed text-cream/60">{RESEARCH_ACCESS_NOTE}</p>
           </div>
         </Reveal>
       </div>

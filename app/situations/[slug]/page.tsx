@@ -69,9 +69,10 @@ export default async function SituationGuidePage({ params }: Props) {
         <section className="section-pad bg-cream">
           <div className="container-main max-w-3xl space-y-12">
             <div>
-              <h2 className="font-display text-2xl font-semibold text-navy">What we can prepare for you</h2>
+              <h2 className="font-display text-2xl font-semibold text-navy">What people use the workspace for</h2>
               <p className="mt-3 text-sm text-gray-600">
-                Examples — your written quote lists exactly what your files need after review.
+                Examples only. Available templates and sources depend on your installation. We confirm what fits your
+                matter during the installation consultation.
               </p>
               <ul className="mt-6 space-y-3">
                 {guide.weHelpWith.map((item) => (
@@ -96,7 +97,7 @@ export default async function SituationGuidePage({ params }: Props) {
             </div>
 
             <div>
-              <h2 className="font-display text-2xl font-semibold text-navy">Documents we often prepare</h2>
+              <h2 className="font-display text-2xl font-semibold text-navy">Examples of drafts you can prepare</h2>
               <ul className="mt-6 flex flex-wrap gap-2">
                 {guide.documentsExamples.map((doc) => (
                   <li
@@ -115,10 +116,10 @@ export default async function SituationGuidePage({ params }: Props) {
               <div className="mt-8 flex flex-wrap items-center gap-4">
                 <SituationCta label={guide.ctaLabel} />
                 <Link
-                  href="/"
+                  href="/pricing"
                   className="text-sm font-semibold text-gold-dark underline-offset-2 hover:underline"
                 >
-                  ← Back to home
+                  See pricing
                 </Link>
               </div>
             </div>

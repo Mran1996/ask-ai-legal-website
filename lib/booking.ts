@@ -88,7 +88,7 @@ export function buildCalcomEmbedSrc(args: {
 }
 
 export const BOOKING_DISCLAIMER =
-  "This call is for setup install and pricing only — not legal advice."
+  "This call covers software installation, pricing, and support — not legal advice."
 
 export const INTAKE_CALL_DESCRIPTION =
-  "Discuss your situation and what we should install so you can work from home — plus flat-fee pricing."
+  "Confirm your computer requirements, review the included features, and discuss installation."

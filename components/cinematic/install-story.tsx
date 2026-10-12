@@ -11,26 +11,26 @@ gsap.registerPlugin(ScrollTrigger)
 const STEPS = [
   {
     n: "01",
-    title: "We understand your situation",
-    body: "Share as much or as little as you're comfortable with — you never have to tell your whole story to a stranger. We ask the questions that matter and work out what your setup needs.",
+    title: "We confirm your computer and setup",
+    body: "In your installation consultation we confirm supported computer requirements, explain the included features and connected services, and review any additional costs before you purchase.",
     img: "install-01-understand.png",
   },
   {
     n: "02",
     title: "You accept a link",
-    body: "That gives us permission to access your computer for the session — and recording starts right then, so everything that happens is yours to keep. End the session any time. We never hold your logins.",
+    body: "That gives us permission to access your computer for the installation session. We explain the remote-access and recording arrangements before the session, and you can end it at any time.",
     img: "install-02-link.png",
   },
   {
     n: "03",
     title: "We install while you watch",
-    body: "Live, on your screen. We walk through every step as we do it, so you see everything that goes into your workspace.",
+    body: "Live, on your screen. We install and configure your workspace and supported connections, then help you set up your first case.",
     img: "install-03-live.png",
   },
   {
     n: "04",
     title: "Your questions, answered",
-    body: "Before we close the session, our staff answer every question until you're comfortable and understand how it all works. The full recording is yours to review whenever you want.",
+    body: "Before we close the session, we show you how to use the installed features and answer your questions. You also receive a written getting-started guide.",
     img: "install-04-questions.png",
   },
 ]
@@ -88,7 +88,7 @@ export function InstallStory() {
         <div className="relative">
           <p className="cine-label mb-6">How the install works</p>
           <h2 className="cine-h2 mb-10 text-cream">
-            On your screen.
+            On your screen.{" "}
             <br />
             <span className="cine-serif text-accent-light">Every step, in view.</span>
           </h2>
@@ -111,7 +111,7 @@ export function InstallStory() {
             <div data-progress className="h-px origin-left scale-x-0 bg-accent" />
           </div>
           <p className="cine-body mt-4 !text-sm !text-cream/40">
-            Afterwards: we help you use what we installed, and keep it current as tools improve.
+            Afterwards: 30 days of installation support is included. Ongoing maintenance is optional at $125/month.
           </p>
         </div>
 

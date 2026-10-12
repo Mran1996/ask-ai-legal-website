@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og"
 import { SITE_TAGLINE } from "@/lib/site-config"
 
-export const alt = "Ask AI Legal — We install. You work from home."
+export const alt = "Ask AI Legal — your legal workspace, installed on your computer"
 
 export const size = { width: 1200, height: 630 }
 export const contentType = "image/png"
@@ -54,7 +54,7 @@ export default function OpenGraphImage() {
             maxWidth: 920,
           }}
         >
-          {`We do the install · custom quote · work from home`}
+          {`$3,997 one-time purchase · Optional maintenance $125/month`}
         </div>
         <div
           style={{
@@ -64,7 +64,7 @@ export default function OpenGraphImage() {
             marginTop: 32,
           }}
         >
-          We do the install · You work from home
+          Installation · Personal training · 30 days of installation support
         </div>
       </div>
     ),

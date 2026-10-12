@@ -1,127 +1,76 @@
-/** Services page copy (English). Merged into en.ts as servicesPage. */
-import { FILE_REVIEW_DEPOSIT_LABEL, CASE_REVIEW_CTA_LABEL } from "@/lib/site-config"
+/** Services page copy (English). Merged into en.ts as servicesPage — also feeds the website chat assistant. */
+import { CASE_REVIEW_CTA_LABEL } from "@/lib/site-config"
 
 export const servicesPageContent = {
-  label: "Services",
-  title: "We install. You work from home.",
+  label: "Features",
+  title: "Your legal workspace. Installed on your computer.",
   intro:
-    "Ask AI Legal installs and configures the tools you use from home — research, planning, drafting, and next steps in your workspace..",
+    "Ask AI Legal is software installed on your computer — research, drafting, and organization in one workspace. Available features depend on your installation.",
   flow: {
     label: "How it fits together",
-    title: "From install to working from home",
+    title: "From consultation to your own workspace",
     narrative:
-      "Every matter moves through a clear sequence: we learn your situation, install a roadmap into your workspace, wire research and source tools, set up document tools, hand the setup to you at home, and refine the install until it fits.",
-    steps: [
-      "Analysis",
-      "Road map",
-      "Research",
-      "Documents",
-      "Home setup",
-      "Refinement",
-    ],
+      "We confirm your computer requirements, install and configure your workspace, help you set up your first case, and show you how to use it. Installation support covers the first 30 days; maintenance afterward is optional.",
+    steps: ["Consultation", "Installation", "First case", "Training", "Support", "Optional maintenance"],
   },
-  deepDivesLabel: "What each part of the install includes",
-  deepDivesTitle: "Configured for you — ready to run from home",
-  includesLabel: "What you get in your setup",
+  deepDivesLabel: "What each part includes",
+  deepDivesTitle: "Installed and explained — then yours to run",
+  includesLabel: "What you get",
   items: [
     {
       detail:
-        "We start by reviewing your situation in plain language — what happened, what you need, and where you want to go. That tells us what to install before you start using the tools yourself. Ideal when you feel overwhelmed and need a clear setup first.",
+        "Research connections let you open the source behind a reference. CourtListener (court opinions) is the confirmed connection today; it uses a free CourtListener account token. Other providers depend on your installation and may require a separate subscription.",
       includes: [
-        "Review of your facts and goals",
-        "Identification of what your home setup needs",
-        "Written summary of install options",
-        "Foundation for every tool we configure",
+        "Source links you can open and read",
+        "CourtListener connection for court opinions",
+        "Paid research databases are not included",
+        "Check every citation before relying on it",
       ],
     },
     {
       detail:
-        "Once we understand your matter, we install a step-by-step plan into your workspace — key issues, recommended documents, deadlines to watch, and what to do next from home. This is your roadmap, not a generic checklist from the internet.",
+        "Prepare editable drafts using the templates supported by your installation. You review the facts, citations, formatting, and applicable court requirements before filing.",
       includes: [
-        "Sequential plan in your workspace",
-        "Key issues and priority actions",
-        "Recommended document sequence",
-        "Timeline guidance you can follow from home",
+        "Editable drafts",
+        "Templates supported by your installation",
+        "Your review before anything is filed",
       ],
     },
     {
       detail:
-        "Your setup is wired to dig into the factual record of your matter — prior filings, procedural history, orders, and evidence references — so you can research what actually happened yourself from home, not guess from assumptions.",
-      includes: [
-        "Tools to review prior filings and records",
-        "Procedural history mapped to your matter",
-        "Fact chronology you can build from home",
-        "Issue spotting tied to your record",
-      ],
+        "Your workspace keeps track of the people, dates, filings, and events in your matter so your information stays organized in one place.",
+      includes: ["People, dates, and filings in one place", "A record of what happened when"],
     },
     {
       detail:
-        "We configure research tools for rules, requirements, and published sources that apply to your issue and jurisdiction — connected to your facts so you can pull what applies yourself from home.",
-      includes: [
-        "Rule and requirement research for your jurisdiction",
-        "Published sources tied to your factual pattern",
-        "Reference-ready source summaries",
-        "Framework applied to your situation",
-      ],
+        "Supported email and calendar connections help organize messages, dates, and reminders. Review extracted dates and confirm deadlines against the applicable rules and court orders.",
+      includes: ["Supported email and calendar connections", "Reminders you confirm against the rules"],
     },
     {
       detail:
-        "Every source stays traceable to the original publication, stored in your file, and verified — so from home you can open it, read it, and check it yourself. Nothing invented. Nothing you cannot verify.",
-      includes: [
-        "Every reference retrieved from source",
-        "Stored in your file for reference",
-        "Verified in a separate review pass",
-        "Full reference list in your home workspace",
-      ],
+        "Your setup may combine local storage with connected AI and cloud services. We explain which features operate locally, which send information to outside providers, and the settings available to you.",
+      includes: ["Explanation of local and connected features", "Settings available to you"],
     },
     {
       detail:
-        "When you have a hearing or appearance you handle yourself, your install includes written materials — outlines, talking points, and supporting documents organized so you can prepare from home. We do not appear on your behalf or speak for you.",
+        "The one-time purchase includes a computer compatibility check and installation, configuration of your workspace and supported connections, guided setup of your first case, personal training, a written getting-started guide, and 30 days of installation support beginning when installation is completed. Guided case setup means organizing the workspace and explaining the software, not legal advice.",
       includes: [
-        "Hearing or appearance outline",
-        "Key talking points in plain language",
-        "Supporting document index",
-        "Organized materials in your workspace",
-      ],
-    },
-    {
-      detail:
-        "Letters, forms, responses, agreements, and supporting paperwork live in your installed workspace — so you draft and refine from the comfort of your home. We set up the tools; you write and decide what to file.",
-      includes: [
-        "Document tools configured for your matter",
-        "Professional formatting and structure",
-        "Headings, sections, and reference placeholders",
-        "Ready for you to review before any filing",
-      ],
-    },
-    {
-      detail:
-        "Once install is complete, you run Ask AI Legal from home. What you create and whether you file is entirely your decision.",
-      includes: [
-        "Configured home workspace delivery",
-        "Tools ready to use from home",
-        "Clear organization by tool and task",
-        "Guidance summary where applicable",
-      ],
-    },
-    {
-      detail:
-        "Need the setup adjusted? Revisions refine the install until it fits your situation — wording, structure, and configuration. No hourly meter running in the background.",
-      includes: [
-        "Install refinements within your quoted scope",
-        "Fact and structure adjustments",
-        "Formatting and workspace tweaks",
-        "Follow-up until the setup matches your situation",
+        "Computer compatibility check and installation",
+        "Configuration of your workspace and supported connections",
+        "Guided setup of your first case",
+        "Personal training on using the installed software",
+        "A written getting-started guide",
+        "30 days of installation support",
       ],
     },
   ],
   disclaimer: {
     label: "What we do not do",
-    text: "Ask AI Legal installs and configures tools you use from home. We never appear in court on your behalf and do not file documents for you. You stay in control of the work.",
+    text: "Ask AI Legal provides software, installation, training, and technical assistance. We do not provide legal representation, appear in court, or file documents for you. You stay in control of your matter.",
   },
   cta: {
-    title: "Let's get you set up —",
-    body: `Start with a custom-quote ${FILE_REVIEW_DEPOSIT_LABEL.toLowerCase()}. We install Ask AI Legal so you can do everything you need from home — then one flat price for your configured setup.`,
+    title: "Ready to set up your legal workspace?",
+    body: "Book a consultation to confirm your computer requirements, review the included features, and discuss installation. The one-time purchase is $3,997, with optional maintenance at $125 per month.",
     button: CASE_REVIEW_CTA_LABEL,
   },
   homeLink: "See how the install works",

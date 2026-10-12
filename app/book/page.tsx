@@ -3,7 +3,7 @@ import { BookPageClient } from "@/components/booking/book-page-client"
 import { BOOKING_DISCLAIMER } from "@/lib/booking"
 
 export const metadata: Metadata = {
-  title: "Book a call | Ask AI Legal",
+  title: "Book a call",
   description: BOOKING_DISCLAIMER,
   robots: { index: false, follow: false },
 }
