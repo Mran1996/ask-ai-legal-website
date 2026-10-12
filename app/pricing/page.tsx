@@ -5,6 +5,7 @@ import { CineNav } from "@/components/cinematic/nav"
 import { Footer } from "@/components/footer"
 import { NeonButton } from "@/components/neon-button"
 import { CompareTable } from "@/components/compare-table"
+import { CostVisual } from "@/components/cost-visual"
 import { COMPARISON } from "@/lib/comparison"
 import {
   CONSULT_CTA_LABEL,
@@ -176,6 +177,9 @@ export default function PricingPage() {
             </h2>
             <p className="mt-5 max-w-3xl text-base leading-relaxed text-gray-700">{COMPARISON.intro}</p>
             <div className="mt-10">
+              <CostVisual />
+            </div>
+            <div className="mt-8">
               <CompareTable tone="light" />
             </div>
             <p className="mt-6 max-w-3xl text-sm font-medium leading-relaxed text-navy">{COMPARISON.note}</p>
