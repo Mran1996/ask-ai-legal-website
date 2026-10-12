@@ -30,7 +30,7 @@ const STEPS = [
   {
     n: "04",
     title: "Your questions, answered",
-    body: "Before we close the session, we show you how to use the installed features and answer your questions. You also receive a walkthrough video of the installation and how the software works.",
+    body: "Before we close the session, we show you how to use the installed features and answer your questions. You also receive a walkthrough video and a written getting-started guide.",
     img: "install-04-questions.png",
   },
 ]

@@ -19,11 +19,11 @@ export const servicesPageContent = {
   items: [
     {
       detail:
-        "Research connections let you open the source behind a reference. CourtListener (court opinions) is the confirmed connection today; it uses a free CourtListener account token. Other providers depend on your installation and may require a separate subscription.",
+        "We can connect supported legal research platforms — including Westlaw, LexisNexis, Bloomberg Law, Fastcase / vLex, CourtListener, UniCourt, Docket Alarm, GovInfo, eCFR, Open States, Caselaw Access Project, OpenLaws, Vaquill AI, and judyrecords — using the customer's own account or API key. Provider subscriptions and usage fees are separate. Options are covered in the consultation.",
       includes: [
+        "Connections to the research platforms you choose",
         "Source links you can open and read",
-        "CourtListener connection for court opinions",
-        "Paid research databases are not included",
+        "Provider subscriptions and usage fees are separate",
         "Check every citation before relying on it",
       ],
     },
@@ -53,13 +53,13 @@ export const servicesPageContent = {
     },
     {
       detail:
-        "The one-time purchase includes a computer compatibility check and installation, configuration of your workspace and supported connections, guided setup of your first case, personal training, a walkthrough video of the installation and the software, and 30 days of installation support beginning when installation is completed. Guided case setup means organizing the workspace and explaining the software, not legal advice.",
+        "The one-time purchase includes a computer compatibility check and installation, configuration of your workspace and supported connections, guided setup of your first case, personal training, a walkthrough video and written getting-started guide, and 30 days of installation support beginning when installation is completed. Guided case setup means organizing the workspace and explaining the software, not legal advice.",
       includes: [
         "Computer compatibility check and installation",
         "Configuration of your workspace and supported connections",
         "Guided setup of your first case",
         "Personal training on using the installed software",
-        "A walkthrough video of the installation and how the software works",
+        "Walkthrough video and written getting-started guide",
         "30 days of installation support",
       ],
     },

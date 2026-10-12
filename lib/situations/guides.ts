@@ -157,7 +157,7 @@ export const SITUATION_GUIDES: Record<string, SituationGuide> = {
       },
       {
         q: "How much does it cost?",
-        a: "Ask AI Legal is a one-time purchase of $3,997 for your installed copy, setup, personal training, a walkthrough video of the installation and the software, and 30 days of installation support. Optional maintenance is $125 per month. Third-party AI usage, research subscriptions, and cloud services may cost extra.",
+        a: "Ask AI Legal is a one-time purchase of $3,997 for your installed copy, setup, personal training, a walkthrough video and written getting-started guide, and 30 days of installation support. Optional maintenance is $125 per month. Third-party AI usage, research subscriptions, and cloud services may cost extra.",
       },
     ],
     documentsExamples: [

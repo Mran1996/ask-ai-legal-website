@@ -20,7 +20,7 @@ export const en = {
     titleLine1: "Your legal workspace.",
     titleHighlight: "Installed on your computer.",
     titleLine2: "",
-    body: "Purchase your own installed copy of Ask AI Legal for $3,997. We install and configure your workspace, help you set up your first case, and personally show you how to organize documents, research legal sources, and prepare drafts for review. Your purchase includes a walkthrough video of the installation and the software, plus 30 days of installation support. Optional maintenance is available for $125 per month.",
+    body: "Purchase your own installed copy of Ask AI Legal for $3,997. We install and configure your workspace, help you set up your first case, and personally show you how to organize documents, research legal sources, and prepare drafts for review. Your purchase includes a walkthrough video and written getting-started guide, plus 30 days of installation support. Optional maintenance is available for $125 per month.",
     categories: [
       "Divorce & separation",
       "Custody & family",
@@ -52,9 +52,9 @@ export const en = {
     importantText: SITE_DISCLAIMER,
     items: [
       {
-        title: "Research you can check",
+        title: "Supported research connections",
         description:
-          "Use source links to read the opinions, statutes, court rules, and documents behind your research. AI can make mistakes, including incorrect citations — check each source before relying on it.",
+          "Connect your workspace to supported legal research platforms such as Westlaw, LexisNexis, Bloomberg Law, and CourtListener. Provider subscriptions and usage fees are separate. Open the original sources and review AI-generated citations before relying on them.",
       },
       {
         title: "Document drafting for your review",
@@ -79,7 +79,7 @@ export const en = {
       {
         title: "Installation, training, and support",
         description:
-          "Computer compatibility check, installation, guided setup of your first case, personal training, a walkthrough video of the installation and the software, and 30 days of installation support.",
+          "Computer compatibility check, installation, guided setup of your first case, personal training, a walkthrough video and written getting-started guide, and 30 days of installation support.",
       },
     ],
   },
@@ -94,7 +94,7 @@ export const en = {
     traditionalHeading: "One-time purchase",
     traditionalPrice: "$3,997",
     traditionalDesc:
-      "Your installed copy, setup, personal training, a walkthrough video of the installation and the software, and 30 days of installation support",
+      "Your installed copy, setup, personal training, a walkthrough video and written getting-started guide, and 30 days of installation support",
     traditionalBullets: [
       "Computer compatibility check and installation",
       "Guided setup of your first case",
@@ -150,7 +150,7 @@ export const en = {
     cta: PRIMARY_CTA_LABEL,
     steps: [
       {
-        title: "Book an installation consultation",
+        title: "Request an installation consultation",
         body: "We confirm your computer requirements, review the included features, and explain any additional costs before you purchase.",
       },
       {
@@ -159,7 +159,7 @@ export const en = {
       },
       {
         title: "You work from home",
-        body: "Organize documents, research legal sources, and prepare drafts for your review — with a walkthrough video of the installation and the software, plus 30 days of installation support.",
+        body: "Organize documents, research legal sources, and prepare drafts for your review — with a walkthrough video and written getting-started guide, plus 30 days of installation support.",
       },
     ],
   },
@@ -251,11 +251,11 @@ export const en = {
     items: [
       {
         q: "What does Ask AI Legal cost?",
-        a: "The one-time price is $3,997 for your installed copy, setup, personal training, a walkthrough video of the installation and the software, and 30 days of installation support. Optional maintenance is $125 per month. Third-party AI usage, research subscriptions, and cloud services may cost extra.",
+        a: "The one-time price is $3,997 for your installed copy, setup, personal training, a walkthrough video and written getting-started guide, and 30 days of installation support. Optional maintenance is $125 per month. Third-party AI usage, research subscriptions, and cloud services may cost extra.",
       },
       {
         q: "What is included in installation?",
-        a: "We check computer compatibility, install and configure the included software and supported connections, guide you through setting up your first case, and show you how to use your workspace.",
+        a: "We check computer compatibility, install and configure the included software and supported connections, guide you through setting up your first case, and show you how to use your workspace. You also receive a walkthrough video and a written getting-started guide.",
       },
       {
         q: "What does the 30-day support period cover?",
@@ -268,6 +268,10 @@ export const en = {
       {
         q: "What does maintenance include?",
         a: "Maintenance includes supported software updates, maintenance of existing AI connections, compatibility fixes, and technical assistance within the maintenance plan’s stated limits. Custom integrations, major upgrades, and additional training may require a separate quote.",
+      },
+      {
+        q: "Which research platforms can I connect?",
+        a: "We can connect supported legal research platforms such as Westlaw, LexisNexis, Bloomberg Law, Fastcase / vLex, and CourtListener. Provider subscriptions and usage fees are separate. We'll go over the options for your installation during your consultation.",
       },
       {
         q: "Are AI and research subscriptions included?",

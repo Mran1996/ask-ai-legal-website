@@ -9,6 +9,7 @@ import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { prefersReducedMotion } from "./smooth-scroll"
 import { CONSULT_CTA_LABEL, CONSULT_HREF, THIRD_PARTY_COSTS_NOTE } from "@/lib/site-config"
+import { DEMO_VIDEO_READY } from "@/lib/demo-video"
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -30,7 +31,7 @@ const SCENES = [
     alt: "Laptop glowing on a kitchen table at night with legal documents rising from the screen — Ask AI Legal workspace installed at home",
     label: "We do the install. Ask AI Legal does the heavy lifting. You make the decisions.",
     title: ["Your legal workspace.", "Installed on your computer."],
-    sub: "Purchase your own installed copy of Ask AI Legal for $3,997. We install and configure your workspace, help you set up your first case, and personally show you how to organize documents, research legal sources, and prepare drafts for review. Your purchase includes a walkthrough video of the installation and the software, plus 30 days of installation support. Optional maintenance is available for $125 per month.",
+    sub: "We install Ask AI Legal, help you set up your first case, and personally show you how to organize documents, research sources, and prepare drafts for review.",
     pos: "70% center",
     brand: true,
     intro: true,
@@ -75,7 +76,7 @@ const SCENES = [
     alt: "Woman relaxed at her kitchen table after handling her legal matter from home",
     label: "06 · After",
     title: ["From home.", "On your terms."],
-    sub: "A $3,997 one-time purchase, with optional maintenance at $125 per month. We explain additional costs before installation.",
+    sub: "Know what you're paying. See your work. Stay involved in your case.",
     pos: "60% center",
     cta: true,
   },
@@ -144,7 +145,7 @@ export function StoryHero() {
         className="absolute inset-0 md:hidden"
         style={{
           background:
-            "linear-gradient(to bottom, rgba(7,15,24,0.90) 0%, rgba(7,15,24,0.62) 34%, rgba(7,15,24,0.18) 52%, rgba(7,15,24,0) 68%, rgba(7,15,24,0.55) 92%, rgba(7,15,24,0.85) 100%)",
+            "linear-gradient(to bottom, rgba(7,15,24,0.92) 0%, rgba(7,15,24,0.74) 40%, rgba(7,15,24,0.3) 58%, rgba(7,15,24,0) 68%, rgba(7,15,24,0.55) 92%, rgba(7,15,24,0.85) 100%)",
         }}
       />
       {/* Desktop: side + bottom vignette behind left-aligned copy. */}
@@ -209,9 +210,15 @@ export function StoryHero() {
                     <Link href={CONSULT_HREF} className="cine-btn-gold w-full sm:w-auto">
                       {CONSULT_CTA_LABEL} <ArrowRight className="h-4 w-4" aria-hidden />
                     </Link>
-                    <Link href="/pricing" className="cine-btn-ghost w-full sm:w-auto">
-                      See pricing
-                    </Link>
+                    {DEMO_VIDEO_READY ? (
+                      <Link href="#demo" className="cine-btn-ghost w-full sm:w-auto">
+                        Watch the demo
+                      </Link>
+                    ) : (
+                      <Link href="/pricing" className="cine-btn-ghost w-full sm:w-auto">
+                        See pricing
+                      </Link>
+                    )}
                   </div>
                 </>
               )}

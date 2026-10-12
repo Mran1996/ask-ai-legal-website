@@ -1,20 +1,25 @@
 import type { Metadata } from "next"
 import Link from "next/link"
+import { Check } from "lucide-react"
 import { CineNav } from "@/components/cinematic/nav"
 import { Footer } from "@/components/footer"
 import { NeonButton } from "@/components/neon-button"
+import { CompareTable } from "@/components/compare-table"
+import { COMPARISON } from "@/lib/comparison"
 import {
   CONSULT_CTA_LABEL,
   CONSULT_HREF,
   MAINTENANCE_PRICE_USD,
   PRICING_NOTICE,
+  PURCHASE_INCLUSIONS,
   PURCHASE_PRICE_USD,
   SITE_URL,
+  SUPPORT_PERIOD_NOTE,
 } from "@/lib/site-config"
 
 const TITLE = "Ask AI Legal Pricing | $3,997 Purchase & $125 Maintenance"
 const DESCRIPTION =
-  "Get Ask AI Legal for $3,997 with installation, personal training, and 30 days of installation support. Optional maintenance is $125 per month."
+  "Ask AI Legal includes installation, training, video and written guidance, and 30 days of installation support for $3,997. Maintenance is optional at $125/month."
 
 export const metadata: Metadata = {
   title: { absolute: TITLE },
@@ -37,7 +42,7 @@ const productJsonLd = {
   "@type": "Product",
   name: "Ask AI Legal",
   description:
-    "Legal workspace software installed on your computer, including installation, configuration, personal training, a walkthrough video of the installation and the software, and 30 days of installation support.",
+    "Legal workspace software installed on your computer, including installation, configuration, personal training, a walkthrough video and written getting-started guide, and 30 days of installation support.",
   brand: { "@type": "Brand", name: "Ask AI Legal" },
   url: `${SITE_URL}/pricing`,
   offers: [
@@ -65,18 +70,20 @@ const productJsonLd = {
   ],
 }
 
+const DETAILS_LINE = "We’ll go over the details in your consultation."
+
 const sections = [
   {
     title: "Your costs, clearly explained.",
-    body: "The one-time purchase is $3,997. If you also choose 12 months of maintenance, the combined cost is $5,497, before any applicable taxes or separate third-party charges. Maintenance is optional; this example does not require a 12-month commitment. Third-party AI usage, research subscriptions, and cloud services are separate unless expressly included in your written purchase summary.",
+    body: "The one-time purchase is $3,997. With 12 months of optional maintenance, the first-year total is $5,497 before applicable taxes and separate third-party charges — no 12-month commitment required. Third-party AI usage, research subscriptions, and cloud services are separate.",
   },
   {
     title: "What happens without maintenance?",
-    body: "You keep your purchased software under your license terms if you stop maintenance. Connected features may eventually require updates or separate subscriptions when outside providers change their services. Your purchase agreement explains what remains available without maintenance.",
+    body: "You keep your purchased software under your license terms. Connected features may eventually need updates or outside services as providers change.",
   },
   {
     title: "Before you purchase.",
-    body: "We confirm supported computer requirements, explain the included features and connected services, and review installation arrangements with you. We also explain any remote-access and recording arrangements before the session. Your purchase summary identifies applicable taxes, additional services, third-party charges, and the terms governing your purchase.",
+    body: "We confirm your computer requirements, the included features, and any third-party costs before installation.",
   },
 ]
 
@@ -103,10 +110,10 @@ export default function PricingPage() {
             <div className="mt-10 flex flex-wrap items-center gap-4">
               <NeonButton href={CONSULT_HREF}>{CONSULT_CTA_LABEL}</NeonButton>
               <Link
-                href="/#faq"
+                href="#compare"
                 className="inline-flex items-center text-sm font-semibold text-gold underline-offset-2 hover:underline"
               >
-                Read the FAQ
+                Compare with hiring an attorney
               </Link>
             </div>
           </div>
@@ -123,10 +130,16 @@ export default function PricingPage() {
                 <p className="mt-4 font-display text-4xl font-semibold text-navy">
                   $3,997 <span className="text-lg font-medium text-gray-600">one time</span>
                 </p>
-                <p className="mt-5 flex-grow text-sm leading-relaxed text-gray-700">
-                  Your purchase includes a computer compatibility check and installation, configuration of your
-                  workspace and supported connections, guided setup of your first case, personal training, a walkthrough video of the installation and the software, and 30 days of installation support beginning when installation is completed.
-                </p>
+                <p className="mt-5 text-sm font-semibold text-navy">Your purchase includes:</p>
+                <ul className="mt-3 flex-grow space-y-2.5">
+                  {PURCHASE_INCLUSIONS.map((item) => (
+                    <li key={item} className="flex items-start gap-3 text-sm leading-relaxed text-gray-700">
+                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-gold-dark" aria-hidden />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+                <p className="mt-5 text-xs leading-relaxed text-gray-600">{SUPPORT_PERIOD_NOTE}</p>
                 <div className="mt-8">
                   <NeonButton href={CONSULT_HREF} className="btn-neon-light">
                     {CONSULT_CTA_LABEL}
@@ -142,8 +155,8 @@ export default function PricingPage() {
                 <p className="mt-5 text-sm leading-relaxed text-gray-700">
                   Keep your installation current as technology changes. Maintenance includes supported software
                   updates, maintenance of existing AI connections, compatibility fixes, and technical assistance within
-                  the maintenance plan&rsquo;s stated limits. We evaluate updates before installing them. Custom
-                  integrations, major upgrades, and additional training may require a separate quote.
+                  the maintenance plan&rsquo;s stated limits. Custom integrations, major upgrades, and additional
+                  training may require a separate quote.
                 </p>
                 <p className="mt-4 flex-grow text-sm font-medium leading-relaxed text-navy">
                   Maintenance is optional. Coverage, billing, service limits, and cancellation terms are provided
@@ -154,16 +167,33 @@ export default function PricingPage() {
           </div>
         </section>
 
-        <section className="section-pad bg-white">
-          <div className="container-main max-w-4xl space-y-12">
+        <section id="compare" className="section-pad scroll-mt-20 bg-white" aria-labelledby="compare-title">
+          <div className="container-main max-w-5xl">
+            <p className="firm-label text-gold-dark">{COMPARISON.tagline}</p>
+            <div className="gold-rule mb-6 mt-2" />
+            <h2 id="compare-title" className="firm-title text-navy">
+              {COMPARISON.title}
+            </h2>
+            <p className="mt-5 max-w-3xl text-base leading-relaxed text-gray-700">{COMPARISON.intro}</p>
+            <div className="mt-10">
+              <CompareTable tone="light" />
+            </div>
+            <p className="mt-6 max-w-3xl text-sm font-medium leading-relaxed text-navy">{COMPARISON.note}</p>
+          </div>
+        </section>
+
+        <section className="section-pad bg-cream">
+          <div className="container-main max-w-4xl space-y-10">
             {sections.map((s) => (
               <div key={s.title}>
                 <h2 className="firm-title text-navy">{s.title}</h2>
-                <p className="mt-5 text-base leading-relaxed text-gray-700">{s.body}</p>
+                <p className="mt-4 text-base leading-relaxed text-gray-700">
+                  {s.body} {DETAILS_LINE}
+                </p>
               </div>
             ))}
 
-            <div className="rounded-sm border border-navy/10 bg-cream p-6 sm:p-8">
+            <div className="rounded-sm border border-navy/10 bg-white p-6 sm:p-8">
               <p className="text-xs font-bold uppercase tracking-widest text-navy">Important notice</p>
               <p className="mt-3 text-sm leading-relaxed text-gray-700">{PRICING_NOTICE}</p>
             </div>

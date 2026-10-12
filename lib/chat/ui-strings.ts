@@ -55,17 +55,17 @@ const en: ChatUiStrings = {
   continueBtn: "Continue",
   changeLanguage: "Language",
   tabChat: "Chat",
-  tabBook: "Book consultation",
+  tabBook: "Request consultation",
   welcome:
     "Hello! I'm the Ask AI Legal assistant. I can explain what the software does, what the $3,997 purchase includes, and how optional maintenance works — in your language.",
   welcomeHint:
-    "Ready to talk it through? Use the Book consultation tab. Please don't send confidential case documents through chat.",
+    "Ready to talk it through? Use the Request consultation tab. Please don't send confidential case documents through chat.",
   placeholder: "Ask about Ask AI Legal…",
   send: "Send",
   thinking: "Thinking…",
   notLegalAdvice: "Not legal advice · Software, installation, and support",
   emailSupportHint: "Installation, maintenance, support, or billing questions.",
-  bookTitle: "Book an installation consultation",
+  bookTitle: "Request an installation consultation",
   bookHint:
     "We confirm your computer requirements, review the included features, and discuss installation. We'll reply by email to set a time.",
   pricingLine:
