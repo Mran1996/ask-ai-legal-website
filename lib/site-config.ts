@@ -32,7 +32,7 @@ export const PURCHASE_INCLUSIONS = [
   "Configuration of your workspace and supported connections",
   "Guided setup of your first case",
   "Personal training on using the installed software",
-  "A written getting-started guide",
+  "A walkthrough video of the installation and how the software works",
   "30 days of installation support",
 ] as const
 

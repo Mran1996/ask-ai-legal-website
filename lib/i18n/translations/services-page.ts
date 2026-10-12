@@ -53,13 +53,13 @@ export const servicesPageContent = {
     },
     {
       detail:
-        "The one-time purchase includes a computer compatibility check and installation, configuration of your workspace and supported connections, guided setup of your first case, personal training, a written getting-started guide, and 30 days of installation support beginning when installation is completed. Guided case setup means organizing the workspace and explaining the software, not legal advice.",
+        "The one-time purchase includes a computer compatibility check and installation, configuration of your workspace and supported connections, guided setup of your first case, personal training, a walkthrough video of the installation and the software, and 30 days of installation support beginning when installation is completed. Guided case setup means organizing the workspace and explaining the software, not legal advice.",
       includes: [
         "Computer compatibility check and installation",
         "Configuration of your workspace and supported connections",
         "Guided setup of your first case",
         "Personal training on using the installed software",
-        "A written getting-started guide",
+        "A walkthrough video of the installation and how the software works",
         "30 days of installation support",
       ],
     },
