@@ -1,11 +1,19 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
-  <rect width="32" height="32" rx="7" fill="#0c1929" />
-  <path
-    d="M16 7v18M9 11l-3.5 7a3.5 3.5 0 0 0 7 0L9 11Zm14 0l-3.5 7a3.5 3.5 0 0 0 7 0L23 11ZM6 11h6M20 11h6M11 25h10"
-    stroke="#C5A059"
-    stroke-width="1.6"
-    stroke-linecap="round"
-    stroke-linejoin="round"
-    fill="none"
-  />
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- Ask AI Legal "A" mark (two upside-down V's) on brand navy — same artwork as the installed app. -->
+  <defs>
+    <linearGradient id="aalo" x1="140" y1="1040" x2="1000" y2="260" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#19C8CF" />
+      <stop offset="0.5" stop-color="#2A9BE0" />
+      <stop offset="1" stop-color="#3B6FE8" />
+    </linearGradient>
+    <linearGradient id="aali" x1="420" y1="1040" x2="820" y2="760" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#19C8CF" />
+      <stop offset="1" stop-color="#3B6FE8" />
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="#0c1929" />
+  <svg x="9" y="8" width="46" height="46" viewBox="100 98 1055 1055">
+    <path fill="url(#aalo)" d="M128 1032 L535 262 A102 102 0 0 1 720 262 L1127 1032 Q1132 1048 1115 1048 L945 1048 Q936 1048 932 1040 L636 452 Q627 440 618 452 L320 1040 Q315 1048 305 1048 L138 1048 Q122 1048 128 1032 Z" />
+    <path fill="url(#aali)" d="M412 1030 L588 718 A48 48 0 0 1 666 718 L844 1030 Q850 1048 836 1048 L418 1048 Q404 1048 412 1030 Z" />
+  </svg>
 </svg>

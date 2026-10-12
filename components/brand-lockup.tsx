@@ -22,12 +22,12 @@ export function BrandLockup({
   const isHeader = variant === "header"
 
   const title = isHeader ? (
-    <span className="brand-title-gold font-sans text-[15px] font-semibold leading-tight tracking-tight sm:text-base">
+    <span className="font-sans text-[15px] font-semibold leading-tight tracking-tight text-cream sm:text-base">
       {SITE_BRAND_NAME}
     </span>
   ) : (
     <span
-      className="brand-title-gold font-sans text-4xl font-semibold leading-[1.05] tracking-tight sm:text-5xl md:text-6xl lg:text-7xl"
+      className="font-sans text-4xl text-cream font-semibold leading-[1.05] tracking-tight sm:text-5xl md:text-6xl lg:text-7xl"
       aria-label={SITE_BRAND_NAME}
     >
       <TypewriterText text={SITE_BRAND_NAME} speed={70} startDelay={280} showCursor />
@@ -48,14 +48,17 @@ export function BrandLockup({
   )
 
   const content = isHeader ? (
-    <div className="min-w-0 text-left">
-      {title}
-      {tagline}
+    <div className="flex min-w-0 items-center gap-2.5">
+      <BrandMark className="h-8 w-8 sm:h-9 sm:w-9" />
+      <div className="min-w-0 text-left">
+        {title}
+        {tagline}
+      </div>
     </div>
   ) : (
     <div className="relative z-10 flex w-full flex-col items-center text-center">
       <div className="flex flex-row items-center justify-center gap-3 sm:gap-4 md:gap-5">
-        <BrandMark className="-mt-0.5 sm:-mt-1" />
+        <BrandMark className="-mt-0.5 h-12 w-12 sm:-mt-1 sm:h-14 sm:w-14 md:h-[4.25rem] md:w-[4.25rem] lg:h-[4.75rem] lg:w-[4.75rem]" />
         {title}
       </div>
       {tagline}

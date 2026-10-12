@@ -1,7 +1,8 @@
 "use client"
 
 import Link from "next/link"
-import { Scale, Instagram, Facebook } from "lucide-react"
+import { Instagram, Facebook } from "lucide-react"
+import { BrandMark } from "@/components/brand-mark"
 import { useLanguage } from "@/components/language-provider"
 import { useConsent } from "@/components/privacy/consent-provider"
 import {
@@ -65,7 +66,7 @@ export function Footer() {
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(240px,280px)_1fr] lg:items-start lg:gap-x-10 xl:gap-x-12">
           <div>
             <Link href="/" className="flex items-center gap-3 transition-opacity hover:opacity-90">
-              <Scale className="h-6 w-6 shrink-0 text-gold" aria-hidden />
+              <BrandMark className="h-7 w-7" />
               <span className="font-display text-xl font-semibold text-white">{SITE_BRAND_NAME}</span>
             </Link>
             <p className="mt-4 text-sm leading-relaxed">{t.footer.tagline}</p>
