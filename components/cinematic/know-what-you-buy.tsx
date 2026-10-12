@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import { CompareTable } from "@/components/compare-table"
+import { CostVisual } from "@/components/cost-visual"
 import { COMPARISON } from "@/lib/comparison"
 import { CONSULT_CTA_LABEL, CONSULT_HREF } from "@/lib/site-config"
 
@@ -14,6 +15,10 @@ export function KnowWhatYouBuy() {
         <p className="cine-body mt-8 max-w-2xl">{COMPARISON.intro}</p>
 
         <div className="mt-12">
+          <CostVisual />
+        </div>
+
+        <div className="mt-8">
           <CompareTable tone="dark" short />
         </div>
 

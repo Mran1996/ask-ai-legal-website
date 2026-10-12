@@ -4,11 +4,27 @@ export const COMPARISON = {
   intro:
     "Ask AI Legal and hiring an attorney provide different services. Compare what you pay, what is included, and who is responsible for the work.",
   columns: ["Ask AI Legal", "Hiring an attorney"] as const,
+  /** Owner-supplied typical retainer range (Oct 2026). Keep the "varies" wording with it. */
+  visual: {
+    attorney: {
+      label: "Hiring an attorney",
+      price: "$5,000–$10,000+",
+      unit: "Typical upfront retainer",
+      detail:
+        "Often billed hourly against the retainer, and more may be requested as the case goes on. Actual fees vary by attorney, location, and matter.",
+    },
+    ours: {
+      label: "Ask AI Legal",
+      price: "$3,997",
+      unit: "One-time purchase",
+      detail: "Software, installation, and onboarding. Optional maintenance is $125/month — no hourly billing.",
+    },
+  },
   rows: [
     {
       label: "Upfront cost",
       ours: "$3,997 for software, installation, and onboarding",
-      attorney: "Fees depend on the attorney, matter, and engagement",
+      attorney: "Retainers often start around $5,000–$10,000 or more, depending on the attorney and matter",
       short: true,
     },
     {
