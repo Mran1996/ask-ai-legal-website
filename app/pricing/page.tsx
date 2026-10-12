@@ -37,7 +37,7 @@ const productJsonLd = {
   "@type": "Product",
   name: "Ask AI Legal",
   description:
-    "Legal workspace software installed on your computer, including installation, configuration, personal training, a written getting-started guide, and 30 days of installation support.",
+    "Legal workspace software installed on your computer, including installation, configuration, personal training, a walkthrough video of the installation and the software, and 30 days of installation support.",
   brand: { "@type": "Brand", name: "Ask AI Legal" },
   url: `${SITE_URL}/pricing`,
   offers: [
@@ -125,8 +125,7 @@ export default function PricingPage() {
                 </p>
                 <p className="mt-5 flex-grow text-sm leading-relaxed text-gray-700">
                   Your purchase includes a computer compatibility check and installation, configuration of your
-                  workspace and supported connections, guided setup of your first case, personal training, a written
-                  getting-started guide, and 30 days of installation support beginning when installation is completed.
+                  workspace and supported connections, guided setup of your first case, personal training, a walkthrough video of the installation and the software, and 30 days of installation support beginning when installation is completed.
                 </p>
                 <div className="mt-8">
                   <NeonButton href={CONSULT_HREF} className="btn-neon-light">
