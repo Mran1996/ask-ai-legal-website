@@ -155,7 +155,7 @@ export function StoryHero() {
       <FallingPapers />
 
       {/* copy */}
-      <div className="cine-container relative z-10 flex h-full flex-col justify-center pb-28 pt-20 sm:pb-24 sm:pt-24">
+      <div className="cine-container relative z-10 flex h-full flex-col [justify-content:safe_center] pb-16 pt-24 sm:pb-24 sm:pt-24">
         <div className="relative min-h-[22rem] sm:min-h-[26rem]">
           {SCENES.map((s, i) => (
             <div
@@ -168,7 +168,7 @@ export function StoryHero() {
                   <BrandLockup href="/" className="justify-center" />
                 </div>
               )}
-              <p className={`cine-label cine-shadow ${i === 0 ? "mb-3 !tracking-[0.12em]" : "mb-6"}`}>{s.label}</p>
+              <p className={`cine-label cine-shadow ${i === 0 ? "mb-3 !text-[10px] !leading-relaxed !tracking-[0.06em] sm:!text-xs sm:!tracking-[0.12em]" : "mb-6"}`}>{s.label}</p>
               {i === 0 ? (
                 <h1 className="cine-shadow font-display text-cream">
                   <span className="block text-[clamp(1.9rem,5.4vw,4.25rem)] font-semibold leading-[1.05] tracking-[-0.02em]">{s.title[0]}</span>{" "}
@@ -205,7 +205,7 @@ export function StoryHero() {
                       </li>
                     ))}
                   </ul>
-                  <div className="mt-6 flex w-full flex-col items-center gap-3 sm:flex-row sm:justify-center">
+                  <div className="mt-5 flex w-full flex-col items-center gap-2.5 sm:mt-6 sm:flex-row sm:justify-center sm:gap-3">
                     <Link href={CONSULT_HREF} className="cine-btn-gold w-full sm:w-auto">
                       {CONSULT_CTA_LABEL} <ArrowRight className="h-4 w-4" aria-hidden />
                     </Link>
