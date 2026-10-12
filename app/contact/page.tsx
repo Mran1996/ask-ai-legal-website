@@ -12,9 +12,9 @@ import {
   SUPPORT_MAILTO,
 } from "@/lib/site-config"
 
-const TITLE = "Contact us — book an installation consultation"
+const TITLE = "Request an installation consultation"
 const DESCRIPTION =
-  "Contact Ask AI Legal to book an installation consultation or ask about software installation, maintenance, support, or billing. Send a message and we'll reply by email."
+  "Request an Ask AI Legal installation consultation, or contact us about support or billing. Tell us how to reach you and we'll follow up by email."
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -37,18 +37,17 @@ export default function ContactPage() {
           <div className="container-main max-w-4xl">
             <p className="firm-label text-gold">Contact us</p>
             <div className="gold-rule mb-8" />
-            <h1 className="firm-title text-white">We&rsquo;re here to help</h1>
+            <h1 className="firm-title text-white">Request an installation consultation</h1>
             <p className="mt-8 max-w-2xl text-lg leading-relaxed text-white/70">
-              Have a question about software installation, maintenance, support, or billing? Send us a message below
-              and we&rsquo;ll reply by email. You can also reach us directly at{" "}
+              Tell us how to reach you and the best times to contact you. We&rsquo;ll follow up to arrange a
+              consultation about computer compatibility, included features, and installation.
+            </p>
+            <p className="mt-4 max-w-2xl text-base leading-relaxed text-white/60">
+              For support or billing questions, choose that option in the form, or email us at{" "}
               <a className="text-gold underline underline-offset-2" href={SUPPORT_MAILTO}>
                 {SUPPORT_EMAIL}
               </a>
               .
-            </p>
-            <p className="mt-4 max-w-2xl text-base leading-relaxed text-white/60">
-              To book an installation consultation, tell us the best times to reach you. In the consultation we confirm
-              your computer requirements, review the included features, and discuss installation.
             </p>
           </div>
         </section>

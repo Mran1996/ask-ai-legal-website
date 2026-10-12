@@ -16,7 +16,8 @@ export const SUPPORT_MAILTO = `mailto:${SUPPORT_EMAIL}` as const
 /** Google Business Profile NAP — phone line and hours hidden in UI while empty. */
 export const BUSINESS_PHONE: string = ""
 export const BUSINESS_HOURS: string = ""
-export const BUSINESS_SERVICE_AREAS = "All 50 states"
+/** Where we serve customers — not a claim that every jurisdiction's documents and rules are supported. */
+export const BUSINESS_SERVICE_AREAS = "Serving customers in all 50 states"
 
 /** Approved public pricing (Oct 2026): one-time purchase + optional monthly maintenance. */
 export const PURCHASE_PRICE_USD = 3997
@@ -32,7 +33,7 @@ export const PURCHASE_INCLUSIONS = [
   "Configuration of your workspace and supported connections",
   "Guided setup of your first case",
   "Personal training on using the installed software",
-  "A walkthrough video of the installation and how the software works",
+  "Walkthrough video and written getting-started guide",
   "30 days of installation support",
 ] as const
 
@@ -40,13 +41,35 @@ export const SUPPORT_PERIOD_NOTE =
   "Installation support begins when installation is completed and covers setup problems and questions about using the installed features. Optional ongoing maintenance is available separately."
 
 export const THIRD_PARTY_COSTS_NOTE =
-  "Third-party AI usage, research subscriptions, and cloud services may cost extra. We explain additional costs before installation."
+  "Third-party AI usage, research subscriptions, and cloud services may cost extra."
 
-/** Research providers with a confirmed, working integration in the installed app. */
-export const RESEARCH_SOURCES = ["CourtListener"] as const
+/**
+ * Research platforms we can connect for a customer (owner-confirmed, Oct 2026).
+ * Connected with the customer's own account or API key; details are covered in the consultation.
+ * Text names only — no endorsement or partnership implied.
+ */
+export const RESEARCH_SOURCES = [
+  "Westlaw",
+  "LexisNexis",
+  "Bloomberg Law",
+  "Fastcase / vLex",
+  "CourtListener",
+  "UniCourt",
+  "Docket Alarm",
+  "GovInfo",
+  "eCFR",
+  "Open States",
+  "Caselaw Access Project",
+  "OpenLaws",
+  "Vaquill AI",
+  "judyrecords",
+] as const
+
+export const RESEARCH_DESCRIPTION =
+  "Connect your workspace to supported legal research platforms for case law, statutes, regulations, and court records. We configure the connections selected for your installation."
 
 export const RESEARCH_ACCESS_NOTE =
-  "Available connections depend on your installation and the provider’s access requirements. Some sources require a separate subscription. Purchasing Ask AI Legal does not automatically include access to paid research databases."
+  "We'll walk you through the options during your consultation. Provider subscriptions and usage fees are separate."
 
 export const PRICING_NOTICE =
   "Ask AI Legal provides software, installation, training, and technical assistance. It does not provide legal representation or guarantee court acceptance or outcomes. Review generated work and verify sources before relying on it."
@@ -55,7 +78,7 @@ export const PRICING_NOTICE =
  * Consultation CTA. /book only schedules calls for an existing intake file
  * (it needs caseId + ref), so new visitors start on /contact.
  */
-export const CONSULT_CTA_LABEL = "Book an installation consultation"
+export const CONSULT_CTA_LABEL = "Request an installation consultation"
 export const CONSULT_HREF = "/contact"
 
 /** Pay #1 — internal ops/Stripe amount for the retired custom-quote flow (not advertised). */
@@ -100,7 +123,7 @@ export const SITE_SEO_TITLE = "Ask AI Legal | Installed Legal AI Software & Supp
 
 /** Homepage SEO description — used in layout, JSON-LD, and social previews. */
 export const SITE_SEO_DESCRIPTION =
-  "Own an installed copy of Ask AI Legal for $3,997, including setup and training. Optional maintenance is $125/month. Explore features and installation."
+  "Get Ask AI Legal for $3,997 with installation, personal training, a walkthrough video, and a written guide. Optional maintenance is $125/month."
 
 /** Brand mark (circular scales) — header, hero, app icons. */
 export const SITE_LOGO_MARK = "/brand/stripe-logo-512.png"

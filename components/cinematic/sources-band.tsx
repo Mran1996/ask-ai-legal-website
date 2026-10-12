@@ -26,7 +26,7 @@ export function SourcesBand() {
             before relying on it.
           </p>
           <div data-reveal className="mt-10">
-            <p className="cine-label mb-3 !text-cream/50">Confirmed connections</p>
+            <p className="cine-label mb-3 !text-cream/50">Supported research connections</p>
             <ul className="flex flex-wrap gap-2">
               {SOURCES.map((s) => (
                 <li key={s} className="rounded-full border border-cream/15 px-3 py-1 font-mono text-[11px] uppercase tracking-[0.12em] text-cream/75">

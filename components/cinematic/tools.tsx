@@ -3,9 +3,9 @@
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import { Reveal } from "./reveal"
-import { RESEARCH_ACCESS_NOTE, RESEARCH_SOURCES } from "@/lib/site-config"
+import { RESEARCH_ACCESS_NOTE, RESEARCH_DESCRIPTION, RESEARCH_SOURCES } from "@/lib/site-config"
 
-/** Only providers with a confirmed, working integration. Add more only after verifying them. */
+/** Research platforms we can connect (see RESEARCH_SOURCES). Text names only — no endorsement implied. */
 export const SOURCES: readonly string[] = RESEARCH_SOURCES
 
 type Tool = { id: string; title: string; body: string; sources?: boolean }
@@ -13,8 +13,8 @@ type Tool = { id: string; title: string; body: string; sources?: boolean }
 const TOOLS: Tool[] = [
   {
     id: "research",
-    title: "Research you can check",
-    body: "Use source links to read the opinions, statutes, court rules, and documents behind your research. AI can make mistakes, including incorrect citations. Check each source and confirm that it supports your point before relying on it.",
+    title: "Supported research connections",
+    body: `${RESEARCH_DESCRIPTION} Open the original sources and review AI-generated citations before relying on them.`,
     sources: true,
   },
   {
@@ -44,7 +44,7 @@ const COMPACT = [TOOLS[0], TOOLS[1], TOOLS[3]]
 function SourceList() {
   return (
     <>
-      <ul className="mt-6 flex flex-wrap gap-2" aria-label="Confirmed research connections">
+      <ul className="mt-6 flex flex-wrap gap-2" aria-label="Supported research connections">
         {SOURCES.map((s) => (
           <li key={s} className="rounded-full border border-accent/30 bg-ground px-3 py-1 font-mono text-[11px] uppercase tracking-[0.12em] text-cream/80">
             {s}
@@ -80,7 +80,7 @@ export function ToolsCompact() {
             <article key={t.id} data-reveal className={`cine-card p-7 sm:p-8 ${t.sources ? "lg:col-span-2" : ""}`}>
               <h3 className="cine-h3 text-cream">{t.title}</h3>
               <p className="cine-body mt-3 !text-base">{t.body}</p>
-              {t.sources && <SourceList />}
+              {/* The homepage lists the platforms once, in the sources band below. */}
             </article>
           ))}
         </Reveal>

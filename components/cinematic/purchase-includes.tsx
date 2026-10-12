@@ -10,7 +10,7 @@ export function PurchaseIncludes() {
     <section id="includes" className="relative bg-ground-surface py-24 sm:py-32">
       <div className="cine-container">
         <Reveal>
-          <p data-reveal className="cine-label mb-6">$3,997 one-time purchase</p>
+          <p data-reveal className="cine-label mb-6">One-time purchase</p>
           <h2 data-reveal className="cine-h2 text-cream">Your purchase includes</h2>
         </Reveal>
 

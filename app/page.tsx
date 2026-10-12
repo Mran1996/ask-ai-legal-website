@@ -3,6 +3,7 @@ import { Footer } from "@/components/footer"
 import { FaqJsonLd } from "@/lib/seo/faq-json-ld"
 import { CineNav } from "@/components/cinematic/nav"
 import { StoryHero } from "@/components/cinematic/story-hero"
+import { DemoVideo } from "@/components/cinematic/demo-video"
 import { InstallStory } from "@/components/cinematic/install-story"
 import { PurchaseIncludes } from "@/components/cinematic/purchase-includes"
 import { KnowWhatYouBuy } from "@/components/cinematic/know-what-you-buy"
@@ -38,6 +39,7 @@ export default function Home() {
       <CineNav />
       <main>
         <StoryHero />
+        <DemoVideo />
         <InstallStory />
         <PurchaseIncludes />
         <ToolsCompact />

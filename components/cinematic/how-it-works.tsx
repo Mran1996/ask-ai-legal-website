@@ -6,7 +6,7 @@ import { Reveal } from "./reveal"
 const STEPS = [
   {
     n: "01",
-    title: "Book an installation consultation",
+    title: "Request an installation consultation",
     body: "We confirm your computer requirements, review the included features, and explain any additional costs before you purchase.",
     img: "step-01-tell-us.png",
   },
