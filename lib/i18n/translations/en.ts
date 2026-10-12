@@ -16,7 +16,7 @@ export const en = {
     language: "Language",
   },
   hero: {
-    slogan: "Your installed legal workspace",
+    slogan: "We do the install. Ask AI Legal does the heavy lifting. You make the decisions.",
     titleLine1: "Your legal workspace.",
     titleHighlight: "Installed on your computer.",
     titleLine2: "",

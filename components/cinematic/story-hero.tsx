@@ -28,7 +28,7 @@ const SCENES = [
   {
     img: "hero-desk.png",
     alt: "Laptop glowing on a kitchen table at night with legal documents rising from the screen — Ask AI Legal workspace installed at home",
-    label: "Let us help you get your issues in order",
+    label: "We do the install. Ask AI Legal does the heavy lifting. You make the decisions.",
     title: ["Your legal workspace.", "Installed on your computer."],
     sub: "Purchase your own installed copy of Ask AI Legal for $3,997. We install and configure your workspace, help you set up your first case, and personally show you how to organize documents, research legal sources, and prepare drafts for review. Your purchase includes a walkthrough video of the installation and the software, plus 30 days of installation support. Optional maintenance is available for $125 per month.",
     pos: "70% center",
