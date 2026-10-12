@@ -3,8 +3,9 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { useChat } from "@ai-sdk/react"
 import { DefaultChatTransport, type UIMessage } from "ai"
-import { useMutation } from "convex/react"
+import { useAction } from "convex/react"
 import {
+  CalendarCheck,
   CheckCircle2,
   ChevronDown,
   Mail,
@@ -12,90 +13,49 @@ import {
   Send,
   Sparkles,
   X,
-  FileText,
   Globe,
   Loader2,
-  Paperclip,
 } from "lucide-react"
 import { useLanguage } from "@/components/language-provider"
 import { LANGUAGES, type Locale } from "@/lib/i18n/languages"
-import { CASE_TYPES, EMPTY_INTAKE, type IntakeFormData } from "@/lib/chat/types"
-import { US_STATES } from "@/lib/chat/us-states"
-import { isIntakeValid, SUPPORT_EMAIL } from "@/lib/chat/intake"
-import { intakeFormToPayload } from "@/lib/chat/intake-structured"
-import { prefillIntakeFromChat } from "@/lib/chat/intake-from-chat"
 import { getChatUiStrings, getWelcomeMessage } from "@/lib/chat/ui-strings"
 import { stripMarkdownForChat } from "@/lib/chat/sanitize-response"
 import { OPEN_CHAT_EVENT, type OpenChatEventDetail } from "@/lib/chat/open-chat"
-import { SUPPORT_MAILTO, SITE_BRAND_NAME } from "@/lib/site-config"
+import { SUPPORT_EMAIL, SUPPORT_MAILTO, SITE_BRAND_NAME } from "@/lib/site-config"
 import { trackChatTopic, trackEvent } from "@/lib/analytics"
-import { buildBookPageUrl, INTAKE_BOOKING_ENABLED } from "@/lib/booking"
-import { BookingBanner } from "@/components/brand/booking-banner"
-import { formatUsdFromCents } from "@/lib/pricing/ca-eviction"
-import { estimateFractionPercent } from "@/lib/pricing/service-pricing"
-import { DOCUMENT_RETRIEVAL_FEE_DISPLAY } from "@/lib/site-config"
+import { pixelTrack } from "@/lib/meta-pixel"
 import { api } from "@/convex/_generated/api"
-import type { Id } from "@/convex/_generated/dataModel"
 
-type IntakeEstimateSummary = {
-  serviceLine: string
-  finalQuoteCents: number
-  attorneyCompareLowCents: number
-  attorneyCompareHighCents: number
-  isCustomQuote: boolean
-}
+type Computer = "windows" | "mac" | "unsure"
 
-type IntakeSubmitBanner = {
-  caseReference: string
-  caseId: Id<"cases">
-  email: string
+type ConsultForm = {
   firstName: string
   lastName: string
-  documentsUploaded: number
-  emailQueued: boolean
-  estimate: IntakeEstimateSummary
+  email: string
+  phone: string
+  computer: Computer
+  bestTimes: string
+  question: string
 }
 
-type ChatUi = ReturnType<typeof getChatUiStrings>
-
-function formatIntakeEstimateLine(estimate: IntakeEstimateSummary, ui: ChatUi): string {
-  const attorneyLow = formatUsdFromCents(estimate.attorneyCompareLowCents)
-  const attorneyHigh = formatUsdFromCents(estimate.attorneyCompareHighCents)
-
-  if (estimate.isCustomQuote) {
-    const fraction = String(
-      estimateFractionPercent(
-        0,
-        estimate.attorneyCompareLowCents,
-        estimate.attorneyCompareHighCents
-      )
-    )
-    return ui.estimateCustomQuote
-      .replace("{attorneyTypicalLabel}", ui.attorneyTypicalLabel)
-      .replace("{attorneyLow}", attorneyLow)
-      .replace("{attorneyHigh}", attorneyHigh)
-      .replace("{fraction}", fraction)
-  }
-
-  return ui.estimateComparison
-    .replace("{attorneyTypicalLabel}", ui.attorneyTypicalLabel)
-    .replace("{attorneyLow}", attorneyLow)
-    .replace("{attorneyHigh}", attorneyHigh)
-    .replace("{ourEstimatedLabel}", ui.ourEstimatedLabel)
-    .replace("{ourPrice}", formatUsdFromCents(estimate.finalQuoteCents))
+const EMPTY_CONSULT: ConsultForm = {
+  firstName: "",
+  lastName: "",
+  email: "",
+  phone: "",
+  computer: "unsure",
+  bestTimes: "",
+  question: "",
 }
+
+const COMPUTER_LABEL: Record<Computer, string> = { windows: "Windows", mac: "Mac", unsure: "Not sure" }
 
 const CHAT_LOCALE_KEY = "ask-ai-legal-chat-locale"
 const CHAT_STARTED_KEY = "ask-ai-legal-chat-started"
-const MAX_INTAKE_FILES = 5
-const MAX_INTAKE_FILE_BYTES = 10 * 1024 * 1024
-const ALLOWED_INTAKE_TYPES = new Set([
-  "application/pdf",
-  "image/jpeg",
-  "image/jpg",
-  "image/png",
-  "image/webp",
-])
+
+const fieldClass =
+  "w-full rounded-sm border border-white/15 bg-white/5 px-2.5 py-2 text-sm text-white focus:border-gold/50 focus:outline-none"
+const labelClass = "mb-1 block text-[10px] uppercase tracking-wider text-white/50"
 
 function getMessageText(message: UIMessage): string {
   return message.parts
@@ -192,7 +152,7 @@ function AssistantMessageBubble({
   )
 }
 
-type Tab = "chat" | "quote"
+type Tab = "chat" | "book"
 
 export function ChatWidget() {
   const { locale: siteLocale, setLanguage } = useLanguage()
@@ -202,24 +162,11 @@ export function ChatWidget() {
   const [chatLocale, setChatLocale] = useState<Locale | null>(null)
   const [languageConfirmed, setLanguageConfirmed] = useState(false)
   const [input, setInput] = useState("")
-  const [intake, setIntake] = useState<IntakeFormData>(EMPTY_INTAKE)
-  const [intakeError, setIntakeError] = useState("")
-  const [intakeSubmitting, setIntakeSubmitting] = useState(false)
-  const [intakeSubmitBanner, setIntakeSubmitBanner] = useState<IntakeSubmitBanner | null>(null)
-  const [pendingFiles, setPendingFiles] = useState<File[]>([])
-  const [postCaseNumber, setPostCaseNumber] = useState("")
-  const [retrievalRequested, setRetrievalRequested] = useState(false)
-  const [savingDetails, setSavingDetails] = useState(false)
-  const [detailsSaved, setDetailsSaved] = useState(false)
-  const [detailsError, setDetailsError] = useState("")
-  const fileInputRef = useRef<HTMLInputElement>(null)
-  const postPayFileInputRef = useRef<HTMLInputElement>(null)
-  const createFromIntake = useMutation(api.cases.createFromIntake)
-  const generateForCase = useMutation(api.estimates.generateForCase)
-  const requestIntakeNotifications = useMutation(api.cases.requestIntakeNotifications)
-  const generateUploadUrl = useMutation(api.documents.generateUploadUrl)
-  const attachIntakeDocument = useMutation(api.documents.attachIntakeDocument)
-  const savePostIntakeQuoteDetails = useMutation(api.payments.savePostIntakeQuoteDetails)
+  const [consult, setConsult] = useState<ConsultForm>(EMPTY_CONSULT)
+  const [consultError, setConsultError] = useState("")
+  const [consultSending, setConsultSending] = useState(false)
+  const [consultSent, setConsultSent] = useState(false)
+  const sendContactMessage = useAction(api.contactActions.sendContactMessage)
   const [langMenuOpen, setLangMenuOpen] = useState(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const localeRef = useRef<Locale>(siteLocale)
@@ -301,7 +248,6 @@ export function ChatWidget() {
 
   const confirmLanguage = (locale: Locale) => {
     setChatLocale(locale)
-    setIntake((prev) => ({ ...prev, preferredLanguage: locale }))
     localStorage.setItem(CHAT_LOCALE_KEY, locale)
     localStorage.setItem(CHAT_STARTED_KEY, "1")
     setLanguageConfirmed(true)
@@ -325,7 +271,6 @@ export function ChatWidget() {
     setPanelVisible(false)
     window.setTimeout(() => {
       setOpen(false)
-      setIntakeSubmitBanner(null)
     }, 280)
   }, [])
 
@@ -358,22 +303,18 @@ export function ChatWidget() {
     }
   }
 
-  const switchToQuoteTab = () => {
-    setTab("quote")
-    trackEvent("cta_clicked", { cta: "chat_quote_tab" })
-    setIntake((prev) => {
-      const patch = prefillIntakeFromChat(messages, prev)
-      if (Object.keys(patch).length === 0) return prev
-      return { ...prev, ...patch }
-    })
+  const switchToBookTab = () => {
+    setTab("book")
+    trackEvent("cta_clicked", { cta: "chat_book_tab" })
   }
 
   useEffect(() => {
     const handleOpenEvent = (event: Event) => {
       const detail = (event as CustomEvent<OpenChatEventDetail>).detail
       handleOpen()
+      // "quote" is the legacy tab name some callers still send.
       if (detail?.tab === "quote" && languageConfirmed) {
-        switchToQuoteTab()
+        switchToBookTab()
       }
     }
     window.addEventListener(OPEN_CHAT_EVENT, handleOpenEvent)
@@ -381,197 +322,57 @@ export function ChatWidget() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [languageConfirmed, chatLocale])
 
-  const handleIntakeFiles = (fileList: FileList | null) => {
-    if (!fileList?.length) return
-    const incoming = Array.from(fileList)
-    const combined = [...pendingFiles, ...incoming]
-    if (combined.length > MAX_INTAKE_FILES) {
-      setIntakeError(ui.uploadFilesTooMany)
-      return
-    }
-    for (const file of incoming) {
-      if (file.size > MAX_INTAKE_FILE_BYTES) {
-        setIntakeError(ui.uploadFilesTooLarge)
-        return
-      }
-      if (file.type && !ALLOWED_INTAKE_TYPES.has(file.type)) {
-        setIntakeError("PDF, JPG, or PNG only.")
-        return
-      }
-    }
-    setIntakeError("")
-    setPendingFiles(combined)
-    setIntake((prev) => ({ ...prev, hasDocuments: "yes" }))
+  const updateConsult = (field: keyof ConsultForm, value: string) => {
+    setConsult((prev) => ({ ...prev, [field]: value }))
   }
 
-  const uploadIntakeFiles = async (caseId: Id<"cases">, files: File[]) => {
-    for (const file of files) {
-      const uploadUrl = await generateUploadUrl({})
-      const response = await fetch(uploadUrl, {
-        method: "POST",
-        headers: { "Content-Type": file.type || "application/octet-stream" },
-        body: file,
-      })
-      if (!response.ok) {
-        throw new Error(`Upload failed for ${file.name}`)
-      }
-      const { storageId } = (await response.json()) as { storageId: Id<"_storage"> }
-      await attachIntakeDocument({
-        caseId,
-        storageId,
-        fileName: file.name,
-        contentType: file.type || undefined,
-      })
-    }
-  }
-
-  const handleIntakeSubmit = async (e: React.FormEvent) => {
+  /** Sends the consultation request through the same pipeline as the /contact form. */
+  const handleConsultSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (!isIntakeValid(intake)) {
-      setIntakeError(ui.fillRequired)
+    if (consultSending) return
+    const firstName = consult.firstName.trim()
+    const lastName = consult.lastName.trim()
+    const email = consult.email.trim()
+    const bestTimes = consult.bestTimes.trim()
+    if (!firstName || !lastName || !email || !bestTimes) {
+      setConsultError(ui.fillRequired)
       return
     }
-    setIntakeError("")
-    setIntakeSubmitting(true)
+    setConsultError("")
+    setConsultSending(true)
+    const message = [
+      "Installation consultation request (website chat)",
+      "",
+      `Computer: ${COMPUTER_LABEL[consult.computer]}`,
+      `Best times to reach: ${bestTimes}`,
+      `Preferred language: ${LANGUAGES.find((l) => l.value === activeLocale)?.label ?? activeLocale}`,
+      "",
+      "Question:",
+      consult.question.trim() || "(none)",
+    ].join("\n")
     try {
-      const result = await createFromIntake(
-        intakeFormToPayload(intake, activeLocale)
-      )
-      trackEvent("quote_submitted", {
-        case_reference: result.caseReference,
-        state: intake.state || "unknown",
-        case_type: intake.caseType || "unknown",
+      const result = await sendContactMessage({
+        name: `${firstName} ${lastName}`,
+        email,
+        phone: consult.phone.trim(),
+        subject: "Installation consultation request",
+        message,
+        company: "",
       })
-      let documentsUploaded = 0
-      if (pendingFiles.length > 0) {
-        try {
-          await uploadIntakeFiles(result.caseId, pendingFiles)
-          documentsUploaded = pendingFiles.length
-        } catch (uploadError) {
-          console.error("Intake document upload failed:", uploadError)
-          setIntakeError(
-            "Your quote was saved, but one or more documents failed to upload. Use “Upload more docs” below or email support with your file reference."
-          )
-        }
-      }
-      const estimate = await generateForCase({ caseId: result.caseId })
-      let emailQueued = false
-      try {
-        await requestIntakeNotifications({ caseId: result.caseId })
-        emailQueued = true
-      } catch (notifyError) {
-        console.error("Intake notification schedule failed:", notifyError)
-      }
-      setIntakeSubmitBanner({
-        caseReference: result.caseReference,
-        caseId: result.caseId,
-        email: intake.email,
-        firstName: intake.firstName,
-        lastName: intake.lastName,
-        documentsUploaded,
-        emailQueued,
-        estimate: {
-          serviceLine: estimate.serviceLine,
-          finalQuoteCents: estimate.finalQuoteCents,
-          attorneyCompareLowCents: estimate.attorneyCompareLowCents,
-          attorneyCompareHighCents: estimate.attorneyCompareHighCents,
-          isCustomQuote: estimate.isCustomQuote,
-        },
-      })
-      setIntake(EMPTY_INTAKE)
-      setPendingFiles([])
-      if (fileInputRef.current) {
-        fileInputRef.current.value = ""
-      }
-    } catch (error) {
-      console.error("Intake submit failed:", error)
-      const detail =
-        error instanceof Error ? error.message.toLowerCase() : ""
-      if (detail.includes("timed out")) {
-        setIntakeError(
-          "Request timed out. Run npm run dev:convex in a terminal, wait for \"Convex functions ready\", then try again."
-        )
-      } else if (
-        detail.includes("failed to fetch") ||
-        detail.includes("network")
-      ) {
-        setIntakeError(
-          "Cannot reach the server. Start both npm run dev:convex and npm run dev, then try again."
-        )
+      if (result.ok) {
+        trackEvent("cta_clicked", { cta: "chat_consultation_submitted" })
+        pixelTrack("Lead", { content_category: "chat_consultation" })
+        setConsultSent(true)
+        setConsult(EMPTY_CONSULT)
       } else {
-        setIntakeError(ui.intakeSubmitError)
+        setConsultError(result.error ?? ui.submitError)
       }
+    } catch (submitError) {
+      console.error("Consultation request failed:", submitError)
+      setConsultError(ui.submitError)
     } finally {
-      setIntakeSubmitting(false)
+      setConsultSending(false)
     }
-  }
-
-  const resetIntakeForm = () => {
-    setIntakeSubmitBanner(null)
-    setIntake(EMPTY_INTAKE)
-    setIntakeError("")
-    setPendingFiles([])
-    setPostCaseNumber("")
-    setRetrievalRequested(false)
-    setSavingDetails(false)
-    setDetailsSaved(false)
-    setDetailsError("")
-    if (fileInputRef.current) {
-      fileInputRef.current.value = ""
-    }
-    if (postPayFileInputRef.current) {
-      postPayFileInputRef.current.value = ""
-    }
-  }
-
-  const handleSavePostIntakeDetails = async () => {
-    if (!intakeSubmitBanner) return
-    setDetailsError("")
-    setSavingDetails(true)
-    try {
-      await savePostIntakeQuoteDetails({
-        caseId: intakeSubmitBanner.caseId,
-        caseNumber: postCaseNumber.trim() || undefined,
-        retrievalRequested,
-      })
-      setDetailsSaved(true)
-    } catch (error) {
-      console.error("Save intake details failed:", error)
-      const serverMsg =
-        error instanceof Error ? error.message.replace(/^\[.*?\]\s*/, "").trim() : ""
-      const safeHint =
-        serverMsg.length > 0 &&
-        serverMsg.length < 160 &&
-        !/stack|at\s+\w+|convex:\/\//i.test(serverMsg)
-          ? ` (${serverMsg})`
-          : ""
-      setDetailsError(`${ui.detailsSaveError}${safeHint}`)
-    } finally {
-      setSavingDetails(false)
-    }
-  }
-
-  const handlePostIntakeFiles = async (files: FileList | null) => {
-    if (!intakeSubmitBanner || !files?.length) return
-    const list = Array.from(files).slice(0, MAX_INTAKE_FILES)
-    try {
-      await uploadIntakeFiles(intakeSubmitBanner.caseId, list)
-    } catch (error) {
-      console.error("Post-intake upload failed:", error)
-      const serverMsg =
-        error instanceof Error ? error.message.replace(/^\[.*?\]\s*/, "").trim() : ""
-      const safeHint =
-        serverMsg.length > 0 &&
-        serverMsg.length < 160 &&
-        !/stack|at\s+\w+|convex:\/\//i.test(serverMsg)
-          ? ` (${serverMsg})`
-          : ""
-      setDetailsError(`${ui.detailsUploadError}${safeHint}`)
-    }
-  }
-
-  const updateIntake = (field: keyof IntakeFormData, value: string) => {
-    setIntake((prev) => ({ ...prev, [field]: value }))
   }
 
   if (!open) {
@@ -666,26 +467,25 @@ export function ChatWidget() {
           <div className="flex shrink-0 border-b border-white/10">
             <button
               type="button"
-              onClick={() => {
-                setTab("chat")
-                setIntakeSubmitBanner(null)
-              }}
+              onClick={() => setTab("chat")}
+              aria-pressed={tab === "chat"}
               className={`flex flex-1 items-center justify-center gap-1.5 py-2.5 text-xs font-semibold uppercase tracking-wider ${
                 tab === "chat" ? "border-b-2 border-gold text-gold" : "text-white/55 hover:text-white/80"
               }`}
             >
-              <MessageCircle className="h-3.5 w-3.5" />
+              <MessageCircle className="h-3.5 w-3.5" aria-hidden />
               {ui.tabChat}
             </button>
             <button
               type="button"
-              onClick={switchToQuoteTab}
+              onClick={switchToBookTab}
+              aria-pressed={tab === "book"}
               className={`flex flex-1 items-center justify-center gap-1.5 py-2.5 text-xs font-semibold uppercase tracking-wider ${
-                tab === "quote" ? "border-b-2 border-gold text-gold" : "text-white/55 hover:text-white/80"
+                tab === "book" ? "border-b-2 border-gold text-gold" : "text-white/55 hover:text-white/80"
               }`}
             >
-              <FileText className="h-3.5 w-3.5" />
-              {ui.tabQuote}
+              <CalendarCheck className="h-3.5 w-3.5" aria-hidden />
+              {ui.tabBook}
             </button>
           </div>
 
@@ -737,6 +537,7 @@ export function ChatWidget() {
                       value={input}
                       onChange={(e) => setInput(e.target.value)}
                       placeholder={ui.placeholder}
+                      aria-label={ui.placeholder}
                       disabled={isLoading}
                       className="chat-composer__input"
                     />
@@ -762,330 +563,97 @@ export function ChatWidget() {
                 </div>
               </div>
             </>
-          ) : intakeSubmitBanner ? (
-            <div className="flex flex-1 flex-col overflow-hidden">
-              <div className="flex-1 space-y-3 overflow-y-auto px-4 py-3">
-                <div className="rounded-sm border border-gold/40 bg-gold/10 px-4 py-3 text-center">
-                  <BookingBanner compact className="mb-3" />
-                  <CheckCircle2 className="mx-auto h-8 w-8 text-gold" aria-hidden />
-                  <p className="mt-2 font-display text-base text-white">{ui.intakeSuccessTitle}</p>
-                  <p className="mt-2 font-mono text-sm font-semibold tracking-wide text-gold">
-                    {intakeSubmitBanner.caseReference}
-                  </p>
-                  <div className="mt-3 rounded-sm border border-white/15 bg-navy/50 px-3 py-2.5 text-left">
-                    <p className="text-[10px] font-bold uppercase tracking-wider text-gold">
-                      {ui.pricingTitle}
-                    </p>
-                    <p className="mt-1 text-xs text-white/85">
-                      {intakeSubmitBanner.estimate.serviceLine}
-                    </p>
-                    <p className="mt-2 text-xs leading-relaxed text-white/70">
-                      {formatIntakeEstimateLine(intakeSubmitBanner.estimate, ui)}
-                    </p>
-                    <p className="mt-2 text-[10px] leading-relaxed text-white/45">
-                      {ui.estimateDisclaimer}
-                    </p>
-                  </div>
-                  <p className="mt-2 text-xs leading-relaxed text-white/75">
-                    {ui.intakeSuccessBody}
-                  </p>
-                  <p className="mt-2 text-[10px] text-white/55">
-                    {intakeSubmitBanner.documentsUploaded > 0
-                      ? `${intakeSubmitBanner.documentsUploaded} document(s) saved to your matter file.`
-                      : "No documents attached yet — upload below so ops can see them."}
-                    {" · "}
-                    {intakeSubmitBanner.emailQueued
-                      ? "Follow-up email queued."
-                      : "Email follow-up could not be queued — we still have your information."}
-                  </p>
-                  <p className="mt-2 text-[10px] text-white/45">{ui.quoteNextSteps}</p>
-
-                  <label className="mt-3 block text-left">
-                    <span className="mb-1 block text-[10px] uppercase tracking-wider text-white/50">
-                      {ui.caseNumberLabel}
-                    </span>
-                    <input
-                      value={postCaseNumber}
-                      onChange={(e) => setPostCaseNumber(e.target.value)}
-                      placeholder={ui.caseNumberHint}
-                      className="w-full rounded-sm border border-white/15 bg-white/5 px-2.5 py-2 text-sm text-white focus:border-gold/50 focus:outline-none"
-                    />
-                  </label>
-
-                  <label className="mt-3 flex items-start gap-2 text-left text-xs text-white/75">
-                    <input
-                      type="checkbox"
-                      checked={retrievalRequested}
-                      onChange={(e) => setRetrievalRequested(e.target.checked)}
-                      className="mt-0.5"
-                    />
-                    <span>
-                      {ui.retrievalCheckbox}{" "}
-                      <span className="text-gold">({DOCUMENT_RETRIEVAL_FEE_DISPLAY})</span>
-                      <span className="mt-1 block text-[10px] text-white/45">
-                        {ui.retrievalFeeNote}
-                      </span>
-                    </span>
-                  </label>
-
-                  <div className="mt-3">
-                    <input
-                      ref={postPayFileInputRef}
-                      type="file"
-                      accept=".pdf,image/jpeg,image/png,image/webp"
-                      multiple
-                      className="hidden"
-                      onChange={(e) => void handlePostIntakeFiles(e.target.files)}
-                    />
-                    <button
-                      type="button"
-                      onClick={() => postPayFileInputRef.current?.click()}
-                      className="w-full rounded-sm border border-white/20 px-3 py-2 text-xs font-semibold text-white/80 hover:border-gold/40 hover:text-gold"
-                    >
-                      {ui.uploadMoreDocs}
-                    </button>
-                  </div>
-
-                  {detailsError && (
-                    <p className="mt-2 text-xs text-red-300">{detailsError}</p>
-                  )}
-                  {detailsSaved ? (
-                    <p className="mt-4 text-xs leading-relaxed text-gold">{ui.detailsSaved}</p>
-                  ) : (
-                    <button
-                      type="button"
-                      disabled={savingDetails}
-                      onClick={() => void handleSavePostIntakeDetails()}
-                      className="mt-4 inline-flex w-full items-center justify-center rounded-sm border border-gold bg-gold/25 px-4 py-2.5 text-sm font-semibold text-gold hover:bg-gold/35 disabled:opacity-60"
-                    >
-                      {savingDetails ? ui.savingDetails : ui.saveDetails}
-                    </button>
-                  )}
-
-                  {INTAKE_BOOKING_ENABLED && (
-                    <>
-                      <a
-                        href={buildBookPageUrl({
-                          callType: "intake",
-                          caseId: intakeSubmitBanner.caseId,
-                          caseReference: intakeSubmitBanner.caseReference,
-                          email: intakeSubmitBanner.email,
-                          firstName: intakeSubmitBanner.firstName,
-                          lastName: intakeSubmitBanner.lastName,
-                        })}
-                        className="mt-3 inline-flex w-full items-center justify-center rounded-sm border border-gold/50 bg-gold/15 px-4 py-2.5 text-sm font-semibold text-gold hover:bg-gold/25"
-                      >
-                        {ui.bookIntakeCall}
-                      </a>
-                      <p className="mt-2 text-[10px] text-white/50">{ui.bookIntakeCallHint}</p>
-                    </>
-                  )}
-                  <button
-                    type="button"
-                    onClick={resetIntakeForm}
-                    className="mt-3 text-xs font-semibold text-gold underline-offset-2 hover:underline"
-                  >
-                    {ui.submitAnother}
-                  </button>
-                </div>
-              </div>
+          ) : consultSent ? (
+            <div className="flex flex-1 flex-col items-center justify-center px-6 py-8 text-center" role="status" aria-live="polite">
+              <CheckCircle2 className="h-10 w-10 text-gold" aria-hidden />
+              <p className="mt-3 font-display text-lg text-white">{ui.successTitle}</p>
+              <p className="mt-2 text-sm leading-relaxed text-white/75">{ui.successBody}</p>
+              <p className="mt-4 text-[11px] leading-relaxed text-white/50">{ui.pricingLine}</p>
+              <button
+                type="button"
+                onClick={() => setConsultSent(false)}
+                className="mt-5 text-xs font-semibold text-gold underline-offset-2 hover:underline"
+              >
+                {ui.submitAnother}
+              </button>
             </div>
           ) : (
-            <form onSubmit={handleIntakeSubmit} className="flex flex-1 flex-col overflow-hidden">
+            <form onSubmit={handleConsultSubmit} className="flex flex-1 flex-col overflow-hidden" noValidate>
               <div className="flex-1 space-y-3 overflow-y-auto px-4 py-3">
                 <div>
-                  <p className="font-display text-lg text-white">{ui.quoteTitle}</p>
-                  <p className="mt-1 text-xs text-white/60">{ui.quoteHint}</p>
+                  <p className="font-display text-lg text-white">{ui.bookTitle}</p>
+                  <p className="mt-1 text-xs leading-relaxed text-white/60">{ui.bookHint}</p>
+                  <p className="mt-2 rounded-sm border border-gold/25 bg-gold/10 px-2.5 py-2 text-[11px] leading-relaxed text-gold-light">
+                    {ui.pricingLine}
+                  </p>
                 </div>
 
                 <div className="grid grid-cols-2 gap-2">
                   <label className="block">
-                    <span className="mb-1 block text-[10px] uppercase tracking-wider text-white/50">{ui.firstName}</span>
+                    <span className={labelClass}>{ui.firstName}</span>
                     <input
                       required
-                      value={intake.firstName}
-                      onChange={(e) => updateIntake("firstName", e.target.value)}
-                      className="w-full rounded-sm border border-white/15 bg-white/5 px-2.5 py-2 text-sm text-white focus:border-gold/50 focus:outline-none"
+                      autoComplete="given-name"
+                      maxLength={60}
+                      value={consult.firstName}
+                      onChange={(e) => updateConsult("firstName", e.target.value)}
+                      className={fieldClass}
                     />
                   </label>
                   <label className="block">
-                    <span className="mb-1 block text-[10px] uppercase tracking-wider text-white/50">{ui.lastName}</span>
+                    <span className={labelClass}>{ui.lastName}</span>
                     <input
                       required
-                      value={intake.lastName}
-                      onChange={(e) => updateIntake("lastName", e.target.value)}
-                      className="w-full rounded-sm border border-white/15 bg-white/5 px-2.5 py-2 text-sm text-white focus:border-gold/50 focus:outline-none"
+                      autoComplete="family-name"
+                      maxLength={60}
+                      value={consult.lastName}
+                      onChange={(e) => updateConsult("lastName", e.target.value)}
+                      className={fieldClass}
                     />
                   </label>
                 </div>
 
                 <label className="block">
-                  <span className="mb-1 block text-[10px] uppercase tracking-wider text-white/50">{ui.email}</span>
+                  <span className={labelClass}>{ui.email}</span>
                   <input
                     type="email"
                     required
-                    value={intake.email}
-                    onChange={(e) => updateIntake("email", e.target.value)}
-                    className="w-full rounded-sm border border-white/15 bg-white/5 px-2.5 py-2 text-sm text-white focus:border-gold/50 focus:outline-none"
+                    autoComplete="email"
+                    maxLength={200}
+                    value={consult.email}
+                    onChange={(e) => updateConsult("email", e.target.value)}
+                    className={fieldClass}
                   />
                 </label>
 
                 <label className="block">
-                  <span className="mb-1 block text-[10px] uppercase tracking-wider text-white/50">{ui.phone}</span>
+                  <span className={labelClass}>{ui.phone}</span>
                   <input
                     type="tel"
-                    value={intake.phone}
-                    onChange={(e) => updateIntake("phone", e.target.value)}
-                    className="w-full rounded-sm border border-white/15 bg-white/5 px-2.5 py-2 text-sm text-white focus:border-gold/50 focus:outline-none"
-                  />
-                </label>
-
-                <label className="block">
-                  <span className="mb-1 block text-[10px] uppercase tracking-wider text-white/50">{ui.state}</span>
-                  <select
-                    value={intake.state}
-                    onChange={(e) => updateIntake("state", e.target.value)}
-                    className="w-full rounded-sm border border-white/15 bg-white/5 px-2.5 py-2 text-sm text-white focus:border-gold/50 focus:outline-none"
-                  >
-                    {US_STATES.map(({ code, label }) => (
-                      <option key={code} value={code} className="bg-navy">
-                        {label}
-                      </option>
-                    ))}
-                  </select>
-                  <p className="mt-1 text-[10px] text-white/45">{ui.stateHint}</p>
-                </label>
-
-                <label className="block">
-                  <span className="mb-1 block text-[10px] uppercase tracking-wider text-white/50">{ui.caseType}</span>
-                  <select
-                    required
-                    value={intake.caseType}
-                    onChange={(e) => updateIntake("caseType", e.target.value)}
-                    className="w-full rounded-sm border border-white/15 bg-white/5 px-2.5 py-2 text-sm text-white focus:border-gold/50 focus:outline-none"
-                  >
-                    <option value="" disabled className="bg-navy">
-                      Select matter type
-                    </option>
-                    {CASE_TYPES.map((type) => (
-                      <option key={type} value={type} className="bg-navy">
-                        {type}
-                      </option>
-                    ))}
-                  </select>
-                </label>
-
-                <label className="block">
-                  <span className="mb-1 block text-[10px] uppercase tracking-wider text-white/50">{ui.issue}</span>
-                  <textarea
-                    required
-                    rows={3}
-                    value={intake.issue}
-                    onChange={(e) => updateIntake("issue", e.target.value)}
-                    className="w-full resize-none rounded-sm border border-white/15 bg-white/5 px-2.5 py-2 text-sm text-white focus:border-gold/50 focus:outline-none"
-                  />
-                </label>
-
-                <label className="block">
-                  <span className="mb-1 block text-[10px] uppercase tracking-wider text-white/50">{ui.deadline}</span>
-                  <input
-                    value={intake.deadline}
-                    onChange={(e) => updateIntake("deadline", e.target.value)}
-                    className="w-full rounded-sm border border-white/15 bg-white/5 px-2.5 py-2 text-sm text-white focus:border-gold/50 focus:outline-none"
-                  />
-                </label>
-
-                <label className="block">
-                  <span className="mb-1 block text-[10px] uppercase tracking-wider text-white/50">{ui.opposingParty}</span>
-                  <input
-                    value={intake.opposingParty}
-                    onChange={(e) => updateIntake("opposingParty", e.target.value)}
-                    className="w-full rounded-sm border border-white/15 bg-white/5 px-2.5 py-2 text-sm text-white focus:border-gold/50 focus:outline-none"
+                    autoComplete="tel"
+                    maxLength={40}
+                    value={consult.phone}
+                    onChange={(e) => updateConsult("phone", e.target.value)}
+                    className={fieldClass}
                   />
                 </label>
 
                 <fieldset>
-                  <legend className="mb-1 text-[10px] uppercase tracking-wider text-white/50">{ui.hasDocuments}</legend>
-                  <div className="flex gap-3 text-sm text-white/80">
-                    <label className="flex items-center gap-1.5">
-                      <input
-                        type="radio"
-                        name="hasDocuments"
-                        checked={intake.hasDocuments === "yes"}
-                        onChange={() => updateIntake("hasDocuments", "yes")}
-                        className="accent-gold"
-                      />
-                      {ui.hasDocumentsYes}
-                    </label>
-                    <label className="flex items-center gap-1.5">
-                      <input
-                        type="radio"
-                        name="hasDocuments"
-                        checked={intake.hasDocuments === "no"}
-                        onChange={() => updateIntake("hasDocuments", "no")}
-                        className="accent-gold"
-                      />
-                      {ui.hasDocumentsNo}
-                    </label>
-                  </div>
-                </fieldset>
-
-                {(intake.hasDocuments === "yes" || pendingFiles.length > 0) && (
-                  <div className="rounded-sm border border-white/10 bg-white/5 p-3">
-                    <p className="text-[10px] uppercase tracking-wider text-white/50">{ui.uploadFiles}</p>
-                    <p className="mt-1 text-[10px] text-white/45">{ui.uploadFilesHint}</p>
-                    <input
-                      ref={fileInputRef}
-                      type="file"
-                      accept=".pdf,.jpg,.jpeg,.png,.webp,application/pdf,image/*"
-                      multiple
-                      className="sr-only"
-                      onChange={(e) => {
-                        handleIntakeFiles(e.target.files)
-                        e.target.value = ""
-                      }}
-                    />
-                    <button
-                      type="button"
-                      onClick={() => fileInputRef.current?.click()}
-                      className="mt-2 flex w-full items-center justify-center gap-2 rounded-sm border border-dashed border-gold/40 px-3 py-2 text-xs font-semibold text-gold hover:bg-gold/10"
-                    >
-                      <Paperclip className="h-3.5 w-3.5" aria-hidden />
-                      {ui.uploadFiles}
-                    </button>
-                    {pendingFiles.length > 0 && (
-                      <ul className="mt-2 space-y-1 text-left text-[11px] text-white/70">
-                        {pendingFiles.map((file) => (
-                          <li key={`${file.name}-${file.size}`} className="truncate">
-                            {file.name}
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                    {pendingFiles.length > 0 && (
-                      <p className="mt-1 text-[10px] text-white/45">
-                        {ui.uploadFilesSelected.replace("{count}", String(pendingFiles.length))}
-                      </p>
-                    )}
-                  </div>
-                )}
-
-                <fieldset>
-                  <legend className="mb-1 text-[10px] uppercase tracking-wider text-white/50">{ui.preferredContact}</legend>
+                  <legend className={labelClass}>{ui.computer}</legend>
                   <div className="flex flex-wrap gap-3 text-sm text-white/80">
                     {(
                       [
-                        ["email", ui.contactEmail],
-                        ["phone", ui.contactPhone],
-                        ["either", ui.contactEither],
+                        ["windows", ui.computerWindows],
+                        ["mac", ui.computerMac],
+                        ["unsure", ui.computerUnsure],
                       ] as const
                     ).map(([value, label]) => (
                       <label key={value} className="flex items-center gap-1.5">
                         <input
                           type="radio"
-                          name="preferredContact"
-                          checked={intake.preferredContact === value}
-                          onChange={() => updateIntake("preferredContact", value)}
+                          name="consultComputer"
+                          checked={consult.computer === value}
+                          onChange={() => updateConsult("computer", value)}
                           className="accent-gold"
                         />
                         {label}
@@ -1094,26 +662,51 @@ export function ChatWidget() {
                   </div>
                 </fieldset>
 
-                {intakeError && <p className="text-xs text-red-300">{intakeError}</p>}
+                <label className="block">
+                  <span className={labelClass}>{ui.bestTimes}</span>
+                  <input
+                    required
+                    maxLength={200}
+                    value={consult.bestTimes}
+                    onChange={(e) => updateConsult("bestTimes", e.target.value)}
+                    placeholder={ui.bestTimesHint}
+                    className={fieldClass}
+                  />
+                </label>
+
+                <label className="block">
+                  <span className={labelClass}>{ui.question}</span>
+                  <textarea
+                    rows={3}
+                    maxLength={2000}
+                    value={consult.question}
+                    onChange={(e) => updateConsult("question", e.target.value)}
+                    placeholder={ui.questionHint}
+                    className={`${fieldClass} resize-none`}
+                  />
+                </label>
+
+                {consultError && (
+                  <p role="alert" className="text-xs text-red-300">
+                    {consultError}
+                  </p>
+                )}
               </div>
 
               <div className="shrink-0 border-t border-white/10 px-4 py-3">
                 <button
                   type="submit"
-                  disabled={intakeSubmitting}
+                  disabled={consultSending}
                   className="flex w-full items-center justify-center gap-2 rounded-sm bg-gold py-2.5 text-sm font-semibold text-navy transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
                 >
-                  {intakeSubmitting ? (
+                  {consultSending ? (
                     <Loader2 className="h-4 w-4 animate-spin" aria-hidden />
                   ) : (
-                    <Send className="h-4 w-4" />
+                    <Send className="h-4 w-4" aria-hidden />
                   )}
-                  {intakeSubmitting ? ui.submittingRequest : ui.sendRequest}
+                  {consultSending ? ui.submittingRequest : ui.sendRequest}
                 </button>
-                <p className="mt-2 text-[10px] leading-snug text-white/45">{ui.uploadNote}</p>
-                <p className="mt-1 text-[10px] text-white/40">
-                  {SUPPORT_EMAIL}
-                </p>
+                <p className="mt-2 text-[10px] leading-snug text-white/45">{ui.privacyNote}</p>
               </div>
             </form>
           )}

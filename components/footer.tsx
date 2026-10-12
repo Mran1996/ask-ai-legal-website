@@ -4,7 +4,6 @@ import Link from "next/link"
 import { Scale, Instagram, Facebook } from "lucide-react"
 import { useLanguage } from "@/components/language-provider"
 import { useConsent } from "@/components/privacy/consent-provider"
-import { serviceSlug } from "@/lib/service-icons"
 import {
   BUSINESS_HOURS,
   BUSINESS_PHONE,
@@ -31,12 +30,12 @@ export function Footer() {
       title: columns.services,
       links: [
         { label: links.allServices, href: "/services" },
-        { label: links.caseRoadmap, href: `/services#${serviceSlug("Road map")}` },
-        { label: links.caseResearch, href: `/services#${serviceSlug("Document research")}` },
-        { label: links.legalResearch, href: `/services#${serviceSlug("In-depth research")}` },
-        { label: links.outcomeAnalysis, href: `/services#${serviceSlug("Source verification")}` },
-        { label: links.hearingPrep, href: `/services#${serviceSlug("Hearing preparation")}` },
-        { label: links.documentPrep, href: `/services#${serviceSlug("Document tools")}` },
+        { label: links.caseRoadmap, href: "/services#research" },
+        { label: links.caseResearch, href: "/services#drafting" },
+        { label: links.legalResearch, href: "/services#organization" },
+        { label: links.outcomeAnalysis, href: "/services#calendar" },
+        { label: links.hearingPrep, href: "/services#privacy" },
+        { label: links.documentPrep, href: "/#includes" },
       ],
     },
     {
@@ -44,7 +43,6 @@ export function Footer() {
       links: [
         { label: links.about, href: "/about" },
         { label: links.pricing, href: "/pricing" },
-        { label: "Pay deposit", href: "/pay" },
         { label: links.process, href: "/#process" },
         { label: links.whyUs, href: "/#compare" },
         { label: links.contact, href: "/contact" },
@@ -74,7 +72,7 @@ export function Footer() {
             <address className="mt-5 not-italic text-sm leading-relaxed text-white/60">
               <p className="font-semibold text-white/80">{SITE_LEGAL_NAME}</p>
               <p className="mt-2">{BUSINESS_SERVICE_AREAS}</p>
-              <p className="mt-1 font-medium text-white/80">{BUSINESS_HOURS}</p>
+              {BUSINESS_HOURS ? <p className="mt-1 font-medium text-white/80">{BUSINESS_HOURS}</p> : null}
               <p className="mt-1">
                 <a href={`mailto:${SUPPORT_EMAIL}`} className="transition-colors hover:text-gold">
                   {SUPPORT_EMAIL}

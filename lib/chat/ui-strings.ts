@@ -10,72 +10,37 @@ export type ChatUiStrings = {
   continueBtn: string
   changeLanguage: string
   tabChat: string
-  tabQuote: string
+  tabBook: string
   welcome: string
   welcomeHint: string
   placeholder: string
   send: string
   thinking: string
   notLegalAdvice: string
-  emailSupport: string
   emailSupportHint: string
-  requestQuote: string
-  quoteTitle: string
-  quoteHint: string
+  bookTitle: string
+  bookHint: string
+  pricingLine: string
   firstName: string
   lastName: string
   email: string
   phone: string
-  state: string
-  stateHint: string
-  caseType: string
-  issue: string
-  deadline: string
-  opposingParty: string
-  hasDocuments: string
-  hasDocumentsYes: string
-  hasDocumentsNo: string
-  preferredContact: string
-  contactEmail: string
-  contactPhone: string
-  contactEither: string
+  computer: string
+  computerWindows: string
+  computerMac: string
+  computerUnsure: string
+  bestTimes: string
+  bestTimesHint: string
+  question: string
+  questionHint: string
+  privacyNote: string
   sendRequest: string
   submittingRequest: string
-  intakeSuccessTitle: string
-  intakeSuccessBody: string
-  bookIntakeCall: string
-  bookIntakeCallHint: string
-  caseNumberLabel: string
-  caseNumberHint: string
-  retrievalCheckbox: string
-  retrievalFeeNote: string
-  saveDetails: string
-  savingDetails: string
-  detailsSaved: string
-  uploadMoreDocs: string
-  quoteNextSteps: string
-  intakeSubmitError: string
-  detailsSaveError: string
-  detailsUploadError: string
+  successTitle: string
+  successBody: string
   submitAnother: string
-  conversationTitle: string
-  submittedInfoTitle: string
-  pricingTitle: string
-  attorneyTypicalLabel: string
-  ourEstimatedLabel: string
-  ourCustomQuoteLabel: string
-  ourFractionNote: string
-  estimateComparison: string
-  estimateCustomQuote: string
-  estimateServiceLine: string
-  estimateDisclaimer: string
   fillRequired: string
-  uploadNote: string
-  uploadFiles: string
-  uploadFilesHint: string
-  uploadFilesSelected: string
-  uploadFilesTooMany: string
-  uploadFilesTooLarge: string
+  submitError: string
   chatError: string
   tryAgain: string
 }
@@ -90,87 +55,42 @@ const en: ChatUiStrings = {
   continueBtn: "Continue",
   changeLanguage: "Language",
   tabChat: "Chat",
-  tabQuote: "Request quote",
+  tabBook: "Book consultation",
   welcome:
-    "Hello! I'm the Ask AI Legal assistant. I can explain our services, how pricing works, and what to expect — in your language.",
+    "Hello! I'm the Ask AI Legal assistant. I can explain what the software does, what the $3,997 purchase includes, and how optional maintenance works — in your language.",
   welcomeHint:
-    "For a custom quote, use the Request quote tab or email support@askailegal.com with your documents attached.",
-  placeholder: "Ask about our services…",
+    "Ready to talk it through? Use the Book consultation tab. Please don't send confidential case documents through chat.",
+  placeholder: "Ask about Ask AI Legal…",
   send: "Send",
   thinking: "Thinking…",
-  notLegalAdvice: "Not legal advice · Setup and tools only",
-  emailSupport: "Email support@askailegal.com",
-  emailSupportHint: "Attach documents so we can review your situation and send a custom quote.",
-  requestQuote: "Request a free document review",
-  quoteTitle: "Tell us about your situation",
-  quoteHint:
-    "Submit intake so we can email a personalized form, then a written quote, contract, and invoice. Setup and tools only — not legal advice.",
+  notLegalAdvice: "Not legal advice · Software, installation, and support",
+  emailSupportHint: "Installation, maintenance, support, or billing questions.",
+  bookTitle: "Book an installation consultation",
+  bookHint:
+    "We confirm your computer requirements, review the included features, and discuss installation. We'll reply by email to set a time.",
+  pricingLine:
+    "$3,997 one-time purchase · Optional maintenance $125/month · Third-party AI usage, research subscriptions, and cloud services may cost extra.",
   firstName: "First name",
   lastName: "Last name",
   email: "Email",
-  phone: "Phone",
-  state: "State / jurisdiction",
-  stateHint: "Select your state — we'll show a local average for your matter type.",
-  caseType: "Matter type",
-  issue: "Describe your issue",
-  deadline: "Deadline or urgency (optional)",
-  opposingParty: "Opposing party (optional)",
-  hasDocuments: "Do you have documents to share?",
-  hasDocumentsYes: "Yes — I'll upload files below",
-  hasDocumentsNo: "Not yet",
-  preferredContact: "Preferred contact",
-  contactEmail: "Email",
-  contactPhone: "Phone",
-  contactEither: "Either",
-  sendRequest: "Submit intake",
-  submittingRequest: "Submitting…",
-  intakeSuccessTitle: "Intake received",
-  intakeSuccessBody:
-    "Next we'll email a personalized intake form. After that you'll receive a written quote, contract, and invoice by email. Setup and tools only — not legal advice.",
-  bookIntakeCall: "Book your intake call",
-  bookIntakeCallHint: "15–20 min · setup and pricing only",
-  caseNumberLabel: "Court / docket number (if you have it)",
-  caseNumberHint: "Optional but helps us work faster. Leave blank if you don't have one yet.",
-  retrievalCheckbox: "I need Ask AI Legal to retrieve documents (additional fee — quoted before we pull records).",
-  retrievalFeeNote: "Retrieval is never free unpaid work. We'll include it on your emailed quote if needed.",
-  saveDetails: "Save details & finish",
-  savingDetails: "Saving…",
-  detailsSaved: "Saved. Watch your email for your personalized form (file reference in the subject).",
-  uploadMoreDocs: "Upload documents now",
-  quoteNextSteps:
-    "Order: intake → personalized email form → written quote + contract + invoice by email → pay → we work → deliver.",
-  intakeSubmitError:
-    "We couldn't save your intake. Please try again or email support@askailegal.com with your details.",
-  detailsSaveError:
-    "We couldn't save those details. Your intake was already received — try again or email support@askailegal.com with your file reference.",
-  detailsUploadError:
-    "We couldn't upload that file. Try a smaller PDF/JPG/PNG, or email it to support@askailegal.com with your file reference.",
-  submitAnother: "Submit another request",
-  conversationTitle: "Your conversation",
-  submittedInfoTitle: "What you submitted",
-  pricingTitle: "Planning estimate",
-  attorneyTypicalLabel: "Typical attorney cost",
-  ourEstimatedLabel: "Ask AI Legal estimated average",
-  ourCustomQuoteLabel: "Custom package — confirmed by email",
-  ourFractionNote:
-    "Document-prep estimate for your state and matter type — flat fee, no hourly billing. Not the mid point of the attorney range.",
-  estimateComparison:
-    "{attorneyTypicalLabel}: {attorneyLow}–{attorneyHigh} · {ourEstimatedLabel}: {ourPrice}",
-  estimateCustomQuote:
-    "{attorneyTypicalLabel}: {attorneyLow}–{attorneyHigh}. Final package price comes in your emailed quote after we read your form and documents.",
-  estimateServiceLine: "Service",
-  estimateDisclaimer:
-    "Planning estimate only — not a bill. Typical attorney range is a market reference for your state/matter. Ask AI Legal quote is document-prep only. Final package price is confirmed after Part 1 review. Not legal advice.",
-  fillRequired: "Please fill in name, email, matter type, and a brief issue description.",
-  uploadNote:
-    "Optional: attach court papers, notices, or leases (PDF, JPG, PNG — up to 10 MB each).",
-  uploadFiles: "Attach documents",
-  uploadFilesHint: "PDF, JPG, or PNG · max 5 files · 10 MB each",
-  uploadFilesSelected: "{count} file(s) selected",
-  uploadFilesTooMany: "Maximum 5 files per intake.",
-  uploadFilesTooLarge: "Each file must be 10 MB or smaller.",
-  chatError:
-    "We couldn't get a reply right now. Please try again or email support@askailegal.com — attach any documents so we can help.",
+  phone: "Phone (optional)",
+  computer: "Your computer",
+  computerWindows: "Windows",
+  computerMac: "Mac",
+  computerUnsure: "Not sure",
+  bestTimes: "Best times to reach you",
+  bestTimesHint: "Example: weekdays after 5 pm Pacific",
+  question: "Anything you'd like us to know? (optional)",
+  questionHint: "Questions about features, installation, or pricing.",
+  privacyNote: "Please don't include confidential case details. This request is not legal advice.",
+  sendRequest: "Request consultation",
+  submittingRequest: "Sending…",
+  successTitle: "Request received",
+  successBody: "Thanks — we'll reply by email to arrange your installation consultation.",
+  submitAnother: "Send another request",
+  fillRequired: "Please fill in your first name, last name, email, and the best times to reach you.",
+  submitError: "We couldn't send your request. Please try again or email support@askailegal.com.",
+  chatError: "We couldn't get a reply right now. Please try again or email support@askailegal.com.",
   tryAgain: "Try again",
 }
 
@@ -184,87 +104,42 @@ const hi: ChatUiStrings = {
   continueBtn: "जारी रखें",
   changeLanguage: "भाषा",
   tabChat: "चैट",
-  tabQuote: "कोट का अनुरोध",
+  tabBook: "परामर्श बुक करें",
   welcome:
-    "नमस्ते! मैं Ask AI Legal सहायक हूँ। मैं हमारी सेवाएँ, कीमत कैसे काम करती है, और क्या उम्मीद करें — आपकी भाषा में समझा सकता/सकती हूँ।",
+    "नमस्ते! मैं Ask AI Legal सहायक हूँ। मैं बता सकता/सकती हूँ कि सॉफ़्टवेयर क्या करता है, $3,997 की खरीद में क्या शामिल है, और वैकल्पिक रखरखाव कैसे काम करता है।",
   welcomeHint:
-    "कस्टम कोट के लिए 'कोट का अनुरोध' टैब का उपयोग करें या support@askailegal.com पर दस्तावेज़ संलग्न करके ईमेल करें।",
-  placeholder: "हमारी सेवाओं के बारे में पूछें…",
+    "बात करने के लिए 'परामर्श बुक करें' टैब का उपयोग करें। कृपया चैट में गोपनीय केस दस्तावेज़ न भेजें।",
+  placeholder: "Ask AI Legal के बारे में पूछें…",
   send: "भेजें",
   thinking: "सोच रहा/रही हूँ…",
-  notLegalAdvice: "कानूनी सलाह नहीं · केवल दस्तावेज़ · कानूनी फर्म नहीं",
-  emailSupport: "support@askailegal.com पर ईमेल करें",
-  emailSupportHint: "दस्तावेज़ संलग्न करें ताकि हम आपकी स्थिति समझकर सटीक कोट दे सकें।",
-  requestQuote: "मुफ़्त केस समीक्षा का अनुरोध",
-  quoteTitle: "अपने मामले के बारे में बताएँ",
-  quoteHint:
-    "इंटेक भेजें — हम व्यक्तिगत फ़ॉर्म, फिर ईमेल से लिखित कोट, अनुबंध और इनवॉइस भेजेंगे। केवल दस्तावेज़ तैयारी।",
+  notLegalAdvice: "कानूनी सलाह नहीं · सॉफ़्टवेयर, इंस्टॉलेशन और सहायता",
+  emailSupportHint: "इंस्टॉलेशन, रखरखाव, सहायता या बिलिंग के प्रश्न।",
+  bookTitle: "इंस्टॉलेशन परामर्श बुक करें",
+  bookHint:
+    "हम आपके कंप्यूटर की ज़रूरतें जाँचते हैं, शामिल सुविधाएँ समझाते हैं और इंस्टॉलेशन पर चर्चा करते हैं। समय तय करने के लिए हम ईमेल से जवाब देंगे।",
+  pricingLine:
+    "$3,997 एक बार की खरीद · वैकल्पिक रखरखाव $125/माह · तृतीय-पक्ष AI, रिसर्च सदस्यता और क्लाउड सेवाओं का खर्च अलग हो सकता है।",
   firstName: "पहला नाम",
   lastName: "अंतिम नाम",
   email: "ईमेल",
-  phone: "फ़ोन",
-  state: "राज्य / अधिकार क्षेत्र",
-  stateHint: "अपना राज्य चुनें — हम आपके मामले के प्रकार के लिए स्थानीय औसत दिखाएंगे।",
-  caseType: "मामले का प्रकार",
-  issue: "अपना मुद्दा बताएँ",
-  deadline: "अंतिम तिथि या तात्कालिकता (वैकल्पिक)",
-  opposingParty: "विरोधी पक्ष (वैकल्पिक)",
-  hasDocuments: "क्या साझा करने के लिए दस्तावेज़ हैं?",
-  hasDocumentsYes: "हाँ — नीचे फ़ाइलें अपलोड करूँगा/करूँगी",
-  hasDocumentsNo: "अभी नहीं",
-  preferredContact: "पसंदीदा संपर्क",
-  contactEmail: "ईमेल",
-  contactPhone: "फ़ोन",
-  contactEither: "कोई भी",
-  sendRequest: "इंटेक भेजें",
+  phone: "फ़ोन (वैकल्पिक)",
+  computer: "आपका कंप्यूटर",
+  computerWindows: "Windows",
+  computerMac: "Mac",
+  computerUnsure: "पता नहीं",
+  bestTimes: "आपसे संपर्क का सबसे अच्छा समय",
+  bestTimesHint: "उदाहरण: सप्ताह के दिनों में शाम 5 बजे के बाद",
+  question: "कुछ और बताना चाहें? (वैकल्पिक)",
+  questionHint: "सुविधाओं, इंस्टॉलेशन या कीमत के बारे में प्रश्न।",
+  privacyNote: "कृपया गोपनीय केस विवरण शामिल न करें। यह कानूनी सलाह नहीं है।",
+  sendRequest: "परामर्श का अनुरोध करें",
   submittingRequest: "भेजा जा रहा है…",
-  intakeSuccessTitle: "इंटेक प्राप्त",
-  intakeSuccessBody:
-    "अगला: हम ईमेल से व्यक्तिगत इंटेक फ़ॉर्म भेजेंगे। उसके बाद लिखित कोट, अनुबंध और इनवॉइस ईमेल मिलेगा। केवल दस्तावेज़ तैयारी — कानूनी सलाह नहीं। हम दाखिल नहीं करते।",
-  bookIntakeCall: "अपना इंटेक कॉल बुक करें",
-  bookIntakeCallHint: "15–20 मिनट · केवल दस्तावेज़ तैयारी और मूल्य",
-  caseNumberLabel: "केस / डॉकेट नंबर (यदि हो)",
-  caseNumberHint: "वैकल्पिक, लेकिन काम तेज़ करता है। न हो तो खाली छोड़ दें।",
-  retrievalCheckbox: "मुझे Ask AI Legal से दस्तावेज़ रिट्रीव करवाने हैं (अतिरिक्त शुल्क — पहले कोट)।",
-  retrievalFeeNote: "रिट्रीवल मुफ़्त नहीं। ज़रूरत हो तो ईमेल कोट में शामिल होगा।",
-  saveDetails: "विवरण सहेजें और समाप्त करें",
-  savingDetails: "सहेजा जा रहा है…",
-  detailsSaved: "सहेज लिया। व्यक्तिगत फ़ॉर्म के लिए ईमेल देखें (विषय में केस संदर्भ)।",
-  uploadMoreDocs: "अभी दस्तावेज़ अपलोड करें",
-  quoteNextSteps:
-    "क्रम: इंटेक → व्यक्तिगत ईमेल फ़ॉर्म → लिखित कोट + अनुबंध + इनवॉइस → भुगतान → काम → डिलीवरी।",
-  intakeSubmitError:
-    "इंटेक सहेज नहीं सका। कृपया फिर कोशिश करें या support@askailegal.com पर ईमेल करें।",
-  detailsSaveError:
-    "विवरण सहेज नहीं सके। आपका इंटेक पहले मिल चुका है — फिर कोशिश करें या केस संदर्भ के साथ support@askailegal.com पर ईमेल करें।",
-  detailsUploadError:
-    "फ़ाइल अपलोड नहीं हो सकी। छोटी PDF/JPG/PNG आज़माएँ, या केस संदर्भ के साथ support@askailegal.com पर ईमेल करें।",
+  successTitle: "अनुरोध प्राप्त हुआ",
+  successBody: "धन्यवाद — इंस्टॉलेशन परामर्श तय करने के लिए हम ईमेल से जवाब देंगे।",
   submitAnother: "दूसरा अनुरोध भेजें",
-  conversationTitle: "आपकी बातचीत",
-  submittedInfoTitle: "आपने जो भेजा",
-  pricingTitle: "योजना अनुमान",
-  attorneyTypicalLabel: "वकील की सामान्य लागत",
-  ourEstimatedLabel: "Ask AI Legal अनुमानित औसत",
-  ourCustomQuoteLabel: "कस्टम पैकेज — ईमेल से पुष्टि",
-  ourFractionNote:
-    "ऊपर दिखाई गई वकील रेंज का मध्य बिंदु — फ्लैट फी, प्रति घंटा नहीं",
-  estimateComparison:
-    "{attorneyTypicalLabel}: {attorneyLow}–{attorneyHigh} · {ourEstimatedLabel}: {ourPrice}",
-  estimateCustomQuote:
-    "{attorneyTypicalLabel}: {attorneyLow}–{attorneyHigh}. अंतिम कीमत फ़ॉर्म और दस्तावेज़ के बाद ईमेल कोट में आएगी।",
-  estimateServiceLine: "सेवा",
-  estimateDisclaimer:
-    "केवल योजना अनुमान — बिल नहीं। अंतिम कीमत, अनुबंध और इनवॉइस व्यक्तिगत फ़ॉर्म के बाद ईमेल होंगे। कानूनी सलाह नहीं।",
-  fillRequired: "कृपया नाम, ईमेल, मामले का प्रकार और संक्षिप्त विवरण भरें।",
-  uploadNote:
-    "वैकल्पिक: अदालती कागज़ात, नोटिस या लीज़ संलग्न करें (PDF, JPG, PNG — प्रति 10 MB)।",
-  uploadFiles: "दस्तावेज़ संलग्न करें",
-  uploadFilesHint: "PDF, JPG, PNG · अधिकतम 5 · प्रति 10 MB",
-  uploadFilesSelected: "{count} फ़ाइल चुनी गई",
-  uploadFilesTooMany: "प्रति इंटेक अधिकतम 5 फ़ाइलें।",
-  uploadFilesTooLarge: "प्रत्येक फ़ाइल 10 MB या उससे छोटी होनी चाहिए।",
-  chatError:
-    "अभी जवाब नहीं मिला। कृपया फिर कोशिश करें या support@askailegal.com पर ईमेल करें — दस्तावेज़ संलग्न करें।",
+  fillRequired: "कृपया पहला नाम, अंतिम नाम, ईमेल और संपर्क का समय भरें।",
+  submitError: "अनुरोध नहीं भेजा जा सका। कृपया फिर कोशिश करें या support@askailegal.com पर ईमेल करें।",
+  chatError: "अभी जवाब नहीं मिला। कृपया फिर कोशिश करें या support@askailegal.com पर ईमेल करें।",
   tryAgain: "फिर कोशिश करें",
 }
 

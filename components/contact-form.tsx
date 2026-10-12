@@ -53,14 +53,17 @@ export function ContactForm() {
 
   if (status === "success") {
     return (
-      <div className="rounded-md border-2 border-gold/40 bg-white p-8 text-center shadow-[0_0_24px_rgba(251,176,52,0.12)]">
+      <div
+        className="rounded-md border-2 border-gold/40 bg-white p-8 text-center shadow-[0_0_24px_rgba(251,176,52,0.12)]"
+        role="status"
+        aria-live="polite"
+      >
         <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-gold/15">
           <Check className="h-6 w-6 text-gold-dark" aria-hidden />
         </div>
         <h3 className="mt-4 font-display text-xl font-semibold text-navy">Message sent</h3>
         <p className="mx-auto mt-2 max-w-sm text-sm leading-relaxed text-gray-600">
-          Thanks for reaching out. Our support team will reply to your email as soon as
-          possible, typically within one business day.
+          Thanks for reaching out. We&rsquo;ll reply to your email.
         </p>
         <button
           type="button"
@@ -106,7 +109,7 @@ export function ContactForm() {
           <label htmlFor="contact-subject" className="mb-1.5 block text-xs font-semibold text-navy">
             Subject <span className="font-normal text-navy/40">(optional)</span>
           </label>
-          <input id="contact-subject" name="subject" type="text" maxLength={150} className={inputClass} placeholder="What's this about?" />
+          <input id="contact-subject" name="subject" type="text" maxLength={150} className={inputClass} placeholder="Installation consultation, support, billing…" />
         </div>
       </div>
 
@@ -114,11 +117,19 @@ export function ContactForm() {
         <label htmlFor="contact-message" className="mb-1.5 block text-xs font-semibold text-navy">
           How can we help? <span className="text-gold-dark">*</span>
         </label>
-        <textarea id="contact-message" name="message" required maxLength={5000} rows={6} className={`${inputClass} resize-y`} placeholder="Describe your concern or issue and we'll get back to you." />
+        <textarea
+          id="contact-message"
+          name="message"
+          required
+          maxLength={5000}
+          rows={6}
+          className={`${inputClass} resize-y`}
+          placeholder="For a consultation, tell us the best times to reach you. Please don't include confidential case details."
+        />
       </div>
 
       {status === "error" && error && (
-        <p className="mt-4 rounded-sm border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+        <p role="alert" className="mt-4 rounded-sm border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
           {error}
         </p>
       )}
@@ -142,8 +153,8 @@ export function ContactForm() {
       </button>
 
       <p className="mt-4 text-xs leading-relaxed text-gray-500">
-        By sending this message you agree we may contact you about your request. This form is for
-        general questions and support — it is not legal advice.
+        By sending this message you agree we may contact you about your request. This form is for questions about
+        software installation, maintenance, support, or billing — it is not legal advice.
       </p>
     </form>
   )

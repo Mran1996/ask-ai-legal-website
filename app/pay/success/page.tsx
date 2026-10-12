@@ -5,13 +5,14 @@ import { CineNav } from "@/components/cinematic/nav"
 import { Footer } from "@/components/footer"
 import { PaySuccessPurchase } from "@/components/analytics/pay-success-purchase"
 import {
-  FILE_REVIEW_DEPOSIT_LABEL,
+  MAINTENANCE_PRICE_USD,
+  PURCHASE_PRICE_USD,
   SITE_URL,
   SUPPORT_EMAIL,
 } from "@/lib/site-config"
 
 const TITLE = "Payment received"
-const DESCRIPTION = `Your ${FILE_REVIEW_DEPOSIT_LABEL.toLowerCase()} was received. We'll listen, review your situation, and email your written summary and flat-fee quote.`
+const DESCRIPTION = "Your Ask AI Legal payment was received. Your Stripe receipt shows exactly what you paid for."
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -25,10 +26,46 @@ export const metadata: Metadata = {
   },
 }
 
-export default function PaySuccessPage() {
+type Item = "purchase" | "maintenance" | "unknown"
+
+/** Stripe success URLs carry ?item=purchase or ?item=maintenance so the two confirmations stay distinct. */
+const COPY: Record<Item, { heading: string; body: string; next: string[]; value?: number }> = {
+  purchase: {
+    heading: "Thank you — your purchase is confirmed",
+    body: "We received your one-time payment of $3,997.00 for Ask AI Legal. This payment does not enroll you in maintenance.",
+    next: [
+      "We'll contact you by email to arrange your installation.",
+      "We confirm your computer requirements and installation arrangements before the session.",
+      "Your 30 days of installation support begin when installation is completed.",
+    ],
+    value: PURCHASE_PRICE_USD,
+  },
+  maintenance: {
+    heading: "Your optional maintenance is active",
+    body: "We received your maintenance enrollment at $125.00 per month, billed monthly under the maintenance terms provided before enrollment. This is separate from the one-time purchase.",
+    next: ["Your Stripe receipt shows the billing date for each month.", "Contact us with any maintenance or billing question."],
+    value: MAINTENANCE_PRICE_USD,
+  },
+  unknown: {
+    heading: "Payment received",
+    body: "Thank you. Your Stripe receipt shows what you paid for — the one-time Ask AI Legal purchase or the optional $125-per-month maintenance plan.",
+    next: ["Check your email for your Stripe receipt.", "Contact us if anything on your receipt looks wrong."],
+  },
+}
+
+type PageProps = {
+  searchParams: Promise<Record<string, string | string[] | undefined>>
+}
+
+export default async function PaySuccessPage({ searchParams }: PageProps) {
+  const params = await searchParams
+  const raw = Array.isArray(params.item) ? params.item[0] : params.item
+  const item: Item = raw === "purchase" || raw === "maintenance" ? raw : "unknown"
+  const copy = COPY[item]
+
   return (
     <div className="min-h-screen flex flex-col">
-      <PaySuccessPurchase />
+      <PaySuccessPurchase value={copy.value} />
       <CineNav />
 
       <main className="flex-grow">
@@ -42,20 +79,15 @@ export default function PaySuccessPage() {
                 <Check className="h-7 w-7 text-gold" aria-hidden />
               </div>
 
-              <h1 className="mt-6 font-display text-3xl leading-tight text-white sm:text-4xl">
-                Thank you — your install is next
-              </h1>
-              <p className="mx-auto mt-4 max-w-sm text-base leading-relaxed text-white/70">
-                Your {FILE_REVIEW_DEPOSIT_LABEL.toLowerCase()} payment was received. Credited in
-                full toward your setup — we&apos;ll install Ask AI Legal so you can work from home.
-              </p>
+              <h1 className="mt-6 font-display text-3xl leading-tight text-white sm:text-4xl">{copy.heading}</h1>
+              <p className="mx-auto mt-4 max-w-sm text-base leading-relaxed text-white/70">{copy.body}</p>
 
               <div className="mt-8 rounded-sm border border-white/10 bg-white/5 px-5 py-5 text-left">
                 <p className="text-sm font-semibold text-white">What happens next</p>
                 <ul className="mt-3 space-y-2.5 text-sm leading-relaxed text-white/70">
-                  <li>Share your situation and any documents you have.</li>
-                  <li>We install and configure Ask AI Legal for your matter.</li>
-                  <li>You do everything you need from the comfort of your home.</li>
+                  {copy.next.map((line) => (
+                    <li key={line}>{line}</li>
+                  ))}
                 </ul>
               </div>
 

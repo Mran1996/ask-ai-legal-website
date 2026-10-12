@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import { Clock, Facebook, Instagram, Mail, ShieldCheck } from "lucide-react"
+import { Facebook, Instagram, Mail, ShieldCheck } from "lucide-react"
 import { CineNav } from "@/components/cinematic/nav"
 import { Footer } from "@/components/footer"
 import { ContactForm } from "@/components/contact-form"
@@ -12,9 +12,9 @@ import {
   SUPPORT_MAILTO,
 } from "@/lib/site-config"
 
-const TITLE = "Contact us"
+const TITLE = "Contact us — book an installation consultation"
 const DESCRIPTION =
-  "Contact Ask AI Legal with questions, concerns, or support requests. Send us a message and our team will reply by email — typically within one business day."
+  "Contact Ask AI Legal to book an installation consultation or ask about software installation, maintenance, support, or billing. Send a message and we'll reply by email."
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -39,13 +39,16 @@ export default function ContactPage() {
             <div className="gold-rule mb-8" />
             <h1 className="firm-title text-white">We&rsquo;re here to help</h1>
             <p className="mt-8 max-w-2xl text-lg leading-relaxed text-white/70">
-              Have a question about your situation, a document package, billing, or anything else? Send
-              us a message below and our support team will get back to you by email. You can also
-              reach us directly at{" "}
+              Have a question about software installation, maintenance, support, or billing? Send us a message below
+              and we&rsquo;ll reply by email. You can also reach us directly at{" "}
               <a className="text-gold underline underline-offset-2" href={SUPPORT_MAILTO}>
                 {SUPPORT_EMAIL}
               </a>
               .
+            </p>
+            <p className="mt-4 max-w-2xl text-base leading-relaxed text-white/60">
+              To book an installation consultation, tell us the best times to reach you. In the consultation we confirm
+              your computer requirements, review the included features, and discuss installation.
             </p>
           </div>
         </section>
@@ -76,18 +79,6 @@ export default function ContactPage() {
                         <a className="text-navy underline underline-offset-2 hover:text-gold-dark" href={SUPPORT_MAILTO}>
                           {SUPPORT_EMAIL}
                         </a>
-                      </dd>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-3">
-                    <Clock className="mt-0.5 h-5 w-5 shrink-0 text-gold-dark" aria-hidden />
-                    <div>
-                      <dt className="text-xs font-bold uppercase tracking-[0.15em] text-gold-dark">
-                        Response time
-                      </dt>
-                      <dd className="mt-1 text-sm leading-relaxed text-gray-700">
-                        We typically reply within one business day.
                       </dd>
                     </div>
                   </div>

@@ -156,8 +156,8 @@ export const SITUATION_GUIDES: Record<string, SituationGuide> = {
         a: "Never. We install tools you use from home. You handle appearances and filing.",
       },
       {
-        q: "How is pricing worked out?",
-        a: "Start with a custom-quote setup install; we learn your situation and email a written summary plus one flat price for the configured setup you use from home — no hourly billing.",
+        q: "How much does it cost?",
+        a: "Ask AI Legal is a one-time purchase of $3,997 for your installed copy, setup, personal training, a written getting-started guide, and 30 days of installation support. Optional maintenance is $125 per month. Third-party AI usage, research subscriptions, and cloud services may cost extra.",
       },
     ],
     documentsExamples: [
@@ -232,11 +232,11 @@ export const SITUATION_GUIDES: Record<string, SituationGuide> = {
       },
       {
         q: "Is this the same as hiring an immigration lawyer?",
-        a: "No. We are not a law firm and do not provide legal advice or representation. Many people use our custom-quote home setup and file on their own or bring materials to a licensed attorney.",
+        a: "No. We are not a law firm and do not provide legal advice or representation. Many people use their installed workspace to prepare materials and file on their own or bring them to a licensed attorney.",
       },
       {
         q: "Do you handle asylum or removal proceedings?",
-        a: "We install tools for many immigration matters. Share your notice and paperwork in your setup intake — we'll tell you honestly if your situation is one we can configure.",
+        a: "Tell us about your matter during the installation consultation — we'll tell you honestly whether Ask AI Legal is a good fit for it.",
       },
     ],
     documentsExamples: [

@@ -18,11 +18,15 @@ export function Situations() {
     <section id="situations" className="relative bg-ground py-24 sm:py-32">
       <div className="cine-container">
         <Reveal>
-          <p data-reveal className="cine-label mb-6">What we install for</p>
+          <p data-reveal className="cine-label mb-6">What people use it for</p>
           <h2 data-reveal className="cine-h2 text-cream">
-            Any U.S. state.
-            <span className="cine-serif text-accent-light"> Any matter you can run yourself.</span>
+            Common matters.
+            <span className="cine-serif text-accent-light"> Ask us about yours.</span>
           </h2>
+          <p data-reveal className="cine-body mt-8 max-w-2xl">
+            Examples only. Available templates and sources depend on your installation and your court. We confirm what
+            fits your matter during the installation consultation.
+          </p>
         </Reveal>
 
         <Reveal className="mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-3" stagger={0.08}>

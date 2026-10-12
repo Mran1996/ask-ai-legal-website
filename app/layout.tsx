@@ -7,6 +7,7 @@ import {
   SUPPORT_EMAIL,
   SITE_SEO_TITLE,
   SITE_SEO_DESCRIPTION,
+  SITE_DISCLAIMER,
 } from "@/lib/site-config"
 
 const serif = Instrument_Serif({
@@ -41,22 +42,16 @@ export const metadata: Metadata = {
   },
   description: DESCRIPTION,
   keywords: [
+    "legal AI software",
+    "installed legal workspace",
     "represent yourself in court",
-    "self represented litigant help",
-    "pro se legal help",
-    "legal workspace installed at home",
-    "divorce paperwork help",
-    "custody paperwork help",
-    "eviction response help",
-    "small claims paperwork",
-    "civil dispute documents",
-    "immigration paperwork help",
-    "no retainer legal help",
-    "flat fee legal document service",
+    "self represented litigant tools",
+    "pro se legal software",
+    "legal research with source links",
+    "legal document drafting software",
     "Ask AI Legal",
   ],
   authors: [{ name: "Ask AI Legal" }],
-  alternates: { canonical: "/" },
   robots: {
     index: true,
     follow: true,
@@ -77,27 +72,20 @@ export const metadata: Metadata = {
   },
 }
 
-const legalServiceJsonLd = {
+const organizationJsonLd = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
-  serviceType: "Legal tool install and configuration for home use",
+  serviceType: "Legal workspace software installation, training, and support",
   name: "Ask AI Legal",
   description: DESCRIPTION,
   url: SITE_URL,
   email: SUPPORT_EMAIL,
-  priceRange: "Custom quote",
+  priceRange: "$3,997 one-time purchase; optional $125/month maintenance",
   areaServed: {
     "@type": "Country",
     name: "United States",
   },
-  knowsAbout: [
-    "Divorce paperwork tools",
-    "Custody paperwork tools",
-    "Civil dispute tools",
-    "Business dispute tools",
-  ],
-  disclaimer:
-    "Ask AI Legal installs and configures tools you use from home. We are not a law firm and do not provide legal advice.",
+  disclaimer: SITE_DISCLAIMER,
 }
 
 export default function RootLayout({
@@ -121,7 +109,7 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           // eslint-disable-next-line react/no-danger
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(legalServiceJsonLd) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
         />
         <Providers>{children}</Providers>
       </body>

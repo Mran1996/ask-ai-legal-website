@@ -5,13 +5,14 @@ import { usePathname } from "next/navigation"
 import { useEffect, useState } from "react"
 import { Menu, X } from "lucide-react"
 import { BrandLockup } from "@/components/brand-lockup"
+import { CONSULT_CTA_LABEL, CONSULT_HREF } from "@/lib/site-config"
 
 const LINKS = [
   { href: "/#install", label: "The install" },
-  { href: "/services", label: "The tools" },
-  { href: "/#compare", label: "Why us" },
+  { href: "/services", label: "Features" },
   { href: "/#process", label: "How it works" },
   { href: "/pricing", label: "Pricing" },
+  { href: "/#faq", label: "FAQ" },
   { href: "/about", label: "About" },
 ]
 
@@ -58,13 +59,14 @@ export function CineNav() {
         </nav>
 
         <div className="flex items-center gap-3">
-          <Link href="/pay" className="cine-btn-gold hidden !px-5 !py-2.5 !text-xs sm:inline-flex">
-            Start from home
+          <Link href={CONSULT_HREF} className="cine-btn-gold hidden !px-5 !py-2.5 !text-xs sm:inline-flex">
+            {CONSULT_CTA_LABEL}
           </Link>
           <button
             type="button"
             className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-cream/15 text-cream lg:hidden"
             aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
             onClick={() => setOpen((v) => !v)}
           >
             {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -86,8 +88,8 @@ export function CineNav() {
                 {l.label}
               </Link>
             ))}
-            <Link href="/pay" onClick={() => setOpen(false)} className="cine-btn-gold mt-6 w-full">
-              Start from home
+            <Link href={CONSULT_HREF} onClick={() => setOpen(false)} className="cine-btn-gold mt-6 w-full">
+              {CONSULT_CTA_LABEL}
             </Link>
           </nav>
         </div>

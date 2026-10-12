@@ -26,7 +26,7 @@ type Props = {
 function callTitle(callType: string): string {
   if (callType === "document_planning") return "Document planning call"
   if (callType === "follow_up_paid") return "Follow-up call"
-  return "Intake call"
+  return "Installation consultation"
 }
 
 function callDescription(callType: string): string {
@@ -87,34 +87,19 @@ export function BookPageClient({
           <p className="mt-4 text-xs leading-relaxed text-white/45">{BOOKING_DISCLAIMER}</p>
 
           <div className="mt-8">
-            {!INTAKE_BOOKING_ENABLED ? (
+            {!INTAKE_BOOKING_ENABLED || !slugConfigured || !caseId || !caseReference || !email ? (
               <div className="rounded-md border border-white/15 bg-white/5 px-4 py-6 text-sm text-white/75">
-                <p className="font-semibold text-white">Online scheduling is not available right now.</p>
+                <p className="font-semibold text-white">Book through our contact page.</p>
                 <p className="mt-2">
-                  Email{" "}
+                  Send us a message on the{" "}
+                  <Link href="/contact" className="text-gold underline">
+                    contact page
+                  </Link>{" "}
+                  with the best times to reach you, or email{" "}
                   <a href="mailto:support@askailegal.com" className="text-gold underline">
                     support@askailegal.com
-                  </a>{" "}
-                  with your file reference if you need to reach us.
-                </p>
-              </div>
-            ) : !slugConfigured ? (
-              <div className="rounded-md border border-amber-400/40 bg-amber-950/30 px-4 py-6 text-sm text-amber-100">
-                <p className="font-semibold">Scheduling is not configured yet.</p>
-                <p className="mt-2 text-amber-100/80">
-                  Set <code className="text-amber-50">NEXT_PUBLIC_CALCOM_INTAKE_EVENT_SLUG</code>{" "}
-                  in your environment (see docs/CALCOM_SETUP.md).
-                </p>
-              </div>
-            ) : !caseId || !caseReference || !email ? (
-              <div className="rounded-md border border-white/15 bg-white/5 px-4 py-6 text-sm text-white/75">
-                <p>Please complete the Request Quote form first so we can link this call to your file.</p>
-                <p className="mt-2">
-                  Or email{" "}
-                  <a href="mailto:support@askailegal.com" className="text-gold underline">
-                    support@askailegal.com
-                  </a>{" "}
-                  with your file reference.
+                  </a>
+                  . We&apos;ll reply by email to arrange your consultation.
                 </p>
               </div>
             ) : embedSrc ? (
