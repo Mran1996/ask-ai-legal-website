@@ -10,7 +10,7 @@ const ITEMS: { title: string; body: string; img: string; href: string }[] = [
   { title: "Housing & eviction", body: "Notices, answers, repair and deposit disputes.", img: "situation-housing.png", href: "/situations/housing" },
   { title: "Small claims", body: "Claims, evidence lists, judgment paperwork.", img: "situation-small-claims.png", href: "/situations/small-claims" },
   { title: "Civil disputes", body: "Complaints, answers, discovery, motions.", img: "situation-civil.png", href: "/situations/civil" },
-  { title: "Immigration paperwork", body: "Forms, supporting documents, cover letters.", img: "situation-immigration.png", href: "/situations/immigration" },
+  { title: "Criminal", body: "Bring your information together, explore relevant sources, and prepare personalized documents around your issues.", img: "situation-criminal.webp", href: "/situations/criminal" },
 ]
 
 export function Situations() {
@@ -24,7 +24,7 @@ export function Situations() {
             <span className="cine-serif text-accent-light"> Ask us about yours.</span>
           </h2>
           <p data-reveal className="cine-body mt-8 max-w-2xl">
-            Examples only. Available templates and sources depend on your installation and your court. We confirm what
+            Examples only. Available features and sources depend on your installation and your court. We confirm what
             fits your matter during the installation consultation.
           </p>
         </Reveal>

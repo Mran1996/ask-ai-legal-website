@@ -24,13 +24,13 @@ const STEPS = [
   {
     n: "03",
     title: "We install while you watch",
-    body: "Live, on your screen. We install and configure your workspace and supported connections, then help you set up your first case.",
+    body: "Live, on your screen. We install and configure your workspace and supported connections, then set it up around your issues and goals.",
     img: "install-03-live.png",
   },
   {
     n: "04",
     title: "Your questions, answered",
-    body: "Before we close the session, we show you how to use the installed features and answer your questions. You also receive a walkthrough video and a written getting-started guide.",
+    body: "Before we close the session, we show you how to use the installed features and answer your questions. You also receive a written getting-started guide.",
     img: "install-04-questions.png",
   },
 ]

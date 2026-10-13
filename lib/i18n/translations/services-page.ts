@@ -10,8 +10,8 @@ export const servicesPageContent = {
     label: "How it fits together",
     title: "From consultation to your own workspace",
     narrative:
-      "We confirm your computer requirements, install and configure your workspace, help you set up your first case, and show you how to use it. Installation support covers the first 30 days; maintenance afterward is optional.",
-    steps: ["Consultation", "Installation", "First case", "Training", "Support", "Optional maintenance"],
+      "We confirm your computer requirements, install and configure your workspace, set it up around your issues and goals, and show you how to use it. Installation support covers the first 30 days; maintenance afterward is optional.",
+    steps: ["Consultation", "Installation", "Setup around your goals", "Training", "Support", "Optional maintenance"],
   },
   deepDivesLabel: "What each part includes",
   deepDivesTitle: "Installed and explained — then yours to run",
@@ -29,10 +29,10 @@ export const servicesPageContent = {
     },
     {
       detail:
-        "Prepare editable drafts using the templates supported by your installation. You review the facts, citations, formatting, and applicable court requirements before filing.",
+        "Prepare editable drafts with personalized document generation. You review the facts, citations, formatting, and applicable court requirements before filing.",
       includes: [
         "Editable drafts",
-        "Templates supported by your installation",
+        "Personalized document generation",
         "Your review before anything is filed",
       ],
     },
@@ -53,13 +53,13 @@ export const servicesPageContent = {
     },
     {
       detail:
-        "The one-time purchase includes a computer compatibility check and installation, configuration of your workspace and supported connections, guided setup of your first case, personal training, a walkthrough video and written getting-started guide, and 30 days of installation support beginning when installation is completed. Guided case setup means organizing the workspace and explaining the software, not legal advice.",
+        "The one-time purchase includes a computer compatibility check and installation, configuration of your workspace and supported connections, guided setup around your issues and goals, personal training, a written getting-started guide, and 30 days of installation support beginning when installation is completed. Guided case setup means organizing the workspace and explaining the software, not legal advice.",
       includes: [
         "Computer compatibility check and installation",
         "Configuration of your workspace and supported connections",
-        "Guided setup of your first case",
+        "Guided setup around your issues and goals",
         "Personal training on using the installed software",
-        "Walkthrough video and written getting-started guide",
+        "Personal training and a written getting-started guide",
         "30 days of installation support",
       ],
     },

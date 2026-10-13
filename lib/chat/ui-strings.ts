@@ -69,7 +69,7 @@ const en: ChatUiStrings = {
   bookHint:
     "We confirm your computer requirements, review the included features, and discuss installation. We'll reply by email to set a time.",
   pricingLine:
-    "$3,997 one-time purchase · Optional maintenance $125/month · Third-party AI usage, research subscriptions, and cloud services may cost extra.",
+    "$3,997 one-time purchase · Optional maintenance $125/month · Third-party AI usage and paid services are billed separately.",
   firstName: "First name",
   lastName: "Last name",
   email: "Email",

@@ -19,13 +19,13 @@ const TOOLS: Tool[] = [
   },
   {
     id: "drafting",
-    title: "Document drafting for your review",
-    body: "Prepare editable drafts using the templates supported by your installation. Review the facts, citations, formatting, and applicable court requirements before filing.",
+    title: "Personalized document generation",
+    body: "Generate editable documents built around your information, issues, and goals. Review the facts, citations, formatting, and applicable court requirements before filing.",
   },
   {
     id: "organization",
-    title: "Your second brain",
-    body: "A workspace that keeps track of your matter — the people, dates, filings, and what happened when — so your information stays organized in one place.",
+    title: "Second Brain memory",
+    body: "Keep your saved information, documents, preferences, and drafting lessons together on your computer. Saved corrections and approved lessons guide future drafts.",
   },
   {
     id: "calendar",
@@ -34,8 +34,8 @@ const TOOLS: Tool[] = [
   },
   {
     id: "privacy",
-    title: "Privacy and data handling",
-    body: "Your setup may combine local storage with connected AI and cloud services. We explain which features operate locally, which send information to outside providers, and the settings available to you.",
+    title: "Your information stays under your control",
+    body: "Your documents and Second Brain memory are saved on your computer. With privacy mode on, personal identifiers are removed locally before a connected AI service is used, and restored locally in the returned document.",
   },
 ]
 
@@ -65,12 +65,12 @@ export function ToolsCompact() {
         <Reveal>
           <p data-reveal className="cine-label mb-6">What gets installed</p>
           <h2 data-reveal className="cine-h2 max-w-[18ch] text-cream">
-            One workspace{" "}
+            Your information. Your workspace.{" "}
             <br />
-            <span className="cine-serif text-accent-light">for your matter.</span>
+            <span className="cine-serif text-accent-light">Built around you.</span>
           </h2>
           <p data-reveal className="cine-body mt-8 max-w-2xl">
-            Research, drafting, and organization in one workspace — installed on your computer and configured with you.
+            Personalized document generation, connected research, agents, and Second Brain memory — installed on your computer and configured with you.
             Available features depend on your installation.
           </p>
         </Reveal>
@@ -106,12 +106,12 @@ export function Tools() {
         <Reveal>
           <p data-reveal className="cine-label mb-6">What gets installed</p>
           <h2 data-reveal className="cine-h2 max-w-[18ch] text-cream">
-            One workspace{" "}
+            Your information. Your workspace.{" "}
             <br />
-            <span className="cine-serif text-accent-light">for your matter.</span>
+            <span className="cine-serif text-accent-light">Built around you.</span>
           </h2>
           <p data-reveal className="cine-body mt-8 max-w-2xl">
-            Research, drafting, and organization in one workspace — installed on your computer and configured with you.
+            Personalized document generation, connected research, agents, and Second Brain memory — installed on your computer and configured with you.
             Available features depend on your installation.
           </p>
         </Reveal>

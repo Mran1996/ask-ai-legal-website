@@ -117,7 +117,7 @@ export const SITUATION_GUIDES: Record<string, SituationGuide> = {
       },
       {
         q: "Do you file for me?",
-        a: "No. We install and configure tools you use from home. You file, serve, and appear on your own behalf (or with an attorney you hire separately).",
+        a: "No. We install and configure tools you use from home. You file, serve, and appear on your own behalf (or with legal help you arrange separately).",
       },
     ],
     documentsExamples: [
@@ -133,7 +133,7 @@ export const SITUATION_GUIDES: Record<string, SituationGuide> = {
     slug: "civil",
     title: "Civil disputes",
     intro:
-      "Sued in civil court? Need to sue someone back? We install Ask AI Legal so you are not staring at blank forms alone — researched tools, formatted templates, and plain-language guidance you run from home.",
+      "Sued in civil court? Need to sue someone back? We install Ask AI Legal so you are not staring at blank forms alone — research tools, personalized document generation, and plain-language guidance you run from home.",
     weHelpWith: [
       "Answers to civil complaints",
       "Counterclaims and cross-complaints",
@@ -157,7 +157,7 @@ export const SITUATION_GUIDES: Record<string, SituationGuide> = {
       },
       {
         q: "How much does it cost?",
-        a: "Ask AI Legal is a one-time purchase of $3,997 for your installed copy, setup, personal training, a walkthrough video and written getting-started guide, and 30 days of installation support. Optional maintenance is $125 per month. Third-party AI usage, research subscriptions, and cloud services may cost extra.",
+        a: "Ask AI Legal is a one-time purchase of $3,997 for your installed copy, setup, personal training, a written getting-started guide, and 30 days of installation support. Optional maintenance is $125 per month. Third-party AI usage and paid services are billed separately.",
       },
     ],
     documentsExamples: [
@@ -208,6 +208,36 @@ export const SITUATION_GUIDES: Record<string, SituationGuide> = {
     ],
     ctaLabel: "Start your small claims setup",
   },
+  criminal: {
+    slug: "criminal",
+    title: "Criminal",
+    intro:
+      "Bring your information together, explore relevant sources, and prepare personalized documents around your issues — in a workspace installed on your computer. Not a law firm; not legal advice.",
+    weHelpWith: [
+      "Organizing the papers, notices, and records you have received",
+      "A timeline of events built from your own information",
+      "Exploring relevant statutes, court rules, and published opinions",
+      "Personalized drafts of letters, requests, and written statements for your review",
+      "Keeping dates and court notices in view",
+    ],
+    commonQuestions: [
+      {
+        q: "Does Ask AI Legal represent me in court?",
+        a: "No. Ask AI Legal is software installed on your computer. You decide what to prepare, file, and say; we do not represent you or give legal advice.",
+      },
+      {
+        q: "Can I keep my information private?",
+        a: "Your documents and Second Brain memory are saved on your computer. With privacy mode on, personal identifiers are removed locally before a request goes to a connected AI service.",
+      },
+    ],
+    documentsExamples: [
+      "Timeline of events",
+      "Organized document index",
+      "Letter or written statement draft",
+      "Research notes with source links",
+    ],
+    ctaLabel: "Request an installation consultation",
+  },
   immigration: {
     slug: "immigration",
     title: "Green cards & immigration",
@@ -232,7 +262,7 @@ export const SITUATION_GUIDES: Record<string, SituationGuide> = {
       },
       {
         q: "Is this the same as hiring an immigration lawyer?",
-        a: "No. We are not a law firm and do not provide legal advice or representation. Many people use their installed workspace to prepare materials and file on their own or bring them to a licensed attorney.",
+        a: "No. We are not a law firm and do not provide legal advice or representation. Many people use their installed workspace to prepare materials and file on their own or bring them to a licensed professional.",
       },
       {
         q: "Do you handle asylum or removal proceedings?",
@@ -256,7 +286,7 @@ export const HERO_CATEGORY_LINKS = [
   { slug: "housing", label: "Housing" },
   { slug: "civil", label: "Civil disputes" },
   { slug: "small-claims", label: "Small claims" },
-  { slug: "immigration", label: "Green cards & immigration" },
+  { slug: "criminal", label: "Criminal" },
   { slug: "more", label: "& more", href: "/services" },
 ] as const
 

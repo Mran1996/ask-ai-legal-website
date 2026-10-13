@@ -29,19 +29,19 @@ const capabilities = [
     icon: BookOpen,
     title: "Document drafting for your review",
     description:
-      "Prepare editable drafts using the templates supported by your installation. Review the facts, citations, formatting, and applicable court requirements before filing.",
+      "Prepare editable drafts with personalized document generation. Review the facts, citations, formatting, and applicable court requirements before filing.",
   },
   {
     icon: Receipt,
     title: "One price, stated up front",
     description:
-      "A one-time purchase of $3,997 for your installed copy, setup, personal training, a walkthrough video and written getting-started guide, and 30 days of installation support. Optional maintenance is $125 per month.",
+      "A one-time purchase of $3,997 for your installed copy, setup, personal training, a written getting-started guide, and 30 days of installation support. Optional maintenance is $125 per month.",
   },
   {
     icon: Clock,
     title: "Personal setup and training",
     description:
-      "We install and configure your workspace, guide you through setting up your first case, and show you how to use it.",
+      "We install and configure your workspace, set it up around your issues and goals, and show you how to use it.",
   },
   {
     icon: BadgeCheck,
