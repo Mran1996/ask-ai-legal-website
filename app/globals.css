@@ -515,23 +515,27 @@
     @apply font-mono text-[11px] uppercase tracking-[0.18em] text-accent sm:text-xs;
   }
   .cine-h1 {
-    @apply font-display font-semibold uppercase leading-[0.92] tracking-[-0.02em];
-    font-size: clamp(3.25rem, 11vw, 9.5rem);
+    @apply font-display font-semibold uppercase leading-[1.08] tracking-[-0.02em];
+    font-size: clamp(2.125rem, 5vw, 4.5rem);
   }
   .cine-h2 {
-    @apply font-display font-semibold uppercase leading-[0.95] tracking-[-0.02em];
-    font-size: clamp(2.5rem, 6vw, 5rem);
+    @apply font-display font-semibold uppercase leading-[1.12] tracking-[-0.02em];
+    font-size: clamp(1.75rem, 3.4vw, 3rem);
   }
   .cine-h3 {
     @apply font-display font-medium leading-tight tracking-[-0.01em];
-    font-size: clamp(1.5rem, 2.6vw, 2.25rem);
+    font-size: clamp(1.25rem, 1.8vw, 1.5rem);
   }
   .cine-serif {
     @apply font-serif normal-case italic font-normal;
     letter-spacing: 0;
   }
   .cine-body {
-    @apply text-base leading-relaxed text-cream/70 sm:text-lg;
+    @apply text-lg leading-[1.6] text-cream/80 sm:text-xl;
+  }
+  /* Anchor jumps land below the fixed header. */
+  main section[id] {
+    scroll-margin-top: 5rem;
   }
   .cine-shadow {
     text-shadow: 0 2px 6px rgba(7, 15, 24, 0.9), 0 8px 32px rgba(7, 15, 24, 0.7);

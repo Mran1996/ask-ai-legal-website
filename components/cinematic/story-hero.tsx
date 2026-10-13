@@ -181,7 +181,7 @@ export function StoryHero() {
                   <span className="cine-serif block text-accent-light">{s.title[1]}</span>
                 </h2>
               )}
-              <p className={`cine-body cine-shadow max-w-2xl !text-cream/85 ${i === 0 ? "mx-auto mt-4 !text-[14px] !leading-relaxed sm:!text-base" : "mt-8"}`}>
+              <p className={`cine-body cine-shadow max-w-2xl !text-cream/85 ${i === 0 ? "mx-auto mt-4 !text-[15px] !leading-relaxed sm:!text-lg" : "mt-8"}`}>
                 {s.sub}
               </p>
               {"intro" in s && s.intro && (

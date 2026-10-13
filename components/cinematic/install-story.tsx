@@ -86,7 +86,7 @@ export function InstallStory() {
       <div className="cine-container relative grid min-h-[100svh] items-center gap-12 py-24 md:grid-cols-2">
         {/* text column */}
         <div className="relative">
-          <p className="cine-label mb-6">How the install works</p>
+          <p className="cine-label mb-3">How the install works</p>
           <h2 className="cine-h2 mb-10 text-cream">
             On your screen.{" "}
             <br />

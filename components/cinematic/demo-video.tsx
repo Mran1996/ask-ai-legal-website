@@ -5,9 +5,9 @@ export function DemoVideo() {
   if (!DEMO_VIDEO_READY) return null
 
   return (
-    <section id="demo" className="relative scroll-mt-20 bg-ground py-20 sm:py-28" aria-labelledby="demo-title">
+    <section id="demo" className="relative scroll-mt-20 bg-ground py-6 sm:py-10" aria-labelledby="demo-title">
       <div className="cine-container">
-        <p className="cine-label mb-6">Product walkthrough</p>
+        <p className="cine-label mb-3">Product walkthrough</p>
         <h2 id="demo-title" className="cine-h2 text-cream">
           {DEMO_VIDEO.title}
         </h2>

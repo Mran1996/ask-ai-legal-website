@@ -59,34 +59,34 @@ function SourceList() {
 /** Homepage version: headline, three cards, link to the full page. */
 export function ToolsCompact() {
   return (
-    <section id="tools" className="relative bg-ground py-24 sm:py-32">
+    <section id="tools" className="relative bg-ground py-6 sm:py-10">
       <div className="cine-glow absolute -left-[20%] top-0 h-[60vh] w-[60vw] opacity-60" aria-hidden />
       <div className="cine-container relative">
         <Reveal>
-          <p data-reveal className="cine-label mb-6">What gets installed</p>
+          <p data-reveal className="cine-label mb-3">What gets installed</p>
           <h2 data-reveal className="cine-h2 max-w-[18ch] text-cream">
             Your information. Your workspace.{" "}
             <br />
             <span className="cine-serif text-accent-light">Built around you.</span>
           </h2>
-          <p data-reveal className="cine-body mt-8 max-w-2xl">
+          <p data-reveal className="cine-body mt-4 max-w-2xl">
             Personalized document generation, connected research, agents, and Second Brain memory — installed on your computer and configured with you.
             Available features depend on your installation.
           </p>
         </Reveal>
 
-        <Reveal className="mt-14 grid gap-5 lg:grid-cols-2" stagger={0.08}>
+        <Reveal className="mt-8 grid gap-5 lg:grid-cols-2" stagger={0.08}>
           {COMPACT.map((t) => (
-            <article key={t.id} data-reveal className={`cine-card p-7 sm:p-8 ${t.sources ? "lg:col-span-2" : ""}`}>
+            <article key={t.id} data-reveal className={`cine-card p-5 sm:p-6 ${t.sources ? "lg:col-span-2" : ""}`}>
               <h3 className="cine-h3 text-cream">{t.title}</h3>
-              <p className="cine-body mt-3 !text-base">{t.body}</p>
+              <p className="cine-body mt-2 !text-lg">{t.body}</p>
               {/* The homepage lists the platforms once, in the sources band below. */}
             </article>
           ))}
         </Reveal>
 
         <Reveal>
-          <div data-reveal className="mt-10">
+          <div data-reveal className="mt-6">
             <Link href="/services" className="cine-btn-ghost">
               See all features <ArrowRight className="h-4 w-4" aria-hidden />
             </Link>
@@ -100,40 +100,40 @@ export function ToolsCompact() {
 /** Full version for /services. Card ids are the footer's /services#… targets. */
 export function Tools() {
   return (
-    <section id="tools" className="relative bg-ground py-24 sm:py-32">
+    <section id="tools" className="relative bg-ground py-6 sm:py-10">
       <div className="cine-glow absolute -left-[20%] top-0 h-[60vh] w-[60vw] opacity-60" aria-hidden />
       <div className="cine-container relative">
         <Reveal>
-          <p data-reveal className="cine-label mb-6">What gets installed</p>
+          <p data-reveal className="cine-label mb-3">What gets installed</p>
           <h2 data-reveal className="cine-h2 max-w-[18ch] text-cream">
             Your information. Your workspace.{" "}
             <br />
             <span className="cine-serif text-accent-light">Built around you.</span>
           </h2>
-          <p data-reveal className="cine-body mt-8 max-w-2xl">
+          <p data-reveal className="cine-body mt-4 max-w-2xl">
             Personalized document generation, connected research, agents, and Second Brain memory — installed on your computer and configured with you.
             Available features depend on your installation.
           </p>
         </Reveal>
 
-        <Reveal className="mt-16 grid gap-5 md:grid-cols-2" stagger={0.08}>
+        <Reveal className="mt-8 grid gap-5 md:grid-cols-2" stagger={0.08}>
           {TOOLS.map((t, i) => (
             <article
               key={t.id}
               id={t.id}
               data-reveal
-              className={`cine-card scroll-mt-24 p-7 sm:p-8 ${t.sources ? "md:col-span-2" : ""}`}
+              className={`cine-card scroll-mt-24 p-5 sm:p-6 ${t.sources ? "md:col-span-2" : ""}`}
             >
               <p className="cine-label !text-cream/40">{String(i + 1).padStart(2, "0")}</p>
               <h3 className="cine-h3 mt-3 text-cream">{t.title}</h3>
-              <p className="cine-body mt-3 !text-base">{t.body}</p>
+              <p className="cine-body mt-2 !text-lg">{t.body}</p>
               {t.sources && <SourceList />}
             </article>
           ))}
         </Reveal>
 
         <Reveal>
-          <p data-reveal className="mt-10 max-w-2xl font-mono text-xs uppercase tracking-[0.14em] text-cream/45">
+          <p data-reveal className="mt-6 max-w-2xl font-mono text-xs uppercase tracking-[0.14em] text-cream/45">
             Set up and walked through with you during installation.
           </p>
         </Reveal>

@@ -8,7 +8,7 @@ import { CONSULT_CTA_LABEL, CONSULT_HREF, SITE_DISCLAIMER } from "@/lib/site-con
 
 export function ClosingCta() {
   return (
-    <section id="contact" className="relative overflow-hidden bg-ground py-24 sm:py-32">
+    <section id="contact" className="relative overflow-hidden bg-ground py-6 sm:py-10">
       <div className="cine-glow absolute left-1/2 top-1/2 h-[120vh] w-[120vw] -translate-x-1/2 -translate-y-1/2" aria-hidden />
       <div className="cine-container relative grid items-center gap-12 md:grid-cols-[1.2fr_1fr]">
         <Reveal>
@@ -17,11 +17,11 @@ export function ClosingCta() {
             <br />
             <span className="cine-serif text-accent-light">your legal workspace?</span>
           </h2>
-          <p data-reveal className="cine-body mt-8 max-w-lg">
+          <p data-reveal className="cine-body mt-4 max-w-lg">
             Book a consultation to confirm your computer requirements, review the included features, and discuss
             installation. The one-time purchase is $3,997, with optional maintenance at $125 per month.
           </p>
-          <div data-reveal className="mt-10 flex flex-col gap-4 sm:flex-row">
+          <div data-reveal className="mt-6 flex flex-col gap-4 sm:flex-row">
             <Link href={CONSULT_HREF} className="cine-btn-gold">
               {CONSULT_CTA_LABEL} <ArrowRight className="h-4 w-4" aria-hidden />
             </Link>
@@ -29,7 +29,7 @@ export function ClosingCta() {
               See pricing
             </Link>
           </div>
-          <p data-reveal className="mt-12 max-w-lg font-sans text-xs leading-relaxed text-cream/40">
+          <p data-reveal className="mt-8 max-w-lg font-sans text-xs leading-relaxed text-cream/40">
             {SITE_DISCLAIMER}
           </p>
         </Reveal>
