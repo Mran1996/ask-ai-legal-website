@@ -26,17 +26,17 @@ const STEPS = [
 
 export function HowItWorks() {
   return (
-    <section id="process" className="relative bg-ground-surface py-24 sm:py-32">
+    <section id="process" className="relative bg-ground-surface py-6 sm:py-10">
       <div className="cine-container">
         <Reveal>
-          <p data-reveal className="cine-label mb-6">How it works</p>
+          <p data-reveal className="cine-label mb-3">How it works</p>
           <h2 data-reveal className="cine-h2 text-cream">
             Three steps.
             <span className="cine-serif text-accent-light"> From consultation to your own workspace.</span>
           </h2>
         </Reveal>
 
-        <Reveal className="mt-16 grid gap-6 md:grid-cols-3" stagger={0.15}>
+        <Reveal className="mt-8 grid gap-6 md:grid-cols-3" stagger={0.15}>
           {STEPS.map((s) => (
             <article key={s.n} data-reveal className="cine-card group overflow-hidden">
               <div className="relative aspect-[4/3] overflow-hidden">
@@ -46,7 +46,7 @@ export function HowItWorks() {
               </div>
               <div className="p-6 sm:p-8">
                 <h3 className="cine-h3 text-cream">{s.title}</h3>
-                <p className="cine-body mt-3 !text-base">{s.body}</p>
+                <p className="cine-body mt-2 !text-lg">{s.body}</p>
               </div>
             </article>
           ))}

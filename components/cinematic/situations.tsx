@@ -15,21 +15,21 @@ const ITEMS: { title: string; body: string; img: string; href: string }[] = [
 
 export function Situations() {
   return (
-    <section id="situations" className="relative bg-ground py-24 sm:py-32">
+    <section id="situations" className="relative bg-ground py-6 sm:py-10">
       <div className="cine-container">
         <Reveal>
-          <p data-reveal className="cine-label mb-6">What people use it for</p>
+          <p data-reveal className="cine-label mb-3">What people use it for</p>
           <h2 data-reveal className="cine-h2 text-cream">
             Common matters.
             <span className="cine-serif text-accent-light"> Ask us about yours.</span>
           </h2>
-          <p data-reveal className="cine-body mt-8 max-w-2xl">
+          <p data-reveal className="cine-body mt-4 max-w-2xl">
             Examples only. Available features and sources depend on your installation and your court. We confirm what
             fits your matter during the installation consultation.
           </p>
         </Reveal>
 
-        <Reveal className="mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-3" stagger={0.08}>
+        <Reveal className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3" stagger={0.08}>
           {ITEMS.map((it) => (
             <Link key={it.title} href={it.href} data-reveal className="cine-card group relative overflow-hidden">
               <div className="relative aspect-square overflow-hidden">

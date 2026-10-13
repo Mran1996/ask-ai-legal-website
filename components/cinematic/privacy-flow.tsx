@@ -12,22 +12,22 @@ const FLOW = [
 /** Local privacy workflow (privacy mode, on by default in the installed app). */
 export function PrivacyFlow() {
   return (
-    <section id="privacy" className="relative scroll-mt-20 bg-ground py-24 sm:py-32">
+    <section id="privacy" className="relative scroll-mt-20 bg-ground py-6 sm:py-10">
       <div className="cine-container">
         <Reveal>
-          <p data-reveal className="cine-label mb-6">Privacy</p>
+          <p data-reveal className="cine-label mb-3">Privacy</p>
           <h2 data-reveal className="cine-h2 max-w-[18ch] text-cream">
             Your information stays{" "}
             <span className="cine-serif text-accent-light">under your control.</span>
           </h2>
-          <p data-reveal className="cine-body mt-8 max-w-2xl">
+          <p data-reveal className="cine-body mt-4 max-w-2xl">
             Your documents and Second Brain memory are saved on your computer. With privacy mode on, when a connected
             AI service is used, personal identifiers are removed locally before the request is sent. Your personal
             details are restored locally in the returned document.
           </p>
         </Reveal>
 
-        <Reveal className="mt-12">
+        <Reveal className="mt-6">
           <ol data-reveal className="flex flex-col items-stretch gap-3 md:flex-row md:items-center">
             {FLOW.map((step, i) => (
               <li key={step} className="flex flex-1 items-center gap-3 md:contents">
