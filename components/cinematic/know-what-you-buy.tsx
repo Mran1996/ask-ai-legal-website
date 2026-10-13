@@ -26,9 +26,10 @@ export function KnowWhatYouBuy() {
             <div className="pointer-events-none absolute -right-6 -top-6 h-72 w-72 opacity-90 sm:h-96 sm:w-96 [mask-image:radial-gradient(closest-side,black_55%,transparent)]">
               <Slot src="retainer-trap.png" className="h-full w-full rounded-2xl" imgClassName="object-cover" quiet />
             </div>
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#0c1929] via-[#0c1929]/85 to-transparent" aria-hidden />
             <div className="relative p-8 sm:p-12">
               <p data-reveal className="cine-label !text-brick">The retainer trap</p>
-              <p data-reveal className="font-display mt-6 text-5xl font-semibold tracking-tight text-cream sm:text-7xl">
+              <p data-reveal className="font-display mt-6 text-5xl font-semibold tracking-tight text-cream sm:text-6xl">
                 $5,000–$10,000+
               </p>
               <p data-reveal className="font-mono mt-2 text-xs uppercase tracking-widest text-cream/50">
@@ -47,9 +48,10 @@ export function KnowWhatYouBuy() {
             <div className="pointer-events-none absolute -right-6 -top-6 h-72 w-72 opacity-90 sm:h-96 sm:w-96 [mask-image:radial-gradient(closest-side,black_55%,transparent)]">
               <Slot src="flat-price.png" className="h-full w-full rounded-2xl" imgClassName="object-contain" quiet />
             </div>
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#0c1929] via-[#0c1929]/85 to-transparent" aria-hidden />
             <div className="relative p-8 sm:p-12">
               <p data-reveal className="cine-label">Ask AI Legal</p>
-              <p data-reveal className="font-display mt-6 text-5xl font-semibold tracking-tight text-accent-light sm:text-7xl">
+              <p data-reveal className="font-display mt-6 text-5xl font-semibold tracking-tight text-accent-light sm:text-6xl">
                 $3,997
               </p>
               <p data-reveal className="font-mono mt-2 text-xs uppercase tracking-widest text-cream/50">

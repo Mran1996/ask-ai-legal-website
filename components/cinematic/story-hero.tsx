@@ -165,7 +165,7 @@ export function StoryHero() {
               className={`${i === 0 ? "relative mx-auto flex flex-col items-center text-center" : "absolute inset-0 invisible opacity-0 pointer-events-none md:top-auto"} max-w-3xl`}
             >
               {"brand" in s && s.brand && (
-                <div className="mb-3 hidden sm:block">
+                <div className="mb-3 hidden sm:[@media(min-height:860px)]:block">
                   <BrandLockup href="/" className="justify-center" />
                 </div>
               )}
@@ -244,7 +244,7 @@ export function StoryHero() {
         ))}
       </div>
 
-      <p className="cine-label absolute bottom-8 left-5 hidden !text-cream/40 sm:left-8 sm:block">Scroll</p>
+      <p className="cine-label absolute bottom-8 left-5 hidden !text-cream/40 sm:left-8 sm:[@media(min-height:860px)]:block">Scroll</p>
     </section>
   )
 }
