@@ -30,10 +30,13 @@ export const MAINTENANCE_PRICE_DISPLAY = "$125"
 /** What the one-time purchase includes — homepage, pricing, and /pay all read this list. */
 export const PURCHASE_INCLUSIONS = [
   "Computer compatibility check and installation",
-  "Configuration of your workspace and supported connections",
-  "Guided setup of your first case",
-  "Personal training on using the installed software",
-  "Walkthrough video and written getting-started guide",
+  "Guided setup around your issues and goals",
+  "Personalized workspace configuration",
+  "Agent setup",
+  "Supported API connections",
+  "Supported plugin connections",
+  "Second Brain memory setup",
+  "Personal training and a written getting-started guide",
   "30 days of installation support",
 ] as const
 
@@ -41,7 +44,7 @@ export const SUPPORT_PERIOD_NOTE =
   "Installation support begins when installation is completed and covers setup problems and questions about using the installed features. Optional ongoing maintenance is available separately."
 
 export const THIRD_PARTY_COSTS_NOTE =
-  "Third-party AI usage, research subscriptions, and cloud services may cost extra."
+  "Third-party AI usage and paid services are billed separately."
 
 /**
  * Research platforms we can connect for a customer (owner-confirmed, Oct 2026).
@@ -123,7 +126,7 @@ export const SITE_SEO_TITLE = "Ask AI Legal | Installed Legal AI Software & Supp
 
 /** Homepage SEO description — used in layout, JSON-LD, and social previews. */
 export const SITE_SEO_DESCRIPTION =
-  "Get Ask AI Legal for $3,997 with installation, personal training, a walkthrough video, and a written guide. Optional maintenance is $125/month."
+  "Ask AI Legal is installed on your computer and set up around your issues: personalized documents, agent setup, connections, and Second Brain memory. $3,997 one time; maintenance optional."
 
 /** Brand mark (circular scales) — header, hero, app icons. */
 export const SITE_LOGO_MARK = "/brand/stripe-logo-512.png"

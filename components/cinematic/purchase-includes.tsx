@@ -1,34 +1,42 @@
 "use client"
 
-import { Check } from "lucide-react"
+import Link from "next/link"
+import { ArrowRight, Check } from "lucide-react"
 import { Reveal } from "./reveal"
-import { PURCHASE_INCLUSIONS, SUPPORT_PERIOD_NOTE } from "@/lib/site-config"
+import { CONSULT_CTA_LABEL, CONSULT_HREF, PURCHASE_INCLUSIONS, THIRD_PARTY_COSTS_NOTE } from "@/lib/site-config"
 
-/** The six inclusions of the one-time purchase — sits right after the install story. */
+/** The single purchase offer and everything it includes. */
 export function PurchaseIncludes() {
   return (
-    <section id="includes" className="relative bg-ground-surface py-24 sm:py-32">
-      <div className="cine-container">
+    <section id="includes" className="relative scroll-mt-20 bg-ground-surface py-24 sm:py-32">
+      <div className="cine-container grid gap-12 lg:grid-cols-[1fr_1.4fr] lg:items-start">
         <Reveal>
-          <p data-reveal className="cine-label mb-6">One-time purchase</p>
-          <h2 data-reveal className="cine-h2 text-cream">Your purchase includes</h2>
+          <h2 data-reveal className="cine-h2 text-cream">
+            Personally installed.{" "}
+            <span className="cine-serif text-accent-light">Connected. Set up with you.</span>
+          </h2>
+          <div data-reveal className="mt-10">
+            <p className="font-display text-6xl font-semibold tracking-tight text-accent-light">$3,997</p>
+            <p className="mt-2 font-mono text-xs uppercase tracking-widest text-cream/60">One-time purchase</p>
+            <p className="mt-4 font-display text-xl text-cream">Optional maintenance: $125/month</p>
+            <p className="mt-3 text-sm text-cream/60">{THIRD_PARTY_COSTS_NOTE}</p>
+          </div>
+          <div data-reveal className="mt-10">
+            <Link href={CONSULT_HREF} className="cine-btn-gold">
+              {CONSULT_CTA_LABEL} <ArrowRight className="h-4 w-4" aria-hidden />
+            </Link>
+          </div>
         </Reveal>
 
-        <Reveal stagger={0.06}>
-          <ul className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <Reveal stagger={0.05}>
+          <ul className="grid gap-3 sm:grid-cols-2">
             {PURCHASE_INCLUSIONS.map((item) => (
-              <li key={item} data-reveal className="cine-card flex items-start gap-4 p-6 sm:p-7">
-                <Check className="mt-1 h-5 w-5 shrink-0 text-accent" aria-hidden />
-                <span className="cine-h3 !text-lg text-cream">{item}</span>
+              <li key={item} data-reveal className="cine-card flex items-start gap-3 p-5">
+                <Check className="mt-0.5 h-5 w-5 shrink-0 text-accent" aria-hidden />
+                <span className="text-base text-cream">{item}</span>
               </li>
             ))}
           </ul>
-        </Reveal>
-
-        <Reveal>
-          <p data-reveal className="cine-body mt-10 max-w-2xl">
-            {SUPPORT_PERIOD_NOTE}
-          </p>
         </Reveal>
       </div>
     </section>

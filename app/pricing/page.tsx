@@ -18,7 +18,7 @@ import {
 
 const TITLE = "Ask AI Legal Pricing | $3,997 Purchase & $125 Maintenance"
 const DESCRIPTION =
-  "Ask AI Legal includes installation, training, video and written guidance, and 30 days of installation support for $3,997. Maintenance is optional at $125/month."
+  "Ask AI Legal is $3,997 one time: installation, personalized setup, agent setup, connections, Second Brain memory, training, and 30 days of support. Maintenance optional at $125/month."
 
 export const metadata: Metadata = {
   title: { absolute: TITLE },
@@ -41,7 +41,7 @@ const productJsonLd = {
   "@type": "Product",
   name: "Ask AI Legal",
   description:
-    "Legal workspace software installed on your computer, including installation, configuration, personal training, a walkthrough video and written getting-started guide, and 30 days of installation support.",
+    "Legal workspace software installed on your computer, including installation, configuration, personal training, a written getting-started guide, and 30 days of installation support.",
   brand: { "@type": "Brand", name: "Ask AI Legal" },
   url: `${SITE_URL}/pricing`,
   offers: [
@@ -74,7 +74,7 @@ const DETAILS_LINE = "We’ll go over the details in your consultation."
 const sections = [
   {
     title: "Your costs, clearly explained.",
-    body: "The one-time purchase is $3,997. With 12 months of optional maintenance, the first-year total is $5,497 before applicable taxes and separate third-party charges — no 12-month commitment required. Third-party AI usage, research subscriptions, and cloud services are separate.",
+    body: "The one-time purchase is $3,997. With 12 months of optional maintenance, the first-year total is $5,497 before applicable taxes and separate third-party charges — no 12-month commitment required. Third-party AI usage and paid services are billed separately.",
   },
   {
     title: "What happens without maintenance?",
@@ -109,10 +109,10 @@ export default function PricingPage() {
             <div className="mt-10 flex flex-wrap items-center gap-4">
               <NeonButton href={CONSULT_HREF}>{CONSULT_CTA_LABEL}</NeonButton>
               <Link
-                href="#compare"
+                href="/#faq"
                 className="inline-flex items-center text-sm font-semibold text-gold underline-offset-2 hover:underline"
               >
-                Compare with hiring an attorney
+                Read the FAQ
               </Link>
             </div>
           </div>
@@ -146,22 +146,17 @@ export default function PricingPage() {
                 </div>
               </article>
 
-              <article className="firm-card flex flex-col border-2 border-navy/10 bg-white p-6 sm:p-8">
-                <h3 className="font-display text-2xl font-semibold text-navy">Optional maintenance</h3>
-                <p className="mt-4 font-display text-4xl font-semibold text-navy">
-                  $125 <span className="text-lg font-medium text-gray-600">per month</span>
+              <aside className="flex flex-col justify-center p-2 sm:p-6">
+                <p className="text-xs font-bold uppercase tracking-widest text-gold-dark">Optional maintenance · $125/month</p>
+                <h3 className="mt-3 font-display text-2xl font-semibold text-navy">Keep your workspace moving forward.</h3>
+                <p className="mt-4 text-sm leading-relaxed text-gray-700">
+                  Optional maintenance provides ongoing support, supported software updates, and help maintaining your
+                  API and plugin connections as services change.
                 </p>
-                <p className="mt-5 text-sm leading-relaxed text-gray-700">
-                  Keep your installation current as technology changes. Maintenance includes supported software
-                  updates, maintenance of existing AI connections, compatibility fixes, and technical assistance within
-                  the maintenance plan&rsquo;s stated limits. Custom integrations, major upgrades, and additional
-                  training may require a separate quote.
+                <p className="mt-3 text-sm leading-relaxed text-gray-700">
+                  Your saved learning stays in your workspace. Maintenance supports the software and its connections.
                 </p>
-                <p className="mt-4 flex-grow text-sm font-medium leading-relaxed text-navy">
-                  Maintenance is optional. Coverage, billing, service limits, and cancellation terms are provided
-                  before enrollment.
-                </p>
-              </article>
+              </aside>
             </div>
           </div>
         </section>

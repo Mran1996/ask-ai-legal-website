@@ -71,7 +71,7 @@ export default async function SituationGuidePage({ params }: Props) {
             <div>
               <h2 className="font-display text-2xl font-semibold text-navy">What people use the workspace for</h2>
               <p className="mt-3 text-sm text-gray-600">
-                Examples only. Available templates and sources depend on your installation. We confirm what fits your
+                Examples only. Available features and sources depend on your installation. We confirm what fits your
                 matter during the installation consultation.
               </p>
               <ul className="mt-6 space-y-3">

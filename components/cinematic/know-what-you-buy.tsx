@@ -2,74 +2,85 @@
 
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
-import { Slot } from "./slot"
 import { Reveal } from "./reveal"
 import { CONSULT_CTA_LABEL, CONSULT_HREF } from "@/lib/site-config"
 
-/** The original two-card comparison (hourglass vs. coins), updated to current pricing. */
+const TRAP_QUESTIONS = [
+  "$5,000–$10,000 spent—and still chasing answers?",
+  "No callbacks?",
+  "Unexpected added costs?",
+  "Documents that miss what you asked for?",
+]
+
+/** Hourglass ("Avoid the trap") and single-coin price cards. Short text sits on the photo; the rest below it. */
 export function KnowWhatYouBuy() {
   return (
-    <section id="compare" className="relative scroll-mt-20 overflow-hidden bg-ground py-24 sm:py-32">
+    <section id="compare" className="relative scroll-mt-20 overflow-hidden bg-ground py-24 sm:py-32" aria-labelledby="compare-title">
+      <h2 id="compare-title" className="sr-only">
+        Avoid the trap
+      </h2>
       <div className="cine-container">
-        <Reveal>
-          <p data-reveal className="cine-label mb-6">The difference</p>
-          <h2 data-reveal className="cine-h2 max-w-[16ch] text-cream">
-            Why pay $5,000–$10,000 up front{" "}
-            <br />
-            <span className="cine-serif text-accent-light">to be kept in the dark?</span>
-          </h2>
-        </Reveal>
-
-        <div className="mt-16 grid gap-6 lg:grid-cols-2">
-          {/* the trap */}
-          <Reveal className="cine-card relative overflow-hidden border-brick/20">
-            <div className="pointer-events-none absolute -right-6 -top-6 h-72 w-72 opacity-90 sm:h-96 sm:w-96 [mask-image:radial-gradient(closest-side,black_55%,transparent)]">
-              <Slot src="retainer-trap.png" className="h-full w-full rounded-2xl" imgClassName="object-cover" quiet />
+        <Reveal className="grid gap-6 lg:grid-cols-2" stagger={0.1}>
+          {/* Avoid the trap */}
+          <article data-reveal className="cine-card flex flex-col overflow-hidden border-brick/20">
+            <div className="relative aspect-[4/3] overflow-hidden bg-[#0b0806]">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/renders/retainer-trap.png"
+                alt="Hourglass with gold coins draining away"
+                className="absolute inset-0 h-full w-full object-cover object-[50%_65%]"
+                loading="lazy"
+              />
+              <div className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-[#0b0806]/90 via-[#0b0806]/40 to-transparent" aria-hidden />
+              <p className="cine-shadow absolute inset-x-0 top-5 text-center font-display text-3xl font-semibold tracking-tight text-cream sm:top-7 sm:text-5xl">
+                Avoid the trap
+              </p>
             </div>
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#0c1929] via-[#0c1929]/85 to-transparent" aria-hidden />
-            <div className="relative p-8 sm:p-12">
-              <p data-reveal className="cine-label !text-brick">The retainer trap</p>
-              <p data-reveal className="font-display mt-6 text-5xl font-semibold tracking-tight text-cream sm:text-6xl">
-                $5,000–$10,000+
-              </p>
-              <p data-reveal className="font-mono mt-2 text-xs uppercase tracking-widest text-cream/50">
-                up front · drawn down hourly
-              </p>
-              <ul data-reveal className="cine-body mt-10 space-y-3">
-                <li>Weeks waiting for callbacks.</li>
-                <li>Someone else holds the tools — and the timeline.</li>
-                <li>Costs grow with every call and every email.</li>
+            <div className="flex flex-1 flex-col p-7 sm:p-9">
+              <ul className="cine-body space-y-2.5 !text-base">
+                {TRAP_QUESTIONS.map((q) => (
+                  <li key={q}>{q}</li>
+                ))}
               </ul>
+              <p className="mt-6 font-display text-lg text-accent-light">
+                Keep your information, documents, and next steps in view.
+              </p>
             </div>
-          </Reveal>
+          </article>
 
-          {/* the install */}
-          <Reveal className="cine-card relative overflow-hidden border-accent/30" stagger={0.1}>
-            <div className="pointer-events-none absolute -right-6 -top-6 h-72 w-72 opacity-90 sm:h-96 sm:w-96 [mask-image:radial-gradient(closest-side,black_55%,transparent)]">
-              <Slot src="flat-price.png" className="h-full w-full rounded-2xl" imgClassName="object-contain" quiet />
+          {/* One purchase, one coin */}
+          <article data-reveal className="cine-card flex flex-col overflow-hidden border-accent/30">
+            <div className="relative aspect-[4/3] overflow-hidden bg-[#070605]">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/renders/single-coin.png"
+                alt="A single gold coin"
+                className="absolute right-0 top-0 h-full w-auto max-w-none"
+                loading="lazy"
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-[#070605] via-[#070605]/60 to-transparent" aria-hidden />
+              <div className="absolute left-6 top-6 sm:left-8 sm:top-8">
+                <p className="cine-label">Ask AI Legal</p>
+                <p className="cine-shadow mt-3 font-display text-4xl font-semibold tracking-tight text-accent-light sm:text-6xl">
+                  $3,997
+                </p>
+                <p className="mt-2 font-mono text-xs uppercase tracking-widest text-cream/70">One-time purchase</p>
+              </div>
             </div>
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#0c1929] via-[#0c1929]/85 to-transparent" aria-hidden />
-            <div className="relative p-8 sm:p-12">
-              <p data-reveal className="cine-label">Ask AI Legal</p>
-              <p data-reveal className="font-display mt-6 text-5xl font-semibold tracking-tight text-accent-light sm:text-6xl">
-                $3,997
+            <div className="flex flex-1 flex-col p-7 sm:p-9">
+              <p className="font-display text-lg text-cream">Your workspace, installed and configured with you.</p>
+              <p className="cine-body mt-3 !text-base">
+                Personalized documents. Agent setup. Connected tools. Second Brain memory.
               </p>
-              <p data-reveal className="font-mono mt-2 text-xs uppercase tracking-widest text-cream/50">
-                one-time purchase · no hourly billing
-              </p>
-              <ul data-reveal className="cine-body mt-10 space-y-3">
-                <li>Installed on your computer and set up with you.</li>
-                <li>Your documents and drafts stay in view.</li>
-                <li>Optional maintenance: $125/month.</li>
-              </ul>
-              <div data-reveal className="mt-8">
+              <p className="cine-body mt-3 !text-base">Optional maintenance: $125/month.</p>
+              <div className="mt-8">
                 <Link href={CONSULT_HREF} className="cine-btn-gold">
                   {CONSULT_CTA_LABEL} <ArrowRight className="h-4 w-4" aria-hidden />
                 </Link>
               </div>
             </div>
-          </Reveal>
-        </div>
+          </article>
+        </Reveal>
       </div>
     </section>
   )

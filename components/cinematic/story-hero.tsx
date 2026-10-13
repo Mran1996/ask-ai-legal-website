@@ -21,7 +21,7 @@ const MATTERS = [
   { label: "Housing", href: "/situations/housing" },
   { label: "Civil disputes", href: "/situations/civil" },
   { label: "Small claims", href: "/situations/small-claims" },
-  { label: "Green cards & immigration", href: "/situations/immigration" },
+  { label: "Criminal", href: "/situations/criminal" },
   { label: "& more", href: "/services" },
 ]
 
@@ -31,7 +31,7 @@ const SCENES = [
     alt: "Laptop glowing on a kitchen table at night with legal documents rising from the screen — Ask AI Legal workspace installed at home",
     label: "We do the install. Ask AI Legal does the heavy lifting. You make the decisions.",
     title: ["Your legal workspace.", "Installed on your computer."],
-    sub: "We install Ask AI Legal, help you set up your first case, and personally show you how to organize documents, research sources, and prepare drafts for review.",
+    sub: "Ask AI Legal is installed on your computer and configured around your issues and goals. Bring your information together, generate personalized documents, and build on what your Second Brain remembers.",
     pos: "70% center",
     brand: true,
     intro: true,
@@ -76,7 +76,7 @@ const SCENES = [
     alt: "Woman relaxed at her kitchen table after handling her legal matter from home",
     label: "06 · After",
     title: ["From home.", "On your terms."],
-    sub: "Know what you're paying. See your work. Stay involved in your case.",
+    sub: "Your information. Your workspace. Built around you.",
     pos: "60% center",
     cta: true,
   },

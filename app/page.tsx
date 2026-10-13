@@ -7,6 +7,9 @@ import { DemoVideo } from "@/components/cinematic/demo-video"
 import { InstallStory } from "@/components/cinematic/install-story"
 import { PurchaseIncludes } from "@/components/cinematic/purchase-includes"
 import { KnowWhatYouBuy } from "@/components/cinematic/know-what-you-buy"
+import { Ownership } from "@/components/cinematic/ownership"
+import { SecondBrain } from "@/components/cinematic/second-brain"
+import { PrivacyFlow } from "@/components/cinematic/privacy-flow"
 import { ToolsCompact } from "@/components/cinematic/tools"
 import { HowItWorks } from "@/components/cinematic/how-it-works"
 import { Situations } from "@/components/cinematic/situations"
@@ -42,6 +45,9 @@ export default function Home() {
         <DemoVideo />
         <InstallStory />
         <PurchaseIncludes />
+        <Ownership />
+        <SecondBrain />
+        <PrivacyFlow />
         <ToolsCompact />
         <KnowWhatYouBuy />
         <HowItWorks />

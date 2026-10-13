@@ -13,7 +13,7 @@ const STEPS = [
   {
     n: "02",
     title: "Accept the link. We install — you watch.",
-    body: "We install and configure your workspace and supported connections on your screen, then help you set up your first case.",
+    body: "We install and configure your workspace and supported connections on your screen, then set it up around your issues and goals.",
     img: "step-02-install.png",
   },
   {

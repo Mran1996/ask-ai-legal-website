@@ -20,14 +20,14 @@ export const en = {
     titleLine1: "Your legal workspace.",
     titleHighlight: "Installed on your computer.",
     titleLine2: "",
-    body: "Purchase your own installed copy of Ask AI Legal for $3,997. We install and configure your workspace, help you set up your first case, and personally show you how to organize documents, research legal sources, and prepare drafts for review. Your purchase includes a walkthrough video and written getting-started guide, plus 30 days of installation support. Optional maintenance is available for $125 per month.",
+    body: "Ask AI Legal is installed on your computer and configured around your issues and goals. Bring your information together, generate personalized documents, and build on what your Second Brain remembers.",
     categories: [
       "Divorce & separation",
       "Custody & family",
       "Housing",
       "Civil disputes",
       "Small claims",
-      "Green cards & immigration",
+      "Criminal",
       "& more",
     ],
     ctaPrimary: PRIMARY_CTA_LABEL,
@@ -47,7 +47,7 @@ export const en = {
     titleLine1: "Your legal workspace.",
     titleLine2: "Installed on your computer.",
     intro:
-      "Ask AI Legal is software installed on your computer. We install and configure it, help you set up your first case, and show you how to use it. You stay in control of your matter — nothing is filed on your behalf.",
+      "Ask AI Legal is software installed on your computer. We install and configure it, set it up around your issues and goals, and show you how to use it. You stay in control of your matter — nothing is filed on your behalf.",
     importantLabel: "Important:",
     importantText: SITE_DISCLAIMER,
     items: [
@@ -59,7 +59,7 @@ export const en = {
       {
         title: "Document drafting for your review",
         description:
-          "Prepare editable drafts using the templates supported by your installation. Review the facts, citations, formatting, and applicable court requirements before filing.",
+          "Prepare editable drafts with personalized document generation. Review the facts, citations, formatting, and applicable court requirements before filing.",
       },
       {
         title: "Case organization",
@@ -79,7 +79,7 @@ export const en = {
       {
         title: "Installation, training, and support",
         description:
-          "Computer compatibility check, installation, guided setup of your first case, personal training, a walkthrough video and written getting-started guide, and 30 days of installation support.",
+          "Computer compatibility check, installation, guided setup around your issues and goals, personal training, a written getting-started guide, and 30 days of installation support.",
       },
     ],
   },
@@ -94,10 +94,10 @@ export const en = {
     traditionalHeading: "One-time purchase",
     traditionalPrice: "$3,997",
     traditionalDesc:
-      "Your installed copy, setup, personal training, a walkthrough video and written getting-started guide, and 30 days of installation support",
+      "Your installed copy, setup, personal training, a written getting-started guide, and 30 days of installation support",
     traditionalBullets: [
       "Computer compatibility check and installation",
-      "Guided setup of your first case",
+      "Guided setup around your issues and goals",
       "30 days of installation support",
     ],
     usBadge: "Ask AI Legal",
@@ -123,10 +123,10 @@ export const en = {
           "We check computer compatibility, then install and configure the included software and supported connections.",
       },
       {
-        title: "Your first case, set up with you",
+        title: "Set up around your issues and goals",
         summary: "Guided setup and personal training",
         detail:
-          "We guide you through setting up your first case and show you how to use your workspace. Guided setup means organizing the workspace and explaining the software, not legal advice.",
+          "We set up your workspace around your issues and goals and show you how to use it. Guided setup means organizing the workspace and explaining the software, not legal advice.",
       },
       {
         title: "Support after installation",
@@ -155,11 +155,11 @@ export const en = {
       },
       {
         title: "We do the install",
-        body: "We install and configure your workspace and supported connections, then help you set up your first case and show you how to use it.",
+        body: "We install and configure your workspace and supported connections, then set it up around your issues and goals and show you how to use it.",
       },
       {
         title: "You work from home",
-        body: "Organize documents, research legal sources, and prepare drafts for your review — with a walkthrough video and written getting-started guide, plus 30 days of installation support.",
+        body: "Organize documents, research legal sources, and prepare drafts for your review — with a written getting-started guide, plus 30 days of installation support.",
       },
     ],
   },
@@ -251,11 +251,15 @@ export const en = {
     items: [
       {
         q: "What does Ask AI Legal cost?",
-        a: "The one-time price is $3,997 for your installed copy, setup, personal training, a walkthrough video and written getting-started guide, and 30 days of installation support. Optional maintenance is $125 per month. Third-party AI usage, research subscriptions, and cloud services may cost extra.",
+        a: "The one-time price is $3,997 for your installed workspace, setup, personal training, a written getting-started guide, and 30 days of installation support. Optional maintenance is $125 per month. Third-party AI usage and paid services are billed separately.",
       },
       {
         q: "What is included in installation?",
-        a: "We check computer compatibility, install and configure the included software and supported connections, guide you through setting up your first case, and show you how to use your workspace. You also receive a walkthrough video and a written getting-started guide.",
+        a: "A computer compatibility check and installation, guided setup around your issues and goals, personalized workspace configuration, agent setup, supported API and plugin connections, Second Brain memory setup, personal training, and a written getting-started guide.",
+      },
+      {
+        q: "Do I keep my workspace?",
+        a: "Yes. Purchase Ask AI Legal once and keep your installed workspace on your computer under your license. Your saved information, documents, and accumulated memory stay with you.",
       },
       {
         q: "What does the 30-day support period cover?",
@@ -267,7 +271,7 @@ export const en = {
       },
       {
         q: "What does maintenance include?",
-        a: "Maintenance includes supported software updates, maintenance of existing AI connections, compatibility fixes, and technical assistance within the maintenance plan’s stated limits. Custom integrations, major upgrades, and additional training may require a separate quote.",
+        a: "Optional maintenance provides ongoing support, supported software updates, and help maintaining your API and plugin connections as services change. Your saved learning stays in your workspace either way.",
       },
       {
         q: "Which research platforms can I connect?",
@@ -275,11 +279,11 @@ export const en = {
       },
       {
         q: "Are AI and research subscriptions included?",
-        a: "Third-party AI usage, research subscriptions, and cloud services are separate unless expressly included in your written purchase summary. We explain the services and additional costs for your setup before installation.",
+        a: "Third-party AI usage and paid services are billed separately.",
       },
       {
-        q: "Does everything stay on my computer?",
-        a: "Not necessarily. Local installation does not mean every feature operates offline. Features using cloud AI or connected services may send information to those providers. We explain the connections and data handling for your setup.",
+        q: "Does my information stay on my computer?",
+        a: "Your documents and Second Brain memory are saved on your computer. With privacy mode on, when a connected AI service is used, personal identifiers are removed locally before the request is sent and restored locally in the returned document.",
       },
       {
         q: "Can Ask AI Legal make mistakes?",
@@ -287,7 +291,7 @@ export const en = {
       },
       {
         q: "Are you a law firm?",
-        a: "No. Ask AI Legal provides software, installation, training, and technical assistance. We do not provide legal representation or create an attorney-client relationship.",
+        a: "No. Ask AI Legal provides software, installation, training, and technical assistance. We do not provide legal representation.",
       },
     ],
   },
