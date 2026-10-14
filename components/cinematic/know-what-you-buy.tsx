@@ -10,6 +10,8 @@ const TRAP = [
   "No callbacks?",
   "Unexpected added costs?",
   "Documents that miss what you asked for?",
+  "Paying again every time you need help?",
+  "Waiting on someone else to see your own documents?",
 ]
 
 const OURS = [
@@ -27,7 +29,7 @@ const LIST = "space-y-2.5 text-base leading-snug text-cream/85 sm:text-lg"
 
 /**
  * Two matching cards: heading on top, a 220px photo, then a marked list.
- * The coin photo is scaled so its face (centre at ~59%/64% of single-coin.png) sits mid-frame with the price on it.
+ * The coin photo is scaled and set right of centre; the price sits beside it on the left.
  */
 export function KnowWhatYouBuy() {
   return (
@@ -64,16 +66,14 @@ export function KnowWhatYouBuy() {
                 alt=""
                 aria-hidden
                 className="absolute h-[388px] w-auto max-w-none [mask-image:linear-gradient(to_right,transparent,black_22%,black_80%,transparent)]"
-                style={{ left: "calc(50% - 184px)", top: "-137px" }}
+                style={{ left: "calc(64% - 184px)", top: "-137px" }}
                 loading="lazy"
               />
-              <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
-                <p className="font-display text-3xl font-bold tracking-tight text-[#1c1305] [text-shadow:0_1px_0_rgba(255,226,150,0.55)]">
+              <div className="absolute top-1/2 -translate-y-1/2 text-right" style={{ right: "calc(36% + 92px)" }}>
+                <p className="cine-shadow font-display text-3xl font-semibold tracking-tight text-accent-light sm:text-4xl">
                   $3,997
                 </p>
-                <p className="mt-0.5 font-mono text-[9px] font-semibold uppercase tracking-[0.08em] text-[#2a1c07]">
-                  One-time purchase
-                </p>
+                <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.14em] text-cream/70">One-time purchase</p>
               </div>
             </div>
             <ul className={`flex-1 p-5 ${LIST}`}>
