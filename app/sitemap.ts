@@ -12,6 +12,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/services", changeFrequency: "monthly" as const, priority: 0.8 },
     { path: "/about", changeFrequency: "monthly" as const, priority: 0.6 },
     { path: "/contact", changeFrequency: "monthly" as const, priority: 0.6 },
+    { path: "/faq", changeFrequency: "monthly" as const, priority: 0.6 },
     ...listSituationSlugs().map((slug) => ({
       path: `/situations/${slug}`,
       changeFrequency: "monthly" as const,

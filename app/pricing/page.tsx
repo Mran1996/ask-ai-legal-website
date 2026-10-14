@@ -109,7 +109,7 @@ export default function PricingPage() {
             <div className="mt-10 flex flex-wrap items-center gap-4">
               <NeonButton href={CONSULT_HREF}>{CONSULT_CTA_LABEL}</NeonButton>
               <Link
-                href="/#faq"
+                href="/faq"
                 className="inline-flex items-center text-sm font-semibold text-gold underline-offset-2 hover:underline"
               >
                 Read the FAQ
@@ -184,7 +184,7 @@ export default function PricingPage() {
                 {CONSULT_CTA_LABEL}
               </NeonButton>
               <Link
-                href="/#faq"
+                href="/faq"
                 className="inline-flex items-center text-sm font-semibold text-gold-dark underline-offset-2 hover:underline"
               >
                 Read the FAQ

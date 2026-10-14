@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import { Footer } from "@/components/footer"
 import { FaqJsonLd } from "@/lib/seo/faq-json-ld"
+import { HOME_FAQ } from "@/lib/faq"
 import { CineNav } from "@/components/cinematic/nav"
 import { StoryHero } from "@/components/cinematic/story-hero"
 import { DemoVideo } from "@/components/cinematic/demo-video"
@@ -37,7 +38,7 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <div className="cine min-h-screen">
-      <FaqJsonLd />
+      <FaqJsonLd items={HOME_FAQ} path="/#faq" />
       <SmoothScroll />
       <CineNav />
       <main>

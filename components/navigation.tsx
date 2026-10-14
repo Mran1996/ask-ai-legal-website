@@ -51,7 +51,7 @@ export function Navigation() {
   const utilityLinks = useMemo(
     () => [
       { href: "/#contact", label: t.nav.freeReview },
-      { href: "/#faq", label: t.nav.help },
+      { href: "/faq", label: t.nav.help },
       { href: "/about", label: t.nav.about },
       { href: SUPPORT_MAILTO, label: SUPPORT_EMAIL },
     ],
@@ -65,7 +65,7 @@ export function Navigation() {
       { href: "/pricing", label: t.nav.pricing },
       { href: "/#compare", label: t.nav.whyUs },
       { href: "/#process", label: t.nav.process },
-      { href: "/#faq", label: t.nav.faq },
+      { href: "/faq", label: t.nav.faq },
       { href: "/contact", label: t.nav.contact },
     ],
     [t]

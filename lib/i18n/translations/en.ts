@@ -1,4 +1,5 @@
 import { servicesPageContent } from "./services-page"
+import { ALL_FAQ } from "@/lib/faq"
 import { PRIMARY_CTA_LABEL, SITE_DISCLAIMER } from "@/lib/site-config"
 
 export const en = {
@@ -248,52 +249,7 @@ export const en = {
     label: "FAQ",
     title: "Frequently asked questions",
     intro: "",
-    items: [
-      {
-        q: "What does Ask AI Legal cost?",
-        a: "The one-time price is $3,997 for your installed workspace, setup, personal training, a written getting-started guide, and 30 days of installation support. Optional maintenance is $125 per month. Third-party AI usage and paid services are billed separately.",
-      },
-      {
-        q: "What is included in installation?",
-        a: "A computer compatibility check and installation, guided setup around your issues and goals, personalized workspace configuration, agent setup, supported API and plugin connections, Second Brain memory setup, personal training, and a written getting-started guide.",
-      },
-      {
-        q: "Do I keep my workspace?",
-        a: "Yes. Purchase Ask AI Legal once and keep your installed workspace on your computer under your license. Your saved information, documents, and accumulated memory stay with you.",
-      },
-      {
-        q: "What does the 30-day support period cover?",
-        a: "It begins when installation is completed and covers setup problems and questions about using the installed features. It does not include legal representation or unlimited custom development.",
-      },
-      {
-        q: "Is monthly maintenance required?",
-        a: "No. The $125 monthly maintenance service is optional. Your purchase and maintenance agreements explain what is included, what remains available without maintenance, and which features depend on third-party services.",
-      },
-      {
-        q: "What does maintenance include?",
-        a: "Optional maintenance provides ongoing support, supported software updates, and help maintaining your API and plugin connections as services change. Your saved learning stays in your workspace either way.",
-      },
-      {
-        q: "Which research platforms can I connect?",
-        a: "We can connect supported legal research platforms such as Westlaw, LexisNexis, Bloomberg Law, Fastcase / vLex, and CourtListener. Provider subscriptions and usage fees are separate. We'll go over the options for your installation during your consultation.",
-      },
-      {
-        q: "Are AI and research subscriptions included?",
-        a: "Third-party AI usage and paid services are billed separately.",
-      },
-      {
-        q: "Does my information stay on my computer?",
-        a: "Your documents and Second Brain memory are saved on your computer. With privacy mode on, when a connected AI service is used, personal identifiers are removed locally before the request is sent and restored locally in the returned document.",
-      },
-      {
-        q: "Can Ask AI Legal make mistakes?",
-        a: "Yes. AI can misread documents, produce incorrect citations, or give inaccurate information. Review generated work, check original sources, and confirm applicable court requirements before using a document.",
-      },
-      {
-        q: "Are you a law firm?",
-        a: "No. Ask AI Legal provides software, installation, training, and technical assistance. We do not provide legal representation.",
-      },
-    ],
+    items: ALL_FAQ,
   },
   footer: {
     tagline: "Your installed legal workspace. Setup by us. Optional maintenance.",
