@@ -29,7 +29,7 @@ const LIST = "space-y-2.5 text-base leading-snug text-cream/85 sm:text-lg"
 
 /**
  * Two matching cards: heading on top, a 220px photo, then a marked list.
- * The coin photo is scaled and set right of centre; the price sits beside it on the left.
+ * The right card shows the price in place of a photo.
  */
 export function KnowWhatYouBuy() {
   return (
@@ -59,22 +59,11 @@ export function KnowWhatYouBuy() {
 
           <article data-reveal className="cine-card flex flex-col overflow-hidden">
             <h2 className={HEADING}>Ask AI Legal</h2>
-            <div className={`${PHOTO} bg-[#070605]`}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/renders/single-coin.png"
-                alt=""
-                aria-hidden
-                className="absolute h-[388px] w-auto max-w-none [mask-image:linear-gradient(to_right,transparent,black_22%,black_80%,transparent)]"
-                style={{ left: "calc(64% - 184px)", top: "-137px" }}
-                loading="lazy"
-              />
-              <div className="absolute top-1/2 -translate-y-1/2 text-right" style={{ right: "calc(36% + 92px)" }}>
-                <p className="cine-shadow font-display text-3xl font-semibold tracking-tight text-accent-light sm:text-4xl">
-                  $3,997
-                </p>
-                <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.14em] text-cream/70">One-time purchase</p>
-              </div>
+            <div className={`${PHOTO} flex flex-col items-center justify-center bg-[#070605] text-center`}>
+              <p className="cine-shadow font-display text-6xl font-semibold tracking-tight text-accent-light sm:text-7xl">
+                $3,997
+              </p>
+              <p className="mt-3 font-mono text-xs uppercase tracking-[0.18em] text-cream/70">One-time purchase</p>
             </div>
             <ul className={`flex-1 p-5 ${LIST}`}>
               {OURS.map((t) => (
