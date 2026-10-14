@@ -1,12 +1,12 @@
-import { en } from "@/lib/i18n/translations/en"
+import type { FaqItem } from "@/lib/faq"
 import { SITE_URL } from "@/lib/site-config"
 
-/** FAQPage JSON-LD for homepage FAQ (English canonical copy). */
-export function FaqJsonLd() {
+/** FAQPage JSON-LD for exactly the questions a page shows. */
+export function FaqJsonLd({ items, path }: { items: FaqItem[]; path: string }) {
   const schema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: en.faq.items.map((item) => ({
+    mainEntity: items.map((item) => ({
       "@type": "Question",
       name: item.q,
       acceptedAnswer: {
@@ -14,7 +14,7 @@ export function FaqJsonLd() {
         text: item.a,
       },
     })),
-    url: `${SITE_URL}/#faq`,
+    url: `${SITE_URL}${path}`,
   }
 
   return (

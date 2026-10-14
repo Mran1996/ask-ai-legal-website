@@ -47,7 +47,7 @@ export function Footer() {
         { label: links.process, href: "/#process" },
         { label: links.whyUs, href: "/#compare" },
         { label: links.contact, href: "/contact" },
-        { label: links.faq, href: "/#faq" },
+        { label: links.faq, href: "/faq" },
       ],
     },
     {
