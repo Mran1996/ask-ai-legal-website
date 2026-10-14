@@ -53,9 +53,6 @@ export function KnowWhatYouBuy() {
                 </li>
               ))}
             </ul>
-            <p className="px-5 pb-6 text-center font-display text-lg text-accent-light">
-              Keep your information, documents, and next steps in view.
-            </p>
           </article>
 
           <article data-reveal className="cine-card flex flex-col overflow-hidden">
