@@ -238,46 +238,6 @@ export const SITUATION_GUIDES: Record<string, SituationGuide> = {
     ],
     ctaLabel: "Request an installation consultation",
   },
-  immigration: {
-    slug: "immigration",
-    title: "Green cards & immigration",
-    intro:
-      "Visa applications, green card paperwork, responses to USCIS notices, and family-based petitions — the forms are long and the stakes are high. We install Ask AI Legal so you can work through the paperwork from home. Not a law firm; not legal advice.",
-    weHelpWith: [
-      "Responses to USCIS requests for evidence (RFE)",
-      "Family-based petition supporting documents and cover letters",
-      "Affidavits and declaration drafts for immigration filings",
-      "Document organization for adjustment-of-status packages",
-      "Written summaries of what each form is asking for",
-      "Renewal and extension paperwork preparation",
-    ],
-    commonQuestions: [
-      {
-        q: "Can you help with my green card application?",
-        a: "We install tools so you can prepare written documents and supporting paperwork based on your facts — petitions, affidavits, responses, and organized filing packages. You submit to USCIS yourself; we do not represent you before immigration authorities.",
-      },
-      {
-        q: "I received an RFE — can you help me respond?",
-        a: "Send the notice and any documents USCIS asked for. We explain what the RFE means in plain language and configure your setup so you can prepare written response materials from home before you file.",
-      },
-      {
-        q: "Is this the same as hiring an immigration lawyer?",
-        a: "No. We are not a law firm and do not provide legal advice or representation. Many people use their installed workspace to prepare materials and file on their own or bring them to a licensed professional.",
-      },
-      {
-        q: "Do you handle asylum or removal proceedings?",
-        a: "Tell us about your matter during the installation consultation — we'll tell you honestly whether Ask AI Legal is a good fit for it.",
-      },
-    ],
-    documentsExamples: [
-      "RFE response cover letter and exhibit index",
-      "Affidavit of support supporting documents",
-      "I-130 supporting declaration drafts",
-      "Written timeline of your immigration history",
-      "Plain-English summary of USCIS notices",
-    ],
-    ctaLabel: "Start your immigration setup",
-  },
 }
 
 export const HERO_CATEGORY_LINKS = [

@@ -12,7 +12,7 @@ import {
   SUPPORT_MAILTO,
 } from "@/lib/site-config"
 
-const TITLE = "Request an installation consultation"
+const TITLE = "Contact Ask AI Legal"
 const DESCRIPTION =
   "Request an Ask AI Legal installation consultation, or contact us about support or billing. Tell us how to reach you and we'll follow up by email."
 

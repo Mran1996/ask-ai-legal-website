@@ -16,7 +16,7 @@ import {
   SUPPORT_PERIOD_NOTE,
 } from "@/lib/site-config"
 
-const TITLE = "Ask AI Legal Pricing | $3,997 Purchase & $125 Maintenance"
+const TITLE = "Ask AI Legal Pricing | Private AI Legal Assistant"
 const DESCRIPTION =
   "Ask AI Legal is $3,997 one time: installation, personalized setup, agent setup, connections, Second Brain memory, training, and 30 days of support. Maintenance optional at $125/month."
 
