@@ -12,6 +12,7 @@ import {
   PostHogPageView,
   PostHogProvider,
 } from "@/components/analytics/posthog-provider"
+import { GoogleAnalytics } from "@/components/analytics/google-analytics"
 import { ConsentProvider } from "@/components/privacy/consent-provider"
 import { CookieConsentBanner } from "@/components/privacy/cookie-consent-banner"
 
@@ -25,6 +26,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
               <Suspense fallback={null}>
                 <PostHogPageView />
                 <MetaPixelPageView />
+                <GoogleAnalytics />
               </Suspense>
               {children}
               <ChatWidgetLoader />
