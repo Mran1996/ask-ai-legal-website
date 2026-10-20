@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next"
 import { SITE_URL } from "@/lib/site-config"
 import { listSituationSlugs } from "@/lib/situations/guides"
+import { GUIDES } from "@/lib/guides"
 
 /** Canonical public marketing pages only — no /pay, /book, /ops, or /api. */
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -13,6 +14,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/about", changeFrequency: "monthly" as const, priority: 0.6 },
     { path: "/contact", changeFrequency: "monthly" as const, priority: 0.6 },
     { path: "/faq", changeFrequency: "monthly" as const, priority: 0.6 },
+    { path: "/guides", changeFrequency: "weekly" as const, priority: 0.7 },
+    ...GUIDES.map((g) => ({
+      path: `/guides/${g.slug}`,
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    })),
     ...listSituationSlugs().map((slug) => ({
       path: `/situations/${slug}`,
       changeFrequency: "monthly" as const,
