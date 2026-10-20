@@ -7,7 +7,6 @@ import { StoryHero } from "@/components/cinematic/story-hero"
 import { DemoVideo } from "@/components/cinematic/demo-video"
 import { InstallStory } from "@/components/cinematic/install-story"
 import { PurchaseIncludes } from "@/components/cinematic/purchase-includes"
-import { KnowWhatYouBuy } from "@/components/cinematic/know-what-you-buy"
 import { Ownership } from "@/components/cinematic/ownership"
 import { SecondBrain } from "@/components/cinematic/second-brain"
 import { PrivacyFlow } from "@/components/cinematic/privacy-flow"
@@ -50,7 +49,6 @@ export default function Home() {
         <SecondBrain />
         <PrivacyFlow />
         <ToolsCompact />
-        <KnowWhatYouBuy />
         <HowItWorks />
         <Situations />
         <SourcesBand />
