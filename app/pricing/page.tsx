@@ -4,7 +4,6 @@ import { Check } from "lucide-react"
 import { CineNav } from "@/components/cinematic/nav"
 import { Footer } from "@/components/footer"
 import { NeonButton } from "@/components/neon-button"
-import { KnowWhatYouBuy } from "@/components/cinematic/know-what-you-buy"
 import {
   CONSULT_CTA_LABEL,
   CONSULT_HREF,
@@ -161,7 +160,6 @@ export default function PricingPage() {
           </div>
         </section>
 
-        <KnowWhatYouBuy />
 
         <section className="section-pad bg-cream">
           <div className="container-main max-w-4xl space-y-10">
