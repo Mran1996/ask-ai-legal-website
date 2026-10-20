@@ -48,6 +48,7 @@ export function Footer() {
         { label: links.whyUs, href: "/#compare" },
         { label: links.contact, href: "/contact" },
         { label: links.faq, href: "/faq" },
+        { label: "Guides", href: "/guides" },
       ],
     },
     {
