@@ -77,9 +77,9 @@ const standards = [
 ]
 
 export const metadata: Metadata = {
-  title: "About Us",
+  title: "About Ask AI Legal",
   description:
-    "Ask AI Legal installs a legal workspace on your computer: a $3,997 one-time purchase with setup and personal training, plus optional $125/month maintenance.",
+    "Ask AI Legal is a legal technology company that installs a private AI legal assistant on your computer for people handling their own court cases, nationwide. Not a law firm.",
   alternates: { canonical: "/about" },
 }
 

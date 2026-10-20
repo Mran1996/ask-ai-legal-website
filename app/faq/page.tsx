@@ -8,7 +8,7 @@ import { FaqJsonLd } from "@/lib/seo/faq-json-ld"
 import { ALL_FAQ, FAQ_CATEGORIES } from "@/lib/faq"
 import { CONSULT_CTA_LABEL, CONSULT_HREF, SITE_URL } from "@/lib/site-config"
 
-const TITLE = "Frequently asked questions"
+const TITLE = "AI Legal Assistant FAQ"
 const DESCRIPTION =
   "Answers about Ask AI Legal: what it is, the $3,997 purchase, installation and support, optional $125/month maintenance, privacy, and research connections."
 
