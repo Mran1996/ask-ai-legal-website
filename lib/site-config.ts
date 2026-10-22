@@ -8,6 +8,8 @@ export const META_FACEBOOK_PAGE_ID = "61585772484354"
 export const SOCIAL_LINKS = {
   instagram: "https://www.instagram.com/askailegal/",
   facebook: `https://www.facebook.com/profile.php?id=${META_FACEBOOK_PAGE_ID}`,
+  /** Opens the Page straight to its Reviews tab. */
+  facebookReviews: `https://www.facebook.com/profile.php?id=${META_FACEBOOK_PAGE_ID}&sk=reviews`,
 } as const
 
 export const SUPPORT_EMAIL = "support@askailegal.com"
