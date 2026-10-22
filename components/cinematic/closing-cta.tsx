@@ -4,7 +4,7 @@ import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import { Slot } from "./slot"
 import { Reveal } from "./reveal"
-import { CONSULT_CTA_LABEL, CONSULT_HREF, SITE_DISCLAIMER } from "@/lib/site-config"
+import { CONSULT_CTA_LABEL, CONSULT_HREF, GUARANTEE_HREF, SITE_DISCLAIMER } from "@/lib/site-config"
 
 export function ClosingCta() {
   return (
@@ -20,6 +20,11 @@ export function ClosingCta() {
           <p data-reveal className="cine-body mt-4 max-w-lg">
             We check your computer first, so you know it works before you pay. Plans start at $1,997, paid once.
             Optional maintenance is $125 a month.
+          </p>
+          <p data-reveal className="cine-body mt-3 max-w-lg">
+            <Link href={GUARANTEE_HREF} className="text-accent-light underline underline-offset-4 hover:text-cream">
+              Backed by our 100% money-back guarantee.
+            </Link>
           </p>
           <div data-reveal className="mt-6 flex flex-col gap-4 sm:flex-row">
             <Link href={CONSULT_HREF} className="cine-btn-gold">

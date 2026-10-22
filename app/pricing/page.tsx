@@ -1,12 +1,15 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { Check } from "lucide-react"
+import { Check, ShieldCheck } from "lucide-react"
 import { CineNav } from "@/components/cinematic/nav"
 import { Footer } from "@/components/footer"
 import { NeonButton } from "@/components/neon-button"
 import {
   CONSULT_CTA_LABEL,
   CONSULT_HREF,
+  GUARANTEE_HREF,
+  GUARANTEE_TEXT,
+  GUARANTEE_TITLE,
   MAINTENANCE_PRICE_USD,
   PRICING_NOTICE,
   PURCHASE_INCLUSIONS,
@@ -105,6 +108,16 @@ export default function PricingPage() {
               Your own installed legal workspace, personally set up for you. Purchase Ask AI Legal for $3,997,
               including installation, configuration, personal training, and initial support.
             </p>
+            <Link
+              href={GUARANTEE_HREF}
+              className="mt-8 flex max-w-2xl items-start gap-3 rounded-sm border border-gold/40 bg-white/5 p-5 transition-colors hover:border-gold"
+            >
+              <ShieldCheck className="mt-0.5 h-6 w-6 shrink-0 text-gold" aria-hidden />
+              <span>
+                <span className="block font-semibold text-white">{GUARANTEE_TITLE}</span>
+                <span className="mt-1 block text-sm leading-relaxed text-white/70">{GUARANTEE_TEXT}</span>
+              </span>
+            </Link>
             <div className="mt-10 flex flex-wrap items-center gap-4">
               <NeonButton href={CONSULT_HREF}>{CONSULT_CTA_LABEL}</NeonButton>
               <Link

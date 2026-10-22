@@ -12,6 +12,11 @@ export const SOCIAL_LINKS = {
   facebookReviews: `https://www.facebook.com/profile.php?id=${META_FACEBOOK_PAGE_ID}&sk=reviews`,
 } as const
 
+export const GUARANTEE_HREF = "/guarantee"
+export const GUARANTEE_TITLE = "100% money-back guarantee."
+export const GUARANTEE_TEXT =
+  "During your install, we test Ask AI Legal on your computer against our written checklist. If it doesn’t do what the checklist says, you get every dollar back. No hassle."
+
 export const SUPPORT_EMAIL = "support@askailegal.com"
 export const SUPPORT_MAILTO = `mailto:${SUPPORT_EMAIL}` as const
 
