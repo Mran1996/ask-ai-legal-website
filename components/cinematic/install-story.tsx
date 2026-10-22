@@ -56,23 +56,26 @@ export function InstallStory() {
         scrollTrigger: {
           trigger: root.current,
           start: "top top",
-          end: () => `+=${steps.length * 90}%`,
+          end: () => `+=${steps.length * 55}%`,
           pin: true,
           scrub: 0.6,
         },
       })
+      // Each step: change (0.8), then a reading pause (0.7) before the next one starts.
       steps.forEach((_, i) => {
         if (i === 0) return
-        tl.to(steps[i - 1], { autoAlpha: 0, y: -40, duration: 0.5 }, `s${i}`)
-          .to(images[i - 1], { autoAlpha: 0, scale: 1.1, rotate: -6, duration: 0.5 }, `s${i}`)
-          .to(steps[i], { autoAlpha: 1, y: 0, duration: 0.5 }, `s${i}+=0.3`)
-          .to(images[i], { autoAlpha: 1, scale: 1, rotate: 0, duration: 0.5 }, `s${i}+=0.3`)
+        const at = (i - 1) * 1.5 + 0.7
+        tl.to(steps[i - 1], { autoAlpha: 0, y: -40, duration: 0.5 }, at)
+          .to(images[i - 1], { autoAlpha: 0, scale: 1.1, rotate: -6, duration: 0.5 }, at)
+          .to(steps[i], { autoAlpha: 1, y: 0, duration: 0.5 }, at + 0.3)
+          .to(images[i], { autoAlpha: 1, scale: 1, rotate: 0, duration: 0.5 }, at + 0.3)
       })
+      tl.to({}, { duration: 0.7 }) // hold the last step
       // progress bar
       gsap.to("[data-progress]", {
         scaleX: 1,
         ease: "none",
-        scrollTrigger: { trigger: root.current, start: "top top", end: () => `+=${steps.length * 90}%`, scrub: true },
+        scrollTrigger: { trigger: root.current, start: "top top", end: () => `+=${steps.length * 55}%`, scrub: true },
       })
       ScrollTrigger.refresh()
     }, root)
@@ -100,7 +103,7 @@ export function InstallStory() {
                 data-step
                 className={staticLayout ? "relative" : i === 0 ? "relative" : "absolute inset-0 invisible opacity-0 pointer-events-none"}
               >
-                <p className="cine-label !text-cream/40">{s.n} / 04</p>
+                <p className="cine-label !text-cream/60">{s.n} / 04</p>
                 <h3 className="cine-h3 mt-3 text-cream">{s.title}</h3>
                 <p className="cine-body mt-4 max-w-md">{s.body}</p>
               </div>
@@ -110,7 +113,7 @@ export function InstallStory() {
           <div className="mt-10 h-px w-full max-w-md bg-cream/10">
             <div data-progress className="h-px origin-left scale-x-0 bg-accent" />
           </div>
-          <p className="cine-body mt-4 !text-sm !text-cream/40">
+          <p className="cine-body mt-4 !text-sm !text-cream/65">
             Afterwards: 30 days of installation support is included. Ongoing maintenance is optional at $125/month.
           </p>
         </div>

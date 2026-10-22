@@ -7,7 +7,7 @@ import { makeDocumentTexture } from "./document-texture"
 import * as THREE from "three"
 
 const COUNT_DESKTOP = 22
-const COUNT_MOBILE = 11
+const COUNT_MOBILE = 6
 const TOP = 5
 const BOTTOM = -5.5
 
