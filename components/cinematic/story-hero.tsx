@@ -29,7 +29,7 @@ const SCENES = [
   {
     img: "hero-desk.png",
     alt: "Laptop glowing on a kitchen table at night with legal documents rising from the screen — Ask AI Legal workspace installed at home",
-    label: "We install it on your computer. You run your own court papers from home.",
+    label: "",
     title: ["Represent yourself", "with a legal assistant on your own computer."],
     sub: "It reads your court papers, tracks your deadlines, and drafts documents for you to check. Your files are kept on your own computer.",
     pos: "70% center",
@@ -172,7 +172,9 @@ export function StoryHero() {
                   <BrandLockup href="/" className="justify-center" />
                 </div>
               )}
-              <p className={`cine-label cine-shadow ${i === 0 ? "mb-3 hidden sm:block sm:!text-xs sm:!tracking-[0.12em]" : "mb-6"}`}>{s.label}</p>
+              {s.label && (
+                <p className={`cine-label cine-shadow ${i === 0 ? "mb-3 hidden sm:block sm:!text-xs sm:!tracking-[0.12em]" : "mb-6"}`}>{s.label}</p>
+              )}
               {i === 0 ? (
                 <h1 className="cine-shadow font-display text-cream">
                   <span className="block text-[clamp(2.3rem,5.4vw,4.25rem)] font-semibold leading-[1.05] tracking-[-0.02em]">{s.title[0]}</span>{" "}
