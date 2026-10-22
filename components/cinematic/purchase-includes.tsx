@@ -16,19 +16,26 @@ export function PurchaseIncludes() {
             <span className="cine-serif text-accent-light">while you watch.</span>
           </h2>
           <div data-reveal className="mt-6">
-            <p className="font-display text-5xl font-semibold tracking-tight text-accent-light">$3,997</p>
+            <p className="font-mono text-xs uppercase tracking-widest text-cream/60">Plans from</p>
+            <p className="mt-1 font-display text-5xl font-semibold tracking-tight text-accent-light">$1,997</p>
             <p className="mt-2 font-mono text-xs uppercase tracking-widest text-cream/60">One-time purchase</p>
             <p className="mt-4 font-display text-xl text-cream">Optional maintenance: $125/month</p>
             <p className="mt-3 text-sm text-cream/60">{THIRD_PARTY_COSTS_NOTE}</p>
           </div>
-          <div data-reveal className="mt-6">
+          <div data-reveal className="mt-6 flex flex-col gap-4 sm:flex-row">
             <Link href={CONSULT_HREF} className="cine-btn-gold">
               {CONSULT_CTA_LABEL} <ArrowRight className="h-4 w-4" aria-hidden />
+            </Link>
+            <Link href="/plans" className="cine-btn-ghost">
+              Compare plans
             </Link>
           </div>
         </Reveal>
 
         <Reveal stagger={0.05}>
+          <p data-reveal className="cine-label mb-3">
+            In the Complete plan
+          </p>
           <ul className="grid gap-3 sm:grid-cols-2">
             {PURCHASE_INCLUSIONS.map((item) => (
               <li key={item} data-reveal className="cine-card flex items-start gap-3 px-4 py-3">
