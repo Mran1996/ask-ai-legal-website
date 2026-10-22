@@ -73,7 +73,7 @@ const DETAILS_LINE = "We’ll go over the details in your consultation."
 const sections = [
   {
     title: "Your costs, clearly explained.",
-    body: "The one-time purchase is $3,997. With 12 months of optional maintenance, the first-year total is $5,497 before applicable taxes and separate third-party charges — no 12-month commitment required. Third-party AI usage and paid services are billed separately.",
+    body: "The one-time purchase is $3,997. Optional maintenance is $125 a month, with no long-term commitment. Third-party usage and paid services are billed separately.",
   },
   {
     title: "What happens without maintenance?",
