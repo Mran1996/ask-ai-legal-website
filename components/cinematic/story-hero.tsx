@@ -8,7 +8,7 @@ import { BrandLockup } from "@/components/brand-lockup"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { prefersReducedMotion } from "./smooth-scroll"
-import { CONSULT_CTA_LABEL, CONSULT_HREF, THIRD_PARTY_COSTS_NOTE } from "@/lib/site-config"
+import { CONSULT_CTA_LABEL, CONSULT_HREF } from "@/lib/site-config"
 import { DEMO_VIDEO_READY } from "@/lib/demo-video"
 
 gsap.registerPlugin(ScrollTrigger)
@@ -189,14 +189,6 @@ export function StoryHero() {
               </p>
               {"intro" in s && s.intro && (
                 <>
-                  <div className="mt-4 flex flex-col items-center gap-1 sm:flex-row sm:gap-4">
-                    <p className="cine-shadow font-display text-lg font-semibold text-accent-light sm:text-xl">$3,997 once. Yours to keep.</p>
-                    <span className="hidden text-cream/40 sm:inline" aria-hidden>
-                      ·
-                    </span>
-                    <p className="cine-shadow font-display text-base text-cream sm:text-xl">Maintenance is optional at $125 a month.</p>
-                  </div>
-                  <p className="cine-shadow mx-auto mt-2 max-w-xl text-xs leading-relaxed text-cream/65 sm:text-sm">{THIRD_PARTY_COSTS_NOTE}</p>
                   <ul className="mt-5 hidden flex-wrap justify-center gap-2 sm:flex" aria-label="Matters people use Ask AI Legal for">
                     {MATTERS.map((m) => (
                       <li key={m.href}>
