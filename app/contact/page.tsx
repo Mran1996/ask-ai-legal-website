@@ -107,6 +107,22 @@ export default function ContactPage() {
                       </a>
                     </dd>
                   </div>
+
+                  <div>
+                    <dt className="text-xs font-bold uppercase tracking-[0.15em] text-gold-dark">
+                      Already a customer?
+                    </dt>
+                    <dd className="mt-1 text-sm leading-relaxed">
+                      <a
+                        className="text-navy underline underline-offset-2 hover:text-gold-dark"
+                        href={SOCIAL_LINKS.facebookReviews}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Leave us a review on Facebook
+                      </a>
+                    </dd>
+                  </div>
                 </dl>
 
                 <div className="mt-8 flex items-start gap-3 rounded-sm border border-navy/10 bg-white px-4 py-4">

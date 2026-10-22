@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { Instagram, Facebook } from "lucide-react"
+import { Instagram, Facebook, Star } from "lucide-react"
 import { BrandMark } from "@/components/brand-mark"
 import { useLanguage } from "@/components/language-provider"
 import { useConsent } from "@/components/privacy/consent-provider"
@@ -144,6 +144,17 @@ export function Footer() {
                   </a>
                 </li>
               ))}
+              <li>
+                <a
+                  href={SOCIAL_LINKS.facebookReviews}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-sm transition-colors hover:text-gold"
+                >
+                  <Star className="h-4 w-4 shrink-0" aria-hidden />
+                  Leave us a review
+                </a>
+              </li>
             </ul>
           </div>
           </div>
