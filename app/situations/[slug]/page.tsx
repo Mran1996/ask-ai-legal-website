@@ -116,7 +116,7 @@ export default async function SituationGuidePage({ params }: Props) {
               <div className="mt-8 flex flex-wrap items-center gap-4">
                 <SituationCta label={guide.ctaLabel} />
                 <Link
-                  href="/pricing"
+                  href="/plans"
                   className="text-sm font-semibold text-gold-dark underline-offset-2 hover:underline"
                 >
                   See pricing

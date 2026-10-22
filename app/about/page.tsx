@@ -194,7 +194,7 @@ export default function AboutPage() {
               </NeonButton>
               <p className="mt-4 text-xs text-gray-500">
                 Or{" "}
-                <Link href="/pricing" className="text-gold-dark underline underline-offset-2">
+                <Link href="/plans" className="text-gold-dark underline underline-offset-2">
                   see pricing
                 </Link>
                 .

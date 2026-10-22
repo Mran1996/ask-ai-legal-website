@@ -217,7 +217,7 @@ export function StoryHero() {
                         Watch the demo
                       </Link>
                     ) : (
-                      <Link href="/pricing" className="cine-btn-ghost w-full sm:w-auto">
+                      <Link href="/plans" className="cine-btn-ghost w-full sm:w-auto">
                         See pricing
                       </Link>
                     )}
@@ -229,7 +229,7 @@ export function StoryHero() {
                   <Link href={CONSULT_HREF} className="cine-btn-gold">
                     {CONSULT_CTA_LABEL} <ArrowRight className="h-4 w-4" aria-hidden />
                   </Link>
-                  <Link href="/pricing" className="cine-btn-ghost">
+                  <Link href="/plans" className="cine-btn-ghost">
                     See pricing
                   </Link>
                 </div>

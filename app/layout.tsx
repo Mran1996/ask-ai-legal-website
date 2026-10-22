@@ -82,7 +82,7 @@ const organizationJsonLd = {
   description: DESCRIPTION,
   url: SITE_URL,
   email: SUPPORT_EMAIL,
-  priceRange: "$3,997 one-time purchase; optional $125/month maintenance",
+  priceRange: "$1,997 to $3,997 one-time purchase; optional $125/month maintenance",
   areaServed: {
     "@type": "Country",
     name: "United States",
