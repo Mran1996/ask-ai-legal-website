@@ -99,23 +99,26 @@ export function StoryHero() {
         scrollTrigger: {
           trigger: root.current,
           start: "top top",
-          end: () => `+=${SCENES.length * 100}%`,
+          // Each scene: a short change, then a pause so the words can be read (about 2.5 screens in total).
+          end: () => `+=${SCENES.length * 42}%`,
           pin: true,
           scrub: 0.8,
         },
       })
+      const STEP = 1.6 // 1 unit of change + 0.6 of reading pause per scene
       SCENES.forEach((_, i) => {
         if (i === 0) return
-        const at = `s${i}`
+        const at = (i - 1) * STEP + 0.6
         tl.to(scenes[i - 1], { autoAlpha: 0, scale: 1.12, duration: 1 }, at)
           .to(scenes[i], { autoAlpha: 1, scale: 1, duration: 1 }, at)
           .to(copies[i - 1], { autoAlpha: 0, y: -40, duration: 0.5 }, at)
-          .set(copies[i - 1], { pointerEvents: "none" }, `${at}+=0.45`)
-          .to(copies[i], { autoAlpha: 1, y: 0, duration: 0.6 }, `${at}+=0.4`)
-          .set(copies[i], { pointerEvents: "auto" }, `${at}+=0.45`)
+          .set(copies[i - 1], { pointerEvents: "none" }, at + 0.45)
+          .to(copies[i], { autoAlpha: 1, y: 0, duration: 0.45 }, at + 0.35)
+          .set(copies[i], { pointerEvents: "auto" }, at + 0.45)
           .to("[data-dot]", { backgroundColor: "rgba(250,249,246,0.25)", duration: 0.1 }, at)
           .to(`[data-dot="${i}"]`, { backgroundColor: "#FBB034", duration: 0.1 }, at)
       })
+      tl.to({}, { duration: 0.6 }) // hold the last scene before the page moves on
       ScrollTrigger.refresh()
     }, root)
     return () => ctx.revert()
@@ -151,7 +154,7 @@ export function StoryHero() {
       {/* Desktop: side + bottom vignette behind left-aligned copy. */}
       <div className="cine-vignette absolute inset-0 hidden md:block" />
       <div className="absolute inset-x-0 bottom-0 hidden h-[65%] bg-gradient-to-t from-ground via-ground/55 to-transparent md:block" />
-      <div className="absolute inset-y-0 left-0 hidden w-[60%] bg-gradient-to-r from-ground/80 to-transparent md:block" />
+      <div className="absolute inset-y-0 left-0 hidden w-[62%] bg-gradient-to-r from-ground/90 via-ground/55 to-transparent md:block" />
 
       <FallingPapers />
 
@@ -169,11 +172,11 @@ export function StoryHero() {
                   <BrandLockup href="/" className="justify-center" />
                 </div>
               )}
-              <p className={`cine-label cine-shadow ${i === 0 ? "mb-3 !text-[10px] !leading-relaxed !tracking-[0.06em] sm:!text-xs sm:!tracking-[0.12em]" : "mb-6"}`}>{s.label}</p>
+              <p className={`cine-label cine-shadow ${i === 0 ? "mb-3 hidden sm:block sm:!text-xs sm:!tracking-[0.12em]" : "mb-6"}`}>{s.label}</p>
               {i === 0 ? (
                 <h1 className="cine-shadow font-display text-cream">
-                  <span className="block text-[clamp(1.9rem,5.4vw,4.25rem)] font-semibold leading-[1.05] tracking-[-0.02em]">{s.title[0]}</span>{" "}
-                  <span className="cine-serif block text-[clamp(1.8rem,5vw,4rem)] leading-[1.05] text-accent-light">{s.title[1]}</span>
+                  <span className="block text-[clamp(2.3rem,5.4vw,4.25rem)] font-semibold leading-[1.05] tracking-[-0.02em]">{s.title[0]}</span>{" "}
+                  <span className="cine-serif block text-[clamp(2.15rem,5vw,4rem)] leading-[1.05] text-accent-light">{s.title[1]}</span>
                 </h1>
               ) : (
                 <h2 className="cine-h1 cine-shadow text-cream">
@@ -181,7 +184,7 @@ export function StoryHero() {
                   <span className="cine-serif block text-accent-light">{s.title[1]}</span>
                 </h2>
               )}
-              <p className={`cine-body cine-shadow max-w-2xl !text-cream/85 ${i === 0 ? "mx-auto mt-4 !text-[15px] !leading-relaxed sm:!text-lg" : "mt-8"}`}>
+              <p className={`cine-body cine-shadow max-w-2xl !text-cream ${i === 0 ? "mx-auto mt-4 !text-[15px] !leading-relaxed sm:!text-lg" : "mt-6 rounded-xl bg-ground/55 px-4 py-3 backdrop-blur-[2px] sm:bg-transparent sm:px-0 sm:py-0 sm:backdrop-blur-0"}`}>
                 {s.sub}
               </p>
               {"intro" in s && s.intro && (
