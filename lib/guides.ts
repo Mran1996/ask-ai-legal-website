@@ -253,6 +253,252 @@ export const GUIDES: Guide[] = [
     ],
     updated: "2026-10-19",
   },
+  {
+    slug: "how-to-answer-a-summons",
+    title: "How to Answer a Summons Without a Lawyer",
+    seoTitle: "How to Answer a Summons Without a Lawyer",
+    description:
+      "Got a summons and complaint? How to write and file an answer on your own: responding to each paragraph, defenses, filing, and serving the other side.",
+    intro:
+      "A summons tells you a case has been filed against you. The complaint that comes with it says what the other side wants. Your answer is the paper that tells the court your side. Filing it on time keeps you in the case.",
+    sections: [
+      {
+        heading: "1. Find your deadline to answer",
+        paragraphs: [
+          "The summons usually says how long you have to respond. The exact time depends on your state, your court, and how you were served. Put the date on your calendar today and work backward from it.",
+        ],
+      },
+      {
+        heading: "2. Check whether your court has an answer form",
+        paragraphs: [
+          "Many courts have a fill-in form for answers, especially for debt, eviction, and small claims cases. Some courts require their form. Check the court's website or self-help center before you write your own.",
+        ],
+      },
+      {
+        heading: "3. Respond to every numbered paragraph",
+        paragraphs: [
+          "Complaints are written in numbered paragraphs. Your answer goes through them in order. For each one, you usually say one of three things.",
+        ],
+        bullets: [
+          "Admit: the statement is true",
+          "Deny: the statement is false",
+          "Without enough information to admit or deny, which courts usually treat as a denial",
+        ],
+      },
+      {
+        heading: "4. List your defenses",
+        paragraphs: [
+          "Defenses are reasons the other side should lose even if some facts are true. Examples are that the deadline to sue has passed, or that the debt was already paid. Some defenses are lost if you leave them out of your answer, so read your court's rules on what to include.",
+        ],
+      },
+      {
+        heading: "5. File it and serve a copy",
+        bullets: [
+          "Sign the answer and make copies",
+          "File the original with the court clerk and pay the filing fee, or ask for a fee waiver if you qualify",
+          "Send a copy to the other side or their lawyer, the way your court's rules allow",
+          "File proof that you served it",
+        ],
+      },
+      {
+        heading: "Where Ask AI Legal fits",
+        paragraphs: [
+          "Ask AI Legal reads the complaint, lists every numbered paragraph, and puts your deadline on a calendar. It drafts an answer for you to review and checks each citation against its source. You decide what to admit, what to deny, and what to file.",
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: "What happens if I don't answer a summons?",
+        a: "The other side can usually ask the court for a default judgment, which means they may win without you being heard. If your deadline has passed, check your court's rules right away and consider talking to a licensed attorney.",
+      },
+      {
+        q: "Is an answer the same as a motion to dismiss?",
+        a: "No. An answer responds to the facts in the complaint. A motion to dismiss asks the court to end the case for a legal reason. Some people file a motion first, and court rules control the timing.",
+      },
+    ],
+    updated: "2026-10-22",
+  },
+  {
+    slug: "file-a-motion-without-a-lawyer",
+    title: "How to File a Motion Without a Lawyer",
+    seoTitle: "How to File a Motion Without a Lawyer (Pro Se Guide)",
+    description:
+      "A plain-English guide to filing a motion on your own: what a motion is, the parts it needs, setting a hearing, filing, and serving the other side.",
+    intro:
+      "A motion is a written request asking the judge to do something. It might ask for more time, ask the judge to order the other side to hand over documents, or ask the court to change an order. Courts expect motions to follow a set format.",
+    sections: [
+      {
+        heading: "The parts of a motion",
+        bullets: [
+          "The caption: court name, case name, case number, and document title",
+          "What you are asking for, stated in one or two sentences",
+          "The facts, told in order and backed by documents",
+          "The rule or law that allows the court to grant it",
+          "A sworn statement, called a declaration or affidavit, if the court needs facts proved",
+          "A proposed order the judge can sign, if your court requires one",
+        ],
+      },
+      {
+        heading: "Check your court's rules first",
+        paragraphs: [
+          "Courts set page limits, font size, margins, and how far ahead you must file before a hearing. Many local rules also say how to schedule the hearing. Some courts have official motion forms for common requests. Read these rules before you start writing.",
+        ],
+      },
+      {
+        heading: "Set the hearing",
+        paragraphs: [
+          "Most motions are decided at a hearing, or on the papers by a set date. Your court's rules or the clerk's office explain how to get a date. Write the date and the filing deadline that comes with it on your calendar.",
+        ],
+      },
+      {
+        heading: "File and serve",
+        bullets: [
+          "File the motion and supporting papers with the clerk",
+          "Serve copies on every other party, the way your court's rules allow",
+          "File proof of service",
+          "Watch for the other side's response, and check whether you may file a reply",
+        ],
+      },
+      {
+        heading: "Where Ask AI Legal fits",
+        paragraphs: [
+          "Ask AI Legal drafts the motion, the declaration, and the proposed order from your case files. It formats the caption, marks any citation it cannot verify, and puts the hearing and filing dates on your calendar. You review every page before anything is filed.",
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: "Do I have to go to a hearing for my motion?",
+        a: "It depends on the court and the type of motion. Some are decided at a hearing and some on the papers alone. Your court's rules or the clerk can tell you which applies.",
+      },
+      {
+        q: "Can I file a motion if I am representing myself?",
+        a: "Yes. People who represent themselves can file motions. Courts generally expect them to follow the same rules lawyers follow.",
+      },
+    ],
+    updated: "2026-10-22",
+  },
+  {
+    slug: "respond-to-an-eviction-notice",
+    title: "How to Respond to an Eviction Notice",
+    seoTitle: "How to Respond to an Eviction Notice (Tenant Guide)",
+    description:
+      "Got an eviction notice or eviction papers? What the notice means, how it differs from a court case, deadlines, and how to file a response on time.",
+    intro:
+      "An eviction notice and an eviction lawsuit are two different things. A notice is a letter from the landlord. A lawsuit is a case filed in court. Knowing which one you have tells you what to do next.",
+    sections: [
+      {
+        heading: "1. Figure out which paper you have",
+        bullets: [
+          "A notice to pay rent, fix a problem, or move out, sent by the landlord",
+          "A summons and complaint, which means a court case has been filed",
+          "A court order or writ, which means the court has already ruled",
+        ],
+      },
+      {
+        heading: "2. Know who can make you leave",
+        paragraphs: [
+          "In most states, a landlord has to go through the court to evict a tenant. Changing the locks, removing your belongings, or shutting off utilities without a court order is generally not allowed. Your state's landlord-tenant law controls.",
+        ],
+      },
+      {
+        heading: "3. Find your deadline",
+        paragraphs: [
+          "Eviction cases move fast. The time to respond is often much shorter than in other cases. Read the papers for a hearing date or response deadline and put it on your calendar today.",
+        ],
+      },
+      {
+        heading: "4. File your response",
+        paragraphs: [
+          "Many courts have an official eviction answer form. Use it if your court has one. List your reasons, such as rent that was paid, repairs the landlord did not make, or a notice that was not given correctly. File it with the clerk and serve the landlord.",
+        ],
+      },
+      {
+        heading: "5. Bring proof to the hearing",
+        bullets: [
+          "Your lease",
+          "Rent receipts, bank records, or money order stubs",
+          "Photos of the unit and any repair problems",
+          "Texts, emails, and letters with the landlord",
+        ],
+      },
+      {
+        heading: "Where Ask AI Legal fits",
+        paragraphs: [
+          "Ask AI Legal reads the notice or complaint, finds the dates, and builds a timeline from your lease, receipts, and messages. It drafts your response for you to review and lists the documents to bring to court. Many areas also have free tenant legal aid, and it is worth calling them early.",
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: "Does an eviction notice mean I have to move out right away?",
+        a: "Usually not. A notice is the landlord's first step. In most states only a court can order you to leave, after a case is filed and decided. Read your notice carefully and check your state's rules.",
+      },
+      {
+        q: "What if I miss my eviction hearing?",
+        a: "The court may rule for the landlord without hearing from you. If you missed it, contact the court clerk right away and ask what options your court allows.",
+      },
+    ],
+    updated: "2026-10-22",
+  },
+  {
+    slug: "proof-of-service",
+    title: "What Is Proof of Service and How Do You File It?",
+    seoTitle: "Proof of Service: What It Is and How to File It",
+    description:
+      "Proof of service shows the court the other side got your papers. Who can serve, the common ways to serve, and how to fill out and file a proof of service.",
+    intro:
+      "Every paper you file usually has to be delivered to the other side too. Proof of service is the form that tells the court you did it, when, and how. Without it, a judge may not act on your papers.",
+    sections: [
+      {
+        heading: "Who can serve papers",
+        paragraphs: [
+          "Rules differ by state and by type of paper. For the papers that start a case, many courts require service by an adult who is not a party, a sheriff, or a process server. For later papers, many courts allow service by mail or electronically. Check your court's rules.",
+        ],
+      },
+      {
+        heading: "Common ways to serve",
+        bullets: [
+          "Handing the papers to the person",
+          "Mailing them to the person's address or their lawyer's address",
+          "Sending them by email or through the court's e-filing system, where the rules allow it",
+        ],
+      },
+      {
+        heading: "What the proof of service says",
+        bullets: [
+          "The name of each document served",
+          "Who received it, and at what address or email",
+          "The date and method of service",
+          "The name and signature of the person who served it, often under penalty of perjury",
+        ],
+      },
+      {
+        heading: "File it with the court",
+        paragraphs: [
+          "File the proof of service with the clerk, usually soon after service. Many courts have an official form for it. Keep a copy with your case papers.",
+        ],
+      },
+      {
+        heading: "Where Ask AI Legal fits",
+        paragraphs: [
+          "Ask AI Legal fills in the proof of service from your case details, lists every document you served, and keeps a record of who got what and when. You check it, sign it, and file it.",
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: "Can I serve the papers myself?",
+        a: "For papers that start a case, many courts do not allow a party to serve them. For later papers, such as motions, parties often can serve by mail or email. Your court's rules decide.",
+      },
+      {
+        q: "What if the other side has a lawyer?",
+        a: "Once the other side has a lawyer in the case, papers usually go to the lawyer instead of the person. Check the lawyer's address on their filings.",
+      },
+    ],
+    updated: "2026-10-22",
+  },
 ]
 
 export function getGuide(slug: string): Guide | null {

@@ -12,8 +12,8 @@ export function PurchaseIncludes() {
       <div className="cine-container grid gap-8 lg:grid-cols-[1fr_1.4fr] lg:items-start">
         <Reveal>
           <h2 data-reveal className="cine-h2 text-cream">
-            Personally installed.{" "}
-            <span className="cine-serif text-accent-light">Connected. Set up with you.</span>
+            A real person installs it{" "}
+            <span className="cine-serif text-accent-light">while you watch.</span>
           </h2>
           <div data-reveal className="mt-6">
             <p className="font-display text-5xl font-semibold tracking-tight text-accent-light">$3,997</p>

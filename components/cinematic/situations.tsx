@@ -20,8 +20,8 @@ export function Situations() {
         <Reveal>
           <p data-reveal className="cine-label mb-3">What people use it for</p>
           <h2 data-reveal className="cine-h2 text-cream">
-            Common matters.
-            <span className="cine-serif text-accent-light"> Ask us about yours.</span>
+            Divorce, custody, eviction,
+            <span className="cine-serif text-accent-light"> small claims, and more.</span>
           </h2>
           <p data-reveal className="cine-body mt-4 max-w-2xl">
             Examples only. Available features and sources depend on your installation and your court. We confirm what

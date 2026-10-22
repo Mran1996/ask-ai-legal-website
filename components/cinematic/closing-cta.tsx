@@ -13,13 +13,13 @@ export function ClosingCta() {
       <div className="cine-container relative grid items-center gap-12 md:grid-cols-[1.2fr_1fr]">
         <Reveal>
           <h2 data-reveal className="cine-h2 text-cream">
-            Ready to set up{" "}
+            Book your{" "}
             <br />
-            <span className="cine-serif text-accent-light">your legal workspace?</span>
+            <span className="cine-serif text-accent-light">install call.</span>
           </h2>
           <p data-reveal className="cine-body mt-4 max-w-lg">
-            Book a consultation to confirm your computer requirements, review the included features, and discuss
-            installation. The one-time purchase is $3,997, with optional maintenance at $125 per month.
+            We check your computer first, so you know it works before you pay. The one-time purchase is $3,997,
+            with optional maintenance at $125 a month.
           </p>
           <div data-reveal className="mt-6 flex flex-col gap-4 sm:flex-row">
             <Link href={CONSULT_HREF} className="cine-btn-gold">

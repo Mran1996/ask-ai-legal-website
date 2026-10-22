@@ -16,6 +16,7 @@ import { Situations } from "@/components/cinematic/situations"
 import { SourcesBand } from "@/components/cinematic/sources-band"
 import { Faq } from "@/components/cinematic/faq"
 import { ClosingCta } from "@/components/cinematic/closing-cta"
+import { FounderNote } from "@/components/cinematic/founder-note"
 import { SmoothScroll } from "@/components/cinematic/smooth-scroll"
 import { SITE_SEO_DESCRIPTION, SITE_SEO_TITLE, SITE_URL } from "@/lib/site-config"
 
@@ -53,6 +54,7 @@ export default function Home() {
         <Situations />
         <SourcesBand />
         <Faq />
+        <FounderNote />
         <ClosingCta />
       </main>
       <Footer />
