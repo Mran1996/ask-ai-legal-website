@@ -187,7 +187,7 @@ export function StoryHero() {
                 </h2>
               )}
               {i === 0 && (
-                <p className="cine-shadow mt-3 font-display text-lg font-semibold uppercase tracking-[0.14em] text-accent-light sm:text-xl">
+                <p className="cine-shadow mt-3 font-display text-lg font-semibold uppercase tracking-[0.14em] text-white sm:text-xl">
                   The best in the industry
                 </p>
               )}
