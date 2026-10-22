@@ -43,6 +43,7 @@ export function Footer() {
       title: columns.company,
       links: [
         { label: links.about, href: "/about" },
+        { label: "Our story", href: "/our-story" },
         { label: links.pricing, href: "/pricing" },
         { label: links.process, href: "/#process" },
         { label: links.whyUs, href: "/#compare" },
