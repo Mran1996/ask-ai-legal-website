@@ -11,7 +11,7 @@ const LINKS = [
   { href: "/#install", label: "The install" },
   { href: "/services", label: "Features" },
   { href: "/#process", label: "How it works" },
-  { href: "/pricing", label: "Pricing" },
+  { href: "/plans", label: "Pricing" },
   { href: "/faq", label: "FAQ" },
   { href: "/about", label: "About" },
   { href: "/our-story", label: "Our story" },

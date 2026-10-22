@@ -10,8 +10,8 @@ const WHAT_IS: FaqItem = {
 }
 
 const INCLUDES: FaqItem = {
-  q: "What does the $3,997 purchase include?",
-  a: "A one-time purchase of $3,997 includes a computer compatibility check and installation, guided setup around your issues and goals, personalized workspace configuration, agent setup, supported API and plugin connections, Second Brain memory setup, personal training, a written getting-started guide, and 30 days of installation support. Third-party AI usage and paid services are billed separately.",
+  q: "What do the plans include?",
+  a: "Plans start at $1,997, paid once. Both plans include a live install on your computer. The Complete plan includes a computer compatibility check and installation, guided setup around your issues and goals, personalized workspace configuration, agent setup, supported API and plugin connections, Second Brain memory setup, personal training, a written getting-started guide, and 30 days of installation support. See the plans page to compare both. Third-party usage and paid services are billed separately.",
 }
 
 const MAINTENANCE_OPTIONAL: FaqItem = {
