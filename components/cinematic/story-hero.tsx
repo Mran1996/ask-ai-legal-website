@@ -186,6 +186,11 @@ export function StoryHero() {
                   <span className="cine-serif block text-accent-light">{s.title[1]}</span>
                 </h2>
               )}
+              {i === 0 && (
+                <p className="cine-shadow mt-3 font-display text-lg font-semibold uppercase tracking-[0.14em] text-accent-light sm:text-xl">
+                  The best in the industry
+                </p>
+              )}
               <p className={`cine-body cine-shadow max-w-2xl !text-cream ${i === 0 ? "mx-auto mt-4 !text-[15px] !leading-relaxed sm:!text-lg" : "mt-6 rounded-xl bg-ground/55 px-4 py-3 backdrop-blur-[2px] sm:bg-transparent sm:px-0 sm:py-0 sm:backdrop-blur-0"}`}>
                 {s.sub}
               </p>
