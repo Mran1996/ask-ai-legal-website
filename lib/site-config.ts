@@ -2,7 +2,7 @@
 export const SITE_URL = "https://askailegal.com"
 
 /** Meta / Facebook Page ID — canonical ad-eligible page ("Ask AI Legal"). */
-export const META_FACEBOOK_PAGE_ID = "971753329348819"
+export const META_FACEBOOK_PAGE_ID = "61585772484354"
 
 /** Site-wide links — canonical ask-ai-legal-website app */
 export const SOCIAL_LINKS = {
