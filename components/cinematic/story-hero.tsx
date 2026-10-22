@@ -8,7 +8,7 @@ import { BrandLockup } from "@/components/brand-lockup"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { prefersReducedMotion } from "./smooth-scroll"
-import { CONSULT_CTA_LABEL, CONSULT_HREF, THIRD_PARTY_COSTS_NOTE } from "@/lib/site-config"
+import { CONSULT_CTA_LABEL, CONSULT_HREF } from "@/lib/site-config"
 import { DEMO_VIDEO_READY } from "@/lib/demo-video"
 
 gsap.registerPlugin(ScrollTrigger)
@@ -29,9 +29,9 @@ const SCENES = [
   {
     img: "hero-desk.png",
     alt: "Laptop glowing on a kitchen table at night with legal documents rising from the screen — Ask AI Legal workspace installed at home",
-    label: "We do the install. Ask AI Legal does the heavy lifting. You make the decisions.",
-    title: ["Your legal workspace.", "Installed on your computer."],
-    sub: "Ask AI Legal is installed on your computer and configured around your issues and goals. Bring your information together, generate personalized documents, and build on what your Second Brain remembers.",
+    label: "",
+    title: ["Represent yourself", "with a legal assistant on your own computer."],
+    sub: "It reads your court papers, tracks your deadlines, and drafts documents for you to check. Your files are kept on your own computer.",
     pos: "70% center",
     brand: true,
     intro: true,
@@ -42,7 +42,7 @@ const SCENES = [
     alt: "Woman at her home desk watching her legal workspace being installed on her laptop",
     label: "02 · Installation",
     title: ["We do the", "install."],
-    sub: "We check your computer, then install and configure your workspace with you — and explain each step as we go.",
+    sub: "We connect to your computer, set everything up while you watch, and explain each step.",
     pos: "60% center",
   },
   {
@@ -50,8 +50,8 @@ const SCENES = [
     imgMobile: "story-03-drafting-m.png",
     alt: "Self-represented woman drafting court documents from home on her laptop",
     label: "03 · Your pace",
-    title: ["You do the", "work."],
-    sub: "Organize documents, research legal sources, and prepare drafts for your review — from home, at your own pace.",
+    title: ["Work from your", "kitchen table."],
+    sub: "Sort your papers, look up the law, and get drafts ready to review. No office visits.",
     pos: "60% center",
   },
   {
@@ -59,15 +59,15 @@ const SCENES = [
     alt: "Woman leaving home with her organized legal binder, prepared for court",
     label: "04 · Organized",
     title: ["Your papers,", "in order."],
-    sub: "Your documents organized. Your drafts ready for you to review, check, and finish.",
+    sub: "Every document in one place. Every draft ready for you to check and finish.",
     pos: "55% center",
   },
   {
     img: "story-05-courthouse.png",
     alt: "Woman walking up courthouse steps carrying her own case binder",
     label: "05 · Your matter",
-    title: ["Your matter.", "Your voice."],
-    sub: "You decide what to file and what to say. Ask AI Legal helps you organize and prepare — it does not represent you.",
+    title: ["You stay", "in charge."],
+    sub: "You decide what gets filed and what it says. Ask AI Legal prepares the paperwork. You sign it.",
     pos: "40% center",
   },
   {
@@ -75,8 +75,8 @@ const SCENES = [
     imgMobile: "story-06-home-m.png",
     alt: "Woman relaxed at her kitchen table after handling her legal matter from home",
     label: "06 · After",
-    title: ["From home.", "On your terms."],
-    sub: "Your information. Your workspace. Built around you.",
+    title: ["Court papers,", "handled from home."],
+    sub: "No appointments. No hourly bills.",
     pos: "60% center",
     cta: true,
   },
@@ -172,7 +172,9 @@ export function StoryHero() {
                   <BrandLockup href="/" className="justify-center" />
                 </div>
               )}
-              <p className={`cine-label cine-shadow ${i === 0 ? "mb-3 hidden sm:block sm:!text-xs sm:!tracking-[0.12em]" : "mb-6"}`}>{s.label}</p>
+              {s.label && (
+                <p className={`cine-label cine-shadow ${i === 0 ? "mb-3 hidden sm:block sm:!text-xs sm:!tracking-[0.12em]" : "mb-6"}`}>{s.label}</p>
+              )}
               {i === 0 ? (
                 <h1 className="cine-shadow font-display text-cream">
                   <span className="block text-[clamp(2.3rem,5.4vw,4.25rem)] font-semibold leading-[1.05] tracking-[-0.02em]">{s.title[0]}</span>{" "}
@@ -184,19 +186,16 @@ export function StoryHero() {
                   <span className="cine-serif block text-accent-light">{s.title[1]}</span>
                 </h2>
               )}
+              {i === 0 && (
+                <p className="cine-shadow mt-3 font-display text-lg font-semibold uppercase tracking-[0.14em] text-white sm:text-xl">
+                  The best in the industry
+                </p>
+              )}
               <p className={`cine-body cine-shadow max-w-2xl !text-cream ${i === 0 ? "mx-auto mt-4 !text-[15px] !leading-relaxed sm:!text-lg" : "mt-6 rounded-xl bg-ground/55 px-4 py-3 backdrop-blur-[2px] sm:bg-transparent sm:px-0 sm:py-0 sm:backdrop-blur-0"}`}>
                 {s.sub}
               </p>
               {"intro" in s && s.intro && (
                 <>
-                  <div className="mt-4 flex flex-col items-center gap-1 sm:flex-row sm:gap-4">
-                    <p className="cine-shadow font-display text-lg font-semibold text-accent-light sm:text-xl">$3,997 one-time purchase</p>
-                    <span className="hidden text-cream/40 sm:inline" aria-hidden>
-                      ·
-                    </span>
-                    <p className="cine-shadow font-display text-base text-cream sm:text-xl">Optional maintenance: $125/month.</p>
-                  </div>
-                  <p className="cine-shadow mx-auto mt-2 max-w-xl text-xs leading-relaxed text-cream/65 sm:text-sm">{THIRD_PARTY_COSTS_NOTE}</p>
                   <ul className="mt-5 hidden flex-wrap justify-center gap-2 sm:flex" aria-label="Matters people use Ask AI Legal for">
                     {MATTERS.map((m) => (
                       <li key={m.href}>

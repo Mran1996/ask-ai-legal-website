@@ -25,8 +25,8 @@ export function SecondBrain() {
         <Reveal>
           <p data-reveal className="cine-label mb-3">Second Brain</p>
           <h2 data-reveal className="cine-h2 max-w-[20ch] text-cream">
-            A Second Brain that{" "}
-            <span className="cine-serif text-accent-light">remembers what you teach it.</span>
+            Fix a mistake once.{" "}
+            <span className="cine-serif text-accent-light">It remembers next time.</span>
           </h2>
           <p data-reveal className="cine-body mt-4 max-w-2xl">
             Keep your saved information, documents, preferences, and drafting lessons together on your computer. Teach

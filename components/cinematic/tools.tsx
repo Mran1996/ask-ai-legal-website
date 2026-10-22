@@ -14,7 +14,7 @@ const TOOLS: Tool[] = [
   {
     id: "research",
     title: "Supported research connections",
-    body: `${RESEARCH_DESCRIPTION} Open the original sources and review AI-generated citations before relying on them.`,
+    body: `${RESEARCH_DESCRIPTION} Open the original sources and check each citation before relying on it.`,
     sources: true,
   },
   {

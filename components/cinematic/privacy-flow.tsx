@@ -17,8 +17,8 @@ export function PrivacyFlow() {
         <Reveal>
           <p data-reveal className="cine-label mb-3">Privacy</p>
           <h2 data-reveal className="cine-h2 max-w-[18ch] text-cream">
-            Your information stays{" "}
-            <span className="cine-serif text-accent-light">under your control.</span>
+            Your papers are stored{" "}
+            <span className="cine-serif text-accent-light">on your computer.</span>
           </h2>
           <p data-reveal className="cine-body mt-4 max-w-2xl">
             Your documents and Second Brain memory are saved on your computer. With privacy mode on, when a connected

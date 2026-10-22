@@ -55,7 +55,7 @@ export const en = {
       {
         title: "Supported research connections",
         description:
-          "Connect your workspace to supported legal research platforms such as Westlaw, LexisNexis, Bloomberg Law, and CourtListener. Provider subscriptions and usage fees are separate. Open the original sources and review AI-generated citations before relying on them.",
+          "Connect your workspace to supported legal research platforms such as Westlaw, LexisNexis, Bloomberg Law, and CourtListener. Provider subscriptions and usage fees are separate. Open the original sources and check each citation before relying on it.",
       },
       {
         title: "Document drafting for your review",
