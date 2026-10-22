@@ -18,15 +18,15 @@ export function ClosingCta() {
             <span className="cine-serif text-accent-light">install call.</span>
           </h2>
           <p data-reveal className="cine-body mt-4 max-w-lg">
-            We check your computer first, so you know it works before you pay. The one-time purchase is $3,997,
-            with optional maintenance at $125 a month.
+            We check your computer first, so you know it works before you pay. Plans start at $1,997, paid once.
+            Optional maintenance is $125 a month.
           </p>
           <div data-reveal className="mt-6 flex flex-col gap-4 sm:flex-row">
             <Link href={CONSULT_HREF} className="cine-btn-gold">
               {CONSULT_CTA_LABEL} <ArrowRight className="h-4 w-4" aria-hidden />
             </Link>
-            <Link href="/pricing" className="cine-btn-ghost">
-              See pricing
+            <Link href="/plans" className="cine-btn-ghost">
+              Compare plans
             </Link>
           </div>
           <p data-reveal className="mt-8 max-w-lg font-sans text-xs leading-relaxed text-cream/40">

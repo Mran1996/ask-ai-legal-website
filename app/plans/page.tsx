@@ -85,7 +85,7 @@ export default function PlansPage() {
 
               {/* Complete: card in the installed app's design */}
               <div
-                className="relative flex flex-col rounded-[24px] p-6 sm:p-8"
+                className="relative order-first flex flex-col rounded-[24px] p-6 sm:p-8"
                 style={{
                   background: APP.panel,
                   border: `1px solid ${APP.border}`,
