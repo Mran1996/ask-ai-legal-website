@@ -43,9 +43,36 @@ const APP = {
   grad: "linear-gradient(100deg, #1CC8D6 0%, #2F8FEA 55%, #3B6FE0 100%)",
 }
 
+/** Product data for search engines: two one-time plans plus optional monthly maintenance. */
+const productJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Product",
+  name: "Ask AI Legal",
+  description:
+    "Private legal assistant software installed live on your computer, for people who represent themselves in court.",
+  brand: { "@type": "Brand", name: "Ask AI Legal" },
+  url: "https://askailegal.com/plans",
+  offers: [
+    { "@type": "Offer", name: "Starter", price: "1997.00", priceCurrency: "USD", url: "https://askailegal.com/plans" },
+    { "@type": "Offer", name: "Complete", price: "3997.00", priceCurrency: "USD", url: "https://askailegal.com/plans" },
+    {
+      "@type": "Offer",
+      name: "Optional maintenance, monthly",
+      price: "125.00",
+      priceCurrency: "USD",
+      url: "https://askailegal.com/plans",
+    },
+  ],
+}
+
 export default function PlansPage() {
   return (
     <div className="cine min-h-screen">
+      <script
+        type="application/ld+json"
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }}
+      />
       <CineNav />
       <main className="pt-24 pb-10 sm:pt-28">
         <section className="relative bg-ground py-6 sm:py-10">
