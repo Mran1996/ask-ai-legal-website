@@ -26,7 +26,7 @@ export function ClosingCta() {
               {CONSULT_CTA_LABEL} <ArrowRight className="h-4 w-4" aria-hidden />
             </Link>
             <Link href="/plans" className="cine-btn-ghost">
-              Compare plans
+              See pricing
             </Link>
           </div>
           <p data-reveal className="mt-8 max-w-lg font-sans text-xs leading-relaxed text-cream/40">
