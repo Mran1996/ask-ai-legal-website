@@ -57,7 +57,7 @@ const en: ChatUiStrings = {
   tabChat: "Chat",
   tabBook: "Request consultation",
   welcome:
-    "Hello! I'm the Ask AI Legal assistant. I can explain what the software does, what the $3,997 purchase includes, and how optional maintenance works — in your language.",
+    "Hello! I'm the Ask AI Legal assistant. I can explain what the software does, what each plan includes, and how optional maintenance works, in your language.",
   welcomeHint:
     "Ready to talk it through? Use the Request consultation tab. Please don't send confidential case documents through chat.",
   placeholder: "Ask about Ask AI Legal…",
@@ -69,7 +69,7 @@ const en: ChatUiStrings = {
   bookHint:
     "We confirm your computer requirements, review the included features, and discuss installation. We'll reply by email to set a time.",
   pricingLine:
-    "$3,997 one-time purchase · Optional maintenance $125/month · Third-party AI usage and paid services are billed separately.",
+    "Plans from $1,997, one-time purchase · Optional maintenance $125/month · Third-party usage and paid services are billed separately.",
   firstName: "First name",
   lastName: "Last name",
   email: "Email",
@@ -106,7 +106,7 @@ const hi: ChatUiStrings = {
   tabChat: "चैट",
   tabBook: "परामर्श बुक करें",
   welcome:
-    "नमस्ते! मैं Ask AI Legal सहायक हूँ। मैं बता सकता/सकती हूँ कि सॉफ़्टवेयर क्या करता है, $3,997 की खरीद में क्या शामिल है, और वैकल्पिक रखरखाव कैसे काम करता है।",
+    "नमस्ते! मैं Ask AI Legal सहायक हूँ। मैं बता सकता/सकती हूँ कि सॉफ़्टवेयर क्या करता है, हर प्लान में क्या शामिल है, और वैकल्पिक रखरखाव कैसे काम करता है।",
   welcomeHint:
     "बात करने के लिए 'परामर्श बुक करें' टैब का उपयोग करें। कृपया चैट में गोपनीय केस दस्तावेज़ न भेजें।",
   placeholder: "Ask AI Legal के बारे में पूछें…",
@@ -118,7 +118,7 @@ const hi: ChatUiStrings = {
   bookHint:
     "हम आपके कंप्यूटर की ज़रूरतें जाँचते हैं, शामिल सुविधाएँ समझाते हैं और इंस्टॉलेशन पर चर्चा करते हैं। समय तय करने के लिए हम ईमेल से जवाब देंगे।",
   pricingLine:
-    "$3,997 एक बार की खरीद · वैकल्पिक रखरखाव $125/माह · तृतीय-पक्ष AI, रिसर्च सदस्यता और क्लाउड सेवाओं का खर्च अलग हो सकता है।",
+    "प्लान $1,997 से शुरू, एक बार की खरीद · वैकल्पिक रखरखाव $125/माह · तृतीय-पक्ष AI, रिसर्च सदस्यता और क्लाउड सेवाओं का खर्च अलग हो सकता है।",
   firstName: "पहला नाम",
   lastName: "अंतिम नाम",
   email: "ईमेल",
