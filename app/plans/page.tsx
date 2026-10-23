@@ -9,7 +9,7 @@ import { CONSULT_CTA_LABEL, CONSULT_HREF } from "@/lib/site-config"
 export const metadata: Metadata = {
   title: "Compare Plans | Ask AI Legal",
   description:
-    "Two plans, each paid once. Starter at $1,997 or Complete at $3,997. Both are installed live on your computer while you watch.",
+    "Two plans, each paid once: Starter at $1,997 or Complete at $3,997. Both are installed live on your computer while you watch. Backed by a money-back guarantee.",
   alternates: { canonical: "/plans" },
 }
 
