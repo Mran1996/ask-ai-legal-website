@@ -3,7 +3,7 @@
 set -euo pipefail
 
 if ! command -v gh >/dev/null 2>&1; then
-  echo "gh CLI not found. Install: brew install gh && gh auth login" >&2
+  echo "gh CLI not found. Install: winget install --id GitHub.cli --exact && gh auth login" >&2
   exit 1
 fi
 

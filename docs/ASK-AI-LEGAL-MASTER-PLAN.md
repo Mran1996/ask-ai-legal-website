@@ -3,7 +3,7 @@
 **Version:** 1.1  
 **Last updated:** 2026-07-05 (sync)  
 **Owner:** [Your name]  
-**Repo:** `/Users/sylasp/ask ai legal web`  
+**Repo:** `C:\Users\Gwada\ask-ai-legal-website`  
 **Status key:** ☐ Not started · ◐ In progress · ☑ Done · ⏸ Blocked
 
 **Copies of this file:**

@@ -24,7 +24,7 @@ if ! convex_authed; then
   cat >&2 <<'EOF'
 error: Convex is not authenticated.
 
-Option 1 — local (Mac Terminal):
+Option 1 — local (PowerShell):
   npx convex login
   ./scripts/apply-security-env.sh --prod
 

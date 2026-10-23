@@ -54,7 +54,7 @@ Track implementation against [ASK_AI_LEGAL_SPEC.md](./ASK_AI_LEGAL_SPEC.md) Sect
 - [x] Phase 1 ops shell: Matters | Insights tabs (`/ops`, `/ops/insights`) — law-firm chrome
 - [x] Phase 2 matter file: timeline, one-click toolbar, tabs (Overview | Documents | Money | Communications | Drafts)
 - [x] Phase 3 ops funnel: auto gap-question email after Part 1 return; Approve & send requires Stripe pay link; no-refunds in TOS + agreement + invoice email
-- [x] Option A: separate ops dashboard app at `/Users/sylasp/ask-ai-legal-ops` (localhost:3001); marketing `/ops` redirects there
+- [x] Option A: separate ops dashboard app at `C:\Users\Gwada\ask-ai-legal-ops` (localhost:3001); marketing `/ops` redirects there
 - [x] Firm matter board + Needs attention; PostHog on marketing for clicks/chat/quotes; ops offline UX when Convex down
 
 ### 1.4 Email quote + payment (off-site)

@@ -4,10 +4,10 @@
       "Bash(npm *)",
       "Bash(npx *)",
       "Bash(gh *)",
-      "Read(/Users/sylasp/ask-ai-legal-main/**)"
+      "Read(C:/Users/Gwada/ask-ai-legal-main/**)"
     ]
   },
   "additionalDirectories": [
-    "/Users/sylasp/ask-ai-legal-main/ask-ai-legal"
+    "C:/Users/Gwada/ask-ai-legal-main/ask-ai-legal"
   ]
 }
