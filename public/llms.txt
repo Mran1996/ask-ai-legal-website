@@ -1,0 +1,53 @@
+# Ask AI Legal
+
+> Ask AI Legal is a private legal assistant installed on your own computer, for people who represent themselves in court in all 50 states. It reads your court papers, tracks your deadlines, researches the law with source links, and drafts documents for you to review. It is software, not a law firm, and it does not give legal advice or represent anyone.
+
+## What it does
+- Reads uploaded court papers and organizes them into a case folder
+- Finds dates and deadlines and puts them on a calendar with reminders
+- Drafts court documents for the user to review, with citation checks
+- Case law research with source links the user can open
+- Court rules for the user's state
+- Second Brain memory: saved corrections guide future drafts
+- Files are kept on the user's own computer
+
+## How it works
+- 100% online. We install it remotely, live, while you watch.
+- Book an installation consultation first. We check your computer before you pay.
+
+## Plans (one-time purchase)
+- Starter: $1,997
+- Complete: $3,997. Adds personal training, paid research service setup, email and calendar connections, background helpers, new premium features, and 30 days of support.
+- Optional maintenance: $125 a month, either plan. No long-term commitment.
+- Pay over time is available at checkout.
+- 100% money-back guarantee: during your install, we test Ask AI Legal on your computer against our written checklist. If it doesn't do what the checklist says, you get every dollar back.
+
+## Key pages
+- [Compare plans](https://askailegal.com/plans)
+- [Money-back guarantee](https://askailegal.com/guarantee)
+- [Features](https://askailegal.com/services)
+- [FAQ](https://askailegal.com/faq)
+- [Our story](https://askailegal.com/our-story)
+- [About](https://askailegal.com/about)
+- [Contact](https://askailegal.com/contact)
+
+## Guides
+- [How to represent yourself in court](https://askailegal.com/guides/represent-yourself-in-court)
+- [What to do when you're served with court papers](https://askailegal.com/guides/served-with-court-papers)
+- [How to answer a summons without a lawyer](https://askailegal.com/guides/how-to-answer-a-summons)
+- [How to file a motion without a lawyer](https://askailegal.com/guides/file-a-motion-without-a-lawyer)
+- [How to respond to an eviction notice](https://askailegal.com/guides/respond-to-an-eviction-notice)
+- [Proof of service: what it is and how to file it](https://askailegal.com/guides/proof-of-service)
+- [Court deadline tracker](https://askailegal.com/guides/court-deadline-tracker)
+- [Private legal assistant vs. online chatbots](https://askailegal.com/guides/private-ai-legal-assistant)
+
+## Common matters
+- [Divorce & separation](https://askailegal.com/situations/divorce)
+- [Custody & family](https://askailegal.com/situations/custody)
+- [Housing & eviction](https://askailegal.com/situations/housing)
+- [Small claims](https://askailegal.com/situations/small-claims)
+- [Civil disputes](https://askailegal.com/situations/civil)
+- [Criminal](https://askailegal.com/situations/criminal)
+
+## Contact
+- support@askailegal.com

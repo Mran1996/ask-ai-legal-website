@@ -9,6 +9,20 @@ export default function robots(): MetadataRoute.Robots {
         allow: "/",
         disallow: ["/ops", "/api"],
       },
+      {
+        // Named so AI search and assistant crawlers are clearly welcome.
+        userAgent: [
+          "GPTBot",
+          "OAI-SearchBot",
+          "ChatGPT-User",
+          "ClaudeBot",
+          "Claude-User",
+          "PerplexityBot",
+          "Google-Extended",
+        ],
+        allow: "/",
+        disallow: ["/ops", "/api"],
+      },
     ],
     sitemap: `${SITE_URL}/sitemap.xml`,
   }
