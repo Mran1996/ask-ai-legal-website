@@ -6,7 +6,7 @@ import { SUPPORT_EMAIL } from "@/lib/site-config"
 export const metadata: Metadata = {
   title: "Privacy Policy",
   description:
-    "How Ask AI Legal collects, uses, and protects your personal information.",
+    "How Ask AI Legal collects, uses, and protects your personal information, your choices about cookies and analytics, and how to contact us with privacy questions.",
   alternates: { canonical: "/privacy-policy" },
 }
 
