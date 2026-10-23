@@ -18,6 +18,10 @@ const nextConfig = {
     ]
     return [{ source: "/:path*", headers: securityHeaders }]
   },
+  async redirects() {
+    // The old single-price page now lives on Compare plans.
+    return [{ source: "/pricing", destination: "/plans", permanent: true }]
+  },
 }
 
 module.exports = nextConfig
