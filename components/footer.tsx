@@ -148,7 +148,13 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-10 flex flex-col items-start justify-between gap-3 border-t border-white/10 pt-6 sm:flex-row sm:items-center">
+        <div className="mt-10 border-t border-white/10 pt-6">
+          <p className="max-w-3xl text-xs leading-relaxed text-white/45">
+            {t.footer.disclaimer}
+          </p>
+        </div>
+
+        <div className="mt-6 flex flex-col items-start justify-between gap-3 pt-0 sm:flex-row sm:items-center">
           <p className="text-xs">© {new Date().getFullYear()} {SITE_LEGAL_NAME}. All rights reserved.</p>
           <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-white/40">
             <button

@@ -298,7 +298,9 @@ export const en = {
   },
   footer: {
     tagline: "We do the install. You work from home.",
-    documentOnly: "Install and tools for home use only",
+    documentOnly: "Software install and configuration only",
+    disclaimer:
+      "Ask AI Legal provides customized software, AI integrations, installation, and technical training. We are not a law firm and do not provide legal advice, legal representation, or document preparation services.",
     columns: {
       services: "Services",
       company: "Company",

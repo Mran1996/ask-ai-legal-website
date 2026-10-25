@@ -6,7 +6,7 @@ import { SUPPORT_EMAIL } from "@/lib/site-config"
 export const metadata: Metadata = {
   title: "Terms of Service",
   description:
-    "Terms governing use of Ask AI Legal's document preparation services.",
+    "Terms governing Ask AI Legal's software customization, installation, and integration services.",
   alternates: { canonical: "/terms-of-service" },
 }
 
@@ -17,32 +17,56 @@ export default function TermsOfServicePage() {
     <LegalDocumentLayout title="Terms of Service" lastUpdated={LAST_UPDATED}>
       <p>
         These Terms of Service (&ldquo;Terms&rdquo;) govern your access to and use of the
-        website, consultations, and document preparation services offered by Ask AI Legal LLC
-        (&ldquo;Ask AI Legal,&rdquo; &ldquo;we,&rdquo; &ldquo;us,&rdquo; or &ldquo;our&rdquo;).
-        By accessing our website, requesting a consultation, or purchasing services, you agree
-        to these Terms. If you do not agree, do not use our services.
+        website, consultations, and software customization, installation, and integration
+        services offered by Ask AI Legal LLC (&ldquo;Ask AI Legal,&rdquo; &ldquo;we,&rdquo;{" "}
+        &ldquo;us,&rdquo; or &ldquo;our&rdquo;). By accessing our website, requesting a
+        consultation, or purchasing services, you agree to these Terms. If you do not agree,
+        do not use our services.
       </p>
 
-      <h2>1. Who we are</h2>
+      <h2>1. Nature of our business</h2>
       <p>
-        Ask AI Legal is a <strong>document preparation service</strong>. We prepare
-        complete documents, research materials, and related written work product based on
-        information you provide. We are <strong>not a law firm</strong>, and our personnel are{" "}
-        <strong>not your attorneys</strong>.
+        Ask AI Legal LLC is a <strong>software customization, installation, and technology
+        integration company</strong>. Our services consist of configuring customer-owned
+        software installations, connecting supported third-party AI providers, customizing
+        user interfaces, installing supported integrations, and providing technical training.
+      </p>
+      <p>
+        Ask AI Legal does <strong>not</strong> provide legal advice, legal representation,
+        legal strategy, or document preparation services. We are <strong>not a law firm</strong>,
+        and our personnel are <strong>not your attorneys</strong>.
+      </p>
+      <p>
+        Customers independently operate their installed systems and determine how to use the
+        capabilities offered by their selected AI providers.
       </p>
 
       <h2>2. No legal advice or representation</h2>
       <p>
         Our services do <strong>not</strong> include legal advice, legal representation,
-        attorney-client privilege, or appearance on your behalf in any court, agency, or
-        proceeding. Communications with Ask AI Legal — including phone consultations, email,
-        and messaging — do <strong>not</strong> create an attorney-client relationship.
+        legal strategy, document preparation, attorney-client privilege, or appearance on
+        your behalf in any court, agency, or proceeding. Communications with Ask AI Legal,
+        including consultations, email, and messaging, do <strong>not</strong> create an
+        attorney-client relationship.
       </p>
       <p>
-        You are solely responsible for deciding whether to use any document we prepare, how to
-        file it, and whether to seek independent legal counsel. We strongly encourage you to
-        consult a licensed attorney in your jurisdiction before relying on any prepared
-        materials for a legal matter.
+        You are solely responsible for deciding how to operate your installed software, what
+        to do with any output it produces, whether to file anything, and whether to seek
+        independent legal counsel. We strongly encourage you to consult a licensed attorney
+        in your jurisdiction before relying on any output for a legal matter.
+      </p>
+
+      <h2>2A. Your independence</h2>
+      <p>
+        You independently control your installed software, your AI provider accounts, your API
+        credentials, your data, and your use of any generated output.
+      </p>
+      <p>
+        Ask AI Legal does not select legal strategies, advise you on any particular legal
+        matter, prepare your court filings, or make filing decisions on your behalf. Any
+        document or other material produced through a connected AI tool is generated through
+        your own independent use of that tool. It is not a deliverable of a document
+        preparation service provided by Ask AI Legal.
       </p>
 
       <h2>3. Eligibility</h2>
@@ -70,18 +94,20 @@ export default function TermsOfServicePage() {
 
       <h2>5. Services and deliverables</h2>
       <p>
-        Depending on your matter, our services may include document research, document drafting,
-        formatting, citation support, and revision rounds within the agreed scope. The specific
-        deliverables for your matter will be listed in your accepted quote or written service
-        agreement. We generate documents only.
+        Depending on the package you purchase, our services may include building and installing
+        a customized software copy on your computer, connecting the third-party AI providers
+        you select, installing supported integrations, customizing the interface, and providing
+        technical training on how to operate the installation. The specific deliverables will be
+        listed in your accepted quote or written purchase agreement.
       </p>
-      <p>Unless expressly included in your quote, we do not:</p>
+      <p>Unless expressly included in your purchase agreement, we do not:</p>
       <ul>
+        <li>Prepare, draft, review, or file documents for your legal matter;</li>
         <li>Appear in court or at hearings on your behalf;</li>
-        <li>File documents with any court or agency as your representative;</li>
         <li>Negotiate with opposing parties or counsel;</li>
-        <li>Provide ongoing representation or monitoring of your matter; or</li>
-        <li>Guarantee any particular outcome in your matter.</li>
+        <li>Operate your installed software or your AI provider accounts for you;</li>
+        <li>Supply or pay for third-party AI provider subscriptions or API usage; or</li>
+        <li>Guarantee any particular outcome in any matter.</li>
       </ul>
 
       <h2>6. Your responsibilities</h2>
@@ -101,20 +127,26 @@ export default function TermsOfServicePage() {
         inaccurate, or withheld information you provide.
       </p>
 
-      <h2>7. Payment, refunds, and cancellations</h2>
+      <h2>7. Payment, maintenance, refunds, and cancellations</h2>
       <p>
-        Fees are due as stated in your quote or invoice. Unless otherwise agreed in writing,
-        payment is required before we begin substantive work or before release of final
-        deliverables.
+        Ask AI Legal charges a <strong>one-time purchase price</strong> for the custom software
+        installation and configuration package you select. Fees are due as stated in your quote
+        or invoice. Unless otherwise agreed in writing, payment is required before we begin
+        substantive work or before we complete the installation.
       </p>
       <p>
-        Because our services involve custom research and drafting tailored to your matter,
-        <strong> all fees are non-refundable once paid</strong>, including if you cancel, change
-        your mind, do not use prepared documents, miss a deadline, or are dissatisfied with
-        outcomes that depend on facts, courts, opposing parties, or your own filing choices.
-        Exceptions apply only where required by applicable law or if we expressly agree in a
-        signed writing. Paying your invoice or Payment Link constitutes acceptance of this
-        no-refund policy for that engagement.
+        Ongoing maintenance is <strong>optional</strong>. You are not required to purchase
+        maintenance to retain ownership of the custom software copy you have paid for, and
+        declining maintenance does not disable or revoke your installation.
+      </p>
+      <p>
+        Third-party subscription fees, API usage charges, and other provider costs are separate
+        and are your responsibility unless expressly included in your written purchase
+        agreement.
+      </p>
+      <p>
+        Refunds and cancellations are governed by your applicable written purchase agreement
+        and our published installation guarantee, subject to applicable law.
       </p>
       <p>
         If you dispute a charge, contact us at{" "}
@@ -124,21 +156,31 @@ export default function TermsOfServicePage() {
 
       <h2>8. Revisions</h2>
       <p>
-        Revisions included in your quote are limited to corrections and refinements within the
-        agreed scope of work. Requests for new documents, new legal theories, additional
-        jurisdictions, or material new facts may require a separate quote.
+        Adjustments included in your quote are limited to corrections and refinements of the
+        installation and configuration within the agreed scope of work. Requests for additional
+        integrations, additional AI providers, new machines, or reconfiguration beyond that
+        scope may require a separate quote.
       </p>
 
-      <h2>9. Intellectual property and license</h2>
+      <h2>9. Ownership</h2>
       <p>
-        Upon full payment, you receive a non-exclusive license to use the deliverables we
-        prepare for your personal legal matter, including filing with courts or agencies as
-        permitted by law. Ask AI Legal retains ownership of its methodologies, templates,
-        research systems, and pre-existing materials used to create your deliverables.
+        Upon receipt of <strong>full payment</strong>, ownership of the individually customized
+        software copy and the customer-specific deliverables built for you transfers to you,
+        subject to the third-party rights described below. You may retain, operate, modify, and
+        transfer that copy, subject to applicable third-party licenses and contractual
+        restrictions.
       </p>
       <p>
-        You may not resell, redistribute, or publish our deliverables as a template service or
-        for commercial use unrelated to your matter without our prior written consent.
+        Third-party AI models, APIs, libraries, and other components remain subject to their
+        respective providers&rsquo; ownership rights and licensing terms. Ask AI Legal cannot
+        transfer ownership of third-party intellectual property, and nothing in these Terms
+        purports to do so.
+      </p>
+      <p>
+        Ask AI Legal retains ownership of its pre-existing and separately developed source code,
+        reusable proprietary components, methodologies, templates, and internal tooling, except
+        where a written purchase agreement expressly transfers a specified item to you. Any such
+        transfer must identify the item expressly. Nothing transfers by implication.
       </p>
 
       <h2>10. Confidentiality</h2>

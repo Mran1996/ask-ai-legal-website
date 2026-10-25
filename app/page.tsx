@@ -5,6 +5,7 @@ import { StoryHero } from "@/components/cinematic/story-hero"
 import { InstallStory } from "@/components/cinematic/install-story"
 import { RetainerTrap } from "@/components/cinematic/retainer-trap"
 import { ToolsCompact } from "@/components/cinematic/tools"
+import { Ownership } from "@/components/cinematic/ownership"
 import { HowItWorks } from "@/components/cinematic/how-it-works"
 import { Situations } from "@/components/cinematic/situations"
 import { SourcesBand } from "@/components/cinematic/sources-band"
@@ -20,6 +21,7 @@ export default function Home() {
       <main>
         <StoryHero />
         <InstallStory />
+        <Ownership />
         <ToolsCompact />
         <RetainerTrap />
         <HowItWorks />
