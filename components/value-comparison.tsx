@@ -51,7 +51,7 @@ export function ValueComparison() {
                 <li key={item}>· {item}</li>
               ))}
             </ul>
-            <NeonButton href="/pay" className="btn-neon mt-8 inline-flex w-full sm:w-auto">
+            <NeonButton href="/contact" className="btn-neon mt-8 inline-flex w-full sm:w-auto">
               <FileSearch className="h-4 w-4 shrink-0" aria-hidden />
               <span>{t.compare.cta}</span>
               <ArrowRight className="h-4 w-4 shrink-0" aria-hidden />

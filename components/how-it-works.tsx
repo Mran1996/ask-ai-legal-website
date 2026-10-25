@@ -37,7 +37,7 @@ export function HowItWorks() {
         </ol>
 
         <div className="mt-12 flex justify-center sm:mt-14">
-          <NeonButton href="/pay" className="btn-neon-light">
+          <NeonButton href="/contact" className="btn-neon-light">
             {t.process.cta}
             <ArrowRight className="h-4 w-4" aria-hidden />
           </NeonButton>

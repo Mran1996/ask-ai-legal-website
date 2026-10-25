@@ -84,7 +84,7 @@ export default function PlansPage() {
                 Two plans.{" "}
                 <span className="cine-serif text-accent-light">Each paid once.</span>
               </h1>
-              <p className="cine-body mt-4">Both plans are installed live on your computer while you watch.</p>
+              <p className="cine-body mt-4">Both plans are installed live on your computer while you watch. You purchase through your installation consultation.</p>
             </div>
 
             <div className="mx-auto mt-10 grid max-w-5xl items-stretch gap-6 md:grid-cols-2">
@@ -176,7 +176,7 @@ export default function PlansPage() {
                 </p>
               </div>
               <p className="text-sm text-cream/50">
-                Pay over time is available at checkout. Third-party usage and paid services are billed separately.
+                Third-party usage and paid services are billed separately.
               </p>
             </div>
           </div>

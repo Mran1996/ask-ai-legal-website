@@ -28,13 +28,14 @@ export const BUSINESS_SERVICE_AREAS = "Serving customers in all 50 states"
 
 /** Approved public pricing (Oct 2026): one-time purchase + optional monthly maintenance. */
 export const PURCHASE_PRICE_USD = 3997
+export const STARTER_PRICE_USD = 1997
 export const PURCHASE_PRICE_CENTS = 399700
 export const PURCHASE_PRICE_DISPLAY = "$3,997"
 export const MAINTENANCE_PRICE_USD = 125
 export const MAINTENANCE_PRICE_CENTS = 12500
 export const MAINTENANCE_PRICE_DISPLAY = "$125"
 
-/** What the one-time purchase includes — homepage, pricing, and /pay all read this list. */
+/** What the one-time purchase includes — homepage and pricing read this list. */
 export const PURCHASE_INCLUSIONS = [
   "Computer compatibility check and installation",
   "Guided setup around your issues and goals",
@@ -100,8 +101,6 @@ export const CASE_FILE_REVIEW_PRICE_DISPLAY = "Custom quote"
 /** Client-facing product labels */
 export const CASE_REVIEW_LABEL = "Ask AI Legal purchase"
 export const CASE_REVIEW_ASSESSMENT_LABEL = "Ask AI Legal purchase"
-export const FILE_REVIEW_DEPOSIT_LABEL = CASE_REVIEW_ASSESSMENT_LABEL
-export const FILE_REVIEW_LABEL = CASE_REVIEW_LABEL
 
 /** Primary CTAs */
 export const PRIMARY_CTA_LABEL = CONSULT_CTA_LABEL
@@ -133,7 +132,7 @@ export const SITE_SEO_TITLE = "Ask AI Legal | Private AI Legal Assistant for Sel
 
 /** Homepage SEO description — used in layout, JSON-LD, and social previews. */
 export const SITE_SEO_DESCRIPTION =
-  "A private AI legal assistant installed on your own computer. Organize court papers, track deadlines, research the law with sources, and prepare documents for your case, in all 50 states."
+  "A private AI legal assistant installed on your own computer. Organize court papers, track deadlines, research the law with sources, and draft documents for your case, in all 50 states."
 
 /** Brand mark (circular scales) — header, hero, app icons. */
 export const SITE_LOGO_MARK = "/brand/stripe-logo-512.png"

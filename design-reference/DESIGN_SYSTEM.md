@@ -42,12 +42,12 @@
 
 ### Hero
 - Full-width emerald-500 background, white text
-- H1 + supporting copy + feature pills (Court-Ready Docs, 24/7, Attorney-Style AI)
+- H1 + supporting copy + feature pills (Installed Workspace, 24/7, Attorney-Style AI)
 
 ## Content voice
 
 - Direct, empowering, for families and self-represented defendants
-- Emphasize: court-ready documents, 24/7 access, no hourly billing
+- Emphasize: documents you review, 24/7 access, no hourly billing
 - Covers: criminal motions, civil claims, post-conviction filings
 
 ## Reference paths

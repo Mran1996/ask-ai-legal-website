@@ -8,6 +8,7 @@ import {
   MAINTENANCE_PRICE_USD,
   PURCHASE_PRICE_USD,
   SITE_URL,
+  STARTER_PRICE_USD,
   SUPPORT_EMAIL,
 } from "@/lib/site-config"
 
@@ -26,20 +27,24 @@ export const metadata: Metadata = {
   },
 }
 
-type Item = "purchase" | "maintenance" | "unknown"
+type Item = "starter" | "complete" | "maintenance" | "unknown"
 
-/** Stripe success URLs carry ?item=purchase or ?item=maintenance so the two confirmations stay distinct. */
+const planCopy = (name: string, price: number, days: number) => ({
+  heading: "Thank you. Your purchase is confirmed",
+  body: `We received your one-time payment of $${price.toLocaleString("en-US", { minimumFractionDigits: 2 })} for the Ask AI Legal ${name} plan. This payment does not enroll you in maintenance.`,
+  next: [
+    "We'll contact you by email to arrange your installation.",
+    "We confirm your computer requirements and installation arrangements before the session.",
+    `Your ${days} days of installation support begin when installation is completed.`,
+  ],
+  value: price,
+})
+
+/** Stripe payment links send customers here with ?item=starter, ?item=complete or ?item=maintenance,
+ *  so Meta records each Purchase at the right amount. ?item=purchase (older links) means Complete. */
 const COPY: Record<Item, { heading: string; body: string; next: string[]; value?: number }> = {
-  purchase: {
-    heading: "Thank you — your purchase is confirmed",
-    body: "We received your one-time payment of $3,997.00 for Ask AI Legal. This payment does not enroll you in maintenance.",
-    next: [
-      "We'll contact you by email to arrange your installation.",
-      "We confirm your computer requirements and installation arrangements before the session.",
-      "Your 30 days of installation support begin when installation is completed.",
-    ],
-    value: PURCHASE_PRICE_USD,
-  },
+  starter: planCopy("Starter", STARTER_PRICE_USD, 14),
+  complete: planCopy("Complete", PURCHASE_PRICE_USD, 30),
   maintenance: {
     heading: "Your optional maintenance is active",
     body: "We received your maintenance enrollment at $125.00 per month, billed monthly under the maintenance terms provided before enrollment. This is separate from the one-time purchase.",
@@ -48,7 +53,7 @@ const COPY: Record<Item, { heading: string; body: string; next: string[]; value?
   },
   unknown: {
     heading: "Payment received",
-    body: "Thank you. Your Stripe receipt shows what you paid for — the one-time Ask AI Legal purchase or the optional $125-per-month maintenance plan.",
+    body: "Thank you. Your Stripe receipt shows what you paid for: your Ask AI Legal plan or the optional $125-per-month maintenance.",
     next: ["Check your email for your Stripe receipt.", "Contact us if anything on your receipt looks wrong."],
   },
 }
@@ -60,7 +65,7 @@ type PageProps = {
 export default async function PaySuccessPage({ searchParams }: PageProps) {
   const params = await searchParams
   const raw = Array.isArray(params.item) ? params.item[0] : params.item
-  const item: Item = raw === "purchase" || raw === "maintenance" ? raw : "unknown"
+  const item: Item = raw === "purchase" ? "complete" : raw === "starter" || raw === "complete" || raw === "maintenance" ? raw : "unknown"
   const copy = COPY[item]
 
   return (

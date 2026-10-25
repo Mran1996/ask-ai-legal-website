@@ -20,7 +20,11 @@ const nextConfig = {
   },
   async redirects() {
     // The old single-price page now lives on Compare plans.
-    return [{ source: "/pricing", destination: "/plans", permanent: true }]
+    return [
+      { source: "/pricing", destination: "/plans", permanent: true },
+      { source: "/pay", destination: "/contact", permanent: true },
+      { source: "/document-preparation-agreement", destination: "/terms-of-service", permanent: true },
+    ]
   },
 }
 

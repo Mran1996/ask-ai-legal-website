@@ -30,7 +30,7 @@ export default function DisclaimerPage() {
         agreement signed by a licensed attorney (which we do not offer through this service).
       </p>
       <p>
-        We generate documents. We do <strong>not</strong> appear in court, file documents on
+        The installed software drafts documents for you to review. We do <strong>not</strong> appear in court, file documents on
         your behalf, or represent you in any proceeding.
       </p>
 
@@ -38,9 +38,9 @@ export default function DisclaimerPage() {
       <p>
         Information on our website — including articles, FAQs, consultation summaries, research
         summaries, and prepared documents — is provided for <strong>general informational and
-        document-preparation purposes only</strong>. It is <strong>not legal advice</strong>{" "}
+        software drafting and installation purposes only</strong>. It is <strong>not legal advice</strong>{" "}
         and is not tailored to your specific legal rights, obligations, or strategy unless
-        expressly described in a written quote or deliverable scope you have accepted.
+        expressly described in your written purchase terms.
       </p>
       <p>
         You should not rely on our website, consultations, or deliverables as a substitute for
@@ -52,7 +52,7 @@ export default function DisclaimerPage() {
       <p>
         Legal outcomes depend on many factors outside our control, including facts, law,
         judges, opposing parties, procedural compliance, and timing. We do{" "}
-        <strong>not guarantee</strong> that any document we prepare will be accepted by a
+        <strong>not guarantee</strong> that any document the software drafts will be accepted by a
         court, that any motion will be granted, or that you will achieve any particular result
         in your matter.
       </p>
@@ -78,10 +78,10 @@ export default function DisclaimerPage() {
 
       <h2>5. Unauthorized practice of law</h2>
       <p>
-        We prepare documents based on information you supply and within the scope of permitted
-        document preparation and self-help services. We do not advise you as to what you
+        The installed software drafts documents based on information you supply and within the
+        scope of permitted software and self-help services. We do not advise you as to what you
         should do in your legal matter, what legal rights you have, or what outcome you should
-        expect. If your jurisdiction restricts or regulates document preparation services, you
+        expect. If your jurisdiction restricts or regulates automated document drafting, you
         are responsible for ensuring that your use of our services complies with local rules.
       </p>
 
@@ -105,20 +105,7 @@ export default function DisclaimerPage() {
         convenience only and do not imply endorsement.
       </p>
 
-      <h2>8. Testimonials and examples</h2>
-      <p>
-        Illustrative scenarios on our homepage — including names, portraits, and quoted text in
-        the carousel — are <strong>composite marketing examples</strong>. They do not depict
-        real clients, verified reviews, or actual outcomes. They are shown to explain common
-        situations we may help with, not to represent specific people or guaranteed results.
-      </p>
-      <p>
-        If we publish genuine client feedback in the future, it will be clearly labeled and
-        shared only with appropriate consent. Nothing on this website is a guarantee that you
-        will have the same experience or outcome. Results vary.
-      </p>
-
-      <h2>9. Emergency and time-sensitive matters</h2>
+      <h2>8. Emergency and time-sensitive matters</h2>
       <p>
         Our services are not designed for emergency legal situations. If you face an imminent
         deadline, arrest, hearing, or other urgent matter, contact a licensed attorney or
@@ -126,14 +113,13 @@ export default function DisclaimerPage() {
         time-critical decisions.
       </p>
 
-      <h2>10. Payment and refunds</h2>
+      <h2>9. Payment and refunds</h2>
       <p>
-        Fees are due as stated in your quote or invoice. Because our services involve custom
-        research and drafting tailored to your matter,{" "}
-        <strong>all fees are non-refundable once paid</strong>, including if you cancel, change your
-        mind, do not use prepared documents, miss a deadline, or are dissatisfied with outcomes
-        that depend on facts, courts, opposing parties, or your own filing choices. Exceptions apply
-        only where required by applicable law or if we expressly agree in a signed writing.
+        Plan prices are as stated on our plans page and in your purchase terms. Refunds are
+        governed by our <Link href="/guarantee">100% money-back guarantee</Link>. Where the
+        guarantee does not apply, refunds are handled as required by applicable law. Once your
+        install passes the checklist test, your plan purchase is final, because the installed
+        software stays on your computer.
       </p>
       <p>
         Full payment terms are in our{" "}
@@ -141,7 +127,7 @@ export default function DisclaimerPage() {
         directed to <a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a>.
       </p>
 
-      <h2>11. Limitation of liability</h2>
+      <h2>10. Limitation of liability</h2>
       <p>
         To the fullest extent permitted by law, Ask AI Legal disclaims liability for any
         damages arising from your use of or reliance on our website, consultations, or
@@ -150,14 +136,14 @@ export default function DisclaimerPage() {
         <Link href="/terms-of-service">Terms of Service</Link>.
       </p>
 
-      <h2>12. Changes</h2>
+      <h2>11. Changes</h2>
       <p>
         We may update this Disclaimer at any time. The &ldquo;Last updated&rdquo; date at the
         top indicates the latest version. Continued use of our website or services after
         changes constitutes acceptance.
       </p>
 
-      <h2>13. Contact</h2>
+      <h2>12. Contact</h2>
       <p>Questions about this Disclaimer may be directed to:</p>
       <p>
         Ask AI Legal LLC
