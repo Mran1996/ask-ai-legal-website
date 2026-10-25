@@ -105,20 +105,7 @@ export default function DisclaimerPage() {
         convenience only and do not imply endorsement.
       </p>
 
-      <h2>8. Testimonials and examples</h2>
-      <p>
-        Illustrative scenarios on our homepage — including names, portraits, and quoted text in
-        the carousel — are <strong>composite marketing examples</strong>. They do not depict
-        real clients, verified reviews, or actual outcomes. They are shown to explain common
-        situations we may help with, not to represent specific people or guaranteed results.
-      </p>
-      <p>
-        If we publish genuine client feedback in the future, it will be clearly labeled and
-        shared only with appropriate consent. Nothing on this website is a guarantee that you
-        will have the same experience or outcome. Results vary.
-      </p>
-
-      <h2>9. Emergency and time-sensitive matters</h2>
+      <h2>8. Emergency and time-sensitive matters</h2>
       <p>
         Our services are not designed for emergency legal situations. If you face an imminent
         deadline, arrest, hearing, or other urgent matter, contact a licensed attorney or
@@ -126,7 +113,7 @@ export default function DisclaimerPage() {
         time-critical decisions.
       </p>
 
-      <h2>10. Payment and refunds</h2>
+      <h2>9. Payment and refunds</h2>
       <p>
         Plan prices are as stated on our plans page and in your purchase terms. Refunds are
         governed by our <Link href="/guarantee">100% money-back guarantee</Link>. Where the
@@ -138,7 +125,7 @@ export default function DisclaimerPage() {
         directed to <a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a>.
       </p>
 
-      <h2>11. Limitation of liability</h2>
+      <h2>10. Limitation of liability</h2>
       <p>
         To the fullest extent permitted by law, Ask AI Legal disclaims liability for any
         damages arising from your use of or reliance on our website, consultations, or
@@ -147,14 +134,14 @@ export default function DisclaimerPage() {
         <Link href="/terms-of-service">Terms of Service</Link>.
       </p>
 
-      <h2>12. Changes</h2>
+      <h2>11. Changes</h2>
       <p>
         We may update this Disclaimer at any time. The &ldquo;Last updated&rdquo; date at the
         top indicates the latest version. Continued use of our website or services after
         changes constitutes acceptance.
       </p>
 
-      <h2>13. Contact</h2>
+      <h2>12. Contact</h2>
       <p>Questions about this Disclaimer may be directed to:</p>
       <p>
         Ask AI Legal LLC
