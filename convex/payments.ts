@@ -71,7 +71,8 @@ export const savePostIntakeQuoteDetails = mutation({
     if (
       caseDoc.status === "in_drafting" ||
       caseDoc.status === "delivered" ||
-      caseDoc.status === "closed"
+      caseDoc.status === "closed" ||
+      caseDoc.status === "in_counsel_review"
     ) {
       throw new Error("Quote details can only be updated before work starts")
     }
@@ -958,6 +959,18 @@ export const markDelivered = mutation({
   handler: async (ctx, args) => {
     assertOpsToken(args.opsToken)
     await assertCasePaid(ctx, args.caseId)
+
+    // Hard rule: no delivery without approved counsel review
+    const reviews = await ctx.db
+      .query("counselReviews")
+      .withIndex("by_case", (q) => q.eq("caseId", args.caseId))
+      .collect()
+    const hasApproval = reviews.some((r) => r.decision === "approved")
+    if (!hasApproval) {
+      throw new Error(
+        "Cannot deliver: a licensed human counsel must approve at least one document before delivery."
+      )
+    }
 
     await ctx.db.patch("cases", args.caseId, {
       status: "delivered",

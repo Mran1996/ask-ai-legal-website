@@ -11,6 +11,7 @@
 import type * as appointments from "../appointments.js";
 import type * as cases from "../cases.js";
 import type * as contactActions from "../contactActions.js";
+import type * as counselReview from "../counselReview.js";
 import type * as documents from "../documents.js";
 import type * as draftPackageActions from "../draftPackageActions.js";
 import type * as draftingActions from "../draftingActions.js";
@@ -53,6 +54,7 @@ declare const fullApi: ApiFromModules<{
   appointments: typeof appointments;
   cases: typeof cases;
   contactActions: typeof contactActions;
+  counselReview: typeof counselReview;
   documents: typeof documents;
   draftPackageActions: typeof draftPackageActions;
   draftingActions: typeof draftingActions;

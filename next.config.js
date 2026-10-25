@@ -23,7 +23,6 @@ const nextConfig = {
     return [
       { source: "/pricing", destination: "/plans", permanent: true },
       { source: "/pay", destination: "/contact", permanent: true },
-      { source: "/pay/success", destination: "/contact", permanent: true },
       { source: "/document-preparation-agreement", destination: "/terms-of-service", permanent: true },
     ]
   },
