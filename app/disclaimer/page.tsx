@@ -38,7 +38,7 @@ export default function DisclaimerPage() {
       <p>
         Information on our website — including articles, FAQs, consultation summaries, research
         summaries, and prepared documents — is provided for <strong>general informational and
-        document-preparation purposes only</strong>. It is <strong>not legal advice</strong>{" "}
+        software drafting and installation purposes only</strong>. It is <strong>not legal advice</strong>{" "}
         and is not tailored to your specific legal rights, obligations, or strategy unless
         expressly described in a written quote or deliverable scope you have accepted.
       </p>
@@ -52,7 +52,7 @@ export default function DisclaimerPage() {
       <p>
         Legal outcomes depend on many factors outside our control, including facts, law,
         judges, opposing parties, procedural compliance, and timing. We do{" "}
-        <strong>not guarantee</strong> that any document we prepare will be accepted by a
+        <strong>not guarantee</strong> that any document the software drafts will be accepted by a
         court, that any motion will be granted, or that you will achieve any particular result
         in your matter.
       </p>

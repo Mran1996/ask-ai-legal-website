@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     "court deadline tracker",
     "AI legal research with sources",
     "legal case management software",
-    "legal document preparation software",
+    "AI legal document drafting software",
     "Ask AI Legal",
   ],
   authors: [{ name: "Ask AI Legal" }],
