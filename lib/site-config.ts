@@ -34,7 +34,7 @@ export const MAINTENANCE_PRICE_USD = 125
 export const MAINTENANCE_PRICE_CENTS = 12500
 export const MAINTENANCE_PRICE_DISPLAY = "$125"
 
-/** What the one-time purchase includes — homepage, pricing, and /pay all read this list. */
+/** What the one-time purchase includes — homepage and pricing read this list. */
 export const PURCHASE_INCLUSIONS = [
   "Computer compatibility check and installation",
   "Guided setup around your issues and goals",
