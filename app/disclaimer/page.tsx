@@ -30,7 +30,7 @@ export default function DisclaimerPage() {
         agreement signed by a licensed attorney (which we do not offer through this service).
       </p>
       <p>
-        We generate documents. We do <strong>not</strong> appear in court, file documents on
+        The installed software drafts documents for you to review. We do <strong>not</strong> appear in court, file documents on
         your behalf, or represent you in any proceeding.
       </p>
 
@@ -78,10 +78,10 @@ export default function DisclaimerPage() {
 
       <h2>5. Unauthorized practice of law</h2>
       <p>
-        We prepare documents based on information you supply and within the scope of permitted
-        document preparation and self-help services. We do not advise you as to what you
+        The installed software drafts documents based on information you supply and within the
+        scope of permitted software and self-help services. We do not advise you as to what you
         should do in your legal matter, what legal rights you have, or what outcome you should
-        expect. If your jurisdiction restricts or regulates document preparation services, you
+        expect. If your jurisdiction restricts or regulates automated document drafting, you
         are responsible for ensuring that your use of our services complies with local rules.
       </p>
 

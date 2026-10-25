@@ -103,7 +103,7 @@ function draftFileName(caseReference: string): string {
 }
 
 /**
- * After payment + Start work: generate primary draft document and queue counsel review.
+ * After payment + Start work: the software drafts the primary document for the client to review.
  */
 export const generateCaseDraft = internalAction({
   args: {
@@ -118,10 +118,7 @@ export const generateCaseDraft = internalAction({
     })
     if (!row) return null
 
-    if (
-      !args.force &&
-      (row.status === "in_counsel_review" || row.status === "delivered")
-    ) {
+    if (!args.force && row.status === "delivered") {
       return null
     }
 
@@ -136,21 +133,12 @@ export const generateCaseDraft = internalAction({
         new Blob([content], { type: "text/plain; charset=utf-8" })
       )
 
-      const { documentId } = await ctx.runMutation(
-        internal.documents.saveGeneratedDraftInternal,
-        {
-          caseId: args.caseId,
-          storageId,
-          fileName: draftFileName(row.caseReference),
-          agentRunId: args.agentRunId,
-          mode: llm ? "openai" : "fallback",
-        }
-      )
-
-      await ctx.runAction(internal.emailActions.sendOpsCounselReviewReadyEmail, {
+      await ctx.runMutation(internal.documents.saveGeneratedDraftInternal, {
         caseId: args.caseId,
-        documentId,
-        preview: content.slice(0, 2000),
+        storageId,
+        fileName: draftFileName(row.caseReference),
+        agentRunId: args.agentRunId,
+        mode: llm ? "openai" : "fallback",
       })
     } catch (error) {
       if (args.agentRunId) {

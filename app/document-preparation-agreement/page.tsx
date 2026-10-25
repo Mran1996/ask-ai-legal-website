@@ -3,7 +3,7 @@ import Link from "next/link"
 import { SITE_BRAND_NAME, SITE_DISCLAIMER, SUPPORT_EMAIL } from "@/lib/site-config"
 
 export const metadata: Metadata = {
-  title: `Document Preparation Service Agreement | ${SITE_BRAND_NAME}`,
+  title: `Installation and Software Agreement | ${SITE_BRAND_NAME}`,
   description: SITE_DISCLAIMER,
   robots: { index: true, follow: true },
 }
@@ -15,7 +15,7 @@ export default function DocumentPreparationAgreementPage() {
         <Link href="/" className="text-sm text-gray-500 hover:text-navy">
           ← {SITE_BRAND_NAME}
         </Link>
-        <h1 className="mt-6 font-display text-3xl">Document Preparation Service Agreement</h1>
+        <h1 className="mt-6 font-display text-3xl">Installation and Software Agreement</h1>
         <p className="mt-3 text-sm text-gray-600">
           Effective for engagements started by paying an Ask AI Legal invoice or Payment Link.
         </p>
@@ -23,14 +23,14 @@ export default function DocumentPreparationAgreementPage() {
         <div className="prose prose-sm mt-8 max-w-none space-y-4 text-gray-800">
           <p>
             Ask AI Legal™ (operated by <strong>Ask AI Legal LLC</strong>, &ldquo;we,&rdquo;
-            &ldquo;us&rdquo;) provides <strong>document preparation</strong> and related
-            clerical support only. We are <strong>not a law firm</strong>, we do not practice law,
+            &ldquo;us&rdquo;) provides <strong>installation and software setup</strong>. The installed
+            software drafts documents for you; we do not prepare them for you. We are <strong>not a law firm</strong>, we do not practice law,
             we do not create an attorney-client relationship, and we do not appear in court or file
             documents for you unless a separate written service (if ever offered) expressly says so.
           </p>
           <p>
             <strong>Scope.</strong> After you select a priority issue and pay the quoted start fee,
-            we prepare documents described in your emailed issues/scope package. Delivery is by
+            the installed software drafts the documents described in your emailed issues/scope package. Delivery is by
             email. You are responsible for reviewing all drafts for accuracy and for filing/serving
             papers yourself or through your own counsel.
           </p>
@@ -40,7 +40,7 @@ export default function DocumentPreparationAgreementPage() {
             Additional documents or retrieval may require a separate quote.
           </p>
           <p>
-            <strong>No legal advice.</strong> Information we provide is for document preparation and
+            <strong>No legal advice.</strong> Information we provide is for software setup and
             process explanation only. Court deadlines, strategy, and whether to file any particular
             paper are decisions for you (and any attorney you hire).
           </p>

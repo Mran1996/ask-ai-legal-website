@@ -173,7 +173,7 @@ export const sendIntakeEmails = internalAction({
       "1. We email you a personalized intake form for your situation.",
       "2. You return the form and any court papers you have (or request paid document retrieval — quoted before we pull records).",
       "3. We email a written cost to research & draft, a document-preparation service agreement, and an invoice / payment link.",
-      "4. After payment clears, we prepare your documents and deliver them by email.",
+      "4. After payment clears, the software you install drafts your documents for you to review.",
     ]
 
     if (bookUrl) {
@@ -238,7 +238,7 @@ export const sendIntakeEmails = internalAction({
               <li>We email you a personalized intake form for your situation.</li>
               <li>You return the form and any court papers you have (or request paid document retrieval — quoted before we pull records).</li>
               <li>We email a written cost to research &amp; draft, a document-preparation service agreement, and an invoice / payment link.</li>
-              <li>After payment clears, we prepare your documents and deliver them by email.</li>
+              <li>After payment clears, the software you install drafts your documents for you to review.</li>
             </ol>
             ${bookHtml}
             ${estimateHtml}
@@ -529,7 +529,7 @@ export const sendPersonalizedFormEmail = internalAction({
               <li>You return completed Part 1 (+ documents)</li>
               <li>We acknowledge receipt and review your matter</li>
               <li>We email the issues we can start with + invoice / payment link</li>
-              <li>After payment, we prepare and deliver your documents</li>
+              <li>After payment, the software you install drafts your documents</li>
             </ol>
             <p style="margin:0 0 16px;">Ask AI Legal generates documents only. We are not a law firm, we do not provide legal advice, and we do not file or appear in court for you.</p>
             <p style="margin:0 0 8px;">Questions? Reply to this email or write <a href="mailto:${SUPPORT_EMAIL}" style="color:#C5A059;">${SUPPORT_EMAIL}</a>.</p>
@@ -746,53 +746,6 @@ export const sendOpsDraftPackageReadyEmail = internalAction({
   },
 })
 
-export const sendOpsCounselReviewReadyEmail = internalAction({
-  args: {
-    caseId: v.id("cases"),
-    documentId: v.id("documents"),
-    preview: v.string(),
-  },
-  returns: v.null(),
-  handler: async (ctx, args) => {
-    const context = await ctx.runQuery(internal.cases.getIntakeEmailContext, {
-      caseId: args.caseId,
-    })
-    if (!context) return null
-
-    const to = opsNotifyEmail()
-    const body = [
-      `${context.caseReference} — document draft ready for counsel review`,
-      "",
-      `Client: ${context.clientFirstName} ${context.clientLastName} <${context.clientEmail}>`,
-      "",
-      "A draft document was generated and queued for licensed counsel approval.",
-      "Approve or reject in ops before marking the matter delivered.",
-      "",
-      `Ops: ${opsCaseUrl(args.caseId)}`,
-      `Document id: ${args.documentId}`,
-      "",
-      "— DRAFT PREVIEW —",
-      args.preview,
-    ].join("\n")
-
-    const result = await sendResendEmail({
-      to,
-      subject: `${context.caseReference} — Counsel review needed | Ask AI Legal`,
-      text: body,
-    })
-
-    await ctx.runMutation(internal.notifications.recordNotification, {
-      caseId: args.caseId,
-      type: "counsel_review_ops",
-      recipient: to,
-      status: result.ok ? "sent" : "failed",
-      provider: "resend",
-      errorMessage: result.ok ? undefined : result.error,
-    })
-
-    return null
-  },
-})
 
 const INTERNAL_DRAFT_MARKERS = [
   "review before sending to client",

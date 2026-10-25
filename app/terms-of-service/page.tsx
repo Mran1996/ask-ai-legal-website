@@ -17,7 +17,7 @@ export default function TermsOfServicePage() {
     <LegalDocumentLayout title="Terms of Service" lastUpdated={LAST_UPDATED}>
       <p>
         These Terms of Service (&ldquo;Terms&rdquo;) govern your access to and use of the
-        website, consultations, and document preparation services offered by Ask AI Legal LLC
+        website, consultations, and installation and software services offered by Ask AI Legal LLC
         (&ldquo;Ask AI Legal,&rdquo; &ldquo;we,&rdquo; &ldquo;us,&rdquo; or &ldquo;our&rdquo;).
         By accessing our website, requesting a consultation, or purchasing services, you agree
         to these Terms. If you do not agree, do not use our services.
@@ -25,7 +25,7 @@ export default function TermsOfServicePage() {
 
       <h2>1. Who we are</h2>
       <p>
-        Ask AI Legal is a <strong>document preparation service</strong>. We prepare
+        Ask AI Legal sells <strong>installed legal workspace software</strong> and installation services. The software drafts
         complete documents, research materials, and related written work product based on
         information you provide. We are <strong>not a law firm</strong>, and our personnel are{" "}
         <strong>not your attorneys</strong>.
@@ -39,7 +39,7 @@ export default function TermsOfServicePage() {
         and messaging — do <strong>not</strong> create an attorney-client relationship.
       </p>
       <p>
-        You are solely responsible for deciding whether to use any document we prepare, how to
+        You are solely responsible for deciding whether to use any document the software drafts, how to
         file it, and whether to seek independent legal counsel. We strongly encourage you to
         consult a licensed attorney in your jurisdiction before relying on any prepared
         materials for a legal matter.
@@ -73,7 +73,7 @@ export default function TermsOfServicePage() {
         Depending on your matter, our services may include document research, document drafting,
         formatting, citation support, and revision rounds within the agreed scope. The specific
         deliverables for your matter will be listed in your accepted quote or written service
-        agreement. We generate documents only.
+        agreement. The installed software drafts documents; you review them and decide what to file.
       </p>
       <p>Unless expressly included in your quote, we do not:</p>
       <ul>

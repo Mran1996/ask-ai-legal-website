@@ -113,8 +113,6 @@ export function CaseDetailView({ opsToken, caseId }: Props) {
   const markPaidManual = useMutation(api.payments.markPaidManual)
   const markWorkStarted = useMutation(api.payments.markWorkStarted)
   const markDelivered = useMutation(api.payments.markDelivered)
-  const recordCounselDecision = useMutation(api.counselReview.recordCounselDecision)
-  const regenerateCaseDraft = useMutation(api.counselReview.regenerateCaseDraft)
   const saveDraftPackage = useMutation(api.payments.saveDraftPackage)
   const regenerateDraftPackage = useMutation(api.payments.regenerateDraftPackage)
   const approveAndSendPackage = useMutation(api.payments.approveAndSendPackage)
@@ -131,8 +129,6 @@ export function CaseDetailView({ opsToken, caseId }: Props) {
   const [scopeSummary, setScopeSummary] = useState("")
   const [issuesSummary, setIssuesSummary] = useState("")
   const [timeframe, setTimeframe] = useState("")
-  const [counselReviewer, setCounselReviewer] = useState("")
-  const [counselNotes, setCounselNotes] = useState("")
   const [hydrated, setHydrated] = useState(false)
 
   useEffect(() => {
@@ -207,13 +203,7 @@ export function CaseDetailView({ opsToken, caseId }: Props) {
         label: "Document draft",
         at: detail.agentRuns.find((r) => r.agentType === "drafting" && r.status === "completed")
           ?.createdAt,
-        done: detail.status === "in_counsel_review" || detail.status === "delivered",
-      },
-      {
-        id: "counsel",
-        label: "Counsel approved",
-        at: detail.counselReviews.find((r) => r.decision === "approved")?.reviewedAt,
-        done: detail.counselReviews.some((r) => r.decision === "approved"),
+        done: detail.agentRuns.some((r) => r.agentType === "drafting" && r.status === "completed"),
       },
       {
         id: "outlook",
@@ -230,7 +220,6 @@ export function CaseDetailView({ opsToken, caseId }: Props) {
     ]
   }, [detail])
 
-  const pendingCounselReview = detail?.counselReviews.find((r) => r.decision === "pending")
 
   if (detail === undefined) {
     return <p className="py-16 text-center text-navy/45">Loading matter…</p>
@@ -290,11 +279,9 @@ export function CaseDetailView({ opsToken, caseId }: Props) {
           ? "Next: client payment ($499) or mark paid"
           : detail.status === "in_drafting"
             ? "Next: drafting in progress (or regenerate draft)"
-            : detail.status === "in_counsel_review"
-              ? "Next: counsel must approve before delivery"
-              : detail.status !== "delivered"
-                ? "Next: start work to auto-generate draft, then counsel gate"
-                : "Matter delivered"
+            : detail.status !== "delivered"
+              ? "Next: start work to auto-generate draft"
+              : "Matter delivered"
 
   return (
     <div className="space-y-6">
@@ -992,43 +979,6 @@ export function CaseDetailView({ opsToken, caseId }: Props) {
                 {stamp(f.draftPackageGeneratedAt)}
               </p>
             </div>
-          </Panel>
-
-          <Panel
-            title="Counsel review"
-            hint="No final document can be delivered until a licensed human attorney approves it."
-          >
-            {detail.counselReviews.length === 0 ? (
-              <p className="text-sm text-navy/45">
-                No reviews yet. Submit a document for counsel review before delivery.
-              </p>
-            ) : (
-              <ul className="space-y-2">
-                {detail.counselReviews.map((cr) => (
-                  <li
-                    key={cr.reviewId}
-                    className="border border-navy/8 bg-cream/50 px-3 py-2 text-sm"
-                  >
-                    <span
-                      className={`inline-block px-1.5 py-0.5 text-[10px] font-bold uppercase ${
-                        cr.decision === "approved"
-                          ? "bg-brand/15 text-brand-dark"
-                          : cr.decision === "rejected"
-                            ? "bg-red-100 text-red-800"
-                            : "bg-amber-100 text-amber-900"
-                      }`}
-                    >
-                      {cr.decision}
-                    </span>{" "}
-                    by {cr.reviewerId}
-                    {cr.reviewedAt ? ` · ${stamp(cr.reviewedAt)}` : ""}
-                    {cr.notes && (
-                      <p className="mt-1 text-xs text-navy/60">{cr.notes}</p>
-                    )}
-                  </li>
-                ))}
-              </ul>
-            )}
           </Panel>
         </div>
       )}

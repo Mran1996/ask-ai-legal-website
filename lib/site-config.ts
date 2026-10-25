@@ -133,7 +133,7 @@ export const SITE_SEO_TITLE = "Ask AI Legal | Private AI Legal Assistant for Sel
 
 /** Homepage SEO description — used in layout, JSON-LD, and social previews. */
 export const SITE_SEO_DESCRIPTION =
-  "A private AI legal assistant installed on your own computer. Organize court papers, track deadlines, research the law with sources, and prepare documents for your case, in all 50 states."
+  "A private AI legal assistant installed on your own computer. Organize court papers, track deadlines, research the law with sources, and draft documents for your case, in all 50 states."
 
 /** Brand mark (circular scales) — header, hero, app icons. */
 export const SITE_LOGO_MARK = "/brand/stripe-logo-512.png"

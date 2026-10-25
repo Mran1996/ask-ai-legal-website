@@ -160,7 +160,6 @@ export const saveGeneratedDraftInternal = internalMutation({
   },
   returns: v.object({
     documentId: v.id("documents"),
-    reviewId: v.id("counselReviews"),
   }),
   handler: async (ctx, args) => {
     const caseDoc = await ctx.db.get("cases", args.caseId)
@@ -186,19 +185,6 @@ export const saveGeneratedDraftInternal = internalMutation({
       createdAt: now,
     })
 
-    const reviewId = await ctx.db.insert("counselReviews", {
-      caseId: args.caseId,
-      documentId,
-      reviewerId: "awaiting_counsel",
-      decision: "pending",
-      notes: "Auto-queued after AI draft generation",
-    })
-
-    await ctx.db.patch("cases", args.caseId, {
-      status: "in_counsel_review",
-      updatedAt: now,
-    })
-
     if (args.agentRunId) {
       await ctx.db.patch("agentRuns", args.agentRunId, {
         status: "completed",
@@ -215,16 +201,7 @@ export const saveGeneratedDraftInternal = internalMutation({
       })
     }
 
-    await ctx.db.insert("agentRuns", {
-      caseId: args.caseId,
-      agentType: "counsel",
-      inputRef: `counsel_review:${reviewId}`,
-      outputRef: documentId,
-      status: "running",
-      createdAt: now,
-    })
-
-    return { documentId, reviewId }
+    return { documentId }
   },
 })
 
@@ -240,65 +217,6 @@ export const markDraftAgentRunFailed = internalMutation({
       status: "failed",
       outputRef: args.errorMessage.slice(0, 500),
     })
-    return null
-  },
-})
-
-export const promoteApprovedDocumentInternal = internalMutation({
-  args: {
-    caseId: v.id("cases"),
-    documentId: v.id("documents"),
-    reviewId: v.id("counselReviews"),
-  },
-  returns: v.null(),
-  handler: async (ctx, args) => {
-    const doc = await ctx.db.get("documents", args.documentId)
-    if (!doc || doc.caseId !== args.caseId) throw new Error("Document not found")
-
-    const now = Date.now()
-    await ctx.db.patch("documents", args.documentId, {
-      status: "reviewed",
-    })
-
-    const existingFinal = await ctx.db
-      .query("documents")
-      .withIndex("by_case_and_folder", (q) =>
-        q.eq("caseId", args.caseId).eq("folder", "final_delivered")
-      )
-      .collect()
-
-    await ctx.db.insert("documents", {
-      caseId: args.caseId,
-      type: "final_delivered",
-      folder: "final_delivered",
-      fileName: doc.fileName.replace(/^DRAFT-/i, "FINAL-"),
-      storageId: doc.storageId,
-      status: "delivered",
-      version: existingFinal.length + 1,
-      createdAt: now,
-    })
-
-    await ctx.db.patch("counselReviews", args.reviewId, {
-      reviewedAt: now,
-    })
-
-    const counselRuns = await ctx.db
-      .query("agentRuns")
-      .withIndex("by_case", (q) => q.eq("caseId", args.caseId))
-      .collect()
-    for (const run of counselRuns) {
-      if (
-        run.agentType === "counsel" &&
-        run.status === "running" &&
-        run.inputRef === `counsel_review:${args.reviewId}`
-      ) {
-        await ctx.db.patch("agentRuns", run._id, {
-          status: "completed",
-          outputRef: args.documentId,
-        })
-      }
-    }
-
     return null
   },
 })

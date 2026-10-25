@@ -19,7 +19,7 @@ export default function PrivacyPolicyPage() {
         Ask AI Legal LLC (&ldquo;Ask AI Legal,&rdquo; &ldquo;we,&rdquo; &ldquo;us,&rdquo; or
         &ldquo;our&rdquo;) respects your privacy. This Privacy Policy explains how we collect,
         use, disclose, and protect information when you visit our website, request a
-        consultation, or use our document preparation services (collectively, the
+        consultation, or use our installation and software services (collectively, the
         &ldquo;Services&rdquo;).
       </p>
       <p>
@@ -55,7 +55,7 @@ export default function PrivacyPolicyPage() {
       <p>We use information we collect to:</p>
       <ul>
         <li>Respond to inquiries and schedule consultations;</li>
-        <li>Prepare quotes and perform document preparation services you request;</li>
+        <li>Prepare quotes and perform installation and software services you request;</li>
         <li>Communicate with you about your matter, deliverables, and account status;</li>
         <li>Process payments and prevent fraud;</li>
         <li>Improve our website, services, and internal research tools;</li>
@@ -70,7 +70,7 @@ export default function PrivacyPolicyPage() {
       <p>
         Information about legal matters may be sensitive. We handle matter-related information
         with care and restrict internal access to personnel who need it to perform the
-        Services. Because we are a document preparation service — not a law firm — information
+        Services. Because we are an installation and software company — not a law firm — information
         you share with us is <strong>not protected by attorney-client privilege</strong>.
         Please do not send information you are not comfortable sharing in that context.
       </p>
