@@ -122,7 +122,7 @@ export function ServicesPageContent() {
         <div className="container-main mx-auto max-w-2xl text-center">
           <h2 className="firm-title text-white">{page.cta.title}</h2>
           <p className="mt-5 text-lg leading-relaxed text-white/70">{page.cta.body}</p>
-          <NeonButton href="/pay" className="mt-8 inline-flex">
+          <NeonButton href="/contact" className="mt-8 inline-flex">
             {page.cta.button}
             <ArrowRight className="h-4 w-4" aria-hidden />
           </NeonButton>

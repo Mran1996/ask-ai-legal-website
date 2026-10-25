@@ -55,8 +55,8 @@ export default function PrivacyPolicyPage() {
       <p>We use information we collect to:</p>
       <ul>
         <li>Respond to inquiries and schedule consultations;</li>
-        <li>Prepare quotes and perform installation and software services you request;</li>
-        <li>Communicate with you about your matter, deliverables, and account status;</li>
+        <li>Schedule installations and provide the software and services you request;</li>
+        <li>Communicate with you about your installation, support, and account status;</li>
         <li>Process payments and prevent fraud;</li>
         <li>Improve our website, services, and internal research tools;</li>
         <li>Comply with legal obligations and enforce our Terms; and</li>

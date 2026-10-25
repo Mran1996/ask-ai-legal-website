@@ -59,7 +59,7 @@ export function HeroSection() {
           <HeroCategoryPills />
 
           <div className="mt-10 flex w-full flex-col items-center justify-center gap-4 sm:flex-row animate-fade-up [animation-delay:340ms]">
-            <NeonButton href="/pay">
+            <NeonButton href="/contact">
               {t.hero.ctaPrimary}
               <ArrowRight className="h-4 w-4" aria-hidden />
             </NeonButton>

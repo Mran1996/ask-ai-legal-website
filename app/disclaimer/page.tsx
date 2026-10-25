@@ -40,7 +40,7 @@ export default function DisclaimerPage() {
         summaries, and prepared documents — is provided for <strong>general informational and
         software drafting and installation purposes only</strong>. It is <strong>not legal advice</strong>{" "}
         and is not tailored to your specific legal rights, obligations, or strategy unless
-        expressly described in a written quote or deliverable scope you have accepted.
+        expressly described in your written purchase terms.
       </p>
       <p>
         You should not rely on our website, consultations, or deliverables as a substitute for
@@ -128,12 +128,9 @@ export default function DisclaimerPage() {
 
       <h2>10. Payment and refunds</h2>
       <p>
-        Fees are due as stated in your quote or invoice. Because our services involve custom
-        research and drafting tailored to your matter,{" "}
-        <strong>all fees are non-refundable once paid</strong>, including if you cancel, change your
-        mind, do not use prepared documents, miss a deadline, or are dissatisfied with outcomes
-        that depend on facts, courts, opposing parties, or your own filing choices. Exceptions apply
-        only where required by applicable law or if we expressly agree in a signed writing.
+        Plan prices are as stated on our plans page and in your purchase terms. Refunds are
+        governed by our <Link href="/guarantee">100% money-back guarantee</Link>. Where the
+        guarantee does not apply, refunds are handled as required by applicable law.
       </p>
       <p>
         Full payment terms are in our{" "}

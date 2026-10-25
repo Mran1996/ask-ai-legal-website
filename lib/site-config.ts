@@ -100,8 +100,6 @@ export const CASE_FILE_REVIEW_PRICE_DISPLAY = "Custom quote"
 /** Client-facing product labels */
 export const CASE_REVIEW_LABEL = "Ask AI Legal purchase"
 export const CASE_REVIEW_ASSESSMENT_LABEL = "Ask AI Legal purchase"
-export const FILE_REVIEW_DEPOSIT_LABEL = CASE_REVIEW_ASSESSMENT_LABEL
-export const FILE_REVIEW_LABEL = CASE_REVIEW_LABEL
 
 /** Primary CTAs */
 export const PRIMARY_CTA_LABEL = CONSULT_CTA_LABEL

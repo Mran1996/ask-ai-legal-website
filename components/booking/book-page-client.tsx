@@ -13,7 +13,7 @@ import {
   type BookCallType,
 } from "@/lib/booking"
 import { CalcomEmbed } from "@/components/booking/calcom-embed"
-import { SITE_BRAND_NAME, FILE_REVIEW_DEPOSIT_LABEL } from "@/lib/site-config"
+import { SITE_BRAND_NAME } from "@/lib/site-config"
 
 type Props = {
   callType: string
@@ -24,15 +24,11 @@ type Props = {
 }
 
 function callTitle(callType: string): string {
-  if (callType === "document_planning") return "Document planning call"
   if (callType === "follow_up_paid") return "Follow-up call"
   return "Installation consultation"
 }
 
 function callDescription(callType: string): string {
-  if (callType === "document_planning") {
-    return `Included with your paid ${FILE_REVIEW_DEPOSIT_LABEL.toLowerCase()} — discuss next documents and timeline.`
-  }
   if (callType === "follow_up_paid") {
     return "30-minute follow-up call ($50) — available after included planning calls are used."
   }

@@ -176,7 +176,7 @@ export default function PlansPage() {
                 </p>
               </div>
               <p className="text-sm text-cream/50">
-                Pay over time is available at checkout. Third-party usage and paid services are billed separately.
+                Third-party usage and paid services are billed separately.
               </p>
             </div>
           </div>
