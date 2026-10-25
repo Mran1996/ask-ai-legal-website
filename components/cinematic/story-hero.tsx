@@ -67,7 +67,7 @@ const SCENES = [
     alt: "Woman walking up courthouse steps carrying her own case binder",
     label: "05 · Your matter",
     title: ["You stay", "in charge."],
-    sub: "You decide what gets filed and what it says. The installed software drafts the paperwork. You review and sign it.",
+    sub: "Every decision is yours: what to draft, what to file, and when.",
     pos: "40% center",
   },
   {
