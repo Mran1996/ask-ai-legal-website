@@ -128,7 +128,9 @@ export default function TermsOfServicePage() {
       <p>
         Plan prices are as stated on our plans page and in your purchase terms. Refunds are
         governed by our <Link href="/guarantee">100% money-back guarantee</Link>. Where the
-        guarantee does not apply, refunds are handled as required by applicable law.
+        guarantee does not apply, refunds are handled as required by applicable law. Once your
+        install passes the checklist test, your plan purchase is final, because the installed
+        software stays on your computer.
       </p>
       <p>
         If you dispute a charge, contact us at{" "}
