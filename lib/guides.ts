@@ -55,7 +55,7 @@ export const GUIDES: Guide[] = [
         ],
       },
       {
-        heading: "5. Review your documents carefully",
+        heading: "5. Prepare your documents carefully",
         paragraphs: [
           "Court papers need the right caption, format, and contents. Use your court's forms when they exist. Keep sentences short and stick to facts you can prove. Always keep a copy of what you file and proof that you served it on the other side.",
         ],
