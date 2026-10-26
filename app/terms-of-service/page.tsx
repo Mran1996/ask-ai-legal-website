@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/terms-of-service" },
 }
 
-const LAST_UPDATED = "October 25, 2026"
+const LAST_UPDATED = "October 26, 2026"
 
 export default function TermsOfServicePage() {
   return (
@@ -147,16 +147,42 @@ export default function TermsOfServicePage() {
 
       <h2>10. Intellectual property and license</h2>
       <p>
-        Upon full payment, you receive a license to use the Ask AI Legal software installed on
-        your computer for your personal use, subject to the third-party licenses that apply to
-        its components. Ask AI Legal retains ownership of its software, methodologies, templates,
-        and pre-existing materials.
+        The Ask AI Legal software is licensed, not sold. Upon full payment, you receive a
+        limited, personal, non-exclusive, non-transferable license to use the software for one
+        person on the one computer where we install it, subject to the third-party licenses that
+        apply to its components. Ask AI Legal retains all ownership of, and copyright in, its
+        software, code, prompts, methodologies, templates, designs, and pre-existing materials.
       </p>
+      <p>Without our prior written consent, you may not:</p>
+      <ul>
+        <li>Copy the software, except for ordinary backups of your own computer;</li>
+        <li>
+          Install or use the software on more than one computer, or let anyone else use your
+          copy;
+        </li>
+        <li>
+          Sell, resell, rent, lend, share, give away, sublicense, or otherwise transfer the
+          software or your license;
+        </li>
+        <li>
+          Reverse engineer, decompile, or modify the software, or remove its copyright or license
+          notices;
+        </li>
+        <li>
+          Use the software, or any part of it, to build, train, or offer a competing product or
+          service; or
+        </li>
+        <li>Offer the software or its output as a template service or for commercial use.</li>
+      </ul>
       <p>
         Third-party AI models, APIs, libraries, and other components remain subject to their
-        providers&apos; ownership rights and license terms. You may not resell, redistribute, or
-        publish the software or its output as a template service or for commercial use without
-        our prior written consent.
+        providers&apos; ownership rights and license terms. The documents you create with the
+        software for your own case belong to you.
+      </p>
+      <p>
+        If you break any of these license terms, your license ends immediately without a refund,
+        you must stop using and delete all copies of the software, and we may seek every remedy
+        the law allows, including damages and court orders to stop the copying or sale.
       </p>
 
       <h2>11. Confidentiality</h2>
