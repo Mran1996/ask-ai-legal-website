@@ -16,20 +16,24 @@ export const metadata: Metadata = {
 const BOTH = [
   "Live install while you watch",
   "Chat assistant",
-  "Document drafting with citation checks",
+  "Drafting that plans, writes and polishes, and never changes your citations or quotes",
   "Reads your papers and organizes your case folder",
+  "Search all your papers by title, date or judge",
   "Deadline calendar with reminders",
   "Case law research with source links",
   "Court rules for your state",
-  "Second Brain memory",
+  "Second Brain memory that learns your case",
+  "Privacy switch that hides names before anything is sent",
   "Written getting-started guide",
 ]
 
 const COMPLETE_EXTRA = [
+  "Talk mode: speak to your assistant, interrupt anytime, hear answers out loud",
+  "Case watcher: alerts when new rulings may help or hurt your case",
+  "Every case you've cited, mapped to the exact page",
   "Personal training session",
   "Paid research services set up (Westlaw, Lexis and others)",
   "Email and calendar connections",
-  "Background helpers set up for you",
   "New premium features as they're released",
 ]
 
