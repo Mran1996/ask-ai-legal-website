@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import { Clock, Facebook, Instagram, Mail, ShieldCheck } from "lucide-react"
+import { Clock, Facebook, Instagram, Mail, ShieldCheck, Youtube } from "lucide-react"
 import { CineNav } from "@/components/cinematic/nav"
 import { Footer } from "@/components/footer"
 import { ContactForm } from "@/components/contact-form"
@@ -114,6 +114,15 @@ export default function ContactPage() {
                         className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-navy/15 text-navy transition-colors hover:border-gold hover:text-gold-dark"
                       >
                         <Facebook className="h-5 w-5" aria-hidden />
+                      </a>
+                      <a
+                        href={SOCIAL_LINKS.youtube}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="YouTube"
+                        className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-navy/15 text-navy transition-colors hover:border-gold hover:text-gold-dark"
+                      >
+                        <Youtube className="h-5 w-5" aria-hidden />
                       </a>
                     </dd>
                   </div>

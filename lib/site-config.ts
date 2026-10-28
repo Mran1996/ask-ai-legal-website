@@ -8,6 +8,7 @@ export const META_FACEBOOK_PAGE_ID = "971753329348819"
 export const SOCIAL_LINKS = {
   instagram: "https://www.instagram.com/askailegal/",
   facebook: `https://www.facebook.com/profile.php?id=${META_FACEBOOK_PAGE_ID}`,
+  youtube: "https://www.youtube.com/@AskAILegal",
 } as const
 
 export const SUPPORT_EMAIL = "support@askailegal.com"
