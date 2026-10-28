@@ -10,6 +10,7 @@ export const SOCIAL_LINKS = {
   facebook: `https://www.facebook.com/profile.php?id=${META_FACEBOOK_PAGE_ID}`,
   /** Opens the Page straight to its Reviews tab. */
   facebookReviews: `https://www.facebook.com/profile.php?id=${META_FACEBOOK_PAGE_ID}&sk=reviews`,
+  youtube: "https://www.youtube.com/@AskAILegal",
 } as const
 
 export const GUARANTEE_HREF = "/guarantee"
