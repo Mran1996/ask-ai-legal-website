@@ -52,5 +52,5 @@ echo "==> Applying Cowork + Desktop GitHub MCP fix..."
 python3 "${REPO_ROOT}/scripts/fix-claude-cowork-github.py"
 
 echo ""
-echo "Done. Quit Claude (Cmd+Q), reopen, start a NEW Cowork session."
+echo "Done. Quit Claude completely (tray icon -> Quit), reopen, start a NEW Cowork session."
 echo "In Settings → Connectors, remove the remote \"Github\" connector if it reappears."

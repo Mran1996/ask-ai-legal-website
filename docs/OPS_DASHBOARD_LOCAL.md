@@ -13,22 +13,22 @@ Ask AI Legal runs **two sites**:
 
 **Terminal 1 — Convex (marketing repo):**
 
-```bash
-cd "/Users/sylasp/ask ai legal web"
+```powershell
+cd "C:\Users\Gwada\ask-ai-legal-website"
 npx convex dev
 ```
 
 **Terminal 2 — Marketing site:**
 
-```bash
-cd "/Users/sylasp/ask ai legal web"
+```powershell
+cd "C:\Users\Gwada\ask-ai-legal-website"
 npm run dev
 ```
 
 **Terminal 3 — Ops dashboard:**
 
-```bash
-cd /Users/sylasp/ask-ai-legal-ops
+```powershell
+cd C:\Users\Gwada\ask-ai-legal-ops
 npm run sync:convex   # after backend API changes
 npm run dev
 ```

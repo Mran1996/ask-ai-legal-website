@@ -5,15 +5,15 @@ After the security hardening merge, production webhooks **reject** unauthenticat
 ## Prerequisites
 
 - Convex production deployment: **robust-wombat-16**
-- Convex deploy key **or** `npx convex login` on your Mac
+- Convex deploy key **or** `npx convex login` on your Windows machine
 
-## Fastest path (Mac Terminal)
+## Fastest path (PowerShell)
 
-```bash
-cd "/Users/sylasp/ask ai legal web"
+```powershell
+cd "C:\Users\Gwada\ask-ai-legal-website"
 git pull origin main
 npx convex login
-./scripts/apply-security-env.sh --prod
+bash ./scripts/apply-security-env.sh --prod
 ```
 
 This sets `CALCOM_WEBHOOK_SECRET`, `RESEND_INBOUND_WEBHOOK_SECRET`, and `COUNSEL_EMAILS=support@askailegal.com`, deploys Convex prod, and writes **`security-env.local.txt`** (gitignored) with values for Cal.com and Resend.
@@ -27,9 +27,9 @@ This sets `CALCOM_WEBHOOK_SECRET`, `RESEND_INBOUND_WEBHOOK_SECRET`, and `COUNSEL
 
 ## Alternative: Cursor local Agent + Convex MCP
 
-1. Open project in **Cursor on your Mac** (not Cloud Agent)
+1. Open project in **Cursor on your Windows machine** (not Cloud Agent)
 2. **Settings → MCP → Convex** → Sign in
-3. Ask Agent: *"Run `./scripts/apply-security-env.sh --prod`"*
+3. Ask Agent: *"Run `bash ./scripts/apply-security-env.sh --prod`"*
 
 ## Cal.com webhook
 

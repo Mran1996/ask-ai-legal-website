@@ -52,5 +52,5 @@
 
 ## Reference paths
 
-Local: `/Users/sylasp/ask ai legal web`
+Local: `C:\Users\Gwada\ask-ai-legal-website`
 GitHub: https://github.com/Mran1996/ask-ai-legal-website
