@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { Instagram, Facebook, Star } from "lucide-react"
+import { Instagram, Facebook, Youtube, Star } from "lucide-react"
 import { BrandMark } from "@/components/brand-mark"
 import { useLanguage } from "@/components/language-provider"
 import { useConsent } from "@/components/privacy/consent-provider"
@@ -19,6 +19,7 @@ import {
 const social = [
   { label: "Instagram", icon: Instagram, href: SOCIAL_LINKS.instagram },
   { label: "Facebook", icon: Facebook, href: SOCIAL_LINKS.facebook },
+  { label: "YouTube", icon: Youtube, href: SOCIAL_LINKS.youtube },
 ]
 
 export function Footer() {

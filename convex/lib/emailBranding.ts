@@ -6,6 +6,7 @@ const META_FACEBOOK_PAGE_ID = "971753329348819"
 export const SUPPORT_EMAIL = "support@askailegal.com"
 export const INSTAGRAM_URL = "https://www.instagram.com/askailegal/"
 export const FACEBOOK_URL = `https://www.facebook.com/profile.php?id=${META_FACEBOOK_PAGE_ID}`
+export const YOUTUBE_URL = "https://www.youtube.com/@AskAILegal"
 
 export function publicSiteUrl(): string {
   return (process.env.PUBLIC_SITE_URL ?? "https://askailegal.com").replace(/\/$/, "")
@@ -59,6 +60,7 @@ export function clientEmailFooter(): string {
     `Email: ${SUPPORT_EMAIL}`,
     `Instagram: ${INSTAGRAM_URL}`,
     `Facebook: ${FACEBOOK_URL}`,
+    `YouTube: ${YOUTUBE_URL}`,
     reviewLine,
     "Document preparation only — we are not a law firm and do not provide legal advice.",
   ].join("\n")
@@ -75,7 +77,7 @@ export function clientEmailFooterHtml(): string {
   <p style="margin:0 0 8px;font-weight:700;color:#0A1628;">Ask AI Legal</p>
   <p style="margin:0 0 4px;"><a href="${publicSiteUrl()}" style="color:#C5A059;">${publicSiteUrl()}</a> · <a href="${contactPageUrl()}" style="color:#C5A059;">Contact</a></p>
   <p style="margin:0 0 4px;"><a href="mailto:${SUPPORT_EMAIL}" style="color:#C5A059;">${SUPPORT_EMAIL}</a></p>
-  <p style="margin:0 0 4px;"><a href="${INSTAGRAM_URL}" style="color:#C5A059;">Instagram</a> · <a href="${FACEBOOK_URL}" style="color:#C5A059;">Facebook</a></p>
+  <p style="margin:0 0 4px;"><a href="${INSTAGRAM_URL}" style="color:#C5A059;">Instagram</a> · <a href="${FACEBOOK_URL}" style="color:#C5A059;">Facebook</a> · <a href="${YOUTUBE_URL}" style="color:#C5A059;">YouTube</a></p>
   <p style="margin:8px 0 0;">${reviewHtml}</p>
   <p style="margin:12px 0 0;font-size:12px;color:#6B7280;">Document preparation only — we are not a law firm and do not provide legal advice.</p>
 </div>`
