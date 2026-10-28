@@ -2,12 +2,12 @@
 
 ## Quick fix (run this)
 
-```bash
-cd "/Users/sylasp/ask ai legal web"
-./scripts/setup-claude-github.sh
+```powershell
+cd "C:\Users\Gwada\ask-ai-legal-website"
+bash ./scripts/setup-claude-github.sh
 ```
 
-Then **Cmd+Q** to quit Claude completely, reopen, and start a **new** Cowork session.
+Then **fully quit** Claude (right-click the tray icon → Quit, or Alt+F4), reopen, and start a **new** Cowork session.
 
 ## What was wrong
 
@@ -27,8 +27,8 @@ Ask Claude in a new Cowork session: *“List files in Mran1996/ask-ai-legal-webs
 ## If it still fails
 
 1. Claude Desktop → **Settings → Connectors** → **remove** remote **Github**
-2. Run `./scripts/setup-claude-github.sh` again
-3. Cmd+Q, reopen, **new** Cowork session (not an old “Drafting 2” tab)
+2. Run `bash ./scripts/setup-claude-github.sh` again
+3. Fully quit Claude (tray icon → Quit), reopen, **new** Cowork session (not an old “Drafting 2” tab)
 
 ## Repos
 

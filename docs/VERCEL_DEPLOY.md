@@ -17,8 +17,8 @@ The **website** runs on Vercel. The **backend** (intake, quotes, email) runs on 
 
 ### 1. Push code to GitHub
 
-```bash
-cd "/Users/sylasp/ask ai legal web"
+```powershell
+cd "C:\Users\Gwada\ask-ai-legal-website"
 git add .
 git commit -m "Add Vercel deployment config"
 git push origin <your-branch>
