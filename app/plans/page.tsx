@@ -109,7 +109,7 @@ export default function PlansPage() {
                     14 days of support after install
                   </li>
                 </ul>
-                <a href={STRIPE_STARTER_URL} className="cine-btn-ghost mt-8 justify-center">
+                <a href={STRIPE_STARTER_URL} className="cine-btn-gold mt-8 justify-center">
                   Buy Starter · $1,497
                 </a>
               </div>
