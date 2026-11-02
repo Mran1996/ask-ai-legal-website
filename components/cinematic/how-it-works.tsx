@@ -19,7 +19,7 @@ const STEPS = [
   {
     n: "03",
     title: "You work from home",
-    body: "Organize documents, research legal sources, and prepare drafts for your review, with support by chat or email.",
+    body: "Organize documents, research legal sources, and prepare drafts for your review, with support by chat, email, or phone.",
     img: "step-03-home.png",
   },
 ]

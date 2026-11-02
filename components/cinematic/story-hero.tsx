@@ -42,7 +42,7 @@ const SCENES = [
     alt: "Woman at her home desk watching her legal workspace being installed on her laptop",
     label: "02 · Installation",
     title: ["Install it", "in minutes."],
-    sub: "Download it, follow the walkthrough video, and you are working in minutes. Help is a chat or email away.",
+    sub: "Download it, follow the walkthrough video, and you are working in minutes. Help is a chat, email, or phone call away.",
     pos: "60% center",
   },
   {

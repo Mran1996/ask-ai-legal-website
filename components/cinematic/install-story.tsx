@@ -30,7 +30,7 @@ const STEPS = [
   {
     n: "04",
     title: "Your questions, answered",
-    body: "Use the chat on our website or email support@askailegal.com, and we will help you finish setup.",
+    body: "Use the chat on our website, email support@askailegal.com, or call the support number we send after you purchase, and we will help you finish setup.",
     img: "install-04-questions.png",
   },
 ]
