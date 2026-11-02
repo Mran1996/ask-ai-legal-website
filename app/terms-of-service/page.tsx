@@ -65,11 +65,11 @@ export default function TermsOfServicePage() {
       <p>Ask AI Legal offers two one-time plans:</p>
       <ul>
         <li>
-          <strong>Starter</strong> — $1,997, paid once. Includes a live installation on your
+          <strong>Starter</strong> — $1,497, paid once. Includes a live installation on your
           computer and 14 days of installation support after installation.
         </li>
         <li>
-          <strong>Complete</strong> — $3,997, paid once. Includes a live installation on your
+          <strong>Complete</strong> — $2,997, paid once. Includes a live installation on your
           computer and 30 days of installation support after installation.
         </li>
       </ul>

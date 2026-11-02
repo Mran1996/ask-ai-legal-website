@@ -33,7 +33,7 @@ export const en = {
     ],
     ctaPrimary: PRIMARY_CTA_LABEL,
     ctaSecondary: "See pricing",
-    stat1Value: "$3,997",
+    stat1Value: "$2,997",
     stat1Label: "One-time purchase",
     stat1Sub: "Installation, setup, personal training, and 30 days of installation support",
     stat2Value: "$125/mo",
@@ -91,9 +91,9 @@ export const en = {
     titleHighlight: "",
     titleLine2: "",
     subtitle:
-      "Ask AI Legal is a software purchase with installation and onboarding for $3,997. Optional maintenance is $125 per month. You receive a clear explanation of included services and additional costs before purchase.",
+      "Ask AI Legal is a software purchase with installation and onboarding for $2,997. Optional maintenance is $125 per month. You receive a clear explanation of included services and additional costs before purchase.",
     traditionalHeading: "One-time purchase",
-    traditionalPrice: "$3,997",
+    traditionalPrice: "$2,997",
     traditionalDesc:
       "Your installed copy, setup, personal training, a written getting-started guide, and 30 days of installation support",
     traditionalBullets: [
@@ -137,9 +137,9 @@ export const en = {
       },
       {
         title: "Clear pricing",
-        summary: "$3,997 once, maintenance optional",
+        summary: "$2,997 once, maintenance optional",
         detail:
-          "The one-time purchase is $3,997. Optional maintenance is $125 per month. We explain additional costs before installation.",
+          "The one-time purchase is $2,997. Optional maintenance is $125 per month. We explain additional costs before installation.",
       },
     ],
   },
@@ -238,7 +238,7 @@ export const en = {
     body1:
       "Before you purchase, we confirm supported computer requirements, explain the included features and connected services, and review installation arrangements with you.",
     body2:
-      "The one-time purchase is $3,997, with optional maintenance at $125 per month. We explain additional costs before installation.",
+      "The one-time purchase is $2,997, with optional maintenance at $125 per month. We explain additional costs before installation.",
     cardLabel: PRIMARY_CTA_LABEL,
     cardTitle: "Let's discuss your installation",
     emailLabel: "Email us",
@@ -282,7 +282,7 @@ export const en = {
   cta: {
     label: "Get started",
     title: "Ready to set up your legal workspace?",
-    body: "Book a consultation to confirm your computer requirements, review the included features, and discuss installation. The one-time purchase is $3,997, with optional maintenance at $125 per month.",
+    body: "Book a consultation to confirm your computer requirements, review the included features, and discuss installation. The one-time purchase is $2,997, with optional maintenance at $125 per month.",
     emailConsult: PRIMARY_CTA_LABEL,
     emailQuote: PRIMARY_CTA_LABEL,
     disclaimer: SITE_DISCLAIMER,

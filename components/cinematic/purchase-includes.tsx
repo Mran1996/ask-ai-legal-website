@@ -16,7 +16,7 @@ export function PurchaseIncludes() {
             <span className="cine-serif text-accent-light">while you watch.</span>
           </h2>
           <div data-reveal className="mt-6">
-            <p className="font-display text-5xl font-semibold tracking-tight text-accent-light">$1,997</p>
+            <p className="font-display text-5xl font-semibold tracking-tight text-accent-light">$1,497</p>
             <p className="mt-2 font-mono text-xs uppercase tracking-widest text-cream/60">Starting price · One-time purchase</p>
             <p className="mt-4 font-display text-xl text-cream">Optional maintenance: $125/month</p>
             <p className="mt-3 text-sm text-cream/60">{THIRD_PARTY_COSTS_NOTE}</p>

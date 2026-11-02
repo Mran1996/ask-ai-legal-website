@@ -70,7 +70,7 @@ export const servicesPageContent = {
   },
   cta: {
     title: "Ready to set up your legal workspace?",
-    body: "Book a consultation to confirm your computer requirements, review the included features, and discuss installation. The one-time purchase is $3,997, with optional maintenance at $125 per month.",
+    body: "Book a consultation to confirm your computer requirements, review the included features, and discuss installation. The one-time purchase is $2,997, with optional maintenance at $125 per month.",
     button: CASE_REVIEW_CTA_LABEL,
   },
   homeLink: "See how the install works",
