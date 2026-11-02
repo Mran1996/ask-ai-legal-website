@@ -6,20 +6,20 @@ import { Reveal } from "./reveal"
 const STEPS = [
   {
     n: "01",
-    title: "Request an installation consultation",
-    body: "We confirm your computer requirements, review the included features, and explain any additional costs before you purchase.",
+    title: "Choose your plan and pay once",
+    body: "Pick Starter or Complete and check out securely. Then tell us which computer you use.",
     img: "step-01-tell-us.png",
   },
   {
     n: "02",
-    title: "Accept the link. We install — you watch.",
-    body: "We install and configure your workspace and supported connections on your screen, then set it up around your issues and goals.",
+    title: "Download and install",
+    body: "We email your download and a step-by-step walkthrough video. Install it in minutes, then activate it with your license code.",
     img: "step-02-install.png",
   },
   {
     n: "03",
     title: "You work from home",
-    body: "Organize documents, research legal sources, and prepare drafts for your review — with 30 days of installation support.",
+    body: "Organize documents, research legal sources, and prepare drafts for your review, with support by chat or email.",
     img: "step-03-home.png",
   },
 ]

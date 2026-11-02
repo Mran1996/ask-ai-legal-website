@@ -4,12 +4,15 @@ import { Check, Mail } from "lucide-react"
 import { CineNav } from "@/components/cinematic/nav"
 import { Footer } from "@/components/footer"
 import { PaySuccessPurchase } from "@/components/analytics/pay-success-purchase"
+import { ComputerChoice } from "@/components/pay/computer-choice"
 import {
   MAINTENANCE_PRICE_USD,
   PURCHASE_PRICE_USD,
   SITE_URL,
   STARTER_PRICE_USD,
   SUPPORT_EMAIL,
+  WALKTHROUGH_VIDEO_ID,
+  WALKTHROUGH_VIDEO_URL,
 } from "@/lib/site-config"
 
 const TITLE = "Payment received"
@@ -33,9 +36,10 @@ const planCopy = (name: string, price: number, days: number) => ({
   heading: "Thank you. Your purchase is confirmed",
   body: `We received your one-time payment of $${price.toLocaleString("en-US", { minimumFractionDigits: 2 })} for the Ask AI Legal ${name} plan. This payment does not enroll you in maintenance.`,
   next: [
-    "We'll contact you by email to arrange your installation.",
-    "We confirm your computer requirements and installation arrangements before the session.",
-    `Your ${days} days of installation support begin when installation is completed.`,
+    "Choose Windows or Mac below. We email your download link, usually within one business day.",
+    "Install Ask AI Legal and open it. It shows your computer code.",
+    "Reply with that code and we send your license code to activate it.",
+    `Questions? Use the chat on our website or email us. Your ${days} days of support start when you are activated.`,
   ],
   value: price,
 })
@@ -64,7 +68,9 @@ type PageProps = {
 
 export default async function PaySuccessPage({ searchParams }: PageProps) {
   const params = await searchParams
-  const raw = Array.isArray(params.item) ? params.item[0] : params.item
+  // Stripe links send ?item=starter|complete (older ones may use ?plan=).
+  const pick = (v: string | string[] | undefined) => (Array.isArray(v) ? v[0] : v)
+  const raw = pick(params.item) ?? pick(params.plan)
   const item: Item = raw === "purchase" ? "complete" : raw === "starter" || raw === "complete" || raw === "maintenance" ? raw : "unknown"
   const copy = COPY[item]
 
@@ -95,6 +101,30 @@ export default async function PaySuccessPage({ searchParams }: PageProps) {
                   ))}
                 </ul>
               </div>
+
+              {item === "starter" || item === "complete" ? (
+                <>
+                  <div className="mt-6">
+                    <ComputerChoice plan={item === "starter" ? "Starter" : "Complete"} />
+                  </div>
+                  <div className="mt-6 text-left">
+                    <p className="text-sm font-semibold text-white">Watch the step-by-step walkthrough</p>
+                    <div className="mt-3 aspect-video overflow-hidden rounded-sm border border-white/10">
+                      <iframe
+                        className="h-full w-full"
+                        src={`https://www.youtube-nocookie.com/embed/${WALKTHROUGH_VIDEO_ID}`}
+                        title="Ask AI Legal walkthrough"
+                        allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        loading="lazy"
+                      />
+                    </div>
+                    <a className="mt-2 inline-block text-xs text-gold underline" href={WALKTHROUGH_VIDEO_URL} target="_blank" rel="noopener noreferrer">
+                      Open it on YouTube
+                    </a>
+                  </div>
+                </>
+              ) : null}
 
               <div className="mt-6 flex items-center justify-center gap-2 text-sm text-white/60">
                 <Mail className="h-4 w-4 shrink-0 text-gold" aria-hidden />

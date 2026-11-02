@@ -145,22 +145,22 @@ export const en = {
   },
   process: {
     label: "How it works",
-    title: "Three steps. From consultation to your own workspace.",
+    title: "Three steps. From checkout to your own workspace.",
     titleLine1: "Three steps.",
-    titleHighlight: "From consultation to your own workspace.",
+    titleHighlight: "From checkout to your own workspace.",
     cta: PRIMARY_CTA_LABEL,
     steps: [
       {
-        title: "Request an installation consultation",
-        body: "We confirm your computer requirements, review the included features, and explain any additional costs before you purchase.",
+        title: "Choose your plan and pay once",
+        body: "Pick Starter or Complete and check out securely. Then tell us which computer you use.",
       },
       {
-        title: "We do the install",
-        body: "We install and configure your workspace and supported connections, then set it up around your issues and goals and show you how to use it.",
+        title: "Download and install",
+        body: "We email your download and a step-by-step walkthrough video. Install it in minutes and activate it with your license code.",
       },
       {
         title: "You work from home",
-        body: "Organize documents, research legal sources, and prepare drafts for your review — with a written getting-started guide, plus 30 days of installation support.",
+        body: "Organize documents, research legal sources, and prepare drafts for your review, with support by chat or email.",
       },
     ],
   },
@@ -232,17 +232,17 @@ export const en = {
     },
   },
   consultation: {
-    label: "Installation consultation",
-    titleLine1: "Every computer is different.",
-    titleLine2: "We confirm yours first.",
+    label: "Getting started",
+    titleLine1: "Pay once.",
+    titleLine2: "Install it in minutes.",
     body1:
-      "Before you purchase, we confirm supported computer requirements, explain the included features and connected services, and review installation arrangements with you.",
+      "After you pay, choose Windows or Mac. We send your download and a step-by-step walkthrough video, and help by chat or email whenever you need it.",
     body2:
-      "The one-time purchase is $2,997, with optional maintenance at $125 per month. We explain additional costs before installation.",
+      "Plans start at $1,497, paid once, with optional maintenance at $125 per month. Third-party services you connect are billed separately.",
     cardLabel: PRIMARY_CTA_LABEL,
-    cardTitle: "Let's discuss your installation",
+    cardTitle: "Questions before you buy?",
     emailLabel: "Email us",
-    timing: "Send us a message and we'll reply by email to arrange your consultation.",
+    timing: "Email us or ask our website chat. We reply by email.",
     cta: PRIMARY_CTA_LABEL,
   },
   faq: {
@@ -282,7 +282,7 @@ export const en = {
   cta: {
     label: "Get started",
     title: "Ready to set up your legal workspace?",
-    body: "Book a consultation to confirm your computer requirements, review the included features, and discuss installation. The one-time purchase is $2,997, with optional maintenance at $125 per month.",
+    body: "Pay once, download, and install in minutes. Plans start at $1,497, with optional maintenance at $125 per month.",
     emailConsult: PRIMARY_CTA_LABEL,
     emailQuote: PRIMARY_CTA_LABEL,
     disclaimer: SITE_DISCLAIMER,

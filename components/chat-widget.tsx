@@ -397,9 +397,16 @@ export function ChatWidget() {
     >
       {/* Header */}
       <div className="flex shrink-0 items-start justify-between gap-2 border-b border-white/10 bg-navy-light px-4 py-3">
-        <div className="min-w-0">
-          <p className="font-display text-lg font-semibold text-white">{ui.title}</p>
-          <p className="text-xs text-white/60">{ui.subtitle}</p>
+        <div className="flex min-w-0 items-center gap-3">
+          {/* A friendly face for the chat; labeled as the assistant so nobody mistakes it for a live person. */}
+          <span className="relative shrink-0">
+            <img src="/brand/assistant-face.jpg" alt="" width={44} height={44} className="h-11 w-11 rounded-full border-2 border-gold/60 object-cover" />
+            <span className="absolute bottom-0 right-0 h-3 w-3 rounded-full border-2 border-navy-light bg-emerald-400" aria-hidden />
+          </span>
+          <div className="min-w-0">
+            <p className="font-display text-lg font-semibold text-white">{ui.title}</p>
+            <p className="text-xs text-white/60">{ui.subtitle}</p>
+          </div>
         </div>
         <div className="flex items-center gap-1">
           {languageConfirmed && (

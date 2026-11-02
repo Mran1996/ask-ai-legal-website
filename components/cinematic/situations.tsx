@@ -24,8 +24,8 @@ export function Situations() {
             <span className="cine-serif text-accent-light"> small claims, and more.</span>
           </h2>
           <p data-reveal className="cine-body mt-4 max-w-2xl">
-            Examples only. Available features and sources depend on your installation and your court. We confirm what
-            fits your matter during the installation consultation.
+            Examples only. Available features and sources depend on your installation and your court. Questions about
+            your matter? Ask our website chat or email support@askailegal.com.
           </p>
         </Reveal>
 
