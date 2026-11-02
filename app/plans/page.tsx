@@ -9,7 +9,7 @@ import { CONSULT_CTA_LABEL, CONSULT_HREF } from "@/lib/site-config"
 export const metadata: Metadata = {
   title: "Compare Plans | Ask AI Legal",
   description:
-    "Two plans, each paid once: Starter at $1,997 or Complete at $3,997. Both are installed live on your computer while you watch. Backed by a money-back guarantee.",
+    "Two plans, each paid once: Starter at $1,497 or Complete at $2,997. Both are installed live on your computer while you watch. Backed by a money-back guarantee.",
   alternates: { canonical: "/plans" },
 }
 
@@ -57,8 +57,8 @@ const productJsonLd = {
   brand: { "@type": "Brand", name: "Ask AI Legal" },
   url: "https://askailegal.com/plans",
   offers: [
-    { "@type": "Offer", name: "Starter", price: "1997.00", priceCurrency: "USD", url: "https://askailegal.com/plans" },
-    { "@type": "Offer", name: "Complete", price: "3997.00", priceCurrency: "USD", url: "https://askailegal.com/plans" },
+    { "@type": "Offer", name: "Starter", price: "1497.00", priceCurrency: "USD", url: "https://askailegal.com/plans" },
+    { "@type": "Offer", name: "Complete", price: "2997.00", priceCurrency: "USD", url: "https://askailegal.com/plans" },
     {
       "@type": "Offer",
       name: "Optional maintenance, monthly",
@@ -95,7 +95,7 @@ export default function PlansPage() {
               {/* Starter: plain card */}
               <div className="cine-card flex flex-col p-6 sm:p-8">
                 <p className="cine-label">Starter</p>
-                <p className="mt-3 font-display text-5xl font-semibold text-cream">$1,997</p>
+                <p className="mt-3 font-display text-5xl font-semibold text-cream">$1,497</p>
                 <p className="mt-1 text-sm text-cream/60">One-time purchase</p>
                 <ul className="mt-6 flex-1 space-y-3">
                   {BOTH.map((f) => (
@@ -137,7 +137,7 @@ export default function PlansPage() {
                     Complete
                   </p>
                 </div>
-                <p className="mt-3 font-display text-5xl font-semibold">$3,997</p>
+                <p className="mt-3 font-display text-5xl font-semibold">$2,997</p>
                 <p className="mt-1 text-sm" style={{ color: APP.muted }}>
                   One-time purchase
                 </p>

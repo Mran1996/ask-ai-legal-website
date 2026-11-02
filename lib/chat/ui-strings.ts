@@ -69,7 +69,7 @@ const en: ChatUiStrings = {
   bookHint:
     "We confirm your computer requirements, review the included features, and discuss installation. We'll reply by email to set a time.",
   pricingLine:
-    "Plans from $1,997, one-time purchase · Optional maintenance $125/month · Third-party usage and paid services are billed separately.",
+    "Plans from $1,497, one-time purchase · Optional maintenance $125/month · Third-party usage and paid services are billed separately.",
   firstName: "First name",
   lastName: "Last name",
   email: "Email",
@@ -118,7 +118,7 @@ const hi: ChatUiStrings = {
   bookHint:
     "हम आपके कंप्यूटर की ज़रूरतें जाँचते हैं, शामिल सुविधाएँ समझाते हैं और इंस्टॉलेशन पर चर्चा करते हैं। समय तय करने के लिए हम ईमेल से जवाब देंगे।",
   pricingLine:
-    "प्लान $1,997 से शुरू, एक बार की खरीद · वैकल्पिक रखरखाव $125/माह · तृतीय-पक्ष AI, रिसर्च सदस्यता और क्लाउड सेवाओं का खर्च अलग हो सकता है।",
+    "प्लान $1,497 से शुरू, एक बार की खरीद · वैकल्पिक रखरखाव $125/माह · तृतीय-पक्ष AI, रिसर्च सदस्यता और क्लाउड सेवाओं का खर्च अलग हो सकता है।",
   firstName: "पहला नाम",
   lastName: "अंतिम नाम",
   email: "ईमेल",

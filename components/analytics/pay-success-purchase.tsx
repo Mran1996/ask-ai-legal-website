@@ -6,7 +6,7 @@ import { pixelTrack } from "@/lib/meta-pixel"
 
 /**
  * Fires Meta Purchase once per mount when analytics consent is granted.
- * `value` is the item paid for (3997 purchase / 125 maintenance); omitted when unknown.
+ * `value` is the item paid for (2997 purchase / 125 maintenance); omitted when unknown.
  */
 export function PaySuccessPurchase({ value }: { value?: number }) {
   const { analyticsAllowed, hasChosen } = useConsent()

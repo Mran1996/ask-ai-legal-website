@@ -28,10 +28,10 @@ export const BUSINESS_HOURS: string = ""
 export const BUSINESS_SERVICE_AREAS = "Serving customers in all 50 states"
 
 /** Approved public pricing (Oct 2026): one-time purchase + optional monthly maintenance. */
-export const PURCHASE_PRICE_USD = 3997
-export const STARTER_PRICE_USD = 1997
-export const PURCHASE_PRICE_CENTS = 399700
-export const PURCHASE_PRICE_DISPLAY = "$3,997"
+export const PURCHASE_PRICE_USD = 2997
+export const STARTER_PRICE_USD = 1497
+export const PURCHASE_PRICE_CENTS = 299700
+export const PURCHASE_PRICE_DISPLAY = "$2,997"
 export const MAINTENANCE_PRICE_USD = 125
 export const MAINTENANCE_PRICE_CENTS = 12500
 export const MAINTENANCE_PRICE_DISPLAY = "$125"

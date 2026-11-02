@@ -54,7 +54,7 @@ export default function OpenGraphImage() {
             maxWidth: 920,
           }}
         >
-          {`$3,997 one-time purchase · Optional maintenance $125/month`}
+          {`$2,997 one-time purchase · Optional maintenance $125/month`}
         </div>
         <div
           style={{

@@ -20,7 +20,7 @@ import {
 
 const TITLE = "Ask AI Legal Pricing | Private AI Legal Assistant"
 const DESCRIPTION =
-  "Ask AI Legal is $3,997 one time: installation, personalized setup, agent setup, connections, Second Brain memory, training, and 30 days of support. Maintenance optional at $125/month."
+  "Ask AI Legal is $2,997 one time: installation, personalized setup, agent setup, connections, Second Brain memory, training, and 30 days of support. Maintenance optional at $125/month."
 
 export const metadata: Metadata = {
   title: { absolute: TITLE },
@@ -76,7 +76,7 @@ const DETAILS_LINE = "We’ll go over the details in your consultation."
 const sections = [
   {
     title: "Your costs, clearly explained.",
-    body: "The one-time purchase is $3,997. Optional maintenance is $125 a month, with no long-term commitment. Third-party usage and paid services are billed separately.",
+    body: "The one-time purchase is $2,997. Optional maintenance is $125 a month, with no long-term commitment. Third-party usage and paid services are billed separately.",
   },
   {
     title: "What happens without maintenance?",
@@ -105,7 +105,7 @@ export default function PricingPage() {
             <div className="gold-rule mb-8" />
             <h1 className="firm-title text-white">One-time purchase. Optional monthly maintenance.</h1>
             <p className="mt-8 max-w-2xl text-lg leading-relaxed text-white/70">
-              Your own installed legal workspace, personally set up for you. Purchase Ask AI Legal for $3,997,
+              Your own installed legal workspace, personally set up for you. Purchase Ask AI Legal for $2,997,
               including installation, configuration, personal training, and initial support.
             </p>
             <Link
@@ -139,7 +139,7 @@ export default function PricingPage() {
               <article className="firm-card flex flex-col border-2 border-gold/40 bg-white p-6 shadow-[0_0_24px_rgba(251,176,52,0.1)] sm:p-8">
                 <h3 className="font-display text-2xl font-semibold text-navy">Ask AI Legal</h3>
                 <p className="mt-4 font-display text-4xl font-semibold text-navy">
-                  $3,997 <span className="text-lg font-medium text-gray-600">one time</span>
+                  $2,997 <span className="text-lg font-medium text-gray-600">one time</span>
                 </p>
                 <p className="mt-5 text-sm font-semibold text-navy">Your purchase includes:</p>
                 <ul className="mt-3 flex-grow space-y-2.5">

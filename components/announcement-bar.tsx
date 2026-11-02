@@ -6,7 +6,7 @@ export function AnnouncementBar() {
       </span>
       <span className="mx-2 text-gray-600">·</span>
       <span className="text-gray-300">
-        $3,997 one-time · optional $125/month maintenance
+        $2,997 one-time · optional $125/month maintenance
       </span>
     </div>
   )

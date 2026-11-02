@@ -15,7 +15,7 @@ export const COMPARISON = {
     },
     ours: {
       label: "Ask AI Legal",
-      price: "$3,997",
+      price: "$2,997",
       unit: "One-time purchase",
       detail: "Software, installation, and onboarding. Optional maintenance is $125/month — no hourly billing.",
     },
@@ -23,7 +23,7 @@ export const COMPARISON = {
   rows: [
     {
       label: "Upfront cost",
-      ours: "$3,997 for software, installation, and onboarding",
+      ours: "$2,997 for software, installation, and onboarding",
       attorney: "Retainers often start around $5,000–$10,000 or more, depending on the attorney and matter",
       short: true,
     },

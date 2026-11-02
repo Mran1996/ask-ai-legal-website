@@ -18,7 +18,7 @@ export function ClosingCta() {
             <span className="cine-serif text-accent-light">install call.</span>
           </h2>
           <p data-reveal className="cine-body mt-4 max-w-lg">
-            We check your computer first, so you know it works before you pay. Plans start at $1,997, paid once.
+            We check your computer first, so you know it works before you pay. Plans start at $1,497, paid once.
             Optional maintenance is $125 a month.
           </p>
           <p data-reveal className="cine-body mt-3 max-w-lg">
