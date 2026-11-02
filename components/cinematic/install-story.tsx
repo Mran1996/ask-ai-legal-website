@@ -11,26 +11,26 @@ gsap.registerPlugin(ScrollTrigger)
 const STEPS = [
   {
     n: "01",
-    title: "We confirm your computer and setup",
-    body: "In your installation consultation we confirm supported computer requirements, explain the included features and connected services, and review any additional costs before you purchase.",
+    title: "Pay once",
+    body: "Choose Starter or Complete and pay securely through Stripe. There is no call to book.",
     img: "install-01-understand.png",
   },
   {
     n: "02",
-    title: "You accept a link",
-    body: "That gives us permission to access your computer for the installation session. We explain the remote-access and recording arrangements before the session, and you can end it at any time.",
+    title: "Tell us your computer",
+    body: "Right after you pay, choose Windows or Mac. We send the right download for your computer.",
     img: "install-02-link.png",
   },
   {
     n: "03",
-    title: "We install while you watch",
-    body: "Live, on your screen. We install and configure your workspace and supported connections, then set it up around your issues and goals.",
+    title: "Install in minutes",
+    body: "Follow the step-by-step walkthrough video. Open the app, and we send your license code to activate it.",
     img: "install-03-live.png",
   },
   {
     n: "04",
     title: "Your questions, answered",
-    body: "Before we close the session, we show you how to use the installed features and answer your questions. You also receive a written getting-started guide.",
+    body: "Use the chat on our website or email support@askailegal.com, and we will help you finish setup.",
     img: "install-04-questions.png",
   },
 ]

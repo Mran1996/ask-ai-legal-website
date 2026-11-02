@@ -13,12 +13,12 @@ export function ClosingCta() {
       <div className="cine-container relative grid items-center gap-12 md:grid-cols-[1.2fr_1fr]">
         <Reveal>
           <h2 data-reveal className="cine-h2 text-cream">
-            Book your{" "}
+            Get your own{" "}
             <br />
-            <span className="cine-serif text-accent-light">install call.</span>
+            <span className="cine-serif text-accent-light">legal workspace.</span>
           </h2>
           <p data-reveal className="cine-body mt-4 max-w-lg">
-            We check your computer first, so you know it works before you pay. Plans start at $1,497, paid once.
+            Pay once, download, and install in minutes. Plans start at $1,497.
             Optional maintenance is $125 a month.
           </p>
           <p data-reveal className="cine-body mt-3 max-w-lg">

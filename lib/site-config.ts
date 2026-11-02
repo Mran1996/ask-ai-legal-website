@@ -90,8 +90,15 @@ export const PRICING_NOTICE =
  * Consultation CTA. /book only schedules calls for an existing intake file
  * (it needs caseId + ref), so new visitors start on /contact.
  */
-export const CONSULT_CTA_LABEL = "Request an installation consultation"
-export const CONSULT_HREF = "/contact"
+export const CONSULT_CTA_LABEL = "See plans and buy"
+export const CONSULT_HREF = "/plans"
+
+/** Stripe payment links for the two plans (each redirects to /pay/success?item=starter|complete). */
+export const STRIPE_STARTER_URL = "https://buy.stripe.com/eVq14n4gm71f98ef1t0co0b"
+export const STRIPE_COMPLETE_URL = "https://buy.stripe.com/8x214n5kq2KZfwCg5x0co0c"
+/** The step-by-step install walkthrough on YouTube. */
+export const WALKTHROUGH_VIDEO_URL = "https://www.youtube.com/watch?v=fZWmqU2a330"
+export const WALKTHROUGH_VIDEO_ID = "fZWmqU2a330"
 
 /** Pay #1 — internal ops/Stripe amount for the retired custom-quote flow (not advertised). */
 export const CASE_FILE_REVIEW_PRICE_USD = 499

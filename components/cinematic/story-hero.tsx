@@ -41,8 +41,8 @@ const SCENES = [
     imgMobile: "story-02-install-m.png",
     alt: "Woman at her home desk watching her legal workspace being installed on her laptop",
     label: "02 · Installation",
-    title: ["We do the", "install."],
-    sub: "We connect to your computer, set everything up while you watch, and explain each step.",
+    title: ["Install it", "in minutes."],
+    sub: "Download it, follow the walkthrough video, and you are working in minutes. Help is a chat or email away.",
     pos: "60% center",
   },
   {

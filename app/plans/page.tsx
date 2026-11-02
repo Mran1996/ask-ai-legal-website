@@ -4,17 +4,17 @@ import { ArrowRight, Check, ShieldCheck } from "lucide-react"
 import { CineNav } from "@/components/cinematic/nav"
 import { Footer } from "@/components/footer"
 import { BrandMark } from "@/components/brand-mark"
-import { CONSULT_CTA_LABEL, CONSULT_HREF } from "@/lib/site-config"
+import { STRIPE_COMPLETE_URL, STRIPE_STARTER_URL } from "@/lib/site-config"
 
 export const metadata: Metadata = {
   title: "Compare Plans | Ask AI Legal",
   description:
-    "Two plans, each paid once: Starter at $1,497 or Complete at $2,997. Both are installed live on your computer while you watch. Backed by a money-back guarantee.",
+    "Two plans, each paid once: Starter at $1,497 or Complete at $2,997. Pay once, download, and install in minutes. Backed by a money-back guarantee.",
   alternates: { canonical: "/plans" },
 }
 
 const BOTH = [
-  "Live install while you watch",
+  "Download and install in minutes",
   "Chat assistant",
   "Drafting that plans, writes and polishes, and never changes your citations or quotes",
   "Reads your papers and organizes your case folder",
@@ -53,7 +53,7 @@ const productJsonLd = {
   "@type": "Product",
   name: "Ask AI Legal",
   description:
-    "Private legal assistant software installed live on your computer, for people who represent themselves in court.",
+    "Private legal assistant software you install on your own computer, for people who represent themselves in court.",
   brand: { "@type": "Brand", name: "Ask AI Legal" },
   url: "https://askailegal.com/plans",
   offers: [
@@ -88,7 +88,7 @@ export default function PlansPage() {
                 Two plans.{" "}
                 <span className="cine-serif text-accent-light">Each paid once.</span>
               </h1>
-              <p className="cine-body mt-4">Both plans are installed live on your computer while you watch. You purchase through your installation consultation.</p>
+              <p className="cine-body mt-4">Pay once and get your Ask AI Legal workspace. Download and install it in minutes, and reach out anytime if you need support.</p>
             </div>
 
             <div className="mx-auto mt-10 grid max-w-5xl items-stretch gap-6 md:grid-cols-2">
@@ -109,9 +109,9 @@ export default function PlansPage() {
                     14 days of support after install
                   </li>
                 </ul>
-                <Link href={CONSULT_HREF} className="cine-btn-ghost mt-8 justify-center">
-                  {CONSULT_CTA_LABEL}
-                </Link>
+                <a href={STRIPE_STARTER_URL} className="cine-btn-ghost mt-8 justify-center">
+                  Buy Starter · $1,497
+                </a>
               </div>
 
               {/* Complete: card in the installed app's design */}
@@ -156,13 +156,13 @@ export default function PlansPage() {
                     30 days of support after install
                   </li>
                 </ul>
-                <Link
-                  href={CONSULT_HREF}
+                <a
+                  href={STRIPE_COMPLETE_URL}
                   className="mt-8 inline-flex h-12 items-center justify-center gap-2 rounded-[14px] px-6 font-semibold text-white"
                   style={{ background: APP.grad, boxShadow: "0 10px 24px -10px rgba(47,143,234,.65)" }}
                 >
-                  {CONSULT_CTA_LABEL} <ArrowRight className="h-4 w-4" aria-hidden />
-                </Link>
+                  Buy Complete · $2,997 <ArrowRight className="h-4 w-4" aria-hidden />
+                </a>
               </div>
             </div>
 
