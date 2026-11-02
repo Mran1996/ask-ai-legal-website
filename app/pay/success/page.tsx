@@ -39,7 +39,7 @@ const planCopy = (name: string, price: number, days: number) => ({
     "Choose Windows or Mac below. We email your download link, usually within one business day.",
     "Install Ask AI Legal and open it. It shows your computer code.",
     "Reply with that code and we send your license code to activate it.",
-    `Questions? Use the chat on our website or email us. Your ${days} days of support start when you are activated.`,
+    `Questions? Use the chat on our website, email us, or call. We include our support phone number with your download. Your ${days} days of support start when you are activated.`,
   ],
   value: price,
 })

@@ -160,7 +160,7 @@ export const en = {
       },
       {
         title: "You work from home",
-        body: "Organize documents, research legal sources, and prepare drafts for your review, with support by chat or email.",
+        body: "Organize documents, research legal sources, and prepare drafts for your review, with support by chat, email, or phone.",
       },
     ],
   },
@@ -236,7 +236,7 @@ export const en = {
     titleLine1: "Pay once.",
     titleLine2: "Install it in minutes.",
     body1:
-      "After you pay, choose Windows or Mac. We send your download and a step-by-step walkthrough video, and help by chat or email whenever you need it.",
+      "After you pay, choose Windows or Mac. We send your download and a step-by-step walkthrough video, and help by chat, email, or phone whenever you need it. Our support phone number comes with your download.",
     body2:
       "Plans start at $1,497, paid once, with optional maintenance at $125 per month. Third-party services you connect are billed separately.",
     cardLabel: PRIMARY_CTA_LABEL,
