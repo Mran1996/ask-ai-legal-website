@@ -108,12 +108,13 @@ export default async function PaySuccessPage({ searchParams }: PageProps) {
                     <ComputerChoice plan={item === "starter" ? "Starter" : "Complete"} />
                   </div>
                   <div className="mt-6 text-left">
-                    <p className="text-sm font-semibold text-white">Watch the step-by-step walkthrough</p>
+                    <p className="text-sm font-semibold text-white">See Ask AI Legal in action</p>
+                    <p className="mt-1 text-xs text-white/60">A short preview. Your full walkthrough video, which explains everything step by step, comes by email with your download.</p>
                     <div className="mt-3 aspect-video overflow-hidden rounded-sm border border-white/10">
                       <iframe
                         className="h-full w-full"
                         src={`https://www.youtube-nocookie.com/embed/${WALKTHROUGH_VIDEO_ID}`}
-                        title="Ask AI Legal walkthrough"
+                        title="Ask AI Legal preview"
                         allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
                         allowFullScreen
                         loading="lazy"
