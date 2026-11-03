@@ -2,10 +2,13 @@ import type { Locale } from "@/lib/i18n/languages"
 import { searchKnowledge } from "@/lib/chat/search"
 import { chatBodyTooLarge, isAllowedChatOrigin } from "@/lib/chat/api-guard"
 import { getPreferredLlmProvider, type ChatProviderId } from "@/lib/chat/providers"
+import { allowChatRequest, clientIp } from "@/lib/chat/rate-limit"
+import { SUPPORT_EMAIL } from "@/lib/site-config"
 import {
   buildFaqResponse,
   getLastUserText,
   hasLlmProviderKey,
+  streamFaqAnswer,
   streamLlmAnswer,
 } from "@/lib/chat/stream-response"
 import type { LlmProviderId } from "@/lib/chat/model-providers"
@@ -37,6 +40,13 @@ export async function POST(req: Request) {
 
     messages = body.messages ?? []
     locale = (body.locale ?? "en") as Locale
+
+    if (!allowChatRequest(clientIp(req))) {
+      return streamFaqAnswer(
+        `You have sent a lot of messages in a short time, so the chat is paused for a little while. Please try again later, or email ${SUPPORT_EMAIL} and we will answer you there.`,
+        messages
+      )
+    }
     const lastQuery = getLastUserText(messages)
     const contextChunks = searchKnowledge(lastQuery, locale, 8)
 

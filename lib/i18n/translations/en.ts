@@ -91,7 +91,7 @@ export const en = {
     titleHighlight: "",
     titleLine2: "",
     subtitle:
-      "Ask AI Legal is a software purchase with installation and onboarding for $2,997. Optional maintenance is $125 per month. You receive a clear explanation of included services and additional costs before purchase.",
+      "Ask AI Legal is a one-time software purchase: Starter is $1,497 and Complete is $2,997. Optional maintenance is $125 per month. You download it, follow the walkthrough video, and we help by chat, email, or phone.",
     traditionalHeading: "One-time purchase",
     traditionalPrice: "$2,997",
     traditionalDesc:

@@ -11,7 +11,7 @@ const WHAT_IS: FaqItem = {
 
 const INCLUDES: FaqItem = {
   q: "What do the plans include?",
-  a: "Plans start at $1,497, paid once. Both plans include a live install on your computer. The Complete plan includes a computer compatibility check and installation, guided setup around your issues and goals, personalized workspace configuration, agent setup, supported API and plugin connections, Second Brain memory setup, personal training, a written getting-started guide, and 30 days of installation support. See the plans page to compare both. Third-party usage and paid services are billed separately.",
+  a: "Plans start at $1,497, paid once. You buy on the plans page, choose Windows or Mac, and we email your download with a step-by-step walkthrough video. The Complete plan includes guided setup around your issues and goals, personalized workspace configuration, agent setup, supported API and plugin connections, Second Brain memory setup, personal training, a written getting-started guide, and 30 days of support. See the plans page to compare both. Third-party usage and paid services are billed separately.",
 }
 
 const MAINTENANCE_OPTIONAL: FaqItem = {
@@ -26,7 +26,7 @@ const PRIVACY: FaqItem = {
 
 const SETUP: FaqItem = {
   q: "How does installation and setup work?",
-  a: "In your installation consultation we confirm supported computer requirements, explain the included features and connected services, and review any additional costs before you purchase. We then install and configure your workspace and supported connections on your screen, set it up around your issues and goals, and show you how to use it. Installation support covers the first 30 days after installation is completed.",
+  a: "After you pay, choose Windows or Mac on the thank-you page. We email your download, a step-by-step walkthrough video, and setup steps, usually within one business day. Install it, open it, and send us the computer code it shows; we reply with your license code to activate it. If you get stuck, reach us by chat, email, or phone. Support covers the first 30 days after activation.",
 }
 
 export const HOME_FAQ: FaqItem[] = [WHAT_IS, INCLUDES, MAINTENANCE_OPTIONAL, PRIVACY, SETUP]
@@ -66,7 +66,7 @@ export const FAQ_CATEGORIES: { title: string; items: FaqItem[] }[] = [
       SETUP,
       {
         q: "What does the 30-day support period cover?",
-        a: "It begins when installation is completed and covers setup problems and questions about using the installed features. It does not include legal representation or unlimited custom development.",
+        a: "It begins when your workspace is activated and covers setup problems and questions about using the installed features. It does not include legal representation or unlimited custom development.",
       },
     ],
   },
@@ -86,7 +86,7 @@ export const FAQ_CATEGORIES: { title: string; items: FaqItem[] }[] = [
       PRIVACY,
       {
         q: "Which research platforms can I connect?",
-        a: "We can connect supported legal research platforms such as Westlaw, LexisNexis, Bloomberg Law, Fastcase / vLex, and CourtListener. Provider subscriptions and usage fees are separate. We'll go over the options for your installation during your consultation.",
+        a: "We can connect supported legal research platforms such as Westlaw, LexisNexis, Bloomberg Law, Fastcase / vLex, and CourtListener. Provider subscriptions and usage fees are separate. Email support@askailegal.com and we will help you connect the ones you use.",
       },
     ],
   },

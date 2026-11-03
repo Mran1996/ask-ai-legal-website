@@ -46,7 +46,7 @@ export function buildKnowledgeForLocale(locale: Locale): KnowledgeChunk[] {
       locale,
       "contact",
       "Contact support",
-      `Use the contact page or email ${SUPPORT_EMAIL} to request an installation consultation or ask about installation, maintenance, support, or billing.`,
+      `Use the contact page or email ${SUPPORT_EMAIL} with questions about buying, setup, maintenance, support, or billing. Buy on the plans page; after purchase we also give you a support phone number.`,
       ["support", "email", "consultation", "price", "cost", "contact"]
     ),
     chunk(locale, "pricing", "Pricing", (t.faq.items.find((i) => i.q.includes("$2,997"))?.a ?? "") + " " + t.compare.subtitle, [
