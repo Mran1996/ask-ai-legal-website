@@ -9,9 +9,9 @@ const OPENROUTER_BASE_URL = "https://openrouter.ai/api/v1"
 // NVIDIA's API is free. Models get retired without notice (qwen3-next went 410 Gone in Nov 2026),
 // so the chat tries these in order and moves on when one fails.
 const NVIDIA_MODELS = [
-  "mistralai/mistral-large-2-instruct",
   "nvidia/nemotron-3-ultra-550b-a55b",
   "nvidia/llama-3.1-nemotron-70b-instruct",
+  "deepseek-ai/deepseek-v4.1-flash",
 ]
 // OpenRouter backup uses only ":free" models so a busy or abused chat can never spend account funds.
 const OPENROUTER_FREE_MODELS = [
