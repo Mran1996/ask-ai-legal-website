@@ -41,6 +41,10 @@ export const FAQ_CATEGORIES: { title: string; items: FaqItem[] }[] = [
         a: "No. Ask AI Legal provides software, installation, training, and technical assistance. We do not provide legal representation.",
       },
       {
+        q: "Does Ask AI Legal learn and get better over time?",
+        a: "Yes, in both plans. It learns from you: when you edit a draft or correct it in chat, it saves that as a rule for later drafts. It learns your case: Second Brain memory reads and sorts the papers you upload and remembers the facts, dates, and names. It learns the law: it studies case law with source links, your state's court rules, legal guides, and videos from legal YouTube channels, and uses what it learns when drafting. Learning runs on your own AI account within a daily limit you set, and it stays with you.",
+      },
+      {
         q: "Can Ask AI Legal make mistakes?",
         a: "Yes. AI can misread documents, produce incorrect citations, or give inaccurate information. Review generated work, check original sources, and confirm applicable court requirements before using a document.",
       },
