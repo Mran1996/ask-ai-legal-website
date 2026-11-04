@@ -35,13 +35,13 @@ const capabilities = [
     icon: Receipt,
     title: "One price, stated up front",
     description:
-      "A one-time purchase of $2,997 for your installed copy, setup, personal training, a written getting-started guide, and 30 days of installation support. Optional maintenance is $125 per month.",
+      "A one-time purchase: Starter is $1,497 and Complete is $2,997. Optional maintenance is $125 per month.",
   },
   {
     icon: Clock,
     title: "Personal setup and training",
     description:
-      "We install and configure your workspace, set it up around your issues and goals, and show you how to use it.",
+      "You download it and follow the walkthrough video. It installs in minutes, and you can reach us 24/7 with questions.",
   },
   {
     icon: BadgeCheck,
@@ -72,7 +72,7 @@ const standards = [
   },
   {
     title: "Support after setup",
-    text: "30 days of installation support, with optional maintenance afterward.",
+    text: "14 days of support with Starter, 30 days with Complete, with optional maintenance afterward.",
   },
 ]
 
@@ -177,7 +177,7 @@ export default function AboutPage() {
                 pushing for reform. Anyone who wants capable tools of their own.
               </p>
               <p className="mt-4 leading-relaxed text-gray-600">
-                We install and configure Ask AI Legal and show you how to use it. You remain in control — working from
+                You install Ask AI Legal in minutes with our walkthrough video. You remain in control, working from
                 home, informed, and organized.
               </p>
             </div>

@@ -88,7 +88,7 @@ export default function PlansPage() {
                 Two plans.{" "}
                 <span className="cine-serif text-accent-light">Each paid once.</span>
               </h1>
-              <p className="cine-body mt-4">Pay once and get your Ask AI Legal workspace. Download and install it in minutes, and reach out anytime if you need support.</p>
+              <p className="cine-body mt-4">Pay once and get your Ask AI Legal workspace. Download and install it in minutes, and reach us 24/7 if you have questions.</p>
             </div>
 
             <div className="mx-auto mt-10 grid max-w-5xl items-stretch gap-6 md:grid-cols-2">
@@ -174,9 +174,8 @@ export default function PlansPage() {
               <div className="flex items-start justify-center gap-3 text-left">
                 <ShieldCheck className="mt-1 h-6 w-6 shrink-0 text-accent-light" aria-hidden />
                 <p className="cine-body">
-                  <strong className="text-cream">100% money-back guarantee.</strong> During your install, we test Ask AI
-                  Legal on your computer against our written checklist. If it doesn&apos;t do what the checklist says,
-                  you get every dollar back. No hassle.
+                  <strong className="text-cream">100% money-back guarantee.</strong> If Ask AI Legal won&apos;t install or
+                  run on your computer and we can&apos;t fix it, you get every dollar back. No hassle.
                 </p>
               </div>
               <p className="text-sm text-cream/50">

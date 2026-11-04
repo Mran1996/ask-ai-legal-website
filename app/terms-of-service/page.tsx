@@ -10,25 +10,23 @@ export const metadata: Metadata = {
   alternates: { canonical: "/terms-of-service" },
 }
 
-const LAST_UPDATED = "October 26, 2026"
+const LAST_UPDATED = "November 3, 2026"
 
 export default function TermsOfServicePage() {
   return (
     <LegalDocumentLayout title="Terms of Service" lastUpdated={LAST_UPDATED}>
       <p>
         These Terms of Service (&ldquo;Terms&rdquo;) govern your access to and use of the
-        website, installation consultations, and the Ask AI Legal software and installation
-        services offered by Ask AI Legal LLC (&ldquo;Ask AI Legal,&rdquo; &ldquo;we,&rdquo;
-        &ldquo;us,&rdquo; or &ldquo;our&rdquo;). By accessing our website, booking a
-        consultation, or purchasing a plan, you agree to these Terms. If you do not agree, do
+        website and the Ask AI Legal software and support services offered by Ask AI Legal LLC (&ldquo;Ask AI Legal,&rdquo; &ldquo;we,&rdquo;
+        &ldquo;us,&rdquo; or &ldquo;our&rdquo;). By accessing our website, or
+        purchasing a plan, you agree to these Terms. If you do not agree, do
         not use our services.
       </p>
 
       <h2>1. Who we are</h2>
       <p>
         Ask AI Legal sells a one-time purchase of <strong>legal workspace software</strong> that
-        is installed on your computer, together with the installation, configuration, and
-        training services described on our plans page. The installed software drafts documents,
+        you install on your computer, together with the support described on our plans page. The installed software drafts documents,
         research materials, and related written work from the information you provide. We are{" "}
         <strong>not a law firm</strong>, and our personnel are <strong>not your attorneys</strong>.
       </p>
@@ -37,8 +35,8 @@ export default function TermsOfServicePage() {
       <p>
         Our services do <strong>not</strong> include legal advice, legal representation,
         attorney-client privilege, or appearance on your behalf in any court, agency, or
-        proceeding. Communications with Ask AI Legal — including phone consultations, email,
-        and messaging — do <strong>not</strong> create an attorney-client relationship.
+        proceeding. Communications with Ask AI Legal, including phone calls, email,
+        and messaging, do <strong>not</strong> create an attorney-client relationship.
       </p>
       <p>
         You are solely responsible for deciding whether to use any document the software drafts,
@@ -58,30 +56,29 @@ export default function TermsOfServicePage() {
 
       <h2>4. Consultations and plans</h2>
       <p>
-        Installation consultations are offered at no charge at our discretion. During a
-        consultation we confirm your computer&apos;s compatibility, explain the included features
-        and connected services, and review any additional costs before you purchase.
+        You can contact us before you purchase with questions about your computer, the included
+        features, connected services, or additional costs.
       </p>
       <p>Ask AI Legal offers two one-time plans:</p>
       <ul>
         <li>
-          <strong>Starter</strong> — $1,497, paid once. Includes a live installation on your
-          computer and 14 days of installation support after installation.
+          <strong>Starter</strong>: $1,497, paid once. Includes your download, a walkthrough video,
+          and 14 days of support after installation.
         </li>
         <li>
-          <strong>Complete</strong> — $2,997, paid once. Includes a live installation on your
-          computer and 30 days of installation support after installation.
+          <strong>Complete</strong>: $2,997, paid once. Includes your download, a walkthrough video,
+          a personal training session, and 30 days of support after installation.
         </li>
       </ul>
       <p>
         Optional maintenance is $125 per month on either plan. The features included with each
-        plan are listed on our plans page and confirmed during your consultation.
+        plan are listed on our plans page.
       </p>
 
       <h2>5. Software and installation</h2>
       <p>
-        Your purchase includes a license to the installed software for your computer, its
-        installation and configuration, personal training, and a written getting-started guide.
+        Your purchase includes a license to the software for your computer, a walkthrough video,
+        and the support for your plan. You install the software yourself.
         Available features depend on your computer, your installation, and the services you
         connect. The installed software drafts documents; you review, edit, and decide what to
         file.
@@ -128,8 +125,8 @@ export default function TermsOfServicePage() {
       <p>
         Plan prices are as stated on our plans page and in your purchase terms. Refunds are
         governed by our <Link href="/guarantee">100% money-back guarantee</Link>. Where the
-        guarantee does not apply, refunds are handled as required by applicable law. Once your
-        install passes the checklist test, your plan purchase is final, because the installed
+        guarantee does not apply, refunds are handled as required by applicable law. Once the
+        software is installed and running on your computer, your plan purchase is final, because the installed
         software stays on your computer.
       </p>
       <p>
@@ -140,8 +137,8 @@ export default function TermsOfServicePage() {
 
       <h2>9. Support and maintenance</h2>
       <p>
-        Installation support is included for 14 days (Starter) or 30 days (Complete), counted from
-        the date your installation is completed. Maintenance at $125 per month is optional and
+        Support is included for 14 days (Starter) or 30 days (Complete), counted from
+        the date your installation is completed. You can contact us 24/7. Maintenance at $125 per month is optional and
         may be cancelled as described in your purchase terms.
       </p>
 
@@ -149,7 +146,7 @@ export default function TermsOfServicePage() {
       <p>
         The Ask AI Legal software is licensed, not sold. Upon full payment, you receive a
         limited, personal, non-exclusive, non-transferable license to use the software for one
-        person on the one computer where we install it, subject to the third-party licenses that
+        person on the one computer where it is installed, subject to the third-party licenses that
         apply to its components. Ask AI Legal retains all ownership of, and copyright in, its
         software, code, prompts, methodologies, templates, designs, and pre-existing materials.
       </p>

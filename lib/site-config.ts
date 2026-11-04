@@ -16,7 +16,7 @@ export const SOCIAL_LINKS = {
 export const GUARANTEE_HREF = "/guarantee"
 export const GUARANTEE_TITLE = "100% money-back guarantee."
 export const GUARANTEE_TEXT =
-  "During your install, we test Ask AI Legal on your computer against our written checklist. If it doesn’t do what the checklist says, you get every dollar back. No hassle."
+  "If Ask AI Legal won’t install or run on your computer and we can’t fix it, you get every dollar back. No hassle."
 
 export const SUPPORT_EMAIL = "support@askailegal.com"
 export const SUPPORT_MAILTO = `mailto:${SUPPORT_EMAIL}` as const
@@ -38,19 +38,16 @@ export const MAINTENANCE_PRICE_DISPLAY = "$125"
 
 /** What the one-time purchase includes — homepage and pricing read this list. */
 export const PURCHASE_INCLUSIONS = [
-  "Computer compatibility check and installation",
-  "Guided setup around your issues and goals",
-  "Personalized workspace configuration",
-  "Agent setup",
-  "Supported API connections",
-  "Supported plugin connections",
-  "Second Brain memory setup",
-  "Personal training and a written getting-started guide",
-  "30 days of installation support",
+  "Your download and license code",
+  "Step-by-step walkthrough video",
+  "Install in minutes on your own computer",
+  "Second Brain memory that learns your case",
+  "Reach us 24/7 with questions",
+  "14 days of support with Starter, 30 days with Complete",
 ] as const
 
 export const SUPPORT_PERIOD_NOTE =
-  "Installation support begins when installation is completed and covers setup problems and questions about using the installed features. Optional ongoing maintenance is available separately."
+  "Support begins when you install and covers setup problems and questions about using the installed features. You can reach us 24/7. Optional ongoing maintenance is available separately."
 
 export const THIRD_PARTY_COSTS_NOTE =
   "Third-party AI usage and paid services are billed separately."
@@ -84,7 +81,7 @@ export const RESEARCH_ACCESS_NOTE =
   "Provider subscriptions and usage fees are separate."
 
 export const PRICING_NOTICE =
-  "Ask AI Legal provides software, installation, training, and technical assistance. It does not provide legal representation or guarantee court acceptance or outcomes. Review generated work and verify sources before relying on it."
+  "Ask AI Legal provides software, setup help, and technical assistance. It does not provide legal representation or guarantee court acceptance or outcomes. Review generated work and verify sources before relying on it."
 
 /**
  * Consultation CTA. /book only schedules calls for an existing intake file

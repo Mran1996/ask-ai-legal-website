@@ -55,17 +55,17 @@ const en: ChatUiStrings = {
   continueBtn: "Continue",
   changeLanguage: "Language",
   tabChat: "Chat",
-  tabBook: "Request consultation",
+  tabBook: "Contact us",
   welcome:
     "Hello! I'm the Ask AI Legal assistant. I can explain what the software does, what each plan includes, and how optional maintenance works, in your language.",
   welcomeHint:
-    "Ready to talk it through? Use the Request consultation tab. Please don't send confidential case documents through chat.",
+    "Have a question for our team? Use the Contact us tab. Please don't send confidential case documents through chat.",
   placeholder: "Ask about Ask AI Legal…",
   send: "Send",
   thinking: "Thinking…",
   notLegalAdvice: "Not legal advice · Software, installation, and support",
   emailSupportHint: "Installation, maintenance, support, or billing questions.",
-  bookTitle: "Request an installation consultation",
+  bookTitle: "Contact us",
   bookHint:
     "We confirm your computer requirements, review the included features, and discuss installation. We'll reply by email to set a time.",
   pricingLine:
@@ -83,10 +83,10 @@ const en: ChatUiStrings = {
   question: "Anything you'd like us to know? (optional)",
   questionHint: "Questions about features, installation, or pricing.",
   privacyNote: "Please don't include confidential case details. This request is not legal advice.",
-  sendRequest: "Request consultation",
+  sendRequest: "Send message",
   submittingRequest: "Sending…",
   successTitle: "Request received",
-  successBody: "Thanks — we'll reply by email to arrange your installation consultation.",
+  successBody: "Thanks. We'll reply by email.",
   submitAnother: "Send another request",
   fillRequired: "Please fill in your first name, last name, email, and the best times to reach you.",
   submitError: "We couldn't send your request. Please try again or email support@askailegal.com.",

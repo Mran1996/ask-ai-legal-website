@@ -14,7 +14,7 @@ import {
 
 const TITLE = "Contact Ask AI Legal"
 const DESCRIPTION =
-  "Request an Ask AI Legal installation consultation, or contact us about support or billing. Tell us how to reach you and we'll follow up by email."
+  "Ask a question before you buy, or contact us about support or billing. Reach us 24/7 and we'll follow up by email."
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -37,10 +37,10 @@ export default function ContactPage() {
           <div className="container-main max-w-4xl">
             <p className="firm-label text-gold">Contact us</p>
             <div className="gold-rule mb-8" />
-            <h1 className="firm-title text-white">Request an installation consultation</h1>
+            <h1 className="firm-title text-white">Contact us</h1>
             <p className="mt-8 max-w-2xl text-lg leading-relaxed text-white/70">
-              Tell us how to reach you and the best times to contact you. We&rsquo;ll follow up to arrange a
-              consultation about computer compatibility, included features, and installation.
+              Reach us 24/7 with questions about your computer, the included features, or installing the app.
+              We&rsquo;ll follow up by email.
             </p>
             <p className="mt-4 max-w-2xl text-base leading-relaxed text-white/60">
               For support or billing questions, choose that option in the form, or email us at{" "}

@@ -50,9 +50,8 @@ WHAT THE COMPLETE PLAN INCLUDES:
 - Configuration of the workspace and supported connections
 - Guided setup around the customer's issues and goals (organizing the workspace and explaining the software — not legal advice)
 - Personalized workspace configuration, agent setup, supported API and plugin connections, and Second Brain memory setup
-- Personal training on using the installed software
-- Personal training and a written getting-started guide
-- 30 days of support, beginning when the workspace is activated
+- A step-by-step walkthrough video, and customers can reach us 24/7
+- Support after install: 14 days with Starter, 30 days with Complete. The Complete plan also includes a personal training session
 
 OPTIONAL MAINTENANCE ($125 per month):
 - Supported software updates, maintenance of existing AI connections, compatibility fixes, and technical assistance within the plan's stated limits.

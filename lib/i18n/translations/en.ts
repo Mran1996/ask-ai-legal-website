@@ -17,11 +17,11 @@ export const en = {
     language: "Language",
   },
   hero: {
-    slogan: "We do the install. Ask AI Legal does the heavy lifting. You make the decisions.",
+    slogan: "Install it in minutes. Ask AI Legal does the heavy lifting. You make the decisions.",
     titleLine1: "Your legal workspace.",
     titleHighlight: "Installed on your computer.",
     titleLine2: "",
-    body: "Ask AI Legal is installed on your computer and configured around your issues and goals. Bring your information together, generate personalized documents, and build on what your Second Brain remembers.",
+    body: "Ask AI Legal runs on your own computer. Bring your information together, generate personalized documents, and build on what your Second Brain remembers.",
     categories: [
       "Divorce & separation",
       "Custody & family",
@@ -33,22 +33,22 @@ export const en = {
     ],
     ctaPrimary: PRIMARY_CTA_LABEL,
     ctaSecondary: "See pricing",
-    stat1Value: "$2,997",
+    stat1Value: "$1,497",
     stat1Label: "One-time purchase",
-    stat1Sub: "Installation, setup, personal training, and 30 days of installation support",
+    stat1Sub: "Starting price, paid once, with a walkthrough video and support after install",
     stat2Value: "$125/mo",
     stat2Label: "Optional maintenance",
     stat2Sub: "Supported updates and technical assistance within the plan's stated limits",
-    stat3Value: "30 days",
-    stat3Label: "Installation support",
-    stat3Sub: "Begins when installation is completed",
+    stat3Value: "14 or 30 days",
+    stat3Label: "Support after install",
+    stat3Sub: "14 days with Starter, 30 days with Complete",
   },
   services: {
     label: "What your workspace includes",
     titleLine1: "Your legal workspace.",
     titleLine2: "Installed on your computer.",
     intro:
-      "Ask AI Legal is software installed on your computer. We install and configure it, set it up around your issues and goals, and show you how to use it. You stay in control of your matter — nothing is filed on your behalf.",
+      "Ask AI Legal is software on your own computer. You install it in minutes with our walkthrough video. You stay in control of your matter, and nothing is filed on your behalf.",
     importantLabel: "Important:",
     importantText: SITE_DISCLAIMER,
     items: [
@@ -78,9 +78,9 @@ export const en = {
           "Your setup may combine local storage with connected AI and cloud services. We explain which features operate locally, which send information to outside providers, and the settings available to you.",
       },
       {
-        title: "Installation, training, and support",
+        title: "Walkthrough video and support",
         description:
-          "Computer compatibility check, installation, guided setup around your issues and goals, personal training, a written getting-started guide, and 30 days of installation support.",
+          "Your download, a step-by-step walkthrough video, and 14 days of support with Starter, 30 days with Complete. You can reach us 24/7.",
       },
     ],
   },
@@ -93,13 +93,13 @@ export const en = {
     subtitle:
       "Ask AI Legal is a one-time software purchase: Starter is $1,497 and Complete is $2,997. Optional maintenance is $125 per month. You download it, follow the walkthrough video, and we help by chat, email, or phone.",
     traditionalHeading: "One-time purchase",
-    traditionalPrice: "$2,997",
+    traditionalPrice: "$1,497",
     traditionalDesc:
-      "Your installed copy, setup, personal training, a written getting-started guide, and 30 days of installation support",
+      "Your download, a walkthrough video, and support after install",
     traditionalBullets: [
-      "Computer compatibility check and installation",
-      "Guided setup around your issues and goals",
-      "30 days of installation support",
+      "Step-by-step walkthrough video",
+      "Install in minutes on your own computer",
+      "14 days of support with Starter, 30 days with Complete",
     ],
     usBadge: "Ask AI Legal",
     usHeading: "Optional maintenance",
@@ -118,10 +118,10 @@ export const en = {
     highlightsIntro: "Tap a card to see what each part includes.",
     highlights: [
       {
-        title: "We install first",
-        summary: "Checked, installed, and configured",
+        title: "You install it in minutes",
+        summary: "Download, walkthrough video, license code",
         detail:
-          "We check computer compatibility, then install and configure the included software and supported connections.",
+          "We email your download and a walkthrough video. Follow the steps and activate it with your license code.",
       },
       {
         title: "Set up around your issues and goals",
@@ -130,16 +130,16 @@ export const en = {
           "We set up your workspace around your issues and goals and show you how to use it. Guided setup means organizing the workspace and explaining the software, not legal advice.",
       },
       {
-        title: "Support after installation",
-        summary: "30 days of installation support",
+        title: "Support after install",
+        summary: "14 days of support with Starter, 30 days with Complete",
         detail:
-          "Installation support begins when installation is completed and covers setup problems and questions about using the installed features.",
+          "Support begins when you install and covers setup problems and questions about using the installed features. You can reach us 24/7.",
       },
       {
         title: "Clear pricing",
-        summary: "$2,997 once, maintenance optional",
+        summary: "From $1,497 once, maintenance optional",
         detail:
-          "The one-time purchase is $2,997. Optional maintenance is $125 per month. We explain additional costs before installation.",
+          "Starter is $1,497 and Complete is $2,997, each paid once. Optional maintenance is $125 per month. Third-party services you connect are billed separately.",
       },
     ],
   },
@@ -252,8 +252,8 @@ export const en = {
     items: ALL_FAQ,
   },
   footer: {
-    tagline: "Your installed legal workspace. Setup by us. Optional maintenance.",
-    documentOnly: "Software, installation, and support — not a law firm",
+    tagline: "Your legal workspace on your own computer. Optional maintenance.",
+    documentOnly: "Software and support, not a law firm",
     columns: {
       services: "Features",
       company: "Company",

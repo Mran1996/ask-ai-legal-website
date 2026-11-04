@@ -13,7 +13,7 @@ export const SITUATION_GUIDES: Record<string, SituationGuide> = {
     slug: "divorce",
     title: "Divorce & separation",
     intro:
-      "Whether you are starting a divorce, responding to papers your spouse filed, or untangling finances and parenting — we install Ask AI Legal so you can work through the paperwork from home. Not a law firm; not legal advice.",
+      "Whether you are starting a divorce, responding to papers your spouse filed, or untangling finances and parenting — Ask AI Legal lets you work through the paperwork from home. Not a law firm; not legal advice.",
     weHelpWith: [
       "Child support — establishing, modifying, or documenting support requests",
       "Spousal support / financial support — written requests and supporting paperwork",
@@ -25,7 +25,7 @@ export const SITUATION_GUIDES: Record<string, SituationGuide> = {
     commonQuestions: [
       {
         q: "Can I ask for child support in my divorce paperwork?",
-        a: "Yes — child support is one of the most common areas people configure in their home setup. Tell us your children’s ages, custody arrangement, and income information; we install the tools so you can draft the forms and declarations from home.",
+        a: "Yes — child support is one of the most common areas people configure in their home setup. Tell us your children’s ages, custody arrangement, and income information; the tools let you draft the forms and declarations from home.",
       },
       {
         q: "What if my spouse already filed and I don’t know what to do?",
@@ -37,7 +37,7 @@ export const SITUATION_GUIDES: Record<string, SituationGuide> = {
       },
       {
         q: "Is this the same as hiring a divorce lawyer?",
-        a: "No. We are not a law firm. We install and configure Ask AI Legal; you run the work from home. We do not represent you in court or give legal strategy.",
+        a: "No. We are not a law firm. Ask AI Legal is software you run from home. We do not represent you in court or give legal strategy.",
       },
     ],
     documentsExamples: [
@@ -53,7 +53,7 @@ export const SITUATION_GUIDES: Record<string, SituationGuide> = {
     slug: "custody",
     title: "Custody & family",
     intro:
-      "Custody fights are stressful — and the forms are confusing on purpose. We install Ask AI Legal so you can translate what the court is asking for and work on parenting plans, custody requests, and support paperwork from home.",
+      "Custody fights are stressful — and the forms are confusing on purpose. Ask AI Legal lets you translate what the court is asking for and work on parenting plans, custody requests, and support paperwork from home.",
     weHelpWith: [
       "Parenting plans and visitation schedules",
       "Child custody and legal decision-making requests",
@@ -93,7 +93,7 @@ export const SITUATION_GUIDES: Record<string, SituationGuide> = {
     slug: "housing",
     title: "Housing",
     intro:
-      "Eviction notices, lease disputes, and repair fights move fast. We install Ask AI Legal so you can prepare written responses and housing-related documents from home — and understand every paragraph and deadline.",
+      "Eviction notices, lease disputes, and repair fights move fast. Ask AI Legal lets you prepare written responses and housing-related documents from home — and understand every paragraph and deadline.",
     weHelpWith: [
       "Unlawful detainer / eviction responses",
       "Answers when a landlord sues to remove you",
@@ -109,7 +109,7 @@ export const SITUATION_GUIDES: Record<string, SituationGuide> = {
       },
       {
         q: "Can I stay in my home while I fight an eviction?",
-        a: "That depends on your jurisdiction and what has been filed. We do not give legal advice — we install tools and explain what each filing is for so you can make informed decisions from home.",
+        a: "That depends on your jurisdiction and what has been filed. We do not give legal advice — the app explains what each filing is for so you can make informed decisions from home.",
       },
       {
         q: "My landlord won’t fix anything — can you help?",
@@ -117,7 +117,7 @@ export const SITUATION_GUIDES: Record<string, SituationGuide> = {
       },
       {
         q: "Do you file for me?",
-        a: "No. We install and configure tools you use from home. You file, serve, and appear on your own behalf (or with legal help you arrange separately).",
+        a: "No. Ask AI Legal is software you use from home. You file, serve, and appear on your own behalf (or with legal help you arrange separately).",
       },
     ],
     documentsExamples: [
@@ -133,7 +133,7 @@ export const SITUATION_GUIDES: Record<string, SituationGuide> = {
     slug: "civil",
     title: "Civil disputes",
     intro:
-      "Sued in civil court? Need to sue someone back? We install Ask AI Legal so you are not staring at blank forms alone — research tools, personalized document generation, and plain-language guidance you run from home.",
+      "Sued in civil court? Need to sue someone back? With Ask AI Legal you are not staring at blank forms alone — research tools, personalized document generation, and plain-language guidance you run from home.",
     weHelpWith: [
       "Answers to civil complaints",
       "Counterclaims and cross-complaints",
@@ -149,15 +149,15 @@ export const SITUATION_GUIDES: Record<string, SituationGuide> = {
       },
       {
         q: "Can you help with a business or contract fight?",
-        a: "Yes — tell us the contract, what went wrong, and any letters you’ve already sent. We install tools so you can work on demand letters, responses, and civil pleadings from home.",
+        a: "Yes — tell us the contract, what went wrong, and any letters you’ve already sent. The tools let you work on demand letters, responses, and civil pleadings from home.",
       },
       {
         q: "Do you go to court for me?",
-        a: "Never. We install tools you use from home. You handle appearances and filing.",
+        a: "Never. Ask AI Legal is software you use from home. You handle appearances and filing.",
       },
       {
         q: "How much does it cost?",
-        a: "Ask AI Legal is a one-time purchase of $2,997 for your installed copy, setup, personal training, a written getting-started guide, and 30 days of installation support. Optional maintenance is $125 per month. Third-party AI usage and paid services are billed separately.",
+        a: "Ask AI Legal is a one-time purchase: Starter is $1,497 and Complete is $2,997. Optional maintenance is $125 per month. Third-party AI usage and paid services are billed separately.",
       },
     ],
     documentsExamples: [
@@ -173,7 +173,7 @@ export const SITUATION_GUIDES: Record<string, SituationGuide> = {
     slug: "small-claims",
     title: "Small claims",
     intro:
-      "Small claims court is meant to be simple — but the forms still matter. We install Ask AI Legal so you can prepare your response or claim from home with organized facts, clear requests, and documents that match what the court expects.",
+      "Small claims court is meant to be simple — but the forms still matter. Ask AI Legal lets you prepare your response or claim from home with organized facts, clear requests, and documents that match what the court expects.",
     weHelpWith: [
       "Defendant’s response when you are sued",
       "Plaintiff’s claim statements and exhibits lists",
@@ -184,7 +184,7 @@ export const SITUATION_GUIDES: Record<string, SituationGuide> = {
     commonQuestions: [
       {
         q: "Do I need a lawyer for small claims?",
-        a: "Many people represent themselves in small claims. We install tools you use from home; we are not a law firm and do not appear for you.",
+        a: "Many people represent themselves in small claims. Ask AI Legal is software you use from home, and we are not a law firm and do not appear for you.",
       },
       {
         q: "What if I disagree with how much they say I owe?",
@@ -196,7 +196,7 @@ export const SITUATION_GUIDES: Record<string, SituationGuide> = {
       },
       {
         q: "Will you tell me if I’ll win?",
-        a: "No. We do not predict outcomes or give legal advice. We install tools and explain what each part is for so you can work from home.",
+        a: "No. We do not predict outcomes or give legal advice. The app explains what each part is for so you can work from home.",
       },
     ],
     documentsExamples: [
@@ -236,7 +236,7 @@ export const SITUATION_GUIDES: Record<string, SituationGuide> = {
       "Letter or written statement draft",
       "Research notes with source links",
     ],
-    ctaLabel: "Request an installation consultation",
+    ctaLabel: "See plans and buy",
   },
 }
 

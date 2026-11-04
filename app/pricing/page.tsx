@@ -20,7 +20,7 @@ import {
 
 const TITLE = "Ask AI Legal Pricing | Private AI Legal Assistant"
 const DESCRIPTION =
-  "Ask AI Legal is $2,997 one time: installation, personalized setup, agent setup, connections, Second Brain memory, training, and 30 days of support. Maintenance optional at $125/month."
+  "Ask AI Legal is paid once: Starter $1,497 or Complete $2,997. Download it, follow the walkthrough video, and install in minutes. Maintenance is optional at $125/month."
 
 export const metadata: Metadata = {
   title: { absolute: TITLE },
@@ -43,20 +43,27 @@ const productJsonLd = {
   "@type": "Product",
   name: "Ask AI Legal",
   description:
-    "Legal workspace software installed on your computer, including installation, configuration, personal training, a written getting-started guide, and 30 days of installation support.",
+    "Legal workspace software you install on your own computer in minutes, with a step-by-step walkthrough video and support after install.",
   brand: { "@type": "Brand", name: "Ask AI Legal" },
   url: `${SITE_URL}/pricing`,
   offers: [
     {
       "@type": "Offer",
-      name: "Ask AI Legal — one-time purchase",
-      price: PURCHASE_PRICE_USD.toFixed(2),
+      name: "Ask AI Legal Starter, one-time purchase",
+      price: "1497.00",
       priceCurrency: "USD",
-      url: `${SITE_URL}/pricing`,
+      url: `${SITE_URL}/plans`,
     },
     {
       "@type": "Offer",
-      name: "Optional maintenance — monthly",
+      name: "Ask AI Legal Complete, one-time purchase",
+      price: PURCHASE_PRICE_USD.toFixed(2),
+      priceCurrency: "USD",
+      url: `${SITE_URL}/plans`,
+    },
+    {
+      "@type": "Offer",
+      name: "Optional maintenance, monthly",
       price: MAINTENANCE_PRICE_USD.toFixed(2),
       priceCurrency: "USD",
       url: `${SITE_URL}/pricing`,
@@ -71,12 +78,11 @@ const productJsonLd = {
   ],
 }
 
-const DETAILS_LINE = "We’ll go over the details in your consultation."
 
 const sections = [
   {
     title: "Your costs, clearly explained.",
-    body: "The one-time purchase is $2,997. Optional maintenance is $125 a month, with no long-term commitment. Third-party usage and paid services are billed separately.",
+    body: "Starter is $1,497 and Complete is $2,997, each paid once. Optional maintenance is $125 a month, with no long-term commitment. Third-party usage and paid services are billed separately.",
   },
   {
     title: "What happens without maintenance?",
@@ -84,7 +90,7 @@ const sections = [
   },
   {
     title: "Before you purchase.",
-    body: "We confirm your computer requirements, the included features, and any third-party costs before installation.",
+    body: "Open the sample documents and watch the walkthrough video first. If you have questions about your computer, the features, or outside costs, reach us 24/7.",
   },
 ]
 
@@ -105,8 +111,8 @@ export default function PricingPage() {
             <div className="gold-rule mb-8" />
             <h1 className="firm-title text-white">One-time purchase. Optional monthly maintenance.</h1>
             <p className="mt-8 max-w-2xl text-lg leading-relaxed text-white/70">
-              Your own installed legal workspace, personally set up for you. Purchase Ask AI Legal for $2,997,
-              including installation, configuration, personal training, and initial support.
+              Your own legal workspace on your computer. Plans start at $1,497, paid once. You download it, follow
+              the walkthrough video, and install it in minutes.
             </p>
             <Link
               href={GUARANTEE_HREF}
@@ -137,9 +143,12 @@ export default function PricingPage() {
             </h2>
             <div className="grid gap-6 md:grid-cols-2">
               <article className="firm-card flex flex-col border-2 border-gold/40 bg-white p-6 shadow-[0_0_24px_rgba(251,176,52,0.1)] sm:p-8">
-                <h3 className="font-display text-2xl font-semibold text-navy">Ask AI Legal</h3>
+                <h3 className="font-display text-2xl font-semibold text-navy">Two plans, each paid once</h3>
                 <p className="mt-4 font-display text-4xl font-semibold text-navy">
-                  $2,997 <span className="text-lg font-medium text-gray-600">one time</span>
+                  $1,497 <span className="text-lg font-medium text-gray-600">Starter</span>
+                </p>
+                <p className="mt-1 font-display text-4xl font-semibold text-navy">
+                  $2,997 <span className="text-lg font-medium text-gray-600">Complete</span>
                 </p>
                 <p className="mt-5 text-sm font-semibold text-navy">Your purchase includes:</p>
                 <ul className="mt-3 flex-grow space-y-2.5">
@@ -180,7 +189,7 @@ export default function PricingPage() {
               <div key={s.title}>
                 <h2 className="firm-title text-navy">{s.title}</h2>
                 <p className="mt-4 text-base leading-relaxed text-gray-700">
-                  {s.body} {DETAILS_LINE}
+                  {s.body}
                 </p>
               </div>
             ))}
