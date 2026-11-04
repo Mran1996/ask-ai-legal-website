@@ -2,8 +2,6 @@
 
 import { Render } from "./render"
 import { Reveal } from "./reveal"
-import { SOURCES } from "./tools"
-import { RESEARCH_ACCESS_NOTE } from "@/lib/site-config"
 
 export function SourcesBand() {
   return (
@@ -25,17 +23,6 @@ export function SourcesBand() {
             make mistakes, including incorrect citations. Check each source and confirm that it supports your point
             before relying on it.
           </p>
-          <div data-reveal className="mt-6">
-            <p className="cine-label mb-3 !text-cream/50">Supported research connections</p>
-            <ul className="flex flex-wrap gap-2">
-              {SOURCES.map((s) => (
-                <li key={s} className="rounded-full border border-cream/15 px-3 py-1 font-mono text-[11px] uppercase tracking-[0.12em] text-cream/75">
-                  {s}
-                </li>
-              ))}
-            </ul>
-            <p className="mt-4 text-sm leading-relaxed text-cream/60">{RESEARCH_ACCESS_NOTE}</p>
-          </div>
         </Reveal>
       </div>
     </section>

@@ -5,6 +5,9 @@ import { ArrowRight, Check } from "lucide-react"
 import { Reveal } from "./reveal"
 import { CONSULT_CTA_LABEL, CONSULT_HREF, PURCHASE_INCLUSIONS, THIRD_PARTY_COSTS_NOTE } from "@/lib/site-config"
 
+/** Technical setup items are listed on the Features page instead. */
+const HOME_INCLUSIONS = PURCHASE_INCLUSIONS.filter((item) => !/\b(agent|api|plugin)\b/i.test(item))
+
 /** The single purchase offer and everything it includes. */
 export function PurchaseIncludes() {
   return (
@@ -30,7 +33,7 @@ export function PurchaseIncludes() {
 
         <Reveal stagger={0.05}>
           <ul className="grid gap-3 sm:grid-cols-2">
-            {PURCHASE_INCLUSIONS.map((item) => (
+            {HOME_INCLUSIONS.map((item) => (
               <li key={item} data-reveal className="cine-card flex items-start gap-3 px-4 py-3">
                 <Check className="mt-0.5 h-5 w-5 shrink-0 text-accent" aria-hidden />
                 <span className="text-lg leading-snug text-cream">{item}</span>
