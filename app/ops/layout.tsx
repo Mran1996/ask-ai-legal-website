@@ -5,5 +5,5 @@ export const metadata: Metadata = {
 }
 
 export default function OpsLayout({ children }: { children: React.ReactNode }) {
-  return children
+  return <div data-clarity-mask="True">{children}</div>
 }

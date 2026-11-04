@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/privacy-policy" },
 }
 
-const LAST_UPDATED = "June 29, 2026"
+const LAST_UPDATED = "November 3, 2026"
 
 export default function PrivacyPolicyPage() {
   return (
@@ -151,6 +151,17 @@ export default function PrivacyPolicyPage() {
         optional analytics collection. If you deny, we do not load analytics tools for that
         browser. You can also control cookies through your browser settings. Disabling cookies
         may affect site functionality.
+      </p>
+      <p>
+        If you accept, we also use Microsoft Clarity to see how visitors use the website.
+        Clarity places cookies in your browser and records clicks, scrolling, and page views,
+        including session replays and heatmaps. What you type into forms and your chat
+        conversations are masked, so they are not sent to Clarity. Microsoft processes this
+        data as described in the{" "}
+        <a href="https://www.microsoft.com/privacy/privacystatement">
+          Microsoft Privacy Statement
+        </a>
+        .
       </p>
 
       <h2>9. Third-party links</h2>

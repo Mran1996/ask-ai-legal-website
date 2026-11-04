@@ -18,7 +18,7 @@ export function CookieConsentBanner() {
     >
       <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-x-3 gap-y-2">
         <p className="min-w-0 flex-1 text-[13px] leading-snug" style={{ color: "rgba(250,249,246,0.72)" }}>
-          We use cookies to understand site use and improve our services.{" "}
+          We use cookies and record clicks and scrolling to understand site use and improve our services.{" "}
           <Link
             href="/privacy-policy"
             className="underline underline-offset-2 hover:text-gold"
