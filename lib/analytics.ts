@@ -1,5 +1,6 @@
 import posthog from "posthog-js"
 import { analyticsAllowed, readStoredConsent } from "@/lib/privacy-consent"
+import { pixelTrack } from "@/lib/meta-pixel"
 
 export function trackEvent(
   event: string,
@@ -13,6 +14,18 @@ export function trackEvent(
   } catch {
     // Analytics must never break the product UI
   }
+}
+
+/** A key page action, sent to Google Analytics and the Meta Pixel. Both load only after the visitor consents. */
+export function trackSiteAction(action: string, detail?: string): void {
+  if (typeof window === "undefined") return
+  try {
+    window.gtag?.("event", action, detail ? { item: detail } : undefined)
+    pixelTrack("ViewContent", { content_name: detail ? `${action}: ${detail}` : action })
+  } catch {
+    // Analytics must never break the product UI
+  }
+  trackEvent(action, detail ? { item: detail } : undefined)
 }
 
 /** Chat query / topic — store a short category or truncated text, not full legal facts. */

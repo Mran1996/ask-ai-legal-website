@@ -135,12 +135,15 @@ export const SITE_SLOGAN = SITE_TAGLINE
 export const SITE_DISCLAIMER =
   "Ask AI Legal is not a law firm. We provide software, installation, training, and technical assistance — not legal advice or legal representation."
 
+/** Home page scrolling story. Set to true to bring back all six scenes. */
+export const SHOW_SCROLL_STORY: boolean = false
+
 /** Homepage SEO title — also the default title for pages without their own. */
 export const SITE_SEO_TITLE = "Ask AI Legal | Private AI Legal Assistant for Self-Represented People"
 
 /** Homepage SEO description — used in layout, JSON-LD, and social previews. */
 export const SITE_SEO_DESCRIPTION =
-  "A private AI legal assistant installed on your own computer. Organize court papers, track deadlines, research the law with sources, and draft documents for your case, in all 50 states."
+  "A private AI legal assistant on your own computer. See sample court documents, then draft yours at home. All 50 states, from $1,497, paid once."
 
 /** Brand mark (circular scales) — header, hero, app icons. */
 export const SITE_LOGO_MARK = "/brand/stripe-logo-512.png"

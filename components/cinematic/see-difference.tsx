@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { Play } from "lucide-react"
 import { WALKTHROUGH_VIDEO_ID } from "@/lib/site-config"
+import { trackSiteAction } from "@/lib/analytics"
 
 /** YouTube preview. The player loads only after a click, so nothing from YouTube runs before that. */
 export function SeeDifference() {
@@ -27,7 +28,10 @@ export function SeeDifference() {
           ) : (
             <button
               type="button"
-              onClick={() => setPlaying(true)}
+              onClick={() => {
+                setPlaying(true)
+                trackSiteAction("video_play")
+              }}
               className="group relative block aspect-video w-full"
               aria-label="Play the preview video"
             >

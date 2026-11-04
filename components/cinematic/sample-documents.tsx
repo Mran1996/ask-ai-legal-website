@@ -1,3 +1,7 @@
+"use client"
+
+import { trackSiteAction } from "@/lib/analytics"
+
 const SAMPLES = [
   { title: "Civil", detail: "Motion with exhibits", file: "civil-motion-with-exhibits", pages: 14 },
   { title: "Criminal", detail: "Motion with exhibits", file: "criminal-motion-with-exhibits", pages: 12 },
@@ -21,6 +25,7 @@ export function SampleDocuments() {
                 href={`/samples/${s.file}.pdf`}
                 target="_blank"
                 rel="noopener"
+                onClick={() => trackSiteAction("sample_open", s.title)}
                 className="cine-card group block overflow-hidden"
               >
                 <div className="h-40 overflow-hidden bg-white sm:h-56">
