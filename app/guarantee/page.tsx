@@ -13,7 +13,7 @@ import {
 export const metadata: Metadata = {
   title: "100% Money-Back Guarantee",
   description:
-    "During your install, we test Ask AI Legal on your computer against our written checklist. If it doesn't do what the checklist says, you get every dollar back.",
+    "If Ask AI Legal won't install or run on your computer and we can't fix it, you get every dollar back.",
   alternates: { canonical: "/guarantee" },
 }
 

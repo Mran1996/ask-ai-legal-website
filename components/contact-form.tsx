@@ -11,10 +11,10 @@ type Status = "idle" | "sending" | "success" | "error"
 
 const INQUIRY_TYPES = {
   consultation: {
-    label: "Installation consultation",
+    label: "Question before you buy",
     placeholder:
-      "Tell us the best times to reach you. Please don't include confidential case details.",
-    button: "Send consultation request",
+      "What would you like to know? Please don't include confidential case details.",
+    button: "Send question",
   },
   support: {
     label: "Technical support",
@@ -85,7 +85,6 @@ export function ContactForm() {
   }
 
   if (status === "success") {
-    const consultation = sentInquiry === "consultation"
     return (
       <div
         className="rounded-md border-2 border-gold/40 bg-white p-8 text-center shadow-[0_0_24px_rgba(251,176,52,0.12)]"
@@ -96,12 +95,10 @@ export function ContactForm() {
           <Check className="h-6 w-6 text-gold-dark" aria-hidden />
         </div>
         <h3 className="mt-4 font-display text-xl font-semibold text-navy">
-          {consultation ? "Consultation request sent" : "Message sent"}
+          {"Message sent"}
         </h3>
         <p className="mx-auto mt-2 max-w-sm text-sm leading-relaxed text-gray-600">
-          {consultation
-            ? "Thanks — your request was sent. This doesn't confirm an appointment yet; we'll follow up by email to arrange a time."
-            : "Thanks for reaching out. We'll reply to your email."}
+          Thanks for reaching out. We'll reply to your email.
         </p>
         <button
           type="button"
@@ -172,7 +169,7 @@ export function ContactForm() {
 
       <div className="mt-5">
         <label htmlFor="contact-message" className="mb-1.5 block text-xs font-semibold text-navy">
-          {inquiry === "consultation" ? "Best times to reach you" : "How can we help?"}{" "}
+          {"How can we help?"}{" "}
           <span className="text-gold-dark">*</span>
         </label>
         <textarea
@@ -212,7 +209,7 @@ export function ContactForm() {
 
       <p className="mt-4 text-xs leading-relaxed text-gray-500">
         By sending this message you agree we may contact you about your request. You don&apos;t need to share case
-        documents to request a consultation. This form is not legal advice.
+        documents to ask a question. This form is not legal advice.
       </p>
     </form>
   )

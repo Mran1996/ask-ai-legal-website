@@ -114,7 +114,7 @@ export function InstallStory() {
             <div data-progress className="h-px origin-left scale-x-0 bg-accent" />
           </div>
           <p className="cine-body mt-4 !text-sm !text-cream/65">
-            Afterwards: 30 days of installation support is included. Ongoing maintenance is optional at $125/month.
+            Afterwards: 14 days of support with Starter, 30 days with Complete. You can reach us 24/7. Ongoing maintenance is optional at $125/month.
           </p>
         </div>
 
