@@ -6,7 +6,7 @@ const SAMPLES = [
   { title: "Civil", detail: "Motion with exhibits", file: "civil-motion-with-exhibits", pages: 14 },
   { title: "Criminal", detail: "Motion with exhibits", file: "criminal-motion-with-exhibits", pages: 12 },
   { title: "Divorce", detail: "Trial brief with exhibits", file: "divorce-trial-brief-with-exhibits", pages: 12 },
-  { title: "Research report", detail: "Which cases help or hurt", file: "civil-research-report", pages: 4 },
+  { title: "Research report", detail: "Which cases help or hurt", file: "civil-research-report", pages: 7 },
 ]
 
 /** Fictional sample documents. Each card opens the full PDF from /public/samples. */
