@@ -4,6 +4,7 @@
   "buildCommand": "npm run build",
   "installCommand": "npm install",
   "regions": ["sfo1"],
+  "crons": [{ "path": "/api/support-drafts", "schedule": "*/30 * * * *" }],
   "redirects": [
     {
       "source": "/:path*",
