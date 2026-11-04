@@ -394,6 +394,7 @@ export function ChatWidget() {
       className={`chat-panel ${panelVisible ? "chat-panel--visible" : ""}`}
       role="dialog"
       aria-label={ui.title}
+      data-clarity-mask="True"
     >
       {/* Header */}
       <div className="flex shrink-0 items-start justify-between gap-2 border-b border-white/10 bg-navy-light px-4 py-3">
