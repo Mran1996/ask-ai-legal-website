@@ -81,7 +81,7 @@ export const RESEARCH_DESCRIPTION =
   "Connect your workspace to supported legal research platforms for case law, statutes, regulations, and court records. We configure the connections selected for your installation."
 
 export const RESEARCH_ACCESS_NOTE =
-  "We'll walk you through the options during your consultation. Provider subscriptions and usage fees are separate."
+  "Provider subscriptions and usage fees are separate."
 
 export const PRICING_NOTICE =
   "Ask AI Legal provides software, installation, training, and technical assistance. It does not provide legal representation or guarantee court acceptance or outcomes. Review generated work and verify sources before relying on it."

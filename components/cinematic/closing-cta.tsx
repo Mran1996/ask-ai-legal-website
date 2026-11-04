@@ -30,8 +30,8 @@ export function ClosingCta() {
             <Link href={CONSULT_HREF} className="cine-btn-gold">
               {CONSULT_CTA_LABEL} <ArrowRight className="h-4 w-4" aria-hidden />
             </Link>
-            <Link href="/plans" className="cine-btn-ghost">
-              See pricing
+            <Link href="#samples" className="cine-btn-ghost">
+              See sample documents
             </Link>
           </div>
           <p data-reveal className="mt-8 max-w-lg font-sans text-xs leading-relaxed text-cream/40">

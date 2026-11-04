@@ -32,7 +32,7 @@ export function HowItWorks() {
           <p data-reveal className="cine-label mb-3">How it works</p>
           <h2 data-reveal className="cine-h2 text-cream">
             Three steps
-            <span className="cine-serif text-accent-light"> from first call to first draft.</span>
+            <span className="cine-serif text-accent-light"> to your first draft.</span>
           </h2>
         </Reveal>
 

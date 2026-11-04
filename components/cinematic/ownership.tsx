@@ -25,8 +25,8 @@ export function Ownership() {
           <p data-reveal className="cine-label mb-3">Optional maintenance · $125/month</p>
           <h3 data-reveal className="cine-h3 text-cream">Keep your workspace moving forward.</h3>
           <p data-reveal className="cine-body mt-3 !text-lg">
-            Optional maintenance provides ongoing support, supported software updates, and help maintaining your API
-            and plugin connections as services change.
+            Optional maintenance provides ongoing support, supported software updates, and help maintaining your
+            connections as services change.
           </p>
           <p data-reveal className="cine-body mt-3 !text-lg !text-cream/60">
             Your saved learning stays in your workspace. Maintenance supports the software and its connections.

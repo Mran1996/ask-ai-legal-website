@@ -4,7 +4,8 @@ import { FaqJsonLd } from "@/lib/seo/faq-json-ld"
 import { HOME_FAQ } from "@/lib/faq"
 import { CineNav } from "@/components/cinematic/nav"
 import { StoryHero } from "@/components/cinematic/story-hero"
-import { DemoVideo } from "@/components/cinematic/demo-video"
+import { SeeDifference } from "@/components/cinematic/see-difference"
+import { SampleDocuments } from "@/components/cinematic/sample-documents"
 import { InstallStory } from "@/components/cinematic/install-story"
 import { PurchaseIncludes } from "@/components/cinematic/purchase-includes"
 import { Ownership } from "@/components/cinematic/ownership"
@@ -42,15 +43,16 @@ export default function Home() {
       <CineNav />
       <main>
         <StoryHero />
-        <DemoVideo />
-        <InstallStory />
+        <SeeDifference />
+        <SampleDocuments />
         <PurchaseIncludes />
+        <HowItWorks />
+        <Situations />
+        <InstallStory />
         <Ownership />
         <SecondBrain />
         <PrivacyFlow />
         <ToolsCompact />
-        <HowItWorks />
-        <Situations />
         <SourcesBand />
         <Faq />
         <ClosingCta />

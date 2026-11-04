@@ -33,13 +33,22 @@ const TOOLS: Tool[] = [
     body: "Use supported email and calendar connections to help organize messages, dates, and reminders. Review extracted dates and confirm deadlines against the applicable rules and court orders.",
   },
   {
+    id: "setup",
+    title: "Agent, API and plugin setup",
+    body: "Your purchase includes agent setup and supported API and plugin connections.",
+  },
+  {
     id: "privacy",
     title: "Your information stays under your control",
     body: "Your documents and Second Brain memory are saved on your computer. With privacy mode on, personal identifiers are removed locally before a connected AI service is used, and restored locally in the returned document.",
   },
 ]
 
-const COMPACT = [TOOLS[0], TOOLS[1], TOOLS[3]]
+const COMPACT = [
+  { ...TOOLS[0], title: "Research with source links", body: "Look up case law, statutes and court rules, then open the original source and check each citation before relying on it.", sources: false },
+  TOOLS[1],
+  TOOLS[3],
+]
 
 function SourceList() {
   return (
@@ -70,8 +79,8 @@ export function ToolsCompact() {
             <span className="cine-serif text-accent-light">Built around you.</span>
           </h2>
           <p data-reveal className="cine-body mt-4 max-w-2xl">
-            Personalized document generation, connected research, agents, and Second Brain memory — installed on your computer and configured with you.
-            Available features depend on your installation.
+            Document drafting, research, and Second Brain memory, installed on your computer. Available features depend
+            on your installation.
           </p>
         </Reveal>
 

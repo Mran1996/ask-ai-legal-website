@@ -9,7 +9,7 @@ import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { prefersReducedMotion } from "./smooth-scroll"
 import { CONSULT_CTA_LABEL, CONSULT_HREF } from "@/lib/site-config"
-import { DEMO_VIDEO_READY } from "@/lib/demo-video"
+import { openChatWidget } from "@/lib/chat/open-chat"
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -30,7 +30,7 @@ const SCENES = [
     img: "hero-desk.png",
     alt: "Laptop glowing on a kitchen table at night with legal documents rising from the screen — Ask AI Legal workspace installed at home",
     label: "",
-    title: ["Represent yourself", "with a legal assistant on your own computer."],
+    title: ["Draft your court papers at home.", "See the samples first."],
     sub: "It reads your court papers, tracks your deadlines, and drafts documents for you to check. Your files are kept on your own computer.",
     pos: "70% center",
     brand: true,
@@ -186,42 +186,39 @@ export function StoryHero() {
                   <span className="cine-serif block text-accent-light">{s.title[1]}</span>
                 </h2>
               )}
-              {i === 0 && (
-                <p className="cine-shadow mt-3 font-display text-lg font-semibold uppercase tracking-[0.14em] text-white sm:text-xl">
-                  The best in the industry
-                </p>
-              )}
               <p className={`cine-body cine-shadow max-w-2xl !text-cream ${i === 0 ? "mx-auto mt-4 !text-[15px] !leading-relaxed sm:!text-lg" : "mt-6 rounded-xl bg-ground/55 px-4 py-3 backdrop-blur-[2px] sm:bg-transparent sm:px-0 sm:py-0 sm:backdrop-blur-0"}`}>
                 {s.sub}
               </p>
               {"intro" in s && s.intro && (
                 <>
-                  <ul className="mt-5 hidden flex-wrap justify-center gap-2 sm:flex" aria-label="Matters people use Ask AI Legal for">
+                  <p className="cine-shadow mt-3 font-display text-lg font-semibold text-white sm:text-xl">From $1,497, paid once</p>
+                  <ul className="order-last mt-4 flex flex-wrap justify-center gap-1.5 [@media(max-height:700px)]:hidden sm:order-none sm:mt-5 sm:gap-2" aria-label="Matters people use Ask AI Legal for">
                     {MATTERS.map((m) => (
                       <li key={m.href}>
                         <Link
                           href={m.href}
-                          className="cine-pill inline-flex rounded-full border border-accent/50 bg-ground/60 px-3.5 py-1.5 text-[13px] text-cream sm:px-4 sm:py-2 sm:text-sm transition-colors hover:border-accent hover:bg-accent/10 active:bg-accent active:text-ground"
+                          className="cine-pill inline-flex rounded-full border border-accent/50 bg-ground/60 px-3 py-1 text-[13px] text-cream sm:px-4 sm:py-2 sm:text-sm transition-colors hover:border-accent hover:bg-accent/10 active:bg-accent active:text-ground"
                         >
                           {m.label}
                         </Link>
                       </li>
                     ))}
                   </ul>
-                  <div className="mt-5 flex w-full flex-col items-center gap-2.5 sm:mt-6 sm:flex-row sm:justify-center sm:gap-3">
-                    <Link href={CONSULT_HREF} className="cine-btn-gold w-full sm:w-auto">
-                      {CONSULT_CTA_LABEL} <ArrowRight className="h-4 w-4" aria-hidden />
+                  <div className="mt-4 flex w-full flex-col items-center gap-2.5 sm:mt-6 sm:flex-row sm:justify-center sm:gap-3">
+                    <Link href="#samples" className="cine-btn-gold w-full sm:w-auto">
+                      See sample documents <ArrowRight className="h-4 w-4" aria-hidden />
                     </Link>
-                    {DEMO_VIDEO_READY ? (
-                      <Link href="#demo" className="cine-btn-ghost w-full sm:w-auto">
-                        Watch the demo
-                      </Link>
-                    ) : (
-                      <Link href="/plans" className="cine-btn-ghost w-full sm:w-auto">
-                        See pricing
-                      </Link>
-                    )}
+                    <Link href={CONSULT_HREF} className="cine-btn-ghost w-full sm:w-auto">
+                      {CONSULT_CTA_LABEL}
+                    </Link>
                   </div>
+                  <button
+                    type="button"
+                    onClick={() => openChatWidget("chat")}
+                    className="cine-shadow mt-3 text-sm text-cream underline underline-offset-4 hover:text-accent-light"
+                  >
+                    Ask a question
+                  </button>
                 </>
               )}
               {"cta" in s && s.cta && (
@@ -229,8 +226,8 @@ export function StoryHero() {
                   <Link href={CONSULT_HREF} className="cine-btn-gold">
                     {CONSULT_CTA_LABEL} <ArrowRight className="h-4 w-4" aria-hidden />
                   </Link>
-                  <Link href="/plans" className="cine-btn-ghost">
-                    See pricing
+                  <Link href="#samples" className="cine-btn-ghost">
+                    See sample documents
                   </Link>
                 </div>
               )}
