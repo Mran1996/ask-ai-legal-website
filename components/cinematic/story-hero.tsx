@@ -8,7 +8,7 @@ import { BrandLockup } from "@/components/brand-lockup"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { prefersReducedMotion } from "./smooth-scroll"
-import { CONSULT_CTA_LABEL, CONSULT_HREF } from "@/lib/site-config"
+import { CONSULT_CTA_LABEL, CONSULT_HREF, SHOW_SCROLL_STORY } from "@/lib/site-config"
 import { openChatWidget } from "@/lib/chat/open-chat"
 
 gsap.registerPlugin(ScrollTrigger)
@@ -25,7 +25,7 @@ const MATTERS = [
   { label: "& more", href: "/services" },
 ]
 
-const SCENES = [
+const ALL_SCENES = [
   {
     img: "hero-desk.png",
     alt: "Laptop glowing on a kitchen table at night with legal documents rising from the screen — Ask AI Legal workspace installed at home",
@@ -82,11 +82,13 @@ const SCENES = [
   },
 ]
 
+const SCENES = SHOW_SCROLL_STORY ? ALL_SCENES : ALL_SCENES.slice(0, 1)
+
 export function StoryHero() {
   const root = useRef<HTMLElement>(null)
 
   useEffect(() => {
-    if (!root.current || prefersReducedMotion()) return
+    if (!root.current || !SHOW_SCROLL_STORY || prefersReducedMotion()) return
     const ctx = gsap.context(() => {
       const scenes = gsap.utils.toArray<HTMLElement>("[data-scene]")
       const copies = gsap.utils.toArray<HTMLElement>("[data-copy]")
@@ -237,13 +239,13 @@ export function StoryHero() {
       </div>
 
       {/* progress dots */}
-      <div className="absolute bottom-8 left-1/2 flex -translate-x-1/2 gap-2 sm:left-auto sm:right-8 sm:translate-x-0" aria-hidden>
+      {SHOW_SCROLL_STORY && <div className="absolute bottom-8 left-1/2 flex -translate-x-1/2 gap-2 sm:left-auto sm:right-8 sm:translate-x-0" aria-hidden>
         {SCENES.map((_, i) => (
           <span key={i} data-dot={i} className="h-1.5 w-6 rounded-full" style={{ backgroundColor: i === 0 ? "#FBB034" : "rgba(250,249,246,0.25)" }} />
         ))}
-      </div>
+      </div>}
 
-      <p className="cine-label absolute bottom-8 left-5 hidden !text-cream/40 sm:left-8 sm:[@media(min-height:860px)]:block">Scroll</p>
+      {SHOW_SCROLL_STORY && <p className="cine-label absolute bottom-8 left-5 hidden !text-cream/40 sm:left-8 sm:[@media(min-height:860px)]:block">Scroll</p>}
     </section>
   )
 }
