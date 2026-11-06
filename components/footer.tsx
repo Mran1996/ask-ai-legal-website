@@ -12,6 +12,7 @@ import {
   SITE_DISCLAIMER,
   SITE_BRAND_NAME,
   SITE_LEGAL_NAME,
+  REFERRAL_HREF,
   SOCIAL_LINKS,
   SUPPORT_EMAIL,
 } from "@/lib/site-config"
@@ -51,6 +52,7 @@ export function Footer() {
         { label: links.contact, href: "/contact" },
         { label: links.faq, href: "/faq" },
         { label: "Guides", href: "/guides" },
+        { label: "Referral program", href: REFERRAL_HREF },
       ],
     },
     {

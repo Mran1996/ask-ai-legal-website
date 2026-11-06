@@ -2,6 +2,10 @@ import type { Locale } from "@/lib/i18n/languages"
 import { LANGUAGES } from "@/lib/i18n/languages"
 import {
   GUARANTEE_TEXT,
+  REFERRAL_COMPLETE_REWARD_USD,
+  REFERRAL_NAME_WITHIN_DAYS,
+  REFERRAL_PAY_AFTER_DAYS,
+  REFERRAL_STARTER_REWARD_USD,
   SITE_BRAND_NAME,
   SITE_DISCLAIMER,
   SUPPORT_EMAIL,
@@ -58,6 +62,12 @@ OPTIONAL MAINTENANCE ($125 per month):
 - Supported software updates, maintenance of existing AI connections, compatibility fixes, and technical assistance within the plan's stated limits.
 - Custom integrations, major upgrades, and additional training may require a separate quote.
 - Coverage, billing, service limits, and cancellation terms are provided before enrollment.
+
+REFERRAL PROGRAM:
+- When someone refers a new customer, the referrer and the new customer each get $${REFERRAL_STARTER_REWARD_USD} on Starter or $${REFERRAL_COMPLETE_REWARD_USD} on Complete. No code or sign-up is needed.
+- The new customer names the referrer in the "Who referred you?" box on the thank-you page, or by email to ${SUPPORT_EMAIL}, within ${REFERRAL_NAME_WITHIN_DAYS} days of buying.
+- Both rewards go out ${REFERRAL_PAY_AFTER_DAYS} days after the new customer installs. The referrer is paid by PayPal or Zelle. The new customer gets theirs back on the card they paid with. If the new customer gets a refund, neither reward is paid.
+- Anyone can refer except lawyers. Full rules are at /referrals. This is not a discount at checkout.
 
 RESEARCH CONNECTIONS:
 - We can connect supported legal research platforms (Westlaw, LexisNexis, Bloomberg Law, Fastcase / vLex, CourtListener, UniCourt, Docket Alarm, GovInfo, eCFR, Open States, Caselaw Access Project, OpenLaws, Vaquill AI, judyrecords) using the customer's own account or API key.

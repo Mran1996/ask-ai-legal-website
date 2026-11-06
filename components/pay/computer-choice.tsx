@@ -1,10 +1,11 @@
 "use client"
 
 import { useState, type FormEvent } from "react"
+import Link from "next/link"
 import { useAction } from "convex/react"
 import { Apple, Monitor, Check } from "lucide-react"
 import { api } from "@/convex/_generated/api"
-import { SUPPORT_EMAIL } from "@/lib/site-config"
+import { REFERRAL_HREF, SUPPORT_EMAIL } from "@/lib/site-config"
 
 type Computer = "Windows" | "Mac"
 
@@ -20,6 +21,7 @@ export function ComputerChoice({ plan }: { plan: string }) {
     event.preventDefault()
     if (!computer || status === "sending") return
     const data = new FormData(event.currentTarget)
+    const referredBy = String(data.get("referredBy") ?? "").trim()
     setStatus("sending")
     setError("")
     try {
@@ -27,7 +29,7 @@ export function ComputerChoice({ plan }: { plan: string }) {
         name: String(data.get("name") ?? ""),
         email: String(data.get("email") ?? ""),
         subject: `New purchase: ${plan} for ${computer}`,
-        message: `New Ask AI Legal purchase.\nPlan: ${plan}\nComputer: ${computer}\nPlease send the ${computer} download, the walkthrough video, and setup steps.`,
+        message: `New Ask AI Legal purchase.\nPlan: ${plan}\nComputer: ${computer}\nReferred by: ${referredBy || "No one named"}\nPlease send the ${computer} download, the walkthrough video, and setup steps.`,
         company: String(data.get("company") ?? ""),
       })
       if (!result.ok) throw new Error(result.error || "Something went wrong.")
@@ -78,6 +80,16 @@ export function ComputerChoice({ plan }: { plan: string }) {
       <label className="mt-3 block text-xs text-white/60">
         The email you paid with
         <input name="email" type="email" required maxLength={200} className="mt-1 w-full rounded-sm border border-white/15 bg-white/10 px-3 py-2.5 text-sm text-white" />
+      </label>
+      <label className="mt-3 block text-xs text-white/60">
+        Who referred you? (optional)
+        <input name="referredBy" maxLength={200} placeholder="Their name and email" className="mt-1 w-full rounded-sm border border-white/15 bg-white/10 px-3 py-2.5 text-sm text-white placeholder:text-white/35" />
+        <span className="mt-1 block">
+          You each get a reward.{" "}
+          <Link href={REFERRAL_HREF} target="_blank" className="underline underline-offset-2 hover:text-white">
+            See how it works
+          </Link>
+        </span>
       </label>
       <input name="company" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden />
       {error ? <p className="mt-3 text-sm text-red-300">{error}</p> : null}

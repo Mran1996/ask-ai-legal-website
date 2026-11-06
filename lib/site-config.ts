@@ -18,6 +18,15 @@ export const GUARANTEE_TITLE = "100% money-back guarantee."
 export const GUARANTEE_TEXT =
   "If Ask AI Legal won’t install or run on your computer and we can’t fix it, you get every dollar back. No hassle."
 
+/** Referral program: the referrer and the new customer each get this amount. */
+export const REFERRAL_HREF = "/referrals"
+export const REFERRAL_STARTER_REWARD_USD = 50
+export const REFERRAL_COMPLETE_REWARD_USD = 100
+export const REFERRAL_PAY_AFTER_DAYS = 30
+export const REFERRAL_NAME_WITHIN_DAYS = 7
+export const REFERRAL_TEXT =
+  "Know someone who could use Ask AI Legal? When they buy and tell us you sent them, you each get a reward."
+
 export const SUPPORT_EMAIL = "support@askailegal.com"
 export const SUPPORT_MAILTO = `mailto:${SUPPORT_EMAIL}` as const
 

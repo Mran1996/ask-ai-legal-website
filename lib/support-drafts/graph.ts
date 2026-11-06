@@ -21,6 +21,7 @@ type GraphMessage = {
   id: string
   subject?: string
   from?: { emailAddress?: { address?: string; name?: string } }
+  replyTo?: { emailAddress?: { address?: string; name?: string } }[]
   body?: { content?: string }
   categories?: string[]
   internetMessageHeaders?: { name: string; value: string }[]
@@ -77,7 +78,7 @@ export async function listNewEmails(token: string, limit: number): Promise<Suppo
   const query = new URLSearchParams({
     $filter: `receivedDateTime ge ${since}`,
     $orderby: "receivedDateTime desc",
-    $select: "id,subject,from,body,categories,internetMessageHeaders",
+    $select: "id,subject,from,replyTo,body,categories,internetMessageHeaders",
     $top: "50",
   })
   const res = await graph(token, `/mailFolders/inbox/messages?${query}`)
@@ -85,15 +86,18 @@ export async function listNewEmails(token: string, limit: number): Promise<Suppo
 
   return value
     .map((m) => {
-      const fromAddress = m.from?.emailAddress?.address ?? ""
+      // Website contact form emails come from our own address, with the visitor in reply-to.
+      const sender = m.replyTo?.[0]?.emailAddress ?? m.from?.emailAddress
+      const fromAddress = sender?.address ?? ""
       return {
         id: m.id,
         subject: m.subject ?? "",
         fromAddress,
-        fromName: m.from?.emailAddress?.name ?? "",
+        fromName: sender?.name ?? "",
         body: m.body?.content ?? "",
         categories: m.categories ?? [],
-        automated: !fromAddress || looksAutomated(fromAddress, m.internetMessageHeaders),
+        automated:
+          !fromAddress || /new purchase:/i.test(m.subject ?? "") || looksAutomated(fromAddress, m.internetMessageHeaders),
       }
     })
     .filter((m) => !m.categories.includes(DRAFTED_CATEGORY) && !m.categories.includes(SKIPPED_CATEGORY))
