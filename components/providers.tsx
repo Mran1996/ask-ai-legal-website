@@ -2,6 +2,7 @@
 
 import { Suspense } from "react"
 import { ChatWidgetLoader } from "@/components/chat-widget-loader"
+import { ReferralStar } from "@/components/referral-star"
 import { LanguageProvider } from "@/components/language-provider"
 import { ConvexClientProvider } from "@/components/convex-client-provider"
 import {
@@ -31,6 +32,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
                 <MicrosoftClarity />
               </Suspense>
               {children}
+              <ReferralStar />
               <ChatWidgetLoader />
               <CookieConsentBanner />
             </LanguageProvider>
