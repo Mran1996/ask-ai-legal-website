@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { ArrowRight, Gift } from "lucide-react"
+import { ArrowRight } from "lucide-react"
 import { CineNav } from "@/components/cinematic/nav"
 import { Footer } from "@/components/footer"
 import {
@@ -48,7 +48,8 @@ export default function ReferralsPage() {
         <section className="relative bg-ground py-6 sm:py-10">
           <div className="cine-container relative">
             <div className="cine-card mx-auto max-w-3xl border-accent/30 p-6 sm:p-10">
-              <Gift className="h-10 w-10 text-accent-light" aria-hidden />
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/brand/referral-star.png" alt="Get $100.00 referral" width={160} height={157} className="h-auto w-40" />
               <h1 className="cine-h2 mt-4 text-cream">Refer someone. You both get paid.</h1>
               <p className="cine-body mt-4">{REFERRAL_TEXT}</p>
 

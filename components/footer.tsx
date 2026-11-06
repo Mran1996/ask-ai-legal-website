@@ -163,11 +163,21 @@ export function Footer() {
           </div>
         </div>
 
-        <p className="mt-8 text-sm">
-          <Link href={REFERRAL_HREF} className="text-gold underline underline-offset-2 transition-colors hover:text-white">
-            * See our referral program
-          </Link>
-        </p>
+        <Link href={REFERRAL_HREF} className="group mt-8 inline-flex items-center gap-4">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/brand/referral-star.png"
+            alt="Get $100.00 referral"
+            width={120}
+            height={118}
+            loading="lazy"
+            className="h-auto w-[120px] transition-transform group-hover:scale-105"
+          />
+          <span className="text-sm text-white/80">
+            <span className="block font-semibold text-gold underline underline-offset-2">* See our referral program</span>
+            <span className="mt-1 block text-xs text-white/60">$100 each on Complete, $50 each on Starter</span>
+          </span>
+        </Link>
 
         <div className="mt-4 flex flex-col items-start justify-between gap-3 border-t border-white/10 pt-6 sm:flex-row sm:items-center">
           <p className="text-xs">© {new Date().getFullYear()} {SITE_LEGAL_NAME}. All rights reserved.</p>
