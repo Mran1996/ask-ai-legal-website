@@ -163,7 +163,13 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-10 flex flex-col items-start justify-between gap-3 border-t border-white/10 pt-6 sm:flex-row sm:items-center">
+        <p className="mt-8 text-sm">
+          <Link href={REFERRAL_HREF} className="text-gold underline underline-offset-2 transition-colors hover:text-white">
+            * See our referral program
+          </Link>
+        </p>
+
+        <div className="mt-4 flex flex-col items-start justify-between gap-3 border-t border-white/10 pt-6 sm:flex-row sm:items-center">
           <p className="text-xs">© {new Date().getFullYear()} {SITE_LEGAL_NAME}. All rights reserved.</p>
           <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-white/40">
             <button
