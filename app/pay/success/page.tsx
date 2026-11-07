@@ -76,7 +76,7 @@ export default async function PaySuccessPage({ searchParams }: PageProps) {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <PaySuccessPurchase value={copy.value} />
+      <PaySuccessPurchase item={item} value={copy.value} />
       <CineNav />
 
       <main className="flex-grow">
