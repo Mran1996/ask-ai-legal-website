@@ -4,7 +4,8 @@ import { ArrowRight, Check, ShieldCheck } from "lucide-react"
 import { CineNav } from "@/components/cinematic/nav"
 import { Footer } from "@/components/footer"
 import { BrandMark } from "@/components/brand-mark"
-import { STRIPE_COMPLETE_URL, STRIPE_STARTER_URL } from "@/lib/site-config"
+import { PlanBuyLink } from "@/components/analytics/plan-buy-link"
+import { PURCHASE_PRICE_USD, STARTER_PRICE_USD, STRIPE_COMPLETE_URL, STRIPE_STARTER_URL } from "@/lib/site-config"
 
 export const metadata: Metadata = {
   title: "Compare Plans | Ask AI Legal",
@@ -109,9 +110,9 @@ export default function PlansPage() {
                     14 days of support after install
                   </li>
                 </ul>
-                <a href={STRIPE_STARTER_URL} className="cine-btn-gold mt-8 justify-center">
+                <PlanBuyLink plan="starter" value={STARTER_PRICE_USD} href={STRIPE_STARTER_URL} className="cine-btn-gold mt-8 justify-center">
                   Buy Starter · $1,497
-                </a>
+                </PlanBuyLink>
               </div>
 
               {/* Complete: card in the installed app's design */}
@@ -156,13 +157,15 @@ export default function PlansPage() {
                     30 days of support after install
                   </li>
                 </ul>
-                <a
+                <PlanBuyLink
+                  plan="complete"
+                  value={PURCHASE_PRICE_USD}
                   href={STRIPE_COMPLETE_URL}
                   className="mt-8 inline-flex h-12 items-center justify-center gap-2 rounded-[14px] px-6 font-semibold text-white"
                   style={{ background: APP.grad, boxShadow: "0 10px 24px -10px rgba(47,143,234,.65)" }}
                 >
                   Buy Complete · $2,997 <ArrowRight className="h-4 w-4" aria-hidden />
-                </a>
+                </PlanBuyLink>
               </div>
             </div>
 
