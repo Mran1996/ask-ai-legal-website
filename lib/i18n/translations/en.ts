@@ -41,7 +41,7 @@ export const en = {
     stat2Sub: "Supported updates and technical assistance within the plan's stated limits",
     stat3Value: "14 or 30 days",
     stat3Label: "Support after install",
-    stat3Sub: "14 days with Starter, 30 days with Complete",
+    stat3Sub: "Support covers the first 30 days",
   },
   services: {
     label: "What your workspace includes",
@@ -80,7 +80,7 @@ export const en = {
       {
         title: "Walkthrough video and support",
         description:
-          "Your download, a step-by-step walkthrough video, and 14 days of support with Starter, 30 days with Complete. You can reach us 24/7.",
+          "Your download, a step-by-step walkthrough video, and support for the first 30 days. You can reach us 24/7.",
       },
     ],
   },
@@ -99,7 +99,7 @@ export const en = {
     traditionalBullets: [
       "Step-by-step walkthrough video",
       "Install in minutes on your own computer",
-      "14 days of support with Starter, 30 days with Complete",
+      "Support covers the first 30 days",
     ],
     usBadge: "Ask AI Legal",
     usHeading: "Optional maintenance",
@@ -131,7 +131,7 @@ export const en = {
       },
       {
         title: "Support after install",
-        summary: "14 days of support with Starter, 30 days with Complete",
+        summary: "Support covers the first 30 days",
         detail:
           "Support begins when you install and covers setup problems and questions about using the installed features. You can reach us 24/7.",
       },

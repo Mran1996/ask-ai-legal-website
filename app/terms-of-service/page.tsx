@@ -63,7 +63,7 @@ export default function TermsOfServicePage() {
       <ul>
         <li>
           <strong>Starter</strong>: $1,497, paid once. Includes your download, a walkthrough video,
-          and 14 days of support after installation.
+          and 30 days of support after installation.
         </li>
         <li>
           <strong>Complete</strong>: $2,997, paid once. Includes your download, a walkthrough video,
@@ -137,7 +137,7 @@ export default function TermsOfServicePage() {
 
       <h2>9. Support and maintenance</h2>
       <p>
-        Support is included for 14 days (Starter) or 30 days (Complete), counted from
+        Support is included for 30 days with either plan, counted from
         the date your installation is completed. You can contact us 24/7. Maintenance at $125 per month is optional and
         may be cancelled as described in your purchase terms.
       </p>

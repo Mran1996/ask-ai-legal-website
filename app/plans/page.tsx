@@ -107,7 +107,7 @@ export default function PlansPage() {
                   ))}
                   <li className="flex items-start gap-3 text-[15px] text-cream/85">
                     <Check className="mt-0.5 h-5 w-5 shrink-0 text-accent-light" aria-hidden />
-                    14 days of support after install
+                    30 days of support after install
                   </li>
                 </ul>
                 <PlanBuyLink plan="starter" value={STARTER_PRICE_USD} href={STRIPE_STARTER_URL} className="cine-btn-gold mt-8 justify-center">

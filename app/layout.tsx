@@ -8,6 +8,8 @@ import {
   SITE_SEO_TITLE,
   SITE_SEO_DESCRIPTION,
   SITE_DISCLAIMER,
+  STARTER_PRICE_USD,
+  PURCHASE_PRICE_USD,
 } from "@/lib/site-config"
 
 const serif = Instrument_Serif({
@@ -90,6 +92,32 @@ const organizationJsonLd = {
   disclaimer: SITE_DISCLAIMER,
 }
 
+/** Tells search engines and AI tools this is installable software, with the two real plans and prices.
+ *  No ratings or reviews here until real ones exist. */
+const softwareJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: "Ask AI Legal",
+  description: DESCRIPTION,
+  url: SITE_URL,
+  applicationCategory: "BusinessApplication",
+  operatingSystem: "Windows, macOS",
+  featureList: [
+    "Court document drafting for self-represented people",
+    "Case organization for court papers and exhibits",
+    "Court deadline tracking",
+    "Legal research with sources",
+    "Writing Check and Second Opinion review of drafts",
+    "Second Brain memory that learns from each document",
+    "Privacy mode that replaces names before anything is sent",
+  ],
+  offers: [
+    { "@type": "Offer", name: "Starter", price: String(STARTER_PRICE_USD), priceCurrency: "USD", url: `${SITE_URL}/plans` },
+    { "@type": "Offer", name: "Complete", price: String(PURCHASE_PRICE_USD), priceCurrency: "USD", url: `${SITE_URL}/plans` },
+  ],
+  publisher: { "@type": "Organization", name: "Ask AI Legal", url: SITE_URL, email: SUPPORT_EMAIL },
+}
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -112,6 +140,11 @@ export default function RootLayout({
           type="application/ld+json"
           // eslint-disable-next-line react/no-danger
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareJsonLd) }}
         />
         <Providers>{children}</Providers>
       </body>

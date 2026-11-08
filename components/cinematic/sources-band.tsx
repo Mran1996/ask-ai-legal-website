@@ -5,12 +5,12 @@ import { Reveal } from "./reveal"
 
 export function SourcesBand() {
   return (
-    <section className="relative overflow-hidden bg-ground">
+    <section id="sources" className="relative flex min-h-[460px] items-center overflow-hidden bg-ground sm:min-h-[520px] xl:min-h-[640px]">
       <div className="absolute inset-0">
-        <Render src="install-04-questions.png" className="h-full w-full" imgClassName="object-cover object-[70%_center]" />
+        <Render src="install-04-questions.png" className="h-full w-full" imgClassName="object-cover object-[70%_30%]" />
         <div className="absolute inset-0 bg-gradient-to-r from-ground via-ground/70 to-ground/30" />
       </div>
-      <div className="cine-container relative py-12 sm:py-16">
+      <div className="cine-container relative w-full py-12 sm:py-16">
         <Reveal className="max-w-2xl">
           <p data-reveal className="cine-label mb-3">Research you can check</p>
           <h2 data-reveal className="cine-h2 text-cream">
