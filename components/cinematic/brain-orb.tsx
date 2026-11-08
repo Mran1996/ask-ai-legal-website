@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react"
 
 /** A live copy of the app's Second Brain orb (static/brainmap.js, "3D orb" layout), drawn on a canvas.
- *  The dots are turning on a sphere, routines circle it, and connected tools ride the outer ring.
+ *  The dots turn on a sphere and connected tools ride the outer ring. The gold routine rings are left out to keep it simple.
  *  Only group labels and counts are shown. No file names, case names or people, ever. */
 
 type Node = { ring: "memory" | "skill" | "routine" | "app"; group?: string; color?: string; size: number; label?: string
@@ -26,7 +26,6 @@ function buildNodes() {
   let i = 0
   GROUPS.forEach((g) => { for (let k = 0; k < g.count; k++) nodes.push({ ring: "memory", group: g.label, color: g.color, size: 0.4 + rand(++i) * (rand(i + 7) > 0.93 ? 2.2 : 0.9), x: 0, y: 0, p: 1, z: 0 }) })
   for (let k = 0; k < 14; k++) nodes.push({ ring: "skill", size: 1, x: 0, y: 0, p: 1, z: 0 })
-  for (let k = 0; k < 4; k++) nodes.push({ ring: "routine", size: 1, x: 0, y: 0, p: 1, z: 0 })
   APPS.forEach((label) => nodes.push({ ring: "app", label, size: 1, x: 0, y: 0, p: 1, z: 0 }))
   return nodes
 }
@@ -86,13 +85,12 @@ export function BrainOrb({ className = "" }: { className?: string }) {
     const draw = () => {
       const dpr = Math.min(2, window.devicePixelRatio || 1), W = cv.clientWidth, H = cv.clientHeight
       if (cv.width !== Math.round(W * dpr) || cv.height !== Math.round(H * dpr)) { cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr) }
-      const s = Math.min(W, H) / 960, small = W < 420
+      const s = Math.min(W, H) / 1010, small = W < 420
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, W, H)
       ctx.setTransform(dpr * s, 0, 0, dpr * s, (dpr * W) / 2, (dpr * H) / 2)
       const g = ctx.createRadialGradient(0, 0, 40, 0, 0, 330); g.addColorStop(0, "rgba(34,201,214,0.22)"); g.addColorStop(0.55, "rgba(47,143,234,0.08)"); g.addColorStop(1, "rgba(47,143,234,0)")
       ctx.fillStyle = g; ctx.beginPath(); ctx.arc(0, 0, 340, 0, Math.PI * 2); ctx.fill()
-      ctx.lineWidth = 1 / s; ctx.strokeStyle = "rgba(245,185,77,0.22)"; ctx.beginPath(); ctx.ellipse(0, 0, 360, 360 * Math.sin(0.32), 0, 0, Math.PI * 2); ctx.stroke()
-      ctx.strokeStyle = "rgba(139,156,246,0.25)"; ctx.beginPath(); ctx.arc(0, 0, 440, 0, Math.PI * 2); ctx.stroke()
+      ctx.lineWidth = 1 / s; ctx.strokeStyle = "rgba(139,156,246,0.25)"; ctx.beginPath(); ctx.arc(0, 0, 440, 0, Math.PI * 2); ctx.stroke()
       ctx.font = "700 17px Inter, system-ui, sans-serif"
       ctx.fillStyle = RING.app; spaced("APPLICATIONS", 0, -470, 3)
       ctx.fillStyle = RING.memory; spaced("MEMORY", 0, -300, 3)
@@ -147,7 +145,7 @@ export function BrainOrb({ className = "" }: { className?: string }) {
     <canvas
       ref={ref}
       role="img"
-      aria-label="The Second Brain map: the Legal Brain at the center, a turning sphere of dots for court papers, cited cases and writing lessons, gold routines circling it and connected tools on the outer ring"
+      aria-label="The Second Brain map: the Legal Brain at the center, a turning sphere of dots for court papers, cited cases and writing lessons, with connected tools on the outer ring"
       className={className}
     />
   )
