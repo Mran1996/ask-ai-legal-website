@@ -72,7 +72,7 @@ const standards = [
   },
   {
     title: "Support after setup",
-    text: "14 days of support with Starter, 30 days with Complete, with optional maintenance afterward.",
+    text: "Support covers the first 30 days, with optional maintenance afterward.",
   },
 ]
 

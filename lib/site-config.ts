@@ -52,7 +52,7 @@ export const PURCHASE_INCLUSIONS = [
   "Install in minutes on your own computer",
   "Second Brain memory that learns your case",
   "Reach us 24/7 with questions",
-  "14 days of support with Starter, 30 days with Complete",
+  "Support covers the first 30 days",
 ] as const
 
 export const SUPPORT_PERIOD_NOTE =
