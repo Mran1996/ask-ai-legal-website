@@ -19,7 +19,8 @@ export function SecondBrain() {
 
         <div className="relative">
           <div className="absolute -inset-4 rounded-full bg-accent/10 blur-3xl" aria-hidden />
-          <div className="relative mx-auto aspect-square w-full max-w-[600px] rounded-full bg-[#0b1220]">
+          {/* Sized to the screen height too, so the whole orb fits on laptops with short screens. */}
+          <div className="relative mx-auto aspect-square w-full rounded-full bg-[#0b1220]" style={{ maxWidth: "min(480px, 68vh)" }}>
             <BrainOrb className="absolute inset-0 h-full w-full" />
           </div>
         </div>
