@@ -3,7 +3,7 @@ import { Footer } from "@/components/footer"
 import { FaqJsonLd } from "@/lib/seo/faq-json-ld"
 import { HOME_FAQ } from "@/lib/faq"
 import { CineNav } from "@/components/cinematic/nav"
-import { StoryHero } from "@/components/cinematic/story-hero"
+import { WorkspaceHero } from "@/components/cinematic/workspace-hero"
 import { SeeDifference } from "@/components/cinematic/see-difference"
 import { SampleDocuments } from "@/components/cinematic/sample-documents"
 import { InstallStory } from "@/components/cinematic/install-story"
@@ -42,7 +42,7 @@ export default function Home() {
       <SmoothScroll />
       <CineNav />
       <main>
-        <StoryHero />
+        <WorkspaceHero />
         <SeeDifference />
         <SampleDocuments />
         <PurchaseIncludes />
