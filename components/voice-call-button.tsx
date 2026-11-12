@@ -72,6 +72,14 @@ export function VoiceCallButton() {
           </a>
         </p>
       )}
+      {!message && !live && !connecting && (
+        <a
+          href={`tel:${VOICE_PHONE_TEL}`}
+          className="rounded-full border border-gold/30 bg-navy/90 px-3 py-1 text-xs font-semibold text-gold shadow-firm hover:border-gold"
+        >
+          Call {VOICE_PHONE_DISPLAY}
+        </a>
+      )}
       <button
         type="button"
         onClick={live || connecting ? stop : start}
