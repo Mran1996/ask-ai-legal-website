@@ -2,6 +2,7 @@
 
 import { Suspense } from "react"
 import { ChatWidgetLoader } from "@/components/chat-widget-loader"
+import { VoiceCallButton } from "@/components/voice-call-button"
 import { ReferralStar } from "@/components/referral-star"
 import { LanguageProvider } from "@/components/language-provider"
 import { ConvexClientProvider } from "@/components/convex-client-provider"
@@ -33,6 +34,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
               </Suspense>
               {children}
               <ReferralStar />
+              <VoiceCallButton />
               <ChatWidgetLoader />
               <CookieConsentBanner />
             </LanguageProvider>

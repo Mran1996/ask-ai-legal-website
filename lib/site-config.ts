@@ -27,6 +27,11 @@ export const REFERRAL_NAME_WITHIN_DAYS = 7
 export const REFERRAL_TEXT =
   "Know someone who could use Ask AI Legal? When they buy and tell us you sent them, you each get a reward."
 
+/** Retell voice agent ("Ask AI Legal Assistant"). The id is not secret; the API key stays on the server. */
+export const RETELL_AGENT_ID = "agent_9ea0ca84ba73e22e80348888f2"
+export const VOICE_PHONE_DISPLAY = "(833) 711-1237"
+export const VOICE_PHONE_TEL = "+18337111237"
+
 export const SUPPORT_EMAIL = "support@askailegal.com"
 export const SUPPORT_MAILTO = `mailto:${SUPPORT_EMAIL}` as const
 
