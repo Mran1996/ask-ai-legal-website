@@ -6,7 +6,7 @@ import { SUPPORT_EMAIL } from "@/lib/site-config"
 export const metadata: Metadata = {
   title: "Disclaimer",
   description:
-    "Important disclaimers about Ask AI Legal: it is software, not a law firm. It does not give legal advice or create an attorney-client relationship. Check your court's rules.",
+    "Ask AI Legal is software, not a law firm. It does not give legal advice or create an attorney-client relationship. Always check your court's rules.",
   alternates: { canonical: "/disclaimer" },
 }
 

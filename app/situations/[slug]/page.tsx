@@ -7,9 +7,25 @@ import { Footer } from "@/components/footer"
 import { SituationCta } from "@/components/situation-cta"
 import { HeroCategoryPills } from "@/components/hero-category-pills"
 import { getSituationGuide, listSituationSlugs } from "@/lib/situations/guides"
-import { SITE_DISCLAIMER, SITE_URL } from "@/lib/site-config"
+import { OG_IMAGE, SITE_DISCLAIMER, SITE_URL } from "@/lib/site-config"
 
 type Props = { params: Promise<{ slug: string }> }
+
+/** One search description per page, each under 160 characters. */
+const SEO_DESCRIPTIONS: Record<string, string> = {
+  divorce:
+    "Starting a divorce or answering papers your spouse filed? Organize your finances and parenting issues and draft your court papers from home.",
+  custody:
+    "Make sense of custody forms, parenting plans and support papers. Draft your custody requests and responses from home, on your own computer.",
+  housing:
+    "Got an eviction notice or a lease dispute? Read every paragraph and deadline, then draft your written response and housing papers from home.",
+  civil:
+    "Sued in civil court, or suing someone? Research the law with sources and draft your answer, motions and declarations on your own computer.",
+  "small-claims":
+    "Prepare your small claims case from home. Organize the facts, state what you are asking for, and draft papers in the format the court expects.",
+  criminal:
+    "Gather your case papers, look up the law with sources and draft documents for your criminal matter in a private workspace on your computer.",
+}
 
 export function generateStaticParams() {
   return listSituationSlugs().map((slug) => ({ slug }))
@@ -20,15 +36,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const guide = getSituationGuide(slug)
   if (!guide) return { title: "Situation guide" }
 
-  const description = guide.intro.slice(0, 155)
+  const description = SEO_DESCRIPTIONS[slug] ?? guide.intro.slice(0, 155)
   return {
-    title: `${guide.title}: AI Help for Self-Represented People`,
+    title: `${guide.title}: Representing Yourself`,
     description,
     alternates: { canonical: `/situations/${slug}` },
     openGraph: {
       title: `${guide.title} | Ask AI Legal`,
       description,
       url: `${SITE_URL}/situations/${slug}`,
+      images: [OG_IMAGE],
     },
   }
 }

@@ -6,7 +6,7 @@ import { Footer } from "@/components/footer"
 import { FaqAccordion } from "@/components/faq-accordion"
 import { FaqJsonLd } from "@/lib/seo/faq-json-ld"
 import { ALL_FAQ, FAQ_CATEGORIES } from "@/lib/faq"
-import { CONSULT_CTA_LABEL, CONSULT_HREF, SITE_URL } from "@/lib/site-config"
+import { CONSULT_CTA_LABEL, CONSULT_HREF, OG_IMAGE, SITE_URL } from "@/lib/site-config"
 
 const TITLE = "AI Legal Assistant FAQ"
 const DESCRIPTION =
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   title: TITLE,
   description: DESCRIPTION,
   alternates: { canonical: "/faq" },
-  openGraph: { title: TITLE, description: DESCRIPTION, url: `${SITE_URL}/faq` },
+  openGraph: { title: TITLE, description: DESCRIPTION, url: `${SITE_URL}/faq`, images: [OG_IMAGE] },
 }
 
 export default function FaqPage() {
