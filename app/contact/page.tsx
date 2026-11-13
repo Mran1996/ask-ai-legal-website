@@ -10,6 +10,7 @@ import {
   SOCIAL_LINKS,
   SUPPORT_EMAIL,
   SUPPORT_MAILTO,
+  OG_IMAGE,
 } from "@/lib/site-config"
 
 const TITLE = "Contact Ask AI Legal"
@@ -24,6 +25,7 @@ export const metadata: Metadata = {
     title: TITLE,
     description: DESCRIPTION,
     url: `${SITE_URL}/contact`,
+    images: [OG_IMAGE],
   },
 }
 

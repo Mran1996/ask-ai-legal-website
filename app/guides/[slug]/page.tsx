@@ -7,7 +7,7 @@ import { Footer } from "@/components/footer"
 import { FaqAccordion } from "@/components/faq-accordion"
 import { FaqJsonLd } from "@/lib/seo/faq-json-ld"
 import { GUIDES, getGuide } from "@/lib/guides"
-import { CONSULT_CTA_LABEL, CONSULT_HREF, SITE_URL } from "@/lib/site-config"
+import { CONSULT_CTA_LABEL, CONSULT_HREF, OG_IMAGE, SITE_URL } from "@/lib/site-config"
 
 type Props = { params: Promise<{ slug: string }> }
 
@@ -22,10 +22,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const guide = getGuide(slug)
   if (!guide) return { title: "Guide" }
   return {
-    title: { absolute: `${guide.seoTitle} | Ask AI Legal` },
+    // Keep titles under 60 characters so Google shows them whole.
+    title: { absolute: guide.seoTitle.length > 45 ? guide.seoTitle : `${guide.seoTitle} | Ask AI Legal` },
     description: guide.description,
     alternates: { canonical: `/guides/${slug}` },
-    openGraph: { title: guide.seoTitle, description: guide.description, url: `${SITE_URL}/guides/${slug}`, type: "article" },
+    openGraph: {
+      title: guide.seoTitle,
+      description: guide.description,
+      url: `${SITE_URL}/guides/${slug}`,
+      type: "article",
+      images: [OG_IMAGE],
+    },
   }
 }
 

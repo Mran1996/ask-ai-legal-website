@@ -4,17 +4,17 @@ import { ArrowRight } from "lucide-react"
 import { CineNav } from "@/components/cinematic/nav"
 import { Footer } from "@/components/footer"
 import { GUIDES } from "@/lib/guides"
-import { SITE_URL } from "@/lib/site-config"
+import { OG_IMAGE, SITE_URL } from "@/lib/site-config"
 
 const TITLE = "Guides for Representing Yourself in Court"
 const DESCRIPTION =
-  "Plain-English guides for self-represented people: representing yourself in court, tracking court deadlines, what to do when you're served, and private AI legal help."
+  "Plain-English guides for people representing themselves: court basics, deadlines, what to do when you're served, motions, evictions and proof of service."
 
 export const metadata: Metadata = {
   title: TITLE,
   description: DESCRIPTION,
   alternates: { canonical: "/guides" },
-  openGraph: { title: TITLE, description: DESCRIPTION, url: `${SITE_URL}/guides` },
+  openGraph: { title: TITLE, description: DESCRIPTION, url: `${SITE_URL}/guides`, images: [OG_IMAGE] },
 }
 
 export default function GuidesPage() {

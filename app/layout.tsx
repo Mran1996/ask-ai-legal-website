@@ -5,6 +5,7 @@ import { Providers } from "@/components/providers"
 import {
   SITE_URL,
   SUPPORT_EMAIL,
+  VOICE_PHONE_TEL,
   SITE_SEO_TITLE,
   SITE_SEO_DESCRIPTION,
   SITE_DISCLAIMER,
@@ -84,6 +85,7 @@ const organizationJsonLd = {
   description: DESCRIPTION,
   url: SITE_URL,
   email: SUPPORT_EMAIL,
+  telephone: VOICE_PHONE_TEL,
   priceRange: "$1,497 to $2,997 one-time purchase; optional $125/month maintenance",
   areaServed: {
     "@type": "Country",

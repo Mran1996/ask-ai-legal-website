@@ -79,7 +79,7 @@ const standards = [
 export const metadata: Metadata = {
   title: "About Ask AI Legal",
   description:
-    "Ask AI Legal is a legal technology company that installs a private AI legal assistant on your computer for people handling their own court cases, nationwide. Not a law firm.",
+    "Ask AI Legal makes private legal software that runs on your computer, for people handling their own court cases anywhere in the US. Not a law firm.",
   alternates: { canonical: "/about" },
 }
 

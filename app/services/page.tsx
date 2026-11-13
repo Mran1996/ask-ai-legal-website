@@ -11,9 +11,9 @@ import { Render } from "@/components/cinematic/render"
 import { CONSULT_CTA_LABEL, CONSULT_HREF } from "@/lib/site-config"
 
 export const metadata: Metadata = {
-  title: "AI Legal Research, Court Deadline Tracking & Case Organization",
+  title: "AI Legal Research & Court Deadline Tracking",
   description:
-    "AI legal research with source links, court deadline tracking, case organization, and document drafting for your review. A private AI legal assistant installed on your computer.",
+    "Legal research with source links, court deadline tracking, case organization and document drafting. A private legal assistant installed on your computer.",
   alternates: { canonical: "/services" },
 }
 

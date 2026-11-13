@@ -8,7 +8,7 @@ import { PlanBuyLink } from "@/components/analytics/plan-buy-link"
 import { PURCHASE_PRICE_USD, STARTER_PRICE_USD, STRIPE_COMPLETE_URL, STRIPE_STARTER_URL } from "@/lib/site-config"
 
 export const metadata: Metadata = {
-  title: "Compare Plans | Ask AI Legal",
+  title: "Compare Plans",
   description:
     "Two plans, each paid once: Starter at $1,497 or Complete at $2,997. Pay once, download, and install in minutes. Backed by a money-back guarantee.",
   alternates: { canonical: "/plans" },

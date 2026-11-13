@@ -32,6 +32,9 @@ export const RETELL_AGENT_ID = "agent_9ea0ca84ba73e22e80348888f2"
 export const VOICE_PHONE_DISPLAY = "(833) 711-1237"
 export const VOICE_PHONE_TEL = "+18337111237"
 
+/** Site-wide share image (app/opengraph-image.tsx). Pages that set their own openGraph must list it again. */
+export const OG_IMAGE = { url: "/opengraph-image", width: 1200, height: 630, alt: "Ask AI Legal" }
+
 export const SUPPORT_EMAIL = "support@askailegal.com"
 export const SUPPORT_MAILTO = `mailto:${SUPPORT_EMAIL}` as const
 
