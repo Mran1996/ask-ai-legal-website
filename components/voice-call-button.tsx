@@ -7,8 +7,8 @@ import { RETELL_AGENT_ID, VOICE_PHONE_DISPLAY, VOICE_PHONE_TEL } from "@/lib/sit
 type Status = "idle" | "connecting" | "live" | "error"
 type Session = { end: () => Promise<void> | void }
 
-/** Floating "Talk to us" button: a browser voice call with the Ask AI Legal voice agent. */
-export function VoiceCallButton() {
+/** "Talk to us" header button: a browser voice call with the Ask AI Legal voice agent. */
+export function VoiceCallButton({ className = "" }: { className?: string }) {
   const [status, setStatus] = useState<Status>("idle")
   const [message, setMessage] = useState("")
   const session = useRef<Session | null>(null)
@@ -38,17 +38,13 @@ export function VoiceCallButton() {
           },
           onError: (err: Error) => {
             const denied = /permission|notallowed|microphone/i.test(err?.message ?? "")
-            setMessage(
-              denied
-                ? "Allow microphone access to talk, or call us instead."
-                : `The call didn't connect. You can call us at ${VOICE_PHONE_DISPLAY}.`
-            )
+            setMessage(denied ? "Allow microphone access to talk, or call us instead." : "The call didn't connect. You can call us instead.")
             setStatus("error")
           },
         },
       }) as unknown as Session
     } catch {
-      setMessage(`The call didn't connect. You can call us at ${VOICE_PHONE_DISPLAY}.`)
+      setMessage("The call didn't connect. You can call us instead.")
       setStatus("error")
     }
   }
@@ -63,40 +59,41 @@ export function VoiceCallButton() {
   const connecting = status === "connecting"
 
   return (
-    <div className="fixed bottom-20 right-5 z-[70] flex flex-col items-end gap-2">
-      {message && (
-        <p role="status" className="max-w-[240px] rounded-md border border-gold/30 bg-navy px-3 py-2 text-xs text-white/90 shadow-firm">
-          {message}{" "}
-          <a href={`tel:${VOICE_PHONE_TEL}`} className="font-semibold text-gold underline">
-            Call {VOICE_PHONE_DISPLAY}
-          </a>
-        </p>
-      )}
-      {!message && !live && !connecting && (
-        <a
-          href={`tel:${VOICE_PHONE_TEL}`}
-          className="rounded-full border border-gold/30 bg-navy/90 px-3 py-1 text-xs font-semibold text-gold shadow-firm hover:border-gold"
-        >
-          Call {VOICE_PHONE_DISPLAY}
-        </a>
-      )}
+    <div className={`relative flex items-center gap-3 ${className}`}>
+      <a
+        href={`tel:${VOICE_PHONE_TEL}`}
+        className="hidden font-sans text-sm font-semibold text-cream/80 transition-colors hover:text-cream 2xl:inline"
+      >
+        {VOICE_PHONE_DISPLAY}
+      </a>
       <button
         type="button"
         onClick={live || connecting ? stop : start}
         aria-label={live ? "End the voice call" : "Talk to us by voice"}
-        className={`flex items-center gap-2 rounded-full border px-5 py-3 text-sm font-semibold text-white shadow-neon transition-all duration-200 hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold ${
-          live ? "border-red-400/70 bg-red-600/90" : "border-gold/50 bg-navy hover:border-gold"
+        className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-2 font-sans text-[11px] font-semibold text-cream transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent sm:px-4 sm:text-xs ${
+          live ? "border-red-400/70 bg-red-600/90" : "border-cream/25 bg-ground/60 hover:border-accent hover:bg-accent/10"
         }`}
       >
         {connecting ? (
-          <Loader2 className="h-5 w-5 animate-spin text-gold motion-reduce:animate-none" aria-hidden />
+          <Loader2 className="h-4 w-4 shrink-0 animate-spin text-accent-light motion-reduce:animate-none" aria-hidden />
         ) : live ? (
-          <PhoneOff className="h-5 w-5" aria-hidden />
+          <PhoneOff className="h-4 w-4 shrink-0" aria-hidden />
         ) : (
-          <Mic className="h-5 w-5 text-gold" aria-hidden />
+          <Mic className="h-4 w-4 shrink-0 text-accent-light" aria-hidden />
         )}
-        <span className="hidden sm:inline">{connecting ? "Connecting…" : live ? "End call" : "Talk to us"}</span>
+        <span>{connecting ? "Connecting…" : live ? "End call" : "Talk to us"}</span>
       </button>
+      {message && (
+        <p
+          role="status"
+          className="absolute right-0 top-full mt-2 w-60 rounded-md border border-accent/30 bg-ground px-3 py-2 font-sans text-xs text-cream/90 shadow-lg"
+        >
+          {message}{" "}
+          <a href={`tel:${VOICE_PHONE_TEL}`} className="font-semibold text-accent-light underline">
+            Call {VOICE_PHONE_DISPLAY}
+          </a>
+        </p>
+      )}
     </div>
   )
 }
