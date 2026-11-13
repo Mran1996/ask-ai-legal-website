@@ -111,7 +111,7 @@ export function WorkspaceHero() {
             </Link>
 
             <div className="mt-5 flex flex-wrap items-center justify-center gap-x-3 lg:justify-start gap-y-2 font-sans text-sm text-cream/80">
-              <span>Questions? Talk to us now.</span>
+              <span>Questions? Call us now.</span>
               <VoiceCallButton showPhone />
             </div>
 
