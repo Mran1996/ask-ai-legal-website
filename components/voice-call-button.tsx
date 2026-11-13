@@ -1,13 +1,13 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
-import { Loader2, Mic, PhoneOff } from "lucide-react"
+import { Loader2, PhoneOff } from "lucide-react"
 import { RETELL_AGENT_ID, VOICE_PHONE_DISPLAY, VOICE_PHONE_TEL } from "@/lib/site-config"
 
 type Status = "idle" | "connecting" | "live" | "error"
 type Session = { end: () => Promise<void> | void }
 
-/** "Talk to us" header button: a browser voice call with the Ask AI Legal voice agent. */
+/** "Call us" header button: a browser voice call with the Ask AI Legal voice agent. */
 export function VoiceCallButton({ className = "", showPhone = false }: { className?: string; showPhone?: boolean }) {
   const [status, setStatus] = useState<Status>("idle")
   const [message, setMessage] = useState("")
@@ -78,9 +78,7 @@ export function VoiceCallButton({ className = "", showPhone = false }: { classNa
           <Loader2 className="h-4 w-4 shrink-0 animate-spin text-accent-light motion-reduce:animate-none" aria-hidden />
         ) : live ? (
           <PhoneOff className="h-4 w-4 shrink-0" aria-hidden />
-        ) : (
-          <Mic className="h-4 w-4 shrink-0 text-accent-light" aria-hidden />
-        )}
+        ) : null}
         <span className="sm:hidden">{connecting ? "…" : live ? "End" : "Call us"}</span>
         <span className="hidden sm:inline">{connecting ? "Connecting…" : live ? "End call" : "Call us"}</span>
       </button>
