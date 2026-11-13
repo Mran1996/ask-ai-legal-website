@@ -5,7 +5,8 @@ import { usePathname } from "next/navigation"
 import { useEffect, useState } from "react"
 import { Menu, ShieldCheck, X } from "lucide-react"
 import { BrandLockup } from "@/components/brand-lockup"
-import { CONSULT_CTA_LABEL, CONSULT_HREF, GUARANTEE_HREF } from "@/lib/site-config"
+import { VoiceCallButton } from "@/components/voice-call-button"
+import { CONSULT_CTA_LABEL, CONSULT_HREF, GUARANTEE_HREF, VOICE_PHONE_DISPLAY, VOICE_PHONE_TEL } from "@/lib/site-config"
 
 const LINKS = [
   { href: "/#install", label: "The install" },
@@ -46,29 +47,32 @@ export function CineNav() {
       <div className="cine-container flex h-[4.5rem] items-center justify-between">
         <BrandLockup href="/" variant="header" />
 
-        <nav className="hidden items-center gap-8 lg:flex" aria-label="Main">
+        <nav className="hidden items-center gap-5 lg:flex xl:gap-7" aria-label="Main">
           {LINKS.map((l) => (
             <Link
               key={l.href}
               href={l.href}
               aria-current={isActive(l.href) ? "page" : undefined}
-              className="font-sans text-sm text-cream/70 transition-colors hover:text-cream active:text-accent"
+              className={`whitespace-nowrap font-sans text-sm text-cream/70 transition-colors hover:text-cream active:text-accent ${
+                l.href === "/#install" || l.href === "/our-story" ? "hidden xl:inline" : ""
+              }`}
             >
               {l.label}
             </Link>
           ))}
         </nav>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3">
+          <VoiceCallButton />
           <Link
             href={GUARANTEE_HREF}
-            className="inline-flex items-center gap-1.5 rounded-full border border-accent/60 bg-ground/60 px-3 py-2 font-sans text-[11px] font-semibold text-accent-light transition-colors hover:border-accent hover:bg-accent/10 sm:px-4 sm:text-xs"
+            className="hidden shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full border border-accent/60 sm:inline-flex bg-ground/60 px-3 py-2 font-sans text-[11px] font-semibold text-accent-light transition-colors hover:border-accent hover:bg-accent/10 sm:px-4 sm:text-xs"
           >
             <ShieldCheck className="h-4 w-4 shrink-0" aria-hidden />
             <span className="xl:hidden">100% Guarantee</span>
             <span className="hidden xl:inline">100% Money-back guarantee</span>
           </Link>
-          <Link href={CONSULT_HREF} className="cine-btn-gold hidden !px-5 !py-2.5 !text-xs sm:inline-flex">
+          <Link href={CONSULT_HREF} className="cine-btn-gold hidden whitespace-nowrap !px-5 !py-2.5 !text-xs sm:inline-flex">
             {CONSULT_CTA_LABEL}
           </Link>
           <button
@@ -100,6 +104,9 @@ export function CineNav() {
             <Link href={CONSULT_HREF} onClick={() => setOpen(false)} className="cine-btn-gold mt-6 w-full">
               {CONSULT_CTA_LABEL}
             </Link>
+            <a href={`tel:${VOICE_PHONE_TEL}`} className="mt-3 w-full text-center font-sans text-base font-semibold text-cream/80">
+              Call {VOICE_PHONE_DISPLAY}
+            </a>
           </nav>
         </div>
       )}
