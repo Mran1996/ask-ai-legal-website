@@ -55,7 +55,7 @@ export function CineNav() {
               href={l.href}
               aria-current={isActive(l.href) ? "page" : undefined}
               className={`whitespace-nowrap font-sans text-sm text-cream/70 transition-colors hover:text-cream active:text-accent ${
-                l.href === "/#install" || l.href === "/our-story" ? "hidden xl:inline" : ""
+                l.href === "/#install" ? "hidden xl:inline" : l.href === "/our-story" ? "hidden 2xl:inline" : ""
               }`}
             >
               {l.label}
