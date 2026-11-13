@@ -3,6 +3,7 @@
 import Link from "next/link"
 import { ArrowRight, ClipboardCheck, Feather, GraduationCap, Lock, Orbit, Play, Scale, ShieldCheck } from "lucide-react"
 import { ReferralStarSticker } from "@/components/referral-star"
+import { VoiceCallButton } from "@/components/voice-call-button"
 import { CONSULT_CTA_LABEL, CONSULT_HREF, GUARANTEE_HREF, MAINTENANCE_PRICE_USD, STARTER_PRICE_USD } from "@/lib/site-config"
 
 /** Each card matches a real feature in the app (Second Brain, the Learner, Writing Check, Second Opinion,
@@ -108,6 +109,11 @@ export function WorkspaceHero() {
             >
               <Play className="h-4 w-4 text-accent-light" aria-hidden /> Watch the walkthrough
             </Link>
+
+            <div className="mt-5 flex flex-wrap items-center gap-x-3 gap-y-2 font-sans text-sm text-cream/80">
+              <span>Questions? Talk to us now.</span>
+              <VoiceCallButton showPhone />
+            </div>
 
             <div className="mt-7 font-sans text-sm text-cream/70">
               <p className="text-base font-semibold text-cream">

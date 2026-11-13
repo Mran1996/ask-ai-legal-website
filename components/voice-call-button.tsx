@@ -8,7 +8,7 @@ type Status = "idle" | "connecting" | "live" | "error"
 type Session = { end: () => Promise<void> | void }
 
 /** "Talk to us" header button: a browser voice call with the Ask AI Legal voice agent. */
-export function VoiceCallButton({ className = "" }: { className?: string }) {
+export function VoiceCallButton({ className = "", showPhone = false }: { className?: string; showPhone?: boolean }) {
   const [status, setStatus] = useState<Status>("idle")
   const [message, setMessage] = useState("")
   const session = useRef<Session | null>(null)
@@ -62,7 +62,7 @@ export function VoiceCallButton({ className = "" }: { className?: string }) {
     <div className={`relative flex items-center gap-3 ${className}`}>
       <a
         href={`tel:${VOICE_PHONE_TEL}`}
-        className="hidden font-sans text-sm font-semibold text-cream/80 transition-colors hover:text-cream 2xl:inline"
+        className={`${showPhone ? "order-last inline" : "hidden 2xl:inline"} whitespace-nowrap font-sans text-sm font-semibold text-cream/80 transition-colors hover:text-cream`}
       >
         {VOICE_PHONE_DISPLAY}
       </a>
