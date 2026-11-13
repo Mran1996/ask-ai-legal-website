@@ -3,7 +3,17 @@
  * General information for people handling their own case. Rules and deadlines vary by state and court,
  * so every guide points readers to their court's official rules instead of stating a number of days.
  */
-export type GuideSection = { heading: string; paragraphs?: string[]; bullets?: string[] }
+export type GuideLink = { label: string; href: string }
+export type GuideSection = {
+  heading: string
+  paragraphs?: string[]
+  bullets?: string[]
+  /** Text shown in a box with a Copy button (for prompts). */
+  copy?: string
+  /** Paragraphs shown after the copy box. */
+  after?: string[]
+  links?: GuideLink[]
+}
 export type Guide = {
   slug: string
   title: string
@@ -17,7 +27,103 @@ export type Guide = {
   updated: string
 }
 
+export const STARTER_PROMPT = `I am representing myself in a court case. Help me step by step.
+1. First, ask me questions one at a time until you understand my case: the court, the state, the papers I have, and what I need to do next.
+2. Then write the exact prompt I should give you for that task, and tell me which of my papers to upload.
+3. When you answer, show the page and line from my papers that you relied on. For any law or case, give the full citation and a link to the official source.
+4. If you are not sure, say so. Never make up a case, a quote or a deadline.`
+
 export const GUIDES: Guide[] = [
+  {
+    slug: "use-chatgpt-claude-for-your-case",
+    title: "How to Use ChatGPT or Claude for Your Court Case",
+    seoTitle: "How to Use ChatGPT or Claude for Your Court Case",
+    description:
+      "Four free steps to use ChatGPT or Claude on your own court case: upload your papers, paste one starter prompt, and check every answer.",
+    intro:
+      "Most people type a question and hope. The answers get better when the chatbot can read your papers and asks you the right questions first. Here is how to set that up in about ten minutes, for free.",
+    sections: [
+      {
+        heading: "Step 1. Open Claude or ChatGPT",
+        paragraphs: ["Both have a free plan. Pick one."],
+        links: [
+          { label: "Open Claude", href: "https://claude.ai" },
+          { label: "Open ChatGPT", href: "https://chatgpt.com" },
+        ],
+      },
+      {
+        heading: "Step 2. Upload your court papers",
+        paragraphs: [
+          "Click the paperclip or the + button and add your PDFs: the complaint, any orders, notices and letters. Want it to remember your papers in every chat? Put them in a Project.",
+        ],
+        links: [
+          {
+            label: "Claude: what files you can upload",
+            href: "https://support.claude.com/en/articles/8241126-what-kinds-of-documents-can-i-upload-to-claude-ai",
+          },
+          { label: "Claude: how Projects work", href: "https://support.claude.com/en/articles/9517075-what-are-projects" },
+          { label: "ChatGPT: uploading files", href: "https://help.openai.com/en/articles/8555545-file-uploads-faq" },
+        ],
+      },
+      {
+        heading: "Step 3. Paste this starter prompt",
+        paragraphs: [
+          "You don't need to know the right words. This prompt asks you about your case, then writes the right prompt for you.",
+        ],
+        copy: STARTER_PROMPT,
+        after: [
+          "Tip: paste rules 3 and 4 into your Project instructions (Claude) or Custom Instructions (ChatGPT). Then every chat follows them.",
+        ],
+        links: [
+          {
+            label: "ChatGPT: Custom Instructions",
+            href: "https://help.openai.com/en/articles/8096356-custom-instructions-for-chatgpt",
+          },
+        ],
+      },
+      {
+        heading: "Step 4. Check its work",
+        paragraphs: ["Chatbots can sound sure and still be wrong. Before you file anything:"],
+        bullets: [
+          "Look up every case and law it cites. If you can't find it, don't use it.",
+          "Match each quote word for word against your papers.",
+          "Check every deadline against your court's rules and the dates on your papers.",
+          "Ask it: \"What could be wrong with this answer?\"",
+          "Check your court's self-help page for the right format and forms.",
+        ],
+      },
+      {
+        heading: "Free help near you",
+        paragraphs: [
+          "Most state courts have a free self-help center with forms and filing steps. Search \"[your state] courts self help\".",
+          "Free legal aid, if you qualify:",
+        ],
+        links: [{ label: "Find legal aid", href: "https://www.lsc.gov/about-lsc/what-legal-aid/get-legal-help" }],
+      },
+      {
+        heading: "Want this on your own computer?",
+        paragraphs: [
+          "Ask AI Legal does these steps for you, with your files kept on your computer. It reads your papers, tracks deadlines and checks its sources before it drafts.",
+        ],
+        links: [{ label: "See how Ask AI Legal works", href: "/services" }],
+      },
+    ],
+    faq: [
+      {
+        q: "Is ChatGPT or Claude free for this?",
+        a: "Both have free plans. Free plans limit how much you can upload and ask each day.",
+      },
+      {
+        q: "Is it safe to upload my court papers?",
+        a: "Your files go to the company that runs the chatbot. Read their privacy settings first. Ask AI Legal keeps your files on your own computer.",
+      },
+      {
+        q: "Can I file what it writes?",
+        a: "Only after you check it with the list in Step 4 and match your court's format.",
+      },
+    ],
+    updated: "2026-11-13",
+  },
   {
     slug: "represent-yourself-in-court",
     title: "How to Represent Yourself in Court",

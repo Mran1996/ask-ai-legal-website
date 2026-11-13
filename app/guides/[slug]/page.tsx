@@ -1,7 +1,8 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import { notFound } from "next/navigation"
-import { ArrowLeft, ArrowRight, Check } from "lucide-react"
+import { ArrowLeft, ArrowRight, Check, ExternalLink } from "lucide-react"
+import { CopyBox } from "@/components/copy-box"
 import { CineNav } from "@/components/cinematic/nav"
 import { Footer } from "@/components/footer"
 import { FaqAccordion } from "@/components/faq-accordion"
@@ -88,6 +89,28 @@ export default async function GuidePage({ params }: Props) {
                         </li>
                       ))}
                     </ul>
+                  )}
+                  {s.copy && <CopyBox text={s.copy} />}
+                  {s.after?.map((p) => (
+                    <p key={p} className="mt-3 leading-relaxed text-cream/80">{p}</p>
+                  ))}
+                  {s.links && (
+                    <div className="mt-4 flex flex-wrap gap-3">
+                      {s.links.map((l) => {
+                        const external = l.href.startsWith("http")
+                        return (
+                          <a
+                            key={l.href}
+                            href={l.href}
+                            {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                            className="inline-flex items-center gap-1.5 rounded-full border border-accent/50 px-4 py-2 font-sans text-sm font-semibold text-accent-light transition-colors hover:border-accent hover:bg-accent/10"
+                          >
+                            {l.label}
+                            {external ? <ExternalLink className="h-3.5 w-3.5" aria-hidden /> : <ArrowRight className="h-3.5 w-3.5" aria-hidden />}
+                          </a>
+                        )
+                      })}
+                    </div>
                   )}
                 </section>
               ))}

@@ -52,6 +52,7 @@ export function Footer() {
         { label: links.contact, href: "/contact" },
         { label: links.faq, href: "/faq" },
         { label: "Guides", href: "/guides" },
+        { label: "Free help: ChatGPT & Claude", href: "/guides/use-chatgpt-claude-for-your-case" },
         { label: "Referral program", href: REFERRAL_HREF },
       ],
     },

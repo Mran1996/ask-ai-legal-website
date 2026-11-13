@@ -14,6 +14,7 @@ const LINKS = [
   { href: "/#process", label: "How it works" },
   { href: "/plans", label: "Pricing" },
   { href: "/faq", label: "FAQ" },
+  { href: "/guides/use-chatgpt-claude-for-your-case", label: "Free help" },
   { href: "/about", label: "About" },
   { href: "/our-story", label: "Our story" },
 ]
