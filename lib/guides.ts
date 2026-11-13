@@ -62,7 +62,7 @@ export const GUIDES: Guide[] = [
             href: "https://support.claude.com/en/articles/8241126-what-kinds-of-documents-can-i-upload-to-claude-ai",
           },
           { label: "Claude: how Projects work", href: "https://support.claude.com/en/articles/9517075-what-are-projects" },
-          { label: "ChatGPT: uploading files", href: "https://help.openai.com/en/articles/8555545-file-uploads-faq" },
+          { label: "ChatGPT: uploading files", href: "https://help.openai.com/en/articles/8555545-uploading-files-and-audio-to-chatgpt" },
         ],
       },
       {
@@ -77,7 +77,7 @@ export const GUIDES: Guide[] = [
         links: [
           {
             label: "ChatGPT: Custom Instructions",
-            href: "https://help.openai.com/en/articles/8096356-custom-instructions-for-chatgpt",
+            href: "https://help.openai.com/en/articles/8096356-chatgpt-custom-instructions",
           },
         ],
       },
