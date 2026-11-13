@@ -110,7 +110,7 @@ export function WorkspaceHero() {
               <Play className="h-4 w-4 text-accent-light" aria-hidden /> Watch the walkthrough
             </Link>
 
-            <div className="mt-5 flex flex-wrap items-center gap-x-3 gap-y-2 font-sans text-sm text-cream/80">
+            <div className="mt-5 flex flex-wrap items-center justify-center gap-x-3 lg:justify-start gap-y-2 font-sans text-sm text-cream/80">
               <span>Questions? Talk to us now.</span>
               <VoiceCallButton showPhone />
             </div>
