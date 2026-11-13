@@ -60,11 +60,11 @@ export function CineNav() {
           ))}
         </nav>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3">
           <VoiceCallButton />
           <Link
             href={GUARANTEE_HREF}
-            className="inline-flex items-center gap-1.5 rounded-full border border-accent/60 bg-ground/60 px-3 py-2 font-sans text-[11px] font-semibold text-accent-light transition-colors hover:border-accent hover:bg-accent/10 sm:px-4 sm:text-xs"
+            className="inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full border border-accent/60 bg-ground/60 px-3 py-2 font-sans text-[11px] font-semibold text-accent-light transition-colors hover:border-accent hover:bg-accent/10 sm:px-4 sm:text-xs"
           >
             <ShieldCheck className="h-4 w-4 shrink-0" aria-hidden />
             <span className="xl:hidden">100% Guarantee</span>

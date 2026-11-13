@@ -70,7 +70,7 @@ export function VoiceCallButton({ className = "" }: { className?: string }) {
         type="button"
         onClick={live || connecting ? stop : start}
         aria-label={live ? "End the voice call" : "Talk to us by voice"}
-        className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-2 font-sans text-[11px] font-semibold text-cream transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent sm:px-4 sm:text-xs ${
+        className={`inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full border px-3 py-2 font-sans text-[11px] font-semibold text-cream transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent sm:px-4 sm:text-xs ${
           live ? "border-red-400/70 bg-red-600/90" : "border-cream/25 bg-ground/60 hover:border-accent hover:bg-accent/10"
         }`}
       >
@@ -81,7 +81,8 @@ export function VoiceCallButton({ className = "" }: { className?: string }) {
         ) : (
           <Mic className="h-4 w-4 shrink-0 text-accent-light" aria-hidden />
         )}
-        <span>{connecting ? "Connecting…" : live ? "End call" : "Talk to us"}</span>
+        <span className="sm:hidden">{connecting ? "…" : live ? "End" : "Call"}</span>
+        <span className="hidden sm:inline">{connecting ? "Connecting…" : live ? "End call" : "Talk to us"}</span>
       </button>
       {message && (
         <p
