@@ -63,7 +63,7 @@ export function CineNav() {
           ))}
         </nav>
 
-        <div className="flex items-center gap-2 sm:gap-3">
+        <div className="ml-4 flex items-center gap-2 sm:gap-3 lg:ml-8">
           <VoiceCallButton />
           <Link
             href={GUARANTEE_HREF}
