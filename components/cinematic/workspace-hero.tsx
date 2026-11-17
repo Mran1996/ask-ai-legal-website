@@ -82,15 +82,18 @@ export function WorkspaceHero() {
       <div className="cine-container relative">
         <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_1fr]">
           <div className="text-center lg:text-left">
+            {/* Visitors clicked the headline (Clarity dead clicks), so it opens the walkthrough. */}
+            <Link href="#demo" className="group block cursor-pointer">
             <p className="cine-label mb-4">Private legal workspace</p>
-            <h1 className="font-display text-cream">
+            <h1 className="font-display text-cream transition-opacity group-hover:opacity-90">
               <span className="block text-[clamp(2.3rem,5vw,4rem)] font-semibold leading-[1.05] tracking-[-0.02em]">
-                Your case. Your documents.
+                You don&apos;t have to face court alone.
               </span>
               <span className="cine-serif block text-[clamp(2.2rem,4.8vw,3.8rem)] leading-[1.08] text-accent-light">
-                On your own computer.
+                We&apos;re with you every step.
               </span>
             </h1>
+            </Link>
             <p className="cine-body mx-auto mt-5 max-w-xl !text-lg !text-cream/80 lg:mx-0">
               Sort your court papers, look up the law, track your deadlines and get drafts you can edit. Your files stay with you.
             </p>
@@ -114,6 +117,13 @@ export function WorkspaceHero() {
               <span>Questions? Call us now.</span>
               <VoiceCallButton />
             </div>
+
+            <p className="mt-4 font-sans text-sm text-cream/80">
+              Built by someone who went to court without a lawyer.{" "}
+              <Link href="/our-story" className="inline-flex items-center gap-1 text-accent-light underline underline-offset-4 hover:text-cream">
+                Read our story <ArrowRight className="h-3.5 w-3.5" aria-hidden />
+              </Link>
+            </p>
 
             <div className="mt-7 font-sans text-sm text-cream/70">
               <p className="text-base font-semibold text-cream">
