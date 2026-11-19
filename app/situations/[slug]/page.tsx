@@ -1,13 +1,11 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import { notFound } from "next/navigation"
-import { ArrowLeft, Check } from "lucide-react"
-import { CineNav } from "@/components/cinematic/nav"
+import { ArrowLeft, ArrowRight, Check } from "lucide-react"
 import { Footer } from "@/components/footer"
-import { SituationCta } from "@/components/situation-cta"
-import { HeroCategoryPills } from "@/components/hero-category-pills"
-import { getSituationGuide, listSituationSlugs } from "@/lib/situations/guides"
-import { OG_IMAGE, SITE_DISCLAIMER, SITE_URL } from "@/lib/site-config"
+import { ALT_BG, card, Eyebrow, GHOST_BTN, gold, H1, H2, ink, muted, PAGE_BG, PRIMARY_BTN, serif, SiteHeader } from "@/components/site/ui"
+import { getSituationGuide, HERO_CATEGORY_LINKS, listSituationSlugs } from "@/lib/situations/guides"
+import { CONSULT_HREF, OG_IMAGE, SITE_DISCLAIMER, SITE_URL } from "@/lib/site-config"
 
 type Props = { params: Promise<{ slug: string }> }
 
@@ -56,93 +54,109 @@ export default async function SituationGuidePage({ params }: Props) {
   if (!guide) notFound()
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <CineNav />
-
-      <main className="flex-grow">
-        <section className="section-navy section-pad-under-header">
-          <div className="container-main max-w-3xl">
-            <div className="flex flex-col items-start gap-5">
-              <Link
-                href="/"
-                className="flex w-fit min-h-[44px] items-center gap-2.5 rounded-full border-2 border-gold/55 bg-gold/10 px-4 py-3 text-sm font-semibold text-gold transition-colors hover:border-gold hover:bg-gold/15 hover:text-white"
-              >
-                <ArrowLeft className="h-5 w-5 shrink-0" aria-hidden />
-                Back to home
-              </Link>
-              <div className="w-full">
-                <p className="firm-label block text-gold">Situation guide</p>
-                <div className="gold-rule mb-6 mt-2" />
-              </div>
-            </div>
-            <h1 className="firm-title text-white">{guide.title}</h1>
-            <p className="mt-6 text-lg leading-relaxed text-white/70">{guide.intro}</p>
-            <div className="flex justify-center">
-              <HeroCategoryPills />
-            </div>
+    <div className={PAGE_BG}>
+      <SiteHeader />
+      <main>
+        {/* 1. Intro */}
+        <section className="relative overflow-hidden pb-12 pt-12 lg:pt-16">
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(232,201,138,0.08),transparent_60%)]" />
+          <div className="relative mx-auto max-w-3xl px-4 text-center sm:px-6">
+            <Link href="/" className={`mb-8 inline-flex items-center gap-2 text-sm ${muted} hover:text-[#f3ead8]`}>
+              <ArrowLeft className="h-4 w-4" aria-hidden /> Back to home
+            </Link>
+            <Eyebrow>Situation guide</Eyebrow>
+            <H1>{guide.title}</H1>
+            <p className={`mx-auto mt-5 max-w-2xl text-lg leading-relaxed ${muted}`}>{guide.intro}</p>
+            <nav className="mt-8 flex flex-wrap justify-center gap-2" aria-label="Situations">
+              {HERO_CATEGORY_LINKS.map((item) => {
+                const href = "href" in item ? item.href : `/situations/${item.slug}`
+                const active = !("href" in item) && item.slug === slug
+                return (
+                  <Link
+                    key={item.slug}
+                    href={href}
+                    aria-current={active ? "page" : undefined}
+                    className={`rounded-full border px-4 py-2 text-sm transition ${
+                      active
+                        ? "border-[#e8c98a]/70 bg-[#e8c98a]/10 text-[#e8c98a]"
+                        : "border-white/15 text-[#f3ead8] hover:border-[#e8c98a]/60 hover:text-[#e8c98a]"
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
+                )
+              })}
+            </nav>
           </div>
         </section>
 
-        <section className="section-pad bg-cream">
-          <div className="container-main max-w-3xl space-y-12">
+        {/* 2. What people use it for + drafts */}
+        <section className={`border-t border-white/[0.06] ${ALT_BG} py-20`}>
+          <div className="mx-auto grid max-w-6xl gap-12 px-4 sm:px-6 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] lg:gap-16">
             <div>
-              <h2 className="font-display text-2xl font-semibold text-navy">What people use the workspace for</h2>
-              <p className="mt-3 text-sm text-gray-600">
+              <Eyebrow>What it helps with</Eyebrow>
+              <H2>
+                What people use <em className={gold}>the workspace for.</em>
+              </H2>
+              <p className={`mt-4 text-sm ${muted} opacity-80`}>
                 Examples only. Available features and sources depend on your plan and the services you connect.
               </p>
-              <ul className="mt-6 space-y-3">
+              <ul className="mt-8 space-y-4">
                 {guide.weHelpWith.map((item) => (
-                  <li key={item} className="flex items-start gap-3 text-sm leading-relaxed text-gray-700">
-                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-gold-dark" aria-hidden />
+                  <li key={item} className={`flex items-start gap-3 text-base leading-relaxed ${muted}`}>
+                    <Check className="mt-1 h-4 w-4 shrink-0 text-[#9fd3a8]" aria-hidden />
                     <span>{item}</span>
                   </li>
                 ))}
               </ul>
             </div>
-
-            <div>
-              <h2 className="font-display text-2xl font-semibold text-navy">Questions people ask first</h2>
-              <dl className="mt-6 space-y-6">
-                {guide.commonQuestions.map((item) => (
-                  <div key={item.q} className="firm-card border border-gold/25 bg-white p-5 sm:p-6">
-                    <dt className="font-display text-lg font-semibold text-navy">{item.q}</dt>
-                    <dd className="mt-2 text-sm leading-relaxed text-gray-600">{item.a}</dd>
-                  </div>
-                ))}
-              </dl>
-            </div>
-
-            <div>
-              <h2 className="font-display text-2xl font-semibold text-navy">Examples of drafts you can prepare</h2>
+            <div className={`${card} p-6 sm:p-8 lg:self-start`}>
+              <p className={`font-mono text-[11px] uppercase tracking-[0.16em] ${gold}`}>Examples of drafts you can prepare</p>
               <ul className="mt-6 flex flex-wrap gap-2">
                 {guide.documentsExamples.map((doc) => (
-                  <li
-                    key={doc}
-                    className="rounded-full border-2 border-gold/30 bg-white px-3 py-1.5 text-xs font-medium text-navy sm:text-sm"
-                  >
+                  <li key={doc} className="rounded-full border border-white/10 bg-white/[0.03] px-3 py-1.5 text-sm text-[#f3ead8]">
                     {doc}
                   </li>
                 ))}
               </ul>
             </div>
+          </div>
+        </section>
 
-            <div className="rounded-sm border border-navy/10 bg-white p-6 sm:p-8">
-              <p className="text-xs font-bold uppercase tracking-widest text-navy">Important</p>
-              <p className="mt-3 text-sm leading-relaxed text-gray-600">{SITE_DISCLAIMER}</p>
-              <div className="mt-8 flex flex-wrap items-center gap-4">
-                <SituationCta label={guide.ctaLabel} />
-                <Link
-                  href="/plans"
-                  className="text-sm font-semibold text-gold-dark underline-offset-2 hover:underline"
-                >
-                  See pricing
-                </Link>
-              </div>
+        {/* 3. Questions people ask first */}
+        <section className="border-t border-white/[0.06] py-20">
+          <div className="mx-auto max-w-3xl px-4 sm:px-6">
+            <Eyebrow>Questions</Eyebrow>
+            <H2>
+              Questions people <em className={gold}>ask first.</em>
+            </H2>
+            <dl className="mt-10 divide-y divide-white/[0.07] border-y border-white/[0.07]">
+              {guide.commonQuestions.map((item) => (
+                <div key={item.q} className="py-6">
+                  <dt className={`${serif} ${ink} text-xl leading-snug sm:text-2xl`}>{item.q}</dt>
+                  <dd className={`mt-3 text-base leading-relaxed ${muted}`}>{item.a}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        </section>
+
+        {/* 4. Closing */}
+        <section className={`border-t border-white/[0.06] ${ALT_BG} py-20 text-center`}>
+          <div className="mx-auto max-w-2xl px-4 sm:px-6">
+            <H2>
+              Ready when <em className={gold}>you are.</em>
+            </H2>
+            <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+              <Link href="/contact" className={GHOST_BTN}>Ask a question</Link>
+              <Link href={CONSULT_HREF} className={PRIMARY_BTN}>
+                {guide.ctaLabel} <ArrowRight className="h-4 w-4" aria-hidden />
+              </Link>
             </div>
+            <p className={`mx-auto mt-8 max-w-xl text-xs leading-relaxed ${muted} opacity-80`}>{SITE_DISCLAIMER}</p>
           </div>
         </section>
       </main>
-
       <Footer />
     </div>
   )
