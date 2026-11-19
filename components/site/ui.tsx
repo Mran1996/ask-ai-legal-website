@@ -34,7 +34,7 @@ const NAV = [
   { href: "/#compare", label: "Compare" },
   { href: "/plans", label: "Pricing" },
   { href: "/#how", label: "How it works" },
-  { href: "/#faq", label: "Questions" },
+  { href: "/faq", label: "Questions" },
 ]
 
 /** Quiet header: logo, a few links, phone, one button. */
