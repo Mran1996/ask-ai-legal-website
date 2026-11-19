@@ -11,7 +11,7 @@ type Computer = "Windows" | "Mac"
 
 /** Right after paying: the buyer picks Windows or Mac and gives the email they paid with, so we send the right
  *  download. It goes to support through the same message system as the contact form. */
-export function ComputerChoice({ plan }: { plan: string }) {
+export function ComputerChoice({ plan, receipt }: { plan: string; receipt: string }) {
   const send = useAction(api.contactActions.sendContactMessage)
   const [computer, setComputer] = useState<Computer | null>(null)
   const [status, setStatus] = useState<"idle" | "sending" | "sent">("idle")
@@ -29,7 +29,7 @@ export function ComputerChoice({ plan }: { plan: string }) {
         name: String(data.get("name") ?? ""),
         email: String(data.get("email") ?? ""),
         subject: `New purchase: ${plan} for ${computer}`,
-        message: `New Ask AI Legal purchase.\nPlan: ${plan}\nComputer: ${computer}\nReferred by: ${referredBy || "No one named"}\nPlease send the ${computer} download, the walkthrough video, and setup steps.`,
+        message: `New Ask AI Legal purchase.\nPlan: ${plan}\nComputer: ${computer}\nReferred by: ${referredBy || "No one named"}\nReceipt: ${receipt}\nPlease send the ${computer} download, the walkthrough video, and setup steps.`,
         company: String(data.get("company") ?? ""),
       })
       if (!result.ok) throw new Error(result.error || "Something went wrong.")
@@ -42,9 +42,9 @@ export function ComputerChoice({ plan }: { plan: string }) {
 
   if (status === "sent") {
     return (
-      <div className="rounded-sm border border-gold/40 bg-gold/10 px-5 py-5 text-left">
+      <div className="rounded-2xl border border-[#e8c98a]/40 bg-[#e8c98a]/[0.06] px-5 py-5 text-left">
         <p className="flex items-center gap-2 text-sm font-semibold text-white">
-          <Check className="h-4 w-4 text-gold" aria-hidden /> Got it: {computer}
+          <Check className="h-4 w-4 text-[#e8c98a]" aria-hidden /> Got it: {computer}
         </p>
         <p className="mt-2 text-sm leading-relaxed text-white/70">
           We will email your {computer} download and setup steps to the address you gave, usually within one business day.
@@ -58,8 +58,8 @@ export function ComputerChoice({ plan }: { plan: string }) {
       type="button"
       onClick={() => setComputer(c)}
       aria-pressed={computer === c}
-      className={`flex flex-1 items-center justify-center gap-2 rounded-sm border px-4 py-4 text-sm font-semibold transition ${
-        computer === c ? "border-gold bg-gold/15 text-white" : "border-white/15 bg-white/5 text-white/80 hover:border-white/30"
+      className={`flex flex-1 items-center justify-center gap-2 rounded-xl border px-4 py-4 text-sm font-semibold transition ${
+        computer === c ? "border-[#e8c98a] bg-[#e8c98a]/10 text-[#f3ead8]" : "border-white/15 bg-white/5 text-white/80 hover:border-white/30"
       }`}
     >
       <Icon className="h-5 w-5" aria-hidden /> {c}
@@ -67,7 +67,7 @@ export function ComputerChoice({ plan }: { plan: string }) {
   )
 
   return (
-    <form onSubmit={submit} className="rounded-sm border border-white/10 bg-white/5 px-5 py-5 text-left">
+    <form onSubmit={submit} className="rounded-2xl border border-white/[0.07] bg-white/[0.025] px-5 py-5 text-left">
       <p className="text-sm font-semibold text-white">Which computer do you use?</p>
       <div className="mt-3 flex gap-3">
         {choice("Windows", Monitor)}
@@ -75,15 +75,15 @@ export function ComputerChoice({ plan }: { plan: string }) {
       </div>
       <label className="mt-4 block text-xs text-white/60">
         Your name
-        <input name="name" required maxLength={120} className="mt-1 w-full rounded-sm border border-white/15 bg-white/10 px-3 py-2.5 text-sm text-white" />
+        <input name="name" required maxLength={120} className="mt-1 w-full rounded-lg border border-white/15 bg-white/[0.05] px-3 py-2.5 text-sm text-white" />
       </label>
       <label className="mt-3 block text-xs text-white/60">
         The email you paid with
-        <input name="email" type="email" required maxLength={200} className="mt-1 w-full rounded-sm border border-white/15 bg-white/10 px-3 py-2.5 text-sm text-white" />
+        <input name="email" type="email" required maxLength={200} className="mt-1 w-full rounded-lg border border-white/15 bg-white/[0.05] px-3 py-2.5 text-sm text-white" />
       </label>
       <label className="mt-3 block text-xs text-white/60">
         Who referred you? (optional)
-        <input name="referredBy" maxLength={200} placeholder="Their name and email" className="mt-1 w-full rounded-sm border border-white/15 bg-white/10 px-3 py-2.5 text-sm text-white placeholder:text-white/35" />
+        <input name="referredBy" maxLength={200} placeholder="Their name and email" className="mt-1 w-full rounded-lg border border-white/15 bg-white/[0.05] px-3 py-2.5 text-sm text-white placeholder:text-white/35" />
         <span className="mt-1 block">
           You each get a reward.{" "}
           <Link href={REFERRAL_HREF} target="_blank" className="underline underline-offset-2 hover:text-white">
@@ -96,7 +96,7 @@ export function ComputerChoice({ plan }: { plan: string }) {
       <button
         type="submit"
         disabled={!computer || status === "sending"}
-        className="btn-gold mt-4 inline-flex min-h-[46px] w-full items-center justify-center disabled:opacity-50"
+        className="mt-4 inline-flex min-h-[46px] w-full items-center justify-center rounded-full bg-[#f3ead8] px-6 text-sm font-semibold text-[#0b131d] transition hover:bg-white disabled:opacity-50"
       >
         {status === "sending" ? "Sending…" : computer ? `Send my ${computer} download` : "Choose Windows or Mac"}
       </button>
