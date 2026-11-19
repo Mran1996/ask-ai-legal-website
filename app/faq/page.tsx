@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { ArrowRight } from "lucide-react"
+import { ArrowRight, Download } from "lucide-react"
 import { Footer } from "@/components/footer"
 import { ALT_BG, Eyebrow, GHOST_BTN, gold, H1, H2, ink, muted, PAGE_BG, PRIMARY_BTN, SiteHeader } from "@/components/site/ui"
 import { FaqJsonLd } from "@/lib/seo/faq-json-ld"
@@ -40,6 +40,16 @@ export default function FaqPage() {
                 </a>
               ))}
             </nav>
+            {/* Free PDF guide (public/ask-ai-legal-help-guide.pdf): the same answers, to save, print or share */}
+            <div className={`mx-auto mt-10 flex max-w-xl flex-col items-center gap-4 rounded-2xl border border-[#e8c98a]/25 bg-white/[0.025] p-6 text-left sm:flex-row sm:justify-between`}>
+              <div>
+                <p className={`font-semibold ${ink}`}>Free Help Guide: working with your assistant</p>
+                <p className={`mt-1 text-sm ${muted}`}>How to add your papers, talk to the chat, research and draft. 12 pages, no sign-up.</p>
+              </div>
+              <a href="/ask-ai-legal-help-guide.pdf" download="Ask AI Legal Help Guide.pdf" className={`${PRIMARY_BTN} shrink-0`}>
+                <Download className="h-4 w-4" aria-hidden /> Download PDF
+              </a>
+            </div>
           </div>
         </section>
 

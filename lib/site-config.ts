@@ -1,15 +1,16 @@
 /** Canonical production URL — used for metadataBase, canonical links, sitemap, and JSON-LD. */
 export const SITE_URL = "https://askailegal.com"
 
-/** Meta / Facebook Page ID — canonical ad-eligible page ("Ask AI Legal"). */
-export const META_FACEBOOK_PAGE_ID = "61585772484354"
+/** Meta / Facebook Page ID of the keeper Page "Ask AI Legal" (facebook.com/AskAILegal). Same ID as the emails
+ *  (convex/lib/emailBranding.ts). 61585772484354 is that same Page's profile number; both open facebook.com/AskAILegal. */
+export const META_FACEBOOK_PAGE_ID = "971753329348819"
 
 /** Site-wide links — canonical ask-ai-legal-website app */
 export const SOCIAL_LINKS = {
   instagram: "https://www.instagram.com/askailegal/",
-  facebook: `https://www.facebook.com/profile.php?id=${META_FACEBOOK_PAGE_ID}`,
+  facebook: `https://www.facebook.com/${META_FACEBOOK_PAGE_ID}`,
   /** Opens the Page straight to its Reviews tab. */
-  facebookReviews: `https://www.facebook.com/profile.php?id=${META_FACEBOOK_PAGE_ID}&sk=reviews`,
+  facebookReviews: "https://www.facebook.com/AskAILegal/reviews",
   youtube: "https://www.youtube.com/@AskAILegal",
 } as const
 
