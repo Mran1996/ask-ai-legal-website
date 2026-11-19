@@ -171,7 +171,7 @@ export default function Home() {
             <div>
               <Eyebrow>A private legal workspace for your own computer</Eyebrow>
               <h1 className={`${serif} ${ink} text-[clamp(2.6rem,5.6vw,4.4rem)] leading-[1.03] tracking-[-0.015em]`}>
-                Built for your case from start to finish. <em className={gold}>It remembers everything.</em>
+                Built for your case from start to finish. <em className={gold}>It remembers every step.</em>
               </h1>
               <p className={`mt-6 max-w-xl text-lg leading-relaxed ${muted}`}>
                 It reads your papers, tracks your deadlines, finds the law with sources and drafts documents you can edit. Your files stay on your computer.
