@@ -1,22 +1,9 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { NeonButton } from "@/components/neon-button"
-import {
-  CONSULT_CTA_LABEL,
-  CONSULT_HREF,
-  SITE_DISCLAIMER,
-} from "@/lib/site-config"
-import { CineNav } from "@/components/cinematic/nav"
+import { ArrowRight, BadgeCheck, BookOpen, Clock, FileSearch, Receipt, Shield } from "lucide-react"
 import { Footer } from "@/components/footer"
-import {
-  ArrowRight,
-  BadgeCheck,
-  BookOpen,
-  Clock,
-  FileSearch,
-  Receipt,
-  Shield,
-} from "lucide-react"
+import { ALT_BG, card, Eyebrow, GHOST_BTN, gold, H1, H2, ink, muted, PAGE_BG, PRIMARY_BTN, serif, SiteHeader } from "@/components/site/ui"
+import { CONSULT_CTA_LABEL, CONSULT_HREF, SITE_DISCLAIMER } from "@/lib/site-config"
 
 const capabilities = [
   {
@@ -85,125 +72,106 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen flex flex-col">
-      <CineNav />
-
-      <main className="flex-grow">
-        <section className="section-navy section-pad-under-header">
-          <div className="container-main max-w-4xl">
-            <p className="firm-label">About us</p>
-            <div className="gold-rule mb-8" />
-            <h1 className="firm-title text-white">
-              Your legal workspace, installed and explained.
-            </h1>
-            <p className="mt-8 max-w-2xl text-lg leading-relaxed text-white/70">
-              Ask AI Legal installs legal workspace software on your computer and shows you how to use it. We exist
-              because people handling important paperwork should have organized, capable tools of their own — at a
-              price that is stated up front.
+    <div className={PAGE_BG}>
+      <SiteHeader />
+      <main>
+        {/* 1. Intro */}
+        <section className="relative overflow-hidden pb-12 pt-16 lg:pt-20">
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(232,201,138,0.08),transparent_60%)]" />
+          <div className="relative mx-auto max-w-2xl px-4 text-center sm:px-6">
+            <Eyebrow>About us</Eyebrow>
+            <H1>
+              Your legal workspace, <em className={gold}>installed and explained.</em>
+            </H1>
+            <p className={`mt-5 text-lg leading-relaxed ${muted}`}>
+              Ask AI Legal installs legal workspace software on your computer and shows you how to use it. We exist because people
+              handling important paperwork should have organized, capable tools of their own, at a price that is stated up front.
             </p>
           </div>
         </section>
 
-        <section className="section-pad bg-cream">
-          <div className="container-main">
+        {/* 2. What makes us different */}
+        <section className={`border-t border-white/[0.06] ${ALT_BG} py-20`}>
+          <div className="mx-auto max-w-6xl px-4 sm:px-6">
             <div className="max-w-2xl">
-              <p className="firm-label text-gold-dark">What makes us different</p>
-              <div className="gold-rule mb-6" />
-              <h2 className="firm-title text-navy">
-                What you get when you work from home
-              </h2>
-              <p className="mt-5 text-lg leading-relaxed text-gray-600">
-                We built our service around what people actually need: a configured workspace, sources they can check
-                themselves, and clear pricing. Here is what that means in practice.
+              <Eyebrow>What makes us different</Eyebrow>
+              <H2>
+                What you get when you <em className={gold}>work from home.</em>
+              </H2>
+              <p className={`mt-5 text-lg leading-relaxed ${muted}`}>
+                We built our service around what people actually need: a configured workspace, sources they can check themselves, and
+                clear pricing. Here is what that means in practice.
               </p>
             </div>
-
-            <ul className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            <ul className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {capabilities.map((item) => (
-                <li key={item.title} className="firm-card">
-                  <item.icon className="h-8 w-8 text-gold-dark" aria-hidden />
-                  <h3 className="mt-5 font-display text-xl font-semibold text-navy">
-                    {item.title}
-                  </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-gray-600">
-                    {item.description}
-                  </p>
+                <li key={item.title} className={`${card} p-6`}>
+                  <span className="flex h-11 w-11 items-center justify-center rounded-full border border-[#e8c98a]/40 text-[#e8c98a]">
+                    <item.icon className="h-5 w-5" aria-hidden />
+                  </span>
+                  <h3 className={`${serif} ${ink} mt-5 text-2xl leading-tight`}>{item.title}</h3>
+                  <p className={`mt-3 text-sm leading-relaxed ${muted}`}>{item.description}</p>
                 </li>
               ))}
             </ul>
           </div>
         </section>
 
-        <section className="section-pad bg-white">
-          <div className="container-main">
-            <div className="mx-auto max-w-3xl text-center">
-              <p className="firm-label text-gold-dark">Our standard</p>
-              <div className="gold-rule mx-auto mb-6" />
-              <h2 className="firm-title text-navy">
-                The home setup your situation deserves
-              </h2>
-              <p className="mt-5 text-gray-600 leading-relaxed">
-                Everyone working from home should have research tools behind them, sources they can verify, and a
-                clear picture of what they are paying for. That is the bar we hold ourselves to on every install.
+        {/* 3. Our standard */}
+        <section className="border-t border-white/[0.06] py-20">
+          <div className="mx-auto max-w-5xl px-4 sm:px-6">
+            <div className="mx-auto max-w-2xl text-center">
+              <Eyebrow>Our standard</Eyebrow>
+              <H2>
+                The home setup <em className={gold}>your situation deserves.</em>
+              </H2>
+              <p className={`mt-5 text-lg leading-relaxed ${muted}`}>
+                Everyone working from home should have research tools behind them, sources they can verify, and a clear picture of what
+                they are paying for. That is the bar we hold ourselves to on every install.
               </p>
             </div>
-
-            <ul className="mx-auto mt-16 grid max-w-4xl gap-6 sm:grid-cols-2">
-              {standards.map((item) => (
-                <li
-                  key={item.title}
-                  className="border-l-2 border-gold pl-6 py-2"
-                >
-                  <h3 className="font-display text-xl font-semibold text-navy">
-                    {item.title}
-                  </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-gray-600">
-                    {item.text}
-                  </p>
+            <ol className="mt-10 grid gap-10 sm:grid-cols-2">
+              {standards.map((item, n) => (
+                <li key={item.title} className="border-t border-white/10 pt-5">
+                  <p className={`font-mono text-xs ${gold}`}>0{n + 1}</p>
+                  <h3 className={`mt-3 text-lg font-semibold ${ink}`}>{item.title}</h3>
+                  <p className={`mt-2 text-sm leading-relaxed ${muted}`}>{item.text}</p>
                 </li>
               ))}
-            </ul>
+            </ol>
           </div>
         </section>
 
-        <section className="section-pad bg-cream-dark">
-          <div className="container-main grid gap-12 lg:grid-cols-2">
+        {/* 4. Who we serve */}
+        <section className={`border-t border-white/[0.06] ${ALT_BG} py-20`}>
+          <div className="mx-auto grid max-w-6xl gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:gap-16">
             <div>
-              <h2 className="font-display text-3xl font-semibold text-navy">
-                Who we serve
-              </h2>
-              <p className="mt-4 leading-relaxed text-gray-600">
-                Families fighting for a loved one. Self-represented people who want to stay organized. Advocates
-                pushing for reform. Anyone who wants capable tools of their own.
+              <Eyebrow>Who we serve</Eyebrow>
+              <H2>
+                People who want <em className={gold}>tools of their own.</em>
+              </H2>
+              <p className={`mt-5 text-lg leading-relaxed ${muted}`}>
+                Families fighting for a loved one. Self-represented people who want to stay organized. Advocates pushing for reform.
+                Anyone who wants capable tools of their own.
               </p>
-              <p className="mt-4 leading-relaxed text-gray-600">
-                You install Ask AI Legal in minutes with our walkthrough video. You remain in control, working from
-                home, informed, and organized.
+              <p className={`mt-4 text-lg leading-relaxed ${muted}`}>
+                You install Ask AI Legal in minutes with our walkthrough video. You remain in control, working from home, informed, and
+                organized.
               </p>
             </div>
-            <div className="rounded-sm border border-gold/30 bg-white p-8">
-              <p className="text-xs font-bold uppercase tracking-widest text-navy">
-                Important notice
-              </p>
-              <p className="mt-4 text-sm leading-relaxed text-gray-600">
-                {SITE_DISCLAIMER}
-              </p>
-              <NeonButton href={CONSULT_HREF} className="btn-neon-light mt-8 inline-flex">
-                {CONSULT_CTA_LABEL}
-                <ArrowRight className="h-4 w-4" aria-hidden />
-              </NeonButton>
-              <p className="mt-4 text-xs text-gray-500">
-                Or{" "}
-                <Link href="/plans" className="text-gold-dark underline underline-offset-2">
-                  see pricing
+            <div className="rounded-2xl border border-[#e8c98a]/30 bg-white/[0.03] p-8 lg:self-start">
+              <p className={`font-mono text-[11px] uppercase tracking-[0.16em] ${gold}`}>Important notice</p>
+              <p className={`mt-4 text-sm leading-relaxed ${muted}`}>{SITE_DISCLAIMER}</p>
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                <Link href={CONSULT_HREF} className={PRIMARY_BTN}>
+                  {CONSULT_CTA_LABEL} <ArrowRight className="h-4 w-4" aria-hidden />
                 </Link>
-                .
-              </p>
+                <Link href="/contact" className={GHOST_BTN}>Ask a question</Link>
+              </div>
             </div>
           </div>
         </section>
       </main>
-
       <Footer />
     </div>
   )
