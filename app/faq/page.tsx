@@ -25,7 +25,7 @@ export default function FaqPage() {
       <SiteHeader />
       <main>
         {/* 1. Intro */}
-        <section className="relative overflow-hidden pb-16 pt-16 lg:pt-20">
+        <section className="relative overflow-hidden pb-12 pt-16 lg:pt-20">
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(232,201,138,0.08),transparent_60%)]" />
           <div className="relative mx-auto max-w-2xl px-4 text-center sm:px-6">
             <Eyebrow>Questions</Eyebrow>
@@ -44,7 +44,7 @@ export default function FaqPage() {
         </section>
 
         {/* 2. Questions by topic */}
-        <section className={`border-t border-white/[0.06] ${ALT_BG} py-20`}>
+        <section className={`border-t border-white/[0.06] ${ALT_BG} pb-20 pt-14`}>
           <div className="mx-auto max-w-3xl space-y-16 px-4 sm:px-6">
             {FAQ_CATEGORIES.map((c, n) => (
               <div key={c.title} id={`topic-${n}`} className="scroll-mt-24">
