@@ -3,8 +3,8 @@ import Link from "next/link"
 import { notFound } from "next/navigation"
 import { ArrowLeft, ArrowRight, Check, ExternalLink } from "lucide-react"
 import { CopyBox } from "@/components/copy-box"
-import { CineNav } from "@/components/cinematic/nav"
 import { Footer } from "@/components/footer"
+import { ALT_BG, Eyebrow, gold, H1, ink, muted, PAGE_BG, PRIMARY_BTN, serif, SiteHeader } from "@/components/site/ui"
 import { FaqAccordion } from "@/components/faq-accordion"
 import { FaqJsonLd } from "@/lib/seo/faq-json-ld"
 import { GUIDES, getGuide } from "@/lib/guides"
@@ -54,89 +54,103 @@ export default async function GuidePage({ params }: Props) {
   }
   const others = GUIDES.filter((g) => g.slug !== slug)
 
+  const H = `${serif} ${ink} mb-4 text-2xl leading-tight sm:text-[1.75rem]`
+  const P = `leading-[1.75] ${muted}`
+
   return (
-    <div className="cine flex min-h-screen flex-col bg-ground">
+    <div className={PAGE_BG}>
       <script
         type="application/ld+json"
         // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
       />
       <FaqJsonLd items={guide.faq} path={`/guides/${slug}`} />
-      <CineNav />
-      <main className="flex-grow">
-        <article className="pt-28 pb-12 sm:pt-32">
-          <div className="cine-container max-w-3xl">
-            <Link href="/guides" className="mb-6 inline-flex items-center gap-2 text-sm text-cream/70 hover:text-accent-light">
+      <SiteHeader />
+      <main>
+        {/* 1. Intro */}
+        <section className="relative overflow-hidden pb-12 pt-12 lg:pt-16">
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(232,201,138,0.08),transparent_60%)]" />
+          <div className="relative mx-auto max-w-3xl px-4 sm:px-6">
+            <Link href="/guides" className={`mb-8 inline-flex items-center gap-2 text-sm ${muted} hover:text-[#f3ead8]`}>
               <ArrowLeft className="h-4 w-4" aria-hidden /> All guides
             </Link>
-            <p className="cine-label mb-3">Guide</p>
-            <h1 className="cine-h2 text-cream">{guide.title}</h1>
-            <p className="mt-5 text-lg leading-relaxed text-cream/80">{guide.intro}</p>
+            <Eyebrow>Guide</Eyebrow>
+            <H1>{guide.title}</H1>
+            <p className={`mt-5 text-lg leading-relaxed ${muted}`}>{guide.intro}</p>
+          </div>
+        </section>
 
-            <div className="mt-10 space-y-9">
-              {guide.sections.map((s) => (
-                <section key={s.heading}>
-                  <h2 className="mb-3 font-display text-xl font-semibold text-accent-light sm:text-2xl">{s.heading}</h2>
-                  {s.paragraphs?.map((p) => (
-                    <p key={p} className="mb-3 leading-relaxed text-cream/80">{p}</p>
-                  ))}
-                  {s.bullets && (
-                    <ul className="space-y-2">
-                      {s.bullets.map((b) => (
-                        <li key={b} className="flex items-start gap-3 leading-relaxed text-cream/80">
-                          <Check className="mt-1 h-4 w-4 shrink-0 text-accent-light" aria-hidden />
-                          <span>{b}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                  {s.copy && <CopyBox text={s.copy} />}
-                  {s.after?.map((p) => (
-                    <p key={p} className="mt-3 leading-relaxed text-cream/80">{p}</p>
-                  ))}
-                  {s.links && (
-                    <div className="mt-4 flex flex-wrap gap-3">
-                      {s.links.map((l) => {
-                        const external = l.href.startsWith("http")
-                        return (
-                          <a
-                            key={l.href}
-                            href={l.href}
-                            {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                            className="inline-flex items-center gap-1.5 rounded-full border border-accent/50 px-4 py-2 font-sans text-sm font-semibold text-accent-light transition-colors hover:border-accent hover:bg-accent/10"
-                          >
-                            {l.label}
-                            {external ? <ExternalLink className="h-3.5 w-3.5" aria-hidden /> : <ArrowRight className="h-3.5 w-3.5" aria-hidden />}
-                          </a>
-                        )
-                      })}
-                    </div>
-                  )}
-                </section>
-              ))}
-            </div>
+        {/* 2. Article body */}
+        <article className={`border-t border-white/[0.06] ${ALT_BG} pb-20 pt-14`}>
+          <div className="mx-auto max-w-3xl space-y-12 px-4 sm:px-6">
+            {guide.sections.map((s) => (
+              <section key={s.heading}>
+                <h2 className={H}>{s.heading}</h2>
+                {s.paragraphs?.map((p) => (
+                  <p key={p} className={`mb-4 ${P}`}>{p}</p>
+                ))}
+                {s.bullets && (
+                  <ul className="space-y-3">
+                    {s.bullets.map((b) => (
+                      <li key={b} className={`flex items-start gap-3 ${P}`}>
+                        <Check className="mt-1.5 h-4 w-4 shrink-0 text-[#9fd3a8]" aria-hidden />
+                        <span>{b}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+                {s.copy && <CopyBox text={s.copy} />}
+                {s.after?.map((p) => (
+                  <p key={p} className={`mt-4 ${P}`}>{p}</p>
+                ))}
+                {s.links && (
+                  <div className="mt-5 flex flex-wrap gap-3">
+                    {s.links.map((l) => {
+                      const external = l.href.startsWith("http")
+                      return (
+                        <a
+                          key={l.href}
+                          href={l.href}
+                          {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                          className="inline-flex items-center gap-1.5 rounded-full border border-white/20 px-4 py-2 text-sm font-semibold text-[#f3ead8] transition hover:border-[#e8c98a]/60 hover:text-[#e8c98a]"
+                        >
+                          {l.label}
+                          {external ? <ExternalLink className="h-3.5 w-3.5" aria-hidden /> : <ArrowRight className="h-3.5 w-3.5" aria-hidden />}
+                        </a>
+                      )
+                    })}
+                  </div>
+                )}
+              </section>
+            ))}
 
-            <section className="mt-12">
-              <h2 className="mb-3 font-display text-xl font-semibold text-accent-light sm:text-2xl">Common questions</h2>
+            <section>
+              <h2 className={H}>Common questions</h2>
               <FaqAccordion items={guide.faq} />
             </section>
 
-            <Link href={CONSULT_HREF} className="cine-btn-gold mt-10">
+            <Link href={CONSULT_HREF} className={PRIMARY_BTN}>
               {CONSULT_CTA_LABEL} <ArrowRight className="h-4 w-4" aria-hidden />
             </Link>
-
-            <nav className="mt-14 border-t border-white/10 pt-8" aria-label="More guides">
-              <p className="cine-label mb-4">More guides</p>
-              <ul className="space-y-2">
-                {others.map((g) => (
-                  <li key={g.slug}>
-                    <Link href={`/guides/${g.slug}`} className="text-cream/80 hover:text-accent-light">{g.title}</Link>
-                  </li>
-                ))}
-              </ul>
-            </nav>
           </div>
         </article>
+
+        {/* 3. More guides */}
+        <nav className="py-20" aria-label="More guides">
+          <div className="mx-auto max-w-3xl px-4 sm:px-6">
+            <Eyebrow>More guides</Eyebrow>
+            <ul className="divide-y divide-white/[0.07] border-y border-white/[0.07]">
+              {others.map((g) => (
+                <li key={g.slug}>
+                  <Link href={`/guides/${g.slug}`} className={`group flex items-center justify-between gap-4 py-4 ${ink} hover:text-[#e8c98a]`}>
+                    <span>{g.title}</span>
+                    <ArrowRight className="h-4 w-4 shrink-0 text-[#e8c98a] transition group-hover:translate-x-0.5" aria-hidden />
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </nav>
       </main>
       <Footer />
     </div>
