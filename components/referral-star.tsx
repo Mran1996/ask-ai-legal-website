@@ -25,7 +25,7 @@ export function ReferralStarSticker({ className = "" }: { className?: string }) 
 export function ReferralStar() {
   const pathname = usePathname() ?? ""
   // Hidden on the redesigned pages; the footer still links the referral program.
-  if (["/", "/plans", "/contact"].includes(pathname) || pathname === REFERRAL_HREF || pathname.startsWith("/ops") || pathname.startsWith("/pay")) return null
+  if (["/", "/plans", "/contact", "/faq"].includes(pathname) || pathname === REFERRAL_HREF || pathname.startsWith("/ops") || pathname.startsWith("/pay")) return null
 
   return (
     <Link
