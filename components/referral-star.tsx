@@ -24,8 +24,8 @@ export function ReferralStarSticker({ className = "" }: { className?: string }) 
 /** Star that opens the referral page, pinned bottom-left above the cookie banner on pages other than home. */
 export function ReferralStar() {
   const pathname = usePathname() ?? ""
-  // The home page shows its own star on the app picture in the hero.
-  if (pathname === "/" || pathname === REFERRAL_HREF || pathname.startsWith("/ops") || pathname.startsWith("/pay")) return null
+  // Hidden on the redesigned pages (home, plans); the footer still links the referral program.
+  if (pathname === "/" || pathname === "/plans" || pathname === REFERRAL_HREF || pathname.startsWith("/ops") || pathname.startsWith("/pay")) return null
 
   return (
     <Link
