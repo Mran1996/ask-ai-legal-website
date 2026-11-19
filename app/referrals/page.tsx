@@ -1,8 +1,8 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { ArrowRight } from "lucide-react"
-import { CineNav } from "@/components/cinematic/nav"
+import { ArrowRight, Check } from "lucide-react"
 import { Footer } from "@/components/footer"
+import { ALT_BG, card, Eyebrow, GHOST_BTN, gold, H1, H2, ink, muted, PAGE_BG, PRIMARY_BTN, serif, SiteHeader } from "@/components/site/ui"
 import {
   REFERRAL_COMPLETE_REWARD_USD,
   REFERRAL_PAY_AFTER_DAYS,
@@ -42,47 +42,68 @@ const RULES = [
 
 export default function ReferralsPage() {
   return (
-    <div className="cine min-h-screen">
-      <CineNav />
-      <main className="pt-24 pb-10 sm:pt-28">
-        <section className="relative bg-ground py-6 sm:py-10">
-          <div className="cine-container relative">
-            <div className="cine-card mx-auto max-w-3xl border-accent/30 p-6 sm:p-10">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/brand/referral-star.png" alt="Get $100.00 referral" width={160} height={157} className="h-auto w-40" />
-              <h1 className="cine-h2 mt-4 text-cream">Refer someone. You both get paid.</h1>
-              <p className="cine-body mt-4">{REFERRAL_TEXT}</p>
-
-              <div className="mt-6 grid gap-3 sm:grid-cols-2">
-                {REWARDS.map(({ plan, reward }) => (
-                  <div key={plan} className="rounded-sm border border-cream/15 p-5">
-                    <p className="text-sm text-cream/65">{plan} plan</p>
-                    <p className="mt-1 font-display text-3xl font-semibold text-cream">${reward} each</p>
-                  </div>
-                ))}
-              </div>
-
-              <h2 className="mt-8 font-display text-xl font-semibold text-cream">How it works</h2>
-              <ol className="cine-body mt-3 list-decimal space-y-2 pl-5">
-                {STEPS.map((step) => (
-                  <li key={step}>{step}</li>
-                ))}
-              </ol>
-
-              <h2 className="mt-8 font-display text-xl font-semibold text-cream">The rules</h2>
-              <ul className="cine-body mt-3 list-disc space-y-2 pl-5">
-                {RULES.map((rule) => (
-                  <li key={rule}>{rule}</li>
-                ))}
-              </ul>
-
-              <div className="mt-8">
-                <Link href="/plans" className="cine-btn-gold">
-                  See the plans <ArrowRight className="h-4 w-4" aria-hidden />
-                </Link>
-              </div>
-              <p className="mt-6 text-sm text-cream/60">{SITE_DISCLAIMER}</p>
+    <div className={PAGE_BG}>
+      <SiteHeader />
+      <main>
+        {/* 1. Intro and rewards */}
+        <section className="relative overflow-hidden pb-16 pt-16 lg:pt-20">
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(232,201,138,0.08),transparent_60%)]" />
+          <div className="relative mx-auto max-w-3xl px-4 text-center sm:px-6">
+            <Eyebrow>Referral program</Eyebrow>
+            <H1>
+              Refer someone. <em className={gold}>You both get paid.</em>
+            </H1>
+            <p className={`mx-auto mt-5 max-w-xl text-lg leading-relaxed ${muted}`}>{REFERRAL_TEXT}</p>
+            <div className="mx-auto mt-10 grid max-w-xl gap-4 sm:grid-cols-2">
+              {REWARDS.map(({ plan, reward }, n) => (
+                <div key={plan} className={n ? "rounded-2xl border border-[#e8c98a]/35 bg-white/[0.04] p-6" : `${card} p-6`}>
+                  <p className={`font-mono text-[11px] uppercase tracking-[0.16em] ${n ? gold : muted}`}>{plan} plan</p>
+                  <p className={`${serif} ${ink} mt-2 text-5xl`}>${reward}</p>
+                  <p className={`mt-1 text-sm ${muted}`}>for you, and ${reward} for them</p>
+                </div>
+              ))}
             </div>
+          </div>
+        </section>
+
+        {/* 2. How it works */}
+        <section className={`border-t border-white/[0.06] ${ALT_BG} py-20`}>
+          <div className="mx-auto max-w-5xl px-4 sm:px-6">
+            <Eyebrow>How it works</Eyebrow>
+            <H2>
+              Three steps, <em className={gold}>no sign-up.</em>
+            </H2>
+            <ol className="mt-10 grid gap-10 md:grid-cols-3">
+              {STEPS.map((step, n) => (
+                <li key={step} className="border-t border-white/10 pt-5">
+                  <p className={`font-mono text-xs ${gold}`}>0{n + 1}</p>
+                  <p className={`mt-3 text-base leading-relaxed ${ink}`}>{step}</p>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </section>
+
+        {/* 3. Rules */}
+        <section className="border-t border-white/[0.06] py-20">
+          <div className="mx-auto max-w-3xl px-4 sm:px-6">
+            <Eyebrow>The rules</Eyebrow>
+            <H2>
+              Simple and <em className={gold}>fair.</em>
+            </H2>
+            <ul className="mt-10 space-y-4">
+              {RULES.map((rule) => (
+                <li key={rule} className={`flex gap-3 text-base leading-relaxed ${muted}`}>
+                  <Check className="mt-1 h-4 w-4 shrink-0 text-[#9fd3a8]" aria-hidden />
+                  <span>{rule}</span>
+                </li>
+              ))}
+            </ul>
+            <div className="mt-10 flex flex-col gap-3 sm:flex-row">
+              <Link href="/plans" className={PRIMARY_BTN}>See the plans <ArrowRight className="h-4 w-4" aria-hidden /></Link>
+              <Link href="/contact" className={GHOST_BTN}>Ask a question</Link>
+            </div>
+            <p className={`mt-8 text-xs leading-relaxed ${muted} opacity-80`}>{SITE_DISCLAIMER}</p>
           </div>
         </section>
       </main>
