@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { Phone } from "lucide-react"
-import { VOICE_PHONE_DISPLAY, VOICE_PHONE_TEL } from "@/lib/site-config"
+import { SITE_BRAND_NAME, VOICE_PHONE_DISPLAY, VOICE_PHONE_TEL } from "@/lib/site-config"
 
 /** Shared look for the redesigned pages (home redesign, Nov 2026). Use these so every page feels the same. */
 export const serif = "font-[family-name:var(--font-serif)] font-normal"
@@ -42,10 +42,10 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 border-b border-white/[0.06] bg-[#0b131d]/85 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6">
-        <Link href="/" className={`${serif} ${ink} text-xl`}>
-          Ask AI Legal
+        <Link href="/" className={`${serif} ${ink} shrink-0 whitespace-nowrap text-xl`}>
+          {SITE_BRAND_NAME}
         </Link>
-        <nav className={`hidden gap-7 text-sm md:flex ${muted}`}>
+        <nav className={`hidden gap-7 whitespace-nowrap text-sm lg:flex ${muted}`}>
           {NAV.map((n) => (
             <Link key={n.href} href={n.href} className="hover:text-[#f3ead8]">
               {n.label}

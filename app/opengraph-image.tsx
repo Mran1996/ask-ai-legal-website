@@ -30,7 +30,7 @@ export default function OpenGraphImage() {
             letterSpacing: "-0.02em",
           }}
         >
-          Ask AI Legal
+          Ask AI Legal™
         </div>
         <div
           style={{

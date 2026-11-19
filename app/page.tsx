@@ -171,7 +171,7 @@ export default function Home() {
             <div>
               <Eyebrow>A private legal workspace for your own computer</Eyebrow>
               <h1 className={`${serif} ${ink} text-[clamp(2.6rem,5.6vw,4.4rem)] leading-[1.03] tracking-[-0.015em]`}>
-                Handle court papers at home, <em className={gold}>with help</em> that remembers everything.
+                Built for your case from start to finish. <em className={gold}>It remembers everything.</em>
               </h1>
               <p className={`mt-6 max-w-xl text-lg leading-relaxed ${muted}`}>
                 It reads your papers, tracks your deadlines, finds the law with sources and drafts documents you can edit. Your files stay on your computer.
@@ -320,7 +320,7 @@ export default function Home() {
                 <thead>
                   <tr className="border-b border-white/[0.07]">
                     <th scope="col" className={`p-4 font-normal ${muted}`}>What you get</th>
-                    <th scope="col" className={`p-4 font-semibold ${ink}`}>Ask AI Legal</th>
+                    <th scope="col" className={`p-4 font-semibold ${ink}`}>Ask AI Legal™</th>
                     <th scope="col" className={`p-4 font-semibold ${ink}`}>
                       ChatGPT or Claude <span className={`block text-xs font-normal ${muted}`}>on their own</span>
                     </th>
