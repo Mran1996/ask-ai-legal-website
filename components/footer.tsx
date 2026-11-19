@@ -38,7 +38,7 @@ export function Footer() {
         { label: links.legalResearch, href: "/services#organization" },
         { label: links.outcomeAnalysis, href: "/services#calendar" },
         { label: links.hearingPrep, href: "/services#privacy" },
-        { label: links.documentPrep, href: "/#includes" },
+        { label: links.documentPrep, href: "/plans" },
       ],
     },
     {
@@ -47,7 +47,7 @@ export function Footer() {
         { label: links.about, href: "/about" },
         { label: "Our story", href: "/our-story" },
         { label: links.pricing, href: "/plans" },
-        { label: links.process, href: "/#process" },
+        { label: links.process, href: "/#how" },
         { label: links.whyUs, href: "/#compare" },
         { label: links.contact, href: "/contact" },
         { label: links.faq, href: "/faq" },
