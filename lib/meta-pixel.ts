@@ -67,10 +67,13 @@ export function pixelPageView(): void {
 
 export function pixelTrack(
   event: string,
-  params?: Record<string, string | number | boolean>
+  params?: Record<string, string | number | boolean>,
+  options?: { eventID: string }
 ): void {
   if (!canTrack()) return
-  if (params) {
+  if (options) {
+    window.fbq!("track", event, params ?? {}, options)
+  } else if (params) {
     window.fbq!("track", event, params)
   } else {
     window.fbq!("track", event)

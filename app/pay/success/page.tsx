@@ -1,10 +1,12 @@
 import type { Metadata } from "next"
 import Link from "next/link"
+import { redirect } from "next/navigation"
 import { Check, Mail } from "lucide-react"
-import { CineNav } from "@/components/cinematic/nav"
 import { Footer } from "@/components/footer"
+import { card, Eyebrow, H1, ink, muted, PAGE_BG, PRIMARY_BTN, SiteHeader } from "@/components/site/ui"
 import { PaySuccessPurchase } from "@/components/analytics/pay-success-purchase"
 import { ComputerChoice } from "@/components/pay/computer-choice"
+import { verifyCheckoutSession, type PaidItem, type VerifiedPurchase } from "@/lib/stripe-receipt"
 import {
   MAINTENANCE_PRICE_USD,
   PURCHASE_PRICE_USD,
@@ -30,7 +32,10 @@ export const metadata: Metadata = {
   },
 }
 
-type Item = "starter" | "complete" | "maintenance" | "unknown"
+type Item = PaidItem
+
+// Checked against Stripe on every visit, never cached.
+export const dynamic = "force-dynamic"
 
 const planCopy = (name: string, price: number, days: number) => ({
   heading: "Thank you. Your purchase is confirmed",
@@ -44,8 +49,8 @@ const planCopy = (name: string, price: number, days: number) => ({
   value: price,
 })
 
-/** Stripe payment links send customers here with ?item=starter, ?item=complete or ?item=maintenance,
- *  so Meta records each Purchase at the right amount. ?item=purchase (older links) means Complete. */
+/** Stripe payment links send customers here with ?session_id={CHECKOUT_SESSION_ID} (plus ?item=...).
+ *  The page only opens for a real, paid Stripe checkout; anyone else is sent to /plans. */
 const COPY: Record<Item, { heading: string; body: string; next: string[]; value?: number }> = {
   starter: planCopy("Starter", STARTER_PRICE_USD, 14),
   complete: planCopy("Complete", PURCHASE_PRICE_USD, 30),
@@ -68,86 +73,102 @@ type PageProps = {
 
 export default async function PaySuccessPage({ searchParams }: PageProps) {
   const params = await searchParams
-  // Stripe links send ?item=starter|complete (older ones may use ?plan=).
   const pick = (v: string | string[] | undefined) => (Array.isArray(v) ? v[0] : v)
-  const raw = pick(params.item) ?? pick(params.plan)
-  const item: Item = raw === "purchase" ? "complete" : raw === "starter" || raw === "complete" || raw === "maintenance" ? raw : "unknown"
-  const copy = COPY[item]
+  const hint = pick(params.item) ?? pick(params.plan)
+
+  let purchase: VerifiedPurchase | null = await verifyCheckoutSession(pick(params.session_id), hint === "purchase" ? "complete" : hint)
+
+  // Local preview only (never on the live site): /pay/success?preview=starter|complete|maintenance
+  const preview = pick(params.preview)
+  if (!purchase && process.env.NODE_ENV === "development" && (preview === "starter" || preview === "complete" || preview === "maintenance")) {
+    purchase = {
+      sessionId: "",
+      item: preview,
+      value: preview === "starter" ? STARTER_PRICE_USD : preview === "complete" ? PURCHASE_PRICE_USD : MAINTENANCE_PRICE_USD,
+    }
+  }
+
+  if (!purchase) redirect("/plans")
+
+  const item: Item = purchase.item
+  const base = COPY[item]
+  // Show and report what Stripe says was actually paid.
+  const copy =
+    item === "starter" || item === "complete"
+      ? planCopy(item === "starter" ? "Starter" : "Complete", purchase.value, item === "starter" ? 14 : 30)
+      : { ...base, value: purchase.value || base.value }
+  const receipt = purchase.sessionId
+    ? `Stripe checkout ${purchase.sessionId}, paid $${purchase.value.toFixed(2)}`
+    : "Local preview, not a real payment"
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <PaySuccessPurchase item={item} value={copy.value} />
-      <CineNav />
+    <div className={PAGE_BG}>
+      {purchase.sessionId ? <PaySuccessPurchase item={item} value={copy.value} eventId={purchase.sessionId} /> : null}
+      <SiteHeader />
+      <main>
+        <section className="relative overflow-hidden pb-20 pt-16 lg:pt-20">
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(232,201,138,0.08),transparent_60%)]" />
+          <div className="relative mx-auto w-full max-w-xl px-4 text-center sm:px-6">
+            <span className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-full border border-[#e8c98a]/40">
+              <Check className="h-6 w-6 text-[#e8c98a]" aria-hidden />
+            </span>
+            <Eyebrow>Payment confirmed</Eyebrow>
+            <H1>{copy.heading}</H1>
+            <p className={`mx-auto mt-5 max-w-md text-lg leading-relaxed ${muted}`}>{copy.body}</p>
 
-      <main className="flex-grow">
-        <section className="section-navy section-pad-under-header">
-          <div className="container-main max-w-lg">
-            <div className="mx-auto w-full max-w-md text-center">
-              <p className="firm-label text-gold">Payment confirmed</p>
-              <div className="gold-rule mx-auto mb-6 mt-2" />
-
-              <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full border border-gold/40 bg-gold/10">
-                <Check className="h-7 w-7 text-gold" aria-hidden />
-              </div>
-
-              <h1 className="mt-6 font-display text-3xl leading-tight text-white sm:text-4xl">{copy.heading}</h1>
-              <p className="mx-auto mt-4 max-w-sm text-base leading-relaxed text-white/70">{copy.body}</p>
-
-              <div className="mt-8 rounded-sm border border-white/10 bg-white/5 px-5 py-5 text-left">
-                <p className="text-sm font-semibold text-white">What happens next</p>
-                <ul className="mt-3 space-y-2.5 text-sm leading-relaxed text-white/70">
-                  {copy.next.map((line) => (
-                    <li key={line}>{line}</li>
-                  ))}
-                </ul>
-              </div>
-
-              {item === "starter" || item === "complete" ? (
-                <>
-                  <div className="mt-6">
-                    <ComputerChoice plan={item === "starter" ? "Starter" : "Complete"} />
-                  </div>
-                  <div className="mt-6 text-left">
-                    <p className="text-sm font-semibold text-white">See Ask AI Legal in action</p>
-                    <p className="mt-1 text-xs text-white/60">A short preview. Your full walkthrough video, which explains everything step by step, comes by email with your download.</p>
-                    <div className="mt-3 aspect-video overflow-hidden rounded-sm border border-white/10">
-                      <iframe
-                        className="h-full w-full"
-                        src={`https://www.youtube-nocookie.com/embed/${WALKTHROUGH_VIDEO_ID}`}
-                        title="Ask AI Legal preview"
-                        allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                        loading="lazy"
-                      />
-                    </div>
-                    <a className="mt-2 inline-block text-xs text-gold underline" href={WALKTHROUGH_VIDEO_URL} target="_blank" rel="noopener noreferrer">
-                      Open it on YouTube
-                    </a>
-                  </div>
-                </>
-              ) : null}
-
-              <div className="mt-6 flex items-center justify-center gap-2 text-sm text-white/60">
-                <Mail className="h-4 w-4 shrink-0 text-gold" aria-hidden />
-                <span>
-                  Questions?{" "}
-                  <a className="text-gold underline" href={`mailto:${SUPPORT_EMAIL}`}>
-                    {SUPPORT_EMAIL}
-                  </a>
-                </span>
-              </div>
-
-              <Link
-                href="/"
-                className="btn-gold mt-8 inline-flex min-h-[48px] items-center justify-center px-8"
-              >
-                Return home
-              </Link>
+            <div className={`${card} mt-10 p-6 text-left`}>
+              <p className={`font-mono text-[11px] uppercase tracking-[0.16em] text-[#e8c98a]`}>What happens next</p>
+              <ol className="mt-4 space-y-3">
+                {copy.next.map((line, n) => (
+                  <li key={line} className={`flex gap-3 text-sm leading-relaxed ${muted}`}>
+                    <span className="font-mono text-xs text-[#e8c98a]">0{n + 1}</span>
+                    <span>{line}</span>
+                  </li>
+                ))}
+              </ol>
             </div>
+
+            {item === "starter" || item === "complete" ? (
+              <>
+                <div className="mt-6">
+                  <ComputerChoice plan={item === "starter" ? "Starter" : "Complete"} receipt={receipt} />
+                </div>
+                <div className="mt-10 text-left">
+                  <p className={`text-base font-semibold ${ink}`}>See Ask AI Legal in action</p>
+                  <p className={`mt-1 text-sm ${muted}`}>A short preview. Your full walkthrough video, which explains everything step by step, comes by email with your download.</p>
+                  <div className="mt-4 aspect-video overflow-hidden rounded-2xl border border-white/10">
+                    <iframe
+                      className="h-full w-full"
+                      src={`https://www.youtube-nocookie.com/embed/${WALKTHROUGH_VIDEO_ID}`}
+                      title="Ask AI Legal preview"
+                      allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      loading="lazy"
+                    />
+                  </div>
+                  <a className="mt-3 inline-block text-sm text-[#e8c98a] underline underline-offset-4" href={WALKTHROUGH_VIDEO_URL} target="_blank" rel="noopener noreferrer">
+                    Open it on YouTube
+                  </a>
+                </div>
+              </>
+            ) : null}
+
+            <div className={`mt-10 flex items-center justify-center gap-2 text-sm ${muted}`}>
+              <Mail className="h-4 w-4 shrink-0 text-[#e8c98a]" aria-hidden />
+              <span>
+                Questions?{" "}
+                <a className="text-[#e8c98a] underline underline-offset-4" href={`mailto:${SUPPORT_EMAIL}`}>
+                  {SUPPORT_EMAIL}
+                </a>
+              </span>
+            </div>
+
+            <Link href="/" className={`${PRIMARY_BTN} mt-8`}>
+              Return home
+            </Link>
           </div>
         </section>
       </main>
-
       <Footer />
     </div>
   )
