@@ -36,7 +36,7 @@ const INQUIRY_TYPES = {
 type InquiryType = keyof typeof INQUIRY_TYPES
 
 const inputClass =
-  "w-full rounded-sm border border-navy/15 bg-white px-4 py-3 text-sm text-navy placeholder:text-navy/40 focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold/30"
+  "w-full rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3 text-sm text-[#f3ead8] placeholder:text-[#a9b3c1]/50 focus:border-[#e8c98a]/60 focus:outline-none focus:ring-2 focus:ring-[#e8c98a]/20"
 
 export function ContactForm() {
   const sendContactMessage = useAction(api.contactActions.sendContactMessage)
@@ -87,23 +87,23 @@ export function ContactForm() {
   if (status === "success") {
     return (
       <div
-        className="rounded-md border-2 border-gold/40 bg-white p-8 text-center shadow-[0_0_24px_rgba(251,176,52,0.12)]"
+        className="rounded-2xl border border-[#e8c98a]/35 bg-white/[0.04] p-8 text-center"
         role="status"
         aria-live="polite"
       >
-        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-gold/15">
-          <Check className="h-6 w-6 text-gold-dark" aria-hidden />
+        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-[#e8c98a]/15">
+          <Check className="h-6 w-6 text-[#e8c98a]" aria-hidden />
         </div>
-        <h3 className="mt-4 font-display text-xl font-semibold text-navy">
+        <h3 className="mt-4 font-[family-name:var(--font-serif)] text-2xl text-[#f3ead8]">
           {"Message sent"}
         </h3>
-        <p className="mx-auto mt-2 max-w-sm text-sm leading-relaxed text-gray-600">
+        <p className="mx-auto mt-2 max-w-sm text-sm leading-relaxed text-[#a9b3c1]">
           Thanks for reaching out. We'll reply to your email.
         </p>
         <button
           type="button"
           onClick={() => setStatus("idle")}
-          className="mt-6 text-sm font-semibold text-gold-dark underline-offset-2 hover:underline"
+          className="mt-6 text-sm font-semibold text-[#e8c98a] underline-offset-2 hover:underline"
         >
           Send another message
         </button>
@@ -112,7 +112,7 @@ export function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="rounded-md border-2 border-navy/10 bg-white p-6 sm:p-8">
+    <form onSubmit={handleSubmit} className="rounded-2xl border border-white/[0.07] bg-white/[0.025] p-6 sm:p-8">
       {/* Honeypot — hidden from users, no layout/overflow impact on mobile. */}
       <div className="hidden" aria-hidden>
         <label>
@@ -122,7 +122,7 @@ export function ContactForm() {
       </div>
 
       <div className="mb-5">
-        <label htmlFor="contact-inquiry" className="mb-1.5 block text-xs font-semibold text-navy">
+        <label htmlFor="contact-inquiry" className="mb-1.5 block text-xs font-semibold text-[#f3ead8]">
           What can we help with?
         </label>
         <select
@@ -142,35 +142,35 @@ export function ContactForm() {
 
       <div className="grid gap-5 sm:grid-cols-2">
         <div>
-          <label htmlFor="contact-name" className="mb-1.5 block text-xs font-semibold text-navy">
-            Name <span className="text-gold-dark">*</span>
+          <label htmlFor="contact-name" className="mb-1.5 block text-xs font-semibold text-[#f3ead8]">
+            Name <span className="text-[#e8c98a]">*</span>
           </label>
           <input id="contact-name" name="name" type="text" required maxLength={120} autoComplete="name" className={inputClass} placeholder="Your full name" />
         </div>
         <div>
-          <label htmlFor="contact-email" className="mb-1.5 block text-xs font-semibold text-navy">
-            Email <span className="text-gold-dark">*</span>
+          <label htmlFor="contact-email" className="mb-1.5 block text-xs font-semibold text-[#f3ead8]">
+            Email <span className="text-[#e8c98a]">*</span>
           </label>
           <input id="contact-email" name="email" type="email" required maxLength={200} autoComplete="email" className={inputClass} placeholder="you@example.com" />
         </div>
         <div>
-          <label htmlFor="contact-phone" className="mb-1.5 block text-xs font-semibold text-navy">
-            Phone <span className="font-normal text-navy/40">(optional)</span>
+          <label htmlFor="contact-phone" className="mb-1.5 block text-xs font-semibold text-[#f3ead8]">
+            Phone <span className="font-normal text-[#a9b3c1]/70">(optional)</span>
           </label>
           <input id="contact-phone" name="phone" type="tel" maxLength={40} autoComplete="tel" className={inputClass} placeholder="(555) 555-5555" />
         </div>
         <div>
-          <label htmlFor="contact-subject" className="mb-1.5 block text-xs font-semibold text-navy">
-            Subject <span className="font-normal text-navy/40">(optional)</span>
+          <label htmlFor="contact-subject" className="mb-1.5 block text-xs font-semibold text-[#f3ead8]">
+            Subject <span className="font-normal text-[#a9b3c1]/70">(optional)</span>
           </label>
           <input id="contact-subject" name="subject" type="text" maxLength={120} className={inputClass} placeholder="Optional" />
         </div>
       </div>
 
       <div className="mt-5">
-        <label htmlFor="contact-message" className="mb-1.5 block text-xs font-semibold text-navy">
+        <label htmlFor="contact-message" className="mb-1.5 block text-xs font-semibold text-[#f3ead8]">
           {"How can we help?"}{" "}
-          <span className="text-gold-dark">*</span>
+          <span className="text-[#e8c98a]">*</span>
         </label>
         <textarea
           id="contact-message"
@@ -184,7 +184,7 @@ export function ContactForm() {
       </div>
 
       {status === "error" && error && (
-        <p role="alert" className="mt-4 rounded-sm border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+        <p role="alert" className="mt-4 rounded-xl border border-red-400/30 bg-red-500/10 px-4 py-3 text-sm text-red-200">
           {error}
         </p>
       )}
@@ -192,7 +192,7 @@ export function ContactForm() {
       <button
         type="submit"
         disabled={status === "sending"}
-        className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-gold px-6 py-3.5 text-sm font-semibold text-ground transition-colors hover:bg-gold-light focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-light disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
+        className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#f3ead8] px-6 py-3.5 text-sm font-semibold text-[#0b131d] transition-colors hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e8c98a] disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
       >
         {status === "sending" ? (
           <>
@@ -207,7 +207,7 @@ export function ContactForm() {
         )}
       </button>
 
-      <p className="mt-4 text-xs leading-relaxed text-gray-500">
+      <p className="mt-4 text-xs leading-relaxed text-[#a9b3c1]/80">
         By sending this message you agree we may contact you about your request. You don&apos;t need to share case
         documents to ask a question. This form is not legal advice.
       </p>
