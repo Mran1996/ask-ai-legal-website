@@ -1,14 +1,13 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { ArrowRight, BookOpen, Phone, Check, Eye, Minus, PenLine, Repeat, Scale, ShieldCheck, X } from "lucide-react"
+import { ArrowRight, BookOpen, Check, Eye, Minus, PenLine, Repeat, Scale, ShieldCheck, X } from "lucide-react"
 import { Footer } from "@/components/footer"
+import { card, Eyebrow, GHOST_BTN, gold, H2, ink, muted, PRIMARY_BTN, serif, SiteHeader } from "@/components/site/ui"
 import { BrainOrb } from "@/components/cinematic/brain-orb"
 import { HOME_FAQ } from "@/lib/faq"
 import { FaqJsonLd } from "@/lib/seo/faq-json-ld"
 import {
   GUARANTEE_HREF,
-  VOICE_PHONE_DISPLAY,
-  VOICE_PHONE_TEL,
   RESEARCH_SOURCES,
   MAINTENANCE_PRICE_USD,
   STARTER_PRICE_USD,
@@ -32,25 +31,6 @@ export const metadata: Metadata = {
     description: SITE_SEO_DESCRIPTION,
   },
 }
-
-const serif = "font-[family-name:var(--font-serif)] font-normal"
-const ink = "text-[#f3ead8]"
-const muted = "text-[#a9b3c1]"
-const gold = "text-[#e8c98a]"
-const card = "rounded-2xl border border-white/[0.07] bg-white/[0.025]"
-
-function Eyebrow({ children }: { children: React.ReactNode }) {
-  return <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.16em] text-[#e8c98a]/80">{children}</p>
-}
-
-function H2({ children }: { children: React.ReactNode }) {
-  return <h2 className={`${serif} ${ink} text-[clamp(2rem,4vw,3.1rem)] leading-[1.08] tracking-[-0.01em]`}>{children}</h2>
-}
-
-const PRIMARY_BTN =
-  "inline-flex items-center justify-center gap-2 rounded-full bg-[#f3ead8] px-6 py-3 font-sans text-sm font-semibold text-[#0b131d] transition hover:bg-white"
-const GHOST_BTN =
-  "inline-flex items-center justify-center gap-2 rounded-full border border-white/20 px-6 py-3 font-sans text-sm font-semibold text-[#f3ead8] transition hover:border-white/40"
 
 /** Only features listed on /plans. Chat column is a general, conservative read. Verify before publishing. */
 type Mark = "yes" | "partly" | "no"
@@ -181,31 +161,7 @@ export default function Home() {
       `}</style>
       <FaqJsonLd items={HOME_FAQ} path="/#faq" />
 
-      {/* Quiet header: one button */}
-      <header className="sticky top-0 z-40 border-b border-white/[0.06] bg-[#0b131d]/85 backdrop-blur">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6">
-          <Link href="/" className={`${serif} ${ink} text-xl`}>
-            Ask AI Legal
-          </Link>
-          <nav className={`hidden gap-7 text-sm md:flex ${muted}`}>
-            <a href="#brain" className="hover:text-[#f3ead8]">Second Brain</a>
-            <a href="#research" className="hover:text-[#f3ead8]">Research</a>
-            <a href="#compare" className="hover:text-[#f3ead8]">Compare</a>
-            <a href="#pricing" className="hover:text-[#f3ead8]">Pricing</a>
-            <a href="#how" className="hover:text-[#f3ead8]">How it works</a>
-            <a href="#faq" className="hover:text-[#f3ead8]">Questions</a>
-          </nav>
-          <div className="flex items-center gap-4">
-            <a href={`tel:${VOICE_PHONE_TEL}`} className="inline-flex items-center gap-2 text-sm font-semibold text-[#f3ead8] hover:text-[#e8c98a]" aria-label={`Call ${VOICE_PHONE_DISPLAY}`}>
-              <Phone className="h-4 w-4 text-[#e8c98a]" aria-hidden />
-              <span className="hidden sm:inline">{VOICE_PHONE_DISPLAY}</span>
-            </a>
-            <Link href="/plans" className="rounded-full border border-white/20 px-4 py-2 text-sm font-semibold text-[#f3ead8] hover:border-white/40">
-              See plans
-            </Link>
-          </div>
-        </div>
-      </header>
+      <SiteHeader />
 
       <main>
         {/* 1. Hero */}
