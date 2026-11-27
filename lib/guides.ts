@@ -156,12 +156,23 @@ export const GUIDES: Guide[] = [
 6. Tell me what you did not read and could not check.
 7. Use plain English. Short sentences.
 8. When I challenge you, check again. Do not agree with me to please me.`,
-        after: [
-          "Want every chat to follow them? Paste them into Custom Instructions (ChatGPT) or your Project instructions (Claude).",
-        ],
       },
       {
-        heading: "2. Give it your papers",
+        heading: "2. Have it save everything once",
+        paragraphs: [
+          "You should not have to paste these prompts every time. Send this once and ChatGPT or Claude turns this whole guide into saved rules and a skill. If it cannot open the link, paste the prompts from this page into the chat and send the same request.",
+        ],
+        copy: `Read this page: https://askailegal.com/guides/ask-chatgpt-claude-better
+Turn every rule and prompt on it into something you keep using, so I never have to paste them again.
+1. Write one set of standing rules from the page. Number them. Keep every rule and do not add new ones.
+2. Turn the prompts (read everything first, four chairs, get links, check against the source, cut the machine writing, before you file) into one skill I can call by name.
+3. If you can save rules or create a skill yourself, do it now and tell me what you saved.
+4. If you cannot, give me the finished text in a box I can copy, and tell me exactly where to paste it: ChatGPT Custom Instructions or a Project's instructions, or Claude Project instructions or a skill.
+5. Then tell me how to start a new chat that uses them.`,
+        after: ["Check what it saved. Read the rules once and fix anything it changed."],
+      },
+      {
+        heading: "3. Give it your papers",
         paragraphs: [
           "Use copies of your papers and keep the originals somewhere else. Leave out ID numbers, bank numbers and other people's health records. If a court order or sealed file is involved, check what you may share first.",
         ],
@@ -178,7 +189,7 @@ export const GUIDES: Guide[] = [
         ],
       },
       {
-        heading: "3. Ask it to read everything first",
+        heading: "4. Ask it to read everything first",
         paragraphs: ["Send this before you ask for any draft."],
         copy: `Read every file I gave you. Do not change or delete anything.
 1. List each document with its date, who wrote it, and whether it shows a court filing stamp.
@@ -189,7 +200,7 @@ export const GUIDES: Guide[] = [
 Then ask me your questions. Do not draft yet.`,
       },
       {
-        heading: "4. Describe your situation",
+        heading: "5. Describe your situation",
         paragraphs: ["A good request gives a goal, the facts and the limits. Fill this in."],
         copy: `Court and county:
 Who I am in it (for example, the person who filed):
@@ -214,7 +225,7 @@ Before you answer, ask me what is missing.`,
         ],
       },
       {
-        heading: "5. Test it from four chairs",
+        heading: "6. Test it from four chairs",
         copy: `Review this draft four times and keep the reviews separate.
 1. As the judge: what can be ordered today, under which rule, on which evidence? What is missing?
 2. As an appeals court: if the judge says no, is every argument and exhibit in the record?
@@ -223,7 +234,7 @@ Before you answer, ask me what is missing.`,
 Then list the changes you recommend and why.`,
       },
       {
-        heading: "6. Get links and verify them",
+        heading: "7. Get links and verify them",
         paragraphs: ["ChatGPT and Claude can both produce a case that looks real and is not. Treat every citation as unproven until you open it."],
         copy: `For each case or rule, give me: the full name and citation, a link to the full text at the court or legislature site when possible, the exact sentence you rely on, the page, and what the case was about. If you cannot open the source, write "NOT VERIFIED" and do not put it in my draft.`,
         after: ["Then check each one yourself."],
@@ -252,7 +263,7 @@ Do not fill gaps from memory.`,
         ],
       },
       {
-        heading: "7. Add legal research plugins",
+        heading: "8. Add legal research plugins",
         paragraphs: [
           "A plugin lets ChatGPT or Claude search a real legal database instead of its memory. Claude calls them connectors. ChatGPT calls them apps or plugins. The answers come back with links you can open.",
           "Claude needs a paid plan to add connectors. In ChatGPT it depends on your plan. Anything sent through a plugin goes to that company's servers.",
@@ -276,7 +287,7 @@ Do not fill gaps from memory.`,
         ],
       },
       {
-        heading: "8. Cut the machine writing",
+        heading: "9. Cut the machine writing",
         copy: `Write like a careful person, not like a press release.
 1. Short sentences with a named actor and a plain verb.
 2. No long dashes and no semicolons.
@@ -289,7 +300,7 @@ After drafting, list each sentence that breaks a rule and fix it.`,
         after: ["Then read it out loud. If you would never say a sentence to a clerk, change it."],
       },
       {
-        heading: "9. What ChatGPT and Claude do well",
+        heading: "10. What ChatGPT and Claude do well",
         bullets: [
           "Reading long papers and building a timeline.",
           "Arguing the other side when you ask.",
@@ -308,8 +319,9 @@ After drafting, list each sentence that breaks a rule and fix it.`,
         after: ["Better answers come from a clear goal, real documents and your corrections. Say why something is wrong. The reason changes the next draft."],
       },
       {
-        heading: "10. Save your rules so you stop retyping them",
+        heading: "11. Save the rules and skill yourself",
         paragraphs: [
+          "Use this if step 2 did not work.",
           "ChatGPT: paste the text below into Custom Instructions or a Project's instructions.",
           "Claude: save it as a skill. Anthropic says custom skills need code execution turned on.",
         ],
@@ -338,7 +350,7 @@ description: Use for any court paper, discovery questions or legal plan. Asks qu
         ],
       },
       {
-        heading: "11. Before you file",
+        heading: "12. Before you file",
         steps: [
           "Read every line. You are the one signing it.",
           "Confirm each fact is true from what you know or from a document.",
@@ -366,6 +378,10 @@ description: Use for any court paper, discovery questions or legal plan. Asks qu
       {
         q: "Do these prompts work in both ChatGPT and Claude?",
         a: "Yes. Copy and paste them into either one. Only the Cowork folder and the skill upload are Claude features.",
+      },
+      {
+        q: "Do I have to paste the prompts every time?",
+        a: "No. Send the step 2 prompt once. It turns the guide into saved rules and a skill that new chats can use.",
       },
       {
         q: "Which legal research plugin is free?",
