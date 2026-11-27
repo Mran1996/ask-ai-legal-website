@@ -77,6 +77,17 @@ export default async function GuidePage({ params }: Props) {
             <Eyebrow>Guide</Eyebrow>
             <H1>{guide.title}</H1>
             <p className={`mt-5 text-lg leading-relaxed ${muted}`}>{guide.intro}</p>
+            {guide.cta && (
+              <div className="mt-8 flex flex-col gap-4 rounded-2xl border border-[#e8c98a]/25 bg-white/[0.025] p-6 sm:flex-row sm:items-center sm:justify-between">
+                <div>
+                  <p className={`font-semibold ${ink}`}>{guide.cta.title}</p>
+                  <p className={`mt-1 text-sm ${muted}`}>{guide.cta.text}</p>
+                </div>
+                <Link href={guide.cta.href} className={`${PRIMARY_BTN} shrink-0`}>
+                  {guide.cta.label} <ArrowRight className="h-4 w-4" aria-hidden />
+                </Link>
+              </div>
+            )}
           </div>
         </section>
 
@@ -98,6 +109,16 @@ export default async function GuidePage({ params }: Props) {
                       </li>
                     ))}
                   </ul>
+                )}
+                {s.steps && (
+                  <ol className="space-y-3">
+                    {s.steps.map((t, i) => (
+                      <li key={t} className={`flex items-start gap-3 ${P}`}>
+                        <span className={`w-5 shrink-0 text-right font-semibold ${gold}`}>{i + 1}.</span>
+                        <span>{t}</span>
+                      </li>
+                    ))}
+                  </ol>
                 )}
                 {s.copy && <CopyBox text={s.copy} />}
                 {s.after?.map((p) => (

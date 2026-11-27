@@ -8,6 +8,8 @@ export type GuideSection = {
   heading: string
   paragraphs?: string[]
   bullets?: string[]
+  /** Numbered list (1, 2, 3) for steps done in order. */
+  steps?: string[]
   /** Text shown in a box with a Copy button (for prompts). */
   copy?: string
   /** Paragraphs shown after the copy box. */
@@ -23,6 +25,8 @@ export type Guide = {
   description: string
   intro: string
   sections: GuideSection[]
+  /** Box with one button, shown right under the intro. */
+  cta?: { title: string; text: string; label: string; href: string }
   faq: { q: string; a: string }[]
   updated: string
 }
@@ -63,6 +67,7 @@ export const GUIDES: Guide[] = [
           },
           { label: "Claude: how Projects work", href: "https://support.claude.com/en/articles/9517075-what-are-projects" },
           { label: "ChatGPT: uploading files", href: "https://help.openai.com/en/articles/8555545-uploading-files-and-audio-to-chatgpt" },
+          { label: "After you upload: prompts that get better answers", href: "/guides/ask-chatgpt-claude-better" },
         ],
       },
       {
@@ -123,6 +128,255 @@ export const GUIDES: Guide[] = [
       },
     ],
     updated: "2026-11-13",
+  },
+  {
+    slug: "ask-chatgpt-claude-better",
+    title: "Ask ChatGPT or Claude Better About Your Court Case",
+    seoTitle: "Ask ChatGPT or Claude Better: Legal Prompts",
+    description:
+      "Copy-ready rules and prompts for ChatGPT or Claude: read your court papers, test a draft four ways, get real case links, and add legal research plugins.",
+    intro:
+      "Uploading your papers is the first step. The back and forth is the work. Every rule and prompt below works in ChatGPT or Claude. Copy them as they are.",
+    cta: {
+      title: "Want the best out of ChatGPT or Claude?",
+      text: "Fill out the form with your name, phone number and what you need. We get back to you.",
+      label: "Fill out the form",
+      href: "/contact",
+    },
+    sections: [
+      {
+        heading: "1. Copy the starter rules",
+        paragraphs: ["Paste this as your first message. It works in an ordinary chat."],
+        copy: `Follow these rules in every answer.
+1. Ask me questions before you draft. Do not guess facts.
+2. Number every point so I can answer by number.
+3. Never invent a fact, case, rule, date or quote. If you are unsure, say "not verified".
+4. Give a link for every rule and case, and quote the exact sentence you rely on.
+5. Tell me what the other side will attack.
+6. Tell me what you did not read and could not check.
+7. Use plain English. Short sentences.
+8. When I challenge you, check again. Do not agree with me to please me.`,
+        after: [
+          "Want every chat to follow them? Paste them into Custom Instructions (ChatGPT) or your Project instructions (Claude).",
+        ],
+      },
+      {
+        heading: "2. Give it your papers",
+        paragraphs: [
+          "Use copies of your papers and keep the originals somewhere else. Leave out ID numbers, bank numbers and other people's health records. If a court order or sealed file is involved, check what you may share first.",
+        ],
+        steps: [
+          "ChatGPT or Claude: make a Project for the matter and add your files. The papers stay with every chat in that Project.",
+          "Claude desktop app: Claude Cowork can read one folder on your computer. Anthropic lists it for paid plans. Pick only the folder for this matter.",
+          "Cowork can change files in the folder you pick, not only read them. Work on copies.",
+        ],
+        links: [
+          { label: "ChatGPT: uploading files", href: "https://help.openai.com/en/articles/8555545-uploading-files-and-audio-to-chatgpt" },
+          { label: "Claude: how Projects work", href: "https://support.claude.com/en/articles/9517075-what-are-projects" },
+          { label: "Claude Cowork: getting started", href: "https://support.claude.com/en/articles/13345190-get-started-with-claude-cowork" },
+          { label: "Using Cowork safely", href: "https://support.claude.com/en/articles/13364135-use-claude-cowork-safely" },
+        ],
+      },
+      {
+        heading: "3. Ask it to read everything first",
+        paragraphs: ["Send this before you ask for any draft."],
+        copy: `Read every file I gave you. Do not change or delete anything.
+1. List each document with its date, who wrote it, and whether it shows a court filing stamp.
+2. Tell me which files you could not read.
+3. Make a timeline with the file name beside each date.
+4. List every deadline you find and where you found it.
+5. List the issues you see. Mark each one "in the document" or "your inference".
+Then ask me your questions. Do not draft yet.`,
+      },
+      {
+        heading: "4. Describe your situation",
+        paragraphs: ["A good request gives a goal, the facts and the limits. Fill this in."],
+        copy: `Court and county:
+Who I am in it (for example, the person who filed):
+What already happened, with dates:
+What the other side filed:
+Next date I know about:
+What I want the judge to do:
+What I am worried about:
+What I do not want mentioned, and why:
+Before you answer, ask me what is missing.`,
+      },
+      {
+        heading: "Questions that sharpen the answer",
+        steps: [
+          "How does this sentence help me?",
+          "Who benefits if I add this person or this claim?",
+          "What do I have to prove, one item at a time?",
+          "If the other side says this, where is their proof?",
+          "Could this open a door I plan to ask the judge to close?",
+          "How did they answer this kind of question before?",
+          "Could this look bad or get me in trouble?",
+        ],
+      },
+      {
+        heading: "5. Test it from four chairs",
+        copy: `Review this draft four times and keep the reviews separate.
+1. As the judge: what can be ordered today, under which rule, on which evidence? What is missing?
+2. As an appeals court: if the judge says no, is every argument and exhibit in the record?
+3. As a juror: what happened, was it on purpose, is there a pattern, and what would I need to see?
+4. As the other side's lawyer: attack the weakest three points.
+Then list the changes you recommend and why.`,
+      },
+      {
+        heading: "6. Get links and verify them",
+        paragraphs: ["ChatGPT and Claude can both produce a case that looks real and is not. Treat every citation as unproven until you open it."],
+        copy: `For each case or rule, give me: the full name and citation, a link to the full text at the court or legislature site when possible, the exact sentence you rely on, the page, and what the case was about. If you cannot open the source, write "NOT VERIFIED" and do not put it in my draft.`,
+        after: ["Then check each one yourself."],
+      },
+      {
+        heading: "Check the draft against the source",
+        steps: [
+          "Open the link yourself. Search the page for the quoted sentence.",
+          "Save the full opinion or rule as a file.",
+          "Start a new chat, so the chatbot is not defending its own work. Upload the file and your draft.",
+          "Paste the request below.",
+          "Check whether the case was later reversed or limited. A law library can help with this.",
+        ],
+        copy: `I uploaded the source and my draft. Use only the uploaded source.
+1. Is each quote word for word? Show any difference.
+2. Is the page number right?
+3. Does the source decide what my sentence says it decides? Answer yes, partly or no, and explain.
+4. Is anything in the source bad for me?
+Do not fill gaps from memory.`,
+        after: ["Free places to look:"],
+        links: [
+          { label: "Washington court opinions", href: "https://www.courts.wa.gov/opinions/" },
+          { label: "Washington court rules", href: "https://www.courts.wa.gov/court_rules/" },
+          { label: "Washington statutes", href: "https://app.leg.wa.gov/rcw/" },
+          { label: "CourtListener", href: "https://www.courtlistener.com/" },
+        ],
+      },
+      {
+        heading: "7. Add legal research plugins",
+        paragraphs: [
+          "A plugin lets ChatGPT or Claude search a real legal database instead of its memory. Claude calls them connectors. ChatGPT calls them apps or plugins. The answers come back with links you can open.",
+          "Claude needs a paid plan to add connectors. In ChatGPT it depends on your plan. Anything sent through a plugin goes to that company's servers.",
+        ],
+        steps: [
+          "CourtListener, from the nonprofit Free Law Project. The plugin is free. It searches millions of court opinions, federal PACER dockets and judge data, and checks citations. Works in Claude and ChatGPT. Start here.",
+          "Midpage. Case law with a link to every source and a citator that shows if a case is still good law. Works in Claude and ChatGPT. Needs a Midpage subscription, $100 a month ($10 for students).",
+          "Descrybe. U.S. cases, statutes and regulations, with quote checks and treatment. Works in Claude and ChatGPT. $25 a month.",
+          "Trellis. State trial court dockets, rulings and court rules. Works in Claude. $50 a month.",
+          "Courtroom5. Built for people without a lawyer. Counts deadlines and suggests next steps in all 50 states. Works in Claude. Starts at $1 for 100 credits.",
+        ],
+        after: [
+          "To add one in Claude, open Settings, then Connectors, then Browse. In ChatGPT, open the apps directory and search the name. Prices are from each company and the USC law library list and can change.",
+          "A plugin finds real cases. You still open each one before you rely on it.",
+        ],
+        links: [
+          { label: "CourtListener", href: "https://www.courtlistener.com/" },
+          { label: "Midpage", href: "https://www.midpage.ai/" },
+          { label: "Descrybe", href: "https://descrybe.com/" },
+          { label: "USC law library list", href: "https://lawlibguides.usc.edu/c.php?g=1447399&p=11552754" },
+        ],
+      },
+      {
+        heading: "8. Cut the machine writing",
+        copy: `Write like a careful person, not like a press release.
+1. Short sentences with a named actor and a plain verb.
+2. No long dashes and no semicolons.
+3. No "not only X but also Y" and no "it is not X, it is Y".
+4. No rhetorical questions, no pep talk, no summary that repeats what you said.
+5. Do not use: delve, navigate, landscape, tapestry, harness, unlock, pivotal, testament, moreover, furthermore, utilize, game-changer.
+6. Every claim needs a document, a date or a number behind it.
+7. Cut words like very, really, clearly and obviously.
+After drafting, list each sentence that breaks a rule and fix it.`,
+        after: ["Then read it out loud. If you would never say a sentence to a clerk, change it."],
+      },
+      {
+        heading: "9. What ChatGPT and Claude do well",
+        bullets: [
+          "Reading long papers and building a timeline.",
+          "Arguing the other side when you ask.",
+          "Drafting from facts you give it and checking a draft against a file.",
+        ],
+      },
+      {
+        heading: "What to watch for",
+        steps: [
+          "It can state wrong things with confidence, including cases and dates.",
+          "It can miss a file or read a scanned page badly. Ask what it did not read.",
+          "A new chat may not remember the last one. Keep your own notes.",
+          "It cannot see the court's docket unless you give it the information or a plugin that can.",
+          "It is not your lawyer.",
+        ],
+        after: ["Better answers come from a clear goal, real documents and your corrections. Say why something is wrong. The reason changes the next draft."],
+      },
+      {
+        heading: "10. Save your rules so you stop retyping them",
+        paragraphs: [
+          "ChatGPT: paste the text below into Custom Instructions or a Project's instructions.",
+          "Claude: save it as a skill. Anthropic says custom skills need code execution turned on.",
+        ],
+        steps: [
+          "Copy the text below into a file named SKILL.md.",
+          "Put that file in a folder named four-chairs.",
+          "Compress the folder to a ZIP file.",
+          "In Claude, open Customize, then Skills, then upload the ZIP.",
+        ],
+        copy: `---
+name: four-chairs
+description: Use for any court paper, discovery questions or legal plan. Asks questions first, tests the work as judge, appeals court, juror and opposing lawyer, and verifies sources.
+---
+1. Ask what the goal is, what happened and what is missing before drafting.
+2. List what must be proved.
+3. Cut anything that does not help.
+4. Review as judge, appeals court, juror and the other side.
+5. Never invent facts or citations. Give links and exact quotes, or write NOT VERIFIED.
+6. Check court rules for format, deadline and required forms.
+7. Say which papers get filed, which get only served, and which go only to the judge, and verify that under the rules.
+8. Use plain English and number every point.
+9. End with what you did not check.`,
+        links: [
+          { label: "ChatGPT: Custom Instructions", href: "https://help.openai.com/en/articles/8096356-chatgpt-custom-instructions" },
+          { label: "Claude: use skills", href: "https://support.claude.com/en/articles/12512180-use-skills-in-claude" },
+        ],
+      },
+      {
+        heading: "11. Before you file",
+        steps: [
+          "Read every line. You are the one signing it.",
+          "Confirm each fact is true from what you know or from a document.",
+          "Open each rule and case.",
+          "Check your court's local rules, forms, page limits and deadlines.",
+          "Know the difference between filing with the court, serving the other side, and sending a proposed order to the judge.",
+          "Look at every page before it goes out.",
+          "If much is at stake, ask a lawyer or a legal aid office to review it.",
+        ],
+        links: [{ label: "Find legal aid", href: "https://www.lsc.gov/about-lsc/what-legal-aid/get-legal-help" }],
+      },
+      {
+        heading: "Want the best out of ChatGPT or Claude?",
+        paragraphs: [
+          "Fill out the form with your name, your phone number and what you need. We get back to you.",
+          "Ask AI Legal can also do these steps for you on your own computer. It reads your papers, tracks deadlines and checks its sources before it drafts.",
+        ],
+        links: [
+          { label: "Fill out the form", href: "/contact" },
+          { label: "See how Ask AI Legal works", href: "/services" },
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: "Do these prompts work in both ChatGPT and Claude?",
+        a: "Yes. Copy and paste them into either one. Only the Cowork folder and the skill upload are Claude features.",
+      },
+      {
+        q: "Which legal research plugin is free?",
+        a: "The CourtListener plugin from Free Law Project costs nothing. Claude still needs a paid plan to add connectors.",
+      },
+      {
+        q: "If I use a plugin, can I skip checking the cases?",
+        a: "No. A plugin pulls real cases, but you still open each one and match every quote before you file.",
+      },
+    ],
+    updated: "2026-11-26",
   },
   {
     slug: "represent-yourself-in-court",
