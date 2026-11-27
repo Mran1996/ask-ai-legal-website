@@ -53,6 +53,7 @@ export function Footer() {
         { label: links.faq, href: "/faq" },
         { label: "Guides", href: "/guides" },
         { label: "Free help: ChatGPT & Claude", href: "/guides/use-chatgpt-claude-for-your-case" },
+        { label: "Free help: ask ChatGPT or Claude better", href: "/guides/ask-chatgpt-claude-better" },
         { label: "Referral program", href: REFERRAL_HREF },
       ],
     },
