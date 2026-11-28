@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { Phone } from "lucide-react"
 import { SITE_BRAND_NAME, VOICE_PHONE_DISPLAY, VOICE_PHONE_TEL } from "@/lib/site-config"
+import { MobileMenu } from "@/components/site/mobile-menu"
 
 /** Shared look for the redesigned pages (home redesign, Nov 2026). Use these so every page feels the same. */
 export const serif = "font-[family-name:var(--font-serif)] font-normal"
@@ -38,11 +39,14 @@ const NAV = [
   { href: "/guides", label: "Free guides" },
 ]
 
+/** The phone menu also lists Contact, since phones don't show the header links. */
+const MOBILE_NAV = [...NAV, { href: "/contact", label: "Contact" }]
+
 /** Quiet header: logo, a few links, phone, one button. */
 export function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 border-b border-white/[0.06] bg-[#0b131d]/85 backdrop-blur">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6">
+      <div className="relative mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6">
         <Link href="/" className={`${serif} ${ink} shrink-0 whitespace-nowrap text-xl`}>
           {SITE_BRAND_NAME}
         </Link>
@@ -65,6 +69,7 @@ export function SiteHeader() {
           <Link href="/plans" className="rounded-full border border-white/20 px-4 py-2 text-sm font-semibold text-[#f3ead8] hover:border-white/40">
             See plans
           </Link>
+          <MobileMenu links={MOBILE_NAV} />
         </div>
       </div>
     </header>
