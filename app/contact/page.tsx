@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
-import { Facebook, Instagram, Mail, Phone, ShieldCheck, Youtube } from "lucide-react"
+import { ArrowRight, Facebook, Instagram, Mail, Phone, ShieldCheck, Youtube } from "lucide-react"
 import { Footer } from "@/components/footer"
-import { ALT_BG, Eyebrow, gold, H1, ink, muted, PAGE_BG, SiteHeader } from "@/components/site/ui"
+import { ALT_BG, Eyebrow, gold, H1, ink, muted, PAGE_BG, PRIMARY_BTN, SiteHeader } from "@/components/site/ui"
 import { ContactForm } from "@/components/contact-form"
 import {
   SITE_DISCLAIMER,
@@ -17,7 +17,7 @@ import {
 
 const TITLE = "Contact Ask AI Legal"
 const DESCRIPTION =
-  "Ask a question before you buy, or contact us about support or billing. Reach us 24/7 and we'll follow up by email."
+  "Ask a question before you buy, get extra help with ChatGPT or Claude, or contact us about support or billing."
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -49,9 +49,18 @@ export default function ContactPage() {
             <H1>
               Ask us anything, <em className={gold}>before or after you buy.</em>
             </H1>
-            <p className={`mt-5 text-lg leading-relaxed ${muted}`}>
-              Reach us 24/7 with questions about your computer, the features or installing the app. We&rsquo;ll follow up by email.
-            </p>
+            {/* Plain <a> (full page load) so the form reads ?topic=chatgpt and scrolls to itself. */}
+            <div className="mx-auto mt-8 flex max-w-xl flex-col items-center gap-4 rounded-2xl border border-[#e8c98a]/25 bg-white/[0.025] p-6 text-left sm:flex-row sm:justify-between">
+              <div>
+                <p className={`font-semibold ${ink}`}>Want extra help with ChatGPT or Claude?</p>
+                <p className={`mt-1 text-sm ${muted}`}>
+                  Write your question and we answer by email. You usually get a reply right back.
+                </p>
+              </div>
+              <a href="/contact?topic=chatgpt" className={`${PRIMARY_BTN} shrink-0`}>
+                Get extra help <ArrowRight className="h-4 w-4" aria-hidden />
+              </a>
+            </div>
           </div>
         </section>
 

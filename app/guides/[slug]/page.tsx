@@ -57,6 +57,19 @@ export default async function GuidePage({ params }: Props) {
   const H = `${serif} ${ink} mb-4 text-2xl leading-tight sm:text-[1.75rem]`
   const P = `leading-[1.75] ${muted}`
 
+  const cta = guide.cta
+  const ctaBox = cta ? (
+    <div className="mt-8 flex flex-col gap-4 rounded-2xl border border-[#e8c98a]/25 bg-white/[0.025] p-6 sm:flex-row sm:items-center sm:justify-between">
+      <div>
+        <p className={`font-semibold ${ink}`}>{cta.title}</p>
+        <p className={`mt-1 text-sm ${muted}`}>{cta.text}</p>
+      </div>
+      <Link href={cta.href} className={`${PRIMARY_BTN} shrink-0`}>
+        {cta.label} <ArrowRight className="h-4 w-4" aria-hidden />
+      </Link>
+    </div>
+  ) : null
+
   return (
     <div className={PAGE_BG}>
       <script
@@ -77,17 +90,7 @@ export default async function GuidePage({ params }: Props) {
             <Eyebrow>Guide</Eyebrow>
             <H1>{guide.title}</H1>
             <p className={`mt-5 text-lg leading-relaxed ${muted}`}>{guide.intro}</p>
-            {guide.cta && (
-              <div className="mt-8 flex flex-col gap-4 rounded-2xl border border-[#e8c98a]/25 bg-white/[0.025] p-6 sm:flex-row sm:items-center sm:justify-between">
-                <div>
-                  <p className={`font-semibold ${ink}`}>{guide.cta.title}</p>
-                  <p className={`mt-1 text-sm ${muted}`}>{guide.cta.text}</p>
-                </div>
-                <Link href={guide.cta.href} className={`${PRIMARY_BTN} shrink-0`}>
-                  {guide.cta.label} <ArrowRight className="h-4 w-4" aria-hidden />
-                </Link>
-              </div>
-            )}
+            {guide.cta && guide.cta.placement !== "bottom" && ctaBox}
           </div>
         </section>
 
@@ -144,6 +147,8 @@ export default async function GuidePage({ params }: Props) {
                 )}
               </section>
             ))}
+
+            {cta && (cta.placement === "bottom" || cta.placement === "both") && ctaBox}
 
             <section>
               <h2 className={H}>Common questions</h2>

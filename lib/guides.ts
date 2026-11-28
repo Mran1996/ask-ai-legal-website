@@ -25,8 +25,8 @@ export type Guide = {
   description: string
   intro: string
   sections: GuideSection[]
-  /** Box with one button, shown right under the intro. */
-  cta?: { title: string; text: string; label: string; href: string }
+  /** Box with one gold button, shown under the intro, at the bottom, or both (default: top). */
+  cta?: { title: string; text: string; label: string; href: string; placement?: "top" | "bottom" | "both" }
   faq: { q: string; a: string }[]
   updated: string
 }
@@ -113,6 +113,13 @@ export const GUIDES: Guide[] = [
         links: [{ label: "See how Ask AI Legal works", href: "/services" }],
       },
     ],
+    cta: {
+      title: "Want the best out of ChatGPT or Claude?",
+      text: "Write us your question. We answer by email, and you usually get a reply right back.",
+      label: "Ask your question",
+      href: "/contact?topic=chatgpt",
+      placement: "bottom",
+    },
     faq: [
       {
         q: "Is ChatGPT or Claude free for this?",
@@ -139,9 +146,10 @@ export const GUIDES: Guide[] = [
       "Uploading your papers is the first step. The back and forth is the work. Every rule and prompt below works in ChatGPT or Claude. Copy them as they are.",
     cta: {
       title: "Want the best out of ChatGPT or Claude?",
-      text: "Fill out the form with your name, phone number and what you need. We get back to you.",
-      label: "Fill out the form",
-      href: "/contact",
+      text: "Write us your question. We answer by email, and you usually get a reply right back.",
+      label: "Ask your question",
+      href: "/contact?topic=chatgpt",
+      placement: "both",
     },
     sections: [
       {
@@ -363,15 +371,11 @@ description: Use for any court paper, discovery questions or legal plan. Asks qu
         links: [{ label: "Find legal aid", href: "https://www.lsc.gov/about-lsc/what-legal-aid/get-legal-help" }],
       },
       {
-        heading: "Want the best out of ChatGPT or Claude?",
+        heading: "Want this on your own computer?",
         paragraphs: [
-          "Fill out the form with your name, your phone number and what you need. We get back to you.",
-          "Ask AI Legal can also do these steps for you on your own computer. It reads your papers, tracks deadlines and checks its sources before it drafts.",
+          "Ask AI Legal can do these steps for you on your own computer. It reads your papers, tracks deadlines and checks its sources before it drafts.",
         ],
-        links: [
-          { label: "Fill out the form", href: "/contact" },
-          { label: "See how Ask AI Legal works", href: "/services" },
-        ],
+        links: [{ label: "See how Ask AI Legal works", href: "/services" }],
       },
     ],
     faq: [

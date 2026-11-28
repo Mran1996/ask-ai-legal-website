@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, type FormEvent } from "react"
+import { useEffect, useState, type FormEvent } from "react"
 import { useAction } from "convex/react"
 import { Check, Loader2, Send } from "lucide-react"
 import { api } from "@/convex/_generated/api"
@@ -15,6 +15,12 @@ const INQUIRY_TYPES = {
     placeholder:
       "What would you like to know? Please don't include confidential case details.",
     button: "Send question",
+  },
+  chatgpt: {
+    label: "Help with ChatGPT or Claude",
+    placeholder:
+      "Type your question about ChatGPT or Claude. Please don't include confidential case details.",
+    button: "Send request",
   },
   support: {
     label: "Technical support",
@@ -45,6 +51,16 @@ export function ContactForm() {
   const [inquiry, setInquiry] = useState<InquiryType>("consultation")
   const [sentInquiry, setSentInquiry] = useState<InquiryType>("consultation")
   const type = INQUIRY_TYPES[inquiry]
+
+  // Links like /contact?topic=chatgpt open the form with that choice already picked.
+  useEffect(() => {
+    const topic = new URLSearchParams(window.location.search).get("topic")
+    if (topic && topic in INQUIRY_TYPES) {
+      setInquiry(topic as InquiryType)
+      // On phones the form sits below the contact details, so bring it into view.
+      document.getElementById("contact-form")?.scrollIntoView({ block: "start" })
+    }
+  }, [])
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -98,7 +114,7 @@ export function ContactForm() {
           {"Message sent"}
         </h3>
         <p className="mx-auto mt-2 max-w-sm text-sm leading-relaxed text-[#a9b3c1]">
-          Thanks for reaching out. We'll reply to your email.
+          {sentInquiry === "chatgpt" ? "Thanks for reaching out. We'll answer by email, usually right back." : "Thanks for reaching out. We'll reply to your email."}
         </p>
         <button
           type="button"
@@ -112,7 +128,7 @@ export function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="rounded-2xl border border-white/[0.07] bg-white/[0.025] p-6 sm:p-8">
+    <form id="contact-form" onSubmit={handleSubmit} className="scroll-mt-24 rounded-2xl border border-white/[0.07] bg-white/[0.025] p-6 sm:p-8">
       {/* Honeypot — hidden from users, no layout/overflow impact on mobile. */}
       <div className="hidden" aria-hidden>
         <label>
